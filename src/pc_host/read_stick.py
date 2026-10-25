@@ -42,7 +42,7 @@ print("Active. Press Ctrl+C to stop.\n")
 # Bit: 0=B, 1=Y, 2=Select, 3=Start, 4=Up, 5=Down, 6=Left, 7=Right, 8=A, 9=X, 10=L, 11=R
 MASK_UP    = 1 << 4
 MASK_DOWN  = 1 << 5
-MASK_LEFT& = 1 << 6
+MASK_LEFT  = 1 << 6
 MASK_RIGHT = 1 << 7
 
 # Precomputed hat lookup table (Index 0-7 = Directions, 15 = Neutral)
