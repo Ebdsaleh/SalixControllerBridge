@@ -1,0 +1,40 @@
+Captured whil using the MAYFLASH 300 in PS3/DINPUT MODE
+Cardinal directions:
+NEUTRAL: State: 0xFFFF | ~mask: 0000000000000000
+UP: State: 0xFFEF | ~mask: 0000000000010000
+DOWN: State: 0xFFDF | ~mask: 0000000000100000
+LEFT: State: 0xFFBF | ~mask: 0000000001000000
+RIGHT: State: 0xFF7F | ~mask: 0000000010000000
+
+Diagonal directions:
+UP-LEFT: State: 0xFFAF | ~mask: 0000000001010000
+UP-RIGHT: State: 0xFF6F | ~mask: 0000000010010000
+DOWN-LEFT: State: 0xFF9F | ~mask: 0000000001100000
+DOWN-RIGHT: State: 0xFF5F | ~mask: 0000000010100000
+
+Face Buttons:
+A/Cross: State: 0xFEFF | ~mask: 0000000100000000
+X/Square: State: 0xFFFE | ~mask: 0000000000000001
+B/Circle: State: 0xFBFF | ~mask: 0000010000000000
+Y/Triangle: State: 0xFDFF | ~mask: 0000001000000000
+RB/R1: State: 0xFFFD | ~mask: 0000000000000010
+RT/R2: State: 0xF7FF | ~mask: 0000100000000000
+LB/L1: State: 0xFFFB | ~mask: 0000000000000100
+LT/L2: State: 0xFFF7 | ~mask: 0000000000001000
+START: Mask: 0xFFF7 | Binary: 0000000000001000
+SELECT: Mask: 0xFFFB | Binary: 0000000000000100
+SELECT+START : Mask: 0xFFF3 | Binary: 0000000000001100
+HOME/PS: Mask: 0xFFF7 | Binary: 0000000000001000
+
+FULL 360 clockwise starting from neutral and anchoring from UP:
+NEUTRAL:   Active Mask: 0xFFFF | Binary: 0000000000000000
+UP:        Active Mask: 0xFFEF | Binary: 0000000000010000
+UP-RIGHT:  Active Mask: 0xFF6F | Binary: 0000000010010000
+RIGHT:     Active Mask: 0xFF7F | Binary: 0000000010000000
+DOWN-ROWN: Active Mask: 0xFF5F | Binary: 0000000010100000
+DOWN:      Active Mask: 0xFFDF | Binary: 0000000000100000
+DOWN-LEFT: Active Mask: 0xFF9F | Binary: 0000000001100000
+LEFT:      Active Mask: 0xFFBF | Binary: 0000000001000000
+UP-LEFT:   Active Mask: 0xFFAF | Binary: 0000000001010000
+UP:        Active Mask: 0xFFEF | Binary: 0000000000010000
+NEUTRAL:   Active Mask: 0xFFFF | Binary: 0000000000000000

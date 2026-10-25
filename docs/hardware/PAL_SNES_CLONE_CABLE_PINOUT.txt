@@ -1,0 +1,14 @@
+SNES CLONE NTSC/NON-PAL PLUG:
+White
+Red
+Blue
+Yellow
+Brown
+
+    Pin1: White
+    Pin2: Blue
+    Pin3: Yellow
+    Pin4: Red
+    Pin5: N/a
+    Pin6: N/A
+    Pin7: Brown
