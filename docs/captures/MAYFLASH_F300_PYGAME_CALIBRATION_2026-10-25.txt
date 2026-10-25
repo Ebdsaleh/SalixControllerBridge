@@ -1,0 +1,23 @@
+UP:		HATS: ((0, 1),)
+UP-RIGHT:	HATS: ((1, 1),)
+RIGHT:		HATS: ((1, 0),)
+DOWN-RIGHT:	HATS: ((1, -1),)
+DOWN:		HATS: ((0, -1),)
+DOWN-LEFT:	HATS: ((-1, -1),)
+LEFT:		HATS: ((-1, 0),)
+UP-LEFT:	HATS: ((-1, 1),)
+
+NEUTRAL:	HATS: ((0, 0),)
+
+A/Cross:	BUTTONS pressed indices: [1]
+X/Square:	BUTTONS pressed indices: [0]
+B/Circle:	BUTTONS pressed indices: [4]
+Y/Triangle:	BUTTONS pressed indices: [3]
+RB/R1:		BUTTONS pressed indices: [2]
+RT/R2:		BUTTONS pressed indices: [5]
+LB/L1:		BUTTONS pressed indices: [6]
+LT/L2:		BUTTONS pressed indices: [7]
+
+Start:		BUTTONS pressed indices: [11] (also Options/Menu, maybe?)
+Select/Share:	BUTTONS pressed indices: [10]	
+Home:PS		BUTTONS pressed indices: [9]
