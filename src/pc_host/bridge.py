@@ -15,6 +15,10 @@ SYNC_1 = 0xAA
 SYNC_2 = 0x55
 SNES_NEUTRAL_MASK = 0xFFFF
 
+F300_DINPUT_GUID = "0300b697bc2000000155000000000000"
+F300_GAMEPAD_GUID = "0300dc99790000001c18000000000000"
+F300_XINPUT_GUID = "0300383c790000003218000000007200"
+
 SNES_TEST_BITS = {
     "b": 0,
     "y": 1,
@@ -77,6 +81,14 @@ F300_XINPUT_PROVISIONAL_BUTTON_TO_SNES_BIT = F300_DINPUT_BUTTON_TO_SNES_BIT
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "--probe-inputs",
+        action="store_true",
+        help=(
+            "Print raw button, hat and axis changes for controller calibration. "
+            "COM3 is not opened and nothing is sent to the SNES."
+        ),
+    )
+    parser.add_argument(
         "--serial-test",
         choices=tuple(SNES_TEST_BITS),
         help=(
@@ -88,24 +100,27 @@ def parse_args():
 
 
 def detect_f300_profile(joystick):
+    guid = joystick.get_guid()
     name = joystick.get_name()
     button_count = joystick.get_numbuttons()
 
-    if name == "JJ" and button_count == 16:
+    if guid == F300_DINPUT_GUID or (name == "JJ" and button_count == 16):
         return (
             "PS3/DInput",
             F300_DINPUT_BUTTON_TO_SNES_BIT,
             False,
         )
 
-    if name == "MAYFLASH Arcade Fightstick F300" and button_count == 15:
+    if guid == F300_GAMEPAD_GUID or (
+        name == "MAYFLASH Arcade Fightstick F300" and button_count == 15
+    ):
         return (
             "Gamepad/Controller",
             F300_GAMEPAD_BUTTON_TO_SNES_BIT,
             False,
         )
 
-    if (
+    if guid == F300_XINPUT_GUID or (
         name == "Controller (MAYFLASH Arcade Fightstick F300)"
         and button_count == 11
     ):
@@ -150,6 +165,47 @@ def init_controller():
         )
 
     return joystick, button_map
+
+
+
+def probe_controller_inputs(joystick):
+    button_count = joystick.get_numbuttons()
+    hat_count = joystick.get_numhats()
+    axis_count = joystick.get_numaxes()
+
+    last_buttons = [joystick.get_button(i) for i in range(button_count)]
+    last_hats = [joystick.get_hat(i) for i in range(hat_count)]
+    last_axes = [joystick.get_axis(i) for i in range(axis_count)]
+
+    print("Raw input probe active. COM3 will NOT be opened.")
+    print("Initial axes: " + ", ".join(
+        f"{index}={value:+.3f}" for index, value in enumerate(last_axes)
+    ))
+    print("Press/move one physical control at a time. Ctrl+C to exit.")
+
+    while True:
+        pygame.event.pump()
+
+        for index in range(button_count):
+            value = joystick.get_button(index)
+            if value != last_buttons[index]:
+                state = "DOWN" if value else "UP"
+                print(f"BUTTON {index}: {state}")
+                last_buttons[index] = value
+
+        for index in range(hat_count):
+            value = joystick.get_hat(index)
+            if value != last_hats[index]:
+                print(f"HAT {index}: {value}")
+                last_hats[index] = value
+
+        for index in range(axis_count):
+            value = joystick.get_axis(index)
+            if abs(value - last_axes[index]) >= 0.20:
+                print(f"AXIS {index}: {value:+.3f}")
+                last_axes[index] = value
+
+        time.sleep(0.005)
 
 
 def build_snes_mask(joystick, button_map):
@@ -210,6 +266,11 @@ def main():
 
     try:
         joystick, button_map = init_controller()
+
+        if args.probe_inputs:
+            probe_controller_inputs(joystick)
+            return
+
         serial_port = serial.Serial(
             SERIAL_PORT,
             BAUD_RATE,
