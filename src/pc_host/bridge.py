@@ -90,7 +90,11 @@ def send_mask(serial_port, mask):
             f"Short serial write: expected {len(packet)} bytes, wrote {bytes_written}"
         )
 
-    return packet, bytes_written
+    # write() returning 4 only proves Windows accepted the bytes. Force the
+    # host serial stack to drain so this diagnostic distinguishes an OS-side
+    # queued write from data actually handed to the Pico's USB CDC endpoint.
+    serial_port.flush()
+    return packet, bytes_written, serial_port.out_waiting
 
 
 def send_neutral(serial_port):
@@ -125,18 +129,20 @@ def main():
             # 10 Hz only. The Pico keeps the latest state between SNES polls,
             # so flooding COM3 every 5 ms is unnecessary.
             if mask != last_mask or (now - last_send_time) >= HEARTBEAT_SECONDS:
-                packet, bytes_written = send_mask(serial_port, mask)
+                packet, bytes_written, out_waiting = send_mask(serial_port, mask)
                 last_send_time = now
             else:
                 packet = None
                 bytes_written = 0
+                out_waiting = 0
 
             if mask != last_mask:
                 active_bits = bin(~mask & 0x0FFF)[2:].zfill(12)
                 packet_hex = " ".join(f"{byte:02X}" for byte in packet)
                 print(
                     f"Mask: 0x{mask:04X} | SNES (R->B): {active_bits} "
-                    f"| TX: {packet_hex} | wrote={bytes_written}"
+                    f"| TX: {packet_hex} | wrote={bytes_written} "
+                    f"| pending={out_waiting}"
                 )
                 last_mask = mask
 
