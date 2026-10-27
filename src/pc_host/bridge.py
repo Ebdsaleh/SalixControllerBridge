@@ -87,11 +87,15 @@ F300_XINPUT_BUTTON_TO_SNES_BIT = {
     # 10 = PS/Home, intentionally unmapped.
 }
 
-# XInput X/Y lever mode is exposed on axes 0/1. The measured polarity is:
+# X/Y lever mode is exposed on axes 0/1 in both Gamepad/Controller and
+# XInput/NS profiles. The measured polarity is:
 #   axis 0: -1 left, +1 right
 #   axis 1: -1 up,   +1 down
-# DPAD lever mode continues to arrive through hat 0.
-F300_XINPUT_AXIS_DEADZONE = 0.50
+#
+# In Gamepad/Controller mode axis 2 mirrors axis 1 for the vertical lever
+# movement; axis 1 alone is sufficient and avoids double-counting the same
+# physical direction. DPAD lever mode continues to arrive through hat 0.
+F300_XY_AXIS_DEADZONE = 0.50
 
 
 def parse_args():
@@ -135,7 +139,7 @@ def detect_f300_profile(joystick):
             "Gamepad/Controller",
             F300_GAMEPAD_BUTTON_TO_SNES_BIT,
             False,
-            False,
+            True,
         )
 
     if guid == F300_XINPUT_GUID or (
@@ -250,21 +254,22 @@ def build_snes_mask(joystick, button_map, use_xy_axes):
         elif hat_x == 1:
             mask &= ~(1 << 7)
 
-    # In XInput/NS mode the F300's separate X/Y lever setting exposes the same
-    # physical stick on axes 0/1 instead of hat 0. Merge that source into the
-    # same canonical SNES direction bits so DPAD and X/Y behave identically.
+    # In Gamepad/Controller and XInput/NS modes the F300's separate X/Y lever
+    # setting exposes the same physical stick on axes 0/1 instead of hat 0.
+    # Merge that source into the same canonical SNES direction bits so DPAD
+    # and X/Y behave identically.
     if use_xy_axes and joystick.get_numaxes() >= 2:
         axis_x = joystick.get_axis(0)
         axis_y = joystick.get_axis(1)
 
-        if axis_y <= -F300_XINPUT_AXIS_DEADZONE:
+        if axis_y <= -F300_XY_AXIS_DEADZONE:
             mask &= ~(1 << 4)
-        elif axis_y >= F300_XINPUT_AXIS_DEADZONE:
+        elif axis_y >= F300_XY_AXIS_DEADZONE:
             mask &= ~(1 << 5)
 
-        if axis_x <= -F300_XINPUT_AXIS_DEADZONE:
+        if axis_x <= -F300_XY_AXIS_DEADZONE:
             mask &= ~(1 << 6)
-        elif axis_x >= F300_XINPUT_AXIS_DEADZONE:
+        elif axis_x >= F300_XY_AXIS_DEADZONE:
             mask &= ~(1 << 7)
 
     return mask
