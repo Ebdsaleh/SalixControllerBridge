@@ -82,7 +82,15 @@ def build_packet(mask):
 
 
 def send_mask(serial_port, mask):
-    serial_port.write(build_packet(mask))
+    packet = build_packet(mask)
+    bytes_written = serial_port.write(packet)
+
+    if bytes_written != len(packet):
+        raise serial.SerialException(
+            f"Short serial write: expected {len(packet)} bytes, wrote {bytes_written}"
+        )
+
+    return packet, bytes_written
 
 
 def send_neutral(serial_port):
@@ -117,12 +125,19 @@ def main():
             # 10 Hz only. The Pico keeps the latest state between SNES polls,
             # so flooding COM3 every 5 ms is unnecessary.
             if mask != last_mask or (now - last_send_time) >= HEARTBEAT_SECONDS:
-                send_mask(serial_port, mask)
+                packet, bytes_written = send_mask(serial_port, mask)
                 last_send_time = now
+            else:
+                packet = None
+                bytes_written = 0
 
             if mask != last_mask:
                 active_bits = bin(~mask & 0x0FFF)[2:].zfill(12)
-                print(f"Mask: 0x{mask:04X} | SNES (R->B): {active_bits}")
+                packet_hex = " ".join(f"{byte:02X}" for byte in packet)
+                print(
+                    f"Mask: 0x{mask:04X} | SNES (R->B): {active_bits} "
+                    f"| TX: {packet_hex} | wrote={bytes_written}"
+                )
                 last_mask = mask
 
             # 1 ms input sampling keeps the F300 responsive while leaving
