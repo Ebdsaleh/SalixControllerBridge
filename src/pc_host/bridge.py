@@ -10,6 +10,7 @@ import serial
 SERIAL_PORT = "COM3"
 BAUD_RATE = 115200
 HEARTBEAT_SECONDS = 0.100
+RECONNECT_POLL_SECONDS = 0.050
 
 SYNC_1 = 0xAA
 SYNC_2 = 0x55
@@ -161,14 +162,8 @@ def detect_f300_profile(joystick):
     )
 
 
-def init_controller():
-    pygame.init()
-    pygame.joystick.init()
-
-    if pygame.joystick.get_count() == 0:
-        raise RuntimeError("No arcade stick detected.")
-
-    joystick = pygame.joystick.Joystick(0)
+def open_controller(device_index):
+    joystick = pygame.joystick.Joystick(device_index)
     joystick.init()
 
     print(f"Controller: {joystick.get_name()}")
@@ -335,12 +330,107 @@ def main():
                 time.sleep(0.005)
 
         print(f"Bridge streaming to {SERIAL_PORT}. Press Ctrl+C to exit.")
+        print("F300 USB mode hot-switching enabled.")
 
+        active_instance_id = joystick.get_instance_id()
         last_mask = None
         last_send_time = 0.0
+        last_reconnect_poll = 0.0
 
         while True:
-            mask = build_snes_mask(joystick, button_map, use_xy_axes)
+            now = time.monotonic()
+
+            for event in pygame.event.get():
+                if (
+                    event.type == pygame.JOYDEVICEREMOVED
+                    and joystick is not None
+                    and event.instance_id == active_instance_id
+                ):
+                    print(
+                        "Controller disconnected/re-enumerating. "
+                        "Sending SNES neutral and waiting for F300..."
+                    )
+                    send_neutral(serial_port)
+
+                    try:
+                        joystick.quit()
+                    except pygame.error:
+                        pass
+
+                    joystick = None
+                    button_map = None
+                    use_xy_axes = False
+                    active_instance_id = None
+                    last_mask = SNES_NEUTRAL_MASK
+                    last_send_time = time.monotonic()
+                    last_reconnect_poll = 0.0
+
+                elif event.type == pygame.JOYDEVICEADDED and joystick is None:
+                    try:
+                        joystick, button_map, use_xy_axes = open_controller(
+                            event.device_index
+                        )
+                        active_instance_id = joystick.get_instance_id()
+                        last_mask = None
+                        last_send_time = 0.0
+                        print("F300 re-enumerated. Live bridge resumed.")
+                    except pygame.error as err:
+                        print(f"Controller re-open deferred: {err}")
+                        joystick = None
+
+            if joystick is None:
+                now = time.monotonic()
+
+                # Fallback in case Windows/SDL re-enumerates the device before
+                # the hotplug event is observed. Keep COM3 open throughout.
+                if (now - last_reconnect_poll) >= RECONNECT_POLL_SECONDS:
+                    last_reconnect_poll = now
+                    if pygame.joystick.get_count() > 0:
+                        try:
+                            joystick, button_map, use_xy_axes = open_controller(0)
+                            active_instance_id = joystick.get_instance_id()
+                            last_mask = None
+                            last_send_time = 0.0
+                            print("F300 rediscovered. Live bridge resumed.")
+                        except pygame.error:
+                            joystick = None
+
+                # Keep the console-side state explicitly neutral while the USB
+                # personality is between disconnect and re-enumeration.
+                if (
+                    joystick is None
+                    and (now - last_send_time) >= HEARTBEAT_SECONDS
+                ):
+                    send_mask(serial_port, SNES_NEUTRAL_MASK)
+                    last_send_time = now
+
+                if joystick is None:
+                    time.sleep(0.005)
+                    continue
+
+            try:
+                mask = build_snes_mask(joystick, button_map, use_xy_axes)
+            except pygame.error:
+                # Defensive race handling: the physical mode switch can remove
+                # the old joystick between event processing and state sampling.
+                print(
+                    "Controller vanished during sampling. "
+                    "Sending SNES neutral and waiting for F300..."
+                )
+                send_neutral(serial_port)
+                try:
+                    joystick.quit()
+                except pygame.error:
+                    pass
+                joystick = None
+                button_map = None
+                use_xy_axes = False
+                active_instance_id = None
+                last_mask = SNES_NEUTRAL_MASK
+                last_send_time = time.monotonic()
+                last_reconnect_poll = 0.0
+                continue
+
             now = time.monotonic()
 
             # Send immediately on every state change. While held, refresh at
