@@ -72,10 +72,26 @@ F300_GAMEPAD_BUTTON_TO_SNES_BIT = {
     11: 3,
 }
 
-# XInput/NS is detected separately, but its raw button/axis layout still needs
-# an explicit calibration pass. Keep the old table temporarily so we can
-# continue observing it without pretending it is the final canonical mapping.
-F300_XINPUT_PROVISIONAL_BUTTON_TO_SNES_BIT = F300_DINPUT_BUTTON_TO_SNES_BIT
+# XInput/NS raw mapping, calibrated on Windows Server 2022 with the F300 in
+# the far-left switch's top XInput/NS position. Normalize the physical controls
+# back to the same canonical SNES actions as PS3/DINPUT.
+F300_XINPUT_BUTTON_TO_SNES_BIT = {
+    0: 0,    # A / Cross     -> SNES B
+    1: 8,    # B / Circle    -> SNES A
+    2: 1,    # X / Square    -> SNES Y
+    3: 9,    # Y / Triangle  -> SNES X
+    4: 10,   # LB / L1       -> SNES L
+    5: 11,   # RB / R1       -> SNES R
+    6: 2,    # Select / Back -> SNES Select
+    7: 3,    # Start         -> SNES Start
+    # 10 = PS/Home, intentionally unmapped.
+}
+
+# XInput X/Y lever mode is exposed on axes 0/1. The measured polarity is:
+#   axis 0: -1 left, +1 right
+#   axis 1: +1 up,   -1 down
+# DPAD lever mode continues to arrive through hat 0.
+F300_XINPUT_AXIS_DEADZONE = 0.50
 
 
 def parse_args():
@@ -109,6 +125,7 @@ def detect_f300_profile(joystick):
             "PS3/DInput",
             F300_DINPUT_BUTTON_TO_SNES_BIT,
             False,
+            False,
         )
 
     if guid == F300_GAMEPAD_GUID or (
@@ -118,6 +135,7 @@ def detect_f300_profile(joystick):
             "Gamepad/Controller",
             F300_GAMEPAD_BUTTON_TO_SNES_BIT,
             False,
+            False,
         )
 
     if guid == F300_XINPUT_GUID or (
@@ -126,7 +144,8 @@ def detect_f300_profile(joystick):
     ):
         return (
             "XInput/NS",
-            F300_XINPUT_PROVISIONAL_BUTTON_TO_SNES_BIT,
+            F300_XINPUT_BUTTON_TO_SNES_BIT,
+            False,
             True,
         )
 
@@ -134,6 +153,7 @@ def detect_f300_profile(joystick):
         "Unknown/Fallback",
         F300_DINPUT_BUTTON_TO_SNES_BIT,
         True,
+        False,
     )
 
 
@@ -156,7 +176,7 @@ def init_controller():
         f"{joystick.get_numaxes()} axes"
     )
 
-    profile_name, button_map, provisional = detect_f300_profile(joystick)
+    profile_name, button_map, provisional, use_xy_axes = detect_f300_profile(joystick)
     print(f"F300 profile: {profile_name}")
     if provisional:
         print(
@@ -164,7 +184,7 @@ def init_controller():
             "PS3/DInput remains the canonical reference."
         )
 
-    return joystick, button_map
+    return joystick, button_map, use_xy_axes
 
 
 
@@ -208,7 +228,7 @@ def probe_controller_inputs(joystick):
         time.sleep(0.005)
 
 
-def build_snes_mask(joystick, button_map):
+def build_snes_mask(joystick, button_map, use_xy_axes):
     pygame.event.pump()
     mask = SNES_NEUTRAL_MASK
 
@@ -228,6 +248,23 @@ def build_snes_mask(joystick, button_map):
         if hat_x == -1:
             mask &= ~(1 << 6)
         elif hat_x == 1:
+            mask &= ~(1 << 7)
+
+    # In XInput/NS mode the F300's separate X/Y lever setting exposes the same
+    # physical stick on axes 0/1 instead of hat 0. Merge that source into the
+    # same canonical SNES direction bits so DPAD and X/Y behave identically.
+    if use_xy_axes and joystick.get_numaxes() >= 2:
+        axis_x = joystick.get_axis(0)
+        axis_y = joystick.get_axis(1)
+
+        if axis_y >= F300_XINPUT_AXIS_DEADZONE:
+            mask &= ~(1 << 4)
+        elif axis_y <= -F300_XINPUT_AXIS_DEADZONE:
+            mask &= ~(1 << 5)
+
+        if axis_x <= -F300_XINPUT_AXIS_DEADZONE:
+            mask &= ~(1 << 6)
+        elif axis_x >= F300_XINPUT_AXIS_DEADZONE:
             mask &= ~(1 << 7)
 
     return mask
@@ -265,7 +302,7 @@ def main():
     serial_port = None
 
     try:
-        joystick, button_map = init_controller()
+        joystick, button_map, use_xy_axes = init_controller()
 
         if args.probe_inputs:
             probe_controller_inputs(joystick)
@@ -298,7 +335,7 @@ def main():
         last_send_time = 0.0
 
         while True:
-            mask = build_snes_mask(joystick, button_map)
+            mask = build_snes_mask(joystick, button_map, use_xy_axes)
             now = time.monotonic()
 
             # Send immediately on every state change. While held, refresh at
