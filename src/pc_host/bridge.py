@@ -186,6 +186,15 @@ def open_controller(device_index):
     return joystick, button_map, use_xy_axes
 
 
+def init_controller():
+    pygame.init()
+    pygame.joystick.init()
+
+    if pygame.joystick.get_count() == 0:
+        raise RuntimeError("No arcade stick detected.")
+
+    return open_controller(0)
+
 
 def probe_controller_inputs(joystick):
     button_count = joystick.get_numbuttons()
