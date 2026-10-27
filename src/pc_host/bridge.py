@@ -1,5 +1,6 @@
 # src/pc_host/bridge.py
 
+import argparse
 import sys
 import time
 
@@ -13,6 +14,21 @@ HEARTBEAT_SECONDS = 0.100
 SYNC_1 = 0xAA
 SYNC_2 = 0x55
 SNES_NEUTRAL_MASK = 0xFFFF
+
+SNES_TEST_BITS = {
+    "b": 0,
+    "y": 1,
+    "select": 2,
+    "start": 3,
+    "up": 4,
+    "down": 5,
+    "left": 6,
+    "right": 7,
+    "a": 8,
+    "x": 9,
+    "l": 10,
+    "r": 11,
+}
 
 # Mayflash F300, PS3/DINPUT mode, measured on Windows Server 2022 x64.
 # SNES bits: 0=B, 1=Y, 2=Select, 3=Start, 4=Up, 5=Down,
@@ -30,6 +46,19 @@ F300_BUTTON_TO_SNES_BIT = {
     10: 2,   # Select     -> SNES Select
     11: 3,   # Start      -> SNES Start
 }
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--serial-test",
+        choices=tuple(SNES_TEST_BITS),
+        help=(
+            "Diagnostic mode: initialise Pygame/XInput normally, then ignore "
+            "live input and continuously send one fixed SNES state every 5 ms."
+        ),
+    )
+    return parser.parse_args()
 
 
 def init_controller():
@@ -104,6 +133,7 @@ def send_neutral(serial_port):
 
 
 def main():
+    args = parse_args()
     joystick = None
     serial_port = None
 
@@ -115,6 +145,20 @@ def main():
             timeout=0,
             write_timeout=0.100,
         )
+
+        if args.serial_test is not None:
+            test_mask = SNES_NEUTRAL_MASK & ~(1 << SNES_TEST_BITS[args.serial_test])
+            test_packet = build_packet(test_mask)
+            packet_hex = " ".join(f"{byte:02X}" for byte in test_packet)
+            print(
+                f"Serial diagnostic: holding {args.serial_test.upper()} "
+                f"mask=0x{test_mask:04X} packet={packet_hex}"
+            )
+            print("Pygame/XInput remains initialised. Press Ctrl+C to exit.")
+
+            while True:
+                send_mask(serial_port, test_mask)
+                time.sleep(0.005)
 
         print(f"Bridge streaming to {SERIAL_PORT}. Press Ctrl+C to exit.")
 
