@@ -39,6 +39,14 @@ py -m pip install -r requirements.txt
 
 The default Pico serial port in the current tools is `COM3`. Override it where a tool offers `--port` if Windows assigns another port.
 
+### Windows controller detection / XInput driver
+
+If a controller is not detected or does not enumerate correctly in Windows, try installing the Microsoft XUSB/Xbox 360 controller driver from the Microsoft Update Catalog before assuming the controller is unsupported:
+
+[Microsoft Update Catalog — XUSB/Xbox 360 Controller driver](https://www.catalog.update.microsoft.com/Search.aspx?q=4015a39c-7c66-46bb-a5bc-db6c33ca5114)
+
+This is a troubleshooting prerequisite for devices that depend on the Windows XInput/XUSB stack; it is not required for controllers that already enumerate and work correctly.
+
 ## Pico setup
 
 Copy:
