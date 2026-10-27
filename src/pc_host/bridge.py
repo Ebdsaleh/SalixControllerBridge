@@ -89,7 +89,7 @@ F300_XINPUT_BUTTON_TO_SNES_BIT = {
 
 # XInput X/Y lever mode is exposed on axes 0/1. The measured polarity is:
 #   axis 0: -1 left, +1 right
-#   axis 1: +1 up,   -1 down
+#   axis 1: -1 up,   +1 down
 # DPAD lever mode continues to arrive through hat 0.
 F300_XINPUT_AXIS_DEADZONE = 0.50
 
@@ -257,9 +257,9 @@ def build_snes_mask(joystick, button_map, use_xy_axes):
         axis_x = joystick.get_axis(0)
         axis_y = joystick.get_axis(1)
 
-        if axis_y >= F300_XINPUT_AXIS_DEADZONE:
+        if axis_y <= -F300_XINPUT_AXIS_DEADZONE:
             mask &= ~(1 << 4)
-        elif axis_y <= -F300_XINPUT_AXIS_DEADZONE:
+        elif axis_y >= F300_XINPUT_AXIS_DEADZONE:
             mask &= ~(1 << 5)
 
         if axis_x <= -F300_XINPUT_AXIS_DEADZONE:
