@@ -30,10 +30,14 @@ SNES_TEST_BITS = {
     "r": 11,
 }
 
-# Mayflash F300, PS3/DINPUT mode, measured on Windows Server 2022 x64.
+# Canonical SNES layout. The physical F300 controls must produce these same
+# SNES actions regardless of which USB personality the F300 exposes.
+#
 # SNES bits: 0=B, 1=Y, 2=Select, 3=Start, 4=Up, 5=Down,
 #            6=Left, 7=Right, 8=A, 9=X, 10=L, 11=R.
-F300_BUTTON_TO_SNES_BIT = {
+#
+# PS3/DINPUT mode is the known-good reference mapping and must not change.
+F300_DINPUT_BUTTON_TO_SNES_BIT = {
     0: 1,    # Square/X   -> SNES Y
     1: 0,    # Cross/A    -> SNES B
     2: 11,   # R1         -> SNES R
@@ -46,6 +50,28 @@ F300_BUTTON_TO_SNES_BIT = {
     10: 2,   # Select     -> SNES Select
     11: 3,   # Start      -> SNES Start
 }
+
+# Middle "Gamepad/Controller" mode enumerates the face buttons differently.
+# These four remaps normalize the physical face positions back to the exact
+# same SNES actions as the known-good PS3/DINPUT profile.
+F300_GAMEPAD_BUTTON_TO_SNES_BIT = {
+    0: 0,    # Cross/A    -> SNES B
+    1: 8,    # Circle/B   -> SNES A
+    2: 11,   # R1/RB      -> SNES R
+    3: 1,    # Square/X   -> SNES Y
+    4: 9,    # Triangle/Y -> SNES X
+    5: 11,
+    6: 10,   # L1/LB      -> SNES L
+    7: 10,
+    9: 3,
+    10: 2,
+    11: 3,
+}
+
+# XInput/NS is detected separately, but its raw button/axis layout still needs
+# an explicit calibration pass. Keep the old table temporarily so we can
+# continue observing it without pretending it is the final canonical mapping.
+F300_XINPUT_PROVISIONAL_BUTTON_TO_SNES_BIT = F300_DINPUT_BUTTON_TO_SNES_BIT
 
 
 def parse_args():
@@ -61,6 +87,41 @@ def parse_args():
     return parser.parse_args()
 
 
+def detect_f300_profile(joystick):
+    name = joystick.get_name()
+    button_count = joystick.get_numbuttons()
+
+    if name == "JJ" and button_count == 16:
+        return (
+            "PS3/DInput",
+            F300_DINPUT_BUTTON_TO_SNES_BIT,
+            False,
+        )
+
+    if name == "MAYFLASH Arcade Fightstick F300" and button_count == 15:
+        return (
+            "Gamepad/Controller",
+            F300_GAMEPAD_BUTTON_TO_SNES_BIT,
+            False,
+        )
+
+    if (
+        name == "Controller (MAYFLASH Arcade Fightstick F300)"
+        and button_count == 11
+    ):
+        return (
+            "XInput/NS",
+            F300_XINPUT_PROVISIONAL_BUTTON_TO_SNES_BIT,
+            True,
+        )
+
+    return (
+        "Unknown/Fallback",
+        F300_DINPUT_BUTTON_TO_SNES_BIT,
+        True,
+    )
+
+
 def init_controller():
     pygame.init()
     pygame.joystick.init()
@@ -72,21 +133,31 @@ def init_controller():
     joystick.init()
 
     print(f"Controller: {joystick.get_name()}")
+    print(f"GUID: {joystick.get_guid()}")
     print(
         "Inputs: "
         f"{joystick.get_numbuttons()} buttons, "
         f"{joystick.get_numhats()} hats, "
         f"{joystick.get_numaxes()} axes"
     )
-    return joystick
+
+    profile_name, button_map, provisional = detect_f300_profile(joystick)
+    print(f"F300 profile: {profile_name}")
+    if provisional:
+        print(
+            "WARNING: this profile is not fully calibrated; "
+            "PS3/DInput remains the canonical reference."
+        )
+
+    return joystick, button_map
 
 
-def build_snes_mask(joystick):
+def build_snes_mask(joystick, button_map):
     pygame.event.pump()
     mask = SNES_NEUTRAL_MASK
 
     num_buttons = joystick.get_numbuttons()
-    for button_index, snes_bit in F300_BUTTON_TO_SNES_BIT.items():
+    for button_index, snes_bit in button_map.items():
         if button_index < num_buttons and joystick.get_button(button_index):
             mask &= ~(1 << snes_bit)
 
@@ -138,7 +209,7 @@ def main():
     serial_port = None
 
     try:
-        joystick = init_controller()
+        joystick, button_map = init_controller()
         serial_port = serial.Serial(
             SERIAL_PORT,
             BAUD_RATE,
@@ -166,7 +237,7 @@ def main():
         last_send_time = 0.0
 
         while True:
-            mask = build_snes_mask(joystick)
+            mask = build_snes_mask(joystick, button_map)
             now = time.monotonic()
 
             # Send immediately on every state change. While held, refresh at
