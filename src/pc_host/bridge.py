@@ -20,6 +20,7 @@ F300_DINPUT_GUID = "0300b697bc2000000155000000000000"
 F300_GAMEPAD_GUID = "0300dc99790000001c18000000000000"
 F300_XINPUT_GUID = "0300383c790000003218000000007200"
 GAMESIR_C2_XINPUT_GUID = "030003f05e0400008e02000000007200"
+SWITCH_PRO_GUID = "030056fb7e0500000920000010026803"
 
 SNES_TEST_BITS = {
     "b": 0,
@@ -104,6 +105,25 @@ GAMESIR_C2_XINPUT_BUTTON_TO_SNES_BIT = {
     7: 3,    # Options / Start-> SNES Start
 }
 
+# Official Nintendo Switch Pro Controller mapping, calibrated through SDL/Pygame.
+# Unlike the F300/C2, the D-pad is exposed as four independent buttons rather
+# than a hat. The Nintendo face labels already match the physical SNES layout.
+# Capture/Home, stick clicks, and ZL/ZR are intentionally unmapped for SNES.
+SWITCH_PRO_BUTTON_TO_SNES_BIT = {
+    0: 8,    # A      -> SNES A
+    1: 0,    # B      -> SNES B
+    2: 9,    # X      -> SNES X
+    3: 1,    # Y      -> SNES Y
+    4: 2,    # Minus  -> SNES Select
+    6: 3,    # Plus   -> SNES Start
+    9: 10,   # L      -> SNES L
+    10: 11,  # R      -> SNES R
+    11: 4,   # D-pad Up
+    12: 5,   # D-pad Down
+    13: 6,   # D-pad Left
+    14: 7,   # D-pad Right
+}
+
 # X/Y lever mode is exposed on axes 0/1 in both Gamepad/Controller and
 # XInput/NS profiles. The measured polarity is:
 #   axis 0: -1 left, +1 right
@@ -178,6 +198,16 @@ def detect_controller_profile(joystick):
             ((0, 1), (2, 3)),
         )
 
+    if guid == SWITCH_PRO_GUID or (
+        name == "Nintendo Switch Pro Controller" and button_count == 20
+    ):
+        return (
+            "Nintendo Switch Pro Controller",
+            SWITCH_PRO_BUTTON_TO_SNES_BIT,
+            False,
+            ((0, 1), (2, 3)),
+        )
+
     return (
         "Unknown/Fallback",
         F300_DINPUT_BUTTON_TO_SNES_BIT,
@@ -215,7 +245,7 @@ def init_controller():
     pygame.joystick.init()
 
     if pygame.joystick.get_count() == 0:
-        raise RuntimeError("No arcade stick detected.")
+        raise RuntimeError("No controller detected.")
 
     return open_controller(0)
 
@@ -285,8 +315,8 @@ def build_snes_mask(joystick, button_map, directional_axis_pairs):
     # Some controllers can route the same physical lever to analog stick axes
     # instead of hat 0. Merge every calibrated directional axis pair into the
     # canonical SNES direction bits. F300 X/Y uses (0,1); GameSir C2 LS uses
-    # (0,1) and RS uses (2,3). Inactive pairs remain centered and contribute
-    # no direction.
+    # (0,1) and RS uses (2,3); Switch Pro uses both analog sticks the same way.
+    # Inactive or centered pairs contribute no direction.
     num_axes = joystick.get_numaxes()
     for axis_x_index, axis_y_index in directional_axis_pairs:
         if axis_x_index >= num_axes or axis_y_index >= num_axes:
