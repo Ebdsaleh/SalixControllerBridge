@@ -146,7 +146,7 @@ def detect_controller_profile(joystick):
             "PS3/DInput",
             F300_DINPUT_BUTTON_TO_SNES_BIT,
             False,
-            False,
+            (),
         )
 
     if guid == F300_GAMEPAD_GUID or (
@@ -156,7 +156,7 @@ def detect_controller_profile(joystick):
             "Gamepad/Controller",
             F300_GAMEPAD_BUTTON_TO_SNES_BIT,
             False,
-            True,
+            ((0, 1),),
         )
 
     if guid == F300_XINPUT_GUID or (
@@ -167,7 +167,7 @@ def detect_controller_profile(joystick):
             "F300 XInput/NS",
             F300_XINPUT_BUTTON_TO_SNES_BIT,
             False,
-            True,
+            ((0, 1),),
         )
 
     if guid == GAMESIR_C2_XINPUT_GUID:
@@ -175,14 +175,14 @@ def detect_controller_profile(joystick):
             "GameSir C2 XInput",
             GAMESIR_C2_XINPUT_BUTTON_TO_SNES_BIT,
             False,
-            False,
+            ((0, 1), (2, 3)),
         )
 
     return (
         "Unknown/Fallback",
         F300_DINPUT_BUTTON_TO_SNES_BIT,
         True,
-        False,
+        (),
     )
 
 
@@ -199,7 +199,7 @@ def open_controller(device_index):
         f"{joystick.get_numaxes()} axes"
     )
 
-    profile_name, button_map, provisional, use_xy_axes = detect_controller_profile(joystick)
+    profile_name, button_map, provisional, directional_axis_pairs = detect_controller_profile(joystick)
     print(f"Controller profile: {profile_name}")
     if provisional:
         print(
@@ -207,7 +207,7 @@ def open_controller(device_index):
             "F300 PS3/DInput remains the canonical SNES reference."
         )
 
-    return joystick, button_map, use_xy_axes
+    return joystick, button_map, directional_axis_pairs
 
 
 def init_controller():
@@ -260,7 +260,7 @@ def probe_controller_inputs(joystick):
         time.sleep(0.005)
 
 
-def build_snes_mask(joystick, button_map, use_xy_axes):
+def build_snes_mask(joystick, button_map, directional_axis_pairs):
     pygame.event.pump()
     mask = SNES_NEUTRAL_MASK
 
@@ -282,13 +282,18 @@ def build_snes_mask(joystick, button_map, use_xy_axes):
         elif hat_x == 1:
             mask &= ~(1 << 7)
 
-    # In Gamepad/Controller and XInput/NS modes the F300's separate X/Y lever
-    # setting exposes the same physical stick on axes 0/1 instead of hat 0.
-    # Merge that source into the same canonical SNES direction bits so DPAD
-    # and X/Y behave identically.
-    if use_xy_axes and joystick.get_numaxes() >= 2:
-        axis_x = joystick.get_axis(0)
-        axis_y = joystick.get_axis(1)
+    # Some controllers can route the same physical lever to analog stick axes
+    # instead of hat 0. Merge every calibrated directional axis pair into the
+    # canonical SNES direction bits. F300 X/Y uses (0,1); GameSir C2 LS uses
+    # (0,1) and RS uses (2,3). Inactive pairs remain centered and contribute
+    # no direction.
+    num_axes = joystick.get_numaxes()
+    for axis_x_index, axis_y_index in directional_axis_pairs:
+        if axis_x_index >= num_axes or axis_y_index >= num_axes:
+            continue
+
+        axis_x = joystick.get_axis(axis_x_index)
+        axis_y = joystick.get_axis(axis_y_index)
 
         if axis_y <= -F300_XY_AXIS_DEADZONE:
             mask &= ~(1 << 4)
@@ -335,7 +340,7 @@ def main():
     serial_port = None
 
     try:
-        joystick, button_map, use_xy_axes = init_controller()
+        joystick, button_map, directional_axis_pairs = init_controller()
 
         if args.probe_inputs:
             probe_controller_inputs(joystick)
@@ -392,7 +397,7 @@ def main():
 
                     joystick = None
                     button_map = None
-                    use_xy_axes = False
+                    directional_axis_pairs = False
                     active_instance_id = None
                     last_mask = SNES_NEUTRAL_MASK
                     last_send_time = time.monotonic()
@@ -400,7 +405,7 @@ def main():
 
                 elif event.type == pygame.JOYDEVICEADDED and joystick is None:
                     try:
-                        joystick, button_map, use_xy_axes = open_controller(
+                        joystick, button_map, directional_axis_pairs = open_controller(
                             event.device_index
                         )
                         active_instance_id = joystick.get_instance_id()
@@ -420,7 +425,7 @@ def main():
                     last_reconnect_poll = now
                     if pygame.joystick.get_count() > 0:
                         try:
-                            joystick, button_map, use_xy_axes = open_controller(0)
+                            joystick, button_map, directional_axis_pairs = open_controller(0)
                             active_instance_id = joystick.get_instance_id()
                             last_mask = None
                             last_send_time = 0.0
@@ -442,7 +447,7 @@ def main():
                     continue
 
             try:
-                mask = build_snes_mask(joystick, button_map, use_xy_axes)
+                mask = build_snes_mask(joystick, button_map, directional_axis_pairs)
             except pygame.error:
                 # Defensive race handling: the physical mode switch can remove
                 # the old joystick between event processing and state sampling.
@@ -457,7 +462,7 @@ def main():
                     pass
                 joystick = None
                 button_map = None
-                use_xy_axes = False
+                directional_axis_pairs = False
                 active_instance_id = None
                 last_mask = SNES_NEUTRAL_MASK
                 last_send_time = time.monotonic()
