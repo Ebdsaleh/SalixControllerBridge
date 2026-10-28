@@ -397,7 +397,7 @@ def main():
 
                     joystick = None
                     button_map = None
-                    directional_axis_pairs = False
+                    directional_axis_pairs = ()
                     active_instance_id = None
                     last_mask = SNES_NEUTRAL_MASK
                     last_send_time = time.monotonic()
@@ -462,7 +462,7 @@ def main():
                     pass
                 joystick = None
                 button_map = None
-                directional_axis_pairs = False
+                directional_axis_pairs = ()
                 active_instance_id = None
                 last_mask = SNES_NEUTRAL_MASK
                 last_send_time = time.monotonic()
