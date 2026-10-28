@@ -19,6 +19,7 @@ SNES_NEUTRAL_MASK = 0xFFFF
 F300_DINPUT_GUID = "0300b697bc2000000155000000000000"
 F300_GAMEPAD_GUID = "0300dc99790000001c18000000000000"
 F300_XINPUT_GUID = "0300383c790000003218000000007200"
+GAMESIR_C2_XINPUT_GUID = "030003f05e0400008e02000000007200"
 
 SNES_TEST_BITS = {
     "b": 0,
@@ -88,6 +89,21 @@ F300_XINPUT_BUTTON_TO_SNES_BIT = {
     # 10 = PS/Home, intentionally unmapped.
 }
 
+# GameSir C2 XInput mapping, calibrated on Windows Server 2022. The C2
+# enumerates as "Xbox 360 Controller" and exposes the same standard XInput
+# face/shoulder/start/back indices as the F300 XInput profile. Home (10),
+# L3 (8), R3 (9), and trigger axes 4/5 are intentionally unmapped for SNES.
+GAMESIR_C2_XINPUT_BUTTON_TO_SNES_BIT = {
+    0: 0,    # A / Cross      -> SNES B
+    1: 8,    # B / Circle     -> SNES A
+    2: 1,    # X / Square     -> SNES Y
+    3: 9,    # Y / Triangle   -> SNES X
+    4: 10,   # LB / L1        -> SNES L
+    5: 11,   # RB / R1        -> SNES R
+    6: 2,    # Share / Back   -> SNES Select
+    7: 3,    # Options / Start-> SNES Start
+}
+
 # X/Y lever mode is exposed on axes 0/1 in both Gamepad/Controller and
 # XInput/NS profiles. The measured polarity is:
 #   axis 0: -1 left, +1 right
@@ -120,7 +136,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def detect_f300_profile(joystick):
+def detect_controller_profile(joystick):
     guid = joystick.get_guid()
     name = joystick.get_name()
     button_count = joystick.get_numbuttons()
@@ -148,10 +164,18 @@ def detect_f300_profile(joystick):
         and button_count == 11
     ):
         return (
-            "XInput/NS",
+            "F300 XInput/NS",
             F300_XINPUT_BUTTON_TO_SNES_BIT,
             False,
             True,
+        )
+
+    if guid == GAMESIR_C2_XINPUT_GUID:
+        return (
+            "GameSir C2 XInput",
+            GAMESIR_C2_XINPUT_BUTTON_TO_SNES_BIT,
+            False,
+            False,
         )
 
     return (
@@ -175,12 +199,12 @@ def open_controller(device_index):
         f"{joystick.get_numaxes()} axes"
     )
 
-    profile_name, button_map, provisional, use_xy_axes = detect_f300_profile(joystick)
-    print(f"F300 profile: {profile_name}")
+    profile_name, button_map, provisional, use_xy_axes = detect_controller_profile(joystick)
+    print(f"Controller profile: {profile_name}")
     if provisional:
         print(
             "WARNING: this profile is not fully calibrated; "
-            "PS3/DInput remains the canonical reference."
+            "F300 PS3/DInput remains the canonical SNES reference."
         )
 
     return joystick, button_map, use_xy_axes
@@ -339,7 +363,7 @@ def main():
                 time.sleep(0.005)
 
         print(f"Bridge streaming to {SERIAL_PORT}. Press Ctrl+C to exit.")
-        print("F300 USB mode hot-switching enabled.")
+        print("Controller USB hot-switching enabled.")
 
         active_instance_id = joystick.get_instance_id()
         last_mask = None
@@ -357,7 +381,7 @@ def main():
                 ):
                     print(
                         "Controller disconnected/re-enumerating. "
-                        "Sending SNES neutral and waiting for F300..."
+                        "Sending SNES neutral and waiting for controller..."
                     )
                     send_neutral(serial_port)
 
@@ -382,7 +406,7 @@ def main():
                         active_instance_id = joystick.get_instance_id()
                         last_mask = None
                         last_send_time = 0.0
-                        print("F300 re-enumerated. Live bridge resumed.")
+                        print("Controller re-enumerated. Live bridge resumed.")
                     except pygame.error as err:
                         print(f"Controller re-open deferred: {err}")
                         joystick = None
@@ -400,7 +424,7 @@ def main():
                             active_instance_id = joystick.get_instance_id()
                             last_mask = None
                             last_send_time = 0.0
-                            print("F300 rediscovered. Live bridge resumed.")
+                            print("Controller rediscovered. Live bridge resumed.")
                         except pygame.error:
                             joystick = None
 
@@ -424,7 +448,7 @@ def main():
                 # the old joystick between event processing and state sampling.
                 print(
                     "Controller vanished during sampling. "
-                    "Sending SNES neutral and waiting for F300..."
+                    "Sending SNES neutral and waiting for controller..."
                 )
                 send_neutral(serial_port)
                 try:
