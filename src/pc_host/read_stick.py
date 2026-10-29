@@ -1,20 +1,49 @@
 # src/pc_host/read_stick.py
 
 
+import argparse
 import sys
 import time
-import serial
-import hid
 
-COM_PORT = 'COM3'
+import hid
+import serial
+
+from serial_ports import resolve_serial_port
+
 BAUD_RATE = 115200
 
 # 1. Establish Serial Pipeline to Pico
+parser = argparse.ArgumentParser(description="Legacy direct-HID F300 to Pico bridge.")
+parser.add_argument(
+    "serial_port",
+    nargs="?",
+    metavar="COM_PORT",
+    help="Optional Pico serial port override, e.g. COM4; otherwise auto-detect.",
+)
+parser.add_argument(
+    "--port",
+    dest="port_override",
+    metavar="COM_PORT",
+    help="Explicit Pico serial port override (same as positional COM_PORT).",
+)
+args = parser.parse_args()
+
+if (
+    args.serial_port
+    and args.port_override
+    and args.serial_port.casefold() != args.port_override.casefold()
+):
+    parser.error(
+        "conflicting serial ports supplied: "
+        f"{args.serial_port} and {args.port_override}"
+    )
+
 try:
-    ser = serial.Serial(COM_PORT, BAUD_RATE, timeout=0.1)
-    print(f"Connected to Pico on {COM_PORT}")
+    serial_device = resolve_serial_port(args.port_override or args.serial_port)
+    ser = serial.Serial(serial_device, BAUD_RATE, timeout=0.1)
+    print(f"Connected to Pico on {serial_device}")
 except Exception as e:
-    print(f"Error opening {COM_PORT}: {e}")
+    print(f"Error opening Pico serial port: {e}")
     sys.exit(1)
 
 # 2. Bind to JJ USB HID Encoder

@@ -4,7 +4,7 @@
 import hid
 
 print("Scanning USB HID devices...\n")
-devices = hid.enuerate()
+devices = hid.enumerate()
 
 for d in devices:
     # Filter for generic game controllers / joysticks (Usage Page 1, Usage 4/5)

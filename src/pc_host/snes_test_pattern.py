@@ -5,6 +5,8 @@ import time
 
 import serial
 
+from serial_ports import resolve_serial_port
+
 SYNC_1 = 0xAA
 SYNC_2 = 0x55
 BAUD_RATE = 115200
@@ -40,7 +42,18 @@ def main():
     parser = argparse.ArgumentParser(
         description="Continuously send one known SNES button state to the Pico."
     )
-    parser.add_argument("--port", default="COM3", help="Pico serial port (default: COM3)")
+    parser.add_argument(
+        "serial_port",
+        nargs="?",
+        metavar="COM_PORT",
+        help="Optional Pico serial port override, e.g. COM4; otherwise auto-detect.",
+    )
+    parser.add_argument(
+        "--port",
+        dest="port_override",
+        metavar="COM_PORT",
+        help="Explicit Pico serial port override (same as positional COM_PORT).",
+    )
     parser.add_argument(
         "--button",
         default="neutral",
@@ -49,15 +62,27 @@ def main():
     )
     args = parser.parse_args()
 
+    if (
+        args.serial_port
+        and args.port_override
+        and args.serial_port.casefold() != args.port_override.casefold()
+    ):
+        parser.error(
+            "conflicting serial ports supplied: "
+            f"{args.serial_port} and {args.port_override}"
+        )
+
+    serial_device = resolve_serial_port(args.port_override or args.serial_port)
+
     mask = build_mask(args.button)
     packet = packet_for(mask)
     neutral_packet = packet_for(0xFFFF)
 
-    print(f"Opening {args.port} at {BAUD_RATE} baud")
+    print(f"Opening {serial_device} at {BAUD_RATE} baud")
     print(f"Holding SNES state: {args.button.upper()}  logical mask=0x{mask:04X}")
     print("Press Ctrl+C to release and exit.")
 
-    with serial.Serial(args.port, BAUD_RATE, timeout=0) as ser:
+    with serial.Serial(serial_device, BAUD_RATE, timeout=0) as ser:
         try:
             while True:
                 ser.write(packet)

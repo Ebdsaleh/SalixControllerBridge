@@ -37,7 +37,16 @@ If the level shifter has `HV`, `LV`, and `GND` rails, use SNES +5 V on `HV`, Pic
 py -m pip install -r requirements.txt
 ```
 
-The default Pico serial port in the current tools is `COM3`. Override it where a tool offers `--port` if Windows assigns another port.
+Serial-based host tools now auto-detect the Pico when exactly one likely Pico serial device is present. You can always force a specific port with a positional argument such as `COM4`, or with the compatible `--port COM4` form.
+
+Examples:
+
+```bat
+py src\pc_host\bridge.py COM4
+py src\pc_host\bridge.py --port COM4
+```
+
+If multiple Pico serial devices are connected at once, automatic selection deliberately stops and asks you to specify the desired COM port rather than guessing.
 
 ### Windows controller detection / XInput driver
 
@@ -68,15 +77,15 @@ Then reset the Pico.
 Before involving the Mayflash mapping, test one known SNES state directly:
 
 ```bat
-py src\pc_host\snes_test_pattern.py --port COM3 --button up
+py src\pc_host\snes_test_pattern.py COM4 --button up
 ```
 
 The script continuously presents SNES `UP` until Ctrl+C, then releases the controller state. Other useful tests:
 
 ```bat
-py src\pc_host\snes_test_pattern.py --port COM3 --button b
-py src\pc_host\snes_test_pattern.py --port COM3 --button start
-py src\pc_host\snes_test_pattern.py --port COM3 --button neutral
+py src\pc_host\snes_test_pattern.py COM4 --button b
+py src\pc_host\snes_test_pattern.py COM4 --button start
+py src\pc_host\snes_test_pattern.py COM4 --button neutral
 ```
 
 If these work on the console, the SNES wiring, level conversion, serial framing, Pico parser, PIO bit order, timing, and controller signature are all proven independently of the USB fight-stick profile.
@@ -109,7 +118,8 @@ Once that table is confirmed, `bridge.py` can use a named Mayflash F300 profile 
 
 ## Existing source roles
 
-- `src/pc_host/bridge.py` - latest Pygame -> framed serial prototype.
+- `src/pc_host/bridge.py` - latest Pygame -> framed serial prototype; auto-detects the Pico or accepts a positional/--port COM override.
+- `src/pc_host/serial_ports.py` - shared safe Pico serial-port discovery/selection helper.
 - `src/pc_host/calibrate_pygame.py` - raw Pygame index calibration tool.
 - `src/pc_host/snes_test_pattern.py` - known-state SNES hardware test sender.
 - `src/pc_host/probe_hid.py` - HID enumeration helper.

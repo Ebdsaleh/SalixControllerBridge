@@ -7,7 +7,8 @@ import time
 import pygame
 import serial
 
-SERIAL_PORT = "COM3"
+from serial_ports import resolve_serial_port
+
 BAUD_RATE = 115200
 HEARTBEAT_SECONDS = 0.100
 RECONNECT_POLL_SECONDS = 0.050
@@ -138,11 +139,26 @@ F300_XY_AXIS_DEADZONE = 0.50
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "serial_port",
+        nargs="?",
+        metavar="COM_PORT",
+        help=(
+            "Optional Pico serial port override, for example COM4. "
+            "If omitted, the active Pico is auto-detected."
+        ),
+    )
+    parser.add_argument(
+        "--port",
+        dest="port_override",
+        metavar="COM_PORT",
+        help="Explicit Pico serial port override (same as positional COM_PORT).",
+    )
+    parser.add_argument(
         "--probe-inputs",
         action="store_true",
         help=(
             "Print raw button, hat and axis changes for controller calibration. "
-            "COM3 is not opened and nothing is sent to the SNES."
+            "The Pico serial port is not opened and nothing is sent to the SNES."
         ),
     )
     parser.add_argument(
@@ -259,7 +275,7 @@ def probe_controller_inputs(joystick):
     last_hats = [joystick.get_hat(i) for i in range(hat_count)]
     last_axes = [joystick.get_axis(i) for i in range(axis_count)]
 
-    print("Raw input probe active. COM3 will NOT be opened.")
+    print("Raw input probe active. The Pico serial port will NOT be opened.")
     print("Initial axes: " + ", ".join(
         f"{index}={value:+.3f}" for index, value in enumerate(last_axes)
     ))
@@ -376,8 +392,19 @@ def main():
             probe_controller_inputs(joystick)
             return
 
+        if (
+            args.serial_port
+            and args.port_override
+            and args.serial_port.casefold() != args.port_override.casefold()
+        ):
+            raise RuntimeError(
+                "Conflicting serial ports supplied: "
+                f"{args.serial_port} and {args.port_override}"
+            )
+
+        serial_device = resolve_serial_port(args.port_override or args.serial_port)
         serial_port = serial.Serial(
-            SERIAL_PORT,
+            serial_device,
             BAUD_RATE,
             timeout=0,
             write_timeout=0.100,
@@ -397,7 +424,7 @@ def main():
                 send_mask(serial_port, test_mask)
                 time.sleep(0.005)
 
-        print(f"Bridge streaming to {SERIAL_PORT}. Press Ctrl+C to exit.")
+        print(f"Bridge streaming to {serial_device}. Press Ctrl+C to exit.")
         print("Controller USB hot-switching enabled.")
 
         active_instance_id = joystick.get_instance_id()
@@ -450,7 +477,7 @@ def main():
                 now = time.monotonic()
 
                 # Fallback in case Windows/SDL re-enumerates the device before
-                # the hotplug event is observed. Keep COM3 open throughout.
+                # the hotplug event is observed. Keep the selected serial port open throughout.
                 if (now - last_reconnect_poll) >= RECONNECT_POLL_SECONDS:
                     last_reconnect_poll = now
                     if pygame.joystick.get_count() > 0:
@@ -503,7 +530,7 @@ def main():
 
             # Send immediately on every state change. While held, refresh at
             # 10 Hz only. The Pico keeps the latest state between SNES polls,
-            # so flooding COM3 every 5 ms is unnecessary.
+            # so flooding the serial link every 5 ms is unnecessary.
             if mask != last_mask or (now - last_send_time) >= HEARTBEAT_SECONDS:
                 packet, bytes_written, out_waiting = send_mask(serial_port, mask)
                 last_send_time = now
