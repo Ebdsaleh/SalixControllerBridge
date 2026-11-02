@@ -131,7 +131,7 @@ class WindowsRawMouseCapture:
         self._user32.RegisterRawInputDevices.restype = wintypes.BOOL
 
         self._user32.GetRawInputData.argtypes = (
-            wintypes.HRAWINPUT,
+            wintypes.HANDLE,
             wintypes.UINT,
             wintypes.LPVOID,
             ctypes.POINTER(wintypes.UINT),
@@ -282,7 +282,7 @@ class WindowsRawMouseCapture:
         header_size = ctypes.sizeof(RAWINPUTHEADER)
 
         result = self._user32.GetRawInputData(
-            wintypes.HRAWINPUT(lparam),
+            wintypes.HANDLE(lparam),
             RID_INPUT,
             None,
             ctypes.byref(size),
@@ -294,7 +294,7 @@ class WindowsRawMouseCapture:
 
         buffer = ctypes.create_string_buffer(size.value)
         result = self._user32.GetRawInputData(
-            wintypes.HRAWINPUT(lparam),
+            wintypes.HANDLE(lparam),
             RID_INPUT,
             buffer,
             ctypes.byref(size),
@@ -322,7 +322,10 @@ class WindowsRawMouseCapture:
         if not handle:
             return None
 
-        key = int(handle)
+        try:
+            key = int(ctypes.cast(handle, ctypes.c_void_p).value or 0)
+        except (TypeError, ValueError):
+            key = int(handle or 0)
         if key in self._device_names:
             return self._device_names[key]
 
