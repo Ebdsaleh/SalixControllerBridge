@@ -163,32 +163,23 @@ def load_profile(path):
     return profile
 
 
-def merge_profile(existing, update):
-    """Merge a calibration update while retaining existing console modules."""
+def _deep_merge_dict(existing, update):
+    """Recursively merge dictionaries without discarding sibling state."""
     merged = deepcopy(existing)
 
-    for key in (
-        "profile_name",
-        "device_type",
-        "identity",
-        "host_environment",
-        "source_calibration",
-    ):
-        if key in update:
-            if isinstance(update[key], dict) and isinstance(merged.get(key), dict):
-                merged[key].update(deepcopy(update[key]))
-            else:
-                merged[key] = deepcopy(update[key])
+    for key, value in update.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _deep_merge_dict(merged[key], value)
+        else:
+            merged[key] = deepcopy(value)
 
-    for console_name, console_data in update.get("consoles", {}).items():
-        destination = merged.setdefault("consoles", {}).setdefault(
-            console_name,
-            {},
-        )
-        destination_modules = destination.setdefault("modules", {})
-        for module_name, module_data in console_data.get("modules", {}).items():
-            destination_modules[module_name] = deepcopy(module_data)
+    return merged
 
+
+def merge_profile(existing, update):
+    """Deep-merge profile updates while retaining unrelated calibration data."""
+    merged = _deep_merge_dict(existing, update)
+    merged["schema_version"] = PROFILE_SCHEMA_VERSION
     merged["updated_utc"] = utc_now_iso()
     return merged
 
