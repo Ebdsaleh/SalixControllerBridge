@@ -182,3 +182,27 @@ before live normalized `MouseState` data is emitted.
 
 This lifecycle behavior belongs to the SNES output personality, not to
 `PhysicalMouseSource`.
+
+
+## Physical mouse source motion envelope
+
+Normalized states are allowed to apply source-specific safety/normalization
+before entering a console personality.
+
+For the PC physical-mouse source, Windows/SDL can produce relative motion far
+larger than an authentic SNES Mouse normally produces. The source therefore
+limits each 60 Hz motion vector to a maximum largest-axis magnitude of 28 while
+preserving direction proportionally.
+
+This is intentionally a source normalization rule, not an SNES screen-position
+rule:
+
+```text
+desktop relative motion
+    -> source motion envelope
+    -> MouseState
+    -> SNES Mouse encoder
+```
+
+The SNES Mouse remains a relative device; cursor bounds remain owned by the
+game.
