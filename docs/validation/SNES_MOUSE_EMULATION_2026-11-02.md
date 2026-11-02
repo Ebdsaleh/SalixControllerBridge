@@ -127,3 +127,44 @@ mouse personality uses StateMachine 4 (PIO1/SM0). Only the selected personality
 is active on the shared DATA pin at any time.
 
 Physical retest should use commit `3a12dcc` or later.
+
+
+## Sensitivity controls — controller-driven follow-up
+
+After the first successful gamepad-to-SNES-Mouse bring-up, the host bridge gained
+three user-selectable sensitivity states:
+
+| State | SNES report value | Movement scale |
+| --- | ---: | ---: |
+| LOW | 0 | 0.5x |
+| MEDIUM | 1 | 1.0x |
+| HIGH | 2 | 2.0x |
+
+The bridge starts at **MEDIUM**, preserving the movement rate used during the
+first successful physical test.
+
+Sensitivity is changed from canonical SNES control positions:
+
+- **L shoulder** or **Y face position**: decrease one step.
+- **R shoulder** or **X face position**: increase one step.
+
+Changes are edge-triggered: holding a sensitivity button does not repeatedly
+cycle through every level. The setting clamps at LOW and HIGH.
+
+The selected value is written into the SNES Mouse sensitivity bits in every
+32-bit report as well as being used to scale generated analog-stick/D-pad
+displacement.
+
+Expected console diagnostics include:
+
+```text
+Sensitivity: MEDIUM -> LOW
+Sensitivity: LOW -> MEDIUM
+Sensitivity: MEDIUM -> HIGH
+```
+
+and state reports include the active level and generated movement speeds.
+
+No Pico firmware change is required for this host-side sensitivity-control
+batch; the existing 32-bit mouse personality already transports the sensitivity
+bits.
