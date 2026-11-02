@@ -62,9 +62,12 @@ class SnesMouseOutput:
     LEFT = 0x40
     RIGHT = 0x80
 
-    # Keep the SNES hardware speed bits at the known-good compatibility value.
-    # Salix bridge sensitivity is intentionally independent from the authentic
-    # SNES latch/clock hardware-sensitivity command.
+    # The host sends a canonical LOW/raw hardware-sensitivity value. The Pico
+    # now owns the authentic console-driven LOW/MEDIUM/HIGH state, rewrites
+    # these bits locally, and applies the official-style response curve when
+    # the SNES clocks the mouse while Latch is high.
+    #
+    # Salix's five-level source sensitivity remains completely independent.
     WIRE_SPEED_BITS = 0
 
     name = "SNES Mouse"
@@ -835,6 +838,10 @@ def run_physical_mouse_bridge(
         print(
             f"Physical mouse throw limit: +/-{max_throw} "
             "per report (direction preserved)."
+        )
+        print(
+            "SNES hardware sensitivity: Pico-owned LOW/MEDIUM/HIGH command "
+            "handling; independent from Salix source sensitivity."
         )
 
         accumulated_dx = 0
