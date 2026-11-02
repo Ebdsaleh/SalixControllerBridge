@@ -15,6 +15,7 @@ import pygame
 
 from hardware_profiles import (
     ensure_console_module,
+    list_profiles,
     load_profile,
     new_profile,
     profile_path,
@@ -200,18 +201,12 @@ class CalibrationApp:
 
         dpg.add_spacer(height=10)
         dpg.add_text(
-            "Calibration flow:
-"
-            "1. Leave the mouse at your comfortable daily-driver setting.
-"
-            "2. A 256x224 SDL window opens.
-"
-            "3. Teach Salix four natural full throws: right, left, down, up.
-"
-            "4. Salix derives one scalar raw-count gain.
-"
-            "5. Test that gain in the same SNES-sized environment.
-"
+            "Calibration flow:\n"
+            "1. Leave the mouse at your comfortable daily-driver setting.\n"
+            "2. A 256x224 SDL window opens.\n"
+            "3. Teach Salix four natural full throws: right, left, down, up.\n"
+            "4. Salix derives one scalar raw-count gain.\n"
+            "5. Test that gain in the same SNES-sized environment.\n"
             "6. +/- adjusts by 5%; Enter accepts; Esc cancels.",
             wrap=900,
         )
@@ -429,13 +424,6 @@ class CalibrationApp:
                 "Calibration window active. Complete the SDL test, then return "
                 "to this utility."
             )
-            # Give DearPyGui one frame to display the status before the modal
-            # worker owns the user's attention.
-            try:
-                dpg.render_dearpygui_frame()
-            except Exception:
-                pass
-
             completed = subprocess.run(
                 command,
                 cwd=str(Path(__file__).resolve().parents[2]),
