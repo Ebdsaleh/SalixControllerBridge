@@ -531,3 +531,101 @@ physical mouse raw counts
 
 Therefore changing Mario Paint's own SLOW/NORMAL/FAST selector must not alter
 the saved Naga calibration or the current Salix side-button sensitivity level.
+
+
+## Default hardware profiles
+
+Default profile selection is application state, not a flag stored inside each
+hardware profile.
+
+This prevents multiple profile JSON files from independently claiming:
+
+```text
+"default": true
+```
+
+and makes the default a single authoritative selection per source device type.
+
+Settings file:
+
+```text
+%LOCALAPPDATA%\SalixControllerBridge\profiles\defaults.json
+```
+
+The state directory override continues to apply through:
+
+```text
+SALIX_CONTROLLER_BRIDGE_STATE_DIR
+```
+
+Schema:
+
+```json
+{
+  "schema_version": 1,
+  "defaults": {
+    "mouse": "razer-naga-pro.json",
+    "controller": "switch-pro.json"
+  }
+}
+```
+
+The stored references are filenames relative to the Salix hardware-profile
+directory rather than absolute machine-specific paths.
+
+The Hardware Profiler provides:
+
+```text
+Set as Default
+Clear Default
+```
+
+and annotates the saved-profile list:
+
+```text
+[DEFAULT] Razer Naga Pro | mouse
+```
+
+The profile must already be saved before it can become a default.
+
+### Runtime precedence
+
+For profile-aware launch modes:
+
+```text
+explicit --hardware-profile
+    -> saved source-type default
+    -> built-in bridge fallback
+```
+
+Examples:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse
+```
+
+uses the saved default mouse profile.
+
+```bat
+py src\pc_host\bridge.py COM3 mouse_emu
+```
+
+uses the saved default controller profile.
+
+Explicit override:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse --hardware-profile "Another Mouse"
+```
+
+Ignore defaults deliberately:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse --no-default-profile
+```
+
+`--hardware-profile` and `--no-default-profile` are mutually exclusive.
+
+Plain SNES pad mode does not yet consume calibrated hardware-profile modules, so
+it intentionally does not auto-load a controller default at this stage. When
+pad-profile runtime is added, it can join the same source-type default system.
