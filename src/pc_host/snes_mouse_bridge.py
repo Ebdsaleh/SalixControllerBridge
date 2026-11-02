@@ -33,6 +33,12 @@ SENSITIVITY_NAMES = ("LOW", "MEDIUM", "HIGH")
 SENSITIVITY_SPEED_SCALE = (0.5, 1.0, 2.0)
 DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 
+# Keep the SNES Mouse speed bits at the exact known-good bring-up value for
+# now. The bridge sensitivity controls below are a host-side cursor-speed
+# feature. Authentic SNES Mouse sensitivity selection requires the console-side
+# Latch/Clock command sequence and will be implemented independently.
+SNES_MOUSE_WIRE_SPEED_BITS = 0
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -210,7 +216,7 @@ def build_logical_mouse_report(
 
     second_byte = (
         SNES_MOUSE_SIGNATURE
-        | ((sensitivity & 0x03) << 4)
+        | ((SNES_MOUSE_WIRE_SPEED_BITS & 0x03) << 4)
         | (SNES_MOUSE_LEFT if left_pressed else 0)
         | (SNES_MOUSE_RIGHT if right_pressed else 0)
     )
@@ -278,16 +284,16 @@ def send_mouse_report(serial_port, logical_report):
     return packet, wire_word
 
 
-def build_neutral_report(sensitivity=DEFAULT_SENSITIVITY):
+def build_neutral_report():
     second_byte = (
         SNES_MOUSE_SIGNATURE
-        | ((sensitivity & 0x03) << 4)
+        | ((SNES_MOUSE_WIRE_SPEED_BITS & 0x03) << 4)
     )
     return (0x00 << 24) | (second_byte << 16)
 
 
-def send_neutral(serial_port, sensitivity=DEFAULT_SENSITIVITY):
-    neutral_report = build_neutral_report(sensitivity)
+def send_neutral(serial_port):
+    neutral_report = build_neutral_report()
     for _ in range(5):
         send_mouse_report(serial_port, neutral_report)
         time.sleep(0.005)
@@ -339,8 +345,12 @@ def main():
             "Each press changes one step."
         )
         print(
-            f"Mouse sensitivity: {SENSITIVITY_NAMES[sensitivity]} "
+            f"Bridge sensitivity: {SENSITIVITY_NAMES[sensitivity]} "
             f"({sensitivity})"
+        )
+        print(
+            "SNES Mouse button report: known-good compatibility mode; "
+            "B=MouseLeft, A=MouseRight."
         )
 
         active_instance_id = joystick.get_instance_id()
@@ -361,7 +371,7 @@ def main():
                         "Controller disconnected/re-enumerating. "
                         "Sending neutral SNES Mouse state and waiting..."
                     )
-                    send_neutral(serial_port, sensitivity)
+                    send_neutral(serial_port)
                     try:
                         joystick.quit()
                     except pygame.error:
@@ -372,7 +382,7 @@ def main():
                     active_instance_id = None
                     previous_decrease = False
                     previous_increase = False
-                    last_report = build_neutral_report(sensitivity)
+                    last_report = build_neutral_report()
                     last_send_time = time.monotonic()
                     last_reconnect_poll = 0.0
 
@@ -403,7 +413,7 @@ def main():
                             joystick = None
 
                 if joystick is None and (now - last_send_time) >= HEARTBEAT_SECONDS:
-                    send_mouse_report(serial_port, build_neutral_report(sensitivity))
+                    send_mouse_report(serial_port, build_neutral_report())
                     last_send_time = now
 
                 if joystick is None:
@@ -465,7 +475,7 @@ def main():
                     "Controller vanished during sampling. "
                     "Sending neutral SNES Mouse state and waiting..."
                 )
-                send_neutral(serial_port, sensitivity)
+                send_neutral(serial_port)
                 try:
                     joystick.quit()
                 except pygame.error:
@@ -476,7 +486,7 @@ def main():
                 active_instance_id = None
                 previous_decrease = False
                 previous_increase = False
-                last_report = build_neutral_report(sensitivity)
+                last_report = build_neutral_report()
                 last_send_time = time.monotonic()
                 last_reconnect_poll = 0.0
                 continue
@@ -494,7 +504,7 @@ def main():
                 print(
                     f"Mouse dx={dx:+d} dy={dy:+d} "
                     f"L={int(left_pressed)} R={int(right_pressed)} "
-                    f"sens={SENSITIVITY_NAMES[sensitivity]}({sensitivity}) "
+                    f"bridge-sens={SENSITIVITY_NAMES[sensitivity]}({sensitivity}) "
                     f"speed={analog_speed}/{digital_speed} "
                     f"report=0x{report:08X} wire=0x{wire_word:08X} "
                     f"TX={packet_hex}"
@@ -515,7 +525,7 @@ def main():
     finally:
         if serial_port is not None:
             try:
-                send_neutral(serial_port, sensitivity)
+                send_neutral(serial_port)
             except (serial.SerialException, serial.SerialTimeoutException):
                 pass
             try:
