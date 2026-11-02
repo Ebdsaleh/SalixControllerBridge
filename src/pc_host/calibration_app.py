@@ -148,6 +148,7 @@ class CalibrationApp:
                 default_value="mouse",
                 tag="device_type",
                 width=180,
+                callback=self._on_device_type_changed,
             )
 
         dpg.add_spacer(height=8)
@@ -387,6 +388,15 @@ class CalibrationApp:
 
     def _status(self, message):
         dpg.set_value("status_text", message)
+
+    def _on_device_type_changed(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+        self._refresh_default_profile_status()
 
     def _refresh_default_profile_status(self):
         if not dpg.does_item_exist("default_profile_status"):
