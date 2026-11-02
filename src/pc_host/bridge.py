@@ -196,8 +196,16 @@ def parse_args():
         "--hardware-profile",
         metavar="NAME_OR_JSON",
         help=(
-            "Optional hardware profile name or JSON path. The bridge reads "
-            "only the console module required by the selected launch mode."
+            "Explicit hardware profile name or JSON path. This overrides any "
+            "saved default profile for the selected source device type."
+        ),
+    )
+    parser.add_argument(
+        "--no-default-profile",
+        action="store_true",
+        help=(
+            "Ignore any saved default hardware profile and use the bridge's "
+            "built-in fallback settings unless --hardware-profile is supplied."
         ),
     )
     return parser.parse_args()
@@ -470,6 +478,13 @@ def main():
 
         hardware_profile = None
         hardware_profile_path = None
+
+        if args.hardware_profile and args.no_default_profile:
+            raise RuntimeError(
+                "--hardware-profile and --no-default-profile cannot be used "
+                "together."
+            )
+
         if args.hardware_profile:
             from hardware_profiles import load_profile_reference
 
@@ -477,6 +492,24 @@ def main():
                 args.hardware_profile
             )
             print(f"Hardware profile: {hardware_profile_path}")
+
+        elif not args.no_default_profile:
+            from hardware_profiles import load_default_profile
+
+            default_device_type = (
+                "mouse"
+                if launch_mode == "mouse"
+                else "controller"
+            )
+            hardware_profile, hardware_profile_path = load_default_profile(
+                default_device_type
+            )
+
+            if hardware_profile_path is not None:
+                print(
+                    f"Hardware profile (default {default_device_type}): "
+                    f"{hardware_profile_path}"
+                )
 
         if launch_mode == "mouse_emu":
             # Gamepad/arcade-stick source -> normalized MouseState -> SNES Mouse.
