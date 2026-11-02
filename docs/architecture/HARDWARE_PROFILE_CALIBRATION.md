@@ -435,3 +435,36 @@ raw mouse counts
     -> MouseState
     -> console mouse personality
 ```
+
+
+## Safe save semantics for existing profiles
+
+A fresh profiler skeleton must never silently overwrite a previously calibrated
+profile just because the user types the same profile name and presses Save.
+
+The profiler now tracks whether the current in-memory profile was actually
+loaded from the destination path.
+
+If Save targets an existing profile that was NOT loaded:
+
+```text
+existing calibrated JSON
+    -> load from disk
+    -> preserve console calibration / host environment / source baseline
+    -> merge only explicit editable identity/source-control fields
+    -> save
+```
+
+Seeded placeholder modules such as:
+
+```json
+{
+  "compatible": true,
+  "calibrated": false
+}
+```
+
+are never allowed to erase a real calibrated module in this collision path.
+
+General profile merging is now recursive so adding a nested control mapping does
+not discard sibling source-calibration data.
