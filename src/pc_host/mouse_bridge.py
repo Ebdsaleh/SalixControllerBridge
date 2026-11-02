@@ -536,8 +536,10 @@ def run_physical_mouse_bridge(
 
         accumulated_dx = 0
         accumulated_dy = 0
-        last_left = False
-        last_right = False
+        current_left = False
+        current_right = False
+        latched_left = False
+        latched_right = False
         last_report_time = time.monotonic()
 
         while True:
@@ -547,8 +549,13 @@ def run_physical_mouse_bridge(
 
             accumulated_dx += sample.dx
             accumulated_dy += sample.dy
-            last_left = sample.left
-            last_right = sample.right
+            current_left = sample.left
+            current_right = sample.right
+
+            # Preserve short clicks that begin and end between two 60 Hz
+            # console reports. Held buttons remain asserted every report.
+            latched_left = latched_left or current_left
+            latched_right = latched_right or current_right
 
             now = time.monotonic()
             if (now - last_report_time) < PHYSICAL_MOUSE_REPORT_SECONDS:
@@ -558,8 +565,8 @@ def run_physical_mouse_bridge(
             state = MouseState(
                 dx=max(-127, min(127, accumulated_dx)),
                 dy=max(-127, min(127, accumulated_dy)),
-                left=last_left,
-                right=last_right,
+                left=latched_left,
+                right=latched_right,
             )
 
             logical_report, wire_word, packet = output.send(serial_port, state)
@@ -575,6 +582,8 @@ def run_physical_mouse_bridge(
 
             accumulated_dx = 0
             accumulated_dy = 0
+            latched_left = current_left
+            latched_right = current_right
             last_report_time = now
 
             time.sleep(0.001)
