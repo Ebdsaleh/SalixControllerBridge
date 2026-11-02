@@ -492,8 +492,10 @@ def main():
             run_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
+                max_speed=module.get("base_analog_speed", 8),
                 mouse_deadzone=module.get("deadzone"),
                 axis_pair_override=module.get("axis_pair"),
+                axis_calibration_records=module.get("axis_calibration"),
             )
             return
 
