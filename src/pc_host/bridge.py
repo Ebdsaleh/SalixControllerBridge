@@ -17,6 +17,8 @@ SYNC_1 = 0xAA
 SYNC_2 = 0x55
 SNES_NEUTRAL_MASK = 0xFFFF
 
+MOUSE_EMU_ALIASES = ("mouse_emu", "mouse-emu")
+
 F300_DINPUT_GUID = "0300b697bc2000000155000000000000"
 F300_GAMEPAD_GUID = "0300dc99790000001c18000000000000"
 F300_XINPUT_GUID = "0300383c790000003218000000007200"
@@ -148,6 +150,16 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "mode",
+        nargs="?",
+        metavar="MODE",
+        help=(
+            "Optional bridge personality. Use mouse_emu or mouse-emu to route "
+            "the connected controller through the generic mouse bridge and "
+            "present the current SNES Mouse output personality."
+        ),
+    )
+    parser.add_argument(
         "--port",
         dest="port_override",
         metavar="COM_PORT",
@@ -170,6 +182,37 @@ def parse_args():
         ),
     )
     return parser.parse_args()
+
+
+def normalize_launch_mode(args):
+    """Resolve the user-facing bridge personality without breaking old commands."""
+    aliases = {name.casefold() for name in MOUSE_EMU_ALIASES}
+
+    # Also support auto-detect usage such as:
+    #   bridge.py mouse_emu
+    # where no COM port is supplied.
+    if (
+        args.serial_port
+        and args.mode is None
+        and args.serial_port.casefold() in aliases
+    ):
+        args.mode = args.serial_port
+        args.serial_port = None
+
+    if args.mode is None:
+        return "pad"
+
+    normalized = args.mode.casefold()
+    if normalized in aliases:
+        return "mouse_emu"
+
+    if normalized in ("pad", "controller", "snes_pad", "snes-pad"):
+        return "pad"
+
+    raise RuntimeError(
+        f"Unknown bridge mode: {args.mode}. "
+        "Expected mouse_emu, mouse-emu, or pad."
+    )
 
 
 def detect_controller_profile(joystick):
@@ -386,11 +429,7 @@ def main():
     serial_port = None
 
     try:
-        joystick, button_map, directional_axis_pairs = init_controller()
-
-        if args.probe_inputs:
-            probe_controller_inputs(joystick)
-            return
+        launch_mode = normalize_launch_mode(args)
 
         if (
             args.serial_port
@@ -401,6 +440,24 @@ def main():
                 "Conflicting serial ports supplied: "
                 f"{args.serial_port} and {args.port_override}"
             )
+
+        if launch_mode == "mouse_emu":
+            # Keep bridge.py as the single user-facing launcher. The generic
+            # mouse bridge owns relative motion/input behavior; SNES Mouse is
+            # currently one output personality behind that layer.
+            from mouse_bridge import run_mouse_bridge
+
+            run_mouse_bridge(
+                serial_port_override=args.port_override or args.serial_port,
+                output_personality="snes",
+            )
+            return
+
+        joystick, button_map, directional_axis_pairs = init_controller()
+
+        if args.probe_inputs:
+            probe_controller_inputs(joystick)
+            return
 
         serial_device = resolve_serial_port(args.port_override or args.serial_port)
         serial_port = serial.Serial(
