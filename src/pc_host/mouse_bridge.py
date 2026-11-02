@@ -1,6 +1,7 @@
 # src/pc_host/mouse_bridge.py
 
 import argparse
+import math
 import time
 import pygame
 import serial
@@ -38,6 +39,11 @@ PHYSICAL_MOUSE_REPORT_SECONDS = 1.0 / PHYSICAL_MOUSE_REPORT_HZ
 # high-DPI / accelerated desktop mouse from launching the game cursor far
 # outside its useful on-screen region in one frame.
 PHYSICAL_MOUSE_MAX_THROW = 28
+
+# Keep a high-DPI desktop mouse usable without changing its hardware DPI.
+# 0.50 means the console receives half of the Windows/SDL relative motion
+# before the per-report throw envelope is applied.
+PHYSICAL_MOUSE_GAIN = 0.50
 
 PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS = 0.250
 PHYSICAL_MOUSE_SERIAL_RETRIES = 3
@@ -557,6 +563,20 @@ def run_mouse_bridge(
     )
 
 
+def scale_physical_mouse_delta(dx, dy, gain, residual_x, residual_y):
+    """Apply source sensitivity while preserving sub-integer motion over time."""
+    scaled_x = (float(dx) * gain) + residual_x
+    scaled_y = (float(dy) * gain) + residual_y
+
+    output_x = math.trunc(scaled_x)
+    output_y = math.trunc(scaled_y)
+
+    residual_x = scaled_x - output_x
+    residual_y = scaled_y - output_y
+
+    return output_x, output_y, residual_x, residual_y
+
+
 def limit_physical_mouse_throw(dx, dy, max_throw=PHYSICAL_MOUSE_MAX_THROW):
     """Limit one physical-mouse report while preserving motion direction."""
     dx = int(dx)
@@ -604,6 +624,7 @@ def send_physical_mouse_with_retry(output, serial_port, state):
 def run_physical_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
+    mouse_gain=PHYSICAL_MOUSE_GAIN,
 ):
     """Translate the PC's physical mouse into a console mouse personality."""
     serial_port = None
@@ -611,6 +632,9 @@ def run_physical_mouse_bridge(
     output = create_output_personality(output_personality)
 
     try:
+        if mouse_gain <= 0.0 or mouse_gain > 4.0:
+            raise RuntimeError("--mouse-gain must be greater than 0 and at most 4.0.")
+
         source.start()
 
         serial_device = resolve_serial_port(serial_port_override)
@@ -639,6 +663,10 @@ def run_physical_mouse_bridge(
             "Mouse deltas are accumulated between reports."
         )
         print(
+            f"Physical mouse software gain: {mouse_gain:.2f}x "
+            "(fractional motion preserved)."
+        )
+        print(
             f"Physical mouse throw limit: +/-{PHYSICAL_MOUSE_MAX_THROW} "
             "per report (direction preserved)."
         )
@@ -649,6 +677,8 @@ def run_physical_mouse_bridge(
         current_right = False
         latched_left = False
         latched_right = False
+        residual_x = 0.0
+        residual_y = 0.0
         last_report_time = time.monotonic()
 
         while True:
@@ -673,9 +703,20 @@ def run_physical_mouse_bridge(
 
             raw_dx = accumulated_dx
             raw_dy = accumulated_dy
+
+            scaled_dx, scaled_dy, residual_x, residual_y = (
+                scale_physical_mouse_delta(
+                    raw_dx,
+                    raw_dy,
+                    mouse_gain,
+                    residual_x,
+                    residual_y,
+                )
+            )
+
             limited_dx, limited_dy, was_limited = limit_physical_mouse_throw(
-                raw_dx,
-                raw_dy,
+                scaled_dx,
+                scaled_dy,
             )
 
             state = MouseState(
@@ -688,7 +729,8 @@ def run_physical_mouse_bridge(
             if was_limited:
                 print(
                     f"Physical mouse throw limited: "
-                    f"raw={raw_dx:+d}/{raw_dy:+d} -> "
+                    f"raw={raw_dx:+d}/{raw_dy:+d} "
+                    f"scaled={scaled_dx:+d}/{scaled_dy:+d} -> "
                     f"{limited_dx:+d}/{limited_dy:+d}"
                 )
 
@@ -775,6 +817,16 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--mouse-gain",
+        type=float,
+        default=PHYSICAL_MOUSE_GAIN,
+        metavar="GAIN",
+        help=(
+            "Physical mouse software sensitivity multiplier "
+            f"(default: {PHYSICAL_MOUSE_GAIN:.2f})."
+        ),
+    )
+    parser.add_argument(
         "--max-speed",
         type=int,
         default=MOUSE_ANALOG_MAX_DELTA,
@@ -810,6 +862,7 @@ def main():
         run_physical_mouse_bridge(
             serial_port_override=serial_device,
             output_personality=args.output,
+            mouse_gain=args.mouse_gain,
         )
     else:
         run_gamepad_mouse_bridge(
