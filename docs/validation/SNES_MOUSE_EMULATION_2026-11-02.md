@@ -490,3 +490,70 @@ The Naga Pro side buttons and hardware DPI buttons are intentionally not mapped
 to Salix functions yet. Hardware DPI changes can therefore alter the raw
 relative deltas reaching the bridge, but they do not directly trigger a bridge
 mode change or shutdown.
+
+
+## Physical-mouse restart produced host traffic but no SNES response
+
+After the serial-timeout recovery batch, a new physical test showed:
+
+- `bridge.py COM3 mouse` started normally;
+- the PC continued generating valid `AA 56` SNES Mouse frames;
+- MouseLeft/MouseRight reports were present in the host log;
+- no serial timeout occurred during the run;
+- the real SNES/Mario Paint did not respond to the mouse at all.
+
+The host therefore still had valid input and packet generation. The failure was
+downstream of host report construction.
+
+### Pico mode-state observation
+
+The Pico only reinitializes the mouse PIO state machine when the incoming frame
+kind changes from PAD to MOUSE.
+
+If a previous host session ends while the Pico already believes it is in
+`MODE_MOUSE`, a subsequent host process can send more `AA 56` frames without
+forcing the mouse PIO state machine through a fresh initialization boundary.
+
+This can leave a restart dependent on whatever PIO phase/state the previous
+session left behind.
+
+### Physical-mouse startup re-arm
+
+Physical-mouse mode now explicitly forces:
+
+```text
+PAD neutral
+    ->
+MOUSE neutral
+    ->
+live physical-mouse reports
+```
+
+on every launch.
+
+This deliberately causes the Pico to execute:
+
+```text
+MODE_MOUSE -> MODE_PAD -> MODE_MOUSE
+```
+
+and therefore re-run the known-good PIO initialization path before live mouse
+traffic begins.
+
+Startup diagnostic:
+
+```text
+Re-arming SNES Mouse output: PAD neutral -> MOUSE neutral...
+```
+
+On physical-mouse shutdown, the bridge now:
+
+```text
+mouse neutral -> pad neutral
+```
+
+so the Pico is returned to its default pad personality.
+
+The already validated gamepad `mouse_emu` path remains on its previous
+startup/shutdown behavior and was intentionally excluded from this lifecycle
+change.
