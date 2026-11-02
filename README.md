@@ -85,7 +85,14 @@ Switch Pro Controller:
 - left analog stick -> relative mouse X/Y motion;
 - D-pad -> relative mouse motion;
 - canonical SNES B face position -> mouse left click;
-- canonical SNES A face position -> mouse right click.
+- canonical SNES A face position -> mouse right click;
+- canonical SNES L or Y position -> decrease mouse sensitivity;
+- canonical SNES R or X position -> increase mouse sensitivity.
+
+Mouse sensitivity has three edge-triggered steps: LOW, MEDIUM, and HIGH. The
+bridge starts at MEDIUM; LOW is half of the configured base movement rate and
+HIGH is double it. The selected level is also written into the SNES Mouse
+sensitivity field.
 
 For Mario Paint, connect the proven Salix SNES adapter to controller port 1 and
 run:
