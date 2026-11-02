@@ -233,3 +233,18 @@ def get_console_module(profile, console_name, module_name):
         .get("modules", {})
         .get(str(module_name).strip().lower())
     )
+
+
+def list_profiles():
+    directory = default_profile_directory()
+    if not directory.exists():
+        return []
+
+    results = []
+    for path in sorted(directory.glob("*.json")):
+        try:
+            profile = load_profile(path)
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError):
+            continue
+        results.append((profile, path))
+    return results
