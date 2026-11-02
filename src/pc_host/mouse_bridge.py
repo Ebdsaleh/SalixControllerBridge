@@ -2,12 +2,12 @@
 
 import argparse
 import time
-from dataclasses import dataclass
-
 import pygame
 import serial
 
 from bridge import BAUD_RATE, HEARTBEAT_SECONDS, open_controller
+from mouse_sources import PhysicalMouseSource
+from mouse_state import MouseState
 from serial_ports import resolve_serial_port
 
 MOUSE_DEADZONE = 0.18
@@ -26,15 +26,11 @@ SENSITIVITY_ANALOG_SCALE = (0.25, 0.5, 1.0, 1.5, 2.0)
 SENSITIVITY_DPAD_SCALE = (0.25, 0.5, 1.0, 2.0, 3.0)
 DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 
-
-@dataclass(frozen=True)
-class MouseState:
-    """Console-independent relative mouse state produced by an input source."""
-
-    dx: int = 0
-    dy: int = 0
-    left: bool = False
-    right: bool = False
+# A real mouse produces one-shot relative deltas, not a sustained velocity.
+# Sample/forward at the console's normal frame cadence so accumulated desktop
+# motion becomes one SNES Mouse displacement report per frame.
+PHYSICAL_MOUSE_REPORT_HZ = 60.0
+PHYSICAL_MOUSE_REPORT_SECONDS = 1.0 / PHYSICAL_MOUSE_REPORT_HZ
 
 
 class SnesMouseOutput:
@@ -503,6 +499,109 @@ def run_mouse_bridge(
 
         pygame.quit()
         print("Mouse bridge stopped.")
+
+
+def run_physical_mouse_bridge(
+    serial_port_override=None,
+    output_personality="snes",
+):
+    """Translate the PC's physical mouse into a console mouse personality."""
+    serial_port = None
+    source = PhysicalMouseSource()
+    output = create_output_personality(output_personality)
+
+    try:
+        source.start()
+
+        serial_device = resolve_serial_port(serial_port_override)
+        serial_port = serial.Serial(
+            serial_device,
+            BAUD_RATE,
+            timeout=0,
+            write_timeout=0.100,
+        )
+
+        print(
+            f"Physical mouse -> {output.name} streaming to {serial_device}. "
+            "Press ESC in the capture window or Ctrl+C to exit."
+        )
+        print(
+            "Mapping: physical mouse motion -> relative console mouse motion; "
+            "left button -> MouseLeft; right button -> MouseRight."
+        )
+        print(
+            f"Physical mouse report cadence: {PHYSICAL_MOUSE_REPORT_HZ:.0f} Hz. "
+            "Mouse deltas are accumulated between reports."
+        )
+
+        accumulated_dx = 0
+        accumulated_dy = 0
+        last_left = False
+        last_right = False
+        last_report_time = time.monotonic()
+
+        while True:
+            sample, stop_requested = source.poll()
+            if stop_requested:
+                break
+
+            accumulated_dx += sample.dx
+            accumulated_dy += sample.dy
+            last_left = sample.left
+            last_right = sample.right
+
+            now = time.monotonic()
+            if (now - last_report_time) < PHYSICAL_MOUSE_REPORT_SECONDS:
+                time.sleep(0.001)
+                continue
+
+            state = MouseState(
+                dx=max(-127, min(127, accumulated_dx)),
+                dy=max(-127, min(127, accumulated_dy)),
+                left=last_left,
+                right=last_right,
+            )
+
+            logical_report, wire_word, packet = output.send(serial_port, state)
+            packet_hex = " ".join(f"{byte:02X}" for byte in packet)
+
+            if state.dx or state.dy or state.left or state.right:
+                print(
+                    f"Mouse dx={state.dx:+d} dy={state.dy:+d} "
+                    f"L={int(state.left)} R={int(state.right)} "
+                    f"report=0x{logical_report:08X} "
+                    f"wire=0x{wire_word:08X} TX={packet_hex}"
+                )
+
+            accumulated_dx = 0
+            accumulated_dy = 0
+            last_report_time = now
+
+            time.sleep(0.001)
+
+    except KeyboardInterrupt:
+        print(f"\nCtrl+C received. Releasing {output.name} state...")
+
+    except serial.SerialTimeoutException:
+        print("\nSerial write timed out. Releasing physical mouse bridge.")
+
+    except (serial.SerialException, RuntimeError, pygame.error) as err:
+        print(f"Physical mouse bridge error: {err}")
+
+    finally:
+        if serial_port is not None:
+            try:
+                output.send_neutral(serial_port)
+            except (serial.SerialException, serial.SerialTimeoutException):
+                pass
+            try:
+                serial_port.close()
+            except serial.SerialException:
+                pass
+
+        source.stop()
+        pygame.quit()
+        print("Physical mouse bridge stopped.")
 
 
 def parse_args():
