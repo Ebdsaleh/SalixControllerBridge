@@ -232,17 +232,22 @@ def read_dpad(joystick, button_map):
     return x, y
 
 
-def axis_to_delta(value, max_delta):
+def axis_to_delta(value, max_delta, deadzone=MOUSE_DEADZONE):
     magnitude = abs(value)
-    if magnitude <= MOUSE_DEADZONE:
+    if magnitude <= deadzone:
         return 0
 
-    normalized = (magnitude - MOUSE_DEADZONE) / (1.0 - MOUSE_DEADZONE)
+    normalized = (magnitude - deadzone) / (1.0 - deadzone)
     delta = max(1, int(round(normalized * max_delta)))
     return -delta if value < 0.0 else delta
 
 
-def read_analog_motion(joystick, directional_axis_pairs, max_delta):
+def read_analog_motion(
+    joystick,
+    directional_axis_pairs,
+    max_delta,
+    deadzone=MOUSE_DEADZONE,
+):
     if not directional_axis_pairs:
         return 0, 0
 
@@ -256,8 +261,16 @@ def read_analog_motion(joystick, directional_axis_pairs, max_delta):
         return 0, 0
 
     return (
-        axis_to_delta(joystick.get_axis(axis_x_index), max_delta),
-        axis_to_delta(joystick.get_axis(axis_y_index), max_delta),
+        axis_to_delta(
+            joystick.get_axis(axis_x_index),
+            max_delta,
+            deadzone,
+        ),
+        axis_to_delta(
+            joystick.get_axis(axis_y_index),
+            max_delta,
+            deadzone,
+        ),
     )
 
 
@@ -268,6 +281,7 @@ def build_mouse_state(
     max_speed,
     dpad_speed,
     sensitivity,
+    mouse_deadzone=MOUSE_DEADZONE,
 ):
     pygame.event.pump()
 
@@ -286,6 +300,7 @@ def build_mouse_state(
         joystick,
         directional_axis_pairs,
         analog_speed,
+        mouse_deadzone,
     )
     dpad_x, dpad_y = read_dpad(joystick, button_map)
 
@@ -314,6 +329,8 @@ def run_gamepad_mouse_bridge(
     output_personality="snes",
     max_speed=MOUSE_ANALOG_MAX_DELTA,
     dpad_speed=MOUSE_DPAD_DELTA,
+    mouse_deadzone=None,
+    axis_pair_override=None,
 ):
     joystick = None
     serial_port = None
@@ -322,6 +339,14 @@ def run_gamepad_mouse_bridge(
     try:
         max_speed = clamp_speed(max_speed, "--max-speed")
         dpad_speed = clamp_speed(dpad_speed, "--dpad-speed")
+
+        if mouse_deadzone is None:
+            mouse_deadzone = MOUSE_DEADZONE
+        mouse_deadzone = float(mouse_deadzone)
+        if mouse_deadzone < 0.0 or mouse_deadzone >= 0.95:
+            raise RuntimeError(
+                "mouse deadzone must be at least 0.0 and less than 0.95."
+            )
 
         sensitivity = DEFAULT_SENSITIVITY
         previous_decrease = False
@@ -334,6 +359,17 @@ def run_gamepad_mouse_bridge(
             raise RuntimeError("No controller detected.")
 
         joystick, button_map, directional_axis_pairs = open_controller(0)
+        if axis_pair_override:
+            if (
+                isinstance(axis_pair_override, (list, tuple))
+                and len(axis_pair_override) == 2
+            ):
+                directional_axis_pairs = (
+                    (
+                        int(axis_pair_override[0]),
+                        int(axis_pair_override[1]),
+                    ),
+                )
 
         serial_device = resolve_serial_port(serial_port_override)
         serial_port = serial.Serial(
@@ -352,7 +388,7 @@ def run_gamepad_mouse_bridge(
         )
         print(
             f"Motion tuning base: analog max={max_speed}, "
-            f"D-pad speed={dpad_speed}, deadzone={MOUSE_DEADZONE:.2f}"
+            f"D-pad speed={dpad_speed}, deadzone={mouse_deadzone:.3f}"
         )
         print(
             "Sensitivity controls: L or Y = decrease; R or X = increase. "
@@ -477,6 +513,7 @@ def run_gamepad_mouse_bridge(
                     max_speed,
                     dpad_speed,
                     sensitivity,
+                    mouse_deadzone,
                 )
             except pygame.error:
                 print(
@@ -553,6 +590,8 @@ def run_mouse_bridge(
     output_personality="snes",
     max_speed=MOUSE_ANALOG_MAX_DELTA,
     dpad_speed=MOUSE_DPAD_DELTA,
+    mouse_deadzone=None,
+    axis_pair_override=None,
 ):
     """Backward-compatible name for the gamepad mouse-emulation source."""
     return run_gamepad_mouse_bridge(
@@ -560,6 +599,8 @@ def run_mouse_bridge(
         output_personality=output_personality,
         max_speed=max_speed,
         dpad_speed=dpad_speed,
+        mouse_deadzone=mouse_deadzone,
+        axis_pair_override=axis_pair_override,
     )
 
 
@@ -624,7 +665,9 @@ def send_physical_mouse_with_retry(output, serial_port, state):
 def run_physical_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
-    mouse_gain=PHYSICAL_MOUSE_GAIN,
+    mouse_gain=None,
+    max_throw=None,
+    report_hz=None,
 ):
     """Translate the PC's physical mouse into a console mouse personality."""
     serial_port = None
@@ -632,8 +675,30 @@ def run_physical_mouse_bridge(
     output = create_output_personality(output_personality)
 
     try:
+        if mouse_gain is None:
+            mouse_gain = PHYSICAL_MOUSE_GAIN
+        mouse_gain = float(mouse_gain)
         if mouse_gain <= 0.0 or mouse_gain > 4.0:
-            raise RuntimeError("--mouse-gain must be greater than 0 and at most 4.0.")
+            raise RuntimeError(
+                "mouse gain must be greater than 0 and at most 4.0."
+            )
+
+        if max_throw is None:
+            max_throw = PHYSICAL_MOUSE_MAX_THROW
+        max_throw = int(max_throw)
+        if max_throw < 1 or max_throw > 127:
+            raise RuntimeError(
+                "mouse max throw must be between 1 and 127."
+            )
+
+        if report_hz is None:
+            report_hz = PHYSICAL_MOUSE_REPORT_HZ
+        report_hz = float(report_hz)
+        if report_hz <= 1.0 or report_hz > 1000.0:
+            raise RuntimeError(
+                "mouse report rate must be greater than 1 and at most 1000 Hz."
+            )
+        report_seconds = 1.0 / report_hz
 
         source.start()
 
@@ -659,7 +724,7 @@ def run_physical_mouse_bridge(
             "left button -> MouseLeft; right button -> MouseRight."
         )
         print(
-            f"Physical mouse report cadence: {PHYSICAL_MOUSE_REPORT_HZ:.0f} Hz. "
+            f"Physical mouse report cadence: {report_hz:.2f} Hz. "
             "Mouse deltas are accumulated between reports."
         )
         print(
@@ -667,7 +732,7 @@ def run_physical_mouse_bridge(
             "(fractional motion preserved)."
         )
         print(
-            f"Physical mouse throw limit: +/-{PHYSICAL_MOUSE_MAX_THROW} "
+            f"Physical mouse throw limit: +/-{max_throw} "
             "per report (direction preserved)."
         )
 
@@ -697,7 +762,7 @@ def run_physical_mouse_bridge(
             latched_right = latched_right or current_right
 
             now = time.monotonic()
-            if (now - last_report_time) < PHYSICAL_MOUSE_REPORT_SECONDS:
+            if (now - last_report_time) < report_seconds:
                 time.sleep(0.001)
                 continue
 
@@ -717,6 +782,7 @@ def run_physical_mouse_bridge(
             limited_dx, limited_dy, was_limited = limit_physical_mouse_throw(
                 scaled_dx,
                 scaled_dy,
+                max_throw,
             )
 
             state = MouseState(
