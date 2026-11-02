@@ -102,6 +102,14 @@ map directly to MouseLeft/MouseRight. The first host proof uses the operating
 system's active mouse stream; individual USB-HID device selection belongs to
 the later standalone hardware-host layer.
 
+High-DPI desktop mice use a 0.50x software gain by default, followed by a
+direction-preserving per-report throw limit. This keeps Windows hardware DPI
+independent from console sensitivity. Override the source gain when needed:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse --mouse-gain 0.35
+```
+
 When only one likely Pico serial device is connected, the COM port can still be
 auto-detected:
 
