@@ -656,3 +656,36 @@ Valid gain range is greater than 0 through 4.0.
 
 This setting affects only the physical PC-mouse source. Gamepad mouse emulation
 remains unchanged.
+
+
+## PC-host-only nature of current physical mouse tuning
+
+The current physical mouse path runs inside Windows through SDL/Pygame.
+
+Its software gain is therefore a host-side compensation/normalization tool for
+the PC proof environment.
+
+The final standalone bridge will instead host the mouse directly:
+
+```text
+USB mouse
+    -> Salix USB host
+    -> raw HID counts
+    -> source/profile normalization
+    -> MouseState
+    -> SNES Mouse
+```
+
+Windows pointer acceleration and desktop cursor behavior will not exist in that
+final path.
+
+Raw HID does not eliminate hardware DPI differences, however. A high-DPI mouse
+still reports more raw counts for the same physical travel. Any compensation for
+that belongs to the source/profile layer, not to the SNES Mouse encoder.
+
+Accordingly:
+
+- `--mouse-gain` is currently a PC-host/source tuning knob;
+- the SNES report encoder remains unchanged;
+- the +/-28 throw envelope is conceptually separate and protects the console
+  personality from implausibly large one-frame movement.
