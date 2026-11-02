@@ -468,3 +468,66 @@ are never allowed to erase a real calibrated module in this collision path.
 
 General profile merging is now recursive so adding a nested control mapping does
 not discard sibling source-calibration data.
+
+
+## Authentic SNES Mouse hardware sensitivity
+
+SNES hardware sensitivity is now a separate console-side layer from Salix
+source sensitivity.
+
+The official mouse advances its three hardware states when the console issues a
+Clock pulse while Latch/Strobe remains high:
+
+```text
+LOW -> MEDIUM -> HIGH -> LOW
+```
+
+The mouse report exposes the current hardware state in the second-byte
+sensitivity bits.
+
+The Pico PIO now distinguishes this transaction from a normal 32-bit mouse
+read. A sensitivity command:
+
+```text
+Latch high
+    -> first Clock falling edge while Latch is still high
+    -> abort would-be normal report
+    -> notify MicroPython
+    -> return PIO to fresh bit-0 transaction state
+```
+
+This avoids the previous failure where Mario Paint's sensitivity command left
+the PIO midway through a 32-bit report and subsequent mouse reads became
+desynchronised.
+
+MicroPython owns the current 0/1/2 hardware state and overlays it onto the
+canonical host mouse report before queueing the next PIO word.
+
+Motion is transformed using the documented official-style lookup curves:
+
+```text
+LOW:
+  linear/raw magnitude
+
+MEDIUM:
+  0 1 2 3 8 10 12 21
+  magnitudes above 7 clamp to 21
+
+HIGH:
+  0 1 4 9 12 20 24 28
+  magnitudes above 7 clamp to 28
+```
+
+This layer is independent of Salix's five source-side sensitivity levels:
+
+```text
+physical mouse raw counts
+    -> calibrated hardware-profile gain
+    -> Salix VERY LOW/LOW/MEDIUM/HIGH/VERY HIGH
+    -> canonical SNES raw mouse delta
+    -> Pico SNES hardware LOW/MEDIUM/HIGH curve
+    -> SNES Mouse report
+```
+
+Therefore changing Mario Paint's own SLOW/NORMAL/FAST selector must not alter
+the saved Naga calibration or the current Salix side-button sensitivity level.
