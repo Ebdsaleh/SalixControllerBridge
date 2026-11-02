@@ -57,6 +57,7 @@ class SnesMouseOutput:
     SYNC_1 = 0xAA
     SYNC_PAD = 0x55
     SYNC_MOUSE = 0x56
+    SYNC_MOUSE_STATUS = 0x57
 
     SIGNATURE = 0x01
     LEFT = 0x40
@@ -182,6 +183,52 @@ def create_output_personality(name):
         return SnesMouseOutput()
 
     raise RuntimeError(f"Unsupported mouse output personality: {name}")
+
+
+def service_pico_mouse_status(serial_port, status_buffer, last_state):
+    """Drain Pico -> host SNES hardware-sensitivity telemetry."""
+    try:
+        waiting = serial_port.in_waiting
+    except (AttributeError, OSError):
+        waiting = 0
+
+    if waiting:
+        status_buffer.extend(serial_port.read(waiting))
+
+    while len(status_buffer) >= 3:
+        try:
+            sync_index = status_buffer.index(SnesMouseOutput.SYNC_1)
+        except ValueError:
+            status_buffer.clear()
+            break
+
+        if sync_index:
+            del status_buffer[:sync_index]
+            if len(status_buffer) < 3:
+                break
+
+        if status_buffer[1] != SnesMouseOutput.SYNC_MOUSE_STATUS:
+            del status_buffer[0]
+            continue
+
+        state = int(status_buffer[2])
+        del status_buffer[:3]
+
+        if state > 2:
+            continue
+
+        names = ("LOW", "MEDIUM", "HIGH")
+        if last_state is None:
+            print(f"SNES hardware sensitivity: {names[state]} ({state})")
+        elif state != last_state:
+            print(
+                f"SNES hardware sensitivity: {names[last_state]} "
+                f"-> {names[state]}"
+            )
+
+        last_state = state
+
+    return last_state
 
 
 def clamp_speed(value, name):
@@ -454,9 +501,16 @@ def run_gamepad_mouse_bridge(
         last_state = None
         last_send_time = 0.0
         last_reconnect_poll = 0.0
+        pico_status_buffer = bytearray()
+        snes_hardware_sensitivity = None
 
         while True:
             now = time.monotonic()
+            snes_hardware_sensitivity = service_pico_mouse_status(
+                serial_port,
+                pico_status_buffer,
+                snes_hardware_sensitivity,
+            )
 
             for event in pygame.event.get():
                 if (
@@ -853,8 +907,16 @@ def run_physical_mouse_bridge(
         residual_x = 0.0
         residual_y = 0.0
         last_report_time = time.monotonic()
+        pico_status_buffer = bytearray()
+        snes_hardware_sensitivity = None
 
         while True:
+            snes_hardware_sensitivity = service_pico_mouse_status(
+                serial_port,
+                pico_status_buffer,
+                snes_hardware_sensitivity,
+            )
+
             sample, stop_requested, button_down_events = source.poll()
             if stop_requested:
                 break
