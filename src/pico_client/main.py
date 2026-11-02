@@ -142,20 +142,36 @@ pin_clk = Pin(2, Pin.IN, Pin.PULL_UP)
 pin_latch = Pin(3, Pin.IN, Pin.PULL_UP)
 pin_data = Pin(4, Pin.OUT, value=0)
 
-sm = rp2.StateMachine(0)
+# Keep pad and mouse programs in separate PIO instruction memories.
+# StateMachine 0 is PIO0/SM0; StateMachine 4 is PIO1/SM0. Each PIO block has
+# its own 32-instruction program memory, avoiding ENOMEM when both personalities
+# are present in one firmware image.
+pad_sm = rp2.StateMachine(0)
+mouse_sm = rp2.StateMachine(4)
+active_sm = pad_sm
 current_mode = None
 active_word = SNES_PAD_NEUTRAL_WORD
 last_enqueued_word = SNES_PAD_NEUTRAL_WORD
 
 
 def init_state_machine(mode, initial_word):
-    """Switch the one SNES output state machine between pad and mouse modes."""
-    global current_mode, active_word, last_enqueued_word
+    """Switch between pad and mouse PIO blocks without sharing program memory."""
+    global active_sm, current_mode, active_word, last_enqueued_word
 
-    sm.active(0)
+    pad_sm.active(0)
+    mouse_sm.active(0)
 
-    program = snes_mouse_piso if mode == MODE_MOUSE else snes_pad_piso
-    sm.init(
+    if mode == MODE_MOUSE:
+        target_sm = mouse_sm
+        program = snes_mouse_piso
+    else:
+        target_sm = pad_sm
+        program = snes_pad_piso
+
+    # Re-initialising the selected SM resets its execution/FIFO state. Because
+    # each personality lives in a different PIO block, the two programs no
+    # longer compete for the same 32-instruction memory.
+    target_sm.init(
         program,
         freq=150_000_000,
         out_base=pin_data,
@@ -163,12 +179,12 @@ def init_state_machine(mode, initial_word):
         in_base=pin_clk,
     )
 
+    active_sm = target_sm
     active_word = initial_word
     last_enqueued_word = initial_word
-    sm.put(initial_word)
-    sm.active(1)
+    active_sm.put(initial_word)
+    active_sm.active(1)
     current_mode = mode
-
 
 def queue_latest_if_possible():
     global last_enqueued_word
@@ -178,8 +194,8 @@ def queue_latest_if_possible():
 
     # Keep at most one pending report. Latest state wins rather than allowing
     # stale controller/mouse reports to accumulate in the PIO TX FIFO.
-    if sm.tx_fifo() == 0:
-        sm.put(active_word)
+    if active_sm.tx_fifo() == 0:
+        active_sm.put(active_word)
         last_enqueued_word = active_word
 
 
