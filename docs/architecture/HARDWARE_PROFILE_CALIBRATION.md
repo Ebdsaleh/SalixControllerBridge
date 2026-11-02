@@ -356,3 +356,82 @@ The final derived result also compares opposite-direction throw magnitudes.
 Horizontal or vertical opposite-direction measurements differing by more than
 2x produce a `quality.status = review` warning rather than being silently
 presented as equally trustworthy.
+
+
+## Physical mouse source controls
+
+Hardware profiles can now store source-level auxiliary mouse controls under:
+
+```text
+source_calibration.mouse.controls
+```
+
+Current keys:
+
+```text
+sensitivity_decrease_button
+sensitivity_increase_button
+```
+
+These values are Pygame `MOUSEBUTTONDOWN.event.button` numbers discovered by
+the mouse-button probe.
+
+They are source/device controls, not console protocol bits.
+
+Example:
+
+```json
+{
+  "source_calibration": {
+    "mouse": {
+      "controls": {
+        "sensitivity_decrease_button": 6,
+        "sensitivity_increase_button": 7
+      }
+    }
+  }
+}
+```
+
+The DearPyGui profiler exposes these mappings directly and can launch the
+standalone mouse-button probe.
+
+## Physical mouse five-level sensitivity
+
+The accepted/calibrated mouse gain is the MEDIUM baseline.
+
+Runtime sensitivity levels scale around that baseline:
+
+```text
+VERY LOW   0.25x
+LOW        0.50x
+MEDIUM     1.00x
+HIGH       1.50x
+VERY HIGH  2.00x
+```
+
+The source controls are edge-triggered: one button-down event changes exactly
+one level.
+
+Changing sensitivity resets only fractional sub-count residuals. It does not
+alter:
+
+- the saved calibration gain;
+- the SNES Mouse packet signature;
+- the SNES hardware sensitivity bits;
+- Mario Paint's console-driven SLOW/NORMAL/FAST state.
+
+The per-report throw envelope remains independent and continues to cap the
+largest motion axis at the profile's configured maximum.
+
+The separation is:
+
+```text
+raw mouse counts
+    -> calibrated MEDIUM gain
+    -> user-selected Salix sensitivity multiplier
+    -> fractional carry
+    -> per-report throw envelope
+    -> MouseState
+    -> console mouse personality
+```
