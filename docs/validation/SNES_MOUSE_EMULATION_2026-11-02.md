@@ -557,3 +557,52 @@ so the Pico is returned to its default pad personality.
 The already validated gamepad `mouse_emu` path remains on its previous
 startup/shutdown behavior and was intentionally excluded from this lifecycle
 change.
+
+
+## Physical mouse throw clamp
+
+A later Razer Naga Pro run confirmed the physical mouse path can produce very
+large Windows/SDL deltas, including reports that hit the protocol encoder's
+previous +/-127 clamp.
+
+The SNES Mouse report is relative, not an absolute screen coordinate. The game
+owns the cursor position and screen bounds.
+
+The physical PC-mouse source now applies an authentic-ish per-report motion
+envelope before producing `MouseState`:
+
+```text
+PHYSICAL_MOUSE_MAX_THROW = 28
+```
+
+The largest axis is limited to +/-28 and the other axis is scaled by the same
+factor so direction is preserved.
+
+Example:
+
+```text
+raw +127 / +54
+    ->
+limited +28 / +12
+```
+
+This does not clamp Mario Paint to a specific pixel coordinate. It limits the
+largest relative displacement that can be injected during one 60 Hz report.
+
+The gamepad `mouse_emu` source is unchanged.
+
+When limiting occurs the host prints:
+
+```text
+Physical mouse throw limited: raw=+127/+54 -> +28/+12
+```
+
+Rationale:
+
+- authentic SNES Mouse motion is normally much smaller than the full 7-bit
+  sign/magnitude field;
+- low-sensitivity authentic motion values above roughly 25 are difficult to
+  produce;
+- higher authentic sensitivity modes saturate around roughly 21/28;
+- preserving the majority of normal Naga motion while suppressing extreme
+  accelerated spikes is therefore closer to real hardware behavior.
