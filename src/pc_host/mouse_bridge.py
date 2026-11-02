@@ -723,6 +723,8 @@ def run_physical_mouse_bridge(
     mouse_gain=None,
     max_throw=None,
     report_hz=None,
+    sensitivity_decrease_button=None,
+    sensitivity_increase_button=None,
 ):
     """Translate the PC's physical mouse into a console mouse personality."""
     serial_port = None
@@ -755,6 +757,31 @@ def run_physical_mouse_bridge(
             )
         report_seconds = 1.0 / report_hz
 
+        if sensitivity_decrease_button is not None:
+            sensitivity_decrease_button = int(sensitivity_decrease_button)
+            if sensitivity_decrease_button <= 0:
+                sensitivity_decrease_button = None
+
+        if sensitivity_increase_button is not None:
+            sensitivity_increase_button = int(sensitivity_increase_button)
+            if sensitivity_increase_button <= 0:
+                sensitivity_increase_button = None
+
+        if (
+            sensitivity_decrease_button is not None
+            and sensitivity_decrease_button == sensitivity_increase_button
+        ):
+            raise RuntimeError(
+                "physical mouse sensitivity decrease/increase buttons "
+                "must be different."
+            )
+
+        sensitivity = DEFAULT_SENSITIVITY
+        base_mouse_gain = mouse_gain
+        effective_mouse_gain = (
+            base_mouse_gain * SENSITIVITY_ANALOG_SCALE[sensitivity]
+        )
+
         source.start()
         print(f"Physical mouse source: {source.source_mode}")
 
@@ -784,9 +811,27 @@ def run_physical_mouse_bridge(
             "Mouse deltas are accumulated between reports."
         )
         print(
-            f"Physical mouse software gain: {mouse_gain:.2f}x "
-            "(fractional motion preserved)."
+            f"Physical mouse calibrated/base gain: {base_mouse_gain:.6f}x "
+            "(MEDIUM baseline; fractional motion preserved)."
         )
+        print(
+            f"Physical mouse sensitivity: {SENSITIVITY_NAMES[sensitivity]} "
+            f"({sensitivity}) effective gain={effective_mouse_gain:.6f}x"
+        )
+
+        if (
+            sensitivity_decrease_button is not None
+            or sensitivity_increase_button is not None
+        ):
+            print(
+                "Physical mouse sensitivity controls: "
+                f"button {sensitivity_decrease_button or '-'} = decrease; "
+                f"button {sensitivity_increase_button or '-'} = increase. "
+                "One step per press."
+            )
+        else:
+            print("Physical mouse sensitivity controls: not configured.")
+
         print(
             f"Physical mouse throw limit: +/-{max_throw} "
             "per report (direction preserved)."
@@ -803,9 +848,61 @@ def run_physical_mouse_bridge(
         last_report_time = time.monotonic()
 
         while True:
-            sample, stop_requested = source.poll()
+            sample, stop_requested, button_down_events = source.poll()
             if stop_requested:
                 break
+
+            sensitivity_changed = False
+
+            for button in button_down_events:
+                if (
+                    sensitivity_decrease_button is not None
+                    and button == sensitivity_decrease_button
+                ):
+                    old_sensitivity = sensitivity
+                    sensitivity = max(
+                        SENSITIVITY_VERY_LOW,
+                        sensitivity - 1,
+                    )
+                    if sensitivity != old_sensitivity:
+                        sensitivity_changed = True
+                        print(
+                            f"Physical mouse sensitivity: "
+                            f"{SENSITIVITY_NAMES[old_sensitivity]} "
+                            f"-> {SENSITIVITY_NAMES[sensitivity]}"
+                        )
+                    else:
+                        print("Physical mouse sensitivity already at VERY LOW.")
+
+                elif (
+                    sensitivity_increase_button is not None
+                    and button == sensitivity_increase_button
+                ):
+                    old_sensitivity = sensitivity
+                    sensitivity = min(
+                        SENSITIVITY_VERY_HIGH,
+                        sensitivity + 1,
+                    )
+                    if sensitivity != old_sensitivity:
+                        sensitivity_changed = True
+                        print(
+                            f"Physical mouse sensitivity: "
+                            f"{SENSITIVITY_NAMES[old_sensitivity]} "
+                            f"-> {SENSITIVITY_NAMES[sensitivity]}"
+                        )
+                    else:
+                        print("Physical mouse sensitivity already at VERY HIGH.")
+
+            if sensitivity_changed:
+                effective_mouse_gain = (
+                    base_mouse_gain * SENSITIVITY_ANALOG_SCALE[sensitivity]
+                )
+                residual_x = 0.0
+                residual_y = 0.0
+                print(
+                    f"Physical mouse effective gain: "
+                    f"{effective_mouse_gain:.6f}x"
+                )
 
             accumulated_dx += sample.dx
             accumulated_dy += sample.dy
@@ -829,7 +926,7 @@ def run_physical_mouse_bridge(
                 scale_physical_mouse_delta(
                     raw_dx,
                     raw_dy,
-                    mouse_gain,
+                    effective_mouse_gain,
                     residual_x,
                     residual_y,
                 )
@@ -867,6 +964,8 @@ def run_physical_mouse_bridge(
                 print(
                     f"Mouse dx={state.dx:+d} dy={state.dy:+d} "
                     f"L={int(state.left)} R={int(state.right)} "
+                    f"sens={SENSITIVITY_NAMES[sensitivity]}({sensitivity}) "
+                    f"gain={effective_mouse_gain:.6f} "
                     f"report=0x{logical_report:08X} "
                     f"wire=0x{wire_word:08X} TX={packet_hex}"
                 )
