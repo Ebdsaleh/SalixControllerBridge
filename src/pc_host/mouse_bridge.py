@@ -329,8 +329,6 @@ def run_gamepad_mouse_bridge(
             timeout=0,
             write_timeout=0.100,
         )
-        output.activate(serial_port)
-
         print(
             f"Mouse emulation -> {output.name} streaming to {serial_device}. "
             "Press Ctrl+C to exit."
@@ -374,7 +372,7 @@ def run_gamepad_mouse_bridge(
                         "Controller disconnected/re-enumerating. "
                         f"Sending neutral {output.name} state and waiting..."
                     )
-                    output.deactivate(serial_port)
+                    output.send_neutral(serial_port)
 
                     try:
                         joystick.quit()
@@ -472,7 +470,7 @@ def run_gamepad_mouse_bridge(
                     "Controller vanished during sampling. "
                     f"Sending neutral {output.name} state and waiting..."
                 )
-                output.deactivate(serial_port)
+                output.send_neutral(serial_port)
 
                 try:
                     joystick.quit()
@@ -525,7 +523,7 @@ def run_gamepad_mouse_bridge(
     finally:
         if serial_port is not None:
             try:
-                output.deactivate(serial_port)
+                output.send_neutral(serial_port)
             except (serial.SerialException, serial.SerialTimeoutException):
                 pass
             try:
