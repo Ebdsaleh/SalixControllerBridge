@@ -324,6 +324,24 @@ def build_mouse_state(
     )
 
 
+def apply_axis_pair_override(directional_axis_pairs, axis_pair_override):
+    if not axis_pair_override:
+        return directional_axis_pairs
+
+    if (
+        isinstance(axis_pair_override, (list, tuple))
+        and len(axis_pair_override) == 2
+    ):
+        return (
+            (
+                int(axis_pair_override[0]),
+                int(axis_pair_override[1]),
+            ),
+        )
+
+    return directional_axis_pairs
+
+
 def run_gamepad_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
@@ -359,17 +377,10 @@ def run_gamepad_mouse_bridge(
             raise RuntimeError("No controller detected.")
 
         joystick, button_map, directional_axis_pairs = open_controller(0)
-        if axis_pair_override:
-            if (
-                isinstance(axis_pair_override, (list, tuple))
-                and len(axis_pair_override) == 2
-            ):
-                directional_axis_pairs = (
-                    (
-                        int(axis_pair_override[0]),
-                        int(axis_pair_override[1]),
-                    ),
-                )
+        directional_axis_pairs = apply_axis_pair_override(
+            directional_axis_pairs,
+            axis_pair_override,
+        )
 
         serial_device = resolve_serial_port(serial_port_override)
         serial_port = serial.Serial(
@@ -443,6 +454,10 @@ def run_gamepad_mouse_bridge(
                         joystick, button_map, directional_axis_pairs = open_controller(
                             event.device_index
                         )
+                        directional_axis_pairs = apply_axis_pair_override(
+                            directional_axis_pairs,
+                            axis_pair_override,
+                        )
                         active_instance_id = joystick.get_instance_id()
                         last_state = None
                         last_send_time = 0.0
@@ -457,6 +472,10 @@ def run_gamepad_mouse_bridge(
                     if pygame.joystick.get_count() > 0:
                         try:
                             joystick, button_map, directional_axis_pairs = open_controller(0)
+                            directional_axis_pairs = apply_axis_pair_override(
+                                directional_axis_pairs,
+                                axis_pair_override,
+                            )
                             active_instance_id = joystick.get_instance_id()
                             last_state = None
                             last_send_time = 0.0
@@ -701,6 +720,7 @@ def run_physical_mouse_bridge(
         report_seconds = 1.0 / report_hz
 
         source.start()
+        print(f"Physical mouse source: {source.source_mode}")
 
         serial_device = resolve_serial_port(serial_port_override)
         serial_port = serial.Serial(
