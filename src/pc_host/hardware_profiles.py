@@ -226,6 +226,16 @@ def get_console_module(profile, console_name, module_name):
     )
 
 
+def _is_profile_backup(path):
+    name = path.name.lower()
+    return (
+        ".before-recovery-" in name
+        or ".backup." in name
+        or name.endswith(".backup.json")
+        or name.endswith(".bak.json")
+    )
+
+
 def list_profiles():
     directory = default_profile_directory()
     if not directory.exists():
@@ -233,6 +243,9 @@ def list_profiles():
 
     results = []
     for path in sorted(directory.glob("*.json")):
+        if _is_profile_backup(path):
+            continue
+
         try:
             profile = load_profile(path)
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError):
