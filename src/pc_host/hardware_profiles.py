@@ -238,7 +238,11 @@ def get_default_profile_path(device_type):
     if not device_type:
         return None
 
-    settings = load_default_profile_settings()
+    try:
+        settings = load_default_profile_settings()
+    except (OSError, ValueError, RuntimeError, json.JSONDecodeError):
+        return None
+
     reference = settings.get("defaults", {}).get(device_type)
     if not reference:
         return None
