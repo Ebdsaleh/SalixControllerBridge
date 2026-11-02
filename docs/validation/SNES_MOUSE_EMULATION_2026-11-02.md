@@ -1,0 +1,107 @@
+# SNES Mouse Emulation Bring-Up — 2026-11-02
+
+## Goal
+
+Prove that the existing SalixControllerBridge SNES electrical interface can present a genuine SNES Mouse personality to a physical PAL SNES before adding USB-mouse input support.
+
+The initial input source is a Nintendo Switch Pro Controller because its left analog stick and face buttons are already calibrated in the PC bridge.
+
+## Scope of this batch
+
+- Existing standard-pad serial frame remains unchanged: `AA 55 <low> <high>`.
+- New mouse frame: `AA 56 <wire0> <wire1> <wire2> <wire3>`.
+- Pico firmware can switch between 16-bit standard-pad and 32-bit SNES Mouse PIO personalities.
+- Mouse movement source:
+  - left analog stick / calibrated first XY pair;
+  - D-pad as a fixed-speed fallback/additional source.
+- SNES B face position -> SNES Mouse left button.
+- SNES A face position -> SNES Mouse right button.
+- Mouse sensitivity field is fixed at level 0 for this first physical proof.
+- Software-driven sensitivity cycling while Latch is high is intentionally deferred.
+
+## Hardware
+
+Use one already-proven SNES adapter only.
+
+For Mario Paint, connect that adapter to **SNES controller port 1**.
+
+Do not modify the level-shifter/perfboard wiring for this test.
+
+## Pico update
+
+Copy the updated:
+
+`src/pico_client/main.py`
+
+to the selected Pico as:
+
+`main.py`
+
+and reset the Pico.
+
+## Host test
+
+With the Nintendo Switch Pro Controller connected to Windows:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3
+```
+
+Replace `COM3` with the Pico attached to SNES controller port 1.
+
+The tool can also auto-detect the Pico when only one likely Pico serial device is connected:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py
+```
+
+Optional tuning:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3 --max-speed 6 --dpad-speed 3
+```
+
+Defaults are:
+
+- analog deadzone: 0.18
+- full-stick maximum displacement: 8
+- D-pad displacement: 4
+
+## Expected mapping
+
+| Physical/normalized input | SNES Mouse output |
+| --- | --- |
+| Left stick X/Y | Relative mouse motion |
+| D-pad | Relative mouse motion |
+| SNES B face position | Left mouse button |
+| SNES A face position | Right mouse button |
+
+For the calibrated Nintendo Switch Pro profile, this preserves the existing canonical SNES face-position mapping rather than hard-coding raw Pygame button numbers.
+
+## Acceptance checkpoints
+
+1. Mario Paint boots with the adapter in controller port 1.
+2. Mario Paint recognizes the bridge as a mouse rather than a standard pad.
+3. Left-stick motion moves the Mario Paint cursor.
+4. D-pad motion also moves the cursor.
+5. SNES B-position button performs left click.
+6. SNES A-position button performs right click.
+7. Returning the stick to center stops cursor movement.
+8. Ctrl+C releases mouse buttons/motion and stops the host bridge cleanly.
+
+## First-run console output
+
+The host should print a line similar to:
+
+```text
+SNES Mouse bridge streaming to COM3. Press Ctrl+C to exit.
+Mapping: left stick/lever or D-pad -> mouse motion; SNES B position -> LEFT click; SNES A position -> RIGHT click.
+```
+
+State changes print the logical mouse report, the physical-wire word, and the serial packet. A neutral report is logically `0x00010000`.
+
+## Known limitation
+
+The authentic SNES Mouse can cycle sensitivity when the console clocks the mouse while Latch is active. This first batch reports sensitivity level 0 and does not yet emulate the sensitivity-cycle command.
+
+If Mario Paint recognition/motion works, sensitivity cycling becomes the next protocol-accuracy refinement rather than being mixed into the first proof.
