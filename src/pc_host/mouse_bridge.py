@@ -261,7 +261,7 @@ def build_mouse_state(
     )
 
 
-def run_mouse_bridge(
+def run_gamepad_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
     max_speed=MOUSE_ANALOG_MAX_DELTA,
@@ -501,6 +501,21 @@ def run_mouse_bridge(
         print("Mouse bridge stopped.")
 
 
+def run_mouse_bridge(
+    serial_port_override=None,
+    output_personality="snes",
+    max_speed=MOUSE_ANALOG_MAX_DELTA,
+    dpad_speed=MOUSE_DPAD_DELTA,
+):
+    """Backward-compatible name for the gamepad mouse-emulation source."""
+    return run_gamepad_mouse_bridge(
+        serial_port_override=serial_port_override,
+        output_personality=output_personality,
+        max_speed=max_speed,
+        dpad_speed=dpad_speed,
+    )
+
+
 def run_physical_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
@@ -639,6 +654,15 @@ def parse_args():
         help="Console mouse output personality (currently: snes).",
     )
     parser.add_argument(
+        "--source",
+        default="gamepad",
+        choices=("gamepad", "mouse"),
+        help=(
+            "Input source for MouseState: gamepad for controller/arcade-stick "
+            "emulation, or mouse for the PC's physical mouse."
+        ),
+    )
+    parser.add_argument(
         "--max-speed",
         type=int,
         default=MOUSE_ANALOG_MAX_DELTA,
@@ -668,12 +692,20 @@ def main():
             f"{args.serial_port} and {args.port_override}"
         )
 
-    run_mouse_bridge(
-        serial_port_override=args.port_override or args.serial_port,
-        output_personality=args.output,
-        max_speed=args.max_speed,
-        dpad_speed=args.dpad_speed,
-    )
+    serial_device = args.port_override or args.serial_port
+
+    if args.source == "mouse":
+        run_physical_mouse_bridge(
+            serial_port_override=serial_device,
+            output_personality=args.output,
+        )
+    else:
+        run_gamepad_mouse_bridge(
+            serial_port_override=serial_device,
+            output_personality=args.output,
+            max_speed=args.max_speed,
+            dpad_speed=args.dpad_speed,
+        )
 
 
 if __name__ == "__main__":
