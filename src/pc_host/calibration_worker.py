@@ -27,6 +27,20 @@ SNES_WIDTH = int(SNES_ENV["logical_width"])
 SNES_HEIGHT = int(SNES_ENV["logical_height"])
 SNES_MARGIN = 16
 
+# Keep the console math at the native logical resolution, but render it large
+# enough to read comfortably. Instructions and live telemetry live beside the
+# console surface rather than covering it.
+SNES_RENDER_SCALE = 3
+INSTRUCTION_PANEL_WIDTH = 420
+CALIBRATION_WINDOW_WIDTH = (
+    SNES_WIDTH * SNES_RENDER_SCALE
+    + INSTRUCTION_PANEL_WIDTH
+)
+CALIBRATION_WINDOW_HEIGHT = SNES_HEIGHT * SNES_RENDER_SCALE
+
+THROW_MIN_PRIMARY_COUNTS = 24
+THROW_MAX_OFF_AXIS_RATIO = 0.45
+
 
 def _write_result(path, payload):
     output = Path(path)
@@ -37,9 +51,103 @@ def _write_result(path, payload):
     )
 
 
-def _draw_text(surface, font, text, x, y):
-    rendered = font.render(text, True, (235, 235, 235))
+def _draw_text(surface, font, text, x, y, color=(235, 235, 235)):
+    rendered = font.render(text, True, color)
     surface.blit(rendered, (x, y))
+
+
+def _wrap_text(font, text, max_width):
+    words = str(text).split()
+    if not words:
+        return [""]
+
+    lines = []
+    current = words[0]
+
+    for word in words[1:]:
+        candidate = current + " " + word
+        if font.size(candidate)[0] <= max_width:
+            current = candidate
+        else:
+            lines.append(current)
+            current = word
+
+    lines.append(current)
+    return lines
+
+
+def _present_calibration_frame(
+    window,
+    console_surface,
+    title_font,
+    body_font,
+    small_font,
+    heading,
+    lines,
+):
+    window.fill((13, 15, 19))
+
+    scaled = pygame.transform.scale(
+        console_surface,
+        (
+            SNES_WIDTH * SNES_RENDER_SCALE,
+            SNES_HEIGHT * SNES_RENDER_SCALE,
+        ),
+    )
+    window.blit(scaled, (0, 0))
+
+    panel_x = SNES_WIDTH * SNES_RENDER_SCALE
+    pygame.draw.line(
+        window,
+        (72, 78, 92),
+        (panel_x, 0),
+        (panel_x, CALIBRATION_WINDOW_HEIGHT),
+        2,
+    )
+
+    x = panel_x + 24
+    y = 24
+    max_width = INSTRUCTION_PANEL_WIDTH - 48
+
+    _draw_text(
+        window,
+        title_font,
+        heading,
+        x,
+        y,
+        color=(90, 255, 160),
+    )
+    y += 44
+
+    for entry in lines:
+        if isinstance(entry, tuple):
+            text, kind = entry
+        else:
+            text, kind = entry, "body"
+
+        font = small_font if kind == "small" else body_font
+        color = (170, 178, 194) if kind == "small" else (235, 235, 235)
+
+        for wrapped in _wrap_text(font, text, max_width):
+            _draw_text(window, font, wrapped, x, y, color=color)
+            y += font.get_linesize() + 3
+        y += 7
+
+    pygame.display.flip()
+
+
+def _create_calibration_display(title):
+    window = pygame.display.set_mode(
+        (CALIBRATION_WINDOW_WIDTH, CALIBRATION_WINDOW_HEIGHT)
+    )
+    pygame.display.set_caption(title)
+
+    console_surface = pygame.Surface((SNES_WIDTH, SNES_HEIGHT))
+    title_font = pygame.font.Font(None, 34)
+    body_font = pygame.font.Font(None, 26)
+    small_font = pygame.font.Font(None, 21)
+
+    return window, console_surface, title_font, body_font, small_font
 
 
 def _draw_console_environment(surface, target=None, cursor=None):
@@ -81,6 +189,48 @@ def _mouse_targets():
         ("DOWN", (center[0], SNES_HEIGHT - SNES_MARGIN - 1), "y", +1),
         ("UP", (center[0], SNES_MARGIN), "y", -1),
     )
+
+
+def _validate_mouse_throw(axis, sign, snapshot):
+    primary = int(snapshot["dx"] if axis == "x" else snapshot["dy"])
+    secondary = int(snapshot["dy"] if axis == "x" else snapshot["dx"])
+
+    primary_abs = abs(primary)
+    secondary_abs = abs(secondary)
+    ratio = (
+        secondary_abs / float(primary_abs)
+        if primary_abs > 0
+        else float("inf")
+    )
+
+    quality = {
+        "primary_counts": primary,
+        "secondary_counts": secondary,
+        "primary_abs": primary_abs,
+        "secondary_abs": secondary_abs,
+        "off_axis_ratio": ratio,
+        "event_count": int(snapshot["event_count"]),
+    }
+
+    if primary == 0 or (primary > 0) != (sign > 0):
+        return False, "Movement went in the wrong primary direction.", quality
+
+    if primary_abs < THROW_MIN_PRIMARY_COUNTS:
+        return (
+            False,
+            f"Primary throw was too small ({primary_abs} raw counts).",
+            quality,
+        )
+
+    if ratio > THROW_MAX_OFF_AXIS_RATIO:
+        return (
+            False,
+            "Too much off-axis movement "
+            f"({secondary_abs} vs {primary_abs} raw counts).",
+            quality,
+        )
+
+    return True, None, quality
 
 
 def _measurement_gain(measurements):
