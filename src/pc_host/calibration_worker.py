@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pygame
 
+from axis_calibration import apply_deadzone, normalize_axis
 from hardware_profiles import CONSOLE_ENVIRONMENTS
 from windows_mouse_settings import (
     get_windows_mouse_settings,
@@ -302,7 +303,10 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
                 raise KeyboardInterrupt
 
             derived = _measurement_gain(measurements)
-            accepted_gain = float(derived["recommended_gain"])
+            accepted_gain = max(
+                0.01,
+                min(4.0, float(derived["recommended_gain"])),
+            )
 
             # Live console-environment test. Raw counts drive the virtual
             # console cursor through the derived scalar gain. +/- adjusts by 5%.
@@ -326,12 +330,12 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
                             event.unicode in ("+", "=")
                             or event.key in (pygame.K_EQUALS, pygame.K_KP_PLUS)
                         ):
-                            accepted_gain *= 1.05
+                            accepted_gain = min(4.0, accepted_gain * 1.05)
                         elif (
                             event.unicode == "-"
                             or event.key in (pygame.K_MINUS, pygame.K_KP_MINUS)
                         ):
-                            accepted_gain /= 1.05
+                            accepted_gain = max(0.01, accepted_gain / 1.05)
                         elif event.key == pygame.K_r:
                             accepted_gain = float(derived["recommended_gain"])
                             cursor_x = float(center[0])
