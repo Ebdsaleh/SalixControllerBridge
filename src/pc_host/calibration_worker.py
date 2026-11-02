@@ -469,13 +469,21 @@ def _axis_statistics(samples, minimums, maximums):
         negative_span = max(0.001, center - minimum)
         positive_span = max(0.001, maximum - center)
 
-        deadzone = min(0.35, max(0.05, noise * 1.75 + 0.02))
+        normalized_noise = max(
+            noise / negative_span,
+            noise / positive_span,
+        )
+        deadzone = min(
+            0.35,
+            max(0.05, normalized_noise * 1.75 + 0.02),
+        )
 
         axes.append(
             {
                 "index": index,
                 "center": center,
                 "center_noise": noise,
+                "normalized_center_noise": normalized_noise,
                 "minimum": minimum,
                 "maximum": maximum,
                 "negative_span": negative_span,
