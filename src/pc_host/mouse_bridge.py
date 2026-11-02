@@ -41,6 +41,7 @@ class SnesMouseOutput:
     """SNES Mouse output personality for the generic mouse-emulation bridge."""
 
     SYNC_1 = 0xAA
+    SYNC_PAD = 0x55
     SYNC_MOUSE = 0x56
 
     SIGNATURE = 0x01
@@ -124,6 +125,36 @@ class SnesMouseOutput:
         neutral = MouseState()
         for _ in range(5):
             self.send(serial_port, neutral)
+            time.sleep(0.005)
+
+    @classmethod
+    def _send_pad_neutral(cls, serial_port):
+        """Force the Pico back through its known-good standard-pad mode."""
+        packet = bytes((cls.SYNC_1, cls.SYNC_PAD, 0xFF, 0xFF))
+        bytes_written = serial_port.write(packet)
+        if bytes_written != len(packet):
+            raise serial.SerialException(
+                f"Short serial write: expected {len(packet)} bytes, "
+                f"wrote {bytes_written}"
+            )
+        serial_port.flush()
+
+    def activate(self, serial_port):
+        """Re-arm the Pico mouse PIO state machine from a known mode boundary."""
+        # The Pico only reinitializes a personality when the frame kind changes.
+        # Force PAD -> MOUSE on every host launch so a previous run cannot leave
+        # the mouse PIO blocked mid-transaction or out of phase.
+        for _ in range(3):
+            self._send_pad_neutral(serial_port)
+            time.sleep(0.005)
+
+        self.send_neutral(serial_port)
+
+    def deactivate(self, serial_port):
+        """Release mouse state and return the Pico to its default pad mode."""
+        self.send_neutral(serial_port)
+        for _ in range(3):
+            self._send_pad_neutral(serial_port)
             time.sleep(0.005)
 
 
@@ -298,6 +329,7 @@ def run_gamepad_mouse_bridge(
             timeout=0,
             write_timeout=0.100,
         )
+        output.activate(serial_port)
 
         print(
             f"Mouse emulation -> {output.name} streaming to {serial_device}. "
@@ -342,7 +374,7 @@ def run_gamepad_mouse_bridge(
                         "Controller disconnected/re-enumerating. "
                         f"Sending neutral {output.name} state and waiting..."
                     )
-                    output.send_neutral(serial_port)
+                    output.deactivate(serial_port)
 
                     try:
                         joystick.quit()
@@ -440,7 +472,7 @@ def run_gamepad_mouse_bridge(
                     "Controller vanished during sampling. "
                     f"Sending neutral {output.name} state and waiting..."
                 )
-                output.send_neutral(serial_port)
+                output.deactivate(serial_port)
 
                 try:
                     joystick.quit()
@@ -493,7 +525,7 @@ def run_gamepad_mouse_bridge(
     finally:
         if serial_port is not None:
             try:
-                output.send_neutral(serial_port)
+                output.deactivate(serial_port)
             except (serial.SerialException, serial.SerialTimeoutException):
                 pass
             try:
@@ -561,6 +593,7 @@ def run_physical_mouse_bridge(
             timeout=0,
             write_timeout=PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS,
         )
+        output.activate(serial_port)
 
         print(
             f"Physical mouse -> {output.name} streaming to {serial_device}. "
@@ -645,7 +678,7 @@ def run_physical_mouse_bridge(
     finally:
         if serial_port is not None:
             try:
-                output.send_neutral(serial_port)
+                output.deactivate(serial_port)
             except (serial.SerialException, serial.SerialTimeoutException):
                 pass
             try:
