@@ -239,7 +239,7 @@ class CalibrationApp:
         dpg.add_text(
             "Calibration flow:\n"
             "1. Leave the mouse at your comfortable daily-driver setting.\n"
-            "2. A 256x224 SDL window opens.\n"
+            "2. A 3x-rendered 256x224 logical SNES area opens with a side panel.\n"
             "3. Teach Salix four natural full throws: right, left, down, up.\n"
             "4. Salix derives one scalar raw-count gain.\n"
             "5. Test that gain in the same SNES-sized environment.\n"
@@ -248,7 +248,7 @@ class CalibrationApp:
         )
 
         dpg.add_spacer(height=10)
-        dpg.add_text("Last mouse calibration")
+        dpg.add_text("Pending / last mouse calibration")
         dpg.add_input_text(
             tag="mouse_result",
             multiline=True,
@@ -302,7 +302,7 @@ class CalibrationApp:
         )
 
         dpg.add_spacer(height=10)
-        dpg.add_text("Last controller calibration")
+        dpg.add_text("Pending / last controller calibration")
         dpg.add_input_text(
             tag="controller_result",
             multiline=True,
