@@ -23,18 +23,25 @@ MOUSE_DPAD_DELTA = 4
 #   bits 5-4: hardware mouse speed/sensitivity state
 #   bits 3-0: signature 0001
 #
-# Do not equate the hardware speed bits with the bridge's LOW/MEDIUM/HIGH
+# Do not equate the hardware speed bits with the bridge's five-level
 # cursor-speed setting. Authentic SNES Mouse sensitivity selection is a
 # console-side Latch/Clock protocol operation and is intentionally separate.
 SNES_MOUSE_SIGNATURE = 0x01
 SNES_MOUSE_LEFT = 0x40
 SNES_MOUSE_RIGHT = 0x80
 
-SENSITIVITY_LOW = 0
-SENSITIVITY_MEDIUM = 1
-SENSITIVITY_HIGH = 2
-SENSITIVITY_NAMES = ("LOW", "MEDIUM", "HIGH")
-SENSITIVITY_SPEED_SCALE = (0.5, 1.0, 2.0)
+SENSITIVITY_VERY_LOW = 0
+SENSITIVITY_LOW = 1
+SENSITIVITY_MEDIUM = 2
+SENSITIVITY_HIGH = 3
+SENSITIVITY_VERY_HIGH = 4
+SENSITIVITY_NAMES = ("VERY LOW", "LOW", "MEDIUM", "HIGH", "VERY HIGH")
+
+# Preserve the physically validated MEDIUM rate exactly, add a gentler analog
+# HIGH between MEDIUM and the old HIGH, and give the D-pad more authority in
+# the upper tiers.
+SENSITIVITY_ANALOG_SCALE = (0.25, 0.5, 1.0, 1.5, 2.0)
+SENSITIVITY_DPAD_SCALE = (0.25, 0.5, 1.0, 2.0, 3.0)
 DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 
 # Keep the SNES Mouse speed bits at the exact known-good bring-up value for
@@ -125,8 +132,8 @@ def read_sensitivity_controls(joystick, button_map):
     return decrease, increase
 
 
-def scaled_speed(base_speed, sensitivity):
-    scale = SENSITIVITY_SPEED_SCALE[sensitivity]
+def scaled_speed(base_speed, sensitivity, scale_table):
+    scale = scale_table[sensitivity]
     return max(1, int(round(base_speed * scale)))
 
 
@@ -196,8 +203,16 @@ def build_logical_mouse_report(
 ):
     pygame.event.pump()
 
-    analog_speed = scaled_speed(max_speed, sensitivity)
-    digital_speed = scaled_speed(dpad_speed, sensitivity)
+    analog_speed = scaled_speed(
+        max_speed,
+        sensitivity,
+        SENSITIVITY_ANALOG_SCALE,
+    )
+    digital_speed = scaled_speed(
+        dpad_speed,
+        sensitivity,
+        SENSITIVITY_DPAD_SCALE,
+    )
 
     analog_x, analog_y = read_analog_motion(
         joystick,
@@ -346,7 +361,7 @@ def main():
         )
         print(
             "Sensitivity controls: L or Y = decrease; R or X = increase. "
-            "Each press changes one step."
+            "Five levels, one step per press."
         )
         print(
             f"Bridge sensitivity: {SENSITIVITY_NAMES[sensitivity]} "
@@ -435,25 +450,25 @@ def main():
 
                 if decrease_edge and not increase_edge:
                     old_sensitivity = sensitivity
-                    sensitivity = max(SENSITIVITY_LOW, sensitivity - 1)
+                    sensitivity = max(SENSITIVITY_VERY_LOW, sensitivity - 1)
                     if sensitivity != old_sensitivity:
                         print(
                             f"Sensitivity: {SENSITIVITY_NAMES[old_sensitivity]} "
                             f"-> {SENSITIVITY_NAMES[sensitivity]}"
                         )
                     else:
-                        print("Sensitivity already at LOW.")
+                        print("Sensitivity already at VERY LOW.")
 
                 elif increase_edge and not decrease_edge:
                     old_sensitivity = sensitivity
-                    sensitivity = min(SENSITIVITY_HIGH, sensitivity + 1)
+                    sensitivity = min(SENSITIVITY_VERY_HIGH, sensitivity + 1)
                     if sensitivity != old_sensitivity:
                         print(
                             f"Sensitivity: {SENSITIVITY_NAMES[old_sensitivity]} "
                             f"-> {SENSITIVITY_NAMES[sensitivity]}"
                         )
                     else:
-                        print("Sensitivity already at HIGH.")
+                        print("Sensitivity already at VERY HIGH.")
 
                 previous_decrease = decrease_pressed
                 previous_increase = increase_pressed
