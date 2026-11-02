@@ -606,3 +606,53 @@ Rationale:
 - higher authentic sensitivity modes saturate around roughly 21/28;
 - preserving the majority of normal Naga motion while suppressing extreme
   accelerated spikes is therefore closer to real hardware behavior.
+
+
+## High-DPI physical mouse software gain
+
+The Razer Naga Pro test exposed a second issue distinct from the per-report
+throw spike.
+
+Lowering the mouse's hardware DPI enough to make Mario Paint comfortable made
+normal Windows pointer use unacceptably slow.
+
+Physical mouse mode now therefore applies a source-specific software gain before
+the SNES throw limit:
+
+```text
+PHYSICAL_MOUSE_GAIN = 0.50
+```
+
+Default data flow:
+
+```text
+Windows / SDL relative delta
+    -> 0.50x physical-mouse gain
+    -> preserve fractional residual motion
+    -> +/-28 proportional throw envelope
+    -> MouseState
+    -> SNES Mouse
+```
+
+Fractional residuals are carried across reports so small source movements are
+not discarded merely because the gain is below 1.0.
+
+The normal command:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse
+```
+
+uses the default 0.50x gain.
+
+For tuning without changing hardware DPI:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse --mouse-gain 0.35
+py src\pc_host\bridge.py COM3 mouse --mouse-gain 0.75
+```
+
+Valid gain range is greater than 0 through 4.0.
+
+This setting affects only the physical PC-mouse source. Gamepad mouse emulation
+remains unchanged.
