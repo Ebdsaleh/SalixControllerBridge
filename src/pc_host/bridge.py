@@ -496,20 +496,22 @@ def main():
         elif not args.no_default_profile:
             from hardware_profiles import load_default_profile
 
-            default_device_type = (
-                "mouse"
-                if launch_mode == "mouse"
-                else "controller"
-            )
-            hardware_profile, hardware_profile_path = load_default_profile(
-                default_device_type
-            )
+            default_device_type = None
+            if launch_mode == "mouse":
+                default_device_type = "mouse"
+            elif launch_mode == "mouse_emu":
+                default_device_type = "controller"
 
-            if hardware_profile_path is not None:
-                print(
-                    f"Hardware profile (default {default_device_type}): "
-                    f"{hardware_profile_path}"
+            if default_device_type is not None:
+                hardware_profile, hardware_profile_path = load_default_profile(
+                    default_device_type
                 )
+
+                if hardware_profile_path is not None:
+                    print(
+                        f"Hardware profile (default {default_device_type}): "
+                        f"{hardware_profile_path}"
+                    )
 
         if launch_mode == "mouse_emu":
             # Gamepad/arcade-stick source -> normalized MouseState -> SNES Mouse.
