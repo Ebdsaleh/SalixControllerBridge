@@ -591,6 +591,10 @@ def run_physical_mouse_bridge(
             timeout=0,
             write_timeout=PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS,
         )
+
+        print(
+            "Re-arming SNES Mouse output: PAD neutral -> MOUSE neutral..."
+        )
         output.activate(serial_port)
 
         print(
