@@ -90,6 +90,18 @@ py src\pc_host\bridge.py COM3 mouse_emu
 py src\pc_host\bridge.py COM3 mouse-emu
 ```
 
+Translate the PC's physical mouse into the current console mouse personality:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse
+```
+
+In `mouse` mode the capture window grabs relative mouse motion; press **ESC**
+in that window to release capture and exit. Physical left/right mouse buttons
+map directly to MouseLeft/MouseRight. The first host proof uses the operating
+system's active mouse stream; individual USB-HID device selection belongs to
+the later standalone hardware-host layer.
+
 When only one likely Pico serial device is connected, the COM port can still be
 auto-detected:
 
