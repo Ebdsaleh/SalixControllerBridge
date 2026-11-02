@@ -236,3 +236,82 @@ Once that table is confirmed, `bridge.py` can use a named Mayflash F300 profile 
 ## Protocol notes
 
 A standard SNES controller returns 16 serial bits. The first 12 are buttons and are active-low. The final four bits are the standard-controller device signature `0000`. The console controls latch and clock; the controller presents `B` first, then advances through the remaining bits as the clock cycles.
+
+
+## Hardware profiler and calibration utility
+
+SalixControllerBridge now includes a DearPyGui hardware-profiler utility. Its
+desktop shell follows the same Salix application style used by SalixTorrent,
+while the profile/calibration backend remains independent from DearPyGui.
+
+Install/update dependencies:
+
+```bat
+py -m pip install -r requirements.txt
+```
+
+Launch the utility:
+
+```bat
+py src\pc_host\calibration_app.py
+```
+
+The utility creates one versioned profile per physical device and keeps every
+compatible console module under that same profile.
+
+Mouse example:
+
+```text
+Razer Naga Pro
+  identity / raw baseline
+  SNES.mouse
+  Saturn.mouse
+  Dreamcast.mouse
+```
+
+Controller example:
+
+```text
+Switch Pro
+  identity / axis baseline
+  SNES.pad
+  SNES.mouse_emu
+  Saturn.pad
+  Saturn.mouse_emu
+  Dreamcast.controller
+  Dreamcast.mouse_emu
+```
+
+The current SNES mouse calibration launches a separate 256x224 SDL/Pygame
+surface, captures unaccelerated Win32 Raw Input counts, measures four natural
+full throws, derives a scalar mouse gain, and then lets the user test/adjust
+that gain in the same logical console environment before saving it.
+
+Windows pointer acceleration can be temporarily disabled during that test and
+is restored automatically afterward. Raw Input remains the authoritative
+measurement.
+
+Generated profiles are stored outside the repository under the user's
+application-state directory. On Windows the default location is:
+
+```text
+%LOCALAPPDATA%\SalixControllerBridge\profiles\hardware\
+```
+
+Use a calibrated physical-mouse profile:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse --hardware-profile "Razer Naga Pro"
+```
+
+Use a calibrated controller mouse-emulation profile:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse_emu --hardware-profile "Switch Pro"
+```
+
+A JSON profile path can be supplied instead of the profile name.
+
+See `docs/architecture/HARDWARE_PROFILE_CALIBRATION.md` for the schema,
+calibration model, Windows Raw Input behavior, and the PC-host versus final
+standalone-box boundary.
