@@ -228,3 +228,39 @@ desktop mouse
 
 This is another example of why source normalization and console output must
 remain separate modules.
+
+
+## PC-host mouse compensation versus final standalone USB host
+
+The current `bridge.py ... mouse` path is a PC-host proof adapter. Its input
+comes from SDL/Pygame after the operating system has already claimed the mouse.
+
+That means host pointer settings, desktop integration, and device DPI can affect
+the relative motion observed by the bridge.
+
+The final standalone Salix box should not reproduce that dependency.
+
+Final intended path:
+
+```text
+physical USB/Bluetooth mouse
+    -> Salix raw HID host
+    -> device/profile normalization
+    -> MouseState
+    -> selected console mouse personality
+```
+
+There is no Windows desktop cursor or Windows pointer-acceleration stage in that
+path.
+
+Therefore the current `--mouse-gain` control must be understood primarily as
+a PC-host/source-normalization aid, not as part of the SNES Mouse protocol.
+
+One nuance remains: raw HID bypasses OS acceleration, but a high-DPI mouse still
+produces more raw counts per unit of physical movement than a low-DPI mouse.
+The standalone box may therefore still need per-device/profile scaling. That
+scaling belongs to the input-source/profile layer.
+
+The SNES-oriented per-report throw envelope is a separate concern: it limits the
+relative motion presented to the emulated console peripheral and may remain
+useful even when the source is raw HID.
