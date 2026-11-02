@@ -429,3 +429,64 @@ selection belongs to the future standalone USB-host/input-slot layer.
 
 No Pico firmware change is required because the existing SNES Mouse output
 personality already consumes normalized relative X/Y and button state.
+
+
+## Razer Naga Pro physical-mouse validation and transient serial timeout
+
+Physical mouse mode was validated with a Razer Naga Pro, model
+`RZ01-03420100`, using the two-button side attachment.
+
+Observed:
+
+- physical mouse motion successfully controlled Mario Paint;
+- physical left click successfully produced MouseLeft;
+- physical right click successfully produced MouseRight;
+- high DPI produced very large relative deltas and correspondingly very fast
+  Mario Paint cursor movement;
+- the run eventually terminated on a host serial write timeout.
+
+The console log ended with:
+
+```text
+Serial write timed out. Releasing physical mouse bridge.
+Physical mouse bridge stopped.
+Bridge stopped.
+```
+
+The DPI controls are not interpreted as exit controls by Salix. Physical-mouse
+mode exits only on capture-window close, ESC, Ctrl+C, or an unrecovered serial
+failure. Therefore the DPI-button press may have coincided with the failure, but
+the direct software cause of shutdown was the COM3 serial timeout.
+
+### Serial robustness correction
+
+Physical-mouse mode now:
+
+- uses a 250 ms serial write timeout instead of 100 ms;
+- retries a timed-out latest mouse state up to three attempts;
+- clears stale queued output before retrying;
+- preserves latest-state-wins semantics so stale mouse movement is not replayed
+  after a transient USB/CDC stall;
+- only terminates if the serial timeout persists through the retry budget.
+
+Expected transient diagnostic:
+
+```text
+Transient serial write timeout; clearing stale output and retrying latest mouse state (1/2)...
+```
+
+The gamepad `mouse_emu` path is unchanged by this correction.
+
+### Current Razer button policy
+
+The current generic physical-mouse source consumes:
+
+```text
+left button  -> MouseLeft
+right button -> MouseRight
+```
+
+The Naga Pro side buttons and hardware DPI buttons are intentionally not mapped
+to Salix functions yet. Hardware DPI changes can therefore alter the raw
+relative deltas reaching the bridge, but they do not directly trigger a bridge
+mode change or shutdown.
