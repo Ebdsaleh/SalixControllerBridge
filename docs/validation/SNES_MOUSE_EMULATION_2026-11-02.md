@@ -689,3 +689,36 @@ Accordingly:
 - the SNES report encoder remains unchanged;
 - the +/-28 throw envelope is conceptually separate and protects the console
   personality from implausibly large one-frame movement.
+
+
+## Physical mouse gain/throw validation before hardware-profiler work
+
+A later Razer Naga Pro run physically validated the 0.50x host gain and +/-28
+throw envelope on the real SNES. The user reported the motion was substantially
+better.
+
+The host startup showed:
+
+```text
+Re-arming SNES Mouse output: PAD neutral -> MOUSE neutral...
+Physical mouse software gain: 0.50x (fractional motion preserved).
+Physical mouse throw limit: +/-28 per report (direction preserved).
+```
+
+The diagnostic log also showed the expected pipeline:
+
+```text
+raw movement -> 0.50x scaled movement -> proportional +/-28 clamp
+```
+
+MouseLeft and MouseRight reports remained correct.
+
+A physical recovery observation remains important: before this successful run,
+the user had to copy/re-paste the current `src/pico_client/main.py` onto the
+Pico again. If future host logs show valid continuous `AA 56` packets while
+the real SNES remains completely silent, verify the Pico firmware/runtime state
+before changing the host mouse translation.
+
+This successful high-DPI experiment directly motivated the new hardware-profile
+calibration subsystem. Fixed host defaults remain useful as safe fallbacks, but
+device-specific calibration is now the intended long-term path.
