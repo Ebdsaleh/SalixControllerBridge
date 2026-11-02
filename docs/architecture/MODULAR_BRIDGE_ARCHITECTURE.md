@@ -145,3 +145,19 @@ That is appropriate for the current PC-host proof.
 The future standalone Salix box should enumerate USB/Bluetooth devices itself
 and bind individual physical devices to input slots before producing normalized
 states.
+
+
+## Physical mouse transport resilience
+
+Input-source modules and console-output modules remain independent from host
+transport reliability.
+
+A transient serial timeout must not destroy the normalized input source. For
+physical mouse mode, the bridge retries the latest `MouseState` after clearing
+stale queued serial bytes. This follows the same latest-state-wins rule already
+used throughout the controller bridge: old motion reports are less valuable
+than the newest state.
+
+Device-specific controls such as mouse DPI buttons remain source-specific and
+must not leak into console-output personalities unless an explicit translation
+profile chooses to use them.
