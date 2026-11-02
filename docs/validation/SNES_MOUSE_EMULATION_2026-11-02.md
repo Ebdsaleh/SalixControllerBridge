@@ -722,3 +722,56 @@ before changing the host mouse translation.
 This successful high-DPI experiment directly motivated the new hardware-profile
 calibration subsystem. Fixed host defaults remain useful as safe fallbacks, but
 device-specific calibration is now the intended long-term path.
+
+
+## First Hardware Profiler mouse-calibration pilot
+
+The first DearPyGui/SDL calibration pilot completed successfully with the
+Razer Naga Pro Raw Input device:
+
+```text
+VID 1532
+PID 008F
+```
+
+The worker recorded Windows pointer settings before calibration as:
+
+```text
+acceleration = 1
+pointer speed = 10
+threshold 1 = 6
+threshold 2 = 10
+```
+
+and used acceleration 0 during the calibration while retaining pointer speed 10.
+
+The pilot produced a recommended/accepted gain of approximately:
+
+```text
+0.197171x
+```
+
+but the user explicitly did NOT accept this as a finished profile calibration.
+
+The pilot exposed two important calibration-tool issues:
+
+1. the original 256x224 physical window made text too small to read comfortably;
+2. the RIGHT throw was visibly contaminated:
+   ```text
+   RIGHT raw = +173 / -209, events = 4309
+   LEFT  raw = -823 /  -30, events = 212
+   DOWN  raw =  +53 / +474, events = 229
+   UP    raw =  +47 / -626, events = 312
+   ```
+
+The RIGHT sample had more off-axis movement than primary movement and should
+never have been accepted into a production calibration.
+
+Corrections:
+
+- render the native 256x224 SNES surface at 3x physical scale;
+- place instructions/telemetry in a dedicated side panel;
+- reject wrong-direction/small/excessive-off-axis throws and repeat them;
+- report opposite-direction consistency warnings;
+- stage successful calibration results without mutating or saving the profile;
+- require explicit Apply, then explicit Save Profile.
