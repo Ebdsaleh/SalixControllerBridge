@@ -5,7 +5,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import sys
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,12 +33,41 @@ CONSOLE_ENVIRONMENTS = {
 }
 
 
+STATE_DIR_ENV = "SALIX_CONTROLLER_BRIDGE_STATE_DIR"
+
+
 def repository_root():
     return Path(__file__).resolve().parents[2]
 
 
+def state_directory():
+    """Writable per-user application state, separate from the source tree."""
+    override = os.environ.get(STATE_DIR_ENV)
+    if override:
+        return Path(override).expanduser().resolve()
+
+    if os.name == "nt":
+        base = os.environ.get("LOCALAPPDATA")
+        if base:
+            return Path(base) / "SalixControllerBridge"
+        return Path.home() / "AppData" / "Local" / "SalixControllerBridge"
+
+    if sys.platform == "darwin":
+        return (
+            Path.home()
+            / "Library"
+            / "Application Support"
+            / "SalixControllerBridge"
+        )
+
+    xdg_state_home = os.environ.get("XDG_STATE_HOME")
+    if xdg_state_home:
+        return Path(xdg_state_home) / "SalixControllerBridge"
+    return Path.home() / ".local" / "state" / "SalixControllerBridge"
+
+
 def default_profile_directory():
-    return repository_root() / "profiles" / "hardware"
+    return state_directory() / "profiles" / "hardware"
 
 
 def slugify(value):
