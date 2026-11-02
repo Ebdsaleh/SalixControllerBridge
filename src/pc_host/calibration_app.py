@@ -15,7 +15,9 @@ import dearpygui.dearpygui as dpg
 import pygame
 
 from hardware_profiles import (
+    clear_default_profile,
     ensure_console_module,
+    get_default_profile_path,
     list_profiles,
     load_profile,
     merge_profile,
@@ -23,6 +25,7 @@ from hardware_profiles import (
     profile_path,
     save_profile,
     set_console_module,
+    set_default_profile,
     set_host_environment,
     set_source_calibration,
 )
@@ -158,6 +161,16 @@ class CalibrationApp:
         with dpg.group(horizontal=True):
             dpg.add_button(label="New Profile", callback=self._new_profile)
             dpg.add_button(label="Save Profile", callback=self._save_current_profile)
+            dpg.add_button(
+                label="Set as Default",
+                callback=self._set_current_profile_as_default,
+            )
+            dpg.add_button(
+                label="Clear Default",
+                callback=self._clear_default_for_current_type,
+            )
+
+        dpg.add_text("", tag="default_profile_status", wrap=900)
 
         dpg.add_spacer(height=8)
         dpg.add_text("Existing profiles")
@@ -177,6 +190,7 @@ class CalibrationApp:
             )
 
         self._refresh_existing_profiles()
+        self._refresh_default_profile_status()
 
         dpg.add_spacer(height=8)
         dpg.add_text("Status")
@@ -374,6 +388,109 @@ class CalibrationApp:
     def _status(self, message):
         dpg.set_value("status_text", message)
 
+    def _refresh_default_profile_status(self):
+        if not dpg.does_item_exist("default_profile_status"):
+            return
+
+        device_type = str(
+            dpg.get_value("device_type") or "mouse"
+        ).strip().lower()
+
+        try:
+            path = get_default_profile_path(device_type)
+        except Exception as exc:
+            dpg.set_value(
+                "default_profile_status",
+                f"Default {device_type} profile: error reading defaults ({exc})",
+            )
+            return
+
+        if path is None:
+            dpg.set_value(
+                "default_profile_status",
+                f"Default {device_type} profile: none",
+            )
+            return
+
+        try:
+            profile = load_profile(path)
+            name = profile.get("profile_name", path.stem)
+        except Exception:
+            name = path.stem
+
+        dpg.set_value(
+            "default_profile_status",
+            f"Default {device_type} profile: {name} [{path.name}]",
+        )
+
+    def _set_current_profile_as_default(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        if self.current_profile is None:
+            self._status("Load or save a hardware profile first.")
+            return
+
+        device_type = str(
+            self.current_profile.get("device_type")
+            or dpg.get_value("device_type")
+            or "mouse"
+        ).strip().lower()
+
+        path = Path(
+            self.current_profile_path
+            or profile_path(self.current_profile)
+        )
+
+        if not path.is_file():
+            self._status(
+                "Save this hardware profile before setting it as the default."
+            )
+            return
+
+        try:
+            saved_path = set_default_profile(device_type, path)
+        except Exception as exc:
+            self._status(f"Could not set default profile: {exc}")
+            return
+
+        self._status(
+            f"Default {device_type} profile set to "
+            f"{self.current_profile.get('profile_name', saved_path.stem)}."
+        )
+        self._refresh_existing_profiles()
+        self._refresh_default_profile_status()
+
+    def _clear_default_for_current_type(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        device_type = str(
+            dpg.get_value("device_type") or "mouse"
+        ).strip().lower()
+
+        try:
+            removed = clear_default_profile(device_type)
+        except Exception as exc:
+            self._status(f"Could not clear default profile: {exc}")
+            return
+
+        if removed:
+            self._status(f"Default {device_type} profile cleared.")
+        else:
+            self._status(f"No default {device_type} profile was set.")
+
+        self._refresh_existing_profiles()
+        self._refresh_default_profile_status()
+
     def _profile_name(self):
         name = str(dpg.get_value("profile_name") or "").strip()
         return name or "New Hardware Profile"
@@ -471,6 +588,7 @@ class CalibrationApp:
             dpg.set_value("profile_path", str(self.current_profile_path))
         self._populate_mouse_controls_from_profile(self.current_profile)
         self._status("New profile ready. Run a calibration or save manually.")
+        self._refresh_default_profile_status()
         self._refresh_profile_json()
 
     @staticmethod
@@ -549,9 +667,29 @@ class CalibrationApp:
         labels = []
         self._profile_choices = {}
 
+        default_paths = {}
+        for device_type in ("mouse", "controller"):
+            try:
+                default_path = get_default_profile_path(device_type)
+            except Exception:
+                default_path = None
+            if default_path is not None:
+                default_paths[device_type] = default_path.resolve()
+
         for profile, path in entries:
+            device_type = str(
+                profile.get("device_type", "unknown")
+            ).strip().lower()
+
+            prefix = ""
+            if (
+                device_type in default_paths
+                and Path(path).resolve() == default_paths[device_type]
+            ):
+                prefix = "[DEFAULT] "
+
             base_label = (
-                f"{profile.get('profile_name', path.stem)} | "
+                f"{prefix}{profile.get('profile_name', path.stem)} | "
                 f"{profile.get('device_type', 'unknown')}"
             )
             label = base_label
@@ -626,6 +764,7 @@ class CalibrationApp:
             f"Loaded hardware profile: "
             f"{profile.get('profile_name', path.stem)}"
         )
+        self._refresh_default_profile_status()
         self._refresh_profile_json()
 
     def _save_current_profile(self, sender=None, app_data=None, user_data=None):
@@ -693,6 +832,7 @@ class CalibrationApp:
         dpg.set_value("profile_path", str(saved))
         self._status(f"Profile saved: {saved}")
         self._refresh_existing_profiles()
+        self._refresh_default_profile_status()
         self._refresh_profile_json()
 
     def _refresh_profile_json(self):
