@@ -868,3 +868,77 @@ Wheel Down
 
 The resulting event indices should be recorded into the Naga hardware profile
 before assigning the two side buttons to Salix sensitivity down/up.
+
+
+## Razer Naga Pro two-button side plate probe result
+
+Physical probe order:
+
+```text
+Left
+Right
+Middle
+Side Front
+Side Rear
+DPI Down
+DPI Up
+Wheel Up
+Wheel Down
+```
+
+Observed Pygame events:
+
+```text
+Left       -> button 1
+Right      -> button 3
+Middle     -> button 2
+Side Front -> button 7
+Side Rear  -> button 6
+
+Wheel Up   -> button 4 + MOUSEWHEEL y=+1
+Wheel Down -> button 5 + MOUSEWHEEL y=-1
+```
+
+The Naga hardware DPI Down / DPI Up buttons produced no Pygame mouse-button or
+wheel event during the probe.
+
+Validated source-control mapping for the current two-button Naga side plate:
+
+```text
+button 6 / Side Rear  -> Salix sensitivity DOWN
+button 7 / Side Front -> Salix sensitivity UP
+```
+
+This mapping is stored in the hardware profile, not hard-coded into the SNES
+Mouse output personality.
+
+## Physical mouse five-level software sensitivity
+
+The physical mouse bridge now supports the same five named Salix sensitivity
+states used by gamepad mouse emulation:
+
+```text
+VERY LOW
+LOW
+MEDIUM
+HIGH
+VERY HIGH
+```
+
+The calibrated hardware-profile gain is MEDIUM.
+
+Scale:
+
+```text
+VERY LOW   0.25x
+LOW        0.50x
+MEDIUM     1.00x
+HIGH       1.50x
+VERY HIGH  2.00x
+```
+
+Each configured side-button press changes exactly one level.
+
+The sensitivity control remains completely separate from Mario Paint's
+authentic SNES Mouse SLOW/NORMAL/FAST selector, which still requires future
+console-side latch/clock sensitivity-command emulation.
