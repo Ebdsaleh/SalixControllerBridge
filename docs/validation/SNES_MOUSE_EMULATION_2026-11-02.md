@@ -1020,3 +1020,106 @@ Fix:
 - duplicate profile labels are disambiguated defensively using the filename.
 
 Active profile discovery should now show only the live Razer Naga Pro entry.
+
+
+## Authentic SNES Mouse hardware sensitivity implementation
+
+Protocol research and emulator cross-checks confirmed the official behavior:
+
+```text
+console clocks mouse while Latch/Strobe is high
+    -> hardware sensitivity advances modulo 3
+    -> LOW -> MEDIUM -> HIGH -> LOW
+```
+
+The speed state is reported in the mouse report's second-byte sensitivity bits.
+
+The previously observed Mario Paint failure is explained by the old PIO flow:
+it treated every Latch assertion as the beginning of a normal 32-bit report.
+When Mario Paint issued the special Clock while Latch was still high, the PIO
+remained waiting for the rest of a normal report and subsequent polls became
+desynchronised.
+
+The mouse PIO now waits for the first Clock falling edge after Latch and checks
+the live Latch level:
+
+```text
+Latch LOW at first Clock edge
+    -> normal 32-bit mouse read
+
+Latch still HIGH at first Clock edge
+    -> sensitivity command
+    -> abort report
+    -> push event to MicroPython RX FIFO
+    -> wait for Latch LOW
+    -> return to fresh bit-0 state
+```
+
+MicroPython owns the current hardware state and rewrites each host-provided
+canonical mouse report before it is queued.
+
+Motion curves now match the documented SNS-016 / Mesen2 model:
+
+```text
+LOW:
+  linear
+
+MEDIUM LUT:
+  0 1 2 3 8 10 12 21
+
+HIGH LUT:
+  0 1 4 9 12 20 24 28
+```
+
+Values beyond table index 7 clamp to the final value.
+
+This remains independent from the source-side Salix five-level Naga sensitivity.
+
+## Pico -> host sensitivity telemetry
+
+New Pico status frame:
+
+```text
+AA 57 <state>
+```
+
+States:
+
+```text
+0 = LOW
+1 = MEDIUM
+2 = HIGH
+```
+
+The PC mouse bridge drains these frames without blocking and prints transitions:
+
+```text
+SNES hardware sensitivity: LOW (0)
+SNES hardware sensitivity: LOW -> MEDIUM
+SNES hardware sensitivity: MEDIUM -> HIGH
+SNES hardware sensitivity: HIGH -> LOW
+```
+
+This telemetry is diagnostic only and is not required for console timing.
+
+## Required physical validation
+
+This change requires a Pico firmware update because the sensitivity command is
+detected inside the PIO program.
+
+After updating `src/pico_client/main.py` on the Pico:
+
+1. Launch the known-good calibrated Razer Naga Pro profile.
+2. Confirm normal motion and MouseLeft/MouseRight still work.
+3. Confirm Naga side-button Salix sensitivity still works.
+4. Leave Salix sensitivity at MEDIUM for the first native command test.
+5. Change Mario Paint sensitivity once from SLOW toward the next setting.
+6. Confirm the PC log reports `LOW -> MEDIUM`.
+7. Confirm Mario Paint still accepts left/right clicks without console reset.
+8. Repeat for `MEDIUM -> HIGH`.
+9. Repeat once more for `HIGH -> LOW`.
+10. Confirm motion response changes but the saved Naga calibration remains
+    unchanged.
+
+If the first native sensitivity change causes loss of input, stop the test and
+capture the host log before changing any other variable.
