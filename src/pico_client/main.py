@@ -18,6 +18,11 @@ SYNC_1 = 0xAA
 SYNC_PAD = 0x55
 SYNC_MOUSE = 0x56
 
+# Pico -> host status frame:
+#   AA 57 <hardware-sensitivity>
+# where sensitivity is 0=LOW, 1=MEDIUM, 2=HIGH.
+SYNC_MOUSE_STATUS = 0x57
+
 MODE_PAD = 0
 MODE_MOUSE = 1
 
@@ -307,6 +312,21 @@ def apply_mouse_hardware_sensitivity(mouse_word):
     return logical_report_to_wire_word(logical_report)
 
 
+def send_mouse_sensitivity_status():
+    """Report Pico-owned SNES hardware sensitivity to the connected host."""
+    try:
+        sys.stdout.buffer.write(
+            bytes((
+                SYNC_1,
+                SYNC_MOUSE_STATUS,
+                mouse_hardware_sensitivity & 0x03,
+            ))
+        )
+    except Exception:
+        # Status telemetry must never interfere with console timing.
+        pass
+
+
 def service_mouse_sensitivity_events():
     """Advance authentic SNES Mouse sensitivity on PIO-detected commands."""
     global mouse_hardware_sensitivity, active_word
@@ -328,6 +348,7 @@ def service_mouse_sensitivity_events():
 
     active_word = apply_mouse_hardware_sensitivity(mouse_base_wire_word)
     queue_latest_if_possible()
+    send_mouse_sensitivity_status()
 
 
 def queue_latest_if_possible():
@@ -375,6 +396,7 @@ def apply_mouse_wire_word(mouse_word):
             mouse_base_wire_word
         )
         init_state_machine(MODE_MOUSE, mouse_word)
+        send_mouse_sensitivity_status()
         return
 
     active_word = apply_mouse_hardware_sensitivity(mouse_base_wire_word)
