@@ -942,3 +942,33 @@ Each configured side-button press changes exactly one level.
 The sensitivity control remains completely separate from Mario Paint's
 authentic SNES Mouse SLOW/NORMAL/FAST selector, which still requires future
 console-side latch/clock sensitivity-command emulation.
+
+
+## Profiler save collision found during Naga control mapping
+
+While adding Naga side-button controls, the user entered the existing profile
+name `Razer Naga Pro` into a fresh profiler skeleton and pressed Save Profile.
+
+The utility wrote the fresh skeleton to the existing destination and erased the
+already accepted SNES mouse calibration from the JSON.
+
+Observed resulting file:
+
+```text
+SNES.mouse.calibrated = false
+source_calibration.mouse = controls only
+```
+
+The user followed the intended workflow; this was a profiler save-semantics bug.
+
+Fix:
+
+- track whether the current profile was genuinely loaded from disk;
+- when a fresh profile attempts to save over an existing destination, load the
+  existing JSON first;
+- preserve calibrated modules, host environment and source baseline;
+- merge only current label/control edits;
+- use recursive profile merging for nested state.
+
+The good Naga calibration was preserved in the validation record and can be
+restored without repeating the physical calibration.
