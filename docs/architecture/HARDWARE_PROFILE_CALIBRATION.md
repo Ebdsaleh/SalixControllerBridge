@@ -281,3 +281,78 @@ controller raw axis
 
 A future Saturn or Dreamcast module can reuse the same source axis calibration
 while choosing its own response/deadzone/output behavior.
+
+
+## Calibration result staging
+
+A calibration run is an experiment, not an automatic profile mutation.
+
+The DearPyGui utility now follows this lifecycle:
+
+```text
+run calibration
+    -> inspect pending result
+    -> Apply Pending Result
+    -> inspect in-memory profile
+    -> Save Profile
+```
+
+Until `Apply Pending Result` is pressed, the hardware profile is unchanged.
+
+Applying a result changes only the in-memory profile. The user must separately
+press `Save Profile` before JSON is written to persistent profile storage.
+
+This allows repeated calibration attempts without polluting a known-good
+hardware profile.
+
+## Scaled console calibration presentation
+
+The SNES calibration math remains exactly:
+
+```text
+256 x 224 logical coordinates
+```
+
+The SDL calibration worker now renders that logical surface at 3x physical
+scale:
+
+```text
+768 x 672 rendered SNES area
+    +
+420 px instruction/telemetry panel
+```
+
+The larger presentation is purely visual. Raw Input counts, logical cursor
+coordinates, target distances and derived gain calculations remain based on the
+native 256x224 environment.
+
+Instructions and telemetry are placed beside the console surface rather than
+inside it.
+
+## Mouse throw quality validation
+
+Each directional mouse throw is now validated before it can contribute to the
+calibration result.
+
+A throw is automatically rejected and repeated when:
+
+- it moves in the wrong primary direction;
+- primary movement is too small;
+- off-axis movement exceeds 45 percent of the primary movement.
+
+Accepted throws store quality data including:
+
+```text
+primary_counts
+secondary_counts
+primary_abs
+secondary_abs
+off_axis_ratio
+event_count
+attempt
+```
+
+The final derived result also compares opposite-direction throw magnitudes.
+Horizontal or vertical opposite-direction measurements differing by more than
+2x produce a `quality.status = review` warning rather than being silently
+presented as equally trustworthy.
