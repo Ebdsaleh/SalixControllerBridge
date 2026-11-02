@@ -234,3 +234,50 @@ py src\pc_host\calibration_app.py
 
 The DearPyGui app launches the SDL/Pygame calibration surface as a separate
 worker process so the two GUI/render loops remain isolated.
+
+
+## Calibrated analog controller runtime
+
+Controller calibration now has two layers.
+
+Source/device normalization stores per axis:
+
+```text
+center
+center_noise
+minimum
+maximum
+negative_span
+positive_span
+recommended_deadzone
+```
+
+At runtime, the selected axis is recentered around its measured center and each
+side is independently rescaled to the canonical -1..+1 range before the
+deadzone is applied.
+
+The SNES `mouse_emu` console module separately stores:
+
+```text
+axis_pair
+deadzone
+base_analog_speed
+axis_calibration
+```
+
+`base_analog_speed` is the MEDIUM sensitivity speed accepted in the live
+256x224 SNES analog-cursor test. The existing five-tier sensitivity curve then
+scales around that calibrated device/console baseline.
+
+This keeps reusable device geometry separate from console-personality tuning:
+
+```text
+controller raw axis
+    -> measured center/range normalization
+    -> measured deadzone
+    -> normalized stick
+    -> SNES mouse_emu base speed / sensitivity tiers
+```
+
+A future Saturn or Dreamcast module can reuse the same source axis calibration
+while choosing its own response/deadzone/output behavior.
