@@ -35,6 +35,10 @@ def _worker_path():
     return Path(__file__).with_name("calibration_worker.py")
 
 
+def _mouse_button_probe_path():
+    return Path(__file__).with_name("mouse_button_probe.py")
+
+
 def _format_json(data):
     return json.dumps(data, indent=2, sort_keys=True)
 
@@ -212,6 +216,40 @@ class CalibrationApp:
         )
 
         dpg.add_spacer(height=8)
+        dpg.add_text(
+            "Optional source controls. Use the mouse-button probe to discover "
+            "Pygame event numbers, then store them in this hardware profile.",
+            wrap=900,
+        )
+        with dpg.group(horizontal=True):
+            dpg.add_text("Sensitivity Down button")
+            dpg.add_input_int(
+                tag="mouse_sensitivity_down_button",
+                default_value=0,
+                min_value=0,
+                min_clamped=True,
+                width=100,
+            )
+            dpg.add_text("Sensitivity Up button")
+            dpg.add_input_int(
+                tag="mouse_sensitivity_up_button",
+                default_value=0,
+                min_value=0,
+                min_clamped=True,
+                width=100,
+            )
+            dpg.add_button(
+                label="Launch Mouse Button Probe",
+                callback=self._launch_mouse_button_probe,
+            )
+
+        dpg.add_text(
+            "0 = unassigned. These are source/profile controls and are not "
+            "SNES Mouse hardware sensitivity bits.",
+            wrap=900,
+        )
+
+        dpg.add_spacer(height=8)
         dpg.add_text("Target console environment")
         dpg.add_combo(
             ("SNES // 256 x 224 // Mouse",),
@@ -340,6 +378,75 @@ class CalibrationApp:
     def _device_label(self):
         return str(dpg.get_value("device_label") or "").strip()
 
+    def _mouse_controls_from_ui(self):
+        down = int(
+            dpg.get_value("mouse_sensitivity_down_button") or 0
+        )
+        up = int(
+            dpg.get_value("mouse_sensitivity_up_button") or 0
+        )
+
+        controls = {}
+        if down > 0:
+            controls["sensitivity_decrease_button"] = down
+        if up > 0:
+            controls["sensitivity_increase_button"] = up
+        return controls
+
+    def _store_mouse_controls_in_profile(self, profile):
+        mouse_source = profile.setdefault(
+            "source_calibration",
+            {},
+        ).setdefault("mouse", {})
+
+        controls = self._mouse_controls_from_ui()
+        if controls:
+            mouse_source["controls"] = controls
+        else:
+            mouse_source.pop("controls", None)
+
+    def _populate_mouse_controls_from_profile(self, profile):
+        controls = (
+            profile.get("source_calibration", {})
+            .get("mouse", {})
+            .get("controls", {})
+            or {}
+        )
+
+        if dpg.does_item_exist("mouse_sensitivity_down_button"):
+            dpg.set_value(
+                "mouse_sensitivity_down_button",
+                int(controls.get("sensitivity_decrease_button") or 0),
+            )
+
+        if dpg.does_item_exist("mouse_sensitivity_up_button"):
+            dpg.set_value(
+                "mouse_sensitivity_up_button",
+                int(controls.get("sensitivity_increase_button") or 0),
+            )
+
+    def _launch_mouse_button_probe(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        self._status(
+            "Mouse button probe active. Follow the probe window instructions; "
+            "the Pico/SNES are not used."
+        )
+        completed = subprocess.run(
+            [sys.executable, str(_mouse_button_probe_path())],
+            cwd=str(Path(__file__).resolve().parents[2]),
+            check=False,
+        )
+        self._status(
+            f"Mouse button probe exited with code {completed.returncode}. "
+            "Enter the measured sensitivity button numbers above, then Save Profile."
+        )
+
     def _new_profile(self, sender=None, app_data=None, user_data=None):
         del sender, app_data, user_data
 
@@ -358,6 +465,7 @@ class CalibrationApp:
 
         if dpg.does_item_exist("profile_path"):
             dpg.set_value("profile_path", str(self.current_profile_path))
+        self._populate_mouse_controls_from_profile(self.current_profile)
         self._status("New profile ready. Run a calibration or save manually.")
         self._refresh_profile_json()
 
@@ -500,6 +608,8 @@ class CalibrationApp:
         if dpg.does_item_exist("mouse_dpi"):
             dpg.set_value("mouse_dpi", int(declared_dpi or 0))
 
+        self._populate_mouse_controls_from_profile(profile)
+
         self._status(
             f"Loaded hardware profile: "
             f"{profile.get('profile_name', path.stem)}"
@@ -519,6 +629,9 @@ class CalibrationApp:
         self.current_profile.setdefault("identity", {})["label"] = (
             self._device_label()
         )
+
+        if self.current_profile["device_type"] == "mouse":
+            self._store_mouse_controls_in_profile(self.current_profile)
 
         saved = save_profile(self.current_profile)
         self.current_profile_path = saved
@@ -665,6 +778,7 @@ class CalibrationApp:
                 "derived": result.get("derived", {}),
             },
         )
+        self._store_mouse_controls_in_profile(profile)
 
         derived = result.get("derived", {})
         environment = result.get("environment", {})
