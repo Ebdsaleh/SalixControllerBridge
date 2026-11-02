@@ -72,6 +72,44 @@ main.py
 
 Then reset the Pico.
 
+## Unified bridge launcher
+
+`bridge.py` is now the primary user-facing launcher for both normal controller
+translation and mouse emulation.
+
+Normal controller mode is unchanged:
+
+```bat
+py src\pc_host\bridge.py COM3
+```
+
+Launch mouse emulation with either spelling:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse_emu
+py src\pc_host\bridge.py COM3 mouse-emu
+```
+
+When only one likely Pico serial device is connected, the COM port can still be
+auto-detected:
+
+```bat
+py src\pc_host\bridge.py mouse_emu
+```
+
+The launcher routes mouse emulation through `mouse_bridge.py`. That module owns
+the console-independent relative `MouseState` and input/sensitivity behavior.
+The current SNES 32-bit mouse encoder is an output personality behind that
+generic layer.
+
+The previous direct command remains valid for compatibility:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3
+```
+
+It is now only a thin wrapper around the generic mouse bridge.
+
 ## SNES Mouse emulation
 
 The current Pico firmware can switch between the existing 16-bit standard-pad
