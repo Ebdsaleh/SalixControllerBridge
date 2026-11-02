@@ -460,11 +460,7 @@ def run_gamepad_mouse_bridge(
 
             now = time.monotonic()
             if state != last_state or (now - last_send_time) >= HEARTBEAT_SECONDS:
-                logical_report, wire_word, packet = send_physical_mouse_with_retry(
-                output,
-                serial_port,
-                state,
-            )
+                logical_report, wire_word, packet = output.send(serial_port, state)
                 last_send_time = now
             else:
                 logical_report = None
@@ -614,7 +610,11 @@ def run_physical_mouse_bridge(
                 right=latched_right,
             )
 
-            logical_report, wire_word, packet = output.send(serial_port, state)
+            logical_report, wire_word, packet = send_physical_mouse_with_retry(
+                output,
+                serial_port,
+                state,
+            )
             packet_hex = " ".join(f"{byte:02X}" for byte in packet)
 
             if state.dx or state.dy or state.left or state.right:
