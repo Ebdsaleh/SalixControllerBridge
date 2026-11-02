@@ -185,11 +185,19 @@ def parse_args():
     parser.add_argument(
         "--mouse-gain",
         type=float,
-        default=0.50,
+        default=None,
         metavar="GAIN",
         help=(
-            "Physical-mouse software sensitivity multiplier for mouse mode "
-            "(default: 0.50)."
+            "Physical-mouse software sensitivity override for mouse mode. "
+            "If omitted, use the selected hardware profile or the 0.50 default."
+        ),
+    )
+    parser.add_argument(
+        "--hardware-profile",
+        metavar="NAME_OR_JSON",
+        help=(
+            "Optional hardware profile name or JSON path. The bridge reads "
+            "only the console module required by the selected launch mode."
         ),
     )
     return parser.parse_args()
@@ -460,24 +468,60 @@ def main():
                 f"{args.serial_port} and {args.port_override}"
             )
 
+        hardware_profile = None
+        hardware_profile_path = None
+        if args.hardware_profile:
+            from hardware_profiles import load_profile_reference
+
+            hardware_profile, hardware_profile_path = load_profile_reference(
+                args.hardware_profile
+            )
+            print(f"Hardware profile: {hardware_profile_path}")
+
         if launch_mode == "mouse_emu":
             # Gamepad/arcade-stick source -> normalized MouseState -> SNES Mouse.
+            from hardware_profiles import get_console_module
             from mouse_bridge import run_mouse_bridge
+
+            module = get_console_module(
+                hardware_profile,
+                "snes",
+                "mouse_emu",
+            ) or {}
 
             run_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
+                mouse_deadzone=module.get("deadzone"),
+                axis_pair_override=module.get("axis_pair"),
             )
             return
 
         if launch_mode == "mouse":
             # Physical PC/USB mouse -> normalized MouseState -> SNES Mouse.
+            from hardware_profiles import get_console_module
             from mouse_bridge import run_physical_mouse_bridge
+
+            module = get_console_module(
+                hardware_profile,
+                "snes",
+                "mouse",
+            ) or {}
+
+            profile_gain = module.get("gain")
+            profile_throw = module.get("max_throw")
+            profile_report_hz = module.get("report_hz")
 
             run_physical_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
-                mouse_gain=args.mouse_gain,
+                mouse_gain=(
+                    args.mouse_gain
+                    if args.mouse_gain is not None
+                    else profile_gain
+                ),
+                max_throw=profile_throw,
+                report_hz=profile_report_hz,
             )
             return
 
