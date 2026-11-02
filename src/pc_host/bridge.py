@@ -514,6 +514,14 @@ def main():
             profile_throw = module.get("max_throw")
             profile_report_hz = module.get("report_hz")
 
+            mouse_source = (
+                hardware_profile.get("source_calibration", {})
+                .get("mouse", {})
+                if hardware_profile
+                else {}
+            )
+            controls = mouse_source.get("controls", {}) or {}
+
             run_physical_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
@@ -524,6 +532,12 @@ def main():
                 ),
                 max_throw=profile_throw,
                 report_hz=profile_report_hz,
+                sensitivity_decrease_button=controls.get(
+                    "sensitivity_decrease_button"
+                ),
+                sensitivity_increase_button=controls.get(
+                    "sensitivity_increase_button"
+                ),
             )
             return
 
