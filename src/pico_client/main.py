@@ -51,6 +51,18 @@ SNES_PAD_NEUTRAL_WORD = 0xFFFF
 # the physical word is FFFF7FFF.
 SNES_MOUSE_NEUTRAL_WIRE_WORD = 0xFFFF7FFF
 
+# Official SNES Mouse hardware sensitivity states. The host bridge keeps its
+# own five-level source sensitivity completely separate; these three states are
+# controlled by the console itself by clocking the mouse while Latch is high.
+SNES_MOUSE_SENSITIVITY_LOW = 0
+SNES_MOUSE_SENSITIVITY_MEDIUM = 1
+SNES_MOUSE_SENSITIVITY_HIGH = 2
+
+# Approximate official SNS-016 response curves documented by NESdev/FullSNES.
+# LOW is linear. MEDIUM/HIGH remap low raw magnitudes and clamp thereafter.
+SNES_MOUSE_MEDIUM_CURVE = (0, 1, 2, 3, 8, 10, 12, 21)
+SNES_MOUSE_HIGH_CURVE = (0, 1, 4, 9, 12, 20, 24, 28)
+
 
 @rp2.asm_pio(
     out_init=rp2.PIO.OUT_LOW,
@@ -103,8 +115,9 @@ def snes_pad_piso():
     autopull=False,
 )
 def snes_mouse_piso():
-    """Emulate the 32-bit SNES Mouse serial report at the DATA pin."""
+    """Emulate SNES Mouse reports and detect console sensitivity clocks."""
     wrap_target()
+    label("mouse_start")
 
     # Authentic SNES mice return logical 1s after bit 32. With the proven
     # console-side inversion this is a physical LOW level.
@@ -119,10 +132,20 @@ def snes_mouse_piso():
     mov(osr, x)
     out(pins, 1)
 
-    wait(0, pin, 1)
+    # The official mouse sensitivity command is a Clock pulse while Latch is
+    # still high. Wait for the first falling Clock edge, then inspect Latch via
+    # jmp_pin. If Latch remains high this is a sensitivity command, NOT the
+    # start of a normal 32-bit read.
+    wait(0, pin, 0)
+    jmp(pin, "mouse_sensitivity_clock")
 
-    # Thirty-one bits remain after the first report bit.
-    set(y, 30)
+    # Normal read: the first falling Clock edge sampled bit 0. Advance the
+    # remaining report bits on rising edges.
+    wait(1, pin, 0)
+    out(pins, 1)
+
+    # Thirty bits remain after bits 0 and 1.
+    set(y, 29)
     label("mouse_clock_loop")
     wait(0, pin, 0)
     wait(1, pin, 0)
@@ -134,6 +157,20 @@ def snes_mouse_piso():
     wait(0, pin, 0)
     wait(1, pin, 0)
     set(pins, 0)
+    jmp("mouse_start")
+
+    label("mouse_sensitivity_clock")
+
+    # Notify MicroPython without blocking the PIO. The report is deliberately
+    # aborted here so the next Latch starts a fresh bit-0 transaction instead
+    # of leaving the state machine one bit out of phase.
+    set(y, 1)
+    mov(isr, y)
+    push(noblock)
+
+    wait(0, pin, 1)
+    set(pins, 0)
+    jmp("mouse_start")
 
     wrap()
 
@@ -152,6 +189,12 @@ active_sm = pad_sm
 current_mode = None
 active_word = SNES_PAD_NEUTRAL_WORD
 last_enqueued_word = SNES_PAD_NEUTRAL_WORD
+
+# The host sends canonical mouse motion/buttons. The Pico owns the authentic
+# console-controlled 3-state hardware sensitivity and rewrites speed bits /
+# motion curve before the PIO sees the word.
+mouse_base_wire_word = SNES_MOUSE_NEUTRAL_WIRE_WORD
+mouse_hardware_sensitivity = SNES_MOUSE_SENSITIVITY_LOW
 
 
 def init_state_machine(mode, initial_word):
@@ -177,6 +220,7 @@ def init_state_machine(mode, initial_word):
         out_base=pin_data,
         set_base=pin_data,
         in_base=pin_clk,
+        jmp_pin=pin_latch,
     )
 
     active_sm = target_sm
@@ -185,6 +229,105 @@ def init_state_machine(mode, initial_word):
     active_sm.put(initial_word)
     active_sm.active(1)
     current_mode = mode
+
+def wire_word_to_logical_report(wire_word):
+    """Convert physical DATA-wire bit order/inversion to logical 32-bit report."""
+    logical_report = 0
+
+    for serial_index in range(32):
+        physical_bit = (wire_word >> serial_index) & 1
+        logical_bit = 0 if physical_bit else 1
+        logical_report |= logical_bit << (31 - serial_index)
+
+    return logical_report
+
+
+def logical_report_to_wire_word(logical_report):
+    """Convert logical 32-bit SNES Mouse report to physical DATA-wire word."""
+    wire_word = 0
+
+    for serial_index in range(32):
+        logical_bit = (logical_report >> (31 - serial_index)) & 1
+        physical_bit = 0 if logical_bit else 1
+        wire_word |= physical_bit << serial_index
+
+    return wire_word
+
+
+def apply_mouse_sensitivity_curve(motion_byte, sensitivity):
+    """Apply the official mouse's console-selected response curve."""
+    sign = motion_byte & 0x80
+    magnitude = motion_byte & 0x7F
+
+    if sensitivity == SNES_MOUSE_SENSITIVITY_MEDIUM:
+        curve = SNES_MOUSE_MEDIUM_CURVE
+    elif sensitivity == SNES_MOUSE_SENSITIVITY_HIGH:
+        curve = SNES_MOUSE_HIGH_CURVE
+    else:
+        return motion_byte
+
+    if magnitude >= len(curve):
+        magnitude = curve[-1]
+    else:
+        magnitude = curve[magnitude]
+
+    return sign | magnitude
+
+
+def apply_mouse_hardware_sensitivity(mouse_word):
+    """Overlay hardware speed bits and motion curve onto one host mouse word."""
+    logical_report = wire_word_to_logical_report(mouse_word)
+
+    second_byte = (logical_report >> 16) & 0xFF
+    y_byte = (logical_report >> 8) & 0xFF
+    x_byte = logical_report & 0xFF
+
+    second_byte = (
+        (second_byte & ~0x30)
+        | ((mouse_hardware_sensitivity & 0x03) << 4)
+    )
+
+    y_byte = apply_mouse_sensitivity_curve(
+        y_byte,
+        mouse_hardware_sensitivity,
+    )
+    x_byte = apply_mouse_sensitivity_curve(
+        x_byte,
+        mouse_hardware_sensitivity,
+    )
+
+    logical_report = (
+        (logical_report & 0xFF000000)
+        | (second_byte << 16)
+        | (y_byte << 8)
+        | x_byte
+    )
+
+    return logical_report_to_wire_word(logical_report)
+
+
+def service_mouse_sensitivity_events():
+    """Advance authentic SNES Mouse sensitivity on PIO-detected commands."""
+    global mouse_hardware_sensitivity, active_word
+
+    if current_mode != MODE_MOUSE:
+        return
+
+    changed = False
+
+    while mouse_sm.rx_fifo():
+        mouse_sm.get()
+        mouse_hardware_sensitivity = (
+            mouse_hardware_sensitivity + 1
+        ) % 3
+        changed = True
+
+    if not changed:
+        return
+
+    active_word = apply_mouse_hardware_sensitivity(mouse_base_wire_word)
+    queue_latest_if_possible()
+
 
 def queue_latest_if_possible():
     global last_enqueued_word
@@ -217,14 +360,23 @@ def apply_pad_word(raw_mask):
 
 def apply_mouse_wire_word(mouse_word):
     global active_word
+    global mouse_base_wire_word, mouse_hardware_sensitivity
 
     mouse_word &= 0xFFFFFFFF
+    mouse_base_wire_word = mouse_word
 
     if current_mode != MODE_MOUSE:
+        # Treat a PAD -> MOUSE personality transition as a fresh virtual mouse
+        # connection. The official low/raw hardware sensitivity is our
+        # deterministic power-on compatibility state.
+        mouse_hardware_sensitivity = SNES_MOUSE_SENSITIVITY_LOW
+        mouse_word = apply_mouse_hardware_sensitivity(
+            mouse_base_wire_word
+        )
         init_state_machine(MODE_MOUSE, mouse_word)
         return
 
-    active_word = mouse_word
+    active_word = apply_mouse_hardware_sensitivity(mouse_base_wire_word)
     queue_latest_if_possible()
 
 
@@ -240,6 +392,11 @@ payload = bytearray(4)
 payload_index = 0
 
 while True:
+    # The mouse PIO reports console-issued hardware sensitivity commands through
+    # its RX FIFO. Service these before queuing the next report so Mario Paint
+    # can advance LOW -> MEDIUM -> HIGH -> LOW without desynchronising PIO.
+    service_mouse_sensitivity_events()
+
     # If the previous pending word was consumed by the SNES, immediately queue
     # the newest desired state. This runs even when no new serial byte arrived.
     queue_latest_if_possible()
