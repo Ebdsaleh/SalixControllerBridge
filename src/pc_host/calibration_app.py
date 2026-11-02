@@ -151,6 +151,25 @@ class CalibrationApp:
             dpg.add_button(label="Save Profile", callback=self._save_current_profile)
 
         dpg.add_spacer(height=8)
+        dpg.add_text("Existing profiles")
+        with dpg.group(horizontal=True):
+            dpg.add_combo(
+                (),
+                tag="existing_profile_selector",
+                width=430,
+            )
+            dpg.add_button(
+                label="Refresh",
+                callback=self._refresh_existing_profiles,
+            )
+            dpg.add_button(
+                label="Load",
+                callback=self._load_selected_profile,
+            )
+
+        self._refresh_existing_profiles()
+
+        dpg.add_spacer(height=8)
         dpg.add_text("Status")
         dpg.add_text("", tag="status_text", wrap=900)
 
@@ -165,6 +184,12 @@ class CalibrationApp:
         )
         dpg.add_spacer(height=8)
 
+        dpg.add_text(
+            "Current DPI is optional metadata. Generic HID does not reliably "
+            "report a vendor mouse's active DPI; raw-count calibration remains "
+            "authoritative.",
+            wrap=900,
+        )
         with dpg.group(horizontal=True):
             dpg.add_text("Current hardware DPI (optional)")
             dpg.add_input_int(
@@ -379,6 +404,88 @@ class CalibrationApp:
         dpg.set_value("profile_path", str(self.current_profile_path))
         return self.current_profile
 
+    def _refresh_existing_profiles(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        entries = list_profiles()
+        labels = [
+            f"{profile.get('profile_name', path.stem)} | "
+            f"{profile.get('device_type', 'unknown')}"
+            for profile, path in entries
+        ]
+        self._profile_choices = {
+            label: path
+            for label, (_, path) in zip(labels, entries)
+        }
+
+        if not labels:
+            labels = ["No saved profiles"]
+
+        if dpg.does_item_exist("existing_profile_selector"):
+            dpg.configure_item(
+                "existing_profile_selector",
+                items=labels,
+            )
+            dpg.set_value("existing_profile_selector", labels[0])
+
+    def _load_selected_profile(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        label = str(dpg.get_value("existing_profile_selector") or "")
+        path = getattr(self, "_profile_choices", {}).get(label)
+        if path is None:
+            self._status("No saved hardware profile is selected.")
+            return
+
+        try:
+            profile = load_profile(path)
+        except Exception as exc:
+            self._status(f"Could not load profile: {exc}")
+            return
+
+        self.current_profile = profile
+        self.current_profile_path = path
+
+        dpg.set_value(
+            "profile_name",
+            str(profile.get("profile_name") or path.stem),
+        )
+        dpg.set_value(
+            "device_type",
+            str(profile.get("device_type") or "mouse"),
+        )
+        dpg.set_value(
+            "device_label",
+            str(profile.get("identity", {}).get("label") or ""),
+        )
+        dpg.set_value("profile_path", str(path))
+
+        declared_dpi = (
+            profile.get("identity", {}).get("declared_dpi")
+            or profile.get("source_calibration", {})
+            .get("mouse", {})
+            .get("declared_dpi")
+            or 0
+        )
+        if dpg.does_item_exist("mouse_dpi"):
+            dpg.set_value("mouse_dpi", int(declared_dpi or 0))
+
+        self._status(
+            f"Loaded hardware profile: "
+            f"{profile.get('profile_name', path.stem)}"
+        )
+        self._refresh_profile_json()
+
     def _save_current_profile(self, sender=None, app_data=None, user_data=None):
         del sender, app_data, user_data
 
@@ -397,6 +504,7 @@ class CalibrationApp:
         self.current_profile_path = saved
         dpg.set_value("profile_path", str(saved))
         self._status(f"Profile saved: {saved}")
+        self._refresh_existing_profiles()
         self._refresh_profile_json()
 
     def _refresh_profile_json(self):
@@ -527,6 +635,7 @@ class CalibrationApp:
             "SNES mouse calibration saved. Other compatible console modules "
             "remain in this same hardware profile for future calibration."
         )
+        self._refresh_existing_profiles()
         self._refresh_profile_json()
 
     def _refresh_controllers(self, sender=None, app_data=None, user_data=None):
@@ -628,6 +737,7 @@ class CalibrationApp:
             "module. Other compatible modules remain available in the same "
             "hardware profile."
         )
+        self._refresh_existing_profiles()
         self._refresh_profile_json()
 
     def run(self):
