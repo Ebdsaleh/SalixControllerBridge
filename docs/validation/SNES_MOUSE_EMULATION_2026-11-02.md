@@ -775,3 +775,96 @@ Corrections:
 - report opposite-direction consistency warnings;
 - stage successful calibration results without mutating or saving the profile;
 - require explicit Apply, then explicit Save Profile.
+
+
+## Mario Paint hardware-sensitivity selector can break current emulation state
+
+During physical Razer Naga Pro testing, Mario Paint started in its own SLOW
+mouse-sensitivity setting and the mouse initially worked.
+
+When the user changed Mario Paint's mouse sensitivity through the game's own
+menu, the real SNES stopped responding to MouseLeft/MouseRight until the console
+was reset.
+
+The host log continued to generate valid button reports afterward, including:
+
+```text
+MouseLeft:
+report 0x0041....
+
+MouseRight:
+report 0x0081....
+```
+
+Therefore the physical Windows mouse buttons and host report encoder were still
+working. The failure is downstream of host report construction.
+
+Interpretation:
+
+```text
+Mario Paint sensitivity selector
+    -> authentic SNES Mouse console-side sensitivity command
+    -> latch/clock interaction with the mouse peripheral
+```
+
+That command path is still intentionally unimplemented in the current
+SNES-Mouse/Pico transport. Bridge-side sensitivity must remain independent from
+the SNES hardware-sensitivity bits/command until the authentic console-driven
+cycle is implemented.
+
+For current validation:
+
+```text
+DO NOT use Mario Paint's SLOW/NORMAL/FAST selector to tune Salix sensitivity.
+```
+
+Use Salix source-side sensitivity instead.
+
+## Razer Naga Pro side-button probe
+
+The physical mouse runtime currently samples:
+
+```text
+pygame.mouse.get_pressed(3)
+```
+
+which exposes only:
+
+```text
+left
+middle
+right
+```
+
+The two-button Naga Pro side plate therefore has no Salix mapping yet.
+
+New diagnostic:
+
+```bat
+py src\pc_host\mouse_button_probe.py
+```
+
+The probe:
+
+- does not open COM3;
+- does not communicate with the Pico or SNES;
+- prints Pygame MOUSEBUTTONDOWN / MOUSEBUTTONUP event.button values;
+- prints MOUSEWHEEL events;
+- reports the current 3/5-button Pygame pressed state when available.
+
+Probe controls in this order:
+
+```text
+Left
+Right
+Middle
+Side Front
+Side Rear
+DPI Down
+DPI Up
+Wheel Up
+Wheel Down
+```
+
+The resulting event indices should be recorded into the Naga hardware profile
+before assigning the two side buttons to Salix sensitivity down/up.
