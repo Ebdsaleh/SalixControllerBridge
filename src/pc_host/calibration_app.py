@@ -43,6 +43,8 @@ class CalibrationApp:
     def __init__(self):
         self.current_profile = None
         self.current_profile_path = None
+        self.pending_mouse_result = None
+        self.pending_controller_result = None
 
         dpg.create_context()
         dpg.create_viewport(
@@ -219,10 +221,19 @@ class CalibrationApp:
         )
 
         dpg.add_spacer(height=8)
-        dpg.add_button(
-            label="Launch SNES Mouse Calibration",
-            callback=self._run_mouse_calibration,
-        )
+        with dpg.group(horizontal=True):
+            dpg.add_button(
+                label="Launch SNES Mouse Calibration",
+                callback=self._run_mouse_calibration,
+            )
+            dpg.add_button(
+                label="Apply Pending Result",
+                callback=self._apply_pending_mouse_result,
+            )
+            dpg.add_button(
+                label="Discard Pending Result",
+                callback=self._discard_pending_mouse_result,
+            )
 
         dpg.add_spacer(height=10)
         dpg.add_text(
@@ -267,10 +278,19 @@ class CalibrationApp:
         self._refresh_controllers()
 
         dpg.add_spacer(height=8)
-        dpg.add_button(
-            label="Launch Controller Axis Calibration",
-            callback=self._run_controller_calibration,
-        )
+        with dpg.group(horizontal=True):
+            dpg.add_button(
+                label="Launch Controller Axis Calibration",
+                callback=self._run_controller_calibration,
+            )
+            dpg.add_button(
+                label="Apply Pending Result",
+                callback=self._apply_pending_controller_result,
+            )
+            dpg.add_button(
+                label="Discard Pending Result",
+                callback=self._discard_pending_controller_result,
+            )
 
         dpg.add_spacer(height=10)
         dpg.add_text(
@@ -547,7 +567,7 @@ class CalibrationApp:
             return json.loads(result_path.read_text(encoding="utf-8"))
 
     def _run_mouse_calibration(self):
-        profile = self._ensure_profile("mouse")
+        self._ensure_profile("mouse")
 
         dpi = int(dpg.get_value("mouse_dpi") or 0)
         args = ["mouse-snes"]
@@ -565,16 +585,55 @@ class CalibrationApp:
         dpg.set_value("mouse_result", _format_json(result))
 
         if result.get("status") == "cancelled":
-            self._status("Mouse calibration cancelled. Profile was not changed.")
+            self.pending_mouse_result = None
+            self._status(
+                "Mouse calibration cancelled. Nothing was applied or saved."
+            )
             return
 
         if result.get("status") != "ok":
+            self.pending_mouse_result = None
             self._status(
                 "Mouse calibration failed: "
                 + str(result.get("error") or "unknown worker error")
             )
             return
 
+        self.pending_mouse_result = result
+        self._status(
+            "Mouse calibration complete and staged only. Review the result; "
+            "use Apply Pending Result when you are satisfied. The profile has "
+            "not been changed or saved."
+        )
+
+    def _discard_pending_mouse_result(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+        self.pending_mouse_result = None
+        if dpg.does_item_exist("mouse_result"):
+            dpg.set_value("mouse_result", "")
+        self._status(
+            "Pending mouse calibration discarded. Profile remains unchanged."
+        )
+
+    def _apply_pending_mouse_result(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        result = self.pending_mouse_result
+        if not result or result.get("status") != "ok":
+            self._status("There is no successful pending mouse result to apply.")
+            return
+
+        profile = self._ensure_profile("mouse")
         identity = result.get("identity", {})
         profile_identity = profile.setdefault("identity", {})
         profile_identity.update(
@@ -628,14 +687,12 @@ class CalibrationApp:
             },
         )
 
-        saved = save_profile(profile)
-        self.current_profile_path = saved
-        dpg.set_value("profile_path", str(saved))
+        self.pending_mouse_result = None
         self._status(
-            "SNES mouse calibration saved. Other compatible console modules "
-            "remain in this same hardware profile for future calibration."
+            "Mouse calibration applied to the in-memory profile only. "
+            "Review Profile Data, then use Save Profile when you want to "
+            "persist it to disk."
         )
-        self._refresh_existing_profiles()
         self._refresh_profile_json()
 
     def _refresh_controllers(self, sender=None, app_data=None, user_data=None):
@@ -669,7 +726,7 @@ class CalibrationApp:
         return int(value.split(":", 1)[0])
 
     def _run_controller_calibration(self):
-        profile = self._ensure_profile("controller")
+        self._ensure_profile("controller")
 
         try:
             device_index = self._selected_controller_index()
@@ -687,18 +744,57 @@ class CalibrationApp:
         dpg.set_value("controller_result", _format_json(result))
 
         if result.get("status") == "cancelled":
+            self.pending_controller_result = None
             self._status(
-                "Controller calibration cancelled. Profile was not changed."
+                "Controller calibration cancelled. Nothing was applied or saved."
             )
             return
 
         if result.get("status") != "ok":
+            self.pending_controller_result = None
             self._status(
                 "Controller calibration failed: "
                 + str(result.get("error") or "unknown worker error")
             )
             return
 
+        self.pending_controller_result = result
+        self._status(
+            "Controller calibration complete and staged only. Review the "
+            "result; use Apply Pending Result when satisfied. The profile "
+            "has not been changed or saved."
+        )
+
+    def _discard_pending_controller_result(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+        self.pending_controller_result = None
+        if dpg.does_item_exist("controller_result"):
+            dpg.set_value("controller_result", "")
+        self._status(
+            "Pending controller calibration discarded. Profile remains unchanged."
+        )
+
+    def _apply_pending_controller_result(
+        self,
+        sender=None,
+        app_data=None,
+        user_data=None,
+    ):
+        del sender, app_data, user_data
+
+        result = self.pending_controller_result
+        if not result or result.get("status") != "ok":
+            self._status(
+                "There is no successful pending controller result to apply."
+            )
+            return
+
+        profile = self._ensure_profile("controller")
         identity = result.get("identity", {})
         profile_identity = profile.setdefault("identity", {})
         profile_identity.update(identity)
@@ -732,15 +828,12 @@ class CalibrationApp:
             },
         )
 
-        saved = save_profile(profile)
-        self.current_profile_path = saved
-        dpg.set_value("profile_path", str(saved))
+        self.pending_controller_result = None
         self._status(
-            "Controller source calibration saved with the SNES mouse-emulation "
-            "module. Other compatible modules remain available in the same "
-            "hardware profile."
+            "Controller calibration applied to the in-memory profile only. "
+            "Review Profile Data, then use Save Profile when you want to "
+            "persist it to disk."
         )
-        self._refresh_existing_profiles()
         self._refresh_profile_json()
 
     def run(self):
