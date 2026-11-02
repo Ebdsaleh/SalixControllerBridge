@@ -291,3 +291,80 @@ button 7 -> SNES R
 No SNES Mouse protocol or Pico firmware changes are involved. Face-button
 clicks, X/Y lever mode, D-pad lever mode, and the five-tier bridge sensitivity
 curve are unchanged.
+
+
+## Generic mouse bridge / unified launcher refactor
+
+The validated SNES Mouse path is no longer implemented as an isolated input
+pipeline.
+
+New architecture:
+
+```text
+bridge.py
+  |
+  +-- default/pad mode
+  |
+  +-- mouse_emu / mouse-emu
+          |
+          v
+      mouse_bridge.py
+          |
+          +-- MouseState(dx, dy, left, right)
+          +-- relative analog/D-pad movement
+          +-- five-level bridge sensitivity
+          +-- hot-plug/re-enumeration handling
+          |
+          v
+      SNES Mouse output personality
+          |
+          +-- 32-bit logical report
+          +-- physical-wire conversion
+          +-- AA 56 serial framing
+```
+
+Primary command:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse_emu
+```
+
+Equivalent alias:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse-emu
+```
+
+Auto-detect form:
+
+```bat
+py src\pc_host\bridge.py mouse_emu
+```
+
+Normal controller mode remains backward compatible:
+
+```bat
+py src\pc_host\bridge.py COM3
+```
+
+The old direct launcher also remains valid:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3
+```
+
+but `snes_mouse_bridge.py` is now only a compatibility wrapper around
+`mouse_bridge.py`.
+
+This creates the intended separation for future work:
+
+```text
+input source
+    -> MouseState
+    -> console mouse output personality
+```
+
+Future USB/Bluetooth mouse sources can therefore produce the same `MouseState`
+without knowing anything about the SNES report format, and future Saturn or
+Dreamcast mouse outputs can consume the same state without duplicating the
+input/sensitivity engine.
