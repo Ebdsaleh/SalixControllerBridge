@@ -273,6 +273,52 @@ def _measurement_gain(measurements):
     # distorted. Use the geometric mean of the independent axis measurements.
     recommended_gain = math.sqrt(gain_x * gain_y)
 
+    by_direction = {
+        str(item["direction"]).upper(): item
+        for item in measurements
+    }
+
+    def opposite_ratio(first, second, axis_name):
+        first_item = by_direction.get(first)
+        second_item = by_direction.get(second)
+        if not first_item or not second_item:
+            return None
+
+        first_value = abs(int(first_item[axis_name]))
+        second_value = abs(int(second_item[axis_name]))
+        smaller = min(first_value, second_value)
+        larger = max(first_value, second_value)
+        if smaller <= 0:
+            return None
+        return larger / float(smaller)
+
+    horizontal_direction_ratio = opposite_ratio(
+        "RIGHT",
+        "LEFT",
+        "raw_dx",
+    )
+    vertical_direction_ratio = opposite_ratio(
+        "DOWN",
+        "UP",
+        "raw_dy",
+    )
+
+    quality_warnings = []
+    if (
+        horizontal_direction_ratio is not None
+        and horizontal_direction_ratio > 2.0
+    ):
+        quality_warnings.append(
+            "Horizontal opposite-direction throws differ by more than 2x."
+        )
+    if (
+        vertical_direction_ratio is not None
+        and vertical_direction_ratio > 2.0
+    ):
+        quality_warnings.append(
+            "Vertical opposite-direction throws differ by more than 2x."
+        )
+
     return {
         "horizontal_target_pixels": horizontal_target,
         "vertical_target_pixels": vertical_target,
@@ -281,6 +327,12 @@ def _measurement_gain(measurements):
         "gain_x_measurement": gain_x,
         "gain_y_measurement": gain_y,
         "recommended_gain": recommended_gain,
+        "quality": {
+            "horizontal_direction_ratio": horizontal_direction_ratio,
+            "vertical_direction_ratio": vertical_direction_ratio,
+            "warnings": quality_warnings,
+            "status": "review" if quality_warnings else "good",
+        },
     }
 
 
