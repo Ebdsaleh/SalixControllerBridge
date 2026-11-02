@@ -17,6 +17,7 @@ from hardware_profiles import (
     ensure_console_module,
     list_profiles,
     load_profile,
+    merge_profile,
     new_profile,
     profile_path,
     save_profile,
@@ -47,6 +48,7 @@ class CalibrationApp:
     def __init__(self):
         self.current_profile = None
         self.current_profile_path = None
+        self.loaded_profile_path = None
         self.pending_mouse_result = None
         self.pending_controller_result = None
 
@@ -462,6 +464,7 @@ class CalibrationApp:
         )
         self._seed_compatible_modules(self.current_profile, device_type)
         self.current_profile_path = profile_path(self.current_profile)
+        self.loaded_profile_path = None
 
         if dpg.does_item_exist("profile_path"):
             dpg.set_value("profile_path", str(self.current_profile_path))
@@ -510,6 +513,7 @@ class CalibrationApp:
         ):
             if expected_path.exists():
                 self.current_profile = load_profile(expected_path)
+                self.loaded_profile_path = expected_path.resolve()
             else:
                 self.current_profile = new_profile(
                     name,
@@ -583,6 +587,7 @@ class CalibrationApp:
 
         self.current_profile = profile
         self.current_profile_path = path
+        self.loaded_profile_path = Path(path).resolve()
 
         dpg.set_value(
             "profile_name",
@@ -633,8 +638,51 @@ class CalibrationApp:
         if self.current_profile["device_type"] == "mouse":
             self._store_mouse_controls_in_profile(self.current_profile)
 
-        saved = save_profile(self.current_profile)
+        target_path = profile_path(self.current_profile)
+        target_resolved = target_path.resolve()
+
+        # A fresh skeleton must never silently replace an existing calibrated
+        # profile merely because the user typed the same profile name.
+        if (
+            target_path.exists()
+            and self.loaded_profile_path != target_resolved
+        ):
+            existing = load_profile(target_path)
+
+            # Preserve the existing calibrated profile and apply only the
+            # explicitly editable profile/source-control fields from the fresh
+            # UI state. Seeded console placeholders (calibrated=false) are not
+            # allowed to erase real calibration modules.
+            safe_update = {
+                "profile_name": self.current_profile["profile_name"],
+                "device_type": self.current_profile["device_type"],
+                "identity": deepcopy(
+                    self.current_profile.get("identity", {})
+                ),
+            }
+
+            if self.current_profile["device_type"] == "mouse":
+                controls = (
+                    self.current_profile.get("source_calibration", {})
+                    .get("mouse", {})
+                    .get("controls")
+                )
+                if controls:
+                    safe_update["source_calibration"] = {
+                        "mouse": {
+                            "controls": deepcopy(controls),
+                        }
+                    }
+
+            self.current_profile = merge_profile(existing, safe_update)
+            self._status(
+                "Existing profile detected: preserved its calibration data "
+                "and merged the current label/source controls."
+            )
+
+        saved = save_profile(self.current_profile, path=target_path)
         self.current_profile_path = saved
+        self.loaded_profile_path = Path(saved).resolve()
         dpg.set_value("profile_path", str(saved))
         self._status(f"Profile saved: {saved}")
         self._refresh_existing_profiles()
