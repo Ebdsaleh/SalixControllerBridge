@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 PROFILE_SCHEMA_VERSION = 1
+DEFAULT_PROFILE_SETTINGS_SCHEMA_VERSION = 1
 
 CONSOLE_ENVIRONMENTS = {
     "snes": {
@@ -68,6 +69,10 @@ def state_directory():
 
 def default_profile_directory():
     return state_directory() / "profiles" / "hardware"
+
+
+def default_profile_settings_path():
+    return state_directory() / "profiles" / "defaults.json"
 
 
 def slugify(value):
@@ -182,6 +187,126 @@ def merge_profile(existing, update):
     merged["schema_version"] = PROFILE_SCHEMA_VERSION
     merged["updated_utc"] = utc_now_iso()
     return merged
+
+
+def _empty_default_profile_settings():
+    return {
+        "schema_version": DEFAULT_PROFILE_SETTINGS_SCHEMA_VERSION,
+        "defaults": {},
+        "updated_utc": utc_now_iso(),
+    }
+
+
+def load_default_profile_settings():
+    path = default_profile_settings_path()
+    if not path.is_file():
+        return _empty_default_profile_settings()
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    schema = data.get("schema_version")
+    if schema != DEFAULT_PROFILE_SETTINGS_SCHEMA_VERSION:
+        raise RuntimeError(
+            f"Unsupported default-profile settings schema {schema!r}; "
+            f"expected {DEFAULT_PROFILE_SETTINGS_SCHEMA_VERSION}."
+        )
+
+    defaults = data.get("defaults")
+    if not isinstance(defaults, dict):
+        raise RuntimeError(
+            f"Invalid default-profile settings file: {path}"
+        )
+
+    return data
+
+
+def save_default_profile_settings(settings):
+    output = deepcopy(settings)
+    output["schema_version"] = DEFAULT_PROFILE_SETTINGS_SCHEMA_VERSION
+    output["updated_utc"] = utc_now_iso()
+
+    path = default_profile_settings_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(output, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def get_default_profile_path(device_type):
+    device_type = str(device_type).strip().lower()
+    if not device_type:
+        return None
+
+    settings = load_default_profile_settings()
+    reference = settings.get("defaults", {}).get(device_type)
+    if not reference:
+        return None
+
+    path = default_profile_directory() / str(reference)
+    if not path.is_file():
+        return None
+
+    try:
+        profile = load_profile(path)
+    except (OSError, ValueError, RuntimeError, json.JSONDecodeError):
+        return None
+
+    if str(profile.get("device_type", "")).strip().lower() != device_type:
+        return None
+
+    return path.resolve()
+
+
+def load_default_profile(device_type):
+    path = get_default_profile_path(device_type)
+    if path is None:
+        return None, None
+    return load_profile(path), path
+
+
+def set_default_profile(device_type, reference):
+    device_type = str(device_type).strip().lower()
+    if device_type not in ("mouse", "controller"):
+        raise RuntimeError(
+            f"Unsupported default profile device type: {device_type!r}"
+        )
+
+    path = resolve_profile_reference(reference)
+    if path is None:
+        raise RuntimeError("A saved hardware profile is required.")
+
+    profile = load_profile(path)
+    profile_type = str(profile.get("device_type", "")).strip().lower()
+    if profile_type != device_type:
+        raise RuntimeError(
+            f"Cannot set {profile_type or 'unknown'} profile as "
+            f"default {device_type} profile."
+        )
+
+    try:
+        relative = path.resolve().relative_to(
+            default_profile_directory().resolve()
+        )
+    except ValueError as exc:
+        raise RuntimeError(
+            "Default profiles must be saved in the Salix hardware profile "
+            "directory before they can be selected as defaults."
+        ) from exc
+
+    settings = load_default_profile_settings()
+    settings.setdefault("defaults", {})[device_type] = str(relative)
+    save_default_profile_settings(settings)
+    return path.resolve()
+
+
+def clear_default_profile(device_type):
+    device_type = str(device_type).strip().lower()
+    settings = load_default_profile_settings()
+    defaults = settings.setdefault("defaults", {})
+    removed = defaults.pop(device_type, None)
+    save_default_profile_settings(settings)
+    return removed is not None
 
 
 def resolve_profile_reference(reference):
