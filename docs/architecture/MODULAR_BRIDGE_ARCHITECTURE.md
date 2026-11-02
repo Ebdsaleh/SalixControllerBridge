@@ -161,3 +161,24 @@ than the newest state.
 Device-specific controls such as mouse DPI buttons remain source-specific and
 must not leak into console-output personalities unless an explicit translation
 profile chooses to use them.
+
+
+## Output-personality lifecycle
+
+Console-output personalities may require an explicit activation boundary, not
+only data packets.
+
+For the current SNES Mouse/Pico transport, a host restart must not assume that
+the previous PIO execution phase is reusable merely because the Pico still
+reports the same logical mode.
+
+Physical-mouse mode therefore re-arms the SNES Mouse output through:
+
+```text
+PAD neutral -> MOUSE neutral
+```
+
+before live normalized `MouseState` data is emitted.
+
+This lifecycle behavior belongs to the SNES output personality, not to
+`PhysicalMouseSource`.
