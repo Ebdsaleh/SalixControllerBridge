@@ -725,6 +725,9 @@ class CalibrationApp:
                 "deadzone": float(
                     mouse_emu.get("recommended_deadzone", 0.18)
                 ),
+                "base_analog_speed": float(
+                    mouse_emu.get("accepted_base_analog_speed", 8.0)
+                ),
                 "axis_calibration": source_calibration.get("axes", []),
             },
         )
