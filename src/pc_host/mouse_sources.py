@@ -67,7 +67,7 @@ class PhysicalMouseSource:
         self._started = True
 
     def poll(self):
-        """Return (MouseState, stop_requested) for the current capture sample."""
+        """Return (MouseState, stop_requested, button_down_events)."""
         if not self._started:
             raise RuntimeError("PhysicalMouseSource.start() was not called.")
 
