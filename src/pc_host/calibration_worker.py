@@ -289,13 +289,18 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
     pygame.display.init()
     pygame.font.init()
 
-    surface = pygame.display.set_mode((SNES_WIDTH, SNES_HEIGHT))
-    pygame.display.set_caption("Salix Hardware Profiler // SNES Mouse 256x224")
+    (
+        window,
+        console_surface,
+        title_font,
+        body_font,
+        small_font,
+    ) = _create_calibration_display(
+        "Salix Hardware Profiler // SNES Mouse 256x224"
+    )
     pygame.event.set_grab(True)
     pygame.mouse.set_visible(False)
 
-    font = pygame.font.Font(None, 15)
-    small_font = pygame.font.Font(None, 13)
     clock = pygame.time.Clock()
 
     raw = WindowsRawMouseCapture()
@@ -340,13 +345,23 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
                         elif event.key in (pygame.K_SPACE, pygame.K_RETURN):
                             intro = False
 
-                _draw_console_environment(surface)
-                _draw_text(surface, font, "SNES MOUSE CALIBRATION", 10, 10)
-                _draw_text(surface, small_font, "256 x 224 logical environment", 10, 30)
-                _draw_text(surface, small_font, "Use your normal daily-driver DPI.", 10, 52)
-                _draw_text(surface, small_font, "SPACE: begin comfortable throw test", 10, 72)
-                _draw_text(surface, small_font, "ESC: cancel", 10, 90)
-                pygame.display.flip()
+                _draw_console_environment(console_surface)
+                _present_calibration_frame(
+                    window,
+                    console_surface,
+                    title_font,
+                    body_font,
+                    small_font,
+                    "SNES MOUSE CALIBRATION",
+                    (
+                        "Native logical area: 256 x 224.",
+                        "The test area is rendered at 3x for readability; "
+                        "the calibration math still uses native SNES coordinates.",
+                        "Keep the mouse at your normal daily-driver hardware setting.",
+                        "SPACE / ENTER: begin the throw test.",
+                        ("ESC: cancel without applying anything.", "small"),
+                    ),
+                )
                 clock.tick(60)
 
             if cancelled:
@@ -355,99 +370,120 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
             center = (SNES_WIDTH // 2, SNES_HEIGHT // 2)
 
             for direction, target, axis, sign in _mouse_targets():
-                armed = False
-                finished = False
-                raw.reset()
-                pygame.mouse.get_rel()
+                accepted = False
+                attempt = 1
+                rejection_reason = None
 
-                while not finished:
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            cancelled = True
-                            finished = True
-                        elif event.type == pygame.KEYDOWN:
-                            if event.key == pygame.K_ESCAPE:
+                while not accepted:
+                    armed = False
+                    finished = False
+                    raw.reset()
+                    pygame.mouse.get_rel()
+
+                    while not finished:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
                                 cancelled = True
                                 finished = True
-                            elif event.key in (pygame.K_SPACE, pygame.K_RETURN):
-                                if not armed:
-                                    raw.reset()
-                                    pygame.mouse.get_rel()
-                                    armed = True
-                                else:
+                            elif event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_ESCAPE:
+                                    cancelled = True
                                     finished = True
+                                elif event.key in (
+                                    pygame.K_SPACE,
+                                    pygame.K_RETURN,
+                                ):
+                                    if not armed:
+                                        raw.reset()
+                                        pygame.mouse.get_rel()
+                                        armed = True
+                                        rejection_reason = None
+                                    else:
+                                        finished = True
+
+                        if cancelled:
+                            break
+
+                        snapshot = raw.snapshot(reset=False)
+                        _draw_console_environment(
+                            console_surface,
+                            target=target,
+                        )
+
+                        lines = [
+                            f"Attempt {attempt}",
+                            (
+                                "Place the mouse comfortably, then press SPACE "
+                                "to arm this throw."
+                                if not armed
+                                else
+                                "Make ONE natural throw toward the highlighted "
+                                "target. Press SPACE when your hand reaches a "
+                                "comfortable end."
+                            ),
+                        ]
+
+                        if armed:
+                            lines.extend(
+                                (
+                                    f"Raw delta: "
+                                    f"{snapshot['dx']:+d} / {snapshot['dy']:+d}",
+                                    f"Raw events: {snapshot['event_count']}",
+                                )
+                            )
+
+                        if rejection_reason:
+                            lines.append(
+                                (
+                                    "Previous attempt rejected: "
+                                    + rejection_reason,
+                                    "small",
+                                )
+                            )
+
+                        lines.append(("ESC: cancel calibration.", "small"))
+
+                        _present_calibration_frame(
+                            window,
+                            console_surface,
+                            title_font,
+                            body_font,
+                            small_font,
+                            f"FULL THROW // {direction}",
+                            lines,
+                        )
+                        clock.tick(120)
 
                     if cancelled:
                         break
 
                     snapshot = raw.snapshot(reset=False)
-                    _draw_console_environment(surface, target=target)
-                    _draw_text(surface, font, f"FULL THROW: {direction}", 10, 8)
+                    valid, reason, quality = _validate_mouse_throw(
+                        axis,
+                        sign,
+                        snapshot,
+                    )
 
-                    if not armed:
-                        _draw_text(
-                            surface,
-                            small_font,
-                            "Place mouse at a comfortable start.",
-                            10,
-                            30,
-                        )
-                        _draw_text(
-                            surface,
-                            small_font,
-                            "SPACE to arm, then make ONE natural throw.",
-                            10,
-                            46,
-                        )
-                    else:
-                        _draw_text(
-                            surface,
-                            small_font,
-                            "Move naturally toward the target.",
-                            10,
-                            30,
-                        )
-                        _draw_text(
-                            surface,
-                            small_font,
-                            "SPACE when your hand reaches a comfortable end.",
-                            10,
-                            46,
-                        )
-                        _draw_text(
-                            surface,
-                            small_font,
-                            f"raw dx/dy: {snapshot['dx']:+d} / {snapshot['dy']:+d}",
-                            10,
-                            64,
-                        )
+                    if not valid:
+                        rejection_reason = reason
+                        attempt += 1
+                        continue
 
-                    pygame.display.flip()
-                    clock.tick(120)
+                    measurements.append(
+                        {
+                            "direction": direction,
+                            "axis": axis,
+                            "raw_dx": int(snapshot["dx"]),
+                            "raw_dy": int(snapshot["dy"]),
+                            "event_count": int(snapshot["event_count"]),
+                            "quality": quality,
+                            "attempt": attempt,
+                        }
+                    )
+                    accepted = True
 
                 if cancelled:
                     break
-
-                snapshot = raw.snapshot(reset=False)
-                measured_axis = snapshot["dx"] if axis == "x" else snapshot["dy"]
-
-                # Reject a throw in the wrong direction rather than silently
-                # creating a nonsensical profile.
-                if measured_axis == 0 or (measured_axis > 0) != (sign > 0):
-                    raise RuntimeError(
-                        f"{direction} throw was not captured in the expected "
-                        "direction. Repeat calibration."
-                    )
-
-                measurements.append(
-                    {
-                        "direction": direction,
-                        "axis": axis,
-                        "raw_dx": int(snapshot["dx"]),
-                        "raw_dy": int(snapshot["dy"]),
-                        "event_count": int(snapshot["event_count"]),
-                    }
-                )
 
             if cancelled:
                 raise KeyboardInterrupt
@@ -499,33 +535,25 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
                 cursor_y = max(0.0, min(SNES_HEIGHT - 1.0, cursor_y))
 
                 _draw_console_environment(
-                    surface,
+                    console_surface,
                     cursor=(cursor_x, cursor_y),
                 )
-                _draw_text(surface, font, "SNES ENVIRONMENT TEST", 10, 8)
-                _draw_text(
-                    surface,
+                _present_calibration_frame(
+                    window,
+                    console_surface,
+                    title_font,
+                    body_font,
                     small_font,
-                    f"gain: {accepted_gain:.4f}x",
-                    10,
-                    28,
+                    "SNES ENVIRONMENT TEST",
+                    (
+                        f"Current gain: {accepted_gain:.4f}x",
+                        "Move naturally across the whole 256 x 224 logical area.",
+                        "+ / - : adjust gain by 5%",
+                        "R: reset to measured recommendation",
+                        "ENTER / SPACE: accept this test result",
+                        ("ESC: cancel without applying.", "small"),
+                    ),
                 )
-                _draw_text(
-                    surface,
-                    small_font,
-                    "+/- adjust 5% | R reset | ENTER accept",
-                    10,
-                    44,
-                )
-                _draw_text(
-                    surface,
-                    small_font,
-                    "Move naturally across the full 256x224 area.",
-                    10,
-                    60,
-                )
-
-                pygame.display.flip()
                 clock.tick(120)
 
             if cancelled:
