@@ -70,7 +70,7 @@ F300_GAMEPAD_BUTTON_TO_SNES_BIT = {
     4: 9,    # Triangle/Y -> SNES X
     5: 11,
     6: 10,   # L1/LB      -> SNES L
-    7: 10,
+    7: 11,   # R1/RB      -> SNES R
     9: 3,
     10: 2,
     11: 3,
