@@ -168,3 +168,43 @@ and state reports include the active level and generated movement speeds.
 No Pico firmware change is required for this host-side sensitivity-control
 batch; the existing 32-bit mouse personality already transports the sensitivity
 bits.
+
+
+## Click regression after bridge sensitivity controls
+
+Physical testing showed the new LOW/MEDIUM/HIGH cursor-speed controls worked and
+the host continued detecting both mouse-button inputs, but Mario Paint no longer
+responded to MouseLeft/MouseRight after the host also began changing the SNES
+Mouse on-wire speed bits.
+
+The host log proved the controller mapping itself was still intact: left and
+right click states were still being emitted by the PC bridge.
+
+Correction:
+
+- keep LOW/MEDIUM/HIGH as **bridge-side movement scaling** only;
+- restore the exact known-good SNES Mouse first-16-bit report pattern used during
+  the successful click bring-up;
+- preserve B-position -> MouseLeft and A-position -> MouseRight;
+- defer authentic SNES hardware-mouse sensitivity selection until its
+  Latch/Clock command sequence is implemented independently.
+
+Known-good SNES-facing second-byte values are therefore restored to:
+
+```text
+neutral     0x01
+MouseLeft   0x41
+MouseRight  0x81
+```
+
+Bridge sensitivity still remains:
+
+```text
+LOW     0.5x
+MEDIUM  1.0x
+HIGH    2.0x
+```
+
+with L/Y decreasing and R/X increasing.
+
+This correction is PC-side only; no Pico firmware update is required.
