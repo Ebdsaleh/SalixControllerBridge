@@ -1123,3 +1123,81 @@ After updating `src/pico_client/main.py` on the Pico:
 
 If the first native sensitivity change causes loss of input, stop the test and
 capture the host log before changing any other variable.
+
+
+## Physical acceptance: native Mario Paint sensitivity + Salix sensitivity coexist
+
+The authenticated SNES Mouse sensitivity command implementation has now passed
+real PAL SNES / Mario Paint validation.
+
+Host startup confirmed the calibrated Razer Naga Pro profile remained active:
+
+```text
+Physical mouse calibrated/base gain: 0.115420x
+Physical mouse sensitivity: MEDIUM (2) effective gain=0.115420x
+Physical mouse sensitivity controls: button 6 = decrease; button 7 = increase
+SNES hardware sensitivity: LOW (0)
+```
+
+The user physically confirmed:
+
+- Salix source-side sensitivity continued to work across all five levels;
+- Mario Paint's native SLOW/NORMAL/FAST sensitivity control also worked;
+- both systems could be changed independently;
+- mouse motion remained responsive;
+- MouseLeft remained valid across native hardware-sensitivity transitions;
+- no console reset was required.
+
+The host log shows Salix source sensitivity moving through the expected calibrated
+effective gains and returning to MEDIUM, while native hardware sensitivity
+telemetry changed independently.
+
+Examples include:
+
+```text
+MEDIUM -> HIGH      0.115420 -> 0.173129
+HIGH -> VERY HIGH   0.173129 -> 0.230839
+MEDIUM -> LOW       0.115420 -> 0.057710
+LOW -> VERY LOW     0.057710 -> 0.028855
+VERY LOW -> LOW -> MEDIUM
+```
+
+Native telemetry includes transitions such as:
+
+```text
+LOW -> MEDIUM
+MEDIUM -> HIGH
+HIGH -> LOW
+```
+
+and MouseLeft reports remained valid immediately before/after those changes.
+
+### Telemetry batching note
+
+The Pico drains all queued PIO sensitivity events before emitting the latest
+status frame. Therefore, if Mario Paint sends more than one sensitivity clock
+before the PC drains telemetry, the host log can legitimately show an apparent
+jump such as:
+
+```text
+LOW -> HIGH
+```
+
+or other compressed state changes.
+
+This is diagnostic coalescing only. The Pico still advances one state per
+console-issued sensitivity command internally.
+
+### Final physical status
+
+```text
+[PASS PHYSICAL] calibrated Razer Naga Pro profile
+[PASS PHYSICAL] five-level Salix source sensitivity
+[PASS PHYSICAL] authentic SNES Mouse LOW/MEDIUM/HIGH sensitivity command
+[PASS PHYSICAL] Mario Paint native sensitivity selector
+[PASS PHYSICAL] source sensitivity and SNES hardware sensitivity coexist
+[PASS PHYSICAL] MouseLeft preserved through hardware sensitivity changes
+[PASS PHYSICAL] no reset required after native sensitivity changes
+```
+
+This closes the previously open SNES Mouse hardware-sensitivity protocol item.
