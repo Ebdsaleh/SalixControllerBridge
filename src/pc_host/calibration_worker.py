@@ -694,10 +694,15 @@ def run_controller_calibration(output_path, *, device_index):
     joystick = pygame.joystick.Joystick(device_index)
     joystick.init()
 
-    surface = pygame.display.set_mode((SNES_WIDTH, SNES_HEIGHT))
-    pygame.display.set_caption("Salix Hardware Profiler // Controller Axes")
-    font = pygame.font.Font(None, 15)
-    small_font = pygame.font.Font(None, 13)
+    (
+        window,
+        console_surface,
+        title_font,
+        body_font,
+        small_font,
+    ) = _create_calibration_display(
+        "Salix Hardware Profiler // Controller Axes"
+    )
     clock = pygame.time.Clock()
 
     axis_count = joystick.get_numaxes()
@@ -722,11 +727,25 @@ def run_controller_calibration(output_path, *, device_index):
             )
             center_samples.append(sample)
 
-            _draw_console_environment(surface)
-            _draw_text(surface, font, "CONTROLLER AXIS CALIBRATION", 10, 10)
-            _draw_text(surface, small_font, "Release every stick to neutral.", 10, 32)
-            _draw_text(surface, small_font, "Measuring center/noise for 2.5 sec...", 10, 48)
-            pygame.display.flip()
+            _draw_console_environment(console_surface)
+            remaining = max(
+                0.0,
+                2.5 - (time.monotonic() - center_start),
+            )
+            _present_calibration_frame(
+                window,
+                console_surface,
+                title_font,
+                body_font,
+                small_font,
+                "CONTROLLER AXIS CALIBRATION",
+                (
+                    "Release every stick and trigger to neutral.",
+                    f"Measuring center / noise: {remaining:.1f} sec remaining.",
+                    "Do not touch the controls until this phase finishes.",
+                    ("ESC: cancel calibration.", "small"),
+                ),
+            )
             clock.tick(120)
 
         # Full-range capture.
@@ -747,25 +766,34 @@ def run_controller_calibration(output_path, *, device_index):
                 minimums[index] = min(minimums[index], value)
                 maximums[index] = max(maximums[index], value)
 
-            _draw_console_environment(surface)
-            _draw_text(surface, font, "FULL ANALOG RANGE", 10, 10)
-            _draw_text(surface, small_font, "Move every analog stick through full circles.", 10, 32)
-            _draw_text(surface, small_font, "Also press analog triggers if present.", 10, 48)
-            _draw_text(surface, small_font, "ENTER/SPACE when finished | ESC cancel", 10, 64)
+            _draw_console_environment(console_surface)
 
-            y = 88
+            telemetry = []
             for index in range(min(axis_count, 6)):
                 value = float(joystick.get_axis(index))
-                _draw_text(
-                    surface,
-                    small_font,
-                    f"axis {index}: {value:+.3f}  [{minimums[index]:+.3f}, {maximums[index]:+.3f}]",
-                    10,
-                    y,
+                telemetry.append(
+                    (
+                        f"Axis {index}: {value:+.3f}   "
+                        f"[{minimums[index]:+.3f}, {maximums[index]:+.3f}]",
+                        "small",
+                    )
                 )
-                y += 14
 
-            pygame.display.flip()
+            _present_calibration_frame(
+                window,
+                console_surface,
+                title_font,
+                body_font,
+                small_font,
+                "FULL ANALOG RANGE",
+                (
+                    "Move every analog stick through full circles.",
+                    "Also press analog triggers through their complete travel.",
+                    "ENTER / SPACE: finish range capture.",
+                    ("ESC: cancel calibration.", "small"),
+                    *telemetry,
+                ),
+            )
             clock.tick(120)
 
         axes = _axis_statistics(center_samples, minimums, maximums)
@@ -840,40 +868,27 @@ def run_controller_calibration(output_path, *, device_index):
                 cursor_y = max(0.0, min(SNES_HEIGHT - 1.0, cursor_y))
 
                 _draw_console_environment(
-                    surface,
+                    console_surface,
                     cursor=(cursor_x, cursor_y),
                 )
-                _draw_text(surface, font, "SNES ANALOG MOUSE TEST", 10, 8)
-                _draw_text(
-                    surface,
+                _present_calibration_frame(
+                    window,
+                    console_surface,
+                    title_font,
+                    body_font,
                     small_font,
-                    f"MEDIUM/base speed: {accepted_base_speed:.1f}",
-                    10,
-                    28,
+                    "SNES ANALOG MOUSE TEST",
+                    (
+                        f"MEDIUM / base speed: {accepted_base_speed:.1f}",
+                        f"Deadzone: {recommended_deadzone:.3f}",
+                        f"Normalized stick: {norm_x:+.3f} / {norm_y:+.3f}",
+                        "Move the stick naturally around the full SNES area.",
+                        "+ / - : adjust base speed by 0.5",
+                        "R: reset to 8.0",
+                        "ENTER / SPACE: accept this test result",
+                        ("ESC: cancel without applying.", "small"),
+                    ),
                 )
-                _draw_text(
-                    surface,
-                    small_font,
-                    f"deadzone: {recommended_deadzone:.3f}",
-                    10,
-                    44,
-                )
-                _draw_text(
-                    surface,
-                    small_font,
-                    "+/- speed | R reset | ENTER accept",
-                    10,
-                    60,
-                )
-                _draw_text(
-                    surface,
-                    small_font,
-                    f"normalized: {norm_x:+.3f} / {norm_y:+.3f}",
-                    10,
-                    76,
-                )
-
-                pygame.display.flip()
                 clock.tick(60)
 
         payload = {
