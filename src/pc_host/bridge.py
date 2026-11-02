@@ -18,6 +18,7 @@ SYNC_2 = 0x55
 SNES_NEUTRAL_MASK = 0xFFFF
 
 MOUSE_EMU_ALIASES = ("mouse_emu", "mouse-emu")
+PHYSICAL_MOUSE_ALIASES = ("mouse",)
 
 F300_DINPUT_GUID = "0300b697bc2000000155000000000000"
 F300_GAMEPAD_GUID = "0300dc99790000001c18000000000000"
@@ -155,8 +156,8 @@ def parse_args():
         metavar="MODE",
         help=(
             "Optional bridge personality. Use mouse_emu or mouse-emu to route "
-            "the connected controller through the generic mouse bridge and "
-            "present the current SNES Mouse output personality."
+            "a controller through the generic mouse bridge, or mouse to route "
+            "the PC's physical mouse into the current SNES Mouse output personality."
         ),
     )
     parser.add_argument(
@@ -186,15 +187,20 @@ def parse_args():
 
 def normalize_launch_mode(args):
     """Resolve the user-facing bridge personality without breaking old commands."""
-    aliases = {name.casefold() for name in MOUSE_EMU_ALIASES}
+    mouse_emu_aliases = {name.casefold() for name in MOUSE_EMU_ALIASES}
+    physical_mouse_aliases = {
+        name.casefold() for name in PHYSICAL_MOUSE_ALIASES
+    }
+    launch_aliases = mouse_emu_aliases | physical_mouse_aliases
 
     # Also support auto-detect usage such as:
     #   bridge.py mouse_emu
+    #   bridge.py mouse
     # where no COM port is supplied.
     if (
         args.serial_port
         and args.mode is None
-        and args.serial_port.casefold() in aliases
+        and args.serial_port.casefold() in launch_aliases
     ):
         args.mode = args.serial_port
         args.serial_port = None
@@ -203,15 +209,18 @@ def normalize_launch_mode(args):
         return "pad"
 
     normalized = args.mode.casefold()
-    if normalized in aliases:
+    if normalized in mouse_emu_aliases:
         return "mouse_emu"
+
+    if normalized in physical_mouse_aliases:
+        return "mouse"
 
     if normalized in ("pad", "controller", "snes_pad", "snes-pad"):
         return "pad"
 
     raise RuntimeError(
         f"Unknown bridge mode: {args.mode}. "
-        "Expected mouse_emu, mouse-emu, or pad."
+        "Expected mouse, mouse_emu, mouse-emu, or pad."
     )
 
 
@@ -442,12 +451,20 @@ def main():
             )
 
         if launch_mode == "mouse_emu":
-            # Keep bridge.py as the single user-facing launcher. The generic
-            # mouse bridge owns relative motion/input behavior; SNES Mouse is
-            # currently one output personality behind that layer.
+            # Gamepad/arcade-stick source -> normalized MouseState -> SNES Mouse.
             from mouse_bridge import run_mouse_bridge
 
             run_mouse_bridge(
+                serial_port_override=args.port_override or args.serial_port,
+                output_personality="snes",
+            )
+            return
+
+        if launch_mode == "mouse":
+            # Physical PC/USB mouse -> normalized MouseState -> SNES Mouse.
+            from mouse_bridge import run_physical_mouse_bridge
+
+            run_physical_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
             )
