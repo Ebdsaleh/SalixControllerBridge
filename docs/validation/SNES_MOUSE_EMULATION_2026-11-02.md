@@ -105,3 +105,25 @@ State changes print the logical mouse report, the physical-wire word, and the se
 The authentic SNES Mouse can cycle sensitivity when the console clocks the mouse while Latch is active. This first batch reports sensitivity level 0 and does not yet emulate the sensitivity-cycle command.
 
 If Mario Paint recognition/motion works, sensitivity cycling becomes the next protocol-accuracy refinement rather than being mixed into the first proof.
+
+
+## Bring-up note: PIO ENOMEM on first paste
+
+The first physical paste of the dual-personality Pico firmware failed during
+startup with:
+
+```text
+OSError: [Errno 12] ENOMEM
+```
+
+at the state-machine initialisation step.
+
+Cause: both the 16-bit standard-pad and 32-bit mouse PIO programs were being
+loaded into the same PIO block. A PIO block has only 32 shared instruction
+slots, so keeping both programs there exhausted its instruction memory.
+
+Fix: the standard-pad personality now uses StateMachine 0 (PIO0/SM0) and the
+mouse personality uses StateMachine 4 (PIO1/SM0). Only the selected personality
+is active on the shared DATA pin at any time.
+
+Physical retest should use commit `3a12dcc` or later.
