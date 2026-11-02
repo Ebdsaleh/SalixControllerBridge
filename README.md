@@ -72,6 +72,44 @@ main.py
 
 Then reset the Pico.
 
+## SNES Mouse emulation
+
+The current Pico firmware can switch between the existing 16-bit standard-pad
+personality and a 32-bit SNES Mouse personality without changing the proven SNES
+wiring.
+
+The first mouse-emulation proof deliberately uses an already-supported gamepad
+as the input source before USB-mouse hosting is introduced. With the Nintendo
+Switch Pro Controller:
+
+- left analog stick -> relative mouse X/Y motion;
+- D-pad -> relative mouse motion;
+- canonical SNES B face position -> mouse left click;
+- canonical SNES A face position -> mouse right click.
+
+For Mario Paint, connect the proven Salix SNES adapter to controller port 1 and
+run:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3
+```
+
+Replace `COM3` with the Pico connected to SNES controller port 1. If only one
+likely Pico serial device is attached, the port argument can be omitted.
+
+Optional motion tuning:
+
+```bat
+py src\pc_host\snes_mouse_bridge.py COM3 --max-speed 6 --dpad-speed 3
+```
+
+The first physical-validation batch reports SNES Mouse sensitivity level 0.
+Console-driven sensitivity cycling is intentionally deferred until the basic
+Mario Paint identification, motion, and button mapping are proven.
+
+See `docs/validation/SNES_MOUSE_EMULATION_2026-11-02.md` for the complete
+hardware acceptance checklist.
+
 ## First physical test: isolate the SNES protocol
 
 Before involving the Mayflash mapping, test one known SNES state directly:
