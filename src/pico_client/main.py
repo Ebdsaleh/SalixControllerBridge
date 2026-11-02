@@ -58,8 +58,9 @@ SNES_MOUSE_SENSITIVITY_LOW = 0
 SNES_MOUSE_SENSITIVITY_MEDIUM = 1
 SNES_MOUSE_SENSITIVITY_HIGH = 2
 
-# Approximate official SNS-016 response curves documented by NESdev/FullSNES.
-# LOW is linear. MEDIUM/HIGH remap low raw magnitudes and clamp thereafter.
+# Official-style SNS-016 response curves documented by NESdev/FullSNES and
+# mirrored by Mesen2. LOW is linear; MEDIUM/HIGH remap magnitudes 0..7 and
+# clamp larger values to the final table entry.
 SNES_MOUSE_MEDIUM_CURVE = (0, 1, 2, 3, 8, 10, 12, 21)
 SNES_MOUSE_HIGH_CURVE = (0, 1, 4, 9, 12, 20, 24, 28)
 
