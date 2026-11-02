@@ -315,3 +315,21 @@ A JSON profile path can be supplied instead of the profile name.
 See `docs/architecture/HARDWARE_PROFILE_CALIBRATION.md` for the schema,
 calibration model, Windows Raw Input behavior, and the PC-host versus final
 standalone-box boundary.
+
+
+### Default hardware profiles
+
+The Hardware Profiler can mark one saved mouse profile and one saved controller
+profile as the defaults for their source type.
+
+After setting `Razer Naga Pro` as the default mouse profile:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse
+```
+
+automatically loads it.
+
+An explicit `--hardware-profile` always overrides the saved default. Use
+`--no-default-profile` when you intentionally want the bridge's built-in
+fallback behavior.
