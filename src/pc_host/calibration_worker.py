@@ -585,6 +585,111 @@ def run_controller_calibration(output_path, *, device_index):
         axes = _axis_statistics(center_samples, minimums, maximums)
         primary_pair = [0, 1] if axis_count >= 2 else []
 
+        accepted_base_speed = 8.0
+        recommended_deadzone = (
+            max(
+                axes[0]["recommended_deadzone"],
+                axes[1]["recommended_deadzone"],
+            )
+            if len(axes) >= 2
+            else 0.18
+        )
+
+        # Console-environment sensitivity test for the primary stick pair.
+        # The accepted value is the MEDIUM/base speed that the existing
+        # five-tier curve scales around at runtime.
+        if len(primary_pair) == 2:
+            cursor_x = float(SNES_WIDTH // 2)
+            cursor_y = float(SNES_HEIGHT // 2)
+            testing = True
+
+            while testing:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        raise KeyboardInterrupt
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            raise KeyboardInterrupt
+                        if event.key in (pygame.K_RETURN, pygame.K_SPACE):
+                            testing = False
+                        elif (
+                            event.unicode in ("+", "=")
+                            or event.key in (pygame.K_EQUALS, pygame.K_KP_PLUS)
+                        ):
+                            accepted_base_speed = min(
+                                32.0,
+                                accepted_base_speed + 0.5,
+                            )
+                        elif (
+                            event.unicode == "-"
+                            or event.key in (pygame.K_MINUS, pygame.K_KP_MINUS)
+                        ):
+                            accepted_base_speed = max(
+                                1.0,
+                                accepted_base_speed - 0.5,
+                            )
+                        elif event.key == pygame.K_r:
+                            accepted_base_speed = 8.0
+                            cursor_x = float(SNES_WIDTH // 2)
+                            cursor_y = float(SNES_HEIGHT // 2)
+
+                pygame.event.pump()
+
+                x_index, y_index = primary_pair
+                raw_x = float(joystick.get_axis(x_index))
+                raw_y = float(joystick.get_axis(y_index))
+
+                norm_x = apply_deadzone(
+                    normalize_axis(raw_x, axes[x_index]),
+                    recommended_deadzone,
+                )
+                norm_y = apply_deadzone(
+                    normalize_axis(raw_y, axes[y_index]),
+                    recommended_deadzone,
+                )
+
+                cursor_x += norm_x * accepted_base_speed
+                cursor_y += norm_y * accepted_base_speed
+                cursor_x = max(0.0, min(SNES_WIDTH - 1.0, cursor_x))
+                cursor_y = max(0.0, min(SNES_HEIGHT - 1.0, cursor_y))
+
+                _draw_console_environment(
+                    surface,
+                    cursor=(cursor_x, cursor_y),
+                )
+                _draw_text(surface, font, "SNES ANALOG MOUSE TEST", 10, 8)
+                _draw_text(
+                    surface,
+                    small_font,
+                    f"MEDIUM/base speed: {accepted_base_speed:.1f}",
+                    10,
+                    28,
+                )
+                _draw_text(
+                    surface,
+                    small_font,
+                    f"deadzone: {recommended_deadzone:.3f}",
+                    10,
+                    44,
+                )
+                _draw_text(
+                    surface,
+                    small_font,
+                    "+/- speed | R reset | ENTER accept",
+                    10,
+                    60,
+                )
+                _draw_text(
+                    surface,
+                    small_font,
+                    f"normalized: {norm_x:+.3f} / {norm_y:+.3f}",
+                    10,
+                    76,
+                )
+
+                pygame.display.flip()
+                clock.tick(60)
+
         payload = {
             "status": "ok",
             "kind": "controller",
@@ -608,14 +713,8 @@ def run_controller_calibration(output_path, *, device_index):
                 },
                 "mouse_emulation": {
                     "axis_pair": primary_pair,
-                    "recommended_deadzone": (
-                        max(
-                            axes[0]["recommended_deadzone"],
-                            axes[1]["recommended_deadzone"],
-                        )
-                        if len(axes) >= 2
-                        else 0.18
-                    ),
+                    "recommended_deadzone": recommended_deadzone,
+                    "accepted_base_analog_speed": accepted_base_speed,
                 },
             },
         }
