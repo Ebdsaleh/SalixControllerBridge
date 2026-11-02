@@ -182,6 +182,16 @@ def parse_args():
             "live input and continuously send one fixed SNES state every 5 ms."
         ),
     )
+    parser.add_argument(
+        "--mouse-gain",
+        type=float,
+        default=0.50,
+        metavar="GAIN",
+        help=(
+            "Physical-mouse software sensitivity multiplier for mouse mode "
+            "(default: 0.50)."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -467,6 +477,7 @@ def main():
             run_physical_mouse_bridge(
                 serial_port_override=args.port_override or args.serial_port,
                 output_personality="snes",
+                mouse_gain=args.mouse_gain,
             )
             return
 
