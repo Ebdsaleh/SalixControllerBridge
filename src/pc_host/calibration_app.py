@@ -546,15 +546,21 @@ class CalibrationApp:
         del sender, app_data, user_data
 
         entries = list_profiles()
-        labels = [
-            f"{profile.get('profile_name', path.stem)} | "
-            f"{profile.get('device_type', 'unknown')}"
-            for profile, path in entries
-        ]
-        self._profile_choices = {
-            label: path
-            for label, (_, path) in zip(labels, entries)
-        }
+        labels = []
+        self._profile_choices = {}
+
+        for profile, path in entries:
+            base_label = (
+                f"{profile.get('profile_name', path.stem)} | "
+                f"{profile.get('device_type', 'unknown')}"
+            )
+            label = base_label
+
+            if label in self._profile_choices:
+                label = f"{base_label} | {path.name}"
+
+            labels.append(label)
+            self._profile_choices[label] = path
 
         if not labels:
             labels = ["No saved profiles"]
