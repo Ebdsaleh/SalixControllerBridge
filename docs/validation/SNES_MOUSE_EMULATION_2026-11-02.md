@@ -368,3 +368,64 @@ Future USB/Bluetooth mouse sources can therefore produce the same `MouseState`
 without knowing anything about the SNES report format, and future Saturn or
 Dreamcast mouse outputs can consume the same state without duplicating the
 input/sensitivity engine.
+
+
+## Physical PC/USB mouse source
+
+The generic mouse bridge now has a second input source.
+
+Commands:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse
+```
+
+or, with Pico auto-detection:
+
+```bat
+py src\pc_host\bridge.py mouse
+```
+
+Data flow:
+
+```text
+physical PC mouse
+    -> PhysicalMouseSource
+    -> MouseState(dx, dy, left, right)
+    -> SNES Mouse output personality
+    -> Pico
+    -> real SNES
+```
+
+This is deliberately distinct from:
+
+```text
+controller
+    -> gamepad-to-mouse translation
+    -> MouseState
+    -> SNES Mouse output
+```
+
+The normalized `MouseState` is shared by both.
+
+Physical mouse details:
+
+- SDL/Pygame relative mouse capture is used.
+- a small capture window is created;
+- the cursor is hidden and grabbed so relative movement continues at desktop
+  edges;
+- ESC releases capture and exits;
+- left physical mouse button -> MouseLeft;
+- right physical mouse button -> MouseRight;
+- relative deltas are accumulated between 60 Hz output reports;
+- button presses are latched until the next report so very short clicks are not
+  lost;
+- outgoing displacement is clamped to the SNES Mouse sign/magnitude range
+  (-127..+127).
+
+The first PC-host implementation sees the operating system's active mouse
+stream. It does not yet bind one specific USB HID by VID/PID. Per-device USB
+selection belongs to the future standalone USB-host/input-slot layer.
+
+No Pico firmware change is required because the existing SNES Mouse output
+personality already consumes normalized relative X/Y and button state.
