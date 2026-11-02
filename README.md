@@ -89,11 +89,13 @@ Switch Pro Controller:
 - canonical SNES L or Y position -> decrease mouse sensitivity;
 - canonical SNES R or X position -> increase mouse sensitivity.
 
-Bridge cursor sensitivity has three edge-triggered steps: LOW, MEDIUM, and
-HIGH. The bridge starts at MEDIUM; LOW is half of the configured base movement
-rate and HIGH is double it. This is deliberately independent from the SNES
-Mouse's hardware speed/sensitivity command protocol so the proven MouseLeft and
-MouseRight report remains unchanged.
+Bridge cursor sensitivity has five edge-triggered steps: VERY LOW, LOW,
+MEDIUM, HIGH, and VERY HIGH. The bridge starts at MEDIUM and preserves the
+physically validated MEDIUM movement rate exactly. Analog movement scales to
+0.25x / 0.5x / 1.0x / 1.5x / 2.0x, while D-pad movement uses a stronger upper
+curve of 0.25x / 0.5x / 1.0x / 2.0x / 3.0x. This is deliberately independent
+from the SNES Mouse's hardware speed/sensitivity command protocol so the proven
+MouseLeft and MouseRight report remains unchanged.
 
 For Mario Paint, connect the proven Salix SNES adapter to controller port 1 and
 run:
