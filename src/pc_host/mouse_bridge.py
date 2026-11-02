@@ -32,6 +32,13 @@ DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 PHYSICAL_MOUSE_REPORT_HZ = 60.0
 PHYSICAL_MOUSE_REPORT_SECONDS = 1.0 / PHYSICAL_MOUSE_REPORT_HZ
 
+# Keep physical PC mice inside an authentic-ish SNES Mouse motion envelope.
+# The wire format can encode magnitude 0..127, but real SNES Mouse motion is
+# normally much smaller. Limiting the largest axis per report prevents a
+# high-DPI / accelerated desktop mouse from launching the game cursor far
+# outside its useful on-screen region in one frame.
+PHYSICAL_MOUSE_MAX_THROW = 28
+
 PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS = 0.250
 PHYSICAL_MOUSE_SERIAL_RETRIES = 3
 PHYSICAL_MOUSE_SERIAL_RETRY_DELAY_SECONDS = 0.010
@@ -550,6 +557,28 @@ def run_mouse_bridge(
     )
 
 
+def limit_physical_mouse_throw(dx, dy, max_throw=PHYSICAL_MOUSE_MAX_THROW):
+    """Limit one physical-mouse report while preserving motion direction."""
+    dx = int(dx)
+    dy = int(dy)
+
+    largest_axis = max(abs(dx), abs(dy))
+    if largest_axis <= max_throw or largest_axis == 0:
+        return dx, dy, False
+
+    scale = max_throw / float(largest_axis)
+    limited_dx = int(round(dx * scale))
+    limited_dy = int(round(dy * scale))
+
+    # Preserve a non-zero contributing axis when rounding would erase it.
+    if dx != 0 and limited_dx == 0:
+        limited_dx = 1 if dx > 0 else -1
+    if dy != 0 and limited_dy == 0:
+        limited_dy = 1 if dy > 0 else -1
+
+    return limited_dx, limited_dy, True
+
+
 def send_physical_mouse_with_retry(output, serial_port, state):
     """Keep one transient USB/CDC stall from terminating physical mouse mode."""
     for attempt in range(1, PHYSICAL_MOUSE_SERIAL_RETRIES + 1):
@@ -609,6 +638,10 @@ def run_physical_mouse_bridge(
             f"Physical mouse report cadence: {PHYSICAL_MOUSE_REPORT_HZ:.0f} Hz. "
             "Mouse deltas are accumulated between reports."
         )
+        print(
+            f"Physical mouse throw limit: +/-{PHYSICAL_MOUSE_MAX_THROW} "
+            "per report (direction preserved)."
+        )
 
         accumulated_dx = 0
         accumulated_dy = 0
@@ -638,12 +671,26 @@ def run_physical_mouse_bridge(
                 time.sleep(0.001)
                 continue
 
+            raw_dx = accumulated_dx
+            raw_dy = accumulated_dy
+            limited_dx, limited_dy, was_limited = limit_physical_mouse_throw(
+                raw_dx,
+                raw_dy,
+            )
+
             state = MouseState(
-                dx=max(-127, min(127, accumulated_dx)),
-                dy=max(-127, min(127, accumulated_dy)),
+                dx=limited_dx,
+                dy=limited_dy,
                 left=latched_left,
                 right=latched_right,
             )
+
+            if was_limited:
+                print(
+                    f"Physical mouse throw limited: "
+                    f"raw={raw_dx:+d}/{raw_dy:+d} -> "
+                    f"{limited_dx:+d}/{limited_dy:+d}"
+                )
 
             logical_report, wire_word, packet = send_physical_mouse_with_retry(
                 output,
