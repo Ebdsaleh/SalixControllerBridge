@@ -322,9 +322,15 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
                             testing = False
                         elif event.key in (pygame.K_RETURN, pygame.K_SPACE):
                             testing = False
-                        elif event.key in (pygame.K_PLUS, pygame.K_EQUALS, pygame.K_KP_PLUS):
+                        elif (
+                            event.unicode in ("+", "=")
+                            or event.key in (pygame.K_EQUALS, pygame.K_KP_PLUS)
+                        ):
                             accepted_gain *= 1.05
-                        elif event.key in (pygame.K_MINUS, pygame.K_KP_MINUS):
+                        elif (
+                            event.unicode == "-"
+                            or event.key in (pygame.K_MINUS, pygame.K_KP_MINUS)
+                        ):
                             accepted_gain /= 1.05
                         elif event.key == pygame.K_r:
                             accepted_gain = float(derived["recommended_gain"])
