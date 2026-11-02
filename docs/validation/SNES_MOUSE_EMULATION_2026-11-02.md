@@ -208,3 +208,52 @@ HIGH    2.0x
 with L/Y decreasing and R/X increasing.
 
 This correction is PC-side only; no Pico firmware update is required.
+
+
+## Five-tier bridge sensitivity refinement
+
+Physical Mario Paint testing confirmed that:
+
+- the restored MouseLeft/MouseRight report works;
+- MEDIUM analog movement is a good default;
+- the previous HIGH analog rate is useful but somewhat fast;
+- the D-pad benefits from more speed in the upper sensitivity levels.
+
+The bridge therefore now exposes five edge-triggered sensitivity states:
+
+| State | Analog scale | Default analog max | D-pad scale | Default D-pad delta |
+| --- | ---: | ---: | ---: | ---: |
+| VERY LOW | 0.25x | 2 | 0.25x | 1 |
+| LOW | 0.5x | 4 | 0.5x | 2 |
+| MEDIUM | 1.0x | 8 | 1.0x | 4 |
+| HIGH | 1.5x | 12 | 2.0x | 8 |
+| VERY HIGH | 2.0x | 16 | 3.0x | 12 |
+
+This deliberately preserves the previously validated MEDIUM rate exactly.
+
+The old three-tier HIGH analog rate (16) becomes the new VERY HIGH analog rate.
+A new HIGH analog tier (12) is inserted between MEDIUM and VERY HIGH.
+
+The D-pad is intentionally more aggressive at the upper levels:
+
+- HIGH = 8 per poll;
+- VERY HIGH = 12 per poll.
+
+Controls remain unchanged:
+
+```text
+L or Y -> decrease one sensitivity step
+R or X -> increase one sensitivity step
+```
+
+The bridge starts at MEDIUM and clamps at VERY LOW / VERY HIGH.
+
+The SNES-facing mouse button report remains in known-good compatibility mode:
+
+```text
+neutral     0x01
+MouseLeft   0x41
+MouseRight  0x81
+```
+
+This refinement is PC-side only; no Pico firmware update is required.
