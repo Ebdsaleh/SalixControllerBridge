@@ -20,8 +20,12 @@ MOUSE_DPAD_DELTA = 4
 # SNES Mouse second-byte layout (logical report, MSB first):
 #   bit 7: right button
 #   bit 6: left button
-#   bits 5-4: sensitivity (0=low, 1=medium, 2=high)
+#   bits 5-4: hardware mouse speed/sensitivity state
 #   bits 3-0: signature 0001
+#
+# Do not equate the hardware speed bits with the bridge's LOW/MEDIUM/HIGH
+# cursor-speed setting. Authentic SNES Mouse sensitivity selection is a
+# console-side Latch/Clock protocol operation and is intentionally separate.
 SNES_MOUSE_SIGNATURE = 0x01
 SNES_MOUSE_LEFT = 0x40
 SNES_MOUSE_RIGHT = 0x80
