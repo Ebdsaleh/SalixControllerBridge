@@ -206,3 +206,25 @@ desktop relative motion
 
 The SNES Mouse remains a relative device; cursor bounds remain owned by the
 game.
+
+
+## Source-local software gain
+
+Physical input hardware should remain configured for the environment that owns
+it. A high-DPI desktop mouse should not need to be crippled at the device level
+just to feed a low-resolution legacy console peripheral.
+
+The physical PC-mouse source therefore has its own software gain before console
+normalization:
+
+```text
+desktop mouse
+    -> source gain
+    -> fractional residual carry
+    -> source throw envelope
+    -> MouseState
+    -> console output
+```
+
+This is another example of why source normalization and console output must
+remain separate modules.
