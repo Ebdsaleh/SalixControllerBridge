@@ -32,6 +32,10 @@ DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 PHYSICAL_MOUSE_REPORT_HZ = 60.0
 PHYSICAL_MOUSE_REPORT_SECONDS = 1.0 / PHYSICAL_MOUSE_REPORT_HZ
 
+PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS = 0.250
+PHYSICAL_MOUSE_SERIAL_RETRIES = 3
+PHYSICAL_MOUSE_SERIAL_RETRY_DELAY_SECONDS = 0.010
+
 
 class SnesMouseOutput:
     """SNES Mouse output personality for the generic mouse-emulation bridge."""
@@ -456,7 +460,11 @@ def run_gamepad_mouse_bridge(
 
             now = time.monotonic()
             if state != last_state or (now - last_send_time) >= HEARTBEAT_SECONDS:
-                logical_report, wire_word, packet = output.send(serial_port, state)
+                logical_report, wire_word, packet = send_physical_mouse_with_retry(
+                output,
+                serial_port,
+                state,
+            )
                 last_send_time = now
             else:
                 logical_report = None
@@ -516,6 +524,28 @@ def run_mouse_bridge(
     )
 
 
+def send_physical_mouse_with_retry(output, serial_port, state):
+    """Keep one transient USB/CDC stall from terminating physical mouse mode."""
+    for attempt in range(1, PHYSICAL_MOUSE_SERIAL_RETRIES + 1):
+        try:
+            return output.send(serial_port, state)
+        except serial.SerialTimeoutException:
+            if attempt >= PHYSICAL_MOUSE_SERIAL_RETRIES:
+                raise
+
+            print(
+                "Transient serial write timeout; clearing stale output and "
+                f"retrying latest mouse state "
+                f"({attempt}/{PHYSICAL_MOUSE_SERIAL_RETRIES - 1})..."
+            )
+
+            # Mouse reports are latest-state-wins. If Windows/USB temporarily
+            # stalls, discard any old queued bytes before retrying the newest
+            # MouseState rather than allowing stale movement to catch up later.
+            serial_port.reset_output_buffer()
+            time.sleep(PHYSICAL_MOUSE_SERIAL_RETRY_DELAY_SECONDS)
+
+
 def run_physical_mouse_bridge(
     serial_port_override=None,
     output_personality="snes",
@@ -533,7 +563,7 @@ def run_physical_mouse_bridge(
             serial_device,
             BAUD_RATE,
             timeout=0,
-            write_timeout=0.100,
+            write_timeout=PHYSICAL_MOUSE_WRITE_TIMEOUT_SECONDS,
         )
 
         print(
