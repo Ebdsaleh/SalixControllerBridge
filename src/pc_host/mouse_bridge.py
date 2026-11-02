@@ -6,6 +6,7 @@ import time
 import pygame
 import serial
 
+from axis_calibration import normalize_axis
 from bridge import BAUD_RATE, HEARTBEAT_SECONDS, open_controller
 from mouse_sources import PhysicalMouseSource
 from mouse_state import MouseState
@@ -242,11 +243,27 @@ def axis_to_delta(value, max_delta, deadzone=MOUSE_DEADZONE):
     return -delta if value < 0.0 else delta
 
 
+def _axis_calibration_by_index(axis_calibration_records):
+    if not axis_calibration_records:
+        return {}
+
+    result = {}
+    for record in axis_calibration_records:
+        if not isinstance(record, dict) or "index" not in record:
+            continue
+        try:
+            result[int(record["index"])] = record
+        except (TypeError, ValueError):
+            continue
+    return result
+
+
 def read_analog_motion(
     joystick,
     directional_axis_pairs,
     max_delta,
     deadzone=MOUSE_DEADZONE,
+    axis_calibration_records=None,
 ):
     if not directional_axis_pairs:
         return 0, 0
@@ -260,14 +277,27 @@ def read_analog_motion(
     ):
         return 0, 0
 
+    calibration_by_index = _axis_calibration_by_index(
+        axis_calibration_records
+    )
+
+    axis_x = normalize_axis(
+        joystick.get_axis(axis_x_index),
+        calibration_by_index.get(axis_x_index),
+    )
+    axis_y = normalize_axis(
+        joystick.get_axis(axis_y_index),
+        calibration_by_index.get(axis_y_index),
+    )
+
     return (
         axis_to_delta(
-            joystick.get_axis(axis_x_index),
+            axis_x,
             max_delta,
             deadzone,
         ),
         axis_to_delta(
-            joystick.get_axis(axis_y_index),
+            axis_y,
             max_delta,
             deadzone,
         ),
@@ -282,6 +312,7 @@ def build_mouse_state(
     dpad_speed,
     sensitivity,
     mouse_deadzone=MOUSE_DEADZONE,
+    axis_calibration_records=None,
 ):
     pygame.event.pump()
 
@@ -301,6 +332,7 @@ def build_mouse_state(
         directional_axis_pairs,
         analog_speed,
         mouse_deadzone,
+        axis_calibration_records,
     )
     dpad_x, dpad_y = read_dpad(joystick, button_map)
 
@@ -349,6 +381,7 @@ def run_gamepad_mouse_bridge(
     dpad_speed=MOUSE_DPAD_DELTA,
     mouse_deadzone=None,
     axis_pair_override=None,
+    axis_calibration_records=None,
 ):
     joystick = None
     serial_port = None
@@ -533,6 +566,7 @@ def run_gamepad_mouse_bridge(
                     dpad_speed,
                     sensitivity,
                     mouse_deadzone,
+                    axis_calibration_records,
                 )
             except pygame.error:
                 print(
@@ -611,6 +645,7 @@ def run_mouse_bridge(
     dpad_speed=MOUSE_DPAD_DELTA,
     mouse_deadzone=None,
     axis_pair_override=None,
+    axis_calibration_records=None,
 ):
     """Backward-compatible name for the gamepad mouse-emulation source."""
     return run_gamepad_mouse_bridge(
@@ -620,6 +655,7 @@ def run_mouse_bridge(
         dpad_speed=dpad_speed,
         mouse_deadzone=mouse_deadzone,
         axis_pair_override=axis_pair_override,
+        axis_calibration_records=axis_calibration_records,
     )
 
 
