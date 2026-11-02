@@ -972,3 +972,51 @@ Fix:
 
 The good Naga calibration was preserved in the validation record and can be
 restored without repeating the physical calibration.
+
+
+## Calibrated Razer Naga Pro runtime physically validated
+
+After restoring the accepted profile, physical runtime startup confirmed:
+
+```text
+Hardware profile: ...\razer-naga-pro.json
+Physical mouse source: Windows Raw Input
+Physical mouse calibrated/base gain: 0.115420x
+Physical mouse sensitivity: MEDIUM (2) effective gain=0.115420x
+Physical mouse sensitivity controls: button 6 = decrease; button 7 = increase
+Physical mouse throw limit: +/-28
+```
+
+The user reported the mouse feels very good in Mario Paint.
+
+The five Salix software sensitivity levels were exercised physically:
+
+```text
+MEDIUM    0.115420
+HIGH      0.173129
+VERY HIGH 0.230839
+LOW       0.057710
+VERY LOW  0.028855
+```
+
+The runtime log shows valid movement continuing after each sensitivity
+transition and MouseLeft reports remaining correct while the Salix sensitivity
+system is active.
+
+The user has NOT yet retested Mario Paint's own SLOW/NORMAL/FAST hardware
+sensitivity selector. That selector remains outside the validated feature set
+until authentic SNES Mouse console-side sensitivity command handling is
+implemented.
+
+## Hardware profiler backup discovery cleanup
+
+The one-time recovery backup was stored beside active profile JSON files and
+therefore appeared as a second live `Razer Naga Pro | mouse` entry in the
+DearPyGui combo, triggering a duplicate-ID warning.
+
+Fix:
+
+- backup/recovery JSON filenames are ignored by normal profile discovery;
+- duplicate profile labels are disambiguated defensively using the filename.
+
+Active profile discovery should now show only the live Razer Naga Pro entry.
