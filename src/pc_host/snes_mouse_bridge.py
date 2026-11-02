@@ -25,7 +25,13 @@ MOUSE_DPAD_DELTA = 4
 SNES_MOUSE_SIGNATURE = 0x01
 SNES_MOUSE_LEFT = 0x40
 SNES_MOUSE_RIGHT = 0x80
-SNES_MOUSE_SENSITIVITY = 0
+
+SENSITIVITY_LOW = 0
+SENSITIVITY_MEDIUM = 1
+SENSITIVITY_HIGH = 2
+SENSITIVITY_NAMES = ("LOW", "MEDIUM", "HIGH")
+SENSITIVITY_SPEED_SCALE = (0.5, 1.0, 2.0)
+DEFAULT_SENSITIVITY = SENSITIVITY_MEDIUM
 
 
 def parse_args():
@@ -96,6 +102,24 @@ def snes_bit_is_pressed(joystick, button_map, target_bit):
     return False
 
 
+def read_sensitivity_controls(joystick, button_map):
+    """Return (decrease, increase) using canonical SNES control positions."""
+    decrease = (
+        snes_bit_is_pressed(joystick, button_map, 10)  # L shoulder
+        or snes_bit_is_pressed(joystick, button_map, 1)  # Y face
+    )
+    increase = (
+        snes_bit_is_pressed(joystick, button_map, 11)  # R shoulder
+        or snes_bit_is_pressed(joystick, button_map, 9)  # X face
+    )
+    return decrease, increase
+
+
+def scaled_speed(base_speed, sensitivity):
+    scale = SENSITIVITY_SPEED_SCALE[sensitivity]
+    return max(1, int(round(base_speed * scale)))
+
+
 def read_dpad(joystick, button_map):
     up = snes_bit_is_pressed(joystick, button_map, 4)
     down = snes_bit_is_pressed(joystick, button_map, 5)
@@ -158,21 +182,25 @@ def build_logical_mouse_report(
     directional_axis_pairs,
     max_speed,
     dpad_speed,
+    sensitivity,
 ):
     pygame.event.pump()
+
+    analog_speed = scaled_speed(max_speed, sensitivity)
+    digital_speed = scaled_speed(dpad_speed, sensitivity)
 
     analog_x, analog_y = read_analog_motion(
         joystick,
         directional_axis_pairs,
-        max_speed,
+        analog_speed,
     )
     dpad_x, dpad_y = read_dpad(joystick, button_map)
 
     # Analog stick/lever is the primary motion source. A D-pad direction can
     # still add a fixed-rate contribution, which also supports digital-only
     # controllers and arcade-stick DP modes.
-    dx = max(-127, min(127, analog_x + (dpad_x * dpad_speed)))
-    dy = max(-127, min(127, analog_y + (dpad_y * dpad_speed)))
+    dx = max(-127, min(127, analog_x + (dpad_x * digital_speed)))
+    dy = max(-127, min(127, analog_y + (dpad_y * digital_speed)))
 
     # Preserve the canonical SNES face positions already encoded in each
     # controller profile: SNES B position -> mouse left, SNES A position ->
@@ -182,7 +210,7 @@ def build_logical_mouse_report(
 
     second_byte = (
         SNES_MOUSE_SIGNATURE
-        | ((SNES_MOUSE_SENSITIVITY & 0x03) << 4)
+        | ((sensitivity & 0x03) << 4)
         | (SNES_MOUSE_LEFT if left_pressed else 0)
         | (SNES_MOUSE_RIGHT if right_pressed else 0)
     )
@@ -199,7 +227,15 @@ def build_logical_mouse_report(
         | x_byte
     )
 
-    return logical_report, dx, dy, left_pressed, right_pressed
+    return (
+        logical_report,
+        dx,
+        dy,
+        left_pressed,
+        right_pressed,
+        analog_speed,
+        digital_speed,
+    )
 
 
 def logical_report_to_wire_word(logical_report):
@@ -242,12 +278,16 @@ def send_mouse_report(serial_port, logical_report):
     return packet, wire_word
 
 
-def build_neutral_report():
-    return (0x00 << 24) | (SNES_MOUSE_SIGNATURE << 16)
+def build_neutral_report(sensitivity=DEFAULT_SENSITIVITY):
+    second_byte = (
+        SNES_MOUSE_SIGNATURE
+        | ((sensitivity & 0x03) << 4)
+    )
+    return (0x00 << 24) | (second_byte << 16)
 
 
-def send_neutral(serial_port):
-    neutral_report = build_neutral_report()
+def send_neutral(serial_port, sensitivity=DEFAULT_SENSITIVITY):
+    neutral_report = build_neutral_report(sensitivity)
     for _ in range(5):
         send_mouse_report(serial_port, neutral_report)
         time.sleep(0.005)
@@ -261,6 +301,9 @@ def main():
     try:
         max_speed = clamp_speed(args.max_speed, "--max-speed")
         dpad_speed = clamp_speed(args.dpad_speed, "--dpad-speed")
+        sensitivity = DEFAULT_SENSITIVITY
+        previous_decrease = False
+        previous_increase = False
 
         joystick, button_map, directional_axis_pairs = init_controller()
 
@@ -288,12 +331,16 @@ def main():
             "SNES B position -> LEFT click; SNES A position -> RIGHT click."
         )
         print(
-            f"Motion tuning: analog max={max_speed}, D-pad speed={dpad_speed}, "
+            f"Motion tuning base: analog max={max_speed}, D-pad speed={dpad_speed}, "
             f"deadzone={MOUSE_DEADZONE:.2f}"
         )
         print(
-            "Initial mouse sensitivity report is LOW (0); "
-            "sensitivity cycling is not yet emulated."
+            "Sensitivity controls: L or Y = decrease; R or X = increase. "
+            "Each press changes one step."
+        )
+        print(
+            f"Mouse sensitivity: {SENSITIVITY_NAMES[sensitivity]} "
+            f"({sensitivity})"
         )
 
         active_instance_id = joystick.get_instance_id()
@@ -314,7 +361,7 @@ def main():
                         "Controller disconnected/re-enumerating. "
                         "Sending neutral SNES Mouse state and waiting..."
                     )
-                    send_neutral(serial_port)
+                    send_neutral(serial_port, sensitivity)
                     try:
                         joystick.quit()
                     except pygame.error:
@@ -323,7 +370,9 @@ def main():
                     button_map = None
                     directional_axis_pairs = ()
                     active_instance_id = None
-                    last_report = build_neutral_report()
+                    previous_decrease = False
+                    previous_increase = False
+                    last_report = build_neutral_report(sensitivity)
                     last_send_time = time.monotonic()
                     last_reconnect_poll = 0.0
 
@@ -354,7 +403,7 @@ def main():
                             joystick = None
 
                 if joystick is None and (now - last_send_time) >= HEARTBEAT_SECONDS:
-                    send_mouse_report(serial_port, build_neutral_report())
+                    send_mouse_report(serial_port, build_neutral_report(sensitivity))
                     last_send_time = now
 
                 if joystick is None:
@@ -362,19 +411,61 @@ def main():
                     continue
 
             try:
-                report, dx, dy, left_pressed, right_pressed = build_logical_mouse_report(
+                decrease_pressed, increase_pressed = read_sensitivity_controls(
+                    joystick,
+                    button_map,
+                )
+
+                decrease_edge = decrease_pressed and not previous_decrease
+                increase_edge = increase_pressed and not previous_increase
+
+                if decrease_edge and not increase_edge:
+                    old_sensitivity = sensitivity
+                    sensitivity = max(SENSITIVITY_LOW, sensitivity - 1)
+                    if sensitivity != old_sensitivity:
+                        print(
+                            f"Sensitivity: {SENSITIVITY_NAMES[old_sensitivity]} "
+                            f"-> {SENSITIVITY_NAMES[sensitivity]}"
+                        )
+                    else:
+                        print("Sensitivity already at LOW.")
+
+                elif increase_edge and not decrease_edge:
+                    old_sensitivity = sensitivity
+                    sensitivity = min(SENSITIVITY_HIGH, sensitivity + 1)
+                    if sensitivity != old_sensitivity:
+                        print(
+                            f"Sensitivity: {SENSITIVITY_NAMES[old_sensitivity]} "
+                            f"-> {SENSITIVITY_NAMES[sensitivity]}"
+                        )
+                    else:
+                        print("Sensitivity already at HIGH.")
+
+                previous_decrease = decrease_pressed
+                previous_increase = increase_pressed
+
+                (
+                    report,
+                    dx,
+                    dy,
+                    left_pressed,
+                    right_pressed,
+                    analog_speed,
+                    digital_speed,
+                ) = build_logical_mouse_report(
                     joystick,
                     button_map,
                     directional_axis_pairs,
                     max_speed,
                     dpad_speed,
+                    sensitivity,
                 )
             except pygame.error:
                 print(
                     "Controller vanished during sampling. "
                     "Sending neutral SNES Mouse state and waiting..."
                 )
-                send_neutral(serial_port)
+                send_neutral(serial_port, sensitivity)
                 try:
                     joystick.quit()
                 except pygame.error:
@@ -383,7 +474,9 @@ def main():
                 button_map = None
                 directional_axis_pairs = ()
                 active_instance_id = None
-                last_report = build_neutral_report()
+                previous_decrease = False
+                previous_increase = False
+                last_report = build_neutral_report(sensitivity)
                 last_send_time = time.monotonic()
                 last_reconnect_poll = 0.0
                 continue
@@ -401,6 +494,8 @@ def main():
                 print(
                     f"Mouse dx={dx:+d} dy={dy:+d} "
                     f"L={int(left_pressed)} R={int(right_pressed)} "
+                    f"sens={SENSITIVITY_NAMES[sensitivity]}({sensitivity}) "
+                    f"speed={analog_speed}/{digital_speed} "
                     f"report=0x{report:08X} wire=0x{wire_word:08X} "
                     f"TX={packet_hex}"
                 )
@@ -420,7 +515,7 @@ def main():
     finally:
         if serial_port is not None:
             try:
-                send_neutral(serial_port)
+                send_neutral(serial_port, sensitivity)
             except (serial.SerialException, serial.SerialTimeoutException):
                 pass
             try:
