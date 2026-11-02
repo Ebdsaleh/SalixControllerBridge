@@ -72,12 +72,15 @@ class PhysicalMouseSource:
             raise RuntimeError("PhysicalMouseSource.start() was not called.")
 
         stop_requested = False
+        button_down_events = []
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 stop_requested = True
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 stop_requested = True
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                button_down_events.append(int(event.button))
 
         if self._raw_capture is not None:
             snapshot = self._raw_capture.snapshot(reset=True)
@@ -100,6 +103,7 @@ class PhysicalMouseSource:
                 right=bool(buttons[2]),
             ),
             stop_requested,
+            tuple(button_down_events),
         )
 
     def stop(self):
