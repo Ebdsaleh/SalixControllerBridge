@@ -191,3 +191,45 @@ def merge_profile(existing, update):
 
     merged["updated_utc"] = utc_now_iso()
     return merged
+
+
+def resolve_profile_reference(reference):
+    """Resolve an explicit JSON path or a profile name in the state directory."""
+    if reference is None:
+        return None
+
+    raw = str(reference).strip()
+    if not raw:
+        return None
+
+    candidate = Path(raw).expanduser()
+    if candidate.is_file():
+        return candidate.resolve()
+
+    by_name = default_profile_directory() / f"{slugify(raw)}.json"
+    if by_name.is_file():
+        return by_name
+
+    raise RuntimeError(
+        f"Hardware profile not found: {reference}. "
+        f"Looked for an explicit file and {by_name}."
+    )
+
+
+def load_profile_reference(reference):
+    path = resolve_profile_reference(reference)
+    if path is None:
+        return None, None
+    return load_profile(path), path
+
+
+def get_console_module(profile, console_name, module_name):
+    if not profile:
+        return None
+
+    return (
+        profile.get("consoles", {})
+        .get(str(console_name).strip().lower(), {})
+        .get("modules", {})
+        .get(str(module_name).strip().lower())
+    )
