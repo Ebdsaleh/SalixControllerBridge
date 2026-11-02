@@ -257,3 +257,37 @@ MouseRight  0x81
 ```
 
 This refinement is PC-side only; no Pico firmware update is required.
+
+
+## Mayflash F300 Gamepad/Controller shoulder correction
+
+Physical testing of the F300 across its USB personalities found:
+
+- XInput/NS: shoulder sensitivity controls correct.
+- PS3/DInput: shoulder sensitivity controls correct.
+- Gamepad/Controller: physical RB/R1 incorrectly behaved as LB/L1 and repeatedly
+  decreased bridge sensitivity.
+
+The Gamepad/Controller profile uses GUID:
+
+```text
+0300dc99790000001c18000000000000
+```
+
+The profile table contained the misalignment directly:
+
+```text
+button 6 -> SNES L
+button 7 -> SNES L   (incorrect)
+```
+
+The correction is:
+
+```text
+button 6 -> SNES L
+button 7 -> SNES R
+```
+
+No SNES Mouse protocol or Pico firmware changes are involved. Face-button
+clicks, X/Y lever mode, D-pad lever mode, and the five-tier bridge sensitivity
+curve are unchanged.
