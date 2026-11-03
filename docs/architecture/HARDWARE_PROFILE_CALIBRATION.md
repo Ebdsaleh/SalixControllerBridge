@@ -139,20 +139,50 @@ Therefore:
 
 ## Controller calibration
 
-The controller worker currently records:
+The controller worker records:
 
 - Pygame name and GUID;
 - button/hat/axis counts;
-- 2.5 seconds of neutral samples;
-- per-axis center;
-- center noise;
-- minimum/maximum range;
+- an initial 2.5-second neutral capture;
+- per-axis initial center and initial center noise;
+- minimum/maximum range from full analog exercise;
+- a short post-exercise settle period;
+- a second 2.5-second return-to-center capture;
+- per-axis return center, return noise and center shift;
+- one combined neutral center used for runtime normalization;
 - negative/positive span;
-- recommended deadzone;
+- normalized resting excursion;
+- measured recommended deadzone;
 - provisional primary directional axis pair.
 
-For SNES mouse emulation, the primary pair and recommended deadzone are stored
-under:
+The second neutral phase is deliberate. A stick can be electrically quiet while
+still returning to a slightly different mechanical center after movement. A
+stable non-zero raw center is corrected by normalization and does not by itself
+inflate the deadzone; the recommendation is based on how far the neutral point
+actually wanders across the pre- and post-exercise captures.
+
+The SNES mouse-emulation test starts at MEDIUM/base analog speed 8.0. During the
+live test:
+
+```text
++ / -   adjust MEDIUM/base speed by 0.5
+[ / ]   adjust deadzone by 0.01
+D       reset deadzone to the measured recommendation
+R       reset MEDIUM/base speed to 8.0
+```
+
+The worker stores both:
+
+```text
+recommended_deadzone
+accepted_deadzone
+```
+
+so the measured value is retained for diagnostics while the runtime uses the
+deadzone the user actually accepted during the console-sized test.
+
+For SNES mouse emulation, the primary pair, accepted deadzone and accepted base
+speed are stored under:
 
 ```text
 consoles.snes.modules.mouse_emu
