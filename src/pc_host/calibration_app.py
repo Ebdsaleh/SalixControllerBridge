@@ -350,10 +350,12 @@ class CalibrationApp:
 
         dpg.add_spacer(height=10)
         dpg.add_text(
-            "The SDL window first measures neutral noise for 2.5 seconds, then "
-            "asks you to move every analog axis through its full range. "
+            "The SDL window first measures initial neutral noise, then asks "
+            "you to exercise every analog axis through its full range. It then "
+            "measures where the controls return to center after movement. "
             "The first axis pair is provisionally treated as the primary "
-            "directional pair and saved into the SNES mouse-emulation module.",
+            "directional pair; the SNES test lets you tune both MEDIUM/base "
+            "speed and deadzone before staging the result.",
             wrap=900,
         )
 
@@ -1138,6 +1140,12 @@ class CalibrationApp:
                 "source": "controller",
                 "axis_pair": mouse_emu.get("axis_pair", [0, 1]),
                 "deadzone": float(
+                    mouse_emu.get(
+                        "accepted_deadzone",
+                        mouse_emu.get("recommended_deadzone", 0.18),
+                    )
+                ),
+                "measured_recommended_deadzone": float(
                     mouse_emu.get("recommended_deadzone", 0.18)
                 ),
                 "base_analog_speed": float(
