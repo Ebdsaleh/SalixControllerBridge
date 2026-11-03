@@ -41,6 +41,16 @@ CALIBRATION_WINDOW_HEIGHT = SNES_HEIGHT * SNES_RENDER_SCALE
 THROW_MIN_PRIMARY_COUNTS = 24
 THROW_MAX_OFF_AXIS_RATIO = 0.45
 
+CONTROLLER_CENTER_CAPTURE_SECONDS = 2.5
+CONTROLLER_RETURN_SETTLE_SECONDS = 0.75
+CONTROLLER_RETURN_CAPTURE_SECONDS = 2.5
+CONTROLLER_DEADZONE_MIN = 0.05
+CONTROLLER_DEADZONE_MAX = 0.35
+CONTROLLER_DEADZONE_MARGIN = 0.02
+CONTROLLER_DEADZONE_SCALE = 1.75
+CONTROLLER_DEADZONE_ADJUST_STEP = 0.01
+CONTROLLER_DEADZONE_LIVE_MAX = 0.50
+
 
 def _write_result(path, payload):
     output = Path(path)
@@ -689,37 +699,93 @@ def run_snes_mouse_calibration(output_path, *, disable_acceleration, declared_dp
         pygame.quit()
 
 
-def _axis_statistics(samples, minimums, maximums):
+def _axis_statistics(initial_samples, return_samples, minimums, maximums):
+    """Derive axis calibration from both pre- and post-exercise neutral states."""
     axes = []
-    if not samples:
+    if not initial_samples:
         return axes
 
-    axis_count = len(samples[0])
+    axis_count = len(initial_samples[0])
+    return_samples = return_samples or []
+
     for index in range(axis_count):
-        values = [sample[index] for sample in samples]
-        center = statistics.median(values)
-        noise = max(abs(value - center) for value in values)
+        initial_values = [sample[index] for sample in initial_samples]
+        return_values = [sample[index] for sample in return_samples]
+
+        initial_center = statistics.median(initial_values)
+        initial_noise = max(
+            abs(value - initial_center)
+            for value in initial_values
+        )
+
+        if return_values:
+            return_center = statistics.median(return_values)
+            return_noise = max(
+                abs(value - return_center)
+                for value in return_values
+            )
+        else:
+            return_center = initial_center
+            return_noise = 0.0
+
+        neutral_values = initial_values + return_values
+        center = statistics.median(neutral_values)
+        center_shift = abs(return_center - initial_center)
+        resting_excursion = max(
+            abs(value - center)
+            for value in neutral_values
+        )
 
         minimum = minimums[index]
         maximum = maximums[index]
         negative_span = max(0.001, center - minimum)
         positive_span = max(0.001, maximum - center)
 
-        normalized_noise = max(
-            noise / negative_span,
-            noise / positive_span,
+        def normalize_excursion(value):
+            return max(
+                value / negative_span,
+                value / positive_span,
+            )
+
+        normalized_initial_noise = normalize_excursion(initial_noise)
+        normalized_return_noise = normalize_excursion(return_noise)
+        normalized_center_shift = normalize_excursion(center_shift)
+        normalized_resting_excursion = normalize_excursion(
+            resting_excursion
         )
+
+        # A stable non-zero raw center is corrected by normalize_axis() and
+        # should not inflate the deadzone. What matters is how far the neutral
+        # point can wander after the mechanism has been exercised.
         deadzone = min(
-            0.35,
-            max(0.05, normalized_noise * 1.75 + 0.02),
+            CONTROLLER_DEADZONE_MAX,
+            max(
+                CONTROLLER_DEADZONE_MIN,
+                normalized_resting_excursion
+                * CONTROLLER_DEADZONE_SCALE
+                + CONTROLLER_DEADZONE_MARGIN,
+            ),
         )
 
         axes.append(
             {
                 "index": index,
                 "center": center,
-                "center_noise": noise,
-                "normalized_center_noise": normalized_noise,
+                "initial_center": initial_center,
+                "return_center": return_center,
+                "center_shift": center_shift,
+                "initial_center_noise": initial_noise,
+                "return_center_noise": return_noise,
+                "center_noise": max(initial_noise, return_noise),
+                "normalized_initial_center_noise": normalized_initial_noise,
+                "normalized_return_center_noise": normalized_return_noise,
+                "normalized_center_shift": normalized_center_shift,
+                "resting_excursion": resting_excursion,
+                "normalized_resting_excursion": normalized_resting_excursion,
+                "normalized_center_noise": max(
+                    normalized_initial_noise,
+                    normalized_return_noise,
+                ),
                 "minimum": minimum,
                 "maximum": maximum,
                 "negative_span": negative_span,
@@ -765,13 +831,17 @@ def run_controller_calibration(output_path, *, device_index):
 
     axis_count = joystick.get_numaxes()
     center_samples = []
+    return_center_samples = []
     minimums = [1.0] * axis_count
     maximums = [-1.0] * axis_count
 
     try:
         # Center/noise capture.
         center_start = time.monotonic()
-        while time.monotonic() - center_start < 2.5:
+        while (
+            time.monotonic() - center_start
+            < CONTROLLER_CENTER_CAPTURE_SECONDS
+        ):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     raise KeyboardInterrupt
@@ -788,7 +858,8 @@ def run_controller_calibration(output_path, *, device_index):
             _draw_console_environment(console_surface)
             remaining = max(
                 0.0,
-                2.5 - (time.monotonic() - center_start),
+                CONTROLLER_CENTER_CAPTURE_SECONDS
+                - (time.monotonic() - center_start),
             )
             _present_calibration_frame(
                 window,
@@ -854,7 +925,88 @@ def run_controller_calibration(output_path, *, device_index):
             )
             clock.tick(120)
 
-        axes = _axis_statistics(center_samples, minimums, maximums)
+        # Let spring-loaded controls settle before measuring where they
+        # actually return after the full-range exercise.
+        settle_start = time.monotonic()
+        while (
+            time.monotonic() - settle_start
+            < CONTROLLER_RETURN_SETTLE_SECONDS
+        ):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    raise KeyboardInterrupt
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    raise KeyboardInterrupt
+
+            pygame.event.pump()
+            _draw_console_environment(console_surface)
+            remaining = max(
+                0.0,
+                CONTROLLER_RETURN_SETTLE_SECONDS
+                - (time.monotonic() - settle_start),
+            )
+            _present_calibration_frame(
+                window,
+                console_surface,
+                title_font,
+                body_font,
+                small_font,
+                "RETURN TO NEUTRAL",
+                (
+                    "Release every stick and trigger now.",
+                    f"Settling: {remaining:.1f} sec remaining.",
+                    "Do not touch the controls.",
+                    ("ESC: cancel calibration.", "small"),
+                ),
+            )
+            clock.tick(120)
+
+        return_start = time.monotonic()
+        while (
+            time.monotonic() - return_start
+            < CONTROLLER_RETURN_CAPTURE_SECONDS
+        ):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    raise KeyboardInterrupt
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    raise KeyboardInterrupt
+
+            pygame.event.pump()
+            sample = tuple(
+                float(joystick.get_axis(index))
+                for index in range(axis_count)
+            )
+            return_center_samples.append(sample)
+
+            _draw_console_environment(console_surface)
+            remaining = max(
+                0.0,
+                CONTROLLER_RETURN_CAPTURE_SECONDS
+                - (time.monotonic() - return_start),
+            )
+            _present_calibration_frame(
+                window,
+                console_surface,
+                title_font,
+                body_font,
+                small_font,
+                "RETURN-TO-CENTER MEASUREMENT",
+                (
+                    "Keep every stick and trigger released.",
+                    f"Measuring post-exercise neutral: {remaining:.1f} sec remaining.",
+                    "This captures mechanical return variation, not just initial noise.",
+                    ("ESC: cancel calibration.", "small"),
+                ),
+            )
+            clock.tick(120)
+
+        axes = _axis_statistics(
+            center_samples,
+            return_center_samples,
+            minimums,
+            maximums,
+        )
         primary_pair = [0, 1] if axis_count >= 2 else []
 
         accepted_base_speed = 8.0
@@ -866,6 +1018,7 @@ def run_controller_calibration(output_path, *, device_index):
             if len(axes) >= 2
             else 0.18
         )
+        accepted_deadzone = recommended_deadzone
 
         # Console-environment sensitivity test for the primary stick pair.
         # The accepted value is the MEDIUM/base speed that the existing
@@ -900,6 +1053,20 @@ def run_controller_calibration(output_path, *, device_index):
                                 1.0,
                                 accepted_base_speed - 0.5,
                             )
+                        elif event.key == pygame.K_LEFTBRACKET:
+                            accepted_deadzone = max(
+                                0.0,
+                                accepted_deadzone
+                                - CONTROLLER_DEADZONE_ADJUST_STEP,
+                            )
+                        elif event.key == pygame.K_RIGHTBRACKET:
+                            accepted_deadzone = min(
+                                CONTROLLER_DEADZONE_LIVE_MAX,
+                                accepted_deadzone
+                                + CONTROLLER_DEADZONE_ADJUST_STEP,
+                            )
+                        elif event.key == pygame.K_d:
+                            accepted_deadzone = recommended_deadzone
                         elif event.key == pygame.K_r:
                             accepted_base_speed = 8.0
                             cursor_x = float(SNES_WIDTH // 2)
@@ -913,11 +1080,11 @@ def run_controller_calibration(output_path, *, device_index):
 
                 norm_x = apply_deadzone(
                     normalize_axis(raw_x, axes[x_index]),
-                    recommended_deadzone,
+                    accepted_deadzone,
                 )
                 norm_y = apply_deadzone(
                     normalize_axis(raw_y, axes[y_index]),
-                    recommended_deadzone,
+                    accepted_deadzone,
                 )
 
                 cursor_x += norm_x * accepted_base_speed
@@ -938,11 +1105,16 @@ def run_controller_calibration(output_path, *, device_index):
                     "SNES ANALOG MOUSE TEST",
                     (
                         f"MEDIUM / base speed: {accepted_base_speed:.1f}",
-                        f"Deadzone: {recommended_deadzone:.3f}",
+                        (
+                            f"Deadzone: {accepted_deadzone:.3f} "
+                            f"(measured {recommended_deadzone:.3f})"
+                        ),
                         f"Normalized stick: {norm_x:+.3f} / {norm_y:+.3f}",
-                        "Move the stick naturally around the full SNES area.",
+                        "Move the stick naturally, then release it repeatedly.",
                         "+ / - : adjust base speed by 0.5",
-                        "R: reset to 8.0",
+                        "[ / ] : adjust deadzone by 0.01",
+                        "D: reset deadzone to measured recommendation",
+                        "R: reset base speed to 8.0",
                         "ENTER / SPACE: accept this test result",
                         ("ESC: cancel without applying.", "small"),
                     ),
@@ -964,6 +1136,7 @@ def run_controller_calibration(output_path, *, device_index):
                 "axes": axes,
                 "primary_directional_axis_pair": primary_pair,
                 "center_sample_count": len(center_samples),
+                "return_center_sample_count": len(return_center_samples),
             },
             "console_module": {
                 "environment": {
@@ -973,6 +1146,7 @@ def run_controller_calibration(output_path, *, device_index):
                 "mouse_emulation": {
                     "axis_pair": primary_pair,
                     "recommended_deadzone": recommended_deadzone,
+                    "accepted_deadzone": accepted_deadzone,
                     "accepted_base_analog_speed": accepted_base_speed,
                 },
             },
