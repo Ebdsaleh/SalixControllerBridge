@@ -8,6 +8,13 @@ import serial
 
 from axis_calibration import normalize_axis
 from bridge import BAUD_RATE, HEARTBEAT_SECONDS, open_controller
+from input_hub import (
+    controller_identity,
+    find_reconnect_index,
+    normalize_input_slot,
+    print_primary_input_bank,
+    resolve_controller_index,
+)
 from mouse_sources import PhysicalMouseSource
 from mouse_state import MouseState
 from serial_ports import resolve_serial_port
@@ -432,6 +439,7 @@ def run_gamepad_mouse_bridge(
     mouse_deadzone=None,
     axis_pair_override=None,
     axis_calibration_records=None,
+    input_slot=None,
 ):
     joystick = None
     serial_port = None
@@ -456,10 +464,18 @@ def run_gamepad_mouse_bridge(
         pygame.init()
         pygame.joystick.init()
 
-        if pygame.joystick.get_count() == 0:
-            raise RuntimeError("No controller detected.")
+        selected_input_slot = normalize_input_slot(input_slot)
+        device_index = resolve_controller_index(selected_input_slot)
 
-        joystick, button_map, directional_axis_pairs = open_controller(0)
+        joystick, button_map, directional_axis_pairs = open_controller(
+            device_index,
+            selected_input_slot,
+        )
+        selected_controller_identity = (
+            controller_identity(joystick)
+            if selected_input_slot is not None
+            else None
+        )
         directional_axis_pairs = apply_axis_pair_override(
             directional_axis_pairs,
             axis_pair_override,
@@ -541,8 +557,20 @@ def run_gamepad_mouse_bridge(
 
                 elif event.type == pygame.JOYDEVICEADDED and joystick is None:
                     try:
+                        if selected_input_slot is None:
+                            reconnect_index = event.device_index
+                        else:
+                            reconnect_index = find_reconnect_index(
+                                selected_controller_identity,
+                                selected_input_slot,
+                            )
+
+                        if reconnect_index is None:
+                            continue
+
                         joystick, button_map, directional_axis_pairs = open_controller(
-                            event.device_index
+                            reconnect_index,
+                            selected_input_slot,
                         )
                         directional_axis_pairs = apply_axis_pair_override(
                             directional_axis_pairs,
@@ -561,15 +589,27 @@ def run_gamepad_mouse_bridge(
                     last_reconnect_poll = now
                     if pygame.joystick.get_count() > 0:
                         try:
-                            joystick, button_map, directional_axis_pairs = open_controller(0)
-                            directional_axis_pairs = apply_axis_pair_override(
-                                directional_axis_pairs,
-                                axis_pair_override,
-                            )
-                            active_instance_id = joystick.get_instance_id()
-                            last_state = None
-                            last_send_time = 0.0
-                            print("Controller rediscovered. Mouse emulation resumed.")
+                            if selected_input_slot is None:
+                                reconnect_index = 0
+                            else:
+                                reconnect_index = find_reconnect_index(
+                                    selected_controller_identity,
+                                    selected_input_slot,
+                                )
+
+                            if reconnect_index is not None:
+                                joystick, button_map, directional_axis_pairs = open_controller(
+                                    reconnect_index,
+                                    selected_input_slot,
+                                )
+                                directional_axis_pairs = apply_axis_pair_override(
+                                    directional_axis_pairs,
+                                    axis_pair_override,
+                                )
+                                active_instance_id = joystick.get_instance_id()
+                                last_state = None
+                                last_send_time = 0.0
+                                print("Controller rediscovered. Mouse emulation resumed.")
                         except pygame.error:
                             joystick = None
 
@@ -703,6 +743,7 @@ def run_mouse_bridge(
     mouse_deadzone=None,
     axis_pair_override=None,
     axis_calibration_records=None,
+    input_slot=None,
 ):
     """Backward-compatible name for the gamepad mouse-emulation source."""
     return run_gamepad_mouse_bridge(
@@ -713,6 +754,7 @@ def run_mouse_bridge(
         mouse_deadzone=mouse_deadzone,
         axis_pair_override=axis_pair_override,
         axis_calibration_records=axis_calibration_records,
+        input_slot=input_slot,
     )
 
 
@@ -1107,6 +1149,21 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--list-inputs",
+        action="store_true",
+        help=(
+            "List Salix PRIMARY-1 / PRIMARY-2 controller discovery and exit."
+        ),
+    )
+    parser.add_argument(
+        "--input-slot",
+        metavar="PRIMARY-1|PRIMARY-2",
+        help=(
+            "Select one logical Primary controller slot for gamepad source. "
+            "Omit to preserve legacy controller-0 behavior."
+        ),
+    )
+    parser.add_argument(
         "--mouse-gain",
         type=float,
         default=PHYSICAL_MOUSE_GAIN,
@@ -1148,7 +1205,24 @@ def main():
 
     serial_device = args.port_override or args.serial_port
 
+    if args.list_inputs:
+        pygame.init()
+        pygame.joystick.init()
+        try:
+            print_primary_input_bank()
+        finally:
+            pygame.quit()
+        return
+
+    selected_input_slot = normalize_input_slot(args.input_slot)
+
     if args.source == "mouse":
+        if selected_input_slot is not None:
+            raise RuntimeError(
+                "--input-slot selects gamepad/controller sources and cannot "
+                "be used with physical mouse source."
+            )
+
         run_physical_mouse_bridge(
             serial_port_override=serial_device,
             output_personality=args.output,
@@ -1160,6 +1234,7 @@ def main():
             output_personality=args.output,
             max_speed=args.max_speed,
             dpad_speed=args.dpad_speed,
+            input_slot=selected_input_slot,
         )
 
 
