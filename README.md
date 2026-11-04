@@ -72,6 +72,52 @@ main.py
 
 Then reset the Pico.
 
+## Primary USB input hub
+
+The first Salix input-hub abstraction models the two sockets on the physical
+Primary USB-A Input Bank as stable logical slots:
+
+```text
+PRIMARY-1
+PRIMARY-2
+```
+
+Inspect the current PC-host discovery backend without opening the Pico serial
+port:
+
+```bat
+py src\pc_host\bridge.py --list-inputs
+```
+
+Select a slot explicitly:
+
+```bat
+py src\pc_host\bridge.py COM3 --input-slot PRIMARY-1
+py src\pc_host\bridge.py COM3 --input-slot PRIMARY-2
+```
+
+The same selection works with controller-to-mouse emulation:
+
+```bat
+py src\pc_host\bridge.py COM3 mouse_emu --input-slot PRIMARY-1
+py src\pc_host\bridge.py COM3 mouse_emu --input-slot PRIMARY-2
+```
+
+Existing commands remain backward compatible. If `--input-slot` is omitted,
+the bridge keeps the historical behavior and opens Pygame controller index 0.
+
+During the PC-host prototype PRIMARY-1/2 map to Pygame controller indices 0/1.
+This is deliberately not claimed to be physical USB-port discovery. The final
+Pico 2 W USB-host backend will bind the actual Primary-bank receptacles to the
+same stable logical slot names.
+
+When two different calibrated controllers are connected, use
+`--hardware-profile` with the selected slot so the correct device tuning is
+unambiguous.
+
+See `docs/architecture/PRIMARY_INPUT_HUB.md` for the physical module contract,
+USB harness convention, hot-plug behavior, and standalone-host boundary.
+
 ## Unified bridge launcher
 
 `bridge.py` is now the primary user-facing launcher for both normal controller
