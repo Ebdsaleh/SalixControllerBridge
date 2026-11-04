@@ -7,6 +7,14 @@ import time
 import pygame
 import serial
 
+from input_hub import (
+    controller_identity,
+    find_reconnect_index,
+    input_slot_label,
+    normalize_input_slot,
+    print_primary_input_bank,
+    resolve_controller_index,
+)
 from serial_ports import resolve_serial_port
 
 BAUD_RATE = 115200
@@ -175,6 +183,23 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--list-inputs",
+        action="store_true",
+        help=(
+            "List Salix PRIMARY-1 / PRIMARY-2 controller discovery and exit. "
+            "This does not open the Pico serial port."
+        ),
+    )
+    parser.add_argument(
+        "--input-slot",
+        metavar="PRIMARY-1|PRIMARY-2",
+        help=(
+            "Select one logical Primary USB input slot. On the current PC-host "
+            "backend PRIMARY-1/2 map to Pygame controller indices 0/1. "
+            "If omitted, preserve legacy behavior and use controller 0."
+        ),
+    )
+    parser.add_argument(
         "--serial-test",
         choices=tuple(SNES_TEST_BITS),
         help=(
@@ -310,10 +335,15 @@ def detect_controller_profile(joystick):
     )
 
 
-def open_controller(device_index):
+def open_controller(device_index, input_slot=None):
     joystick = pygame.joystick.Joystick(device_index)
     joystick.init()
 
+    if input_slot is not None:
+        print(
+            f"Input slot: {input_slot_label(input_slot)} "
+            f"(Pygame index {device_index})"
+        )
     print(f"Controller: {joystick.get_name()}")
     print(f"GUID: {joystick.get_guid()}")
     print(
@@ -334,14 +364,12 @@ def open_controller(device_index):
     return joystick, button_map, directional_axis_pairs
 
 
-def init_controller():
+def init_controller(input_slot=None):
     pygame.init()
     pygame.joystick.init()
 
-    if pygame.joystick.get_count() == 0:
-        raise RuntimeError("No controller detected.")
-
-    return open_controller(0)
+    device_index = resolve_controller_index(input_slot)
+    return open_controller(device_index, input_slot)
 
 
 def probe_controller_inputs(joystick):
@@ -465,6 +493,19 @@ def main():
 
     try:
         launch_mode = normalize_launch_mode(args)
+        selected_input_slot = normalize_input_slot(args.input_slot)
+
+        if args.list_inputs:
+            pygame.init()
+            pygame.joystick.init()
+            print_primary_input_bank()
+            return
+
+        if launch_mode == "mouse" and selected_input_slot is not None:
+            raise RuntimeError(
+                "--input-slot selects gamepad/controller sources and cannot "
+                "be used with physical mouse mode."
+            )
 
         if (
             args.serial_port
@@ -531,6 +572,7 @@ def main():
                 mouse_deadzone=module.get("deadzone"),
                 axis_pair_override=module.get("axis_pair"),
                 axis_calibration_records=module.get("axis_calibration"),
+                input_slot=selected_input_slot,
             )
             return
 
@@ -576,7 +618,14 @@ def main():
             )
             return
 
-        joystick, button_map, directional_axis_pairs = init_controller()
+        joystick, button_map, directional_axis_pairs = init_controller(
+            selected_input_slot
+        )
+        selected_controller_identity = (
+            controller_identity(joystick)
+            if selected_input_slot is not None
+            else None
+        )
 
         if args.probe_inputs:
             probe_controller_inputs(joystick)
@@ -642,8 +691,20 @@ def main():
 
                 elif event.type == pygame.JOYDEVICEADDED and joystick is None:
                     try:
+                        if selected_input_slot is None:
+                            reconnect_index = event.device_index
+                        else:
+                            reconnect_index = find_reconnect_index(
+                                selected_controller_identity,
+                                selected_input_slot,
+                            )
+
+                        if reconnect_index is None:
+                            continue
+
                         joystick, button_map, directional_axis_pairs = open_controller(
-                            event.device_index
+                            reconnect_index,
+                            selected_input_slot,
                         )
                         active_instance_id = joystick.get_instance_id()
                         last_mask = None
@@ -662,11 +723,23 @@ def main():
                     last_reconnect_poll = now
                     if pygame.joystick.get_count() > 0:
                         try:
-                            joystick, button_map, directional_axis_pairs = open_controller(0)
-                            active_instance_id = joystick.get_instance_id()
-                            last_mask = None
-                            last_send_time = 0.0
-                            print("Controller rediscovered. Live bridge resumed.")
+                            if selected_input_slot is None:
+                                reconnect_index = 0
+                            else:
+                                reconnect_index = find_reconnect_index(
+                                    selected_controller_identity,
+                                    selected_input_slot,
+                                )
+
+                            if reconnect_index is not None:
+                                joystick, button_map, directional_axis_pairs = open_controller(
+                                    reconnect_index,
+                                    selected_input_slot,
+                                )
+                                active_instance_id = joystick.get_instance_id()
+                                last_mask = None
+                                last_send_time = 0.0
+                                print("Controller rediscovered. Live bridge resumed.")
                         except pygame.error:
                             joystick = None
 
