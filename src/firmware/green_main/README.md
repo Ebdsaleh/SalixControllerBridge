@@ -1,16 +1,16 @@
 # Salix Main I/O Firmware
 
-This directory is the beginning of the compiled standalone firmware for the
-**green Raspberry Pi Pico 2 W**, the SalixControllerBridge real-time
-Main/Master I/O Processor.
+This directory contains the compiled standalone firmware for the **green
+Raspberry Pi Pico 2 W**, the SalixControllerBridge real-time Main/Master I/O
+Processor.
 
 The existing Python and MicroPython implementations remain in the repository as
-known-good behavioral references. This firmware does **not** replace or modify
-them yet.
+known-good behavioral references. They are not removed by the native firmware
+work.
 
-## Milestone 0.1
+## Milestone 0.1 — accepted
 
-The first milestone is intentionally small:
+GREEN 0.1 proved:
 
 ```text
 power on
@@ -18,37 +18,101 @@ power on
   -> no MicroPython / REPL dependency
   -> native USB exposes CDC/stdout diagnostics
   -> repeating heartbeat proves the firmware stays alive
+  -> cold unplug/replug boots autonomously
 ```
 
-PRIMARY USB host support and the proven SNES backend are deliberately deferred
-until this foundation builds and boots on the real green Pico 2 W.
+The milestone was physically accepted on the green Pico 2 W.
+
+## Milestone 0.2 — PRIMARY-1 HID host bring-up
+
+GREEN 0.2 adds exactly one standalone controller input path:
+
+```text
+PRIMARY-1 USB-A
+  -> D+ GP16 / D- GP17
+  -> Pico-PIO-USB
+  -> TinyUSB host HID
+  -> VID / PID / address / interface / protocol
+  -> raw HID report bytes
+  -> native USB CDC diagnostics
+  -> src/pc_host/pico_monitor.py
+```
+
+This milestone deliberately does **not** normalize controller state and does
+**not** drive the SNES backend yet.
+
+PRIMARY-2 remains reserved on GP18/GP19 but disabled.
+
+## PRIMARY USB electrical rules
+
+Accepted prototype mapping:
+
+```text
+PRIMARY-1
+  D+ -> GP16 through 22 ohm series resistor
+  D- -> GP17 through 22 ohm series resistor
+
+PRIMARY-2
+  D+ -> GP18 through 22 ohm series resistor
+  D- -> GP19 through 22 ohm series resistor
+```
+
+Additional constraints:
+
+- common USB/Salix ground;
+- do not put the XC4486 level shifter in USB D+/D-;
+- PRIMARY USB VBUS remains disconnected until the protected/switched 5 V
+  distribution design is accepted;
+- GP2/GP3/GP4 remain reserved for the proven SNES prototype.
+
+Because VBUS is intentionally unresolved, do not connect a controller to
+PRIMARY-1 until the power-distribution step is explicitly completed.
 
 ## Requirements
 
-- Raspberry Pi Pico SDK 2.3.0 or newer
-- ARM GNU embedded toolchain
-- CMake 3.13 or newer
-- Ninja recommended
-- Pico SDK submodules initialized so TinyUSB device support is available
+Pinned ERIDU environment:
 
-Set `PICO_SDK_PATH` to the local Pico SDK checkout.
+- Raspberry Pi Pico SDK 2.3.1
+- ARM GNU Toolchain 14.2.Rel1 / GCC 14.2.1
+- CMake 4.3.2
+- Ninja 1.12.1
+- picotool 2.3.1
+- Pico-PIO-USB 0.7.3 at commit `b186e36`
 
-Example Windows Command Prompt setup:
+Expected Pico-PIO-USB source path:
 
-```bat
-set "PICO_SDK_PATH=C:\path\to\pico-sdk"
+```text
+C:\Users\Developer.ERIDU\repos\apps_source\Pico-PIO-USB-0.7.3
 ```
+
+`prepare-pico-sdk.bat` should export:
+
+```text
+PICO_SDK_PATH
+PICO_ARM_TOOLCHAIN_PATH
+PICO_TOOLCHAIN_PATH
+PICOTOOL_ROOT
+picotool_DIR
+PICO_PIO_USB_PATH
+CMAKE_GENERATOR
+```
+
+## Clock choice
+
+Pico-PIO-USB requires the system clock to be a multiple of 12 MHz. GREEN 0.2
+uses **120 MHz** during bring-up, matching the conservative upstream dual-USB
+example.
+
+This is intentional; it is not an RP2350 performance target.
 
 ## Configure and build
 
 From the repository root:
 
 ```bat
-cmake -S src\firmware\green_main ^
-      -B "%TEMP%\SalixControllerBridge_green_main" ^
-      -G Ninja ^
-      -DPICO_BOARD=pico2_w
-
+prepare-pico-sdk
+if exist "%TEMP%\SalixControllerBridge_green_main" rmdir /s /q "%TEMP%\SalixControllerBridge_green_main"
+cmake -S src\firmware\green_main -B "%TEMP%\SalixControllerBridge_green_main" -G Ninja -DPICO_BOARD=pico2_w
 cmake --build "%TEMP%\SalixControllerBridge_green_main"
 ```
 
@@ -60,60 +124,57 @@ Expected UF2:
 
 ## Flash
 
-1. Hold BOOTSEL on the green Pico 2 W while connecting USB.
-2. Copy `salix_green_main.uf2` to the `RPI-RP2` drive.
-3. The Pico reboots automatically into the compiled firmware.
+1. Stop `pico_monitor.py` so the native CDC port is released.
+2. Put the green Pico 2 W into BOOTSEL.
+3. Copy `salix_green_main.uf2` to the RP2350 mass-storage drive.
+4. The Pico reboots automatically into the compiled firmware.
 
-This is destructive only to the Pico firmware image. The existing repository
-files are unaffected. The current MicroPython firmware can be restored later if
-needed.
+The existing MicroPython reference implementation remains in the repository.
 
-## Expected diagnostic output
+## Expected diagnostics
 
-After the native USB CDC port appears, use the Salix Pico monitor:
-
-```bat
-py src\\pc_host\\pico_monitor.py
-```
-
-An explicit port is also accepted:
+Monitor the native CDC port with:
 
 ```bat
-py src\\pc_host\\pico_monitor.py COM6
+py src\pc_host\pico_monitor.py
 ```
 
-The monitor uses Ctrl+C as the exit path and closes the serial port before
-returning to the command prompt.
-
-The firmware repeatedly prints a heartbeat similar to:
+Before any controller is attached, expected GREEN 0.2 output includes:
 
 ```text
 SalixControllerBridge - Main I/O Processor
-Firmware milestone: green-main 0.1
-Board role: GREEN Pico 2 W / real-time master
-Runtime: Pico SDK C++ (MicroPython-free)
+Firmware milestone: green-main 0.2
+System clock: 120000 kHz
 Native USB: CDC/stdout diagnostics
-PRIMARY USB host: not enabled in this milestone
+PRIMARY-1 USB host: PIO USB D+=GP16 D-=GP17
+PRIMARY-2 USB host: reserved / disabled
 SNES backend: not enabled in this milestone
 
-[green-main] heartbeat=0 uptime_ms=...
-[green-main] heartbeat=1 uptime_ms=...
+[PRIMARY-1] host ready rhport=1 D+=GP16 D-=GP17
+[green-main] heartbeat=...
 ```
 
-The firmware does not wait for a PC connection. It continues running even if
-the native USB diagnostic cable is unplugged.
+Once PRIMARY-1 power is deliberately resolved and a HID controller is attached,
+the diagnostic target is:
+
+```text
+[PRIMARY-1] HID mount vid=.... pid=.... addr=... instance=... interface=... protocol=...
+[PRIMARY-1] HID report ... data=...
+```
+
+Gamepads and arcade sticks commonly use HID protocol `None`; GREEN 0.2 requests
+reports for every HID protocol rather than only boot keyboards/mice.
 
 ## Next milestone
 
-After 0.1 is physically proven:
+Only after PRIMARY-1 enumeration and raw reports are physically proven:
 
 ```text
-PRIMARY-1 USB-A
-    -> PIO USB host
-    -> enumerate one HID controller
-    -> report VID/PID/interface/raw HID reports
-    -> native USB CDC diagnostics
+raw HID
+  -> Salix input-device/profile layer
+  -> normalized GamepadState / MouseState / KeyboardState
+  -> selected console personality
 ```
 
-Only after that path is green will the known-good SNES pad behavior be migrated
-from `src/pico_client/main.py` into the compiled C++ firmware.
+The known-good SNES pad/mouse behavior will then be migrated from
+`src/pico_client/main.py` without changing its proven external semantics.
