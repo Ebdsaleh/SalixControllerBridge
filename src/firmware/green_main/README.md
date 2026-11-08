@@ -49,16 +49,23 @@ Accepted prototype mapping:
 
 ```text
 PRIMARY-1
-  D+ -> GP16 through 22 ohm series resistor
-  D- -> GP17 through 22 ohm series resistor
+  D+ -> GP16
+  D- -> GP17
 
 PRIMARY-2
-  D+ -> GP18 through 22 ohm series resistor
-  D- -> GP19 through 22 ohm series resistor
+  D+ -> GP18
+  D- -> GP19
 ```
 
 Additional constraints:
 
+- Pico-PIO-USB recommends 22 ohm series resistors on D+ and D- for improved
+  signal integrity, but they are not a hard prerequisite for this short-wire
+  prototype;
+- first bring-up may use direct GP16/GP17 connections;
+- if enumeration is unreliable or the data wiring is lengthened, fit 22-27 ohm
+  series resistors close to the GREEN GPIO pins before changing firmware;
+- keep the D+/D- pair short and close together;
 - common USB/Salix ground;
 - do not put the XC4486 level shifter in USB D+/D-;
 - PRIMARY USB VBUS is supplied through the accepted prototype USB Power

@@ -68,12 +68,12 @@ The accepted GREEN Pico 2 W standalone host mapping is:
 
 ```text
 PRIMARY-1
-  D+ -> GP16 through 22 ohm series resistor
-  D- -> GP17 through 22 ohm series resistor
+  D+ -> GP16
+  D- -> GP17
 
 PRIMARY-2
-  D+ -> GP18 through 22 ohm series resistor
-  D- -> GP19 through 22 ohm series resistor
+  D+ -> GP18
+  D- -> GP19
 ```
 
 The GPIO pairs are intentionally adjacent so Pico-PIO-USB can use its
@@ -104,8 +104,14 @@ protection remains a later hardware-hardening item and is not implied by this
 acceptance.
 
 Do **not** place the DUINTECH XC4486 level shifter in either USB D+/D- pair.
-USB data is handled directly by the RP2350 GPIO/PIO path with the 22 ohm series
-resistors above.
+USB data is handled directly by the RP2350 GPIO/PIO path.
+
+Pico-PIO-USB upstream recommends 22 ohm series resistors on D+ and D- for
+signal-integrity improvement, but describes them as preferable rather than a
+hard requirement. For the current short-wire prototype, direct GP16/GP17 data
+connections are accepted for first bring-up. If enumeration is flaky or the
+wiring must be lengthened, add 22-27 ohm series resistors close to the GREEN
+GPIO pins before changing firmware.
 
 The existing SNES prototype signals remain reserved and untouched:
 
@@ -130,7 +136,10 @@ The controlled bench sequence is:
 3. Insert the USB +5 V jumper and verify the PRIMARY-1 socket receives the
    expected USB supply voltage.
 4. Power down again.
-5. Connect PRIMARY-1 D+ through 22 ohms to GP16 and D- through 22 ohms to GP17.
+5. Connect PRIMARY-1 D+ directly to GP16 and D- directly to GP17 for the
+   current short-wire prototype. Keep the pair as short and close together as
+   practical. 22-27 ohm series resistors are recommended later for additional
+   signal-integrity margin, but are not a blocker for this bring-up.
 6. Power GREEN, confirm the firmware still reports
    `[PRIMARY-1] host ready ...`, then attach one known-good wired HID device.
 7. Accept the path only when firmware reports HID mount information and changing
