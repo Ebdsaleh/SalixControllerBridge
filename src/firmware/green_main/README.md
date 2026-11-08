@@ -70,8 +70,22 @@ needed.
 
 ## Expected diagnostic output
 
-After the native USB CDC port appears, connect with a serial terminal. The
-firmware repeatedly prints a heartbeat similar to:
+After the native USB CDC port appears, use the Salix Pico monitor:
+
+```bat
+py src\\pc_host\\pico_monitor.py
+```
+
+An explicit port is also accepted:
+
+```bat
+py src\\pc_host\\pico_monitor.py COM6
+```
+
+The monitor uses Ctrl+C as the exit path and closes the serial port before
+returning to the command prompt.
+
+The firmware repeatedly prints a heartbeat similar to:
 
 ```text
 SalixControllerBridge - Main I/O Processor
