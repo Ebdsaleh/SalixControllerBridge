@@ -329,6 +329,12 @@ int main()
         make_timeout_time_ms(salix::kHeartbeatIntervalMs);
 
     while (true) {
+        // Because GREEN 0.2 links TinyUSB directly, Pico SDK deliberately
+        // disables pico_stdio_usb's background tud_task() worker. Service the
+        // native CDC device stack explicitly on core 0 so Windows can
+        // enumerate and stdio USB remains alive.
+        tud_task();
+
         salix::HostEvent event{};
         while (queue_try_remove(&salix::g_host_event_queue, &event)) {
             salix::PrintHostEvent(event);
