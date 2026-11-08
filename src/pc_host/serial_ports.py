@@ -67,11 +67,12 @@ def resolve_serial_port(requested=None):
 
     if len(ports) == 1:
         port = ports[0]
-        print(
-            "No Pico-specific USB metadata was found; "
-            f"using the only available serial port: {_port_description(port)}"
+        raise RuntimeError(
+            "No Pico-specific USB metadata was found. "
+            f"The only available serial port is {_port_description(port)}, "
+            "so it will not be selected automatically. "
+            "If that port really is the Pico, specify it explicitly."
         )
-        return port.device
 
     if not ports:
         raise RuntimeError(
