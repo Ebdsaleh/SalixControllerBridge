@@ -62,6 +62,46 @@ The current Primary USB-A bank is intentionally module-first. Future LEDs,
 USB-A/USB-C selector controls, and enclosure mechanics are separate later
 concerns and do not change the logical slot names.
 
+## Standalone PIO USB host wiring decision
+
+The accepted GREEN Pico 2 W standalone host mapping is:
+
+```text
+PRIMARY-1
+  D+ -> GP16 through 22 ohm series resistor
+  D- -> GP17 through 22 ohm series resistor
+
+PRIMARY-2
+  D+ -> GP18 through 22 ohm series resistor
+  D- -> GP19 through 22 ohm series resistor
+```
+
+The GPIO pairs are intentionally adjacent so Pico-PIO-USB can use its
+`PIO_USB_PINOUT_DPDM` convention, where D- is D+ + 1.
+
+Power remains deliberately separate from the data-path milestone:
+
+```text
+USB GND  -> common Salix ground
+USB VBUS -> RED wire remains disconnected until the protected/switched
+            5 V distribution design is accepted
+```
+
+Do **not** place the DUINTECH XC4486 level shifter in either USB D+/D- pair.
+USB data is handled directly by the RP2350 GPIO/PIO path with the 22 ohm series
+resistors above.
+
+The existing SNES prototype signals remain reserved and untouched:
+
+```text
+GP2 = SNES CLOCK
+GP3 = SNES LATCH
+GP4 = SNES DATA
+```
+
+Milestone 0.2 brings up PRIMARY-1 only. PRIMARY-2 is reserved by this mapping
+but is not enabled until the one-port host path is physically proven.
+
 ## PC-host discovery backend
 
 The current Windows prototype still receives controllers through SDL/Pygame.
