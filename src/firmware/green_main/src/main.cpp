@@ -33,6 +33,13 @@ enum class HostEventType : uint8_t {
     HidReceiveFailed,
 };
 
+enum class HostRuntimeState : uint32_t {
+    Starting,
+    ConfigureFailed,
+    InitFailed,
+    Ready,
+};
+
 struct HostEvent {
     HostEventType type;
     uint8_t dev_addr;
@@ -48,6 +55,24 @@ struct HostEvent {
 };
 
 queue_t g_host_event_queue;
+volatile uint32_t g_host_runtime_state =
+    static_cast<uint32_t>(HostRuntimeState::Starting);
+
+void SetHostRuntimeState(HostRuntimeState state)
+{
+    __atomic_store_n(
+        &g_host_runtime_state,
+        static_cast<uint32_t>(state),
+        __ATOMIC_RELEASE
+    );
+}
+
+HostRuntimeState GetHostRuntimeState()
+{
+    return static_cast<HostRuntimeState>(
+        __atomic_load_n(&g_host_runtime_state, __ATOMIC_ACQUIRE)
+    );
+}
 
 bool PushHostEvent(const HostEvent& event)
 {
@@ -84,6 +109,29 @@ void PrintBootBanner()
     std::printf("PRIMARY-2 USB host: reserved / disabled\r\n");
     std::printf("SNES backend: not enabled in this milestone\r\n");
     std::printf("\r\n");
+}
+
+void PrintCurrentHostState()
+{
+    switch (GetHostRuntimeState()) {
+        case HostRuntimeState::Starting:
+            std::printf("[PRIMARY-1] host state=starting\r\n");
+            break;
+        case HostRuntimeState::ConfigureFailed:
+            std::printf("[PRIMARY-1] host state=configure-failed\r\n");
+            break;
+        case HostRuntimeState::InitFailed:
+            std::printf("[PRIMARY-1] host state=init-failed\r\n");
+            break;
+        case HostRuntimeState::Ready:
+            std::printf(
+                "[PRIMARY-1] host ready rhport=%u D+=GP%u D-=GP%u\r\n",
+                kPrimary1Rhport,
+                kPrimary1DpPin,
+                kPrimary1DmPin
+            );
+            break;
+    }
 }
 
 void PrintHostEvent(const HostEvent& event)
@@ -177,17 +225,20 @@ void Primary1HostCore()
             TUH_CFGID_RPI_PIO_USB_CONFIGURATION,
             &pio_config
         )) {
+        SetHostRuntimeState(HostRuntimeState::ConfigureFailed);
         event.type = HostEventType::HostConfigureFailed;
         PushHostEvent(event);
         return;
     }
 
     if (!tuh_init(kPrimary1Rhport)) {
+        SetHostRuntimeState(HostRuntimeState::InitFailed);
         event.type = HostEventType::HostInitFailed;
         PushHostEvent(event);
         return;
     }
 
+    SetHostRuntimeState(HostRuntimeState::Ready);
     event.type = HostEventType::HostReady;
     PushHostEvent(event);
 
@@ -319,12 +370,11 @@ int main()
     // when nothing is attached to the native USB connector.
     sleep_ms(100);
 
-    salix::PrintBootBanner();
-
     multicore_reset_core1();
     multicore_launch_core1(salix::Primary1HostCore);
 
     uint32_t heartbeat = 0;
+    bool cdc_was_connected = false;
     absolute_time_t next_heartbeat =
         make_timeout_time_ms(salix::kHeartbeatIntervalMs);
 
@@ -334,6 +384,13 @@ int main()
         // native CDC device stack explicitly on core 0 so Windows can
         // enumerate and stdio USB remains alive.
         tud_task();
+
+        const bool cdc_connected = tud_cdc_connected();
+        if (cdc_connected && !cdc_was_connected) {
+            salix::PrintBootBanner();
+            salix::PrintCurrentHostState();
+        }
+        cdc_was_connected = cdc_connected;
 
         salix::HostEvent event{};
         while (queue_try_remove(&salix::g_host_event_queue, &event)) {
