@@ -81,6 +81,11 @@ target_compile_definitions(salix_green_main
         # main.cpp initializes native USB device mode explicitly before
         # stdio_init_all(), then initializes the PIO host stack on core 1.
         PICO_STDIO_USB_ENABLE_TINYUSB_INIT=0
+
+        # We use TinyUSB directly for the PIO host, so Pico SDK otherwise
+        # assumes the application supplies its own native-device descriptors.
+        # GREEN 0.2 still wants the proven Pico SDK CDC descriptor set.
+        PICO_STDIO_USB_USE_DEFAULT_DESCRIPTORS=1
 )
 
 target_compile_options(salix_green_main
