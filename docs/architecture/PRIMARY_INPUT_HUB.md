@@ -79,13 +79,29 @@ PRIMARY-2
 The GPIO pairs are intentionally adjacent so Pico-PIO-USB can use its
 `PIO_USB_PINOUT_DPDM` convention, where D- is D+ + 1.
 
-Power remains deliberately separate from the data-path milestone:
+Power is provided by the accepted prototype **USB Power Distribution Rev A**
+board:
 
 ```text
-USB GND  -> common Salix ground
-USB VBUS -> RED wire remains disconnected until the protected/switched
-            5 V distribution design is accepted
+GREEN Pico VBUS / source +5 V
+    -> source +5 V rail
+    -> removable USB +5 V jumper
+    -> switched USB +5 V rail
+    -> PRIMARY USB VBUS outputs
+
+GREEN / USB ground
+    -> continuous common ground rail
+    -> PRIMARY USB GND outputs
 ```
+
+Rev A is the 40 x 60 mm perfboard assembly previously continuity-checked on the
+bench. Its source +5 V and USB-side +5 V are intentionally separated by the
+removable jumper. Ground remains continuous and unswitched. The red source LED
+indicates source power; the yellow USB LED indicates the post-jumper USB rail.
+
+Rev A is accepted for prototype bring-up. Per-port current limiting/PTC
+protection remains a later hardware-hardening item and is not implied by this
+acceptance.
 
 Do **not** place the DUINTECH XC4486 level shifter in either USB D+/D- pair.
 USB data is handled directly by the RP2350 GPIO/PIO path with the 22 ohm series
@@ -101,6 +117,26 @@ GP4 = SNES DATA
 
 Milestone 0.2 brings up PRIMARY-1 only. PRIMARY-2 is reserved by this mapping
 but is not enabled until the one-port host path is physically proven.
+
+### PRIMARY-1 physical validation order
+
+The controlled bench sequence is:
+
+1. With GREEN powered down, connect Power Distribution Rev A to GREEN VBUS/GND
+   and connect only PRIMARY-1 VBUS/GND to the Primary USB board. Leave the USB
+   +5 V jumper removed.
+2. Power GREEN from its native micro-USB connection to ERIDU. Verify source
+   power is present while the post-jumper USB rail remains isolated.
+3. Insert the USB +5 V jumper and verify the PRIMARY-1 socket receives the
+   expected USB supply voltage.
+4. Power down again.
+5. Connect PRIMARY-1 D+ through 22 ohms to GP16 and D- through 22 ohms to GP17.
+6. Power GREEN, confirm the firmware still reports
+   `[PRIMARY-1] host ready ...`, then attach one known-good wired HID device.
+7. Accept the path only when firmware reports HID mount information and changing
+   raw report bytes.
+
+Do not connect PRIMARY-2 during this validation.
 
 ## PC-host discovery backend
 

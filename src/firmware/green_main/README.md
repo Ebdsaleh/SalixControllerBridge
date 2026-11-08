@@ -61,12 +61,16 @@ Additional constraints:
 
 - common USB/Salix ground;
 - do not put the XC4486 level shifter in USB D+/D-;
-- PRIMARY USB VBUS remains disconnected until the protected/switched 5 V
-  distribution design is accepted;
+- PRIMARY USB VBUS is supplied through the accepted prototype USB Power
+  Distribution Rev A board;
+- the Rev A removable jumper isolates source +5 V from the USB +5 V rail;
+- Rev A is accepted for bench bring-up, while per-port current limiting/PTC
+  protection remains a later hardware-hardening item;
 - GP2/GP3/GP4 remain reserved for the proven SNES prototype.
 
-Because VBUS is intentionally unresolved, do not connect a controller to
-PRIMARY-1 until the power-distribution step is explicitly completed.
+The GREEN 0.2 software-only host initialization has been physically accepted.
+The next physical test reconnects Rev A and PRIMARY-1 in a staged power-only,
+then data/HID sequence.
 
 ## Requirements
 
@@ -154,8 +158,8 @@ SNES backend: not enabled in this milestone
 [green-main] heartbeat=...
 ```
 
-Once PRIMARY-1 power is deliberately resolved and a HID controller is attached,
-the diagnostic target is:
+With Power Distribution Rev A reconnected and a HID controller attached to
+PRIMARY-1, the diagnostic target is:
 
 ```text
 [PRIMARY-1] HID mount vid=.... pid=.... addr=... instance=... interface=... protocol=...
