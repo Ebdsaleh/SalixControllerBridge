@@ -27,6 +27,8 @@ enum class HostEventType : uint8_t {
     HostReady,
     HostConfigureFailed,
     HostInitFailed,
+    DeviceMounted,
+    DeviceUnmounted,
     HidMounted,
     HidUnmounted,
     HidReport,
@@ -154,6 +156,22 @@ void PrintHostEvent(const HostEvent& event)
             std::printf("[PRIMARY-1] ERROR: tuh_init failed\r\n");
             break;
 
+        case HostEventType::DeviceMounted:
+            std::printf(
+                "[PRIMARY-1] USB device mount vid=%04x pid=%04x addr=%u\r\n",
+                event.vid,
+                event.pid,
+                event.dev_addr
+            );
+            break;
+
+        case HostEventType::DeviceUnmounted:
+            std::printf(
+                "[PRIMARY-1] USB device unmount addr=%u\r\n",
+                event.dev_addr
+            );
+            break;
+
         case HostEventType::HidMounted:
             std::printf(
                 "[PRIMARY-1] HID mount vid=%04x pid=%04x addr=%u "
@@ -248,6 +266,23 @@ void Primary1HostCore()
 }
 
 }  // namespace salix
+
+extern "C" void tuh_mount_cb(uint8_t dev_addr)
+{
+    salix::HostEvent event{};
+    event.type = salix::HostEventType::DeviceMounted;
+    event.dev_addr = dev_addr;
+    tuh_vid_pid_get(dev_addr, &event.vid, &event.pid);
+    salix::PushHostEvent(event);
+}
+
+extern "C" void tuh_umount_cb(uint8_t dev_addr)
+{
+    salix::HostEvent event{};
+    event.type = salix::HostEventType::DeviceUnmounted;
+    event.dev_addr = dev_addr;
+    salix::PushHostEvent(event);
+}
 
 extern "C" void tuh_hid_mount_cb(
     uint8_t dev_addr,
