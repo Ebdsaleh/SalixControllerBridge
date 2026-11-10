@@ -42,6 +42,13 @@ enum class HostRuntimeState : uint32_t {
     Ready,
 };
 
+enum class UsbLineState : uint8_t {
+    Se0 = 0,
+    FullSpeedIdle,
+    LowSpeedIdle,
+    Se1,
+};
+
 struct HostEvent {
     HostEventType type;
     uint8_t dev_addr;
@@ -92,6 +99,48 @@ const char* ProtocolName(uint8_t protocol)
         default:
             return "None";
     }
+}
+
+UsbLineState ReadPrimary1LineState()
+{
+    const bool dp = gpio_get(kPrimary1DpPin);
+    const bool dm = gpio_get(kPrimary1DmPin);
+
+    if (!dp && !dm) {
+        return UsbLineState::Se0;
+    }
+    if (dp && !dm) {
+        return UsbLineState::FullSpeedIdle;
+    }
+    if (!dp && dm) {
+        return UsbLineState::LowSpeedIdle;
+    }
+    return UsbLineState::Se1;
+}
+
+const char* UsbLineStateName(UsbLineState state)
+{
+    switch (state) {
+        case UsbLineState::Se0:
+            return "SE0/no-device";
+        case UsbLineState::FullSpeedIdle:
+            return "FS-idle";
+        case UsbLineState::LowSpeedIdle:
+            return "LS-idle";
+        case UsbLineState::Se1:
+            return "SE1/invalid";
+    }
+    return "unknown";
+}
+
+void PrintPrimary1LineState(UsbLineState state)
+{
+    std::printf(
+        "[PRIMARY-1] bus lines D+=%u D-=%u state=%s\r\n",
+        gpio_get(kPrimary1DpPin) ? 1u : 0u,
+        gpio_get(kPrimary1DmPin) ? 1u : 0u,
+        UsbLineStateName(state)
+    );
 }
 
 void PrintBootBanner()
@@ -410,6 +459,7 @@ int main()
 
     uint32_t heartbeat = 0;
     bool cdc_was_connected = false;
+    salix::UsbLineState last_line_state = salix::ReadPrimary1LineState();
     absolute_time_t next_heartbeat =
         make_timeout_time_ms(salix::kHeartbeatIntervalMs);
 
@@ -424,8 +474,16 @@ int main()
         if (cdc_connected && !cdc_was_connected) {
             salix::PrintBootBanner();
             salix::PrintCurrentHostState();
+            last_line_state = salix::ReadPrimary1LineState();
+            salix::PrintPrimary1LineState(last_line_state);
         }
         cdc_was_connected = cdc_connected;
+
+        const salix::UsbLineState line_state = salix::ReadPrimary1LineState();
+        if (cdc_connected && line_state != last_line_state) {
+            last_line_state = line_state;
+            salix::PrintPrimary1LineState(line_state);
+        }
 
         salix::HostEvent event{};
         while (queue_try_remove(&salix::g_host_event_queue, &event)) {
