@@ -9,6 +9,7 @@
 
 #include "pio_usb.h"
 #include "tusb.h"
+#include "host/hcd.h"
 
 namespace salix {
 
@@ -17,16 +18,20 @@ constexpr uint32_t kHeartbeatIntervalMs = 2000;
 
 constexpr uint8_t kNativeUsbRhport = 0;
 constexpr uint8_t kPrimary1Rhport = 1;
+constexpr uint8_t kPrimary2Rhport = 2;
 constexpr uint8_t kPrimary1DpPin = 16;
 constexpr uint8_t kPrimary1DmPin = 17;
+constexpr uint8_t kPrimary2DpPin = 18;
+constexpr uint8_t kPrimary2DmPin = 19;
 
 constexpr uint16_t kMaxCapturedReportBytes = 64;
-constexpr uint kHostEventQueueDepth = 32;
+constexpr uint kHostEventQueueDepth = 64;
 
 enum class HostEventType : uint8_t {
     HostReady,
     HostConfigureFailed,
     HostInitFailed,
+    Primary2AddFailed,
     DeviceMounted,
     DeviceUnmounted,
     HidMounted,
@@ -39,18 +44,13 @@ enum class HostRuntimeState : uint32_t {
     Starting,
     ConfigureFailed,
     InitFailed,
+    Primary1Only,
     Ready,
-};
-
-enum class UsbLineState : uint8_t {
-    Se0 = 0,
-    FullSpeedIdle,
-    LowSpeedIdle,
-    Se1,
 };
 
 struct HostEvent {
     HostEventType type;
+    uint8_t rhport;
     uint8_t dev_addr;
     uint8_t instance;
     uint8_t interface_number;
@@ -101,53 +101,30 @@ const char* ProtocolName(uint8_t protocol)
     }
 }
 
-UsbLineState ReadPrimary1LineState()
+const char* PrimaryName(uint8_t rhport)
 {
-    const bool dp = gpio_get(kPrimary1DpPin);
-    const bool dm = gpio_get(kPrimary1DmPin);
-
-    if (!dp && !dm) {
-        return UsbLineState::Se0;
+    switch (rhport) {
+        case kPrimary1Rhport:
+            return "PRIMARY-1";
+        case kPrimary2Rhport:
+            return "PRIMARY-2";
+        default:
+            return "PRIMARY-?";
     }
-    if (dp && !dm) {
-        return UsbLineState::FullSpeedIdle;
-    }
-    if (!dp && dm) {
-        return UsbLineState::LowSpeedIdle;
-    }
-    return UsbLineState::Se1;
 }
 
-const char* UsbLineStateName(UsbLineState state)
+uint8_t DeviceRhport(uint8_t dev_addr)
 {
-    switch (state) {
-        case UsbLineState::Se0:
-            return "SE0/no-device";
-        case UsbLineState::FullSpeedIdle:
-            return "FS-idle";
-        case UsbLineState::LowSpeedIdle:
-            return "LS-idle";
-        case UsbLineState::Se1:
-            return "SE1/invalid";
-    }
-    return "unknown";
-}
-
-void PrintPrimary1LineState(UsbLineState state)
-{
-    std::printf(
-        "[PRIMARY-1] bus lines D+=%u D-=%u state=%s\r\n",
-        gpio_get(kPrimary1DpPin) ? 1u : 0u,
-        gpio_get(kPrimary1DmPin) ? 1u : 0u,
-        UsbLineStateName(state)
-    );
+    hcd_devtree_info_t devtree{};
+    hcd_devtree_get_info(dev_addr, &devtree);
+    return devtree.rhport;
 }
 
 void PrintBootBanner()
 {
     std::printf("\r\n");
     std::printf("SalixControllerBridge - Main I/O Processor\r\n");
-    std::printf("Firmware milestone: green-main 0.2\r\n");
+    std::printf("Firmware milestone: green-main 0.3\r\n");
     std::printf("Board role: GREEN Pico 2 W / real-time master\r\n");
     std::printf("Runtime: Pico SDK C++ (MicroPython-free)\r\n");
     std::printf("System clock: %" PRIu32 " kHz\r\n", kSystemClockKHz);
@@ -157,7 +134,11 @@ void PrintBootBanner()
         kPrimary1DpPin,
         kPrimary1DmPin
     );
-    std::printf("PRIMARY-2 USB host: reserved / disabled\r\n");
+    std::printf(
+        "PRIMARY-2 USB host: PIO USB D+=GP%u D-=GP%u\r\n",
+        kPrimary2DpPin,
+        kPrimary2DmPin
+    );
     std::printf("SNES backend: not enabled in this milestone\r\n");
     std::printf("\r\n");
 }
@@ -166,13 +147,28 @@ void PrintCurrentHostState()
 {
     switch (GetHostRuntimeState()) {
         case HostRuntimeState::Starting:
-            std::printf("[PRIMARY-1] host state=starting\r\n");
+            std::printf("[USB-HOST] host state=starting\r\n");
             break;
         case HostRuntimeState::ConfigureFailed:
             std::printf("[PRIMARY-1] host state=configure-failed\r\n");
             break;
         case HostRuntimeState::InitFailed:
             std::printf("[PRIMARY-1] host state=init-failed\r\n");
+            break;
+        case HostRuntimeState::Primary1Only:
+            std::printf(
+                "[PRIMARY-1] host ready rhport=%u D+=GP%u D-=GP%u\r\n",
+                kPrimary1Rhport,
+                kPrimary1DpPin,
+                kPrimary1DmPin
+            );
+            std::printf(
+                "[PRIMARY-2] ERROR: could not add PIO USB root port "
+                "rhport=%u D+=GP%u D-=GP%u\r\n",
+                kPrimary2Rhport,
+                kPrimary2DpPin,
+                kPrimary2DmPin
+            );
             break;
         case HostRuntimeState::Ready:
             std::printf(
@@ -181,12 +177,20 @@ void PrintCurrentHostState()
                 kPrimary1DpPin,
                 kPrimary1DmPin
             );
+            std::printf(
+                "[PRIMARY-2] host ready rhport=%u D+=GP%u D-=GP%u\r\n",
+                kPrimary2Rhport,
+                kPrimary2DpPin,
+                kPrimary2DmPin
+            );
             break;
     }
 }
 
 void PrintHostEvent(const HostEvent& event)
 {
+    const char* primary = PrimaryName(event.rhport);
+
     switch (event.type) {
         case HostEventType::HostReady:
             std::printf(
@@ -194,6 +198,12 @@ void PrintHostEvent(const HostEvent& event)
                 kPrimary1Rhport,
                 kPrimary1DpPin,
                 kPrimary1DmPin
+            );
+            std::printf(
+                "[PRIMARY-2] host ready rhport=%u D+=GP%u D-=GP%u\r\n",
+                kPrimary2Rhport,
+                kPrimary2DpPin,
+                kPrimary2DmPin
             );
             break;
 
@@ -205,29 +215,44 @@ void PrintHostEvent(const HostEvent& event)
             std::printf("[PRIMARY-1] ERROR: tuh_init failed\r\n");
             break;
 
+        case HostEventType::Primary2AddFailed:
+            std::printf(
+                "[PRIMARY-2] ERROR: pio_usb_host_add_port failed "
+                "D+=GP%u D-=GP%u; PRIMARY-1 remains active\r\n",
+                kPrimary2DpPin,
+                kPrimary2DmPin
+            );
+            break;
+
         case HostEventType::DeviceMounted:
             std::printf(
-                "[PRIMARY-1] USB device mount vid=%04x pid=%04x addr=%u\r\n",
+                "[%s] USB device mount vid=%04x pid=%04x addr=%u rhport=%u\r\n",
+                primary,
                 event.vid,
                 event.pid,
-                event.dev_addr
+                event.dev_addr,
+                event.rhport
             );
             break;
 
         case HostEventType::DeviceUnmounted:
             std::printf(
-                "[PRIMARY-1] USB device unmount addr=%u\r\n",
-                event.dev_addr
+                "[%s] USB device unmount addr=%u rhport=%u\r\n",
+                primary,
+                event.dev_addr,
+                event.rhport
             );
             break;
 
         case HostEventType::HidMounted:
             std::printf(
-                "[PRIMARY-1] HID mount vid=%04x pid=%04x addr=%u "
+                "[%s] HID mount vid=%04x pid=%04x addr=%u rhport=%u "
                 "instance=%u interface=%u protocol=%s report_desc_len=%u\r\n",
+                primary,
                 event.vid,
                 event.pid,
                 event.dev_addr,
+                event.rhport,
                 event.instance,
                 event.interface_number,
                 ProtocolName(event.protocol),
@@ -237,8 +262,11 @@ void PrintHostEvent(const HostEvent& event)
 
         case HostEventType::HidUnmounted:
             std::printf(
-                "[PRIMARY-1] HID unmount addr=%u instance=%u interface=%u\r\n",
+                "[%s] HID unmount addr=%u rhport=%u "
+                "instance=%u interface=%u\r\n",
+                primary,
                 event.dev_addr,
+                event.rhport,
                 event.instance,
                 event.interface_number
             );
@@ -246,9 +274,11 @@ void PrintHostEvent(const HostEvent& event)
 
         case HostEventType::HidReceiveFailed:
             std::printf(
-                "[PRIMARY-1] ERROR: cannot request HID report "
-                "addr=%u instance=%u interface=%u\r\n",
+                "[%s] ERROR: cannot request HID report "
+                "addr=%u rhport=%u instance=%u interface=%u\r\n",
+                primary,
                 event.dev_addr,
+                event.rhport,
                 event.instance,
                 event.interface_number
             );
@@ -256,9 +286,11 @@ void PrintHostEvent(const HostEvent& event)
 
         case HostEventType::HidReport:
             std::printf(
-                "[PRIMARY-1] HID report addr=%u instance=%u interface=%u "
+                "[%s] HID report addr=%u rhport=%u instance=%u interface=%u "
                 "len=%u captured=%u data=",
+                primary,
                 event.dev_addr,
+                event.rhport,
                 event.instance,
                 event.interface_number,
                 event.report_len,
@@ -277,7 +309,7 @@ void PrintHostEvent(const HostEvent& event)
     }
 }
 
-void Primary1HostCore()
+void PrimaryHostCore()
 {
     // Pico-PIO-USB requires a system clock that is a multiple of 12 MHz.
     // main() establishes 120 MHz before this core is launched.
@@ -305,9 +337,21 @@ void Primary1HostCore()
         return;
     }
 
-    SetHostRuntimeState(HostRuntimeState::Ready);
-    event.type = HostEventType::HostReady;
-    PushHostEvent(event);
+    // tuh_init() initializes Pico-PIO-USB root port 0 using GP16/GP17.
+    // Add the library's second root port for PRIMARY-2. Pico-PIO-USB maps
+    // root port 0 -> TinyUSB rhport 1 and root port 1 -> TinyUSB rhport 2.
+    if (pio_usb_host_add_port(kPrimary2DpPin, PIO_USB_PINOUT_DPDM) != 0) {
+        SetHostRuntimeState(HostRuntimeState::Primary1Only);
+        event = {};
+        event.type = HostEventType::Primary2AddFailed;
+        event.rhport = kPrimary2Rhport;
+        PushHostEvent(event);
+    } else {
+        SetHostRuntimeState(HostRuntimeState::Ready);
+        event = {};
+        event.type = HostEventType::HostReady;
+        PushHostEvent(event);
+    }
 
     while (true) {
         tuh_task();
@@ -320,6 +364,7 @@ extern "C" void tuh_mount_cb(uint8_t dev_addr)
 {
     salix::HostEvent event{};
     event.type = salix::HostEventType::DeviceMounted;
+    event.rhport = salix::DeviceRhport(dev_addr);
     event.dev_addr = dev_addr;
     tuh_vid_pid_get(dev_addr, &event.vid, &event.pid);
     salix::PushHostEvent(event);
@@ -329,6 +374,7 @@ extern "C" void tuh_umount_cb(uint8_t dev_addr)
 {
     salix::HostEvent event{};
     event.type = salix::HostEventType::DeviceUnmounted;
+    event.rhport = salix::DeviceRhport(dev_addr);
     event.dev_addr = dev_addr;
     salix::PushHostEvent(event);
 }
@@ -344,6 +390,7 @@ extern "C" void tuh_hid_mount_cb(
 
     salix::HostEvent event{};
     event.type = salix::HostEventType::HidMounted;
+    event.rhport = salix::DeviceRhport(dev_addr);
     event.dev_addr = dev_addr;
     event.instance = instance;
     event.descriptor_len = desc_len;
@@ -364,6 +411,7 @@ extern "C" void tuh_hid_mount_cb(
     if (!tuh_hid_receive_report(dev_addr, instance)) {
         event = {};
         event.type = salix::HostEventType::HidReceiveFailed;
+        event.rhport = salix::DeviceRhport(dev_addr);
         event.dev_addr = dev_addr;
         event.instance = instance;
         event.interface_number =
@@ -376,6 +424,7 @@ extern "C" void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance)
 {
     salix::HostEvent event{};
     event.type = salix::HostEventType::HidUnmounted;
+    event.rhport = salix::DeviceRhport(dev_addr);
     event.dev_addr = dev_addr;
     event.instance = instance;
 
@@ -398,6 +447,7 @@ extern "C" void tuh_hid_report_received_cb(
 {
     salix::HostEvent event{};
     event.type = salix::HostEventType::HidReport;
+    event.rhport = salix::DeviceRhport(dev_addr);
     event.dev_addr = dev_addr;
     event.instance = instance;
     event.report_len = len;
@@ -423,6 +473,7 @@ extern "C" void tuh_hid_report_received_cb(
     if (!tuh_hid_receive_report(dev_addr, instance)) {
         event = {};
         event.type = salix::HostEventType::HidReceiveFailed;
+        event.rhport = salix::DeviceRhport(dev_addr);
         event.dev_addr = dev_addr;
         event.instance = instance;
         event.interface_number =
@@ -455,11 +506,10 @@ int main()
     sleep_ms(100);
 
     multicore_reset_core1();
-    multicore_launch_core1(salix::Primary1HostCore);
+    multicore_launch_core1(salix::PrimaryHostCore);
 
     uint32_t heartbeat = 0;
     bool cdc_was_connected = false;
-    salix::UsbLineState last_line_state = salix::ReadPrimary1LineState();
     absolute_time_t next_heartbeat =
         make_timeout_time_ms(salix::kHeartbeatIntervalMs);
 
@@ -474,16 +524,8 @@ int main()
         if (cdc_connected && !cdc_was_connected) {
             salix::PrintBootBanner();
             salix::PrintCurrentHostState();
-            last_line_state = salix::ReadPrimary1LineState();
-            salix::PrintPrimary1LineState(last_line_state);
         }
         cdc_was_connected = cdc_connected;
-
-        const salix::UsbLineState line_state = salix::ReadPrimary1LineState();
-        if (cdc_connected && line_state != last_line_state) {
-            last_line_state = line_state;
-            salix::PrintPrimary1LineState(line_state);
-        }
 
         salix::HostEvent event{};
         while (queue_try_remove(&salix::g_host_event_queue, &event)) {
