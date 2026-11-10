@@ -43,6 +43,36 @@ This milestone deliberately does **not** normalize controller state and does
 
 PRIMARY-2 remains reserved on GP18/GP19 but disabled.
 
+## Milestone 0.3 — dual PRIMARY USB host bring-up
+
+GREEN 0.3 preserves the physically proven PRIMARY-1 path unchanged and enables
+the second Pico-PIO-USB root port:
+
+```text
+PRIMARY-1
+  D+ GP16 / D- GP17
+  -> Pico-PIO-USB root port 0
+  -> TinyUSB rhport 1
+
+PRIMARY-2
+  D+ GP18 / D- GP19
+  -> Pico-PIO-USB root port 1
+  -> TinyUSB rhport 2
+```
+
+Pico-PIO-USB root port 0 is initialized by `tuh_init(1)`; GREEN then calls
+`pio_usb_host_add_port(18, PIO_USB_PINOUT_DPDM)` to add root port 1.
+TinyUSB device capacity is increased to two directly attached devices.
+
+The host diagnostics now include the originating PRIMARY port and TinyUSB
+rhport for mount, unmount, HID mount, and HID report events. This allows
+simultaneous PRIMARY-1 / PRIMARY-2 tests without guessing which device produced
+a line.
+
+GREEN 0.3 still deliberately does **not** normalize controller state and does
+**not** drive the SNES backend yet. Xbox/XInput-style devices can enumerate as
+generic USB devices even when they do not expose a TinyUSB HID interface.
+
 ## PRIMARY USB electrical rules
 
 Accepted prototype mapping:
@@ -62,7 +92,7 @@ Additional constraints:
 - Pico-PIO-USB recommends 22 ohm series resistors on D+ and D- for improved
   signal integrity, but they are not a hard prerequisite for this short-wire
   prototype;
-- first bring-up may use direct GP16/GP17 connections;
+- prototype bring-up may use direct GP16/GP17 and GP18/GP19 connections;
 - if enumeration is unreliable or the data wiring is lengthened, fit 22-27 ohm
   series resistors close to the GREEN GPIO pins before changing firmware;
 - keep the D+/D- pair short and close together;
@@ -110,9 +140,9 @@ CMAKE_GENERATOR
 
 ## Clock choice
 
-Pico-PIO-USB requires the system clock to be a multiple of 12 MHz. GREEN 0.2
-uses **120 MHz** during bring-up, matching the conservative upstream dual-USB
-example.
+Pico-PIO-USB requires the system clock to be a multiple of 12 MHz. GREEN
+0.2/0.3 uses **120 MHz** during bring-up, matching the conservative upstream
+dual-USB example.
 
 This is intentional; it is not an RP2350 performance target.
 
@@ -150,48 +180,44 @@ Monitor the native CDC port with:
 py src\pc_host\pico_monitor.py
 ```
 
-Before any controller is attached, expected GREEN 0.2 output includes:
+Before any controller is attached, expected GREEN 0.3 output includes:
 
 ```text
 SalixControllerBridge - Main I/O Processor
-Firmware milestone: green-main 0.2
+Firmware milestone: green-main 0.3
 System clock: 120000 kHz
 Native USB: CDC/stdout diagnostics
 PRIMARY-1 USB host: PIO USB D+=GP16 D-=GP17
-PRIMARY-2 USB host: reserved / disabled
+PRIMARY-2 USB host: PIO USB D+=GP18 D-=GP19
 SNES backend: not enabled in this milestone
 
 [PRIMARY-1] host ready rhport=1 D+=GP16 D-=GP17
-[PRIMARY-1] bus lines D+=0 D-=0 state=SE0/no-device
+[PRIMARY-2] host ready rhport=2 D+=GP18 D-=GP19
 [green-main] heartbeat=...
 ```
 
-With Power Distribution Rev A reconnected and a controller attached to
-PRIMARY-1, GREEN also reports the raw electrical state of GP16/GP17 whenever
-it changes:
+A normal HID controller on either port should identify its source directly:
 
 ```text
-D+=0 D-=0 -> SE0/no-device
-D+=1 D-=0 -> FS-idle (normal full-speed attachment)
-D+=0 D-=1 -> LS-idle (low-speed attachment, or possible D+/D- reversal for a
-              controller expected to be full-speed)
-D+=1 D-=1 -> SE1/invalid
+[PRIMARY-1] USB device mount vid=.... pid=.... addr=1 rhport=1
+[PRIMARY-1] HID mount ... addr=1 rhport=1 ...
+[PRIMARY-1] HID report addr=1 rhport=1 ... data=...
+
+[PRIMARY-2] USB device mount vid=.... pid=.... addr=2 rhport=2
+[PRIMARY-2] HID mount ... addr=2 rhport=2 ...
+[PRIMARY-2] HID report addr=2 rhport=2 ... data=...
 ```
 
-The enumeration target is then:
-
-```text
-[PRIMARY-1] USB device mount vid=.... pid=.... addr=...
-[PRIMARY-1] HID mount vid=.... pid=.... addr=... instance=... interface=... protocol=...
-[PRIMARY-1] HID report ... data=...
-```
+Device addresses are assigned dynamically, so PRIMARY-1 is not guaranteed to
+be address 1 and PRIMARY-2 is not guaranteed to be address 2. The `rhport`
+field is the authoritative port identity.
 
 Gamepads and arcade sticks commonly use HID protocol `None`; GREEN 0.2 requests
 reports for every HID protocol rather than only boot keyboards/mice.
 
 ## Next milestone
 
-Only after PRIMARY-1 enumeration and raw reports are physically proven:
+Only after simultaneous PRIMARY-1 / PRIMARY-2 operation is physically proven:
 
 ```text
 raw HID
