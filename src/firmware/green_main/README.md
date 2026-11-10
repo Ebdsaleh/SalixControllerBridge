@@ -162,13 +162,26 @@ PRIMARY-2 USB host: reserved / disabled
 SNES backend: not enabled in this milestone
 
 [PRIMARY-1] host ready rhport=1 D+=GP16 D-=GP17
+[PRIMARY-1] bus lines D+=0 D-=0 state=SE0/no-device
 [green-main] heartbeat=...
 ```
 
-With Power Distribution Rev A reconnected and a HID controller attached to
-PRIMARY-1, the diagnostic target is:
+With Power Distribution Rev A reconnected and a controller attached to
+PRIMARY-1, GREEN also reports the raw electrical state of GP16/GP17 whenever
+it changes:
 
 ```text
+D+=0 D-=0 -> SE0/no-device
+D+=1 D-=0 -> FS-idle (normal full-speed attachment)
+D+=0 D-=1 -> LS-idle (low-speed attachment, or possible D+/D- reversal for a
+              controller expected to be full-speed)
+D+=1 D-=1 -> SE1/invalid
+```
+
+The enumeration target is then:
+
+```text
+[PRIMARY-1] USB device mount vid=.... pid=.... addr=...
 [PRIMARY-1] HID mount vid=.... pid=.... addr=... instance=... interface=... protocol=...
 [PRIMARY-1] HID report ... data=...
 ```
