@@ -8,9 +8,12 @@
 #include "pico/util/queue.h"
 
 #include "pio_usb.h"
-#include "pio_usb_ll.h"
 #include "tusb.h"
 #include "host/hcd.h"
+
+extern "C" {
+extern root_port_t pio_usb_root_port[PIO_USB_ROOT_PORT_CNT];
+}
 
 namespace salix {
 
@@ -136,7 +139,7 @@ uint8_t DeviceRhport(uint8_t dev_addr)
 
 PioRootSnapshot ReadPioRootSnapshot(uint8_t root_index)
 {
-    root_port_t* root = PIO_USB_ROOT_PORT(root_index);
+    root_port_t* root = &pio_usb_root_port[root_index];
 
     PioRootSnapshot snapshot{};
     snapshot.initialized = root->initialized;
