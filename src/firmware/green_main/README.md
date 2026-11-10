@@ -202,3 +202,30 @@ raw HID
 
 The known-good SNES pad/mouse behavior will then be migrated from
 `src/pico_client/main.py` without changing its proven external semantics.
+
+
+## GREEN 0.2 PRIMARY-1 physical HID acceptance
+
+The Mayflash F300 has now been physically captured through PRIMARY-1.
+
+GREEN received continuous 8-byte HID reports on address 1 / interface 0.
+Neutral payload:
+
+```text
+00 00 0F 80 80 80 80 00
+```
+
+Observed movement changed the payload, including axis values reaching
+`00` and `FF`.
+
+This physically proves:
+
+- PRIMARY-1 VBUS/GND power path;
+- GP16/GP17 PIO USB electrical/data path;
+- TinyUSB enumeration/HID receive path;
+- native CDC reporting of live controller data.
+
+The current breadboard-kit female Dupont sockets have shown orientation/contact
+sensitivity. That is treated as a prototype connector-quality issue; a good
+female contact should not depend on rotational orientation around a square
+header pin.

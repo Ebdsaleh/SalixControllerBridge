@@ -257,3 +257,40 @@ native USB host/hub
 Bluetooth
 future USB-C selector path
 ```
+
+
+## PRIMARY-1 physical HID acceptance — Mayflash F300
+
+PRIMARY-1 has now been physically proven with the Mayflash F300 in the
+already-established PS3/DINPUT mode.
+
+Observed on the GREEN Pico 2 W host path:
+
+- TinyUSB HID reports arrive on address 1 / interface 0;
+- report length is 8 bytes;
+- neutral reports repeat as `00 00 0F 80 80 80 80 00`;
+- controller movement produces changing payload values including axis extremes
+  such as `00` and `FF`.
+
+This accepts the full prototype path:
+
+```text
+Mayflash F300
+  -> PRIMARY_USB1
+  -> Rev A power distribution
+  -> GP16/GP17 PIO USB
+  -> TinyUSB HID host
+  -> GREEN native CDC diagnostics
+```
+
+### Prototype Dupont socket contact warning
+
+The current breadboard-kit female Dupont jumpers are mechanically sensitive.
+A healthy female Dupont contact should not require a particular rotational
+orientation on a square 2.54 mm header pin. If flipping the housing changes
+reliability, treat that as a loose/poor internal spring contact or crimp, not as
+normal USB behavior.
+
+For the bench prototype it is acceptable to mark and use the reliable
+orientation, but final hardware should replace mechanically sensitive jumper
+contacts with higher-quality crimp housings/connectors or a fixed harness.
