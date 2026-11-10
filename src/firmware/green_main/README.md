@@ -73,6 +73,35 @@ GREEN 0.3 still deliberately does **not** normalize controller state and does
 **not** drive the SNES backend yet. Xbox/XInput-style devices can enumerate as
 generic USB devices even when they do not expose a TinyUSB HID interface.
 
+## Milestone 0.3.1 — PRIMARY-2 root-state diagnostics
+
+GREEN 0.3.1 keeps the 0.3 dual-port implementation unchanged and adds
+diagnostics for Pico-PIO-USB's own two `root_port_t` structures.
+
+On monitor connection GREEN prints both roots, including:
+
+```text
+[PRIMARY-1] PIO root=0 rhport=1 init=1 connected=0 suspended=0 speed=- pins D+=GP16 D-=GP17 ...
+[PRIMARY-2] PIO root=1 rhport=2 init=1 connected=0 suspended=0 speed=- pins D+=GP18 D-=GP19 ...
+```
+
+GREEN also prints a root-state line whenever `initialized`, `connected`,
+`suspended`, speed, or the configured pins change.
+
+This is specifically intended to separate two failure classes during
+PRIMARY-2 bring-up:
+
+- `connected` remains 0 when a powered controller is inserted:
+  Pico-PIO-USB itself is not seeing a valid USB attach state on GP18/GP19.
+  Check data wiring, polarity, connector contact, and continuity before
+  changing the USB host stack.
+- `connected` changes to 1 but no TinyUSB device mount follows:
+  the physical attach is visible to Pico-PIO-USB, so investigate the
+  enumeration / TinyUSB path next.
+
+The diagnostics read Pico-PIO-USB's own root state rather than inferring USB
+state from a controller LED.
+
 ## PRIMARY USB electrical rules
 
 Accepted prototype mapping:
@@ -184,7 +213,7 @@ Before any controller is attached, expected GREEN 0.3 output includes:
 
 ```text
 SalixControllerBridge - Main I/O Processor
-Firmware milestone: green-main 0.3
+Firmware milestone: green-main 0.3.1
 System clock: 120000 kHz
 Native USB: CDC/stdout diagnostics
 PRIMARY-1 USB host: PIO USB D+=GP16 D-=GP17
