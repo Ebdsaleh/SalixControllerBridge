@@ -8,6 +8,7 @@
 #include "pico/util/queue.h"
 
 #include "pio_usb.h"
+#include "pio_usb_ll.h"
 #include "tusb.h"
 #include "host/hcd.h"
 
@@ -19,6 +20,8 @@ constexpr uint32_t kHeartbeatIntervalMs = 2000;
 constexpr uint8_t kNativeUsbRhport = 0;
 constexpr uint8_t kPrimary1Rhport = 1;
 constexpr uint8_t kPrimary2Rhport = 2;
+constexpr uint8_t kPrimary1RootIndex = 0;
+constexpr uint8_t kPrimary2RootIndex = 1;
 constexpr uint8_t kPrimary1DpPin = 16;
 constexpr uint8_t kPrimary1DmPin = 17;
 constexpr uint8_t kPrimary2DpPin = 18;
@@ -61,6 +64,17 @@ struct HostEvent {
     uint16_t report_len;
     uint16_t captured_len;
     uint8_t report[kMaxCapturedReportBytes];
+};
+
+struct PioRootSnapshot {
+    bool initialized;
+    bool connected;
+    bool suspended;
+    bool is_fullspeed;
+    uint8_t pin_dp;
+    uint8_t pin_dm;
+    uint8_t event;
+    uint32_t ints;
 };
 
 queue_t g_host_event_queue;
@@ -120,11 +134,66 @@ uint8_t DeviceRhport(uint8_t dev_addr)
     return devtree.rhport;
 }
 
+PioRootSnapshot ReadPioRootSnapshot(uint8_t root_index)
+{
+    root_port_t* root = PIO_USB_ROOT_PORT(root_index);
+
+    PioRootSnapshot snapshot{};
+    snapshot.initialized = root->initialized;
+    snapshot.connected = root->connected;
+    snapshot.suspended = root->suspended;
+    snapshot.is_fullspeed = root->is_fullspeed;
+    snapshot.pin_dp = root->pin_dp;
+    snapshot.pin_dm = root->pin_dm;
+    snapshot.event = static_cast<uint8_t>(root->event);
+    snapshot.ints = root->ints;
+    return snapshot;
+}
+
+bool SamePioRootConnectionState(
+    const PioRootSnapshot& lhs,
+    const PioRootSnapshot& rhs
+)
+{
+    return lhs.initialized == rhs.initialized &&
+           lhs.connected == rhs.connected &&
+           lhs.suspended == rhs.suspended &&
+           lhs.is_fullspeed == rhs.is_fullspeed &&
+           lhs.pin_dp == rhs.pin_dp &&
+           lhs.pin_dm == rhs.pin_dm;
+}
+
+void PrintPioRootState(
+    const char* primary,
+    uint8_t root_index,
+    uint8_t rhport,
+    const PioRootSnapshot& state
+)
+{
+    std::printf(
+        "[%s] PIO root=%u rhport=%u init=%u connected=%u suspended=%u "
+        "speed=%s pins D+=GP%u D-=GP%u event=%u ints=0x%08" PRIx32 "\r\n",
+        primary,
+        root_index,
+        rhport,
+        state.initialized ? 1u : 0u,
+        state.connected ? 1u : 0u,
+        state.suspended ? 1u : 0u,
+        state.connected
+            ? (state.is_fullspeed ? "FS" : "LS")
+            : "-",
+        state.pin_dp,
+        state.pin_dm,
+        state.event,
+        state.ints
+    );
+}
+
 void PrintBootBanner()
 {
     std::printf("\r\n");
     std::printf("SalixControllerBridge - Main I/O Processor\r\n");
-    std::printf("Firmware milestone: green-main 0.3\r\n");
+    std::printf("Firmware milestone: green-main 0.3.1\r\n");
     std::printf("Board role: GREEN Pico 2 W / real-time master\r\n");
     std::printf("Runtime: Pico SDK C++ (MicroPython-free)\r\n");
     std::printf("System clock: %" PRIu32 " kHz\r\n", kSystemClockKHz);
@@ -185,6 +254,19 @@ void PrintCurrentHostState()
             );
             break;
     }
+
+    PrintPioRootState(
+        "PRIMARY-1",
+        kPrimary1RootIndex,
+        kPrimary1Rhport,
+        ReadPioRootSnapshot(kPrimary1RootIndex)
+    );
+    PrintPioRootState(
+        "PRIMARY-2",
+        kPrimary2RootIndex,
+        kPrimary2Rhport,
+        ReadPioRootSnapshot(kPrimary2RootIndex)
+    );
 }
 
 void PrintHostEvent(const HostEvent& event)
@@ -510,6 +592,9 @@ int main()
 
     uint32_t heartbeat = 0;
     bool cdc_was_connected = false;
+    bool root_snapshots_valid = false;
+    salix::PioRootSnapshot last_primary1_root{};
+    salix::PioRootSnapshot last_primary2_root{};
     absolute_time_t next_heartbeat =
         make_timeout_time_ms(salix::kHeartbeatIntervalMs);
 
@@ -526,6 +611,47 @@ int main()
             salix::PrintCurrentHostState();
         }
         cdc_was_connected = cdc_connected;
+
+        const salix::PioRootSnapshot primary1_root =
+            salix::ReadPioRootSnapshot(salix::kPrimary1RootIndex);
+        const salix::PioRootSnapshot primary2_root =
+            salix::ReadPioRootSnapshot(salix::kPrimary2RootIndex);
+
+        if (cdc_connected) {
+            if (!root_snapshots_valid) {
+                last_primary1_root = primary1_root;
+                last_primary2_root = primary2_root;
+                root_snapshots_valid = true;
+            } else {
+                if (!salix::SamePioRootConnectionState(
+                        primary1_root,
+                        last_primary1_root
+                    )) {
+                    salix::PrintPioRootState(
+                        "PRIMARY-1",
+                        salix::kPrimary1RootIndex,
+                        salix::kPrimary1Rhport,
+                        primary1_root
+                    );
+                    last_primary1_root = primary1_root;
+                }
+
+                if (!salix::SamePioRootConnectionState(
+                        primary2_root,
+                        last_primary2_root
+                    )) {
+                    salix::PrintPioRootState(
+                        "PRIMARY-2",
+                        salix::kPrimary2RootIndex,
+                        salix::kPrimary2Rhport,
+                        primary2_root
+                    );
+                    last_primary2_root = primary2_root;
+                }
+            }
+        } else {
+            root_snapshots_valid = false;
+        }
 
         salix::HostEvent event{};
         while (queue_try_remove(&salix::g_host_event_queue, &event)) {
