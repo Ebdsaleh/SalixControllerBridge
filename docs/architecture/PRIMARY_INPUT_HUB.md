@@ -264,6 +264,12 @@ future USB-C selector path
 PRIMARY-1 has now been physically proven with the Mayflash F300 in the
 already-established PS3/DINPUT mode.
 
+Important chronology: this capture occurred **before** the later raw
+GP16/GP17 line-state diagnostic firmware was flashed. The Pico was still
+running the previously accepted GREEN 0.2 build. The successful enumeration
+therefore resulted from the physical USB connection becoming reliable during
+voltage/contact testing, not from the diagnostic firmware change.
+
 Observed on the GREEN Pico 2 W host path:
 
 - TinyUSB HID reports arrive on address 1 / interface 0;

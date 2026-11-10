@@ -208,6 +208,11 @@ The known-good SNES pad/mouse behavior will then be migrated from
 
 The Mayflash F300 has now been physically captured through PRIMARY-1.
 
+This capture occurred **before** the raw GP16/GP17 line-state diagnostic build
+was flashed. GREEN was still running the prior 0.2 firmware, so the successful
+capture proves the pre-existing host stack was already functional and that the
+critical change was physical connector/contact reliability.
+
 GREEN received continuous 8-byte HID reports on address 1 / interface 0.
 Neutral payload:
 
