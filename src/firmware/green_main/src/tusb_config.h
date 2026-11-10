@@ -1,16 +1,17 @@
 #pragma once
 
-// Salix GREEN 0.2 TinyUSB configuration.
+// Salix GREEN 0.3 TinyUSB configuration.
 //
 // Native RP2350 USB controller:
 //   roothub 0 -> USB device -> CDC/stdout diagnostics.
 //
 // Pico-PIO-USB:
-//   roothub 1 -> USB host -> PRIMARY-1 HID controller.
+//   PIO root port 0 -> TinyUSB rhport 1 -> PRIMARY-1 GP16/GP17.
+//   PIO root port 1 -> TinyUSB rhport 2 -> PRIMARY-2 GP18/GP19.
 //
-// PRIMARY-1 is deliberately the only enabled physical host port in this
-// milestone. Hub and second-port support remain disabled until one-port
-// enumeration is physically proven.
+// PRIMARY-1 was physically proven under GREEN 0.2. GREEN 0.3 enables the
+// second Pico-PIO-USB root port so two directly attached devices can coexist.
+// External USB hub support remains disabled.
 
 #ifndef CFG_TUSB_RHPORT0_MODE
 #define CFG_TUSB_RHPORT0_MODE (OPT_MODE_DEVICE)
@@ -61,16 +62,16 @@
 #endif
 
 // ---------------------------------------------------------------------------
-// PRIMARY-1 host / HID
+// PRIMARY-1 + PRIMARY-2 host / HID
 // ---------------------------------------------------------------------------
 
-// One directly attached controller only for GREEN 0.2.
+// Two directly attached devices, one on each PRIMARY root port.
 #ifndef CFG_TUH_HUB
 #define CFG_TUH_HUB 0
 #endif
 
 #ifndef CFG_TUH_DEVICE_MAX
-#define CFG_TUH_DEVICE_MAX 1
+#define CFG_TUH_DEVICE_MAX 2
 #endif
 
 // A single USB controller can expose more than one HID interface.
