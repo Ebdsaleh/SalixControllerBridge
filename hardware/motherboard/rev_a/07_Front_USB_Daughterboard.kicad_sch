@@ -1633,7 +1633,7 @@
 	)
 	(symbol
 		(lib_id "Salix:USB_A_HOST")
-		(at 155 68 0)
+		(at 165 68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1641,33 +1641,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006094")
 		(property "Reference" "J21"
-			(at 155 50 0)
+			(at 165 50 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "USB-A BANK A"
-			(at 155 86 0)
+			(at 165 86 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" ""
-			(at 155 68 0)
+			(at 165 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 155 68 0)
+			(at 165 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "USB-A BANK A"
-			(at 155 68 0)
+			(at 165 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -1689,7 +1689,7 @@
 	)
 	(symbol
 		(lib_id "Salix:USB_C_HOST")
-		(at 155 112 0)
+		(at 165 112 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1697,33 +1697,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006100")
 		(property "Reference" "J22"
-			(at 155 94 0)
+			(at 165 94 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "USB-C BANK A"
-			(at 155 130 0)
+			(at 165 130 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" ""
-			(at 155 112 0)
+			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 155 112 0)
+			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "USB-C BANK A"
-			(at 155 112 0)
+			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -1747,7 +1747,7 @@
 	)
 	(symbol
 		(lib_id "Salix:TPD2EUSB30A")
-		(at 130 68 0)
+		(at 140 68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1755,33 +1755,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006108")
 		(property "Reference" "D21"
-			(at 130 50 0)
+			(at 140 50 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD A-A"
-			(at 130 86 0)
+			(at 140 86 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 130 68 0)
+			(at 140 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 130 68 0)
+			(at 140 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "ESD A-A"
-			(at 130 68 0)
+			(at 140 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -1801,7 +1801,7 @@
 	)
 	(symbol
 		(lib_id "Salix:TPD2EUSB30A")
-		(at 130 112 0)
+		(at 140 112 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1809,33 +1809,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006112")
 		(property "Reference" "D22"
-			(at 130 94 0)
+			(at 140 94 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD A-C"
-			(at 130 130 0)
+			(at 140 130 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 130 112 0)
+			(at 140 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 130 112 0)
+			(at 140 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "ESD A-C"
-			(at 130 112 0)
+			(at 140 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3096,22 +3096,22 @@
 			)
 		)
 	)
-	(label "VBUS_A_A" (at 144.84 62.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006251"))
-	(label "USB_A_A_DM" (at 144.84 66.31 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006252"))
-	(label "USB_A_A_DP" (at 144.84 69.69 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006253"))
-	(label "GND" (at 144.84 73.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006254"))
+	(label "VBUS_A_A" (at 154.84 62.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006251"))
+	(label "USB_A_A_DM" (at 154.84 66.31 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006252"))
+	(label "USB_A_A_DP" (at 154.84 69.69 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006253"))
+	(label "GND" (at 154.84 73.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006254"))
 	(label "VBUS_A_C" (at 142.3 103.11 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006255"))
-	(label "USB_A_C_DM" (at 142.3 106.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006256"))
+	(label "USB_A_C_DM" (at 152.3 106.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006256"))
 	(label "USB_A_C_DP" (at 142.3 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006257"))
-	(label "CC1_A" (at 167.7 106.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006258"))
+	(label "CC1_A" (at 177.7 106.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006258"))
 	(label "CC2_A" (at 167.7 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006259"))
-	(label "GND" (at 142.3 117.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006260"))
-	(label "USB_A_A_DP" (at 122.38 65.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006261"))
-	(label "USB_A_A_DM" (at 122.38 70.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006262"))
-	(label "GND" (at 137.62 68 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006263"))
-	(label "USB_A_C_DP" (at 122.38 109.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006264"))
-	(label "USB_A_C_DM" (at 122.38 114.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006265"))
-	(label "GND" (at 137.62 112 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006266"))
+	(label "GND" (at 152.3 117.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006260"))
+	(label "USB_A_A_DP" (at 132.38 65.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006261"))
+	(label "USB_A_A_DM" (at 132.38 70.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006262"))
+	(label "GND" (at 147.62 68 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006263"))
+	(label "USB_A_C_DP" (at 132.38 109.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006264"))
+	(label "USB_A_C_DM" (at 132.38 114.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006265"))
+	(label "GND" (at 147.62 112 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006266"))
 	(label "USB_A_A_DP" (at 205.3 77.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006267"))
 	(label "USB_A_A_DM" (at 205.3 80.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006268"))
 	(label "USB_A_C_DP" (at 205.3 85.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006269"))
