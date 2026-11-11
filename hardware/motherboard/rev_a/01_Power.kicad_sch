@@ -1,76 +1,882 @@
 (kicad_sch
 	(version 20260306)
 	(generator "salix_chatgpt")
-	(generator_version "1.0")
+	(generator_version "1.3")
 	(uuid "10000000-0000-4000-8000-000000000001")
 	(paper "A4")
 	(lib_symbols
-	)
-	(text "01 — POWER / PROTECTION"
-		(exclude_from_sim no)
-		(at 25 20 0)
-		(effects
-			(font
-				(size 2 2)
-				(bold yes)
+		(symbol "Salix:TLV62569P_DDC"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "U"
+			(at 0 12.16 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "TLV62569P"
+			(at 0 -12.16 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv62569.pdf"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "TLV62569P"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "TLV62569P_DDC_0_1"
+				(rectangle
+					(start -7.62 10.16)
+					(end 7.62 -10.16)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "TLV62569P_DDC_1_1"
+				(pin input line
+					(at -10.16 6.35 0)
+					(length 2.54)
+					(name "EN" (effects (font (size 0.85 0.85))))
+					(number "1" (effects (font (size 0.85 0.85))))
+				)
+				(pin power_in line
+					(at -10.16 3.81 0)
+					(length 2.54)
+					(name "GND" (effects (font (size 0.85 0.85))))
+					(number "2" (effects (font (size 0.85 0.85))))
+				)
+				(pin power_out line
+					(at 10.16 6.35 180)
+					(length 2.54)
+					(name "SW" (effects (font (size 0.85 0.85))))
+					(number "3" (effects (font (size 0.85 0.85))))
+				)
+				(pin power_in line
+					(at -10.16 -1.27 0)
+					(length 2.54)
+					(name "VIN" (effects (font (size 0.85 0.85))))
+					(number "4" (effects (font (size 0.85 0.85))))
+				)
+				(pin output line
+					(at 10.16 -3.81 180)
+					(length 2.54)
+					(name "PG" (effects (font (size 0.85 0.85))))
+					(number "5" (effects (font (size 0.85 0.85))))
+				)
+				(pin input line
+					(at 10.16 -6.35 180)
+					(length 2.54)
+					(name "FB" (effects (font (size 0.85 0.85))))
+					(number "6" (effects (font (size 0.85 0.85))))
+				)
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000002")
-	)
-	(text "5V_MAIN input, fuse/eFuse, reverse-current protection, brownout supervision."
-		(exclude_from_sim no)
-		(at 25 28 0)
-		(effects
-			(font
-				(size 1.1 1.1)
+		(symbol "Salix:R"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "R"
+			(at 0 2.635 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "R"
+			(at 0 -2.635 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "R"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.27 0.635)
+					(end 1.27 -0.635)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "1" (effects (font (size 0.85 0.85))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "2" (effects (font (size 0.85 0.85))))
+				)
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000003")
-	)
-	(text "Protected feeds to Pico-A VSYS, Pico-B VSYS, PRIMARY USB board, EXTENDED USB board."
-		(exclude_from_sim no)
-		(at 25 34 0)
-		(effects
-			(font
-				(size 1.1 1.1)
+		(symbol "Salix:C"
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "C"
+			(at 0 2.54 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+
+		(property "Value" "C"
+			(at 0 -2.54 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+
+		(property "Description" "Capacitor"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+
+			(symbol "C_0_1"
+				(polyline (pts (xy -0.5 1.0) (xy -0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy 0.5 1.0) (xy 0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "1" (effects (font (size 0.85 0.85))))
+				)
+
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "2" (effects (font (size 0.85 0.85))))
+				)
+
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000004")
-	)
-	(text "Dedicated 3V3_AUX regulator for hub, management logic, future console modules."
-		(exclude_from_sim no)
-		(at 25 40 0)
-		(effects
-			(font
-				(size 1.1 1.1)
+		(symbol "Salix:L"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "L"
+			(at 0 2.9 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "2.2uH"
+			(at 0 -2.9 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "2.2uH"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "L_0_1"
+				(rectangle
+					(start -1.27 0.9)
+					(end 1.27 -0.9)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "L_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "1" (effects (font (size 0.85 0.85))))
+					(number "1" (effects (font (size 0.85 0.85))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "2" (effects (font (size 0.85 0.85))))
+					(number "2" (effects (font (size 0.85 0.85))))
+				)
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000005")
 	)
-	(text "Keep USB peripheral load off Pico 3V3 rails."
+	(text "01 — POWER / PROTECTION — 5V_MAIN + 3V3_AUX"
 		(exclude_from_sim no)
-		(at 25 46 0)
+		(at 20 14 0)
 		(effects
-			(font
-				(size 1.1 1.1)
+			(font (size 1.8 1.8)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004000")
+	)
+	(text "Power target: regulated 5V input, 5A minimum / 6A recommended for full eight-receptacle charging headroom."
+		(exclude_from_sim no)
+		(at 20 20 0)
+		(effects
+			(font (size 1 1))
+		)
+		(uuid "40000000-0000-4000-8000-000000004001")
+	)
+	(text "Main input connector/eFuse stays provisional until final enclosure and current budget are frozen."
+		(exclude_from_sim no)
+		(at 20 26 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004002")
+	)
+	(text "3V3_AUX is now concrete: TLV62569P 2A synchronous buck."
+		(exclude_from_sim no)
+		(at 20 32 0)
+		(effects
+			(font (size 1 1)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004003")
+	)
+	(symbol
+		(lib_id "Salix:TLV62569P_DDC")
+		(at 110 80 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004004")
+		(property "Reference" "U2"
+			(at 110 50 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "TLV62569P"
+			(at 110 110 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+			(at 110 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 110 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "TLV62569P"
+			(at 110 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004005"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004006"))
+		(pin "3" (uuid "40000000-0000-4000-8000-000000004007"))
+		(pin "4" (uuid "40000000-0000-4000-8000-000000004008"))
+		(pin "5" (uuid "40000000-0000-4000-8000-000000004009"))
+		(pin "6" (uuid "40000000-0000-4000-8000-000000004010"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "U2")
+					(unit 1)
+				)
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000006")
 	)
-	(text "STATUS: exact regulator/eFuse parts not frozen."
+	(symbol
+		(lib_id "Salix:C")
+		(at 70 95 0)
+		(unit 1)
 		(exclude_from_sim no)
-		(at 25 52 0)
-		(effects
-			(font
-				(size 1.1 1.1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004011")
+		(property "Reference" "C1"
+			(at 70 65 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "4.7uF 10V X7R"
+			(at 70 125 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 70 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 70 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "4.7uF 10V X7R"
+			(at 70 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004012"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004013"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "C1")
+					(unit 1)
+				)
 			)
 		)
-		(uuid "10000000-0000-4000-8000-000000000007")
+	)
+	(symbol
+		(lib_id "Salix:L")
+		(at 145 73.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004014")
+		(property "Reference" "L1"
+			(at 145 43.650000000000006 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "2.2uH ≥2.5A"
+			(at 145 103.65 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" ""
+			(at 145 73.65 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 145 73.65 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "2.2uH ≥2.5A"
+			(at 145 73.65 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004015"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004016"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "L1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:C")
+		(at 175 80 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004017")
+		(property "Reference" "C2"
+			(at 175 50 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "22uF 10V X7R"
+			(at 175 110 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 175 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 175 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "22uF 10V X7R"
+			(at 175 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004018"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004019"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:C")
+		(at 190 80 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004020")
+		(property "Reference" "C3"
+			(at 190 50 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "22uF 10V X7R"
+			(at 190 110 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 190 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 190 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "22uF 10V X7R"
+			(at 190 80 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004021"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004022"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:R")
+		(at 175 95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004023")
+		(property "Reference" "R4"
+			(at 175 65 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "453k 1%"
+			(at 175 125 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 175 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 175 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "453k 1%"
+			(at 175 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004024"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004025"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:R")
+		(at 190 95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004026")
+		(property "Reference" "R5"
+			(at 190 65 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "100k 1%"
+			(at 190 125 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 190 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 190 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "100k 1%"
+			(at 190 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004027"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004028"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:C")
+		(at 205 95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004029")
+		(property "Reference" "C4"
+			(at 205 65 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "6.8pF"
+			(at 205 125 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 205 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 205 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "6.8pF"
+			(at 205 95 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004030"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004031"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:R")
+		(at 175 110 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40000000-0000-4000-8000-000000004032")
+		(property "Reference" "R6"
+			(at 175 80 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "100k PG pull-up"
+			(at 175 140 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 175 110 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 175 110 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "100k PG pull-up"
+			(at 175 110 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004033"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004034"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "R6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "TLV62569P Rev-A values:"
+		(exclude_from_sim no)
+		(at 235 48 0)
+		(effects
+			(font (size 1.05 1.05)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004035")
+	)
+	(text "VIN = 5V_MAIN; EN tied high from 5V_MAIN (do not leave floating)"
+		(exclude_from_sim no)
+		(at 235 54 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004036")
+	)
+	(text "L1 = 2.2µH; CIN = 4.7µF; COUT = 2×22µF"
+		(exclude_from_sim no)
+		(at 235 60 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004037")
+	)
+	(text "RFB_TOP = 453k, RFB_BOTTOM = 100k → ~3.3V; CFF = 6.8pF"
+		(exclude_from_sim no)
+		(at 235 66 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004038")
+	)
+	(text "PG open-drain pulled up to 3V3_AUX → 3V3_AUX_PG"
+		(exclude_from_sim no)
+		(at 235 72 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004039")
+	)
+	(text "3V3_AUX feeds USB2514B, motherboard logic and future module-management logic."
+		(exclude_from_sim no)
+		(at 235 78 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004040")
+	)
+	(text "5V_MAIN distribution (protected upstream):"
+		(exclude_from_sim no)
+		(at 35 135 0)
+		(effects
+			(font (size 1.05 1.05)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004041")
+	)
+	(text "• Pico-A VSYS   • Pico-B VSYS   • PRIMARY front board   • EXTENDED front board   • FAN0/FAN1"
+		(exclude_from_sim no)
+		(at 35 141 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004042")
+	)
+	(text "Per-receptacle current limiting/backfeed protection lives on the USB daughterboards, not here."
+		(exclude_from_sim no)
+		(at 35 147 0)
+		(effects
+			(font (size 0.95 0.95)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004043")
+	)
+	(text "Candidate input protection: TPS25947-class eFuse if final current limit ≤5.5A; otherwise select a higher-current part."
+		(exclude_from_sim no)
+		(at 35 153 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004044")
 	)
 	(sheet_instances
-		(path "/"
-			(page "2")
-		)
+		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051" (page "2"))
 	)
 	(embedded_fonts no)
 )

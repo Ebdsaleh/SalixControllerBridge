@@ -19,3 +19,11 @@ USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
 USB hub clock,24.000MHz crystal ±350ppm or better,1,PART TBD,Exact package/CL not frozen
 USB hub filter caps,0.1uF low-ESR,2,PROVISIONAL,CRFILT and PLLFILT
 USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
+3V3_AUX regulator,TI TLV62569P SOT23-6,1,FROZEN FAMILY,2A 5V-to-3.3V buck with power-good
+3V3_AUX inductor,2.2uH >=2.5A class,1,FROZEN VALUE,TLV62569P output filter
+3V3_AUX input capacitor,4.7uF 10V X7R,1,FROZEN VALUE,Close to regulator VIN
+3V3_AUX output capacitors,22uF 10V X7R,2,FROZEN VALUE,Recommended 2.2uH + 2x22uF combination
+3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
+3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
+Main input eFuse,TPS25947-class or higher-current equivalent,1,CANDIDATE,Final part depends on 5V_MAIN current budget
+Front-board interface,20-position keyed/locking connector class,2,LOGICAL PINOUT FROZEN,Exact mechanical family TBD

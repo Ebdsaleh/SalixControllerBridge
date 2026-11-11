@@ -1,7 +1,7 @@
 (kicad_sch
 	(version 20260306)
 	(generator "salix_chatgpt")
-	(generator_version "1.2")
+	(generator_version "1.3")
 	(uuid "10000000-0000-4000-8000-000000000015")
 	(paper "A4")
 	(lib_symbols
@@ -36,20 +36,16 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "Microchip 4-port USB 2.0 Hi-Speed hub controller, 36-pin SQFN preferred package"
+		(property "Description" "Microchip 4-port USB2 hub"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
+
 			(symbol "USB2514B_M2_0_1"
-				(rectangle
-					(start -17.78 27.94)
-					(end 17.78 -27.94)
-					(stroke (width 0.254) (type default))
-					(fill (type background))
-				)
+				(rectangle (start -17.78 27.94) (end 17.78 -27.94) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
 			(symbol "USB2514B_M2_1_1"
 				(pin bidirectional line
@@ -276,21 +272,21 @@
 				)
 			)
 		)
-		(symbol "Salix:DUAL_USB2_DAUGHTERBOARD"
+		(symbol "Salix:FRONT_USB_BOARD_IF_20"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 		(property "Reference" "J"
-			(at 0 13 0)
+			(at 0 28.67 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
-		(property "Value" "DUAL_USB2_DAUGHTERBOARD"
-			(at 0 -13 0)
+		(property "Value" "FRONT_USB_BOARD_IF_20"
+			(at 0 -28.67 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" ""
@@ -307,92 +303,225 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "Electrical interface to one dual-bank front USB daughterboard; physical keyed connector TBD"
+		(property "Description" "FRONT_USB_BOARD_IF_20"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-			(symbol "DUAL_USB2_DAUGHTERBOARD_0_1"
+			(symbol "FRONT_USB_BOARD_IF_20_0_1"
 				(rectangle
-					(start -10.16 10.16)
-					(end 10.16 -10.16)
+					(start -12.7 26.67)
+					(end 12.7 -26.67)
 					(stroke (width 0.254) (type default))
 					(fill (type background))
 				)
 			)
-			(symbol "DUAL_USB2_DAUGHTERBOARD_1_1"
+			(symbol "FRONT_USB_BOARD_IF_20_1_1"
 				(pin power_out line
-					(at -12.7 8.89 0)
+					(at -15.24 24.13 0)
 					(length 2.54)
-					(name "P1_VBUS" (effects (font (size 0.85 0.85))))
+					(name "5V_A" (effects (font (size 0.85 0.85))))
 					(number "1" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
-					(at -12.7 6.3500000000000005 0)
+				(pin power_out line
+					(at -15.24 21.59 0)
 					(length 2.54)
-					(name "P1_DM" (effects (font (size 0.85 0.85))))
+					(name "5V_B" (effects (font (size 0.85 0.85))))
 					(number "2" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
-					(at -12.7 3.8100000000000005 0)
+				(pin power_in line
+					(at -15.24 19.049999999999997 0)
 					(length 2.54)
-					(name "P1_DP" (effects (font (size 0.85 0.85))))
+					(name "GND_A" (effects (font (size 0.85 0.85))))
 					(number "3" (effects (font (size 0.85 0.85))))
 				)
 				(pin power_in line
-					(at -12.7 1.2700000000000005 0)
+					(at -15.24 16.509999999999998 0)
 					(length 2.54)
-					(name "P1_GND" (effects (font (size 0.85 0.85))))
+					(name "GND_B" (effects (font (size 0.85 0.85))))
 					(number "4" (effects (font (size 0.85 0.85))))
 				)
 				(pin power_out line
-					(at -12.7 -1.2699999999999996 0)
+					(at -15.24 13.969999999999999 0)
 					(length 2.54)
-					(name "P2_VBUS" (effects (font (size 0.85 0.85))))
+					(name "3V3_AUX" (effects (font (size 0.85 0.85))))
 					(number "5" (effects (font (size 0.85 0.85))))
 				)
 				(pin bidirectional line
-					(at -12.7 -3.8099999999999987 0)
+					(at -15.24 11.43 0)
 					(length 2.54)
-					(name "P2_DM" (effects (font (size 0.85 0.85))))
+					(name "I2C_SDA" (effects (font (size 0.85 0.85))))
 					(number "6" (effects (font (size 0.85 0.85))))
 				)
 				(pin bidirectional line
-					(at -12.7 -6.35 0)
+					(at -15.24 8.889999999999999 0)
 					(length 2.54)
-					(name "P2_DP" (effects (font (size 0.85 0.85))))
+					(name "I2C_SCL" (effects (font (size 0.85 0.85))))
 					(number "7" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_in line
-					(at -12.7 -8.89 0)
+				(pin input line
+					(at -15.24 6.349999999999998 0)
 					(length 2.54)
-					(name "P2_GND" (effects (font (size 0.85 0.85))))
+					(name "INT_N" (effects (font (size 0.85 0.85))))
 					(number "8" (effects (font (size 0.85 0.85))))
+				)
+				(pin output line
+					(at -15.24 3.8099999999999987 0)
+					(length 2.54)
+					(name "BOARD_ID" (effects (font (size 0.85 0.85))))
+					(number "9" (effects (font (size 0.85 0.85))))
+				)
+				(pin output line
+					(at -15.24 1.2699999999999996 0)
+					(length 2.54)
+					(name "BOARD_ENABLE" (effects (font (size 0.85 0.85))))
+					(number "10" (effects (font (size 0.85 0.85))))
+				)
+				(pin bidirectional line
+					(at -15.24 -1.2699999999999996 0)
+					(length 2.54)
+					(name "BANK_A_DM" (effects (font (size 0.85 0.85))))
+					(number "11" (effects (font (size 0.85 0.85))))
+				)
+				(pin bidirectional line
+					(at -15.24 -3.8100000000000023 0)
+					(length 2.54)
+					(name "BANK_A_DP" (effects (font (size 0.85 0.85))))
+					(number "12" (effects (font (size 0.85 0.85))))
+				)
+				(pin output line
+					(at -15.24 -6.350000000000001 0)
+					(length 2.54)
+					(name "BANK_A_PRTPWR" (effects (font (size 0.85 0.85))))
+					(number "13" (effects (font (size 0.85 0.85))))
+				)
+				(pin input line
+					(at -15.24 -8.890000000000004 0)
+					(length 2.54)
+					(name "BANK_A_OCS_N" (effects (font (size 0.85 0.85))))
+					(number "14" (effects (font (size 0.85 0.85))))
+				)
+				(pin bidirectional line
+					(at -15.24 -11.430000000000003 0)
+					(length 2.54)
+					(name "BANK_B_DM" (effects (font (size 0.85 0.85))))
+					(number "15" (effects (font (size 0.85 0.85))))
+				)
+				(pin bidirectional line
+					(at -15.24 -13.970000000000002 0)
+					(length 2.54)
+					(name "BANK_B_DP" (effects (font (size 0.85 0.85))))
+					(number "16" (effects (font (size 0.85 0.85))))
+				)
+				(pin output line
+					(at -15.24 -16.51 0)
+					(length 2.54)
+					(name "BANK_B_PRTPWR" (effects (font (size 0.85 0.85))))
+					(number "17" (effects (font (size 0.85 0.85))))
+				)
+				(pin input line
+					(at -15.24 -19.05 0)
+					(length 2.54)
+					(name "BANK_B_OCS_N" (effects (font (size 0.85 0.85))))
+					(number "18" (effects (font (size 0.85 0.85))))
+				)
+				(pin power_in line
+					(at -15.24 -21.59 0)
+					(length 2.54)
+					(name "GND_C" (effects (font (size 0.85 0.85))))
+					(number "19" (effects (font (size 0.85 0.85))))
+				)
+				(pin power_in line
+					(at -15.24 -24.13 0)
+					(length 2.54)
+					(name "GND_D" (effects (font (size 0.85 0.85))))
+					(number "20" (effects (font (size 0.85 0.85))))
 				)
 			)
 		)
 		(symbol "Salix:R"
-			(pin_names (offset 0))
+			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 		(property "Reference" "R"
+			(at 0 2.635 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Value" "R"
+			(at 0 -2.635 0)
+			(effects
+					(font (size 0.95 0.95))
+				)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "R"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.27 0.635)
+					(end 1.27 -0.635)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "1" (effects (font (size 0.85 0.85))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "~" (effects (font (size 0.85 0.85))))
+					(number "2" (effects (font (size 0.85 0.85))))
+				)
+			)
+		)
+		(symbol "Salix:C"
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "C"
 			(at 0 2.54 0)
 			(effects
 					(font (size 0.9 0.9))
 				)
 		)
 
-		(property "Value" "R"
+		(property "Value" "C"
 			(at 0 -2.54 0)
 			(effects
 					(font (size 0.9 0.9))
 				)
 		)
 
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -408,7 +537,7 @@
 				)
 		)
 
-		(property "Description" "Resistor"
+		(property "Description" "Capacitor"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -416,10 +545,11 @@
 				)
 		)
 
-			(symbol "R_0_1"
-				(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type none)))
+			(symbol "C_0_1"
+				(polyline (pts (xy -0.5 1.0) (xy -0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy 0.5 1.0) (xy 0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
 			)
-			(symbol "R_1_1"
+			(symbol "C_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -437,24 +567,22 @@
 			)
 		)
 		(symbol "Salix:CRYSTAL_2PIN"
-			(pin_names (offset 0))
+			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 		(property "Reference" "Y"
-			(at 0 3 0)
+			(at 0 3.5 0)
 			(effects
-					(font (size 0.9 0.9))
+					(font (size 0.95 0.95))
 				)
 		)
-
 		(property "Value" "24.000MHz"
-			(at 0 -3 0)
+			(at 0 -3.5 0)
 			(effects
-					(font (size 0.9 0.9))
+					(font (size 0.95 0.95))
 				)
 		)
-
 		(property "Footprint" ""
 			(at 0 0 0)
 			(effects
@@ -462,7 +590,6 @@
 					(hide yes)
 				)
 		)
-
 		(property "Datasheet" "~"
 			(at 0 0 0)
 			(effects
@@ -470,17 +597,20 @@
 					(hide yes)
 				)
 		)
-
-		(property "Description" "24 MHz crystal, ±350 ppm or better; exact CL/package TBD"
+		(property "Description" "24.000MHz"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-
 			(symbol "CRYSTAL_2PIN_0_1"
-				(rectangle (start -1.0 1.5) (end 1.0 -1.5) (stroke (width 0.254) (type default)) (fill (type none)))
+				(rectangle
+					(start -1.27 1.5)
+					(end 1.27 -1.5)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
 			)
 			(symbol "CRYSTAL_2PIN_1_1"
 				(pin passive line
@@ -489,113 +619,111 @@
 					(name "1" (effects (font (size 0.85 0.85))))
 					(number "1" (effects (font (size 0.85 0.85))))
 				)
-
 				(pin passive line
 					(at 3.81 0 180)
 					(length 2.54)
 					(name "2" (effects (font (size 0.85 0.85))))
 					(number "2" (effects (font (size 0.85 0.85))))
 				)
-
 			)
 		)
 	)
-	(text "03 — USB HUB / INPUT INTERFACE — USB2514B FOUNDATION"
+	(text "03 — USB HUB / INPUT INTERFACE — WIRED REV-A FOUNDATION"
 		(exclude_from_sim no)
 		(at 20 14 0)
 		(effects
 			(font (size 1.8 1.8)
 				(bold yes))
 		)
-		(uuid "30000000-0000-4000-8000-000000003000")
+		(uuid "40000000-0000-4000-8000-000000004045")
 	)
-	(text "Four logical USB2 banks → one USB2514B hub → one Pico-A PIO-USB host root on GP16/GP17."
+	(text "Four logical USB2 banks → USB2514B → one Pico-A PIO-USB root. Front boards keep independent charge power."
 		(exclude_from_sim no)
 		(at 20 20 0)
 		(effects
-			(font (size 1.05 1.05))
+			(font (size 1 1))
 		)
-		(uuid "30000000-0000-4000-8000-000000003001")
+		(uuid "40000000-0000-4000-8000-000000004046")
 	)
 	(symbol
 		(lib_id "Salix:USB2514B_M2")
-		(at 135 82 0)
+		(at 140 82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003002")
+		(uuid "40000000-0000-4000-8000-000000004047")
 		(property "Reference" "U1"
-			(at 135 50 0)
+			(at 140 52 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "USB2514B/M2"
-			(at 135 114 0)
+			(at 140 112 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" ""
-			(at 135 82 0)
+			(at 140 82 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 135 82 0)
+			(at 140 82 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "USB2514B/M2"
-			(at 135 82 0)
+			(at 140 82 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003003"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003004"))
-		(pin "3" (uuid "30000000-0000-4000-8000-000000003005"))
-		(pin "4" (uuid "30000000-0000-4000-8000-000000003006"))
-		(pin "5" (uuid "30000000-0000-4000-8000-000000003007"))
-		(pin "6" (uuid "30000000-0000-4000-8000-000000003008"))
-		(pin "7" (uuid "30000000-0000-4000-8000-000000003009"))
-		(pin "8" (uuid "30000000-0000-4000-8000-000000003010"))
-		(pin "9" (uuid "30000000-0000-4000-8000-000000003011"))
-		(pin "10" (uuid "30000000-0000-4000-8000-000000003012"))
-		(pin "11" (uuid "30000000-0000-4000-8000-000000003013"))
-		(pin "12" (uuid "30000000-0000-4000-8000-000000003014"))
-		(pin "13" (uuid "30000000-0000-4000-8000-000000003015"))
-		(pin "14" (uuid "30000000-0000-4000-8000-000000003016"))
-		(pin "15" (uuid "30000000-0000-4000-8000-000000003017"))
-		(pin "16" (uuid "30000000-0000-4000-8000-000000003018"))
-		(pin "17" (uuid "30000000-0000-4000-8000-000000003019"))
-		(pin "18" (uuid "30000000-0000-4000-8000-000000003020"))
-		(pin "19" (uuid "30000000-0000-4000-8000-000000003021"))
-		(pin "20" (uuid "30000000-0000-4000-8000-000000003022"))
-		(pin "21" (uuid "30000000-0000-4000-8000-000000003023"))
-		(pin "22" (uuid "30000000-0000-4000-8000-000000003024"))
-		(pin "23" (uuid "30000000-0000-4000-8000-000000003025"))
-		(pin "24" (uuid "30000000-0000-4000-8000-000000003026"))
-		(pin "25" (uuid "30000000-0000-4000-8000-000000003027"))
-		(pin "26" (uuid "30000000-0000-4000-8000-000000003028"))
-		(pin "27" (uuid "30000000-0000-4000-8000-000000003029"))
-		(pin "28" (uuid "30000000-0000-4000-8000-000000003030"))
-		(pin "29" (uuid "30000000-0000-4000-8000-000000003031"))
-		(pin "30" (uuid "30000000-0000-4000-8000-000000003032"))
-		(pin "31" (uuid "30000000-0000-4000-8000-000000003033"))
-		(pin "32" (uuid "30000000-0000-4000-8000-000000003034"))
-		(pin "33" (uuid "30000000-0000-4000-8000-000000003035"))
-		(pin "34" (uuid "30000000-0000-4000-8000-000000003036"))
-		(pin "35" (uuid "30000000-0000-4000-8000-000000003037"))
-		(pin "36" (uuid "30000000-0000-4000-8000-000000003038"))
-		(pin "EP" (uuid "30000000-0000-4000-8000-000000003039"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004048"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004049"))
+		(pin "3" (uuid "40000000-0000-4000-8000-000000004050"))
+		(pin "4" (uuid "40000000-0000-4000-8000-000000004051"))
+		(pin "5" (uuid "40000000-0000-4000-8000-000000004052"))
+		(pin "6" (uuid "40000000-0000-4000-8000-000000004053"))
+		(pin "7" (uuid "40000000-0000-4000-8000-000000004054"))
+		(pin "8" (uuid "40000000-0000-4000-8000-000000004055"))
+		(pin "9" (uuid "40000000-0000-4000-8000-000000004056"))
+		(pin "10" (uuid "40000000-0000-4000-8000-000000004057"))
+		(pin "11" (uuid "40000000-0000-4000-8000-000000004058"))
+		(pin "12" (uuid "40000000-0000-4000-8000-000000004059"))
+		(pin "13" (uuid "40000000-0000-4000-8000-000000004060"))
+		(pin "14" (uuid "40000000-0000-4000-8000-000000004061"))
+		(pin "15" (uuid "40000000-0000-4000-8000-000000004062"))
+		(pin "16" (uuid "40000000-0000-4000-8000-000000004063"))
+		(pin "17" (uuid "40000000-0000-4000-8000-000000004064"))
+		(pin "18" (uuid "40000000-0000-4000-8000-000000004065"))
+		(pin "19" (uuid "40000000-0000-4000-8000-000000004066"))
+		(pin "20" (uuid "40000000-0000-4000-8000-000000004067"))
+		(pin "21" (uuid "40000000-0000-4000-8000-000000004068"))
+		(pin "22" (uuid "40000000-0000-4000-8000-000000004069"))
+		(pin "23" (uuid "40000000-0000-4000-8000-000000004070"))
+		(pin "24" (uuid "40000000-0000-4000-8000-000000004071"))
+		(pin "25" (uuid "40000000-0000-4000-8000-000000004072"))
+		(pin "26" (uuid "40000000-0000-4000-8000-000000004073"))
+		(pin "27" (uuid "40000000-0000-4000-8000-000000004074"))
+		(pin "28" (uuid "40000000-0000-4000-8000-000000004075"))
+		(pin "29" (uuid "40000000-0000-4000-8000-000000004076"))
+		(pin "30" (uuid "40000000-0000-4000-8000-000000004077"))
+		(pin "31" (uuid "40000000-0000-4000-8000-000000004078"))
+		(pin "32" (uuid "40000000-0000-4000-8000-000000004079"))
+		(pin "33" (uuid "40000000-0000-4000-8000-000000004080"))
+		(pin "34" (uuid "40000000-0000-4000-8000-000000004081"))
+		(pin "35" (uuid "40000000-0000-4000-8000-000000004082"))
+		(pin "36" (uuid "40000000-0000-4000-8000-000000004083"))
+		(pin "EP" (uuid "40000000-0000-4000-8000-000000004084"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -606,55 +734,67 @@
 		)
 	)
 	(symbol
-		(lib_id "Salix:DUAL_USB2_DAUGHTERBOARD")
-		(at 50 65 0)
+		(lib_id "Salix:FRONT_USB_BOARD_IF_20")
+		(at 52 68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003040")
+		(uuid "40000000-0000-4000-8000-000000004085")
 		(property "Reference" "J7"
-			(at 50 33 0)
+			(at 52 38 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
-		(property "Value" "PRIMARY USB0 (BANKS 1-2)"
-			(at 50 97 0)
+		(property "Value" "PRIMARY FRONT BOARD IF"
+			(at 52 98 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" ""
-			(at 50 65 0)
+			(at 52 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 50 65 0)
+			(at 52 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "PRIMARY USB0 (BANKS 1-2)"
-			(at 50 65 0)
+		(property "Description" "PRIMARY FRONT BOARD IF"
+			(at 52 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003041"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003042"))
-		(pin "3" (uuid "30000000-0000-4000-8000-000000003043"))
-		(pin "4" (uuid "30000000-0000-4000-8000-000000003044"))
-		(pin "5" (uuid "30000000-0000-4000-8000-000000003045"))
-		(pin "6" (uuid "30000000-0000-4000-8000-000000003046"))
-		(pin "7" (uuid "30000000-0000-4000-8000-000000003047"))
-		(pin "8" (uuid "30000000-0000-4000-8000-000000003048"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004086"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004087"))
+		(pin "3" (uuid "40000000-0000-4000-8000-000000004088"))
+		(pin "4" (uuid "40000000-0000-4000-8000-000000004089"))
+		(pin "5" (uuid "40000000-0000-4000-8000-000000004090"))
+		(pin "6" (uuid "40000000-0000-4000-8000-000000004091"))
+		(pin "7" (uuid "40000000-0000-4000-8000-000000004092"))
+		(pin "8" (uuid "40000000-0000-4000-8000-000000004093"))
+		(pin "9" (uuid "40000000-0000-4000-8000-000000004094"))
+		(pin "10" (uuid "40000000-0000-4000-8000-000000004095"))
+		(pin "11" (uuid "40000000-0000-4000-8000-000000004096"))
+		(pin "12" (uuid "40000000-0000-4000-8000-000000004097"))
+		(pin "13" (uuid "40000000-0000-4000-8000-000000004098"))
+		(pin "14" (uuid "40000000-0000-4000-8000-000000004099"))
+		(pin "15" (uuid "40000000-0000-4000-8000-000000004100"))
+		(pin "16" (uuid "40000000-0000-4000-8000-000000004101"))
+		(pin "17" (uuid "40000000-0000-4000-8000-000000004102"))
+		(pin "18" (uuid "40000000-0000-4000-8000-000000004103"))
+		(pin "19" (uuid "40000000-0000-4000-8000-000000004104"))
+		(pin "20" (uuid "40000000-0000-4000-8000-000000004105"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -665,55 +805,67 @@
 		)
 	)
 	(symbol
-		(lib_id "Salix:DUAL_USB2_DAUGHTERBOARD")
-		(at 50 110 0)
+		(lib_id "Salix:FRONT_USB_BOARD_IF_20")
+		(at 52 122 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003049")
+		(uuid "40000000-0000-4000-8000-000000004106")
 		(property "Reference" "J8"
-			(at 50 78 0)
+			(at 52 92 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
-		(property "Value" "EXTENDED USB1 (BANKS 3-4)"
-			(at 50 142 0)
+		(property "Value" "EXTENDED FRONT BOARD IF"
+			(at 52 152 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" ""
-			(at 50 110 0)
+			(at 52 122 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 50 110 0)
+			(at 52 122 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "EXTENDED USB1 (BANKS 3-4)"
-			(at 50 110 0)
+		(property "Description" "EXTENDED FRONT BOARD IF"
+			(at 52 122 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003050"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003051"))
-		(pin "3" (uuid "30000000-0000-4000-8000-000000003052"))
-		(pin "4" (uuid "30000000-0000-4000-8000-000000003053"))
-		(pin "5" (uuid "30000000-0000-4000-8000-000000003054"))
-		(pin "6" (uuid "30000000-0000-4000-8000-000000003055"))
-		(pin "7" (uuid "30000000-0000-4000-8000-000000003056"))
-		(pin "8" (uuid "30000000-0000-4000-8000-000000003057"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004107"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004108"))
+		(pin "3" (uuid "40000000-0000-4000-8000-000000004109"))
+		(pin "4" (uuid "40000000-0000-4000-8000-000000004110"))
+		(pin "5" (uuid "40000000-0000-4000-8000-000000004111"))
+		(pin "6" (uuid "40000000-0000-4000-8000-000000004112"))
+		(pin "7" (uuid "40000000-0000-4000-8000-000000004113"))
+		(pin "8" (uuid "40000000-0000-4000-8000-000000004114"))
+		(pin "9" (uuid "40000000-0000-4000-8000-000000004115"))
+		(pin "10" (uuid "40000000-0000-4000-8000-000000004116"))
+		(pin "11" (uuid "40000000-0000-4000-8000-000000004117"))
+		(pin "12" (uuid "40000000-0000-4000-8000-000000004118"))
+		(pin "13" (uuid "40000000-0000-4000-8000-000000004119"))
+		(pin "14" (uuid "40000000-0000-4000-8000-000000004120"))
+		(pin "15" (uuid "40000000-0000-4000-8000-000000004121"))
+		(pin "16" (uuid "40000000-0000-4000-8000-000000004122"))
+		(pin "17" (uuid "40000000-0000-4000-8000-000000004123"))
+		(pin "18" (uuid "40000000-0000-4000-8000-000000004124"))
+		(pin "19" (uuid "40000000-0000-4000-8000-000000004125"))
+		(pin "20" (uuid "40000000-0000-4000-8000-000000004126"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -725,48 +877,48 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 220 72 0)
+		(at 220 70 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003058")
+		(uuid "40000000-0000-4000-8000-000000004127")
 		(property "Reference" "R1"
 			(at 220 40 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22R 1%"
-			(at 220 104 0)
+			(at 220 100 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 220 72 0)
+			(at 220 70 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 220 72 0)
+			(at 220 70 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "22R 1%"
-			(at 220 72 0)
+			(at 220 70 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003059"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003060"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004128"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004129"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -778,48 +930,48 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 220 82 0)
+		(at 220 80 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003061")
+		(uuid "40000000-0000-4000-8000-000000004130")
 		(property "Reference" "R2"
 			(at 220 50 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22R 1%"
-			(at 220 114 0)
+			(at 220 110 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 220 82 0)
+			(at 220 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 220 82 0)
+			(at 220 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "22R 1%"
-			(at 220 82 0)
+			(at 220 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003062"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003063"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004131"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004132"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -829,74 +981,50 @@
 			)
 		)
 	)
-	(label "PICO_A_GP16_USB_DP"
-		(at 226 72 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003064")
-	)
-	(label "PICO_A_GP17_USB_DM"
-		(at 226 82 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003065")
-	)
-	(wire (pts (xy 223.81 72) (xy 226 72)) (stroke (width 0) (type default)) (uuid "30000000-0000-4000-8000-000000003066"))
-	(wire (pts (xy 223.81 82) (xy 226 82)) (stroke (width 0) (type default)) (uuid "30000000-0000-4000-8000-000000003067"))
-	(label "HUB_USBDM_UP"
-		(at 212 82 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003068")
-	)
-	(wire (pts (xy 212 82) (xy 216.19 82)) (stroke (width 0) (type default)) (uuid "30000000-0000-4000-8000-000000003069"))
-	(label "HUB_USBDP_UP"
-		(at 212 72 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003070")
-	)
-	(wire (pts (xy 212 72) (xy 216.19 72)) (stroke (width 0) (type default)) (uuid "30000000-0000-4000-8000-000000003071"))
 	(symbol
 		(lib_id "Salix:R")
-		(at 205 120 0)
+		(at 220 112 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003072")
+		(uuid "40000000-0000-4000-8000-000000004133")
 		(property "Reference" "R3"
-			(at 205 88 0)
+			(at 220 82 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "12.0k 1%"
-			(at 205 152 0)
+			(at 220 142 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 205 120 0)
+			(at 220 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 205 120 0)
+			(at 220 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "12.0k 1%"
-			(at 205 120 0)
+			(at 220 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003073"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003074"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004134"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004135"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -906,60 +1034,50 @@
 			)
 		)
 	)
-	(label "HUB_RBIAS"
-		(at 198 120 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003075")
-	)
-	(label "GND"
-		(at 212 120 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003076")
-	)
 	(symbol
 		(lib_id "Salix:CRYSTAL_2PIN")
-		(at 205 105 0)
+		(at 220 98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "30000000-0000-4000-8000-000000003077")
+		(uuid "40000000-0000-4000-8000-000000004136")
 		(property "Reference" "Y1"
-			(at 205 73 0)
+			(at 220 68 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "24.000MHz ±350ppm"
-			(at 205 137 0)
+			(at 220 128 0)
 			(effects
-					(font (size 1 1))
+					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" ""
-			(at 205 105 0)
+			(at 220 98 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 205 105 0)
+			(at 220 98 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "24.000MHz ±350ppm"
-			(at 205 105 0)
+			(at 220 98 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "30000000-0000-4000-8000-000000003078"))
-		(pin "2" (uuid "30000000-0000-4000-8000-000000003079"))
+		(pin "1" (uuid "40000000-0000-4000-8000-000000004137"))
+		(pin "2" (uuid "40000000-0000-4000-8000-000000004138"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053"
@@ -969,123 +1087,191 @@
 			)
 		)
 	)
-	(label "HUB_XTALIN"
-		(at 194 105 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003080")
-	)
-	(label "HUB_XTALOUT"
-		(at 212 105 0)
-		(effects (font (size 0.95 0.95)) (justify left bottom))
-		(uuid "30000000-0000-4000-8000-000000003081")
-	)
-	(text "Deterministic port map:"
+	(label "5V_USB_PRIMARY" (at 36.76 92.13 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004139"))
+	(label "5V_USB_PRIMARY" (at 36.76 89.59 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004140"))
+	(label "GND" (at 36.76 87.05 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004141"))
+	(label "GND" (at 36.76 84.51 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004142"))
+	(label "3V3_AUX" (at 36.76 81.97 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004143"))
+	(label "MGMT_I2C_SDA" (at 36.76 79.43 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004144"))
+	(label "MGMT_I2C_SCL" (at 36.76 76.89 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004145"))
+	(label "PRIMARY_INT_N" (at 36.76 74.35 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004146"))
+	(label "PRIMARY_BOARD_ID" (at 36.76 71.81 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004147"))
+	(label "PRIMARY_ENABLE" (at 36.76 69.27 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004148"))
+	(label "USB_DN1_DM" (at 36.76 66.73 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004149"))
+	(label "USB_DN1_DP" (at 36.76 64.19 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004150"))
+	(label "HUB_PRTPWR1" (at 36.76 61.65 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004151"))
+	(label "HUB_OCS1_N" (at 36.76 59.11 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004152"))
+	(label "USB_DN2_DM" (at 36.76 56.57 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004153"))
+	(label "USB_DN2_DP" (at 36.76 54.03 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004154"))
+	(label "HUB_PRTPWR2" (at 36.76 51.49 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004155"))
+	(label "HUB_OCS2_N" (at 36.76 48.95 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004156"))
+	(label "GND" (at 36.76 46.41 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004157"))
+	(label "GND" (at 36.76 43.87 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004158"))
+	(label "5V_USB_EXTENDED" (at 36.76 146.13 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004159"))
+	(label "5V_USB_EXTENDED" (at 36.76 143.59 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004160"))
+	(label "GND" (at 36.76 141.05 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004161"))
+	(label "GND" (at 36.76 138.51 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004162"))
+	(label "3V3_AUX" (at 36.76 135.97 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004163"))
+	(label "MGMT_I2C_SDA" (at 36.76 133.43 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004164"))
+	(label "MGMT_I2C_SCL" (at 36.76 130.89 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004165"))
+	(label "EXTENDED_INT_N" (at 36.76 128.35 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004166"))
+	(label "EXTENDED_BOARD_ID" (at 36.76 125.81 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004167"))
+	(label "EXTENDED_ENABLE" (at 36.76 123.27 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004168"))
+	(label "USB_DN3_DM" (at 36.76 120.73 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004169"))
+	(label "USB_DN3_DP" (at 36.76 118.19 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004170"))
+	(label "HUB_PRTPWR3" (at 36.76 115.65 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004171"))
+	(label "HUB_OCS3_N" (at 36.76 113.11 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004172"))
+	(label "USB_DN4_DM" (at 36.76 110.57 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004173"))
+	(label "USB_DN4_DP" (at 36.76 108.03 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004174"))
+	(label "HUB_PRTPWR4" (at 36.76 105.49000000000001 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004175"))
+	(label "HUB_OCS4_N" (at 36.76 102.95 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004176"))
+	(label "GND" (at 36.76 100.41 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004177"))
+	(label "GND" (at 36.76 97.87 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004178"))
+	(label "USB_DN1_DM" (at 119.68 107.4 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004179"))
+	(label "USB_DN1_DP" (at 119.68 104.86 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004180"))
+	(label "USB_DN2_DM" (at 119.68 102.32 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004181"))
+	(label "USB_DN2_DP" (at 119.68 99.78 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004182"))
+	(label "3V3_AUX" (at 119.68 97.24 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004183"))
+	(label "USB_DN3_DM" (at 119.68 94.7 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004184"))
+	(label "USB_DN3_DP" (at 119.68 92.16 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004185"))
+	(label "USB_DN4_DM" (at 119.68 89.62 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004186"))
+	(label "USB_DN4_DP" (at 119.68 87.08 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004187"))
+	(label "3V3_AUX" (at 119.68 84.54 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004188"))
+	(label "GND" (at 119.68 82 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004189"))
+	(label "HUB_PRTPWR1" (at 119.68 79.46 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004190"))
+	(label "HUB_OCS1_N" (at 119.68 76.92 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004191"))
+	(label "HUB_CRFILT" (at 119.68 74.38 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004192"))
+	(label "3V3_AUX" (at 119.68 71.84 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004193"))
+	(label "HUB_PRTPWR2" (at 119.68 69.3 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004194"))
+	(label "HUB_OCS2_N" (at 119.68 66.76 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004195"))
+	(label "HUB_PRTPWR3" (at 119.68 64.22 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004196"))
+	(label "HUB_OCS3_N" (at 119.68 61.68 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004197"))
+	(label "HUB_PRTPWR4" (at 160.32 107.4 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004198"))
+	(label "HUB_OCS4_N" (at 160.32 104.86 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004199"))
+	(label "HUB_SDA" (at 160.32 102.32 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004200"))
+	(label "3V3_AUX" (at 160.32 99.78 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004201"))
+	(label "HUB_SCL" (at 160.32 97.24 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004202"))
+	(label "HUB_HS_IND" (at 160.32 94.7 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004203"))
+	(label "HUB_RESET_N" (at 160.32 92.16 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004204"))
+	(label "HUB_VBUS_DET" (at 160.32 89.62 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004205"))
+	(label "HUB_SUSP_IND" (at 160.32 87.08 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004206"))
+	(label "3V3_AUX" (at 160.32 84.54 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004207"))
+	(label "HUB_USBDM_UP" (at 160.32 82 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004208"))
+	(label "HUB_USBDP_UP" (at 160.32 79.46 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004209"))
+	(label "HUB_XTALOUT" (at 160.32 76.92 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004210"))
+	(label "HUB_XTALIN" (at 160.32 74.38 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004211"))
+	(label "HUB_PLLFILT" (at 160.32 71.84 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004212"))
+	(label "HUB_RBIAS" (at 160.32 69.3 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004213"))
+	(label "3V3_AUX" (at 160.32 66.76 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004214"))
+	(label "HUB_USBDP_UP" (at 216.19 70 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004215"))
+	(wire (pts (xy 216.19 70) (xy 216.19 70)) (stroke (width 0) (type default)) (uuid "40000000-0000-4000-8000-000000004216"))
+	(label "PICO_A_GP16_USB_DP" (at 223.81 70 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004217"))
+	(label "HUB_USBDM_UP" (at 216.19 80 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004218"))
+	(label "PICO_A_GP17_USB_DM" (at 223.81 80 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004219"))
+	(label "HUB_RBIAS" (at 216.19 112 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004220"))
+	(label "GND" (at 223.81 112 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004221"))
+	(label "HUB_XTALIN" (at 216.19 98 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004222"))
+	(label "HUB_XTALOUT" (at 223.81 98 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004223"))
+	(text "Hub power / reset support:"
 		(exclude_from_sim no)
-		(at 20 140 0)
+		(at 190 25 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
 		)
-		(uuid "30000000-0000-4000-8000-000000003082")
+		(uuid "40000000-0000-4000-8000-000000004224")
 	)
-	(text "DN1 = PRIMARY-1     DN2 = PRIMARY-2     DN3 = EXTENDED-3     DN4 = EXTENDED-4"
+	(text "VDDA33 pins 5/10/29/36: 0.1µF each + shared 1µF bulk; VDD33 pins 15/23: 0.1µF each."
 		(exclude_from_sim no)
-		(at 20 146 0)
+		(at 190 31 0)
 		(effects
-			(font (size 1 1))
+			(font (size 0.92 0.92))
 		)
-		(uuid "30000000-0000-4000-8000-000000003083")
+		(uuid "40000000-0000-4000-8000-000000004225")
 	)
-	(text "J7/J8 are electrical interfaces only; final keyed/locking physical connector family remains TBD."
+	(text "CRFILT and PLLFILT: each gets 0.01µF + ≥0.1µF low-ESR to GND; keep them isolated from each other."
 		(exclude_from_sim no)
-		(at 20 152 0)
+		(at 190 37 0)
 		(effects
-			(font (size 0.95 0.95))
+			(font (size 0.92 0.92))
 		)
-		(uuid "30000000-0000-4000-8000-000000003084")
+		(uuid "40000000-0000-4000-8000-000000004226")
 	)
-	(text "Hub support frozen now:"
+	(text "TEST pin 11 → GND. Exposed VSS pad → solid ground plane with multiple vias."
 		(exclude_from_sim no)
-		(at 190 22 0)
+		(at 190 43 0)
+		(effects
+			(font (size 0.92 0.92))
+		)
+		(uuid "40000000-0000-4000-8000-000000004227")
+	)
+	(text "RESET_N: 10k pull-up + 1µF startup delay provision; optional supervisor footprint if power sequencing demands it."
+		(exclude_from_sim no)
+		(at 190 49 0)
+		(effects
+			(font (size 0.92 0.92))
+		)
+		(uuid "40000000-0000-4000-8000-000000004228")
+	)
+	(text "3V3_AUX comes from TLV62569P on POWER sheet."
+		(exclude_from_sim no)
+		(at 190 55 0)
+		(effects
+			(font (size 0.92 0.92)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004229")
+	)
+	(text "Front-board interface is now 20 logical positions:"
+		(exclude_from_sim no)
+		(at 190 126 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
 		)
-		(uuid "30000000-0000-4000-8000-000000003085")
+		(uuid "40000000-0000-4000-8000-000000004230")
 	)
-	(text "• USB2514B/M2, preferred 36-pin SQFN family"
-		(exclude_from_sim no)
-		(at 190 28 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003086")
-	)
-	(text "• 24.000 MHz reference (±350 ppm); crystal load caps selected with actual crystal"
-		(exclude_from_sim no)
-		(at 190 34 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003087")
-	)
-	(text "• RBIAS = 12.0 kΩ ±1% to GND"
-		(exclude_from_sim no)
-		(at 190 40 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003088")
-	)
-	(text "• CRFILT / PLLFILT: provision 0.1µF low-ESR to GND"
-		(exclude_from_sim no)
-		(at 190 46 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003089")
-	)
-	(text "• VSS exposed pad must tie to ground plane with multiple vias"
-		(exclude_from_sim no)
-		(at 190 52 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003090")
-	)
-	(text "• VBUS_DET: self-powered permanently attached host treatment; exact supervisor/reset wiring next"
-		(exclude_from_sim no)
-		(at 190 58 0)
-		(effects
-			(font (size 0.95 0.95))
-		)
-		(uuid "30000000-0000-4000-8000-000000003091")
-	)
-	(text "Still intentionally TBD:"
+	(text "2×5V + 4×GND + 3V3_AUX + I²C + INT + BOARD_ID/ENABLE + two USB2 pairs + PRTPWR/OCS per bank."
 		(exclude_from_sim no)
 		(at 190 132 0)
 		(effects
-			(font (size 1.05 1.05)
-				(bold yes))
+			(font (size 0.92 0.92))
 		)
-		(uuid "30000000-0000-4000-8000-000000003092")
+		(uuid "40000000-0000-4000-8000-000000004231")
 	)
-	(text "per-port VBUS high-side switches / OCS parts; exact hub reset supervisor; crystal package/CL; J7/J8 connector family"
+	(text "This lets PRIMARY and EXTENDED use the same PCB while Pico-B can read selector/fault state over I²C."
 		(exclude_from_sim no)
 		(at 190 138 0)
 		(effects
-			(font (size 0.95 0.95))
+			(font (size 0.92 0.92))
 		)
-		(uuid "30000000-0000-4000-8000-000000003093")
+		(uuid "40000000-0000-4000-8000-000000004232")
 	)
-	(text "Front A/C receptacles can be physically USB 5Gbps-capable, but Rev-A bridge data path through this hub is USB2."
+	(text "Exact physical keyed/locking connector remains TBD; do NOT assume standard PC USB3 pinout."
 		(exclude_from_sim no)
 		(at 190 144 0)
 		(effects
-			(font (size 0.95 0.95)
+			(font (size 0.92 0.92)
 				(bold yes))
 		)
-		(uuid "30000000-0000-4000-8000-000000003094")
+		(uuid "40000000-0000-4000-8000-000000004233")
+	)
+	(text "Deterministic hub map: DN1=PRIMARY-1, DN2=PRIMARY-2, DN3=EXTENDED-3, DN4=EXTENDED-4."
+		(exclude_from_sim no)
+		(at 20 160 0)
+		(effects
+			(font (size 1 1)
+				(bold yes))
+		)
+		(uuid "40000000-0000-4000-8000-000000004234")
+	)
+	(text "Each physical A/C receptacle still gets its own local current-limit/backfeed protection on the daughterboard."
+		(exclude_from_sim no)
+		(at 20 166 0)
+		(effects
+			(font (size 0.95 0.95))
+		)
+		(uuid "40000000-0000-4000-8000-000000004235")
 	)
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053" (page "4"))
