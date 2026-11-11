@@ -1755,13 +1755,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006108")
 		(property "Reference" "D21"
-			(at 140 50 0)
+			(at 140 60 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD A-A"
-			(at 140 86 0)
+			(at 140 76 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -1809,13 +1809,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006112")
 		(property "Reference" "D22"
-			(at 140 94 0)
+			(at 140 104 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD A-C"
-			(at 140 130 0)
+			(at 140 120 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2157,13 +2157,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006160")
 		(property "Reference" "JP1"
-			(at 265 44 0)
+			(at 265 46 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "A-A OPEN=RUN"
-			(at 265 60 0)
+			(at 265 58 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2210,13 +2210,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006163")
 		(property "Reference" "JP2"
-			(at 265 108 0)
+			(at 265 120 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "A-C OPEN=RUN"
-			(at 265 144 0)
+			(at 265 132 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2263,13 +2263,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006166")
 		(property "Reference" "D25"
-			(at 340 34 0)
+			(at 340 46 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "LED A-A"
-			(at 340 70 0)
+			(at 340 58 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2316,13 +2316,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006169")
 		(property "Reference" "D26"
-			(at 340 108 0)
+			(at 340 120 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "LED A-C"
-			(at 340 144 0)
+			(at 340 132 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2492,13 +2492,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006187")
 		(property "Reference" "D23"
-			(at 130 182 0)
+			(at 130 192 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD B-A"
-			(at 130 218 0)
+			(at 130 208 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2546,13 +2546,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006191")
 		(property "Reference" "D24"
-			(at 130 226 0)
+			(at 130 236 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "ESD B-C"
-			(at 130 262 0)
+			(at 130 252 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2894,13 +2894,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006239")
 		(property "Reference" "JP3"
-			(at 265 176 0)
+			(at 265 178 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "B-A OPEN=RUN"
-			(at 265 192 0)
+			(at 265 190 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -2947,13 +2947,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006242")
 		(property "Reference" "JP4"
-			(at 265 240 0)
+			(at 265 252 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "B-C OPEN=RUN"
-			(at 265 276 0)
+			(at 265 264 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3000,13 +3000,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006245")
 		(property "Reference" "D27"
-			(at 340 166 0)
+			(at 340 178 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "LED B-A"
-			(at 340 202 0)
+			(at 340 190 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3053,13 +3053,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006248")
 		(property "Reference" "D28"
-			(at 340 240 0)
+			(at 340 252 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "LED B-C"
-			(at 340 276 0)
+			(at 340 264 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3232,13 +3232,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006377")
 		(property "Reference" "R30"
-			(at 365 30 0)
+			(at 365 45 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "10k"
-			(at 365 66 0)
+			(at 365 51 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3287,13 +3287,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006382")
 		(property "Reference" "R31"
-			(at 365 40 0)
+			(at 365 55 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "10k"
-			(at 365 76 0)
+			(at 365 61 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3342,13 +3342,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006387")
 		(property "Reference" "R32"
-			(at 365 162 0)
+			(at 365 177 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "10k"
-			(at 365 198 0)
+			(at 365 183 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3397,13 +3397,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006392")
 		(property "Reference" "R33"
-			(at 365 172 0)
+			(at 365 187 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "10k"
-			(at 365 208 0)
+			(at 365 193 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3452,13 +3452,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006397")
 		(property "Reference" "R34"
-			(at 365 64 0)
+			(at 365 79 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k"
-			(at 365 100 0)
+			(at 365 85 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3507,13 +3507,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006402")
 		(property "Reference" "R35"
-			(at 225 30 0)
+			(at 225 45 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "28.7k 1%"
-			(at 225 66 0)
+			(at 225 51 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3562,13 +3562,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006407")
 		(property "Reference" "R36"
-			(at 225 162 0)
+			(at 225 177 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "28.7k 1%"
-			(at 225 198 0)
+			(at 225 183 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3617,13 +3617,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006412")
 		(property "Reference" "R37"
-			(at 225 120 0)
+			(at 225 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k 0.5%"
-			(at 225 156 0)
+			(at 225 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3672,13 +3672,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006417")
 		(property "Reference" "R38"
-			(at 225 252 0)
+			(at 225 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k 0.5%"
-			(at 225 288 0)
+			(at 225 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3727,13 +3727,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006422")
 		(property "Reference" "R39"
-			(at 245 120 0)
+			(at 245 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k"
-			(at 245 156 0)
+			(at 245 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3782,13 +3782,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006427")
 		(property "Reference" "R40"
-			(at 245 252 0)
+			(at 245 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k"
-			(at 245 288 0)
+			(at 245 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3837,13 +3837,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006432")
 		(property "Reference" "C30"
-			(at 285 120 0)
+			(at 285 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 285 156 0)
+			(at 285 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3892,13 +3892,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006437")
 		(property "Reference" "C31"
-			(at 300 120 0)
+			(at 300 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 300 156 0)
+			(at 300 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -3947,13 +3947,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006442")
 		(property "Reference" "C32"
-			(at 315 120 0)
+			(at 315 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 315 156 0)
+			(at 315 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4002,13 +4002,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006447")
 		(property "Reference" "C33"
-			(at 330 120 0)
+			(at 330 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 330 156 0)
+			(at 330 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4057,13 +4057,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006452")
 		(property "Reference" "C34"
-			(at 285 252 0)
+			(at 285 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 285 288 0)
+			(at 285 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4112,13 +4112,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006457")
 		(property "Reference" "C35"
-			(at 300 252 0)
+			(at 300 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 300 288 0)
+			(at 300 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4167,13 +4167,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006462")
 		(property "Reference" "C36"
-			(at 315 252 0)
+			(at 315 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 315 288 0)
+			(at 315 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4222,13 +4222,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006467")
 		(property "Reference" "C37"
-			(at 330 252 0)
+			(at 330 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 330 288 0)
+			(at 330 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4277,13 +4277,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006472")
 		(property "Reference" "C38"
-			(at 365 94 0)
+			(at 365 109 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "0.1uF"
-			(at 365 130 0)
+			(at 365 115 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4332,13 +4332,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006477")
 		(property "Reference" "C39"
-			(at 365 104 0)
+			(at 365 119 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "0.1uF"
-			(at 365 140 0)
+			(at 365 125 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
@@ -4387,13 +4387,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006482")
 		(property "Reference" "C40"
-			(at 365 114 0)
+			(at 365 129 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "0.1uF"
-			(at 365 150 0)
+			(at 365 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
