@@ -1,0 +1,86 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000015")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "03 — USB HUB / INPUT INTERFACE"
+		(exclude_from_sim no)
+		(at 25 20 0)
+		(effects
+			(font
+				(size 2 2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000016")
+	)
+	(text "USB0 = PRIMARY dual-bank daughterboard. USB1 = EXTENDED dual-bank daughterboard."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000017")
+	)
+	(text "8 physical A/C receptacles reduce to 4 selected logical USB ports."
+		(exclude_from_sim no)
+		(at 25 34 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000018")
+	)
+	(text "4-port USB2 hub feeds one Pico-A host root."
+		(exclude_from_sim no)
+		(at 25 40 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000019")
+	)
+	(text "Each physical receptacle: ESD, current-limited VBUS, reverse/backfeed protection, DISABLE jumper."
+		(exclude_from_sim no)
+		(at 25 46 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000020")
+	)
+	(text "Front receptacles may be USB 5Gbps-capable; Pico path uses USB2 D+/D-."
+		(exclude_from_sim no)
+		(at 25 52 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000021")
+	)
+	(text "STATUS: hub/mux/power-switch exact parts not frozen."
+		(exclude_from_sim no)
+		(at 25 58 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000022")
+	)
+	(sheet_instances
+		(path "/"
+			(page "4")
+		)
+	)
+	(embedded_fonts no)
+)

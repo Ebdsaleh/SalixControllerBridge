@@ -1,0 +1,86 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000039")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "06 — SERVICE / DEBUG / SUPERVISION"
+		(exclude_from_sim no)
+		(at 25 20 0)
+		(effects
+			(font
+				(size 2 2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000040")
+	)
+	(text "Rear DEBUG/UPDATE USB-C talks only to Pico-B."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000041")
+	)
+	(text "Pico-B SWDIO/SWCLK/RUN path to Pico-A for in-system firmware update and recovery."
+		(exclude_from_sim no)
+		(at 25 34 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000042")
+	)
+	(text "Retain SWD-A, SWD-B and RUN test pads for factory/developer recovery."
+		(exclude_from_sim no)
+		(at 25 40 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000043")
+	)
+	(text "Monitor 5V_MAIN and 3V3_AUX; avoid update during brownout."
+		(exclude_from_sim no)
+		(at 25 46 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000044")
+	)
+	(text "Provide service LEDs and labelled test points even when TFT is unavailable."
+		(exclude_from_sim no)
+		(at 25 52 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000045")
+	)
+	(text "STATUS: supervisor/watchdog exact parts not frozen."
+		(exclude_from_sim no)
+		(at 25 58 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000046")
+	)
+	(sheet_instances
+		(path "/"
+			(page "7")
+		)
+	)
+	(embedded_fonts no)
+)

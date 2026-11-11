@@ -1,0 +1,86 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000023")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "04 — PICO-B SERVICE / STORAGE / UI"
+		(exclude_from_sim no)
+		(at 25 20 0)
+		(effects
+			(font
+				(size 2 2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000024")
+	)
+	(text "Socketed red USB-C Pico 2 preferred."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000025")
+	)
+	(text "Owns rear DEBUG/UPDATE USB-C, microSD, TFT/touch, profiles, logs, updater."
+		(exclude_from_sim no)
+		(at 25 34 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000026")
+	)
+	(text "Programs/recovers Pico-A over SWD; keeps previous known-good image for rollback."
+		(exclude_from_sim no)
+		(at 25 40 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000027")
+	)
+	(text "TF034 2.4in 320x240 front TFT belongs only to Pico-B."
+		(exclude_from_sim no)
+		(at 25 46 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000028")
+	)
+	(text "Pico-B and Pico-A communicate over runtime SPI + READY/IRQ."
+		(exclude_from_sim no)
+		(at 25 52 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000029")
+	)
+	(text "STATUS: SD/TFT GPIO allocation to freeze next."
+		(exclude_from_sim no)
+		(at 25 58 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000030")
+	)
+	(sheet_instances
+		(path "/"
+			(page "5")
+		)
+	)
+	(embedded_fonts no)
+)

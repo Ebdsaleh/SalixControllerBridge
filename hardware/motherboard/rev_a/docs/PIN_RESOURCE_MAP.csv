@@ -1,0 +1,12 @@
+Domain,Signal / Resource,Owner,Status,Notes
+USB Host,PIO USB D+,Pico-A,RESERVED,22R series resistor near Pico; exact GPIO TBD
+USB Host,PIO USB D-,Pico-A,RESERVED,22R series resistor near Pico; exact GPIO TBD
+Realtime,Console PIO lane pool,Pico-A,RESERVE,Lane count TBD
+Runtime RPC,SPI SCK/MOSI/MISO/CS,A<->B,RESERVE,Profile/state RPC
+Runtime RPC,READY/IRQ,A<->B,RESERVE,Health/event signal
+Recovery,SWDIO/SWCLK/RUN,Pico-B -> Pico-A,RESERVE,Firmware/update/recovery
+Service,microSD SPI,Pico-B,RESERVE,Prefer separate SPI from TFT
+Service,TF034 SPI/touch,Pico-B,RESERVE,Exact module pinout TBD
+Management,I2C SDA/SCL,Pico-B or shared,RESERVE,Module management/sensors
+Module Bus,CARD_PRESENT/ENABLE/ID,Motherboard,RESERVE,Likely expander-managed
+Prototype,Raw Pico-A 40-pin mirror,Pico-A,FROZEN,Expose all physical header pins

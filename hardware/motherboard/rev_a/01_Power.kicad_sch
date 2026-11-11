@@ -1,0 +1,76 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000001")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "01 — POWER / PROTECTION"
+		(exclude_from_sim no)
+		(at 25 20 0)
+		(effects
+			(font
+				(size 2 2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000002")
+	)
+	(text "5V_MAIN input, fuse/eFuse, reverse-current protection, brownout supervision."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000003")
+	)
+	(text "Protected feeds to Pico-A VSYS, Pico-B VSYS, PRIMARY USB board, EXTENDED USB board."
+		(exclude_from_sim no)
+		(at 25 34 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000004")
+	)
+	(text "Dedicated 3V3_AUX regulator for hub, management logic, future console modules."
+		(exclude_from_sim no)
+		(at 25 40 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000005")
+	)
+	(text "Keep USB peripheral load off Pico 3V3 rails."
+		(exclude_from_sim no)
+		(at 25 46 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000006")
+	)
+	(text "STATUS: exact regulator/eFuse parts not frozen."
+		(exclude_from_sim no)
+		(at 25 52 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000007")
+	)
+	(sheet_instances
+		(path "/"
+			(page "2")
+		)
+	)
+	(embedded_fonts no)
+)

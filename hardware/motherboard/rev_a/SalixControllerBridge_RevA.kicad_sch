@@ -1,0 +1,299 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000047")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "SALIX CONTROLLER BRIDGE — REV A"
+		(exclude_from_sim no)
+		(at 25 18 0)
+		(effects
+			(font
+				(size 2.2 2.2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000048")
+	)
+	(text "Dual-Pico reusable motherboard + dual-bank USB input modules"
+		(exclude_from_sim no)
+		(at 25 25 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000049")
+	)
+	(text "ARCHITECTURE SKELETON — NOT YET FABRICATION READY"
+		(exclude_from_sim no)
+		(at 25 32 0)
+		(effects
+			(font
+				(size 1.2 1.2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000050")
+	)
+	(sheet
+		(at 25 45)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000051")
+		(property "Sheetname" "POWER / PROTECTION"
+			(at 25 44.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_Power.kicad_sch"
+			(at 25 76.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 100 45)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000052")
+		(property "Sheetname" "PICO-A REALTIME / BRIDGE"
+			(at 100 44.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_PicoA_Realtime.kicad_sch"
+			(at 100 76.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 175 45)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000053")
+		(property "Sheetname" "USB HUB / INPUT INTERFACE"
+			(at 175 44.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_USB_Hub_and_Input.kicad_sch"
+			(at 175 76.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 100)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000054")
+		(property "Sheetname" "PICO-B SERVICE / STORAGE / UI"
+			(at 25 99.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_PicoB_Service.kicad_sch"
+			(at 25 131.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 100 100)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000055")
+		(property "Sheetname" "SALIX MODULE BUS / FUTURE BACKPLANE"
+			(at 100 99.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "05_Salix_Module_Bus.kicad_sch"
+			(at 100 131.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 175 100)
+		(size 55 30)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "10000000-0000-4000-8000-000000000056")
+		(property "Sheetname" "SERVICE / DEBUG / SUPERVISION"
+			(at 175 99.2884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "06_Service_Debug.kicad_sch"
+			(at 175 131.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

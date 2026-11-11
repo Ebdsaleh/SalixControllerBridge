@@ -1,0 +1,76 @@
+(kicad_sch
+	(version 20260306)
+	(generator "salix_chatgpt")
+	(generator_version "1.0")
+	(uuid "10000000-0000-4000-8000-000000000008")
+	(paper "A4")
+	(lib_symbols
+	)
+	(text "02 — PICO-A REALTIME / BRIDGE"
+		(exclude_from_sim no)
+		(at 25 20 0)
+		(effects
+			(font
+				(size 2 2)
+				(bold yes)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000009")
+	)
+	(text "Socketed Pico 2 W preferred. Full 40-pin mirror breakout retained."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000010")
+	)
+	(text "Owns USB-host hub upstream root, future Bluetooth, input normalization and PIO console timing."
+		(exclude_from_sim no)
+		(at 25 34 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000011")
+	)
+	(text "USB root D+/D- uses 22 ohm series resistors close to Pico GPIO."
+		(exclude_from_sim no)
+		(at 25 40 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000012")
+	)
+	(text "Pico-A heartbeat to Pico-B; Pico-B controls RUN and SWD recovery."
+		(exclude_from_sim no)
+		(at 25 46 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000013")
+	)
+	(text "STATUS: exact GPIO allocation to freeze next."
+		(exclude_from_sim no)
+		(at 25 52 0)
+		(effects
+			(font
+				(size 1.1 1.1)
+			)
+		)
+		(uuid "10000000-0000-4000-8000-000000000014")
+	)
+	(sheet_instances
+		(path "/"
+			(page "3")
+		)
+	)
+	(embedded_fonts no)
+)

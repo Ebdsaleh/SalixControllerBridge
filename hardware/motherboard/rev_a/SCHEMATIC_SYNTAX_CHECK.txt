@@ -1,0 +1,3 @@
+Architecture starter generated as KiCad S-expression files.
+Parentheses were generated structurally; validate by opening in installed KiCad before any PCB work.
+Status: NOT FABRICATION READY.
