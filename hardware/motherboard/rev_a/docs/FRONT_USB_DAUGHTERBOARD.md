@@ -13,6 +13,8 @@ Service jumpers are active-low disable inputs implemented as active-high RUN net
 
 The latching A/C selector also drives SN74LVC2G157 SEL. Input A is the A-port RUN state; input B is the C-port RUN state. The complementary Y_N output drives TS3USB221A OE.
 
+Hub PRTPWR is active-high. A SN74LVC2G08 per bank gates PRTPWR with each physical RUN line, so both physical A/C receptacles are powered whenever the logical hub port is ON, subject to their individual service-disable jumpers. Only the mechanically selected receptacle receives USB data.
+
 BOARD_ENABLE_N is active-low and fail-safe pulled high on the daughterboard. SN74LVC2G157 high strobe forces Y=0 and Y_N=1, so TS3USB221A disconnects data while the board is not enabled.
 
 Result:
@@ -20,7 +22,8 @@ Result:
 - Board enabled + selected port RUN=1 => TS3USB OE=0 => data connected.
 - Selected port jumper short => selected RUN=0 => TS3USB OE=1 => data disconnected.
 - BOARD_ENABLE_N high => TS3USB OE=1 regardless of selector/jumpers.
-- Unselected port can remain powered for charging because physical VBUS enables do not depend on selector state.
+- Unselected port remains available for charge-only use while the logical hub port is ON.
+- If the hub powers the logical port OFF, both physical receptacles in that bank lose VBUS, matching USB hub power-control semantics.
 
 ## Type-C implementation
 
@@ -59,10 +62,12 @@ Each Type-A port uses TPS2553 with a provisional 28.7k 1% RILIM target. The jump
 
 A0=BOARD_ID; A1=A2=0. Central management-I2C pull-ups belong on the motherboard.
 
+## Hub overcurrent handling
+
+Each physical power controller keeps its own FAULT_N signal for Pico-B diagnostics. Four 10k pull-ups define those open-drain lines. A third SN74LVC2G08 combines the two fault signals per bank as active-low OCS_N: the hub sees OCS_N low if either the A or C receptacle faults. Type-C SINK_N and the TCA9535 INT_N also receive explicit 10k pull-ups because TCA9535 GPIOs do not provide internal pull-ups.
+
 ## Still deliberately open
 
 - Exact latching push-push SPDT switch manufacturer/footprint.
 - Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
-- Hub PRTPWR behavior with charge-only inactive receptacles.
-- Hardware selected-fault combination into HUB OCS_N.
 - Final LED colors.

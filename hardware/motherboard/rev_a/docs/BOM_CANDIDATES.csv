@@ -43,3 +43,4 @@ Board-enable fail-safe pull-up,100k 1% 0603,1 per daughterboard,FROZEN VALUE,BOA
 Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,FROZEN VALUE,3 per TPS25821 gives 141uF input bulk
 Type-C output bypass capacitor,4.7uF >=10V X5R/X7R,2 per daughterboard,FROZEN VALUE,Less than 10uF at Type-C OUT/VBUS
 Type-C CHG default pulldown,100k 1% 0603,2 per daughterboard,FROZEN VALUE,Defaults current advertisement to STD at power-up
+Hub power gates,TI SN74LVC2G08 VSSOP-8,2 per daughterboard,FROZEN FAMILY,Dual AND gates RUN_A/RUN_C with active-high USB2514B PRTPWR
