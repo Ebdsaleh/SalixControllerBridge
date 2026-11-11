@@ -290,6 +290,31 @@
 			)
 		)
 	)
+	(sheet
+		(at 90 136)
+		(size 80 22)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke (width 0.1524) (type solid))
+		(fill (color 0 0 0 0.0000))
+		(uuid "10000000-0000-4000-8000-000000000057")
+		(property "Sheetname" "FRONT USB DUAL-BANK DAUGHTERBOARD"
+			(at 90 135.2884 0)
+			(effects (font (size 1.27 1.27)) (justify left bottom))
+		)
+		(property "Sheetfile" "07_Front_USB_Daughterboard.kicad_sch"
+			(at 90 159.0046 0)
+			(effects (font (size 1.27 1.27)) (justify left top))
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047" (page "8"))
+			)
+		)
+	)
 	(sheet_instances
 		(path "/" (page "1"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051" (page "2"))
@@ -298,6 +323,7 @@
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054" (page "5"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000055" (page "6"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056" (page "7"))
+		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (page "8"))
 	)
 	(embedded_fonts no)
 )
