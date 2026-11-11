@@ -818,7 +818,7 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001190")
 	)
-	(text "GP21      = SD_CS; GP22 = service spare"
+	(text "GP21      = SD_CS; GP22 = USB2514B HUB_RESET_N"
 		(exclude_from_sim no)
 		(at 190 104 0)
 		(effects
@@ -849,6 +849,18 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001193")
 	)
+	(global_label "MGMT_I2C_SDA" (shape passive) (at 67.3 60.87 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007333"))
+	(global_label "MGMT_I2C_SCL" (shape passive) (at 67.3 63.41 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007334"))
+	(global_label "HUB_RESET_N" (shape passive) (at 152.7 81.19 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007335"))
+	(global_label "5V_MAIN" (shape passive) (at 152.7 106.59 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007336"))
+	(global_label "GND" (shape passive) (at 152.7 65.95 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007337"))
+	(global_label "GND" (shape passive) (at 152.7 78.65 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007338"))
+	(global_label "GND" (shape passive) (at 152.7 91.35 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007339"))
+	(global_label "GND" (shape passive) (at 152.7 104.05 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007340"))
+	(global_label "GND" (shape passive) (at 67.3 65.95 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007341"))
+	(global_label "GND" (shape passive) (at 67.3 78.65 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007342"))
+	(global_label "GND" (shape passive) (at 67.3 91.35 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007343"))
+	(global_label "GND" (shape passive) (at 67.3 104.05 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007344"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054" (page "5"))
 	)
