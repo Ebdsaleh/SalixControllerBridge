@@ -1,0 +1,34 @@
+name: KiCad visual review
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "hardware/motherboard/rev_a/**/*.kicad_sch"
+      - "tools/kicad_schematic_visualizer.py"
+      - ".github/workflows/kicad-visual-review.yml"
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Render Rev-A schematics
+        run: |
+          python tools/kicad_schematic_visualizer.py \
+            hardware/motherboard/rev_a \
+            --recursive \
+            --out artifacts/kicad_visuals
+
+      - name: Upload visual review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kicad-visual-review
+          path: artifacts/kicad_visuals
+          if-no-files-found: error
+          retention-days: 14
