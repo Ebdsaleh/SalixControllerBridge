@@ -13,3 +13,9 @@ TFT,TF034 2.4in 320x240 interface header,1,USER-OWNED,Pico-B UI
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
 Fan drivers,5V load-switch/MOSFET + protection,2,TBD,Pico-B controls motor power without sourcing GPIO current
 Fan tach pullups,logic-level pull-up network,2,TBD,Match selected fan electrical interface
+USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN HUB FAMILY,4-port USB2 Hi-Speed hub
+USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and hub upstream pair
+USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
+USB hub clock,24.000MHz crystal ±350ppm or better,1,PART TBD,Exact package/CL not frozen
+USB hub filter caps,0.1uF low-ESR,2,PROVISIONAL,CRFILT and PLLFILT
+USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
