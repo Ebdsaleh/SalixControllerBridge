@@ -743,13 +743,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004085")
 		(property "Reference" "J7"
-			(at 52 38 0)
+			(at 40 38 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "PRIMARY FRONT BOARD IF"
-			(at 52 98 0)
+			(at 46 38 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -814,13 +814,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004106")
 		(property "Reference" "J8"
-			(at 52 92 0)
+			(at 40 152 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "EXTENDED FRONT BOARD IF"
-			(at 52 152 0)
+			(at 46 152 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -885,13 +885,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004127")
 		(property "Reference" "R1"
-			(at 220 40 0)
+			(at 220 66 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22R 1%"
-			(at 220 100 0)
+			(at 220 74 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -991,13 +991,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004133")
 		(property "Reference" "R3"
-			(at 220 82 0)
+			(at 220 108 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "12.0k 1%"
-			(at 220 142 0)
+			(at 220 116 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -1044,13 +1044,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004136")
 		(property "Reference" "Y1"
-			(at 220 68 0)
+			(at 220 94 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "24.000MHz ±350ppm"
-			(at 220 128 0)
+			(at 220 102 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
