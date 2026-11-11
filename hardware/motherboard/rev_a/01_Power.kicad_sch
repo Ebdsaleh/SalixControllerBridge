@@ -321,13 +321,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004004")
 		(property "Reference" "U2"
-			(at 110 50 0)
+			(at 110 66.5 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "TLV62569P"
-			(at 110 110 0)
+			(at 110 94 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -378,13 +378,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004011")
 		(property "Reference" "C1"
-			(at 70 65 0)
+			(at 70 91.5 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "4.7uF 10V X7R"
-			(at 70 125 0)
+			(at 70 99 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -431,13 +431,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004014")
 		(property "Reference" "L1"
-			(at 145 43.650000000000006 0)
+			(at 145 69.5 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "2.2uH ≥2.5A"
-			(at 145 103.65 0)
+			(at 145 78 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -484,13 +484,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004017")
 		(property "Reference" "C2"
-			(at 175 50 0)
+			(at 175 76.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22uF 10V X7R"
-			(at 175 110 0)
+			(at 175 84.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -537,13 +537,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004020")
 		(property "Reference" "C3"
-			(at 190 50 0)
+			(at 190 76.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22uF 10V X7R"
-			(at 190 110 0)
+			(at 190 84.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -590,13 +590,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004023")
 		(property "Reference" "R4"
-			(at 175 65 0)
+			(at 175 91.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "453k 1%"
-			(at 175 125 0)
+			(at 175 99.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -643,13 +643,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004026")
 		(property "Reference" "R5"
-			(at 190 65 0)
+			(at 190 91.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "100k 1%"
-			(at 190 125 0)
+			(at 190 99.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -696,13 +696,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004029")
 		(property "Reference" "C4"
-			(at 205 65 0)
+			(at 205 91.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "6.8pF"
-			(at 205 125 0)
+			(at 205 99.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -749,13 +749,13 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004032")
 		(property "Reference" "R6"
-			(at 175 80 0)
+			(at 175 106.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "100k PG pull-up"
-			(at 175 140 0)
+			(at 175 115 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
