@@ -37,3 +37,9 @@ USB-C REF resistor,100k 0.5%,2 per daughterboard,FROZEN VALUE,TPS25821 reference
 Port LEDs + resistors,LED + 1k resistor,4 per daughterboard,FROZEN VALUE/COLOUR TBD,Active connector and fault indication
 Latching selector switch,SPDT push-push mechanical,2 per daughterboard,MECHANICAL TBD,Direct hardware A/C selection
 Service disable jumper,2-pin shunt input,4 per daughterboard,FROZEN SEMANTICS,OPEN=RUN / SHORT=OFF
+Hard-disable selector,TI SN74LVC2G157 VSSOP-8,2 per daughterboard,FROZEN FAMILY,Selects A/C RUN and complementary output directly drives TS3USB221A OE
+Run pull-ups,10k 1% 0603,4 per daughterboard,FROZEN VALUE,OPEN jumper defaults each physical port to RUN
+Board-enable fail-safe pull-up,100k 1% 0603,1 per daughterboard,FROZEN VALUE,BOARD_ENABLE_N defaults disabled if control line floats
+Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,FROZEN VALUE,3 per TPS25821 gives 141uF input bulk
+Type-C output bypass capacitor,4.7uF >=10V X5R/X7R,2 per daughterboard,FROZEN VALUE,Less than 10uF at Type-C OUT/VBUS
+Type-C CHG default pulldown,100k 1% 0603,2 per daughterboard,FROZEN VALUE,Defaults current advertisement to STD at power-up

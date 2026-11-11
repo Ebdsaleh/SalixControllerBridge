@@ -1,55 +1,68 @@
 # Universal Front USB Dual-Bank Daughterboard — Rev A
 
-One physical PCB design serves both PRIMARY and EXTENDED front panels. Motherboard BOARD_ID sets the I2C address, while LED colors are chosen at assembly/population.
+## Hardware selection and isolation
 
-## Frozen functional architecture
+Each bank now uses SN74LVC2G157 as the hard-isolation selector companion to TS3USB221A.
 
-- Two banks per board.
-- Each bank has one USB-A receptacle and one USB-C receptacle.
-- One TS3USB221A per bank selects which receptacle owns USB2 D+/D-.
-- Latching push-push SPDT switch directly drives the selector. Firmware cannot accidentally select both.
-- Inactive receptacle remains powered for charging.
-- Each physical receptacle has a hardware service-disable jumper: OPEN=RUN, SHORT=OFF.
-- Each connector gets low-capacitance USB ESD protection close to the receptacle.
+Service jumpers are active-low disable inputs implemented as active-high RUN nets:
 
-## USB-C
+- OPEN jumper: 10k pull-up makes RUN=1.
+- SHORT jumper: shunts RUN to GND, making RUN=0.
+- USB-A RUN drives TPS2553 EN directly.
+- USB-C RUN drives TPS25821 EN directly.
 
-TPS25821 is the Rev-A USB-C source-controller family:
+The latching A/C selector also drives SN74LVC2G157 SEL. Input A is the A-port RUN state; input B is the C-port RUN state. The complementary Y_N output drives TS3USB221A OE.
 
-- USB2 DFP/source-only role.
-- Integrated 1.5A VBUS switch.
-- VBUS only applied after valid sink attachment.
-- Source-to-source is not a valid Type-C connection.
-- CHG defaults low for standard-current advertisement; TCA9535 can later raise CHG to 1.5A only under an explicit power-budget policy.
-- REF = 100k 0.5% to GND.
-- At least 120uF close to IN; <10uF near connector VBUS/OUT.
+BOARD_ENABLE_N is active-low and fail-safe pulled high on the daughterboard. SN74LVC2G157 high strobe forces Y=0 and Y_N=1, so TS3USB221A disconnects data while the board is not enabled.
 
-## USB-A
+Result:
 
-TPS2553 is the Rev-A power-switch family:
+- Board enabled + selected port RUN=1 => TS3USB OE=0 => data connected.
+- Selected port jumper short => selected RUN=0 => TS3USB OE=1 => data disconnected.
+- BOARD_ENABLE_N high => TS3USB OE=1 regardless of selector/jumpers.
+- Unselected port can remain powered for charging because physical VBUS enables do not depend on selector state.
 
-- Reverse input-output voltage protection.
-- Open-drain FAULT output for overcurrent, overtemperature and reverse-voltage conditions.
-- RILIM target approximately 28.7k 1%, giving about 0.9A nominal current-limit target before tolerance review.
-- USB-A inactive charging is safe 5V power only in this revision; BC1.2 fast-charge signatures are not promised yet.
+## Type-C implementation
 
-## Management / LEDs
+Each Type-C port uses TPS25821:
 
-TCA9535 provides sixteen I/O bits over Pico-B's management I2C bus:
+- 3 x 47uF input bulk = 141uF at IN.
+- 4.7uF ceramic at OUT/VBUS (<10uF).
+- 100k 0.5% REF resistor.
+- 100k CHG pulldown for STD advertisement by default.
+- CHG remains controllable by TCA9535 after firmware explicitly configures the GPIO.
+- CC1/CC2 direct to Type-C receptacle.
+- FAULT_N and SINK_N monitored by TCA9535.
 
-- P00/P01: Bank A/B selector state.
-- P02..P05: four physical-port fault inputs.
-- P06/P07: USB-C sink-attach inputs.
-- P10..P13: four connector LEDs.
-- P16/P17: Type-C CHG policy control.
-- A0 driven by BOARD_ID; A1/A2 grounded. PRIMARY and EXTENDED therefore use distinct addresses without different PCBs.
+## USB-A implementation
 
-LED colors remain a population decision. The current intended identity palette is Blue, Amber/Yellow, Green and Purple, with Red reserved for system faults.
+Each Type-A port uses TPS2553 with a provisional 28.7k 1% RILIM target. The jumper RUN net directly drives EN. FAULT_N is monitored by TCA9535.
 
-## Hardware-disable rule
+## TCA9535 map
 
-TS3USB221A OE is active-high disconnect. The hard-disable function must remain independent of firmware:
+- P00: Bank A selector
+- P01: Bank B selector
+- P02: Bank A USB-A FAULT_N
+- P03: Bank A USB-C FAULT_N
+- P04: Bank B USB-A FAULT_N
+- P05: Bank B USB-C FAULT_N
+- P06: Bank A USB-C SINK_N
+- P07: Bank B USB-C SINK_N
+- P10: Bank A USB-A LED
+- P11: Bank A USB-C LED
+- P12: Bank B USB-A LED
+- P13: Bank B USB-C LED
+- P14: Bank A selected RUN state
+- P15: Bank B selected RUN state
+- P16: Bank A Type-C CHG policy
+- P17: Bank B Type-C CHG policy
 
-OE = !BOARD_ENABLE OR (!SEL & DIS_A) OR (SEL & DIS_C)
+A0=BOARD_ID; A1=A2=0. Central management-I2C pull-ups belong on the motherboard.
 
-A tiny LVC logic implementation is still to be frozen. The jumpers themselves are already frozen semantically as OPEN=RUN / SHORT=OFF.
+## Still deliberately open
+
+- Exact latching push-push SPDT switch manufacturer/footprint.
+- Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
+- Hub PRTPWR behavior with charge-only inactive receptacles.
+- Hardware selected-fault combination into HUB OCS_N.
+- Final LED colors.
