@@ -2197,7 +2197,7 @@
 	)
 	(label "HUB_XTALOUT" (at 246.19 199 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007453"))
 	(global_label "GND" (shape passive) (at 253.81 199 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007454"))
-	(text "USB2514B SUPPORT NETWORK — REV-A" (exclude_from_sim no) (at 180 145 0) (effects (font (size 1 1) (bold yes))) (uuid "73000000-0000-4000-8000-000000007455"))
+	(text "USB2514B SUPPORT NETWORK — REV-A" (exclude_from_sim no) (at 180 138 0) (effects (font (size 1 1) (bold yes))) (uuid "73000000-0000-4000-8000-000000007455"))
 	(text "SMBus: CFG_SEL0/SCL=1 via 4.7k pull-up; CFG_SEL1/HS_IND=0 via 10k pull-down. Pico-B configures hub over MGMT_I2C." (exclude_from_sim no) (at 180 205 0) (effects (font (size 0.76 0.76))) (uuid "73000000-0000-4000-8000-000000007456"))
 	(text "RESET_N: 10k + 1uF; Pico-B GP22 hard reset. VBUS_DET: 100k/100k from 5V_MAIN." (exclude_from_sim no) (at 180 209 0) (effects (font (size 0.76 0.76))) (uuid "73000000-0000-4000-8000-000000007457"))
 	(text "Pico-A upstream is PIO-USB Full-/Low-Speed only: 22ohm series + 15k host pulldowns. No 480Mbps end-to-end claim." (exclude_from_sim no) (at 180 213 0) (effects (font (size 0.76 0.76) (bold yes))) (uuid "73000000-0000-4000-8000-000000007458"))
