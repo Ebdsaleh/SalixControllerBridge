@@ -74,7 +74,9 @@ def rot(x,y,d):
     r=math.radians(d);return x*math.cos(r)-y*math.sin(r),x*math.sin(r)+y*math.cos(r)
 
 def xf(x,y,sx,sy,r):
-    x,y=rot(x,y,r);return sx+x,sy+y
+    # KiCad symbol-local coordinates use +Y upward while sheet coordinates
+    # use +Y downward. Rotate in symbol space, then flip Y into sheet space.
+    x,y=rot(x,y,r);return sx+x,sy-y
 
 class SVG:
     def __init__(self,w,h):
