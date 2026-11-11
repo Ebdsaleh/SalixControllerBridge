@@ -116,7 +116,7 @@
 	)
 	(text "06 — SERVICE / DEBUG / SUPERVISION"
 		(exclude_from_sim no)
-		(at 20 15 0)
+		(at 53.086 19.558 0)
 		(effects
 			(font
 				(size 1.8 1.8)
@@ -127,7 +127,7 @@
 	)
 	(text "Pico-B owns cooling, update/recovery, power-health monitoring and service diagnostics."
 		(exclude_from_sim no)
-		(at 20 22 0)
+		(at 53.086 26.558 0)
 		(effects
 			(font
 				(size 1.05 1.05)
@@ -289,7 +289,7 @@
 	)
 	(text "Fan motor current comes from 5V_MAIN through a driver/load switch — never from GPIO."
 		(exclude_from_sim no)
-		(at 105 108 0)
+		(at 117.602 108.65 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -299,7 +299,7 @@
 	)
 	(text "Exact fan connector/driver and tach pull-up are TBD until enclosure/fan selection."
 		(exclude_from_sim no)
-		(at 105 114 0)
+		(at 117.602 114.65 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -309,7 +309,7 @@
 	)
 	(text "I²C/AUX remains separate; fans do not consume the sensor expansion port."
 		(exclude_from_sim no)
-		(at 105 120 0)
+		(at 117.602 120.65 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -319,7 +319,7 @@
 	)
 	(text "Retain rear DEBUG/UPDATE USB-C→Pico-B, SWD-A/SWD-B test pads, rail power-good and service LEDs."
 		(exclude_from_sim no)
-		(at 20 140 0)
+		(at 57.404 138.684 0)
 		(effects
 			(font
 				(size 0.95 0.95)
