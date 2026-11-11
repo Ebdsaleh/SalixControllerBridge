@@ -101,6 +101,165 @@ def tbox(s,x,y,z,j):
     y1,y2=y-h,y+.25*h
     return [x1,y1,x2,y2]
 
+
+def electrical_lint(root, libs):
+    """Geometry-based electrical sanity checks.
+
+    This is deliberately conservative. It catches labels floating in space and
+    obvious role mismatches (for example a GND pin labelled 5V, D+ labelled DM,
+    or SDA labelled SCL) without pretending to replace KiCad ERC.
+    """
+    pins=[]
+    segs=[]
+    labels=[]
+
+    for n in root[1:]:
+        if not isinstance(n,list):
+            continue
+        k=H(n)
+        if k=="wire":
+            ps=O(n,"pts")
+            xy=[(F(A(x,1)),F(A(x,2))) for x in C(ps,"xy")] if ps else []
+            for i in range(len(xy)-1):
+                segs.append((xy[i],xy[i+1]))
+        elif k in ("label","global_label","hierarchical_label"):
+            x,y,_=AT(n)
+            labels.append({"kind":k,"net":A(n,1,""),"point":(x,y)})
+        elif k=="symbol":
+            lib_id=A(O(n,"lib_id"),1)
+            lib=libs.get(lib_id)
+            if not lib:
+                continue
+            sx,sy,sr=AT(n)
+            unit=int(F(A(O(n,"unit"),1),1))
+            ref=""
+            for pr in C(n,"property"):
+                if A(pr,1)=="Reference":
+                    ref=A(pr,2,"")
+                    break
+            for part in C(lib,"symbol"):
+                nm=A(part,1,"")
+                m=re.search(r"_(\d+)_(\d+)$",nm)
+                if m and int(m.group(1)) not in (0,unit):
+                    continue
+                for pin in C(part,"pin"):
+                    px,py,_=AT(pin)
+                    x,y=xf(px,py,sx,sy,sr)
+                    pins.append({
+                        "ref":ref,
+                        "lib":lib_id,
+                        "number":A(O(pin,"number"),1,""),
+                        "name":A(O(pin,"name"),1,""),
+                        "point":(x,y),
+                    })
+
+    def eq(a,b,eps=1e-5):
+        return abs(a[0]-b[0])<=eps and abs(a[1]-b[1])<=eps
+
+    def on_seg(p,seg,eps=1e-5):
+        x,y=p
+        (x1,y1),(x2,y2)=seg
+        cross=(x-x1)*(y2-y1)-(y-y1)*(x2-x1)
+        if abs(cross)>eps:
+            return False
+        return (min(x1,x2)-eps<=x<=max(x1,x2)+eps and
+                min(y1,y2)-eps<=y<=max(y1,y2)+eps)
+
+    orphan=[]
+    for lab in labels:
+        p=lab["point"]
+        if not any(eq(p,x["point"]) for x in pins) and not any(on_seg(p,seg) for seg in segs):
+            orphan.append({
+                "kind":lab["kind"],"net":lab["net"],
+                "x":p[0],"y":p[1]
+            })
+
+    def connected_nets(point):
+        reachable=[point]
+        used=set()
+        changed=True
+        while changed:
+            changed=False
+            for i,seg in enumerate(segs):
+                if i in used:
+                    continue
+                if any(on_seg(p,seg) for p in reachable):
+                    used.add(i)
+                    for q in seg:
+                        if not any(eq(q,p) for p in reachable):
+                            reachable.append(q)
+                    changed=True
+
+        nets=[]
+        for lab in labels:
+            p=lab["point"]
+            if any(eq(p,q) for q in reachable):
+                nets.append(lab["net"])
+                continue
+            for i in used:
+                if on_seg(p,segs[i]):
+                    nets.append(lab["net"])
+                    break
+        return sorted(set(nets))
+
+    def role_ok(pin_name,net):
+        p=pin_name.upper()
+        n=net.upper()
+
+        if p=="~" or not p:
+            return True
+
+        if p=="GND" or p.startswith("GND_"):
+            return "GND" in n
+        if p in ("VCC","VDD33","VDDA33","3V3","3V3_AUX"):
+            return any(x in n for x in ("3V3","VCC","VDD"))
+        if p.startswith("5V_"):
+            return "5V" in n
+
+        if "USBDM" in p or p.endswith("D-"):
+            return "DM" in n or "D-" in n
+        if "USBDP" in p or p.endswith("D+"):
+            return "DP" in n or "D+" in n
+
+        if p=="SDA" or p.startswith("SDA/"):
+            return "SDA" in n
+        if p=="SCL" or p.startswith("SCL/"):
+            return "SCL" in n
+        if p in ("CC1","CC2"):
+            return p in n
+        if p=="FAULT_N":
+            return "FAULT" in n
+        if p=="SINK_N":
+            return "SINK" in n
+        if p=="REF":
+            return "REF" in n
+
+        return True
+
+    mismatches=[]
+    pin_map=[]
+    for pin in pins:
+        nets=connected_nets(pin["point"])
+        if nets:
+            pin_map.append({
+                "ref":pin["ref"],"pin":pin["number"],
+                "pin_name":pin["name"],"nets":nets
+            })
+        for net in nets:
+            if not role_ok(pin["name"],net):
+                mismatches.append({
+                    "ref":pin["ref"],"pin":pin["number"],
+                    "pin_name":pin["name"],"net":net,
+                    "x":pin["point"][0],"y":pin["point"][1],
+                })
+
+    return {
+        "orphan_labels":orphan,
+        "pin_net_mismatches":mismatches,
+        "pin_map":pin_map,
+    }
+
+
 def render(path,out):
     root=parse(path.read_text(encoding="utf-8"))
     p=O(root,"paper"); pn=A(p,1,"A4") if p else "A4"; w,h=PAPER.get(pn,(297,210))
@@ -156,15 +315,25 @@ def render(path,out):
             if not (a[2]<b[0] or b[2]<a[0] or a[3]<b[1] or b[3]<a[1]):
                 if ka=="label" and kb=="label" and na==nb:continue
                 hits.append({"type":"text-text","a":f"{ka}:{na}","b":f"{kb}:{nb}"})
+    lint=electrical_lint(root,libs)
+    report={
+        "file":str(path),
+        "likely_overlaps":hits,
+        "electrical_lint":lint,
+    }
     out.mkdir(parents=True,exist_ok=True)
     (out/(path.stem+".svg")).write_text(svg.done(),encoding="utf-8")
-    (out/(path.stem+".overlaps.json")).write_text(json.dumps({"file":str(path),"likely_overlaps":hits},indent=2),encoding="utf-8")
-    print(f"{path.name}: {len(hits)} likely text overlaps")
-    return len(hits)
+    (out/(path.stem+".overlaps.json")).write_text(json.dumps(report,indent=2),encoding="utf-8")
+    print(
+        f"{path.name}: {len(hits)} likely text overlap(s), "
+        f"{len(lint['orphan_labels'])} orphan label(s), "
+        f"{len(lint['pin_net_mismatches'])} obvious pin/net mismatch(es)"
+    )
+    return len(hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input",type=Path);ap.add_argument("-o","--out",type=Path,default=Path("kicad_visuals"));ap.add_argument("--recursive",action="store_true")
     a=ap.parse_args()
     fs=sorted(a.input.glob("**/*.kicad_sch" if a.recursive else "*.kicad_sch")) if a.input.is_dir() else [a.input]
-    total=sum(render(p,a.out) for p in fs);print("Total likely text overlaps:",total)
+    total=sum(render(p,a.out) for p in fs);print("Total review findings:",total)
 if __name__=="__main__":main()
