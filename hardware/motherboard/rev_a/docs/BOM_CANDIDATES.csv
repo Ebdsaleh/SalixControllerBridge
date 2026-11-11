@@ -1,11 +1,15 @@
 Block,Candidate / Class,Qty,Status,Why
 USB Hub,USB2514B-class 4-port USB2 hub,1,CANDIDATE,Four logical input banks to one Pico-A root
-PIO USB series resistors,22 ohm 1%,2,FROZEN VALUE,Pico-PIO-USB recommendation
+PIO USB series resistors,22 ohm 1%,2,FROZEN VALUE,Pico-PIO-USB root GP16/17
 3V3_AUX,5V->3.3V regulator 1-2A class,1,TBD,Hub/logic/module rail
 Module management,TCA9535-class 16-bit I2C GPIO expander,1,CANDIDATE,Slot present/enable/reset/status
 I2C isolation,PCA9548A-class mux,1,CANDIDATE,Per-card I2C isolation
 Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-port protection
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
 Pico sockets,1x20 female headers x2 per Pico,4,FROZEN FORM,Two socketed Pico modules
+Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
 microSD,Push-push or push-pull socket/module interface,1,TBD,Pico-B storage
 TFT,TF034 2.4in 320x240 interface header,1,USER-OWNED,Pico-B UI
+Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
+Fan drivers,5V load-switch/MOSFET + protection,2,TBD,Pico-B controls motor power without sourcing GPIO current
+Fan tach pullups,logic-level pull-up network,2,TBD,Match selected fan electrical interface

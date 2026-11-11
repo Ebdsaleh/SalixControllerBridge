@@ -1,12 +1,19 @@
-Domain,Signal / Resource,Owner,Status,Notes
-USB Host,PIO USB D+,Pico-A,RESERVED,22R series resistor near Pico; exact GPIO TBD
-USB Host,PIO USB D-,Pico-A,RESERVED,22R series resistor near Pico; exact GPIO TBD
-Realtime,Console PIO lane pool,Pico-A,RESERVE,Lane count TBD
-Runtime RPC,SPI SCK/MOSI/MISO/CS,A<->B,RESERVE,Profile/state RPC
-Runtime RPC,READY/IRQ,A<->B,RESERVE,Health/event signal
-Recovery,SWDIO/SWCLK/RUN,Pico-B -> Pico-A,RESERVE,Firmware/update/recovery
-Service,microSD SPI,Pico-B,RESERVE,Prefer separate SPI from TFT
-Service,TF034 SPI/touch,Pico-B,RESERVE,Exact module pinout TBD
-Management,I2C SDA/SCL,Pico-B or shared,RESERVE,Module management/sensors
-Module Bus,CARD_PRESENT/ENABLE/ID,Motherboard,RESERVE,Likely expander-managed
-Prototype,Raw Pico-A 40-pin mirror,Pico-A,FROZEN,Expose all physical header pins
+Domain,Signal / Resource,Owner,GPIO,Status,Notes
+Module PIO,MODULE_PIO0..7,Pico-A,GP0..GP7,FROZEN,Low-latency active console-card lane pool; GP3/4/5 preserve SNES prototype
+Debug UART,TX/RX,Pico-A,GP8/GP9,RESERVED,Developer-only/spare
+Runtime RPC,SPI1 SCK/MOSI/MISO/CS,Pico-A,GP10..GP13,FROZEN,A master
+Runtime RPC,IRQ A2B / B2A,Pico-A,GP14/GP15,FROZEN,Crossed to Pico-B GP17/GP16
+USB Host,HUB D+ / D-,Pico-A,GP16/GP17,FROZEN,22R series resistors near Pico
+Module SPI,SPI0 SCK/MOSI/MISO/CS,Pico-A,GP18..GP21,FROZEN,High-speed active-card link
+Module IRQ,IRQ,Pico-A,GP22,FROZEN,Active console module event
+Raw spare,FREE,Pico-A,GP26..GP28,FREE,Intentionally unallocated
+Management,I2C SDA/SCL,Pico-B,GP0/GP1,FROZEN,Module/motherboard management
+Cooling,FAN0 PWM/TACH,Pico-B,GP2/GP3,FROZEN,5V fan driver required
+TFT,Touch IRQ / BL PWM / RESET / DC / Touch CS / LCD CS,Pico-B,GP4..GP9,FROZEN,TF034 service display
+Runtime RPC,SPI1 SCK/MISO/MOSI/CS,Pico-B,GP10..GP13,FROZEN,B slave; GP11/12 cross TX/RX versus A
+Cooling,FAN1 PWM/TACH,Pico-B,GP14/GP15,FROZEN,5V fan driver required
+Runtime RPC,IRQ B2A / A2B,Pico-B,GP16/GP17,FROZEN,Crossed to Pico-A GP15/GP14
+Service SPI,TFT+SD SPI0 SCK/MOSI/MISO,Pico-B,GP18..GP20,FROZEN,Shared non-realtime bus
+Storage,SD_CS,Pico-B,GP21,FROZEN,microSD belongs only to Pico-B
+Service spare,SPARE,Pico-B,GP22,FREE,Reserved
+Recovery,Pico-A SWDIO/SWCLK/RUN,Pico-B,GP26/GP27/GP28,FROZEN,In-system recovery/update
