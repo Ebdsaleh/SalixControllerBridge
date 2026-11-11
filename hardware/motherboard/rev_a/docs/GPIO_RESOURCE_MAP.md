@@ -51,7 +51,7 @@ Retired bench mapping: GP18/GP19 are no longer a second PIO-USB root. The 4-port
 | GP19 | TFT+SD SPI0 MOSI | Shared bus. |
 | GP20 | TFT+SD SPI0 MISO | Shared bus. |
 | GP21 | SD_CS | microSD exclusively owned by Pico-B. |
-| GP22 | SERVICE SPARE | Reserved for future service function. |
+| GP22 | USB2514B RESET_N | Hard hub reset / recovery; Pico-B may assert low during service/update or fault recovery. |
 | GP26 | Pico-A SWDIO | In-system programming/recovery. |
 | GP27 | Pico-A SWCLK | In-system programming/recovery. |
 | GP28 | Pico-A RUN | Hard reset/recovery control. |

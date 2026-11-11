@@ -15,5 +15,5 @@ Cooling,FAN1 PWM/TACH,Pico-B,GP14/GP15,FROZEN,5V fan driver required
 Runtime RPC,IRQ B2A / A2B,Pico-B,GP16/GP17,FROZEN,Crossed to Pico-A GP15/GP14
 Service SPI,TFT+SD SPI0 SCK/MOSI/MISO,Pico-B,GP18..GP20,FROZEN,Shared non-realtime bus
 Storage,SD_CS,Pico-B,GP21,FROZEN,microSD belongs only to Pico-B
-Service spare,SPARE,Pico-B,GP22,FREE,Reserved
+USB Hub Reset,USB2514B RESET_N,Pico-B,GP22,FROZEN,Hard hub reset / recovery
 Recovery,Pico-A SWDIO/SWCLK/RUN,Pico-B,GP26/GP27/GP28,FROZEN,In-system recovery/update
