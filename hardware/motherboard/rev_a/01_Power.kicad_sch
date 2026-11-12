@@ -276,7 +276,51 @@
 				)
 			)
 		)
-	)
+	
+		(symbol "Salix:PWR_FLAG"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Description" "ERC marker for a rail known to be driven"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "PWR_FLAG_1_1"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(hide yes)
+					(name "pwr" (effects (font (size 1 1))))
+					(number "1" (effects (font (size 1 1))))
+				)
+			)
+		)
+)
 	(text "01 — POWER / PROTECTION — 5V_MAIN + 3V3_AUX"
 		(exclude_from_sim no)
 		(at 20 14 0)
@@ -1126,6 +1170,138 @@
 		(pts (xy 92.22 73.65) (xy 84.6 73.65))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000020")
+	)
+
+	(symbol
+		(lib_id "Salix:PWR_FLAG")
+		(at 220 135 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "8f010000-0000-4000-8000-000000000001")
+		(property "Reference" "#FLG01"
+			(at 220 136.905 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Value" "PWR_FLAG"
+			(at 220 138.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Footprint" ""
+			(at 220 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 220 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "ERC marker for a rail known to be driven"
+			(at 220 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "8f010000-0000-4000-8000-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "5V_MAIN" (shape passive) (at 220 135 0)
+		(effects (font (size 0.85 0.85)) (justify left bottom))
+		(uuid "8f010000-0000-4000-8000-000000000003")
+	)
+
+	(symbol
+		(lib_id "Salix:PWR_FLAG")
+		(at 240 135 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "8f010000-0000-4000-8000-000000000004")
+		(property "Reference" "#FLG02"
+			(at 240 136.905 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Value" "PWR_FLAG"
+			(at 240 138.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Footprint" ""
+			(at 240 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 240 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "ERC marker for a rail known to be driven"
+			(at 240 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "8f010000-0000-4000-8000-000000000005"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "GND" (shape passive) (at 240 135 0)
+		(effects (font (size 0.85 0.85)) (justify left bottom))
+		(uuid "8f010000-0000-4000-8000-000000000006")
+	)
+
+	(symbol
+		(lib_id "Salix:PWR_FLAG")
+		(at 260 135 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "8f010000-0000-4000-8000-000000000007")
+		(property "Reference" "#FLG03"
+			(at 260 136.905 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Value" "PWR_FLAG"
+			(at 260 138.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Footprint" ""
+			(at 260 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 260 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "ERC marker for a rail known to be driven"
+			(at 260 135 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "8f010000-0000-4000-8000-000000000008"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051"
+					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "3V3_AUX" (shape passive) (at 260 135 0)
+		(effects (font (size 0.85 0.85)) (justify left bottom))
+		(uuid "8f010000-0000-4000-8000-000000000009")
 	)
 
 	(sheet_instances
