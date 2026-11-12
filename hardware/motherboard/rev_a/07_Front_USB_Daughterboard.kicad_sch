@@ -3048,7 +3048,7 @@
 	)
 	(symbol
 		(lib_id "Salix:LED_PORT")
-		(at 341 252 0)
+		(at 355.6 247.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3056,33 +3056,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006248")
 		(property "Reference" "D28"
-			(at 341 246 0)
+			(at 355.6 241.65 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "LED B-C"
-			(at 341 258 0)
+			(at 355.6 253.65 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" ""
-			(at 341 252 0)
+			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 341 252 0)
+			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "LED B-C"
-			(at 341 252 0)
+			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3223,8 +3223,8 @@
 	(label "GND" (at 345.08 126 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006372"))
 	(label "LED_B_A" (at 334.92 187.5 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006373"))
 	(label "GND" (at 345.08 187.5 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006374"))
-	(label "LED_B_C" (at 335.92 252 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006375"))
-	(label "GND" (at 346.08 252 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006376"))
+	(label "LED_B_C" (at 350.52 247.65 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006375"))
+	(label "GND" (at 360.68 247.65 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006376"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 365 48 0)

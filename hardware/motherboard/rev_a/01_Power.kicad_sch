@@ -692,7 +692,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 265 100 0)
+		(at 257.38 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -700,33 +700,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004029")
 		(property "Reference" "C4"
-			(at 265 96.3 0)
+			(at 257.38 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "6.8pF"
-			(at 265 104.2 0)
+			(at 257.38 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 265 100 0)
+			(at 257.38 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 265 100 0)
+			(at 257.38 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "6.8pF"
-			(at 265 100 0)
+			(at 257.38 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -798,7 +798,7 @@
 	)
 	(text "TLV62569P Rev-A values:"
 		(exclude_from_sim no)
-		(at 235 47 0)
+		(at 235 36.83 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
@@ -807,7 +807,7 @@
 	)
 	(text "VIN = 5V_MAIN; EN tied high from 5V_MAIN (do not leave floating)"
 		(exclude_from_sim no)
-		(at 235 53 0)
+		(at 235 42.83 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -815,7 +815,7 @@
 	)
 	(text "L1 = 2.2µH; CIN = 4.7µF; COUT = 2×22µF"
 		(exclude_from_sim no)
-		(at 235 59 0)
+		(at 235 48.83 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -823,7 +823,7 @@
 	)
 	(text "RFB_TOP = 453k, RFB_BOTTOM = 100k → ~3.3V; CFF = 6.8pF"
 		(exclude_from_sim no)
-		(at 235 65 0)
+		(at 235 54.83 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -831,7 +831,7 @@
 	)
 	(text "PG open-drain pulled up to 3V3_AUX → 3V3_AUX_PG"
 		(exclude_from_sim no)
-		(at 235 71 0)
+		(at 235 60.83 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -839,7 +839,7 @@
 	)
 	(text "3V3_AUX feeds USB2514B, motherboard logic and future module-management logic."
 		(exclude_from_sim no)
-		(at 235 77 0)
+		(at 235 66.83 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -983,19 +983,19 @@
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007431")
 	)
-	(global_label "GND" (shape passive) (at 251.51 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
+	(global_label "GND" (shape passive) (at 243.89 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
 	(wire
-		(pts (xy 261.19 100) (xy 256.11 100))
+		(pts (xy 253.57 100) (xy 248.49 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007433")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 248.49 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
+	(global_label "3V3_AUX" (shape passive) (at 240.87 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
 	(wire
-		(pts (xy 268.81 100) (xy 273.89 100))
+		(pts (xy 261.19 100) (xy 266.27 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007435")
 	)
-	(label "BUCK_FB" (at 281.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
+	(label "BUCK_FB" (at 273.89 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
 	(wire
 		(pts (xy 181.19 120) (xy 176.11 120))
 		(stroke (width 0) (type default))
@@ -1009,7 +1009,7 @@
 	)
 	(global_label "3V3_AUX_PG" (shape passive) (at 201.51 120 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007440"))
 	(wire
-		(pts (xy 273.89 100) (xy 281.51 100))
+		(pts (xy 266.27 100) (xy 273.89 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000001")
 	)
@@ -1045,7 +1045,7 @@
 	)
 
 	(wire
-		(pts (xy 256.11 100) (xy 248.49 100))
+		(pts (xy 248.49 100) (xy 240.87 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000007")
 	)
