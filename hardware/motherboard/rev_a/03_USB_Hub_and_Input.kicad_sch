@@ -2683,12 +2683,7 @@
 		(effects (font (size 0.78 0.78)) (justify left))
 		(uuid "b6030000-0000-4000-8000-000000000048")
 	)
-	(text "Power-up ports are inputs: daughterboard 100k pull-ups keep both boards fail-safe disabled until firmware enables them."
-		(exclude_from_sim no)
-		(at 300 91 0)
-		(effects (font (size 0.74 0.74)) (justify left))
-		(uuid "b6030000-0000-4000-8000-000000000049")
-	)
+	
 
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053" (page "4"))
