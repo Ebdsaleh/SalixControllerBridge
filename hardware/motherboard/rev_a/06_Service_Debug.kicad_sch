@@ -168,8 +168,8 @@
 			)
 			(symbol "TPS22919_DCK_1_1"
 				(pin power_in line (at -8.89 0 0) (length 2.54) (name "IN" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
-				(pin power_in line (at -8.89 3.81 0) (length 2.54) (name "GND" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
-				(pin input line (at -8.89 -3.81 0) (length 2.54) (name "ON" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
+				(pin power_in line (at -8.89 -3.81 0) (length 2.54) (name "GND" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+				(pin input line (at -8.89 3.81 0) (length 2.54) (name "ON" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
 				(pin passive line (at 8.89 3.81 180) (length 2.54) (name "NC" (effects (font (size 0.78 0.78)))) (number "4" (effects (font (size 0.78 0.78)))))
 				(pin passive line (at 8.89 -3.81 180) (length 2.54) (name "QOD" (effects (font (size 0.78 0.78)))) (number "5" (effects (font (size 0.78 0.78)))))
 				(pin power_out line (at 8.89 0 180) (length 2.54) (name "VOUT" (effects (font (size 0.78 0.78)))) (number "6" (effects (font (size 0.78 0.78)))))
@@ -349,7 +349,7 @@
 	)
 	(text "FAN0: Pico-B GP2 = PWM/ENABLE, GP3 = TACH"
 		(exclude_from_sim no)
-		(at 105 59 0)
+		(at 78 48 0)
 		(effects
 			(font
 				(size 1 1)
@@ -360,7 +360,7 @@
 	)
 	(text "FAN1: Pico-B GP14 = PWM/ENABLE, GP15 = TACH"
 		(exclude_from_sim no)
-		(at 105 94 0)
+		(at 78 83 0)
 		(effects
 			(font
 				(size 1 1)
@@ -827,11 +827,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R70")
 		(property "Reference" "R70"
-			(at 170 38 0)
+			(at 170 45 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "10k"
-			(at 170 58 0)
+			(at 170 51 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -879,11 +879,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R71")
 		(property "Reference" "R71"
-			(at 170 54 0)
+			(at 170 61 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "1k"
-			(at 170 74 0)
+			(at 170 67 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -931,11 +931,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R72")
 		(property "Reference" "R72"
-			(at 170 66 0)
+			(at 170 73 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "100k"
-			(at 170 86 0)
+			(at 170 79 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -983,11 +983,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R73")
 		(property "Reference" "R73"
-			(at 170 73 0)
+			(at 170 80 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "10k"
-			(at 170 93 0)
+			(at 170 86 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -1035,11 +1035,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R74")
 		(property "Reference" "R74"
-			(at 170 89 0)
+			(at 170 96 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "1k"
-			(at 170 109 0)
+			(at 170 102 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -1087,11 +1087,11 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R75")
 		(property "Reference" "R75"
-			(at 170 101 0)
+			(at 170 108 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "100k"
-			(at 170 121 0)
+			(at 170 114 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
