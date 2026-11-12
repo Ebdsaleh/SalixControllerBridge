@@ -4049,7 +4049,7 @@
 	(label "GND" (at 333.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 285 270 0)
+		(at 285 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4057,33 +4057,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006452")
 		(property "Reference" "C34"
-			(at 285 267 0)
+			(at 285 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 285 273 0)
+			(at 285 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 285 270 0)
+			(at 285 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 285 270 0)
+			(at 285 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 285 270 0)
+			(at 285 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4100,11 +4100,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 281.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
-	(label "GND" (at 288.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
+	(label "5V_BOARD" (at 281.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
+	(label "GND" (at 288.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 300 270 0)
+		(at 300 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4112,33 +4112,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006457")
 		(property "Reference" "C35"
-			(at 300 267 0)
+			(at 300 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 300 273 0)
+			(at 300 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 300 270 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 300 270 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 300 270 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4155,11 +4155,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 296.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
-	(label "GND" (at 303.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
+	(label "5V_BOARD" (at 296.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
+	(label "GND" (at 303.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 315 270 0)
+		(at 315 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4167,33 +4167,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006462")
 		(property "Reference" "C36"
-			(at 315 267 0)
+			(at 315 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 315 273 0)
+			(at 315 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 315 270 0)
+			(at 315 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 315 270 0)
+			(at 315 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 315 270 0)
+			(at 315 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4210,11 +4210,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 311.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
-	(label "GND" (at 318.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
+	(label "5V_BOARD" (at 311.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
+	(label "GND" (at 318.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 330 270 0)
+		(at 330 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4222,33 +4222,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006467")
 		(property "Reference" "C37"
-			(at 330 267 0)
+			(at 330 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 330 273 0)
+			(at 330 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 330 270 0)
+			(at 330 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 330 270 0)
+			(at 330 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 330 270 0)
+			(at 330 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4265,8 +4265,8 @@
 			)
 		)
 	)
-	(label "VBUS_B_C" (at 326.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
-	(label "GND" (at 333.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
+	(label "VBUS_B_C" (at 326.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
+	(label "GND" (at 333.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 365 112 0)

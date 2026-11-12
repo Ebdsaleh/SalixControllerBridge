@@ -268,7 +268,7 @@ def render(path,out):
     svg=SVG(w,h);svg.rect(8,8,w-8,h-8,fill="none",wid=.18)
     # KiCad places the worksheet title block in the lower-right corner. Keep
     # review geometry out of that reserved area even when text/text lint is clean.
-    title_keepout=[w-110,h-45,w-8,h-8]
+    title_keepout=[w-110,h-30,w-8,h-8]
     svg.rect(*title_keepout,col="#d97706",fill="#f59e0b",wid=.12,op=.06)
     lr=O(root,"lib_symbols");libs={A(x,1):x for x in C(lr,"symbol")} if lr else {}
     boxes=[]; texts=[]
