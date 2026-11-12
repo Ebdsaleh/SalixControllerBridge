@@ -78,3 +78,12 @@ The fan `+5V_FAN` pins remain intentionally unconnected until the Rev-A load-swi
 - PRIMARY and EXTENDED USB input boards route only through the 4-port hub to Pico-A.
 - Two fan headers are provisioned; cooling is a Pico-B/system-management responsibility.
 - Console personality cards are not hot-swappable in Rev A.
+
+Pico-B motherboard-intentional NC pins:
+- pin 30 RUN: left open; Pico 2 has an internal RUN pull-up.
+- pin 35 ADC_VREF: no motherboard ADC reference load is used.
+- pin 36 3V3_OUT: motherboard logic uses independent 3V3_AUX instead.
+- pin 37 3V3_EN: left open so the Pico 2 on-board 100k pull-up keeps its SMPS enabled.
+- pin 40 VBUS: not connected to motherboard power; Pico-B is powered through VSYS and its own USB connector may still see VBUS locally.
+
+Pico-B GP28 is now hard-wired to Pico-A RUN as `PICO_A_RUN` for recovery/reset control.
