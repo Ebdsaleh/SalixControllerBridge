@@ -102,3 +102,21 @@ Pico-B GP27 drives SWCLK and GP26 carries SWDIO. Pico-B GP28 already controls Pi
 J12 represents spring/pogo contacts that physically touch the Pico-A SWD pads; it is not a normal 40-pin Pico header connection. Raspberry Pi's SWD interface is three wires only and does not carry target power.
 
 The exact J12 footprint is deliberately left mechanical-TBD until the Pico-A variant is frozen. Pico 2 W places its SWD pads centrally below the MCU, while non-wireless Pico 2 uses a different physical location. Rev-A software therefore requires a custom Pico-B SWD/recovery implementation on GP26/GP27 rather than assuming the stock Raspberry Pi debugprobe GPIO map.
+
+
+### Rev-A microSD SPI wiring
+
+The Pico-B service SPI0 bus is now electrically terminated at microSD socket `J13`:
+
+- GP18 = `SERVICE_SPI_SCK` -> microSD CLK (pin 5).
+- GP19 = `SERVICE_SPI_MOSI` -> microSD CMD/DI (pin 3).
+- GP20 = `SERVICE_SPI_MISO` <- microSD DAT0/DO (pin 7).
+- GP21 = `SD_CS_N` -> microSD DAT3/CS (pin 2).
+
+microSD VDD is powered directly from `3V3_AUX`; VSS is GND.
+
+Host-side 47k pull-ups are fitted on CMD and DAT0-DAT3, including the SPI-reserved DAT1/DAT2 contacts. Local 100nF + 10uF bypass capacitance is fitted at the socket supply.
+
+Rev A does not allocate a separate card-detect GPIO. Presence is detected in firmware by card initialization/response.
+
+The exact push-push/push-pull microSD socket footprint remains mechanical-TBD.

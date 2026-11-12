@@ -8,7 +8,7 @@ Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
 Pico sockets,1x20 female headers x2 per Pico,4,FROZEN FORM,Two socketed Pico modules
 Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
-microSD,Push-push or push-pull socket/module interface,1,TBD,Pico-B storage
+microSD,8-contact push-push or push-pull socket,1,LOGICAL INTERFACE FROZEN / MECHANICAL TBD,Native 3.3V SPI on Pico-B GP18-21; exact socket footprint TBD
 TFT,TF034 2.4in 320x240 interface header,1,USER-OWNED,Pico-B UI
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
 Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
@@ -64,3 +64,6 @@ USB shield RC capacitor,100nF >=50V X7R 0603,1 per daughterboard,FROZEN DEFAULT,
 USB shield direct-bond option,0 ohm 0603 DNP,1 per daughterboard,EMC TUNING,Populate only if EMC/ESD validation favors direct shield-to-GND bond
 
 Pico-A SWD spring contacts,3-position spring/pogo contact set,1,MECHANICAL TBD,SWCLK/GND/SWDIO pickup to socketed Pico-A; exact footprint depends on final Pico-A variant and socket height
+
+microSD host pullups,47k 1% 0603,5,FROZEN VALUE,CMD and DAT0-DAT3 host pull-ups; DAT1/DAT2 remain reserved in SPI mode
+microSD VDD bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Place at microSD socket VDD/VSS

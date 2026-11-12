@@ -41,3 +41,20 @@ Pico-B can recover Pico-A through GP26=SWDIO, GP27=SWCLK and GP28=RUN.
 The motherboard exposes these to a dedicated three-contact target pickup (`J12`) arranged as SWCLK / GND / SWDIO. The target remains powered separately; the SWD contact carries no power.
 
 The schematic is electrically frozen, but the spring-contact footprint is intentionally mechanical-TBD until the final Pico-A module variant and socket height are frozen. The PCB layout must align J12 to the actual Pico-A SWD pads and verify contact compression/clearance.
+
+
+## Pico-B microSD storage
+
+Pico-B owns a native 3.3V microSD socket on its shared service SPI0 bus.
+
+SPI mapping:
+- DAT3 -> CS
+- CMD -> MOSI
+- CLK -> SCK
+- DAT0 -> MISO
+
+DAT1 and DAT2 are not used as host data lines in SPI mode but remain pulled up. The host fits 47k pull-ups on CMD and DAT0-DAT3 and 100nF + 10uF local socket decoupling.
+
+No level shifter is used because Pico-B and the card bus are both 3.3V. No card-detect GPIO is allocated in Rev A; firmware detects media through SPI initialization.
+
+The exact microSD mechanical socket is still TBD.
