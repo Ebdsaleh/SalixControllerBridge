@@ -2,7 +2,7 @@ Block,Candidate / Class,Qty,Status,Why
 USB Hub,USB2514B-class 4-port USB2 hub,1,CANDIDATE,Four logical input banks to one Pico-A root
 PIO USB series resistors,22 ohm 1%,2,FROZEN VALUE,Pico-PIO-USB root GP16/17
 3V3_AUX,TI TLV62569P SOT23-6,1,FROZEN FAMILY,Hub/logic/module rail
-Module management,TCA9535-class 16-bit I2C GPIO expander,1,CANDIDATE,Slot present/enable/reset/status
+Front-board management,TI TCA9536DGK VSSOP-8,1,FROZEN FAMILY / FOOTPRINT,Fixed I2C address 0x41; P0/P1 board enables, P2/P3 board interrupt inputs
 I2C isolation,PCA9548A-class mux,1,CANDIDATE,Per-card I2C isolation
 Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-port protection
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
@@ -72,3 +72,6 @@ TFT SPI branch damping,33 ohm 1% 0603,3,FROZEN VALUE,SCK/MOSI/MISO series dampin
 TFT chip-select pullups,47k 1% 0603,2,FROZEN VALUE,LCD_CS_N and TOUCH_CS_N default deselected at reset
 TFT backlight command pulldown,100k 1% 0603,1,FROZEN VALUE,TFT_BL_PWM logic defaults off; actual backlight driver is on front-panel adapter
 TFT logic bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Local J14 3V3_AUX bypass
+
+Front-board INT pullups,10k 1% 0603,2,FROZEN VALUE,PRIMARY_INT_N and EXTENDED_INT_N pull-ups to 3V3_AUX
+Front-board management bypass,100nF X7R 0603,1,FROZEN VALUE,Local TCA9536 VCC bypass

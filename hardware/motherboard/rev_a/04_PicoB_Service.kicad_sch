@@ -1999,7 +1999,7 @@
 		(stroke (width 0) (type default))
 		(uuid "a5040000-0000-4000-8000-000000000088")
 	)
-	(label "TFT_BL_PWM" (at 251.11 130 180) (effects (font (size 0.64 0.64)) (justify right bottom)) (uuid "a5040000-0000-4000-8000-000000000089"))
+	(global_label "TFT_BL_PWM" (shape passive) (at 251.11 130 180) (effects (font (size 0.64 0.64)) (justify right bottom)) (uuid "a5040000-0000-4000-8000-000000000089"))
 	(wire
 		(pts (xy 263.81 130) (xy 268.89 130))
 		(stroke (width 0) (type default))

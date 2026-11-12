@@ -75,3 +75,16 @@ The motherboard no longer assumes a specific undocumented TF034 connector. Inste
 33R branch series resistors isolate the front-panel cable from the on-board microSD branch. LCD_CS_N and TOUCH_CS_N are pulled high at boot; backlight PWM is pulled low.
 
 The front-panel/TF034 adapter must provide the exact module pin mapping and actual backlight-current driver. The motherboard GP5 signal must never source backlight current directly.
+
+
+## Front-board motherboard management
+
+A TCA9536DGK at I2C address 0x41 now owns the four motherboard-side front-board management lines:
+- P0 -> PRIMARY_ENABLE_N
+- P1 -> EXTENDED_ENABLE_N
+- P2 <- PRIMARY_INT_N
+- P3 <- EXTENDED_INT_N
+
+The TCA9536 power-on default is all ports as inputs. This intentionally preserves the daughterboards' local fail-safe BOARD_ENABLE_N pull-ups: both boards remain data-disconnected until Pico-B explicitly configures P0/P1 as outputs and drives them low.
+
+PRIMARY_INT_N and EXTENDED_INT_N each have a 10k pull-up to 3V3_AUX. P2/P3 are polled by Pico-B over management I2C; P3's optional interrupt-output mode is not used.
