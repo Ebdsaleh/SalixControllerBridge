@@ -1878,6 +1878,12 @@
 		(uuid "79000000-0000-4000-8002-000000000020")
 	)
 
+	(global_label "RPC_SCK" (shape passive) (at 59.68 93.89 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000001"))
+	(global_label "RPC_MOSI" (shape passive) (at 59.68 96.43 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000002"))
+	(global_label "RPC_MISO" (shape passive) (at 59.68 98.97 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000003"))
+	(global_label "RPC_CS_N" (shape passive) (at 59.68 101.51 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000004"))
+	(global_label "IRQ_A2B" (shape passive) (at 59.68 106.59 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000005"))
+	(global_label "IRQ_B2A" (shape passive) (at 59.68 109.13 180) (effects (font (size 0.62 0.62)) (justify right bottom)) (uuid "91020000-0000-4000-8000-000000000006"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000052" (page "3"))
 	)

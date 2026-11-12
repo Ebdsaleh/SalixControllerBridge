@@ -327,6 +327,42 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001211")
 	)
+	(wire
+		(pts (xy 59.84 61.19) (xy 52.22 61.19))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000001")
+	)
+	(global_label "GND" (shape passive) (at 52.22 61.19 180) (effects (font (size 0.76 0.76)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000002"))
+	(wire
+		(pts (xy 59.84 66.27) (xy 52.22 66.27))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000003")
+	)
+	(global_label "FAN0_TACH" (shape passive) (at 52.22 66.27 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000004"))
+	(wire
+		(pts (xy 59.84 68.81) (xy 52.22 68.81))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000005")
+	)
+	(global_label "FAN0_PWM_EN" (shape passive) (at 52.22 68.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000006"))
+	(wire
+		(pts (xy 59.84 96.19) (xy 52.22 96.19))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000007")
+	)
+	(global_label "GND" (shape passive) (at 52.22 96.19 180) (effects (font (size 0.76 0.76)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000008"))
+	(wire
+		(pts (xy 59.84 101.27) (xy 52.22 101.27))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000009")
+	)
+	(global_label "FAN1_TACH" (shape passive) (at 52.22 101.27 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000010"))
+	(wire
+		(pts (xy 59.84 103.81) (xy 52.22 103.81))
+		(stroke (width 0) (type default))
+		(uuid "91060000-0000-4000-8001-000000000011")
+	)
+	(global_label "FAN1_PWM_EN" (shape passive) (at 52.22 103.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000012"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056" (page "7"))
 	)

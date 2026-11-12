@@ -56,6 +56,20 @@ Retired bench mapping: GP18/GP19 are no longer a second PIO-USB root. The 4-port
 | GP27 | Pico-A SWCLK | In-system programming/recovery. |
 | GP28 | Pico-A RUN | Hard reset/recovery control. |
 
+## Rev-A cross-sheet net names
+
+The frozen inter-Pico physical nets are:
+- `RPC_SCK`: Pico-A GP10 ↔ Pico-B GP10.
+- `RPC_MOSI`: Pico-A GP11 → Pico-B GP12.
+- `RPC_MISO`: Pico-B GP11 → Pico-A GP12.
+- `RPC_CS_N`: Pico-A GP13 → Pico-B GP13.
+- `IRQ_A2B`: Pico-A GP14 → Pico-B GP17.
+- `IRQ_B2A`: Pico-B GP16 → Pico-A GP15.
+- `FAN0_PWM_EN` / `FAN0_TACH`: Pico-B GP2 / GP3.
+- `FAN1_PWM_EN` / `FAN1_TACH`: Pico-B GP14 / GP15.
+
+The fan `+5V_FAN` pins remain intentionally unconnected until the Rev-A load-switch/driver is selected. This is a deliberate ERC-visible fabrication blocker, not a no-connect.
+
 ## Power / physical constraints
 
 - Both Pico modules remain socketed.
