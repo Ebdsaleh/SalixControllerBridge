@@ -3103,12 +3103,12 @@
 	(label "USB_A_A_DM" (at 154.84 66.31 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006252"))
 	(label "USB_A_A_DP" (at 154.84 69.69 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006253"))
 	(label "GND" (at 154.84 73.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006254"))
-	(label "VBUS_A_C" (at 152.3 103.11 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006255"))
-	(label "USB_A_C_DM" (at 152.3 106.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006256"))
-	(label "USB_A_C_DP" (at 152.3 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006257"))
-	(label "CC1_A" (at 177.7 106.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006258"))
-	(label "CC2_A" (at 177.7 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006259"))
-	(label "GND" (at 152.3 117.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006260"))
+	(label "VBUS_A_C" (at 147.22 103.11 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006255"))
+	(label "USB_A_C_DM" (at 147.22 106.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006256"))
+	(label "USB_A_C_DP" (at 147.22 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006257"))
+	(label "CC1_A" (at 182.78 106.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006258"))
+	(label "CC2_A" (at 182.78 110.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006259"))
+	(label "GND" (at 147.22 117.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006260"))
 	(label "USB_A_A_DP" (at 132.38 65.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006261"))
 	(label "USB_A_A_DM" (at 132.38 70.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006262"))
 	(label "GND" (at 147.62 68 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006263"))
@@ -3125,24 +3125,24 @@
 	(label "BANK_A_DP_HUB" (at 230.7 82.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006274"))
 	(label "BANK_A_SEL" (at 230.7 90.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006275"))
 	(label "3V3_AUX" (at 230.7 77.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006276"))
-	(label "5V_BOARD" (at 179.84 42.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006277"))
-	(label "GND" (at 179.84 47.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006278"))
-	(label "PWR_EN_A_A" (at 179.84 52.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006279"))
-	(label "FAULT_A_A_N" (at 200.16 52.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006280"))
-	(label "RILIM_A_A" (at 200.16 47.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006281"))
-	(label "VBUS_A_A" (at 200.16 42.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006282"))
-	(label "5V_BOARD" (at 177.3 121.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006283"))
-	(label "5V_BOARD" (at 177.3 124.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006284"))
-	(label "TYPEC_A_CHG" (at 177.3 129.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006285"))
-	(label "PWR_EN_A_C" (at 177.3 132 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006286"))
-	(label "FAULT_A_C_N" (at 177.3 137.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006287"))
-	(label "SINK_A_C_N" (at 177.3 139.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006288"))
-	(label "GND" (at 202.7 139.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006289"))
-	(label "REF_A_C" (at 202.7 134.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006290"))
-	(label "CC1_A" (at 202.7 129.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006291"))
-	(label "GND" (at 202.7 137.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006292"))
-	(label "CC2_A" (at 202.7 126.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006293"))
-	(label "VBUS_A_C" (at 202.7 121.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006294"))
+	(label "5V_BOARD" (at 174.76 42.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006277"))
+	(label "GND" (at 174.76 47.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006278"))
+	(label "PWR_EN_A_A" (at 174.76 52.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006279"))
+	(label "FAULT_A_A_N" (at 205.24 52.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006280"))
+	(label "RILIM_A_A" (at 205.24 47.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006281"))
+	(label "VBUS_A_A" (at 205.24 42.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006282"))
+	(label "5V_BOARD" (at 172.22 121.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006283"))
+	(label "5V_BOARD" (at 172.22 124.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006284"))
+	(label "TYPEC_A_CHG" (at 172.22 129.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006285"))
+	(label "PWR_EN_A_C" (at 172.22 132 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006286"))
+	(label "FAULT_A_C_N" (at 172.22 137.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006287"))
+	(label "SINK_A_C_N" (at 172.22 139.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006288"))
+	(label "GND" (at 207.78 139.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006289"))
+	(label "REF_A_C" (at 207.78 134.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006290"))
+	(label "CC1_A" (at 207.78 129.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006291"))
+	(label "GND" (at 207.78 137.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006292"))
+	(label "CC2_A" (at 207.78 126.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006293"))
+	(label "VBUS_A_C" (at 207.78 121.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006294"))
 	(label "GND" (at 257.38 84.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006295"))
 	(label "BANK_A_SEL" (at 272.62 88 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006296"))
 	(label "3V3_AUX" (at 257.38 91.81 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006297"))
@@ -3162,12 +3162,12 @@
 	(label "USB_B_A_DM" (at 144.84 198.31 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006311"))
 	(label "USB_B_A_DP" (at 144.84 201.69 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006312"))
 	(label "GND" (at 144.84 205.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006313"))
-	(label "VBUS_B_C" (at 142.3 235.11 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006314"))
-	(label "USB_B_C_DM" (at 142.3 238.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006315"))
-	(label "USB_B_C_DP" (at 142.3 242.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006316"))
-	(label "CC1_B" (at 167.7 238.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006317"))
-	(label "CC2_B" (at 167.7 242.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006318"))
-	(label "GND" (at 142.3 249.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006319"))
+	(label "VBUS_B_C" (at 137.22 235.11 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006314"))
+	(label "USB_B_C_DM" (at 137.22 238.92 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006315"))
+	(label "USB_B_C_DP" (at 137.22 242.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006316"))
+	(label "CC1_B" (at 172.78 238.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006317"))
+	(label "CC2_B" (at 172.78 242.73 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006318"))
+	(label "GND" (at 137.22 249.08 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006319"))
 	(label "USB_B_A_DP" (at 122.38 197.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006320"))
 	(label "USB_B_A_DM" (at 122.38 202.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006321"))
 	(label "GND" (at 137.62 200 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006322"))
@@ -3184,24 +3184,24 @@
 	(label "BANK_B_DP_HUB" (at 230.7 214.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006333"))
 	(label "BANK_B_SEL" (at 230.7 222.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006334"))
 	(label "3V3_AUX" (at 230.7 209.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006335"))
-	(label "5V_BOARD" (at 179.84 174.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006336"))
-	(label "GND" (at 179.84 179.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006337"))
-	(label "PWR_EN_B_A" (at 179.84 184.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006338"))
-	(label "FAULT_B_A_N" (at 200.16 184.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006339"))
-	(label "RILIM_B_A" (at 200.16 179.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006340"))
-	(label "VBUS_B_A" (at 200.16 174.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006341"))
-	(label "5V_BOARD" (at 177.3 253.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006342"))
-	(label "5V_BOARD" (at 177.3 256.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006343"))
-	(label "TYPEC_B_CHG" (at 177.3 261.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006344"))
-	(label "PWR_EN_B_C" (at 177.3 264 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006345"))
-	(label "FAULT_B_C_N" (at 177.3 269.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006346"))
-	(label "SINK_B_C_N" (at 177.3 271.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006347"))
-	(label "GND" (at 202.7 271.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006348"))
-	(label "REF_B_C" (at 202.7 266.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006349"))
-	(label "CC1_B" (at 202.7 261.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006350"))
-	(label "GND" (at 202.7 269.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006351"))
-	(label "CC2_B" (at 202.7 258.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006352"))
-	(label "VBUS_B_C" (at 202.7 253.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006353"))
+	(label "5V_BOARD" (at 174.76 174.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006336"))
+	(label "GND" (at 174.76 179.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006337"))
+	(label "PWR_EN_B_A" (at 174.76 184.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006338"))
+	(label "FAULT_B_A_N" (at 205.24 184.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006339"))
+	(label "RILIM_B_A" (at 205.24 179.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006340"))
+	(label "VBUS_B_A" (at 205.24 174.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006341"))
+	(label "5V_BOARD" (at 172.22 253.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006342"))
+	(label "5V_BOARD" (at 172.22 256.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006343"))
+	(label "TYPEC_B_CHG" (at 172.22 261.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006344"))
+	(label "PWR_EN_B_C" (at 172.22 264 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006345"))
+	(label "FAULT_B_C_N" (at 172.22 269.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006346"))
+	(label "SINK_B_C_N" (at 172.22 271.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006347"))
+	(label "GND" (at 207.78 271.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006348"))
+	(label "REF_B_C" (at 207.78 266.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006349"))
+	(label "CC1_B" (at 207.78 261.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006350"))
+	(label "GND" (at 207.78 269.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006351"))
+	(label "CC2_B" (at 207.78 258.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006352"))
+	(label "VBUS_B_C" (at 207.78 253.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006353"))
 	(label "GND" (at 257.38 216.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006354"))
 	(label "BANK_B_SEL" (at 272.62 220 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006355"))
 	(label "3V3_AUX" (at 257.38 223.81 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006356"))
@@ -3722,7 +3722,7 @@
 	(label "GND" (at 228.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006421"))
 	(symbol
 		(lib_id "Salix:R")
-		(at 245 138 0)
+		(at 250 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3730,33 +3730,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006422")
 		(property "Reference" "R39"
-			(at 245 135 0)
+			(at 250 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k"
-			(at 245 141 0)
+			(at 250 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 245 138 0)
+			(at 250 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 245 138 0)
+			(at 250 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "100k"
-			(at 245 138 0)
+			(at 250 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3773,11 +3773,11 @@
 			)
 		)
 	)
-	(label "TYPEC_A_CHG" (at 241.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006425"))
-	(label "GND" (at 248.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006426"))
+	(label "TYPEC_A_CHG" (at 246.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006425"))
+	(label "GND" (at 253.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006426"))
 	(symbol
 		(lib_id "Salix:R")
-		(at 245 270 0)
+		(at 250 270 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3785,33 +3785,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006427")
 		(property "Reference" "R40"
-			(at 245 267 0)
+			(at 250 267 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "100k"
-			(at 245 273 0)
+			(at 250 273 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 245 270 0)
+			(at 250 270 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 245 270 0)
+			(at 250 270 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "100k"
-			(at 245 270 0)
+			(at 250 270 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3828,11 +3828,11 @@
 			)
 		)
 	)
-	(label "TYPEC_B_CHG" (at 241.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006430"))
-	(label "GND" (at 248.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006431"))
+	(label "TYPEC_B_CHG" (at 246.19 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006430"))
+	(label "GND" (at 253.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006431"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 250 138 0)
+		(at 275 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3840,33 +3840,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006432")
 		(property "Reference" "C30"
-			(at 250 135 0)
+			(at 275 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 250 141 0)
+			(at 275 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 250 138 0)
+			(at 275 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 250 138 0)
+			(at 275 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 250 138 0)
+			(at 275 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3883,11 +3883,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 246.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
-	(label "GND" (at 253.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
+	(label "5V_BOARD" (at 251.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
+	(label "GND" (at 278.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 285 138 0)
+		(at 300 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3895,33 +3895,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006437")
 		(property "Reference" "C31"
-			(at 285 135 0)
+			(at 300 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 285 141 0)
+			(at 300 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 285 138 0)
+			(at 300 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 285 138 0)
+			(at 300 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 285 138 0)
+			(at 300 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3938,11 +3938,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 281.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006440"))
-	(label "GND" (at 288.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006441"))
+	(label "5V_BOARD" (at 296.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006440"))
+	(label "GND" (at 303.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006441"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 320 138 0)
+		(at 325 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3950,33 +3950,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006442")
 		(property "Reference" "C32"
-			(at 320 135 0)
+			(at 325 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 320 141 0)
+			(at 325 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 320 138 0)
+			(at 325 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 320 138 0)
+			(at 325 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 320 138 0)
+			(at 325 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3993,11 +3993,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 316.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006445"))
-	(label "GND" (at 323.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006446"))
+	(label "5V_BOARD" (at 321.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006445"))
+	(label "GND" (at 328.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006446"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 355 138 0)
+		(at 350 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4005,33 +4005,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006447")
 		(property "Reference" "C33"
-			(at 355 135 0)
+			(at 350 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 355 141 0)
+			(at 350 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 355 138 0)
+			(at 350 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 355 138 0)
+			(at 350 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 355 138 0)
+			(at 350 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4048,11 +4048,11 @@
 			)
 		)
 	)
-	(label "VBUS_A_C" (at 351.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006450"))
-	(label "GND" (at 358.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
+	(label "VBUS_A_C" (at 346.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006450"))
+	(label "GND" (at 353.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 250 240 0)
+		(at 275 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4060,33 +4060,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006452")
 		(property "Reference" "C34"
-			(at 250 237 0)
+			(at 275 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 250 243 0)
+			(at 275 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 250 240 0)
+			(at 275 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 250 240 0)
+			(at 275 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 250 240 0)
+			(at 275 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4103,11 +4103,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 246.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
-	(label "GND" (at 253.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
+	(label "5V_BOARD" (at 271.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
+	(label "GND" (at 278.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 285 240 0)
+		(at 300 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4115,33 +4115,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006457")
 		(property "Reference" "C35"
-			(at 285 237 0)
+			(at 300 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 285 243 0)
+			(at 300 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 285 240 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 285 240 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 285 240 0)
+			(at 300 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4158,11 +4158,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 281.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
-	(label "GND" (at 288.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
+	(label "5V_BOARD" (at 296.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
+	(label "GND" (at 303.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 320 240 0)
+		(at 325 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4170,33 +4170,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006462")
 		(property "Reference" "C36"
-			(at 320 237 0)
+			(at 325 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 320 243 0)
+			(at 325 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 320 240 0)
+			(at 325 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 320 240 0)
+			(at 325 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 320 240 0)
+			(at 325 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4213,11 +4213,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 316.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
-	(label "GND" (at 323.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
+	(label "5V_BOARD" (at 321.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
+	(label "GND" (at 328.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 355 240 0)
+		(at 350 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4225,33 +4225,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006467")
 		(property "Reference" "C37"
-			(at 355 237 0)
+			(at 350 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 355 243 0)
+			(at 350 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 355 240 0)
+			(at 350 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 355 240 0)
+			(at 350 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 355 240 0)
+			(at 350 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4268,8 +4268,8 @@
 			)
 		)
 	)
-	(label "VBUS_B_C" (at 351.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
-	(label "GND" (at 358.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
+	(label "VBUS_B_C" (at 346.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
+	(label "GND" (at 353.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 365 112 0)
@@ -5402,6 +5402,294 @@
 		(pts (xy 282.14 80.38) (xy 277.06 80.38))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000040")
+	)
+
+	(wire
+		(pts (xy 202.7 253.84) (xy 207.78 253.84))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000001")
+	)
+
+	(wire
+		(pts (xy 202.7 258.92) (xy 207.78 258.92))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000002")
+	)
+
+	(wire
+		(pts (xy 202.7 269.08) (xy 207.78 269.08))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000003")
+	)
+
+	(wire
+		(pts (xy 202.7 261.46) (xy 207.78 261.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000004")
+	)
+
+	(wire
+		(pts (xy 202.7 266.54) (xy 207.78 266.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000005")
+	)
+
+	(wire
+		(pts (xy 202.7 271.62) (xy 207.78 271.62))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000006")
+	)
+
+	(wire
+		(pts (xy 177.3 271.62) (xy 172.22 271.62))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000007")
+	)
+
+	(wire
+		(pts (xy 177.3 269.08) (xy 172.22 269.08))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000008")
+	)
+
+	(wire
+		(pts (xy 177.3 264) (xy 172.22 264))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000009")
+	)
+
+	(wire
+		(pts (xy 177.3 261.46) (xy 172.22 261.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000010")
+	)
+
+	(wire
+		(pts (xy 177.3 256.38) (xy 172.22 256.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000011")
+	)
+
+	(wire
+		(pts (xy 177.3 253.84) (xy 172.22 253.84))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000012")
+	)
+
+	(wire
+		(pts (xy 200.16 174.38) (xy 205.24 174.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000013")
+	)
+
+	(wire
+		(pts (xy 200.16 179.46) (xy 205.24 179.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000014")
+	)
+
+	(wire
+		(pts (xy 200.16 184.54) (xy 205.24 184.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000015")
+	)
+
+	(wire
+		(pts (xy 179.84 184.54) (xy 174.76 184.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000016")
+	)
+
+	(wire
+		(pts (xy 179.84 179.46) (xy 174.76 179.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000017")
+	)
+
+	(wire
+		(pts (xy 179.84 174.38) (xy 174.76 174.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000018")
+	)
+
+	(wire
+		(pts (xy 202.7 121.84) (xy 207.78 121.84))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000019")
+	)
+
+	(wire
+		(pts (xy 202.7 126.92) (xy 207.78 126.92))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000020")
+	)
+
+	(wire
+		(pts (xy 202.7 137.08) (xy 207.78 137.08))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000021")
+	)
+
+	(wire
+		(pts (xy 202.7 129.46) (xy 207.78 129.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000022")
+	)
+
+	(wire
+		(pts (xy 202.7 134.54) (xy 207.78 134.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000023")
+	)
+
+	(wire
+		(pts (xy 202.7 139.62) (xy 207.78 139.62))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000024")
+	)
+
+	(wire
+		(pts (xy 177.3 139.62) (xy 172.22 139.62))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000025")
+	)
+
+	(wire
+		(pts (xy 177.3 137.08) (xy 172.22 137.08))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000026")
+	)
+
+	(wire
+		(pts (xy 177.3 132) (xy 172.22 132))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000027")
+	)
+
+	(wire
+		(pts (xy 177.3 129.46) (xy 172.22 129.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000028")
+	)
+
+	(wire
+		(pts (xy 177.3 124.38) (xy 172.22 124.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000029")
+	)
+
+	(wire
+		(pts (xy 177.3 121.84) (xy 172.22 121.84))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000030")
+	)
+
+	(wire
+		(pts (xy 200.16 42.38) (xy 205.24 42.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000031")
+	)
+
+	(wire
+		(pts (xy 200.16 47.46) (xy 205.24 47.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000032")
+	)
+
+	(wire
+		(pts (xy 200.16 52.54) (xy 205.24 52.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000033")
+	)
+
+	(wire
+		(pts (xy 179.84 52.54) (xy 174.76 52.54))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000034")
+	)
+
+	(wire
+		(pts (xy 179.84 47.46) (xy 174.76 47.46))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000035")
+	)
+
+	(wire
+		(pts (xy 179.84 42.38) (xy 174.76 42.38))
+		(stroke (width 0) (type default))
+		(uuid "7c000000-0000-4000-8001-000000000036")
+	)
+
+	(wire
+		(pts (xy 142.3 249.08) (xy 137.22 249.08))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000001")
+	)
+
+	(wire
+		(pts (xy 167.7 242.73) (xy 172.78 242.73))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000002")
+	)
+
+	(wire
+		(pts (xy 167.7 238.92) (xy 172.78 238.92))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000003")
+	)
+
+	(wire
+		(pts (xy 142.3 242.73) (xy 137.22 242.73))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000004")
+	)
+
+	(wire
+		(pts (xy 142.3 238.92) (xy 137.22 238.92))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000005")
+	)
+
+	(wire
+		(pts (xy 142.3 235.11) (xy 137.22 235.11))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000006")
+	)
+
+	(wire
+		(pts (xy 152.3 117.08) (xy 147.22 117.08))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000007")
+	)
+
+	(wire
+		(pts (xy 177.7 110.73) (xy 182.78 110.73))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000008")
+	)
+
+	(wire
+		(pts (xy 177.7 106.92) (xy 182.78 106.92))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000009")
+	)
+
+	(wire
+		(pts (xy 152.3 110.73) (xy 147.22 110.73))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000010")
+	)
+
+	(wire
+		(pts (xy 152.3 106.92) (xy 147.22 106.92))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000011")
+	)
+
+	(wire
+		(pts (xy 152.3 103.11) (xy 147.22 103.11))
+		(stroke (width 0) (type default))
+		(uuid "7d000000-0000-4000-8001-000000000012")
 	)
 
 	(sheet_instances
