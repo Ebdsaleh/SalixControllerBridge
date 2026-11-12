@@ -3114,7 +3114,7 @@
 	(label "GND" (at 147.62 68 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006263"))
 	(label "USB_A_C_DP" (at 132.38 109.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006264"))
 	(label "USB_A_C_DM" (at 132.38 114.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006265"))
-	(label "GND" (at 147.62 112 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006266"))
+	(label "GND" (at 147.62 114.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006266"))
 	(label "USB_A_A_DP" (at 205.3 77.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006267"))
 	(label "USB_A_A_DM" (at 205.3 80.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006268"))
 	(label "USB_A_C_DP" (at 205.3 85.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006269"))
@@ -3173,7 +3173,7 @@
 	(label "GND" (at 137.62 200 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006322"))
 	(label "USB_B_C_DP" (at 122.38 241.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006323"))
 	(label "USB_B_C_DM" (at 122.38 246.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006324"))
-	(label "GND" (at 137.62 244 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006325"))
+	(label "GND" (at 137.62 246.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006325"))
 	(label "USB_B_A_DP" (at 205.3 209.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006326"))
 	(label "USB_B_A_DM" (at 205.3 212.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006327"))
 	(label "USB_B_C_DP" (at 205.3 217.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006328"))
@@ -3883,7 +3883,7 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 251.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
+	(label "5V_BOARD" (at 271.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
 	(label "GND" (at 278.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
 	(symbol
 		(lib_id "Salix:C")
@@ -4217,7 +4217,7 @@
 	(label "GND" (at 328.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 350 240 0)
+		(at 375 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4225,33 +4225,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006467")
 		(property "Reference" "C37"
-			(at 350 237 0)
+			(at 375 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 350 243 0)
+			(at 375 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 350 240 0)
+			(at 375 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 350 240 0)
+			(at 375 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 350 240 0)
+			(at 375 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4268,8 +4268,8 @@
 			)
 		)
 	)
-	(label "VBUS_B_C" (at 346.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
-	(label "GND" (at 353.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
+	(label "VBUS_B_C" (at 371.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
+	(label "GND" (at 378.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 365 112 0)
@@ -5690,6 +5690,18 @@
 		(pts (xy 152.3 103.11) (xy 147.22 103.11))
 		(stroke (width 0) (type default))
 		(uuid "7d000000-0000-4000-8001-000000000012")
+	)
+
+	(wire
+		(pts (xy 147.62 112) (xy 147.62 114.54))
+		(stroke (width 0) (type default))
+		(uuid "7e000000-0000-4000-8001-000000000001")
+	)
+
+	(wire
+		(pts (xy 137.62 244) (xy 137.62 246.54))
+		(stroke (width 0) (type default))
+		(uuid "7e000000-0000-4000-8001-000000000002")
 	)
 
 	(sheet_instances
