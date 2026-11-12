@@ -5,7 +5,7 @@
 	(uuid "10000000-0000-4000-8000-000000000058")
 	(paper "A3")
 	(lib_symbols
-		(symbol "Salix:FRONT_USB_BOARD_IF_20"
+		(symbol "Salix:FRONT_USB_BOARD_IF_20_DAUGHTER"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -43,10 +43,10 @@
 					(hide yes)
 				)
 		)
-			(symbol "FRONT_USB_BOARD_IF_20_0_1"
+			(symbol "FRONT_USB_BOARD_IF_20_DAUGHTER_0_1"
 				(rectangle (start -12.7 26.67) (end 12.7 -26.67) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
-			(symbol "FRONT_USB_BOARD_IF_20_1_1"
+			(symbol "FRONT_USB_BOARD_IF_20_DAUGHTER_1_1"
 				(pin passive line
 					(at -15.24 24.13 0)
 					(length 2.54)
@@ -1201,7 +1201,7 @@
 				)
 			)
 		)
-		(symbol "Salix:R"
+		(symbol "Salix:R_FRONT"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1239,10 +1239,10 @@
 					(hide yes)
 				)
 		)
-			(symbol "R_0_1"
+			(symbol "R_FRONT_0_1"
 				(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
-			(symbol "R_1_1"
+			(symbol "R_FRONT_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -1257,7 +1257,7 @@
 				)
 			)
 		)
-		(symbol "Salix:C"
+		(symbol "Salix:C_FRONT"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1295,10 +1295,10 @@
 					(hide yes)
 				)
 		)
-			(symbol "C_0_1"
+			(symbol "C_FRONT_0_1"
 				(rectangle (start -1.27 0.8) (end 1.27 -0.8) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
-			(symbol "C_1_1"
+			(symbol "C_FRONT_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -1480,7 +1480,7 @@
 		(uuid "60000000-0000-4000-8000-000000006002")
 	)
 	(symbol
-		(lib_id "Salix:FRONT_USB_BOARD_IF_20")
+		(lib_id "Salix:FRONT_USB_BOARD_IF_20_DAUGHTER")
 		(at 45 80 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3268,7 +3268,7 @@
 	(label "LED_B_C" (at 350.52 247.65 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006375"))
 	(global_label "GND" (shape passive) (at 360.68 247.65 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006376"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 365 48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3323,7 +3323,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 48 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006380"))
 	(label "RUN_A_A" (at 368.81 48 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006381"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 365 58 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3378,7 +3378,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 58 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006385"))
 	(label "RUN_A_C" (at 368.81 58 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006386"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 365 183.5 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3433,7 +3433,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 183.5 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006390"))
 	(label "RUN_B_A" (at 368.81 183.5 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006391"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 365 193.5 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3488,7 +3488,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 193.5 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006395"))
 	(label "RUN_B_C" (at 368.81 193.5 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006396"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 365 82 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3543,7 +3543,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 82 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006400"))
 	(label "BOARD_ENABLE_N" (at 368.81 82 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006401"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 225 48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3598,7 +3598,7 @@
 	(label "RILIM_A_A" (at 221.19 48 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006405"))
 	(global_label "GND" (shape passive) (at 228.81 48 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006406"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 225 180 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3653,7 +3653,7 @@
 	(label "RILIM_B_A" (at 221.19 180 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006410"))
 	(global_label "GND" (shape passive) (at 228.81 180 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006411"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 247.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3708,7 +3708,7 @@
 	(label "REF_A_C" (at 244.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006415"))
 	(global_label "GND" (shape passive) (at 251.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006416"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 247.86 270 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3763,7 +3763,7 @@
 	(label "REF_B_C" (at 244.05 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006420"))
 	(global_label "GND" (shape passive) (at 251.67 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006421"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 272.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3818,7 +3818,7 @@
 	(label "TYPEC_A_CHG" (at 269.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006425"))
 	(global_label "GND" (shape passive) (at 276.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006426"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 272.86 270 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3873,7 +3873,7 @@
 	(label "TYPEC_B_CHG" (at 269.05 270 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006430"))
 	(global_label "GND" (shape passive) (at 276.67 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006431"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 297.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3928,7 +3928,7 @@
 	(label "5V_BOARD" (at 294.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
 	(global_label "GND" (shape passive) (at 301.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 322.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3983,7 +3983,7 @@
 	(label "5V_BOARD" (at 319.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006440"))
 	(global_label "GND" (shape passive) (at 326.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006441"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 347.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4038,7 +4038,7 @@
 	(label "5V_BOARD" (at 344.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006445"))
 	(global_label "GND" (shape passive) (at 351.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006446"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 372.86 138 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4093,7 +4093,7 @@
 	(label "VBUS_A_C" (at 369.05 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006450"))
 	(global_label "GND" (shape passive) (at 376.67 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 275 240 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4148,7 +4148,7 @@
 	(label "5V_BOARD" (at 271.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
 	(global_label "GND" (shape passive) (at 278.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 300 240 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4203,7 +4203,7 @@
 	(label "5V_BOARD" (at 296.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
 	(global_label "GND" (shape passive) (at 303.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 325 240 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4258,7 +4258,7 @@
 	(label "5V_BOARD" (at 321.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
 	(global_label "GND" (shape passive) (at 328.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 375 240 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4313,7 +4313,7 @@
 	(label "VBUS_B_C" (at 371.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
 	(global_label "GND" (shape passive) (at 378.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 365 112 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4368,7 +4368,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 112 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006475"))
 	(global_label "GND" (shape passive) (at 368.81 112 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006476"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 365 122 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4423,7 +4423,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 361.19 122 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006480"))
 	(global_label "GND" (shape passive) (at 368.81 122 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006481"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 365 132 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4679,7 +4679,7 @@
 	(global_label "GND" (shape passive) (at 329.76 167.66 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006149"))
 	(global_label "3V3_AUX" (shape passive) (at 360.24 167.66 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006150"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 40 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4734,7 +4734,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 40 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006154"))
 	(label "FAULT_A_A_N" (at 393.81 40 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006155"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 50 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4789,7 +4789,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 50 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006159"))
 	(label "FAULT_A_C_N" (at 393.81 50 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006160"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 60 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4844,7 +4844,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 60 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006164"))
 	(label "FAULT_B_A_N" (at 393.81 60 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006165"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 70 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4899,7 +4899,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 70 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006169"))
 	(label "FAULT_B_C_N" (at 393.81 70 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006170"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 80 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4954,7 +4954,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 80 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006174"))
 	(label "SINK_A_C_N" (at 393.81 80 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006175"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 90 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5009,7 +5009,7 @@
 	(global_label "3V3_AUX" (shape passive) (at 386.19 90 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "61000000-0000-4000-8000-000000006179"))
 	(label "SINK_B_C_N" (at 393.81 90 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "61000000-0000-4000-8000-000000006180"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 390 100 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5814,7 +5814,7 @@
 	)
 	(label "USB_SHIELD" (at 175.32 249.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000008"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 270 150 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5851,7 +5851,7 @@
 	)
 	(global_label "GND" (shape passive) (at 278.89 150 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000015"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_FRONT")
 		(at 270 158 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5888,7 +5888,7 @@
 	)
 	(global_label "GND" (shape passive) (at 278.89 158 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000022"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_FRONT")
 		(at 270 166 0)
 		(unit 1)
 		(exclude_from_sim no)

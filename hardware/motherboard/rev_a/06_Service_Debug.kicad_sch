@@ -114,7 +114,7 @@
 			)
 		)
 	
-		(symbol "Salix:R"
+		(symbol "Salix:R_SERVICE"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -124,16 +124,16 @@
 			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(property "Description" "Resistor" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(symbol "R_0_1"
+			(symbol "R_SERVICE_0_1"
 				(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
-			(symbol "R_1_1"
+			(symbol "R_SERVICE_1_1"
 				(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
 				(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
 			)
 		)
 
-		(symbol "Salix:C"
+		(symbol "Salix:C_SERVICE"
 			(pin_names (offset 0))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -143,11 +143,11 @@
 			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(property "Description" "Capacitor" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(symbol "C_0_1"
+			(symbol "C_SERVICE_0_1"
 				(polyline (pts (xy -0.5 1.0) (xy -0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
 				(polyline (pts (xy 0.5 1.0) (xy 0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
 			)
-			(symbol "C_1_1"
+			(symbol "C_SERVICE_1_1"
 				(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
 				(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
 			)
@@ -610,7 +610,7 @@
 		(uuid "a4060000-0000-4000-8000-000000000038")
 	)
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_SERVICE")
 		(at 145 48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -662,7 +662,7 @@
 	)
 	(global_label "GND" (shape passive) (at 153.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000045"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_SERVICE")
 		(at 145 56 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -714,7 +714,7 @@
 	)
 	(global_label "GND" (shape passive) (at 153.89 56 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000052"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_SERVICE")
 		(at 145 83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -766,7 +766,7 @@
 	)
 	(global_label "GND" (shape passive) (at 153.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000059"))
 	(symbol
-		(lib_id "Salix:C")
+		(lib_id "Salix:C_SERVICE")
 		(at 145 91 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -818,7 +818,7 @@
 	)
 	(global_label "GND" (shape passive) (at 153.89 91 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000066"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -870,7 +870,7 @@
 	)
 	(global_label "FAN0_TACH" (shape passive) (at 178.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000073"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 64 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -922,7 +922,7 @@
 	)
 	(label "FAN0_PWM_GATE" (at 178.89 64 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000080"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 76 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -974,7 +974,7 @@
 	)
 	(global_label "GND" (shape passive) (at 178.89 76 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000087"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1026,7 +1026,7 @@
 	)
 	(global_label "FAN1_TACH" (shape passive) (at 178.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000094"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1078,7 +1078,7 @@
 	)
 	(label "FAN1_PWM_GATE" (at 178.89 99 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000101"))
 	(symbol
-		(lib_id "Salix:R")
+		(lib_id "Salix:R_SERVICE")
 		(at 170 111 0)
 		(unit 1)
 		(exclude_from_sim no)

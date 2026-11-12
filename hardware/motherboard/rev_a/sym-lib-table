@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Salix")(type "KiCad")(uri "${KIPRJMOD}/Salix.kicad_sym")(options "")(descr "SalixControllerBridge Rev-A project symbols"))
+)

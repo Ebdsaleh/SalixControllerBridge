@@ -88,3 +88,8 @@ A TCA9536DGK at I2C address 0x41 now owns the four motherboard-side front-board 
 The TCA9536 power-on default is all ports as inputs. This intentionally preserves the daughterboards' local fail-safe BOARD_ENABLE_N pull-ups: both boards remain data-disconnected until Pico-B explicitly configures P0/P1 as outputs and drives them low.
 
 PRIMARY_INT_N and EXTENDED_INT_N each have a 10k pull-up to 3V3_AUX. P2/P3 are polled by Pico-B over management I2C; P3's optional interrupt-output mode is not used.
+
+
+## Project-local symbol library
+
+Rev-A carries a project-local `Salix.kicad_sym` and `sym-lib-table`. The library is generated from the exact embedded symbol definitions already used by the schematics. Intentionally different resistor/capacitor drawing variants use distinct names (`R_SERVICE`, `C_SERVICE`, `R_FRONT`, `C_FRONT`) and the daughterboard connector uses `FRONT_USB_BOARD_IF_20_DAUGHTER`, preventing one library name from silently representing different symbol definitions.
