@@ -3214,7 +3214,7 @@
 						(font (size 1.1 1.1))
 					)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias"
 				(at 0 0 0)
 				(effects
 						(font (size 1 1))

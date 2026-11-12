@@ -484,13 +484,13 @@
 					(font (size 0.95 0.95))
 				)
 		)
-		(property "Value" "2.2uH ≥2.5A"
+		(property "Value" "XAL4020-222ME 2.2uH"
 			(at 145 78 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_Coilcraft_XxL4020"
 			(at 145 73.65 0)
 			(effects
 					(font (size 1 1))
@@ -504,7 +504,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "2.2uH ≥2.5A"
+		(property "Description" "Coilcraft XAL4020-222ME 2.2uH power inductor"
 			(at 145 73.65 0)
 			(effects
 					(font (size 1 1))
@@ -857,7 +857,7 @@
 		)
 		(uuid "40000000-0000-4000-8000-000000004036")
 	)
-	(text "L1 = 2.2µH; CIN = 4.7µF; COUT = 2×22µF"
+	(text "L1 = Coilcraft XAL4020-222ME 2.2µH; CIN = 4.7µF; COUT = 2×22µF"
 		(exclude_from_sim no)
 		(at 235 48.83 0)
 		(effects

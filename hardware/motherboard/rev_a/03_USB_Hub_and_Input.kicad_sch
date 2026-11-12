@@ -22,7 +22,7 @@
 					(font (size 1.1 1.1))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -691,7 +691,7 @@
 					(font (size 0.95 0.95))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias"
 			(at 140 82 0)
 			(effects
 					(font (size 1 1))
@@ -1400,7 +1400,7 @@
 			(at 293.5 176 0)
 			(effects (font (size 0.85 0.85)))
 		)
-		(property "Value" "10k 1%"
+		(property "Value" "100k 1%"
 			(at 293.5 184 0)
 			(effects (font (size 0.85 0.85)))
 		)
@@ -1412,7 +1412,7 @@
 			(at 293.5 180 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Description" "10k 1%"
+		(property "Description" "100k 1%"
 			(at 293.5 180 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
@@ -2229,7 +2229,7 @@
 	(global_label "GND" (shape passive) (at 274.93 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007454"))
 	(text "USB2514B SUPPORT NETWORK — REV-A" (exclude_from_sim no) (at 210 120 0) (effects (font (size 1 1) (bold yes))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007455"))
-	(text "SMBus: CFG_SEL0/SCL=1 via 4.7k pull-up; CFG_SEL1/HS_IND=0 via 10k pull-down. Pico-B configures hub over MGMT_I2C." (exclude_from_sim no) (at 210 156 0) (effects (font (size 0.76 0.76))
+	(text "SMBus: CFG_SEL0/SCL=1 via 4.7k pull-up; CFG_SEL1/HS_IND=0 via 100k pull-down. Pico-B configures hub over MGMT_I2C." (exclude_from_sim no) (at 210 156 0) (effects (font (size 0.76 0.76))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007456"))
 	(text "RESET_N: 10k + 1uF; Pico-B GP22 hard reset. VBUS_DET: 100k/100k from 5V_MAIN." (exclude_from_sim no) (at 210 162 0) (effects (font (size 0.76 0.76))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007457"))
