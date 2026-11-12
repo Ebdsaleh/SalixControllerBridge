@@ -5924,12 +5924,7 @@
 		(uuid "95070000-0000-4000-8001-000000000019")
 	)
 	(global_label "GND" (shape passive) (at 278.89 166 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000020"))
-	(text "USB SHIELD → GND: 330R || 100nF; optional 0R DNP for EMC/ESD tuning."
-		(exclude_from_sim no)
-		(at 270 142 0)
-		(effects (font (size 0.82 0.82)) (justify left))
-		(uuid "95070000-0000-4000-8200-000000000001")
-	)
+	
 
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (page "8"))
