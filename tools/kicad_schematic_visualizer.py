@@ -266,6 +266,10 @@ def render(path,out):
     root=parse(path.read_text(encoding="utf-8"))
     p=O(root,"paper"); pn=A(p,1,"A4") if p else "A4"; w,h=PAPER.get(pn,(297,210))
     svg=SVG(w,h);svg.rect(8,8,w-8,h-8,fill="none",wid=.18)
+    # KiCad places the worksheet title block in the lower-right corner. Keep
+    # review geometry out of that reserved area even when text/text lint is clean.
+    title_keepout=[w-110,h-45,w-8,h-8]
+    svg.rect(*title_keepout,col="#d97706",fill="#f59e0b",wid=.12,op=.06)
     lr=O(root,"lib_symbols");libs={A(x,1):x for x in C(lr,"symbol")} if lr else {}
     boxes=[]; texts=[]
     def addtxt(n,kind,col):
@@ -317,10 +321,20 @@ def render(path,out):
             if not (a[2]<b[0] or b[2]<a[0] or a[3]<b[1] or b[3]<a[1]):
                 if ka=="label" and kb=="label" and na==nb:continue
                 hits.append({"type":"text-text","a":f"{ka}:{na}","b":f"{kb}:{nb}"})
+    def intersects(a,b):
+        return not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
+    title_hits=[]
+    for kind,name,box in texts:
+        if intersects(box,title_keepout):
+            title_hits.append({"type":"title-block-text","item":f"{kind}:{name}","box":box})
+    for ref,box in boxes:
+        if intersects(box,title_keepout):
+            title_hits.append({"type":"title-block-symbol","item":ref or "<unnamed>","box":box})
     lint=electrical_lint(root,libs)
     report={
         "file":str(path),
         "likely_overlaps":hits,
+        "title_block_intrusions":title_hits,
         "electrical_lint":lint,
     }
     out.mkdir(parents=True,exist_ok=True)
@@ -328,10 +342,11 @@ def render(path,out):
     (out/(path.stem+".overlaps.json")).write_text(json.dumps(report,indent=2),encoding="utf-8")
     print(
         f"{path.name}: {len(hits)} likely text overlap(s), "
+        f"{len(title_hits)} title-block intrusion(s), "
         f"{len(lint['orphan_labels'])} orphan label(s), "
         f"{len(lint['pin_net_mismatches'])} obvious pin/net mismatch(es)"
     )
-    return len(hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
+    return len(hits)+len(title_hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input",type=Path);ap.add_argument("-o","--out",type=Path,default=Path("kicad_visuals"));ap.add_argument("--recursive",action="store_true")
