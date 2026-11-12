@@ -9,8 +9,13 @@ Each PNG is named after its source .kicad_sch file:
     01_Power.kicad_sch -> 01_Power.png
     07_Front_USB_Daughterboard.kicad_sch -> 07_Front_USB_Daughterboard.png
 
-The script uses KiCad's own kicad-cli renderer, so the output matches KiCad
-rather than the repository's approximate schematic visualizer.
+Rendering strategy:
+- Newer KiCad builds with "sch export png" use KiCad's native PNG exporter.
+- KiCad 10.x builds without schematic PNG export use KiCad's PDF exporter,
+  then rasterize the one-page PDF to PNG with PyMuPDF.
+
+PyMuPDF is installed automatically into the active Python environment only if
+the PDF fallback is needed and PyMuPDF is not already available.
 
 Typical use from the repository root:
     py tools\\render_kicad_schematics.py
@@ -24,6 +29,7 @@ Optional:
 from __future__ import annotations
 
 import argparse
+import importlib
 import os
 import re
 import shutil
@@ -33,7 +39,7 @@ import tempfile
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 
 DEFAULT_RELATIVE_SCHEMATIC = Path(
@@ -46,6 +52,12 @@ DEFAULT_DPI = 300
 class SheetPage:
     page: str
     source: Path
+
+
+@dataclass(frozen=True)
+class RendererInfo:
+    version: str
+    native_png: bool
 
 
 def _version_key(path: Path) -> tuple[int, ...]:
@@ -95,15 +107,17 @@ def find_kicad_cli(explicit: str | None) -> Path:
             resolved = candidate.resolve()
         except OSError:
             resolved = candidate
+
         key = os.path.normcase(str(resolved))
         if key in seen:
             continue
         seen.add(key)
+
         if resolved.is_file():
             return resolved
 
     raise FileNotFoundError(
-        "Could not find kicad-cli. KiCad 10.x must be installed.\n"
+        "Could not find kicad-cli. KiCad must be installed.\n"
         "Either add kicad-cli to PATH, set KICAD_CLI, or pass "
         "--kicad-cli \"C:\\Program Files\\KiCad\\10.0\\bin\\kicad-cli.exe\"."
     )
@@ -112,6 +126,7 @@ def find_kicad_cli(explicit: str | None) -> Path:
 def extract_balanced_blocks(text: str, marker: str) -> Iterable[str]:
     """Yield balanced S-expression blocks beginning at marker."""
     index = 0
+
     while True:
         start = text.find(marker, index)
         if start < 0:
@@ -164,9 +179,13 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     for block in extract_balanced_blocks(text, "\n\t(sheet\n"):
         uuid_match = re.search(r'\(uuid\s+"([^"]+)"\)', block)
         file_match = re.search(r'\(property\s+"Sheetfile"\s+"([^"]+)"', block)
+
         if not uuid_match or not file_match:
             continue
-        children.append((uuid_match.group(1), root_schematic.parent / file_match.group(1)))
+
+        children.append(
+            (uuid_match.group(1), root_schematic.parent / file_match.group(1))
+        )
 
     page_map: dict[str, str] = {}
     for uuid, _ in children:
@@ -182,15 +201,15 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     for fallback_index, (uuid, child) in enumerate(children, start=2):
         pages.append(SheetPage(page_map.get(uuid, str(fallback_index)), child))
 
-    def sort_key(item: SheetPage) -> tuple:
+    def sort_key(item: SheetPage) -> tuple[Any, ...]:
         pieces = re.split(r"([0-9]+)", item.page)
         return tuple(int(p) if p.isdigit() else p for p in pieces)
 
     return sorted(pages, key=sort_key)
 
 
-def run_checked(command: list[str]) -> subprocess.CompletedProcess[str]:
-    result = subprocess.run(
+def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
         command,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -199,38 +218,84 @@ def run_checked(command: list[str]) -> subprocess.CompletedProcess[str]:
         errors="replace",
         check=False,
     )
+
+
+def run_checked(command: list[str]) -> subprocess.CompletedProcess[str]:
+    result = run_command(command)
+
     if result.returncode != 0:
         quoted = subprocess.list2cmdline(command)
         raise RuntimeError(
             f"Command failed with exit code {result.returncode}:\n"
             f"{quoted}\n\n{result.stdout}"
         )
+
     return result
 
 
-def verify_png_support(kicad_cli: Path) -> str:
+def detect_renderer(kicad_cli: Path) -> RendererInfo:
     version = run_checked([str(kicad_cli), "--version"]).stdout.strip()
-    help_result = run_checked(
-        [str(kicad_cli), "sch", "export", "png", "--help"]
-    )
-    if "--dpi" not in help_result.stdout:
-        raise RuntimeError(
-            "This KiCad CLI does not appear to support schematic PNG export. "
-            "KiCad 10.x is required."
+
+    png_help = run_command([str(kicad_cli), "sch", "export", "png", "--help"])
+    native_png = png_help.returncode == 0 and "--dpi" in png_help.stdout
+
+    if not native_png:
+        pdf_help = run_command([str(kicad_cli), "sch", "export", "pdf", "--help"])
+        if pdf_help.returncode != 0 or "--pages" not in pdf_help.stdout:
+            raise RuntimeError(
+                "This KiCad CLI supports neither schematic PNG export nor the "
+                "PDF fallback required by this script."
+            )
+
+    return RendererInfo(version=version, native_png=native_png)
+
+
+def ensure_pymupdf() -> Any:
+    """Import PyMuPDF, installing it into the active environment if necessary."""
+    try:
+        return importlib.import_module("pymupdf")
+    except ImportError:
+        print("PyMuPDF  : not installed; installing into the active Python environment...")
+        install = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "pip",
+                "install",
+                "--disable-pip-version-check",
+                "pymupdf",
+            ],
+            check=False,
         )
-    return version
+        if install.returncode != 0:
+            raise RuntimeError(
+                "PyMuPDF is required for KiCad 10 PDF-to-PNG conversion, "
+                "and automatic installation failed.\n"
+                "Run this once, then retry:\n"
+                f"  {sys.executable} -m pip install pymupdf"
+            )
+
+        importlib.invalidate_caches()
+        try:
+            return importlib.import_module("pymupdf")
+        except ImportError as exc:
+            raise RuntimeError(
+                "PyMuPDF installation completed but Python still cannot import it."
+            ) from exc
 
 
 def clean_previous_outputs(output_dir: Path, zip_path: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
+
     for png in output_dir.glob("*.png"):
         if png.is_file():
             png.unlink()
+
     if zip_path.exists():
         zip_path.unlink()
 
 
-def render_page(
+def render_page_native_png(
     kicad_cli: Path,
     root_schematic: Path,
     sheet: SheetPage,
@@ -254,10 +319,11 @@ def render_page(
         "--pages",
         sheet.page,
     ]
+
     if theme:
         command.extend(["--theme", theme])
-    command.append(str(root_schematic))
 
+    command.append(str(root_schematic))
     run_checked(command)
 
     produced = sorted(page_dir.glob("*.png"))
@@ -271,8 +337,61 @@ def render_page(
     shutil.copy2(produced[0], destination)
 
 
+def render_page_via_pdf(
+    kicad_cli: Path,
+    root_schematic: Path,
+    sheet: SheetPage,
+    destination: Path,
+    dpi: int,
+    theme: str | None,
+    scratch: Path,
+    pymupdf: Any,
+) -> None:
+    page_dir = scratch / f"page_{sheet.page.replace('/', '_')}"
+    page_dir.mkdir(parents=True, exist_ok=True)
+
+    pdf_path = page_dir / "sheet.pdf"
+
+    command = [
+        str(kicad_cli),
+        "sch",
+        "export",
+        "pdf",
+        "--output",
+        str(pdf_path),
+        "--pages",
+        sheet.page,
+    ]
+
+    if theme:
+        command.extend(["--theme", theme])
+
+    command.append(str(root_schematic))
+    run_checked(command)
+
+    if not pdf_path.is_file():
+        raise RuntimeError(
+            f"KiCad reported success but did not create the expected PDF: {pdf_path}"
+        )
+
+    document = pymupdf.open(str(pdf_path))
+    try:
+        if len(document) != 1:
+            raise RuntimeError(
+                f"Expected a one-page PDF for schematic page {sheet.page}, "
+                f"but KiCad produced {len(document)} pages."
+            )
+
+        page = document[0]
+        pixmap = page.get_pixmap(dpi=dpi, alpha=False)
+        pixmap.save(str(destination))
+    finally:
+        document.close()
+
+
 def create_zip(output_dir: Path, zip_path: Path) -> None:
     images = sorted(output_dir.glob("*.png"))
+
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for image in images:
             archive.write(image, arcname=image.name)
@@ -286,8 +405,9 @@ def parse_args() -> argparse.Namespace:
     default_output = user_profile / "Downloads" / "kicad_fixes"
 
     parser = argparse.ArgumentParser(
-        description="Render the KiCad schematic hierarchy directly to PNG images."
+        description="Render the KiCad schematic hierarchy to PNG images."
     )
+
     parser.add_argument(
         "schematic",
         nargs="?",
@@ -305,7 +425,7 @@ def parse_args() -> argparse.Namespace:
         "--dpi",
         type=int,
         default=DEFAULT_DPI,
-        help=f"KiCad PNG render DPI (default: {DEFAULT_DPI})",
+        help=f"PNG render DPI (default: {DEFAULT_DPI})",
     )
     parser.add_argument(
         "--theme",
@@ -327,6 +447,7 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Do not create Downloads\\kicad_fixes.zip after rendering.",
     )
+
     return parser.parse_args()
 
 
@@ -347,7 +468,7 @@ def main() -> int:
 
     try:
         kicad_cli = find_kicad_cli(args.kicad_cli)
-        version = verify_png_support(kicad_cli)
+        renderer = detect_renderer(kicad_cli)
         pages = discover_pages(root_schematic)
 
         if not pages:
@@ -358,13 +479,25 @@ def main() -> int:
             listing = "\n".join(f"  - {p}" for p in missing)
             raise FileNotFoundError(f"Referenced schematic sheet(s) missing:\n{listing}")
 
+        pymupdf = None
+        if not renderer.native_png:
+            pymupdf = ensure_pymupdf()
+
         if not args.no_clean:
             clean_previous_outputs(output_dir, zip_path)
         else:
             output_dir.mkdir(parents=True, exist_ok=True)
 
         print(f"KiCad CLI : {kicad_cli}")
-        print(f"KiCad     : {version}")
+        print(f"KiCad     : {renderer.version}")
+        print(
+            "Renderer  : "
+            + (
+                "native schematic PNG"
+                if renderer.native_png
+                else "KiCad PDF -> PyMuPDF PNG fallback"
+            )
+        )
         print(f"Root      : {root_schematic}")
         print(f"Output    : {output_dir}")
         print(f"DPI       : {args.dpi}")
@@ -373,22 +506,37 @@ def main() -> int:
 
         with tempfile.TemporaryDirectory(prefix="salix_kicad_png_") as temp:
             scratch = Path(temp)
+
             for index, sheet in enumerate(pages, start=1):
                 output_name = sheet.source.with_suffix(".png").name
                 destination = output_dir / output_name
+
                 print(
                     f"[{index}/{len(pages)}] page {sheet.page}: "
                     f"{sheet.source.name} -> {output_name}"
                 )
-                render_page(
-                    kicad_cli=kicad_cli,
-                    root_schematic=root_schematic,
-                    sheet=sheet,
-                    destination=destination,
-                    dpi=args.dpi,
-                    theme=args.theme,
-                    scratch=scratch,
-                )
+
+                if renderer.native_png:
+                    render_page_native_png(
+                        kicad_cli=kicad_cli,
+                        root_schematic=root_schematic,
+                        sheet=sheet,
+                        destination=destination,
+                        dpi=args.dpi,
+                        theme=args.theme,
+                        scratch=scratch,
+                    )
+                else:
+                    render_page_via_pdf(
+                        kicad_cli=kicad_cli,
+                        root_schematic=root_schematic,
+                        sheet=sheet,
+                        destination=destination,
+                        dpi=args.dpi,
+                        theme=args.theme,
+                        scratch=scratch,
+                        pymupdf=pymupdf,
+                    )
 
         if not args.no_zip:
             create_zip(output_dir, zip_path)
