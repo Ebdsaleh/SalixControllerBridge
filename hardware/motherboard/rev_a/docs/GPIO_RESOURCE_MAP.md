@@ -120,3 +120,34 @@ Host-side 47k pull-ups are fitted on CMD and DAT0-DAT3, including the SPI-reserv
 Rev A does not allocate a separate card-detect GPIO. Presence is detected in firmware by card initialization/response.
 
 The exact push-push/push-pull microSD socket footprint remains mechanical-TBD.
+
+
+### Front-panel UI logical interface
+
+Rev-A terminates the six TFT-specific Pico-B GPIOs at logical 12-position service connector `J14` rather than hard-coding an undocumented TF034 module pinout.
+
+J14 logical pinout:
+1. GND
+2. 3V3_AUX logic supply
+3. 5V_MAIN auxiliary panel/backlight supply
+4. TFT_SPI_SCK
+5. TFT_SPI_MOSI
+6. TFT_SPI_MISO
+7. TFT_LCD_CS_N
+8. TFT_TOUCH_CS_N
+9. TFT_DC
+10. TFT_RESET
+11. TFT_TOUCH_IRQ
+12. TFT_BL_PWM (logic only)
+
+Pico-B mappings:
+- GP4 = TFT_TOUCH_IRQ
+- GP5 = TFT_BL_PWM
+- GP6 = TFT_RESET
+- GP7 = TFT_DC
+- GP8 = TFT_TOUCH_CS_N
+- GP9 = TFT_LCD_CS_N
+
+The TFT branch shares Pico-B SPI0 with microSD through separate 33R series resistors on SCK/MOSI/MISO. LCD_CS_N and TOUCH_CS_N each default high through 47k pull-ups; TFT_BL_PWM defaults low through 100k so the backlight command is off during reset/boot.
+
+The actual TF034 panel pinout, backlight current driver and cable/harness belong on the front-panel adapter and remain module-specific. J14's exact keyed connector footprint is mechanical-TBD.

@@ -9,7 +9,7 @@ USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector prot
 Pico sockets,1x20 female headers x2 per Pico,4,FROZEN FORM,Two socketed Pico modules
 Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
 microSD,8-contact push-push or push-pull socket,1,LOGICAL INTERFACE FROZEN / MECHANICAL TBD,Native 3.3V SPI on Pico-B GP18-21; exact socket footprint TBD
-TFT,TF034 2.4in 320x240 interface header,1,USER-OWNED,Pico-B UI
+TFT/front-panel UI,12-position keyed logical service header,1,LOGICAL PINOUT FROZEN / MECHANICAL TBD,Adapter/harness maps J14 to user-owned TF034; exact panel pinout and connector TBD
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
 Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
 Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treated as open-collector/open-drain
@@ -67,3 +67,8 @@ Pico-A SWD spring contacts,3-position spring/pogo contact set,1,MECHANICAL TBD,S
 
 microSD host pullups,47k 1% 0603,5,FROZEN VALUE,CMD and DAT0-DAT3 host pull-ups; DAT1/DAT2 remain reserved in SPI mode
 microSD VDD bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Place at microSD socket VDD/VSS
+
+TFT SPI branch damping,33 ohm 1% 0603,3,FROZEN VALUE,SCK/MOSI/MISO series damping between shared service SPI0 and front-panel cable
+TFT chip-select pullups,47k 1% 0603,2,FROZEN VALUE,LCD_CS_N and TOUCH_CS_N default deselected at reset
+TFT backlight command pulldown,100k 1% 0603,1,FROZEN VALUE,TFT_BL_PWM logic defaults off; actual backlight driver is on front-panel adapter
+TFT logic bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Local J14 3V3_AUX bypass

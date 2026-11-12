@@ -58,3 +58,20 @@ DAT1 and DAT2 are not used as host data lines in SPI mode but remain pulled up. 
 No level shifter is used because Pico-B and the card bus are both 3.3V. No card-detect GPIO is allocated in Rev A; firmware detects media through SPI initialization.
 
 The exact microSD mechanical socket is still TBD.
+
+
+## Front-panel UI interface
+
+The motherboard no longer assumes a specific undocumented TF034 connector. Instead, J14 is a frozen logical 12-signal service UI interface carrying:
+- 3.3V logic power and GND,
+- optional 5V auxiliary panel/backlight power,
+- a damped branch of the shared service SPI0 bus,
+- LCD and touch chip-selects,
+- D/C,
+- reset,
+- touch IRQ,
+- logic-only backlight PWM.
+
+33R branch series resistors isolate the front-panel cable from the on-board microSD branch. LCD_CS_N and TOUCH_CS_N are pulled high at boot; backlight PWM is pulled low.
+
+The front-panel/TF034 adapter must provide the exact module pin mapping and actual backlight-current driver. The motherboard GP5 signal must never source backlight current directly.
