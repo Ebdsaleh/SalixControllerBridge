@@ -191,8 +191,8 @@
 			)
 			(symbol "NMOS_GSD_1_1"
 				(pin input line (at -8.89 0 0) (length 2.54) (name "G" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
-				(pin passive line (at 8.89 2.54 180) (length 2.54) (name "S" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
-				(pin passive line (at 8.89 -2.54 180) (length 2.54) (name "D" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 -2.54 180) (length 2.54) (name "S" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 2.54 180) (length 2.54) (name "D" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
 			)
 		)
 )
@@ -935,7 +935,7 @@
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "100k"
-			(at 170 79 0)
+			(at 170 78 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -983,7 +983,7 @@
 		(dnp no)
 		(uuid "94060000-0000-4000-8300-000000000R73")
 		(property "Reference" "R73"
-			(at 170 80 0)
+			(at 170 82 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "10k"
