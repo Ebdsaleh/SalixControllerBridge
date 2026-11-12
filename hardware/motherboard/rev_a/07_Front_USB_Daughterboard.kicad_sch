@@ -1769,7 +1769,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:Texas_DRT-3"
 			(at 140 68 0)
 			(effects
 					(font (size 1 1))
@@ -1823,7 +1823,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:Texas_DRT-3"
 			(at 137 112 0)
 			(effects
 					(font (size 1 1))
@@ -1877,7 +1877,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_DFN_QFN:UQFN-10-1EP_2x1.5mm_P0.5mm"
+		(property "Footprint" ""
 			(at 218 88 0)
 			(effects
 					(font (size 1 1))
@@ -1995,7 +1995,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SON:WSON-12-1EP_3x2mm_P0.5mm"
+		(property "Footprint" "Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65"
 			(at 212.86 132 0)
 			(effects
 					(font (size 1 1))
@@ -2112,7 +2112,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 292.3 88 0)
 			(effects
 					(font (size 1 1))
@@ -2506,7 +2506,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:Texas_DRT-3"
 			(at 130 200 0)
 			(effects
 					(font (size 1 1))
@@ -2560,7 +2560,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:Texas_DRT-3"
 			(at 127 244 0)
 			(effects
 					(font (size 1 1))
@@ -2614,7 +2614,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_DFN_QFN:UQFN-10-1EP_2x1.5mm_P0.5mm"
+		(property "Footprint" ""
 			(at 203 220 0)
 			(effects
 					(font (size 1 1))
@@ -2732,7 +2732,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SON:WSON-12-1EP_3x2mm_P0.5mm"
+		(property "Footprint" "Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65"
 			(at 212.86 264 0)
 			(effects
 					(font (size 1 1))
@@ -2849,7 +2849,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 292.3 220 0)
 			(effects
 					(font (size 1 1))
@@ -4456,7 +4456,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 340 88 0)
 			(effects
 					(font (size 1 1))
@@ -4515,7 +4515,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 340 220 0)
 			(effects
 					(font (size 1 1))
@@ -4574,7 +4574,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 345 157.5 0)
 			(effects
 					(font (size 1 1))

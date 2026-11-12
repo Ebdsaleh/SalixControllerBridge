@@ -33,9 +33,9 @@ PRIMARY and EXTENDED each use one dual-bank motherboard interface carrying two U
 - Crystal load capacitors remain value-TBD until the exact crystal and its CL are selected.
 - VDDA33: one 100nF at each of four power pins plus shared 1uF bulk.
 - VDD33: one 100nF at each of two power pins.
-- CRFILT: 10nF + 100nF low-ESR to GND.
-- PLLFILT: 10nF + 100nF low-ESR to GND.
-- CRFILT and PLLFILT are separate networks and must never be tied together.
+- CRFILT: 100nF low-ESR to GND. Optional parallel tuning pad is DNP by default.
+- PLLFILT: 100nF low-ESR to GND. Optional parallel tuning pad is DNP by default.
+- CRFILT and PLLFILT are separate networks and must never be tied together. Keep each fitted filter capacitance at or below 0.1uF.
 - TEST → GND.
 - Exposed VSS pad → solid ground plane with multiple vias.
 

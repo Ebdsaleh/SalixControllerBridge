@@ -17,7 +17,7 @@ USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN HUB FAMILY,4-port USB2 Hi-Spe
 USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and hub upstream pair
 USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
 USB hub clock,24.000MHz crystal ±350ppm or better,1,PART TBD,Exact package/CL not frozen
-USB hub filter caps,10nF + 100nF low-ESR,2 pairs,FROZEN VALUES,Separate CRFILT and PLLFILT networks
+USB hub filter caps,100nF low-ESR fitted + optional DNP tuning pad,2 networks,FROZEN FITTED VALUE,Separate CRFILT and PLLFILT networks; each fitted network <=0.1uF
 USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
 3V3_AUX regulator,TI TLV62569P SOT23-6,1,FROZEN FAMILY,2A 5V-to-3.3V buck with power-good
 3V3_AUX inductor,2.2uH >=2.5A class,1,FROZEN VALUE,TLV62569P output filter
@@ -27,23 +27,23 @@ USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
 Main input eFuse,TPS25947-class or higher-current equivalent,1,CANDIDATE,Final part depends on 5V_MAIN current budget
 Front-board interface,20-position keyed/locking connector class,2,LOGICAL PINOUT FROZEN,Exact mechanical family TBD
-Front USB data mux,TI TS3USB221A UQFN-10,2 per daughterboard,FROZEN FAMILY,480Mbps A/C data selection with hardware OE disconnect
-USB-C source controller,TI TPS25821 WSON-12,2 per daughterboard,FROZEN FAMILY,Source-only USB2 DFP + integrated VBUS switch
+Front USB data mux,TI TS3USB221A RSE UQFN-10,2 per daughterboard,FROZEN FAMILY / FOOTPRINT PENDING,480Mbps A/C data selection with hardware OE disconnect; exact TI RSE0010A land pattern required
+USB-C source controller,TI TPS25821DSS WSON-12,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65
 USB-A power switch,TI TPS2553 SOT-23-6,2 per daughterboard,FROZEN FAMILY,Adjustable current limit + reverse-voltage protection
 Front-board GPIO expander,TI TCA9535 TSSOP-24,1 per daughterboard,FROZEN FAMILY,I2C selector/fault/LED/charge policy
-USB data ESD,TI TPD2EUSB30A-class,4 per daughterboard,FROZEN CLASS,Low-capacitance pair close to each receptacle
+USB data ESD,TI TPD2EUSB30A DRT SOT-9X3,4 per daughterboard,FROZEN FAMILY / FOOTPRINT,Use Package_TO_SOT_SMD:Texas_DRT-3; place close to each receptacle
 USB-A current limit resistor,28.7k 1%,2 per daughterboard,PROVISIONAL VALUE,About 0.9A nominal target; tolerance review still required
 USB-C REF resistor,100k 0.5%,2 per daughterboard,FROZEN VALUE,TPS25821 reference resistor
 Port LEDs + resistors,LED + 1k resistor,4 per daughterboard,FROZEN VALUE/COLOUR TBD,Active connector and fault indication
 Latching selector switch,SPDT push-push mechanical,2 per daughterboard,MECHANICAL TBD,Direct hardware A/C selection
 Service disable jumper,2-pin shunt input,4 per daughterboard,FROZEN SEMANTICS,OPEN=RUN / SHORT=OFF
-Hard-disable selector,TI SN74LVC2G157 VSSOP-8,2 per daughterboard,FROZEN FAMILY,Selects A/C RUN and complementary output directly drives TS3USB221A OE
+Hard-disable selector,TI SN74LVC2G157 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_3x3mm_P0.65mm
 Run pull-ups,10k 1% 0603,4 per daughterboard,FROZEN VALUE,OPEN jumper defaults each physical port to RUN
 Board-enable fail-safe pull-up,100k 1% 0603,1 per daughterboard,FROZEN VALUE,BOARD_ENABLE_N defaults disabled if control line floats
 Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,FROZEN VALUE,3 per TPS25821 gives 141uF input bulk
 Type-C output bypass capacitor,4.7uF >=10V X5R/X7R,2 per daughterboard,FROZEN VALUE,Less than 10uF at Type-C OUT/VBUS
 Type-C CHG default pulldown,100k 1% 0603,2 per daughterboard,FROZEN VALUE,Defaults current advertisement to STD at power-up
-Hub power gates,TI SN74LVC2G08 VSSOP-8,2 per daughterboard,FROZEN FAMILY,Dual AND gates RUN_A/RUN_C with active-high USB2514B PRTPWR
+Hub power gates,TI SN74LVC2G08 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_3x3mm_P0.65mm
 USB hub rail decoupling,100nF X7R,6,FROZEN VALUE,4x VDDA33 + 2x VDD33 close to pins
 USB hub analog bulk,1uF X7R,1,FROZEN VALUE,Shared VDDA33 bulk
 USB hub SMBus pullups,4.7k 1% 0603,2,FROZEN VALUE,SDA and SCL / CFG_SEL0 pullups to 3V3_AUX

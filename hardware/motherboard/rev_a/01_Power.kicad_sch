@@ -983,7 +983,7 @@
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007431")
 	)
-	(global_label "GND" (shape passive) (at 243.89 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
+	(global_label "GND" (shape passive) (at 231.51 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
 	(wire
 		(pts (xy 253.57 100) (xy 248.49 100))
 		(stroke (width 0) (type default))

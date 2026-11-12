@@ -319,121 +319,121 @@
 				)
 			)
 			(symbol "FRONT_USB_BOARD_IF_20_1_1"
-				(pin power_out line
+				(pin passive line
 					(at -15.24 24.13 0)
 					(length 2.54)
 					(name "5V_A" (effects (font (size 0.85 0.85))))
 					(number "1" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_out line
+				(pin passive line
 					(at -15.24 21.59 0)
 					(length 2.54)
 					(name "5V_B" (effects (font (size 0.85 0.85))))
 					(number "2" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_in line
+				(pin passive line
 					(at -15.24 19.049999999999997 0)
 					(length 2.54)
 					(name "GND_A" (effects (font (size 0.85 0.85))))
 					(number "3" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_in line
+				(pin passive line
 					(at -15.24 16.509999999999998 0)
 					(length 2.54)
 					(name "GND_B" (effects (font (size 0.85 0.85))))
 					(number "4" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_out line
+				(pin passive line
 					(at -15.24 13.969999999999999 0)
 					(length 2.54)
 					(name "3V3_AUX" (effects (font (size 0.85 0.85))))
 					(number "5" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 11.43 0)
 					(length 2.54)
 					(name "I2C_SDA" (effects (font (size 0.85 0.85))))
 					(number "6" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 8.889999999999999 0)
 					(length 2.54)
 					(name "I2C_SCL" (effects (font (size 0.85 0.85))))
 					(number "7" (effects (font (size 0.85 0.85))))
 				)
-				(pin input line
+				(pin passive line
 					(at -15.24 6.349999999999998 0)
 					(length 2.54)
 					(name "INT_N" (effects (font (size 0.85 0.85))))
 					(number "8" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin passive line
 					(at -15.24 3.8099999999999987 0)
 					(length 2.54)
 					(name "BOARD_ID" (effects (font (size 0.85 0.85))))
 					(number "9" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin passive line
 					(at -15.24 1.2699999999999996 0)
 					(length 2.54)
 					(name "BOARD_ENABLE_N" (effects (font (size 0.85 0.85))))
 					(number "10" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 -1.2699999999999996 0)
 					(length 2.54)
 					(name "BANK_A_DM" (effects (font (size 0.85 0.85))))
 					(number "11" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 -3.8100000000000023 0)
 					(length 2.54)
 					(name "BANK_A_DP" (effects (font (size 0.85 0.85))))
 					(number "12" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin passive line
 					(at -15.24 -6.350000000000001 0)
 					(length 2.54)
 					(name "BANK_A_PRTPWR" (effects (font (size 0.85 0.85))))
 					(number "13" (effects (font (size 0.85 0.85))))
 				)
-				(pin input line
+				(pin passive line
 					(at -15.24 -8.890000000000004 0)
 					(length 2.54)
 					(name "BANK_A_OCS_N" (effects (font (size 0.85 0.85))))
 					(number "14" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 -11.430000000000003 0)
 					(length 2.54)
 					(name "BANK_B_DM" (effects (font (size 0.85 0.85))))
 					(number "15" (effects (font (size 0.85 0.85))))
 				)
-				(pin bidirectional line
+				(pin passive line
 					(at -15.24 -13.970000000000002 0)
 					(length 2.54)
 					(name "BANK_B_DP" (effects (font (size 0.85 0.85))))
 					(number "16" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin passive line
 					(at -15.24 -16.51 0)
 					(length 2.54)
 					(name "BANK_B_PRTPWR" (effects (font (size 0.85 0.85))))
 					(number "17" (effects (font (size 0.85 0.85))))
 				)
-				(pin input line
+				(pin passive line
 					(at -15.24 -19.05 0)
 					(length 2.54)
 					(name "BANK_B_OCS_N" (effects (font (size 0.85 0.85))))
 					(number "18" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_in line
+				(pin passive line
 					(at -15.24 -21.59 0)
 					(length 2.54)
 					(name "GND_C" (effects (font (size 0.85 0.85))))
 					(number "19" (effects (font (size 0.85 0.85))))
 				)
-				(pin power_in line
+				(pin passive line
 					(at -15.24 -24.13 0)
 					(length 2.54)
 					(name "GND_D" (effects (font (size 0.85 0.85))))
@@ -1090,12 +1090,12 @@
 		)
 	)
 	(global_label "5V_MAIN" (shape passive) (at 36.76 43.87 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004139"))
-	(label "5V_MAIN" (at 36.76 46.41 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004140"))
-	(label "GND" (at 36.76 48.95 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004141"))
-	(label "GND" (at 36.76 51.49 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004142"))
-	(label "3V3_AUX" (at 36.76 54.03 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004143"))
-	(label "MGMT_I2C_SDA" (at 36.76 56.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004144"))
-	(label "MGMT_I2C_SCL" (at 36.76 59.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004145"))
+	(global_label "5V_MAIN" (shape passive) (at 36.76 46.41 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004140"))
+	(global_label "GND" (shape passive) (at 36.76 48.95 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004141"))
+	(global_label "GND" (shape passive) (at 36.76 51.49 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004142"))
+	(global_label "3V3_AUX" (shape passive) (at 36.76 54.03 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004143"))
+	(global_label "MGMT_I2C_SDA" (shape passive) (at 36.76 56.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004144"))
+	(global_label "MGMT_I2C_SCL" (shape passive) (at 36.76 59.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004145"))
 	(label "PRIMARY_INT_N" (at 36.76 61.65 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004146"))
 	(label "PRIMARY_BOARD_ID" (at 36.76 64.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004147"))
 	(label "PRIMARY_ENABLE_N" (at 36.76 66.73 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004148"))
@@ -1107,15 +1107,15 @@
 	(label "USB_DN2_DP" (at 36.76 81.97 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004154"))
 	(label "HUB_PRTPWR2" (at 36.76 84.51 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004155"))
 	(label "HUB_OCS2_N" (at 36.76 87.05 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004156"))
-	(label "GND" (at 36.76 89.59 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004157"))
-	(label "GND" (at 36.76 92.13 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004158"))
-	(label "5V_MAIN" (at 36.76 97.87 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004159"))
-	(label "5V_MAIN" (at 36.76 100.41 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004160"))
-	(label "GND" (at 36.76 102.95 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004161"))
-	(label "GND" (at 36.76 105.49 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004162"))
-	(label "3V3_AUX" (at 36.76 108.03 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004163"))
-	(label "MGMT_I2C_SDA" (at 36.76 110.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004164"))
-	(label "MGMT_I2C_SCL" (at 36.76 113.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004165"))
+	(global_label "GND" (shape passive) (at 36.76 89.59 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004157"))
+	(global_label "GND" (shape passive) (at 36.76 92.13 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004158"))
+	(global_label "5V_MAIN" (shape passive) (at 36.76 97.87 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004159"))
+	(global_label "5V_MAIN" (shape passive) (at 36.76 100.41 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004160"))
+	(global_label "GND" (shape passive) (at 36.76 102.95 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004161"))
+	(global_label "GND" (shape passive) (at 36.76 105.49 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004162"))
+	(global_label "3V3_AUX" (shape passive) (at 36.76 108.03 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004163"))
+	(global_label "MGMT_I2C_SDA" (shape passive) (at 36.76 110.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004164"))
+	(global_label "MGMT_I2C_SCL" (shape passive) (at 36.76 113.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004165"))
 	(label "EXTENDED_INT_N" (at 36.76 115.65 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004166"))
 	(label "EXTENDED_BOARD_ID" (at 36.76 118.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004167"))
 	(label "EXTENDED_ENABLE_N" (at 36.76 120.73 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004168"))
@@ -1127,8 +1127,8 @@
 	(label "USB_DN4_DP" (at 36.76 135.97 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004174"))
 	(label "HUB_PRTPWR4" (at 36.76 138.51 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004175"))
 	(label "HUB_OCS4_N" (at 36.76 141.05 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004176"))
-	(label "GND" (at 36.76 143.59 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004177"))
-	(label "GND" (at 36.76 146.13 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004178"))
+	(global_label "GND" (shape passive) (at 36.76 143.59 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004177"))
+	(global_label "GND" (shape passive) (at 36.76 146.13 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004178"))
 	(label "USB_DN1_DM" (at 112.06 56.6 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004179"))
 	(label "USB_DN1_DP" (at 112.06 59.14 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004180"))
 	(label "USB_DN2_DM" (at 112.06 61.68 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004181"))
@@ -1138,12 +1138,12 @@
 	(label "USB_DN3_DP" (at 112.06 71.84 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004185"))
 	(label "USB_DN4_DM" (at 112.06 74.38 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004186"))
 	(label "USB_DN4_DP" (at 112.06 76.92 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004187"))
-	(label "3V3_AUX" (at 112.06 79.46 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004188"))
+	(global_label "3V3_AUX" (shape passive) (at 112.06 79.46 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004188"))
 	(global_label "GND" (shape passive) (at 112.06 82 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004189"))
 	(label "HUB_PRTPWR1" (at 112.06 84.54 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004190"))
 	(label "HUB_OCS1_N" (at 112.06 87.08 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004191"))
 	(label "HUB_CRFILT" (at 112.06 89.62 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004192"))
-	(label "3V3_AUX" (at 112.06 92.16 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004193"))
+	(global_label "3V3_AUX" (shape passive) (at 112.06 92.16 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004193"))
 	(label "HUB_PRTPWR2" (at 112.06 94.7 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004194"))
 	(label "HUB_OCS2_N" (at 112.06 97.24 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004195"))
 	(label "HUB_PRTPWR3" (at 112.06 99.78 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004196"))
@@ -1151,27 +1151,27 @@
 	(label "HUB_PRTPWR4" (at 167.94 56.6 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004198"))
 	(label "HUB_OCS4_N" (at 167.94 59.14 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004199"))
 	(global_label "MGMT_I2C_SDA" (shape passive) (at 167.94 61.68 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004200"))
-	(label "3V3_AUX" (at 167.94 64.22 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004201"))
+	(global_label "3V3_AUX" (shape passive) (at 167.94 64.22 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004201"))
 	(global_label "MGMT_I2C_SCL" (shape passive) (at 167.94 66.76 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004202"))
 	(label "HUB_HS_IND" (at 167.94 69.3 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004203"))
 	(global_label "HUB_RESET_N" (shape passive) (at 167.94 71.84 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004204"))
 	(label "HUB_VBUS_DET" (at 167.94 74.38 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004205"))
 	(label "HUB_SUSP_IND" (at 167.94 76.92 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004206"))
-	(label "3V3_AUX" (at 167.94 79.46 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004207"))
+	(global_label "3V3_AUX" (shape passive) (at 167.94 79.46 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004207"))
 	(label "HUB_USBDM_UP" (at 167.94 82 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004208"))
 	(label "HUB_USBDP_UP" (at 167.94 84.54 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004209"))
 	(label "HUB_XTALOUT" (at 167.94 87.08 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004210"))
 	(label "HUB_XTALIN" (at 167.94 89.62 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004211"))
 	(label "HUB_PLLFILT" (at 167.94 92.16 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004212"))
 	(label "HUB_RBIAS" (at 167.94 94.7 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004213"))
-	(label "3V3_AUX" (at 167.94 97.24 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004214"))
+	(global_label "3V3_AUX" (shape passive) (at 167.94 97.24 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004214"))
 	(label "HUB_USBDP_UP" (at 216.19 70 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004215"))
 	(wire (pts (xy 216.19 70) (xy 216.19 70)) (stroke (width 0) (type default)) (uuid "40000000-0000-4000-8000-000000004216"))
 	(global_label "PICO_A_GP16_USB_DP" (shape passive) (at 223.81 70 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004217"))
 	(label "HUB_USBDM_UP" (at 216.19 80 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004218"))
 	(global_label "PICO_A_GP17_USB_DM" (shape passive) (at 223.81 80 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004219"))
 	(label "HUB_RBIAS" (at 216.19 112 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004220"))
-	(label "GND" (at 223.81 112 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004221"))
+	(global_label "GND" (shape passive) (at 223.81 112 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004221"))
 	(label "HUB_XTALIN" (at 216.19 98 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004222"))
 	(label "HUB_XTALOUT" (at 223.81 98 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004223"))
 	(text "Hub power / reset support:"
@@ -1960,13 +1960,13 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "73000000-0000-4000-8000-000000007425")
 		(property "Reference" "C58"
 			(at 258.5 246 0)
 			(effects (font (size 0.85 0.85)))
 		)
-		(property "Value" "10nF X7R"
+		(property "Value" "DNP"
 			(at 258.5 254 0)
 			(effects (font (size 0.85 0.85)))
 		)
@@ -1978,7 +1978,7 @@
 			(at 258.5 250 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Description" "10nF X7R"
+		(property "Description" "Optional CRFILT tuning pad; default DNP"
 			(at 258.5 250 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
@@ -2044,13 +2044,13 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "73000000-0000-4000-8000-000000007435")
 		(property "Reference" "C60"
 			(at 328.5 246 0)
 			(effects (font (size 0.85 0.85)))
 		)
-		(property "Value" "10nF X7R"
+		(property "Value" "DNP"
 			(at 328.5 254 0)
 			(effects (font (size 0.85 0.85)))
 		)
@@ -2062,7 +2062,7 @@
 			(at 328.5 250 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Description" "10nF X7R"
+		(property "Description" "Optional PLLFILT tuning pad; default DNP"
 			(at 328.5 250 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
@@ -2475,6 +2475,16 @@
 		(pts (xy 189.69 180) (xy 182.07 180))
 		(stroke (width 0) (type default))
 		(uuid "7b000000-0000-4000-8001-000000000044")
+	)
+
+	(wire
+		(pts (xy 167.94 99.78) (xy 175.56 99.78))
+		(stroke (width 0) (type default))
+		(uuid "8e000000-0000-4000-8000-000000000001")
+	)
+	(global_label "GND" (shape passive) (at 175.56 99.78 0)
+		(effects (font (size 0.85 0.85)) (justify left bottom))
+		(uuid "8e000000-0000-4000-8000-000000000002")
 	)
 
 	(sheet_instances
