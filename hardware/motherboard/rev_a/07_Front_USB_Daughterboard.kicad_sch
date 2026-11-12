@@ -2090,7 +2090,7 @@
 	)
 	(symbol
 		(lib_id "Salix:SN74LVC2G157")
-		(at 305 88 0)
+		(at 292.3 88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2098,33 +2098,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006151")
 		(property "Reference" "U24"
-			(at 305 70 0)
+			(at 292.3 70 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "BANK A RUN/ISOLATE"
-			(at 305 106 0)
+			(at 292.3 106 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
-			(at 305 88 0)
+			(at 292.3 88 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 305 88 0)
+			(at 292.3 88 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "BANK A RUN/ISOLATE"
-			(at 305 88 0)
+			(at 292.3 88 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -2827,7 +2827,7 @@
 	)
 	(symbol
 		(lib_id "Salix:SN74LVC2G157")
-		(at 305 220 0)
+		(at 292.3 220 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2835,33 +2835,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006230")
 		(property "Reference" "U28"
-			(at 305 202 0)
+			(at 292.3 202 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "BANK B RUN/ISOLATE"
-			(at 305 238 0)
+			(at 292.3 238 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Package_SO:VSSOP-8_2.3x3mm_P0.65mm"
-			(at 305 220 0)
+			(at 292.3 220 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 305 220 0)
+			(at 292.3 220 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "BANK B RUN/ISOLATE"
-			(at 305 220 0)
+			(at 292.3 220 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3143,14 +3143,14 @@
 	(label "GND" (at 257.38 84.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006295"))
 	(label "BANK_A_SEL" (at 272.62 88 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006296"))
 	(label "3V3_AUX" (at 257.38 91.81 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006297"))
-	(label "RUN_A_A" (at 289.76 80.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006298"))
-	(label "RUN_A_C" (at 289.76 85.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006299"))
-	(label "BANK_A_MUX_OE" (at 320.24 85.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006300"))
-	(label "GND" (at 289.76 95.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006301"))
-	(label "BANK_A_SELECTED_RUN" (at 320.24 80.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006302"))
-	(label "BANK_A_SEL" (at 289.76 90.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006303"))
-	(label "BOARD_ENABLE_N" (at 320.24 95.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006304"))
-	(label "3V3_AUX" (at 320.24 90.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006305"))
+	(label "RUN_A_A" (at 277.06 80.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006298"))
+	(label "RUN_A_C" (at 277.06 85.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006299"))
+	(label "BANK_A_MUX_OE" (at 307.54 85.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006300"))
+	(label "GND" (at 277.06 95.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006301"))
+	(label "BANK_A_SELECTED_RUN" (at 307.54 80.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006302"))
+	(label "BANK_A_SEL" (at 277.06 90.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006303"))
+	(label "BOARD_ENABLE_N" (at 307.54 95.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006304"))
+	(label "3V3_AUX" (at 307.54 90.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006305"))
 	(label "RUN_A_A" (at 259.92 52 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006306"))
 	(label "GND" (at 270.08 52 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006307"))
 	(label "RUN_A_C" (at 259.92 126 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006308"))
@@ -3202,14 +3202,14 @@
 	(label "GND" (at 257.38 216.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006354"))
 	(label "BANK_B_SEL" (at 272.62 220 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006355"))
 	(label "3V3_AUX" (at 257.38 223.81 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006356"))
-	(label "RUN_B_A" (at 289.76 212.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006357"))
-	(label "RUN_B_C" (at 289.76 217.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006358"))
-	(label "BANK_B_MUX_OE" (at 320.24 217.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006359"))
-	(label "GND" (at 289.76 227.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006360"))
-	(label "BANK_B_SELECTED_RUN" (at 320.24 212.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006361"))
-	(label "BANK_B_SEL" (at 289.76 222.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006362"))
-	(label "BOARD_ENABLE_N" (at 320.24 227.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006363"))
-	(label "3V3_AUX" (at 320.24 222.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006364"))
+	(label "RUN_B_A" (at 277.06 212.38 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006357"))
+	(label "RUN_B_C" (at 277.06 217.46 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006358"))
+	(label "BANK_B_MUX_OE" (at 307.54 217.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006359"))
+	(label "GND" (at 277.06 227.62 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006360"))
+	(label "BANK_B_SELECTED_RUN" (at 307.54 212.38 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006361"))
+	(label "BANK_B_SEL" (at 277.06 222.54 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006362"))
+	(label "BOARD_ENABLE_N" (at 307.54 227.62 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006363"))
+	(label "3V3_AUX" (at 307.54 222.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006364"))
 	(label "RUN_B_A" (at 259.92 184 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006365"))
 	(label "GND" (at 270.08 184 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006366"))
 	(label "RUN_B_C" (at 259.92 258 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006367"))
@@ -5291,97 +5291,97 @@
 	)
 
 	(wire
-		(pts (xy 315.16 222.54) (xy 320.24 222.54))
+		(pts (xy 302.46 222.54) (xy 307.54 222.54))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000025")
 	)
 
 	(wire
-		(pts (xy 315.16 227.62) (xy 320.24 227.62))
+		(pts (xy 302.46 227.62) (xy 307.54 227.62))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000026")
 	)
 
 	(wire
-		(pts (xy 294.84 222.54) (xy 289.76 222.54))
+		(pts (xy 282.14 222.54) (xy 277.06 222.54))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000027")
 	)
 
 	(wire
-		(pts (xy 315.16 212.38) (xy 320.24 212.38))
+		(pts (xy 302.46 212.38) (xy 307.54 212.38))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000028")
 	)
 
 	(wire
-		(pts (xy 294.84 227.62) (xy 289.76 227.62))
+		(pts (xy 282.14 227.62) (xy 277.06 227.62))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000029")
 	)
 
 	(wire
-		(pts (xy 315.16 217.46) (xy 320.24 217.46))
+		(pts (xy 302.46 217.46) (xy 307.54 217.46))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000030")
 	)
 
 	(wire
-		(pts (xy 294.84 217.46) (xy 289.76 217.46))
+		(pts (xy 282.14 217.46) (xy 277.06 217.46))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000031")
 	)
 
 	(wire
-		(pts (xy 294.84 212.38) (xy 289.76 212.38))
+		(pts (xy 282.14 212.38) (xy 277.06 212.38))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000032")
 	)
 
 	(wire
-		(pts (xy 315.16 90.54) (xy 320.24 90.54))
+		(pts (xy 302.46 90.54) (xy 307.54 90.54))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000033")
 	)
 
 	(wire
-		(pts (xy 315.16 95.62) (xy 320.24 95.62))
+		(pts (xy 302.46 95.62) (xy 307.54 95.62))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000034")
 	)
 
 	(wire
-		(pts (xy 294.84 90.54) (xy 289.76 90.54))
+		(pts (xy 282.14 90.54) (xy 277.06 90.54))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000035")
 	)
 
 	(wire
-		(pts (xy 315.16 80.38) (xy 320.24 80.38))
+		(pts (xy 302.46 80.38) (xy 307.54 80.38))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000036")
 	)
 
 	(wire
-		(pts (xy 294.84 95.62) (xy 289.76 95.62))
+		(pts (xy 282.14 95.62) (xy 277.06 95.62))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000037")
 	)
 
 	(wire
-		(pts (xy 315.16 85.46) (xy 320.24 85.46))
+		(pts (xy 302.46 85.46) (xy 307.54 85.46))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000038")
 	)
 
 	(wire
-		(pts (xy 294.84 85.46) (xy 289.76 85.46))
+		(pts (xy 282.14 85.46) (xy 277.06 85.46))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000039")
 	)
 
 	(wire
-		(pts (xy 294.84 80.38) (xy 289.76 80.38))
+		(pts (xy 282.14 80.38) (xy 277.06 80.38))
 		(stroke (width 0) (type default))
 		(uuid "77000000-0000-4000-8001-000000000040")
 	)
