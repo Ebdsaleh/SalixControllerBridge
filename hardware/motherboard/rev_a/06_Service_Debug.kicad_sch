@@ -113,7 +113,89 @@
 
 			)
 		)
-	)
+	
+		(symbol "Salix:R"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R" (at 0 2.635 0) (effects (font (size 0.9 0.9))))
+			(property "Value" "R" (at 0 -2.635 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "Resistor" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(symbol "R_0_1"
+				(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type background)))
+			)
+			(symbol "R_1_1"
+				(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+			)
+		)
+
+		(symbol "Salix:C"
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C" (at 0 2.54 0) (effects (font (size 0.9 0.9))))
+			(property "Value" "C" (at 0 -2.54 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "Capacitor" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(symbol "C_0_1"
+				(polyline (pts (xy -0.5 1.0) (xy -0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy 0.5 1.0) (xy 0.5 -1.0)) (stroke (width 0.254) (type default)) (fill (type none)))
+			)
+			(symbol "C_1_1"
+				(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+			)
+		)
+
+		(symbol "Salix:TPS22919_DCK"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U" (at 0 -10 0) (effects (font (size 0.9 0.9))))
+			(property "Value" "TPS22919DCK" (at 0 10 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22919.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "5.5V 1.5A protected load switch" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(symbol "TPS22919_DCK_0_1"
+				(rectangle (start -6.35 7.62) (end 6.35 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
+			)
+			(symbol "TPS22919_DCK_1_1"
+				(pin power_in line (at -8.89 0 0) (length 2.54) (name "IN" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
+				(pin power_in line (at -8.89 3.81 0) (length 2.54) (name "GND" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+				(pin input line (at -8.89 -3.81 0) (length 2.54) (name "ON" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 3.81 180) (length 2.54) (name "NC" (effects (font (size 0.78 0.78)))) (number "4" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 -3.81 180) (length 2.54) (name "QOD" (effects (font (size 0.78 0.78)))) (number "5" (effects (font (size 0.78 0.78)))))
+				(pin power_out line (at 8.89 0 180) (length 2.54) (name "VOUT" (effects (font (size 0.78 0.78)))) (number "6" (effects (font (size 0.78 0.78)))))
+			)
+		)
+
+		(symbol "Salix:NMOS_GSD"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Q" (at 0 -7 0) (effects (font (size 0.9 0.9))))
+			(property "Value" "2N7002" (at 0 7 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/2N7002.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "N-channel logic MOSFET used as open-drain fan PWM sink" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(symbol "NMOS_GSD_0_1"
+				(rectangle (start -6.35 5.08) (end 6.35 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+			)
+			(symbol "NMOS_GSD_1_1"
+				(pin input line (at -8.89 0 0) (length 2.54) (name "G" (effects (font (size 0.78 0.78)))) (number "1" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 2.54 180) (length 2.54) (name "S" (effects (font (size 0.78 0.78)))) (number "2" (effects (font (size 0.78 0.78)))))
+				(pin passive line (at 8.89 -2.54 180) (length 2.54) (name "D" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
+			)
+		)
+)
 	(text "06 — SERVICE / DEBUG / SUPERVISION"
 		(exclude_from_sim no)
 		(at 53.086 19.558 0)
@@ -287,9 +369,9 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001207")
 	)
-	(text "Fan motor current comes from 5V_MAIN through a driver/load switch — never from GPIO."
+	(text "Fan power: TPS22919 from 5V_MAIN; ON=3V3_AUX; 1uF input + 10uF local output."
 		(exclude_from_sim no)
-		(at 117.602 108.65 0)
+		(at 145 123 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -297,9 +379,9 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001208")
 	)
-	(text "Exact fan connector/driver and tach pull-up are TBD until enclosure/fan selection."
+	(text "PWM: 2N7002 open-drain + 1k gate resistor + 100k gate pulldown; reset defaults fan to full speed."
 		(exclude_from_sim no)
-		(at 117.602 114.65 0)
+		(at 145 130 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -307,9 +389,9 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001209")
 	)
-	(text "I²C/AUX remains separate; fans do not consume the sensor expansion port."
+	(text "TACH: open-collector input with 10k pull-up to 3V3_AUX. Exact 5V fan connector/MPN remains TBD."
 		(exclude_from_sim no)
-		(at 117.602 120.65 0)
+		(at 145 137 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -319,7 +401,7 @@
 	)
 	(text "Retain rear DEBUG/UPDATE USB-C→Pico-B, SWD-A/SWD-B test pads, rail power-good and service LEDs."
 		(exclude_from_sim no)
-		(at 57.404 138.684 0)
+		(at 145 147 0)
 		(effects
 			(font
 				(size 0.95 0.95)
@@ -344,7 +426,7 @@
 		(stroke (width 0) (type default))
 		(uuid "91060000-0000-4000-8001-000000000005")
 	)
-	(global_label "FAN0_PWM_EN" (shape passive) (at 52.22 68.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000006"))
+	(label "FAN0_PWM_OD" (at 52.22 68.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000006"))
 	(wire
 		(pts (xy 59.84 96.19) (xy 52.22 96.19))
 		(stroke (width 0) (type default))
@@ -362,7 +444,809 @@
 		(stroke (width 0) (type default))
 		(uuid "91060000-0000-4000-8001-000000000011")
 	)
-	(global_label "FAN1_PWM_EN" (shape passive) (at 52.22 103.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000012"))
+	(label "FAN1_PWM_OD" (at 52.22 103.81 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "91060000-0000-4000-8002-000000000012"))
+	(wire
+		(pts (xy 59.84 63.73) (xy 52.22 63.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000001")
+	)
+	(label "FAN0_5V" (at 52.22 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000002"))
+	(wire
+		(pts (xy 59.84 98.73) (xy 52.22 98.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000003")
+	)
+	(label "FAN1_5V" (at 52.22 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000004"))
+	(symbol
+		(lib_id "Salix:TPS22919_DCK")
+		(at 120 63.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8100-000000000012")
+		(property "Reference" "U12"
+			(at 120 53.73 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "TPS22919DCK"
+			(at 120 73.72999999999999 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6"
+			(at 120 63.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22919.pdf"
+			(at 120 63.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "FAN0 protected 5V load switch"
+			(at 120 63.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8100-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8100-000000000002"))
+		(pin "3" (uuid "94060000-0000-4000-8100-000000000003"))
+		(pin "4" (uuid "94060000-0000-4000-8100-000000000004"))
+		(pin "5" (uuid "94060000-0000-4000-8100-000000000005"))
+		(pin "6" (uuid "94060000-0000-4000-8100-000000000006"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "U12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:TPS22919_DCK")
+		(at 120 98.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8100-000000000013")
+		(property "Reference" "U13"
+			(at 120 88.73 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "TPS22919DCK"
+			(at 120 108.73 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6"
+			(at 120 98.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22919.pdf"
+			(at 120 98.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "FAN1 protected 5V load switch"
+			(at 120 98.73 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8100-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8100-000000000002"))
+		(pin "3" (uuid "94060000-0000-4000-8100-000000000003"))
+		(pin "4" (uuid "94060000-0000-4000-8100-000000000004"))
+		(pin "5" (uuid "94060000-0000-4000-8100-000000000005"))
+		(pin "6" (uuid "94060000-0000-4000-8100-000000000006"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "U13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 111.11 63.73) (xy 106.03 63.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000005")
+	)
+	(global_label "5V_MAIN" (shape passive) (at 106.03 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000006"))
+	(wire
+		(pts (xy 111.11 59.919999999999995) (xy 106.03 59.919999999999995))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000007")
+	)
+	(global_label "3V3_AUX" (shape passive) (at 106.03 59.919999999999995 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000008"))
+	(wire
+		(pts (xy 111.11 67.53999999999999) (xy 106.03 67.53999999999999))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000009")
+	)
+	(global_label "GND" (shape passive) (at 106.03 67.53999999999999 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000010"))
+	(wire
+		(pts (xy 128.89 63.73) (xy 133.97 63.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000011")
+	)
+	(label "FAN0_5V" (at 133.97 63.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000012"))
+	(no_connect
+		(at 128.89 59.919999999999995)
+		(uuid "94060000-0000-4000-8003-000000000013")
+	)
+	(no_connect
+		(at 128.89 67.53999999999999)
+		(uuid "94060000-0000-4000-8003-000000000014")
+	)
+	(wire
+		(pts (xy 111.11 98.73) (xy 106.03 98.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000015")
+	)
+	(global_label "5V_MAIN" (shape passive) (at 106.03 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000016"))
+	(wire
+		(pts (xy 111.11 94.92) (xy 106.03 94.92))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000017")
+	)
+	(global_label "3V3_AUX" (shape passive) (at 106.03 94.92 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000018"))
+	(wire
+		(pts (xy 111.11 102.54) (xy 106.03 102.54))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000019")
+	)
+	(global_label "GND" (shape passive) (at 106.03 102.54 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000020"))
+	(wire
+		(pts (xy 128.89 98.73) (xy 133.97 98.73))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000021")
+	)
+	(label "FAN1_5V" (at 133.97 98.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000022"))
+	(no_connect
+		(at 128.89 94.92)
+		(uuid "94060000-0000-4000-8003-000000000023")
+	)
+	(no_connect
+		(at 128.89 102.54)
+		(uuid "94060000-0000-4000-8003-000000000024")
+	)
+	(symbol
+		(lib_id "Salix:C")
+		(at 145 48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8200-000000000C70")
+		(property "Reference" "C70"
+			(at 145 38 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "1uF"
+			(at 145 58 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 145 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 145 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "1uF fan rail capacitor"
+			(at 145 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "C70")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 141.19 48) (xy 136.11 48))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000025")
+	)
+	(global_label "5V_MAIN" (shape passive) (at 136.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000026"))
+	(wire
+		(pts (xy 148.81 48) (xy 153.89 48))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000027")
+	)
+	(global_label "GND" (shape passive) (at 153.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000028"))
+	(symbol
+		(lib_id "Salix:C")
+		(at 145 56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8200-000000000C71")
+		(property "Reference" "C71"
+			(at 145 46 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "10uF"
+			(at 145 66 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 145 56 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 145 56 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "10uF fan rail capacitor"
+			(at 145 56 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "C71")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 141.19 56) (xy 136.11 56))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000029")
+	)
+	(label "FAN0_5V" (at 136.11 56 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000030"))
+	(wire
+		(pts (xy 148.81 56) (xy 153.89 56))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000031")
+	)
+	(global_label "GND" (shape passive) (at 153.89 56 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000032"))
+	(symbol
+		(lib_id "Salix:C")
+		(at 145 83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8200-000000000C72")
+		(property "Reference" "C72"
+			(at 145 73 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "1uF"
+			(at 145 93 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 145 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 145 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "1uF fan rail capacitor"
+			(at 145 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "C72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 141.19 83) (xy 136.11 83))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000033")
+	)
+	(global_label "5V_MAIN" (shape passive) (at 136.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000034"))
+	(wire
+		(pts (xy 148.81 83) (xy 153.89 83))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000035")
+	)
+	(global_label "GND" (shape passive) (at 153.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000036"))
+	(symbol
+		(lib_id "Salix:C")
+		(at 145 91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8200-000000000C73")
+		(property "Reference" "C73"
+			(at 145 81 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "10uF"
+			(at 145 101 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 145 91 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 145 91 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "10uF fan rail capacitor"
+			(at 145 91 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "C73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 141.19 91) (xy 136.11 91))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000037")
+	)
+	(label "FAN1_5V" (at 136.11 91 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000038"))
+	(wire
+		(pts (xy 148.81 91) (xy 153.89 91))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000039")
+	)
+	(global_label "GND" (shape passive) (at 153.89 91 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000040"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R70")
+		(property "Reference" "R70"
+			(at 170 38 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "10k"
+			(at 170 58 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "10k fan control resistor"
+			(at 170 48 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R70")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 48) (xy 161.11 48))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000041")
+	)
+	(global_label "3V3_AUX" (shape passive) (at 161.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000042"))
+	(wire
+		(pts (xy 173.81 48) (xy 178.89 48))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000043")
+	)
+	(global_label "FAN0_TACH" (shape passive) (at 178.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000044"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R71")
+		(property "Reference" "R71"
+			(at 170 54 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "1k"
+			(at 170 74 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 64 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 64 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "1k fan control resistor"
+			(at 170 64 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R71")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 64) (xy 161.11 64))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000045")
+	)
+	(global_label "FAN0_PWM_EN" (shape passive) (at 161.11 64 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000046"))
+	(wire
+		(pts (xy 173.81 64) (xy 178.89 64))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000047")
+	)
+	(label "FAN0_PWM_GATE" (at 178.89 64 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000048"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R72")
+		(property "Reference" "R72"
+			(at 170 66 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "100k"
+			(at 170 86 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 76 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 76 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "100k fan control resistor"
+			(at 170 76 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 76) (xy 161.11 76))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000049")
+	)
+	(label "FAN0_PWM_GATE" (at 161.11 76 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000050"))
+	(wire
+		(pts (xy 173.81 76) (xy 178.89 76))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000051")
+	)
+	(global_label "GND" (shape passive) (at 178.89 76 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000052"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R73")
+		(property "Reference" "R73"
+			(at 170 73 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "10k"
+			(at 170 93 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "10k fan control resistor"
+			(at 170 83 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 83) (xy 161.11 83))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000053")
+	)
+	(global_label "3V3_AUX" (shape passive) (at 161.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000054"))
+	(wire
+		(pts (xy 173.81 83) (xy 178.89 83))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000055")
+	)
+	(global_label "FAN1_TACH" (shape passive) (at 178.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000056"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R74")
+		(property "Reference" "R74"
+			(at 170 89 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "1k"
+			(at 170 109 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 99 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 99 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "1k fan control resistor"
+			(at 170 99 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R74")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 99) (xy 161.11 99))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000057")
+	)
+	(global_label "FAN1_PWM_EN" (shape passive) (at 161.11 99 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000058"))
+	(wire
+		(pts (xy 173.81 99) (xy 178.89 99))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000059")
+	)
+	(label "FAN1_PWM_GATE" (at 178.89 99 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000060"))
+	(symbol
+		(lib_id "Salix:R")
+		(at 170 111 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8300-000000000R75")
+		(property "Reference" "R75"
+			(at 170 101 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "100k"
+			(at 170 121 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170 111 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 170 111 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "100k fan control resistor"
+			(at 170 111 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "R75")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 166.19 111) (xy 161.11 111))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000061")
+	)
+	(label "FAN1_PWM_GATE" (at 161.11 111 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000062"))
+	(wire
+		(pts (xy 173.81 111) (xy 178.89 111))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000063")
+	)
+	(global_label "GND" (shape passive) (at 178.89 111 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000064"))
+	(symbol
+		(lib_id "Salix:NMOS_GSD")
+		(at 200 71.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8400-000000000070")
+		(property "Reference" "Q70"
+			(at 200 61.349999999999994 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "2N7002"
+			(at 200 81.35 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 200 71.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/2N7002.pdf"
+			(at 200 71.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "FAN0 open-drain PWM sink"
+			(at 200 71.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8400-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8400-000000000002"))
+		(pin "3" (uuid "94060000-0000-4000-8400-000000000003"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "Q70")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:NMOS_GSD")
+		(at 200 106.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94060000-0000-4000-8400-000000000071")
+		(property "Reference" "Q71"
+			(at 200 96.35 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "2N7002"
+			(at 200 116.35 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 200 106.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/2N7002.pdf"
+			(at 200 106.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "FAN1 open-drain PWM sink"
+			(at 200 106.35 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "94060000-0000-4000-8400-000000000001"))
+		(pin "2" (uuid "94060000-0000-4000-8400-000000000002"))
+		(pin "3" (uuid "94060000-0000-4000-8400-000000000003"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
+					(reference "Q71")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts (xy 191.11 71.35) (xy 186.03 71.35))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000065")
+	)
+	(label "FAN0_PWM_GATE" (at 186.03 71.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000066"))
+	(wire
+		(pts (xy 208.89 68.80999999999999) (xy 213.97 68.80999999999999))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000067")
+	)
+	(label "FAN0_PWM_OD" (at 213.97 68.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000068"))
+	(wire
+		(pts (xy 208.89 73.89) (xy 213.97 73.89))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000069")
+	)
+	(global_label "GND" (shape passive) (at 213.97 73.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000070"))
+	(wire
+		(pts (xy 191.11 106.35) (xy 186.03 106.35))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000071")
+	)
+	(label "FAN1_PWM_GATE" (at 186.03 106.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000072"))
+	(wire
+		(pts (xy 208.89 103.80999999999999) (xy 213.97 103.80999999999999))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000073")
+	)
+	(label "FAN1_PWM_OD" (at 213.97 103.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000074"))
+	(wire
+		(pts (xy 208.89 108.89) (xy 213.97 108.89))
+		(stroke (width 0) (type default))
+		(uuid "94060000-0000-4000-8001-000000000075")
+	)
+	(global_label "GND" (shape passive) (at 213.97 108.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000076"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056" (page "7"))
 	)

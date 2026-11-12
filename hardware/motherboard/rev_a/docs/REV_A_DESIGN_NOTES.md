@@ -14,7 +14,13 @@ Rev A now provisions two independent cooling channels:
 - FAN0: Pico-B GP2 PWM/enable, GP3 tach.
 - FAN1: Pico-B GP14 PWM/enable, GP15 tach.
 
-Fan motor current comes from 5V_MAIN via a proper driver/load switch. GPIO controls only logic. The existing I²C/AUX expansion remains separate.
+Each fan is powered from 5V_MAIN through its own TPS22919DCK protected load switch. The load-switch ON input is tied to 3V3_AUX, so fan motor power is available whenever the system logic rail is alive. Pico-B never sources motor current.
+
+Each fan PWM input is driven through a 2N7002 open-drain stage. A 1k gate resistor and 100k gate pulldown make reset/boot fail-safe: with the MOSFET off, the fan PWM input is released and a standards-compliant 4-wire fan defaults toward full-speed operation. Firmware must account for the open-drain inversion.
+
+Each TACH line has a 10k pull-up to 3V3_AUX before entering Pico-B. The existing I²C/AUX expansion remains separate.
+
+The final 5V fan MPN must stay within the TPS22919 1.5A continuous-current capability and its startup transient behavior must be validated before fabrication.
 
 ## Safety / service rules
 - PRIMARY/EXTENDED front USB inputs never route to Pico-B.

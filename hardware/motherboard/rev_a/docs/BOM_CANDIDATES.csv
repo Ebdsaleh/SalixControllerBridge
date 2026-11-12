@@ -11,8 +11,8 @@ Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins
 microSD,Push-push or push-pull socket/module interface,1,TBD,Pico-B storage
 TFT,TF034 2.4in 320x240 interface header,1,USER-OWNED,Pico-B UI
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
-Fan drivers,5V load-switch/MOSFET + protection,2,TBD,Pico-B controls motor power without sourcing GPIO current
-Fan tach pullups,logic-level pull-up network,2,TBD,Match selected fan electrical interface
+Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
+Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treated as open-collector/open-drain
 USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN HUB FAMILY,4-port USB2 Hi-Speed hub
 USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and hub upstream pair
 USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
@@ -52,3 +52,9 @@ USB hub reset RC,10k 1% + 1uF X7R,1 pair,FROZEN VALUES,RESET_N pullup/delay with
 USB hub VBUS detect divider,100k 1% 0603,2,FROZEN VALUE,5V_MAIN divided to HUB_VBUS_DET
 PIO USB host pulldowns,15k 1% 0603,2,FROZEN VALUE,Explicit D+ and D- host pulldowns on Pico-A side
 USB hub crystal load caps,TBD pF,2,PART-DEPENDENT,Calculate from selected 24MHz crystal CL and PCB parasitics
+
+Fan PWM open-drain,Nexperia 2N7002 SOT-23,2,FROZEN FAMILY,Open-drain sink for 4-wire fan PWM; fail-safe released/high on reset
+Fan PWM gate series,1k 1% 0603,2,FROZEN VALUE,Pico-B GPIO to 2N7002 gate
+Fan PWM gate pulldown,100k 1% 0603,2,FROZEN VALUE,Holds 2N7002 off during reset/boot
+Fan load-switch input bypass,1uF >=10V X7R 0805,2,FROZEN VALUE,TI recommends local input capacitance near TPS22919
+Fan local output bulk,10uF >=10V X7R 0805,2,PROVISIONAL VALUE,Local fan supply transient reservoir; validate with selected fan
