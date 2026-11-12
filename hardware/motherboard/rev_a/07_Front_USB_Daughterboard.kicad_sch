@@ -2841,7 +2841,7 @@
 				)
 		)
 		(property "Value" "BANK B RUN/ISOLATE"
-			(at 292.3 238 0)
+			(at 292.3 234 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
