@@ -58,3 +58,7 @@ Fan PWM gate series,1k 1% 0603,2,FROZEN VALUE,Pico-B GPIO to 2N7002 gate
 Fan PWM gate pulldown,100k 1% 0603,2,FROZEN VALUE,Holds 2N7002 off during reset/boot
 Fan load-switch input bypass,1uF >=10V X7R 0805,2,FROZEN VALUE,TI recommends local input capacitance near TPS22919
 Fan local output bulk,10uF >=10V X7R 0805,2,PROVISIONAL VALUE,Local fan supply transient reservoir; validate with selected fan
+
+USB shield RC resistor,330 ohm 1% 0603,1 per daughterboard,FROZEN DEFAULT,Parallel shield-to-GND treatment recommended by Microchip
+USB shield RC capacitor,100nF >=50V X7R 0603,1 per daughterboard,FROZEN DEFAULT,Parallel shield-to-GND high-frequency path
+USB shield direct-bond option,0 ohm 0603 DNP,1 per daughterboard,EMC TUNING,Populate only if EMC/ESD validation favors direct shield-to-GND bond

@@ -71,3 +71,15 @@ Each physical power controller keeps its own FAULT_N signal for Pico-B diagnosti
 - Exact latching push-push SPDT switch manufacturer/footprint.
 - Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
 - Final LED colors.
+
+
+## USB shield treatment
+
+All four USB-A/USB-C connector shield pins join a local `USB_SHIELD` copper/flood on the front daughterboard.
+
+Default Rev-A bonding from `USB_SHIELD` to digital `GND`:
+- 330 ohm resistor.
+- 100nF capacitor in parallel.
+- optional 0 ohm DNP footprint in parallel for EMC/ESD tuning or direct-bond experiments.
+
+This follows Microchip hub guidance that recommends an RC shield-ground treatment while retaining the option for direct grounding. Place the shield-to-ground network near the connector/shield region and use low-inductance connections during PCB layout.
