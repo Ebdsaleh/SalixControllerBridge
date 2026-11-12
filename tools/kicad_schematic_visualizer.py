@@ -245,6 +245,20 @@ def electrical_lint(root, libs):
             return "SINK" in n
         if p=="REF":
             return "REF" in n
+        if p=="SWCLK":
+            return "SWCLK" in n
+        if p=="SWDIO":
+            return "SWDIO" in n
+        if "MOSI" in p:
+            return "MOSI" in n
+        if "MISO" in p:
+            return "MISO" in n
+        if "SCK" in p and "SWCLK" not in p:
+            return "SCK" in n
+        if p=="VDD":
+            return any(x in n for x in ("3V3","VDD"))
+        if p=="VSS":
+            return "GND" in n
 
         return True
 
