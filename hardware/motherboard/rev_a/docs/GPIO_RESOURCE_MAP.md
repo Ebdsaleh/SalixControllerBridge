@@ -87,3 +87,18 @@ Pico-B motherboard-intentional NC pins:
 - pin 40 VBUS: not connected to motherboard power; Pico-B is powered through VSYS and its own USB connector may still see VBUS locally.
 
 Pico-B GP28 is now hard-wired to Pico-A RUN as `PICO_A_RUN` for recovery/reset control.
+
+
+### Pico-A SWD physical pickup
+
+Pico-B recovery nets are now electrically terminated at motherboard contact interface `J12`:
+
+- J12 pin 1 = `PICO_A_SWCLK`
+- J12 pin 2 = `GND`
+- J12 pin 3 = `PICO_A_SWDIO`
+
+Pico-B GP27 drives SWCLK and GP26 carries SWDIO. Pico-B GP28 already controls Pico-A RUN.
+
+J12 represents spring/pogo contacts that physically touch the Pico-A SWD pads; it is not a normal 40-pin Pico header connection. Raspberry Pi's SWD interface is three wires only and does not carry target power.
+
+The exact J12 footprint is deliberately left mechanical-TBD until the Pico-A variant is frozen. Pico 2 W places its SWD pads centrally below the MCU, while non-wireless Pico 2 uses a different physical location. Rev-A software therefore requires a custom Pico-B SWD/recovery implementation on GP26/GP27 rather than assuming the stock Raspberry Pi debugprobe GPIO map.

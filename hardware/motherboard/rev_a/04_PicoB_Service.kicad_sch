@@ -523,7 +523,51 @@
 				)
 			)
 		)
-	)
+	
+		(symbol "Salix:PICO_A_SWD_CONTACT_3"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 -8 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Value" "PICO-A SWD SPRING CONTACT"
+				(at 0 8 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Datasheet" "https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Description" "Three-contact motherboard pickup for Pico-A SWD pads; exact spring-contact footprint depends on final Pico-A mechanical variant"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(symbol "PICO_A_SWD_CONTACT_3_0_1"
+				(rectangle (start -8 5.5) (end 8 -5.5) (stroke (width 0.254) (type default)) (fill (type background)))
+			)
+			(symbol "PICO_A_SWD_CONTACT_3_1_1"
+				(pin passive line (at -10.54 -2.54 0) (length 2.54)
+					(name "SWCLK" (effects (font (size 0.78 0.78))))
+					(number "1" (effects (font (size 0.78 0.78))))
+				)
+				(pin passive line (at -10.54 0 0) (length 2.54)
+					(name "GND" (effects (font (size 0.78 0.78))))
+					(number "2" (effects (font (size 0.78 0.78))))
+				)
+				(pin passive line (at -10.54 2.54 0) (length 2.54)
+					(name "SWDIO" (effects (font (size 0.78 0.78))))
+					(number "3" (effects (font (size 0.78 0.78))))
+				)
+			)
+		)
+)
 	(text "04 — PICO-B SERVICE / STORAGE / UI — REV-A PIN MAP"
 		(exclude_from_sim no)
 		(at 20 15 0)
@@ -1023,6 +1067,91 @@
 		(at 152.7 109.13)
 		(uuid "92040000-0000-4000-8003-000000000005")
 	)
+	(wire
+		(pts (xy 152.7 86.27) (xy 160.32 86.27))
+		(stroke (width 0) (type default))
+		(uuid "96040000-0000-4000-8001-000000000001")
+	)
+	(global_label "PICO_A_SWDIO" (shape passive) (at 160.32 86.27 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000001"))
+	(wire
+		(pts (xy 152.7 88.81) (xy 160.32 88.81))
+		(stroke (width 0) (type default))
+		(uuid "96040000-0000-4000-8001-000000000002")
+	)
+	(global_label "PICO_A_SWCLK" (shape passive) (at 160.32 88.81 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000002"))
+	(symbol
+		(lib_id "Salix:PICO_A_SWD_CONTACT_3")
+		(at 135 145 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "96040000-0000-4000-8100-000000000012")
+		(property "Reference" "J12"
+			(at 135 135.5 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "PICO-A SWD SPRING CONTACT"
+			(at 135 154.5 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" ""
+			(at 135 145 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html"
+			(at 135 145 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "Three-contact motherboard pickup for Pico-A SWD pads; exact spring-contact footprint depends on final Pico-A mechanical variant"
+			(at 135 145 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "96040000-0000-4000-8101-000000000001"))
+		(pin "2" (uuid "96040000-0000-4000-8101-000000000002"))
+		(pin "3" (uuid "96040000-0000-4000-8101-000000000003"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054"
+					(reference "J12")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(wire
+		(pts (xy 124.46 142.46) (xy 116.84 142.46))
+		(stroke (width 0) (type default))
+		(uuid "96040000-0000-4000-8001-000000000003")
+	)
+	(global_label "PICO_A_SWCLK" (shape passive) (at 116.84 142.46 180) (effects (font (size 0.64 0.64)) (justify right bottom)) (uuid "96040000-0000-4000-8002-000000000003"))
+	(wire
+		(pts (xy 124.46 145) (xy 116.84 145))
+		(stroke (width 0) (type default))
+		(uuid "96040000-0000-4000-8001-000000000004")
+	)
+	(global_label "GND" (shape passive) (at 116.84 145 180) (effects (font (size 0.64 0.64)) (justify right bottom)) (uuid "96040000-0000-4000-8002-000000000004"))
+	(wire
+		(pts (xy 124.46 147.54) (xy 116.84 147.54))
+		(stroke (width 0) (type default))
+		(uuid "96040000-0000-4000-8001-000000000005")
+	)
+	(global_label "PICO_A_SWDIO" (shape passive) (at 116.84 147.54 180) (effects (font (size 0.64 0.64)) (justify right bottom)) (uuid "96040000-0000-4000-8002-000000000005"))
+	(text "Pico-A SWD pickup: 1=SWCLK, 2=GND, 3=SWDIO. No target power on SWD."
+		(exclude_from_sim no)
+		(at 175 140 0)
+		(effects (font (size 0.82 0.82)) (justify left))
+		(uuid "96040000-0000-4000-8200-000000000001")
+	)
+	(text "Exact spring-contact footprint is mechanical-TBD; align to the selected Pico-A variant's debug pads."
+		(exclude_from_sim no)
+		(at 175 147 0)
+		(effects (font (size 0.82 0.82)) (justify left))
+		(uuid "96040000-0000-4000-8200-000000000002")
+	)
+
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054" (page "5"))
 	)

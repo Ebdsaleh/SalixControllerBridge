@@ -62,3 +62,5 @@ Fan local output bulk,10uF >=10V X7R 0805,2,PROVISIONAL VALUE,Local fan supply t
 USB shield RC resistor,330 ohm 1% 0603,1 per daughterboard,FROZEN DEFAULT,Parallel shield-to-GND treatment recommended by Microchip
 USB shield RC capacitor,100nF >=50V X7R 0603,1 per daughterboard,FROZEN DEFAULT,Parallel shield-to-GND high-frequency path
 USB shield direct-bond option,0 ohm 0603 DNP,1 per daughterboard,EMC TUNING,Populate only if EMC/ESD validation favors direct shield-to-GND bond
+
+Pico-A SWD spring contacts,3-position spring/pogo contact set,1,MECHANICAL TBD,SWCLK/GND/SWDIO pickup to socketed Pico-A; exact footprint depends on final Pico-A variant and socket height

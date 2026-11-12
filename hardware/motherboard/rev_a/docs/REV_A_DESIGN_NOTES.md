@@ -32,3 +32,12 @@ The final 5V fan MPN must stay within the TPS22919 1.5A continuous-current capab
 
 ## Manufacturing strategy
 Quote the complete architecture first. If optional blocks make PCBA too expensive, DNP them rather than deleting the footprints/nets where possible.
+
+
+## Pico-A SWD recovery contact
+
+Pico-B can recover Pico-A through GP26=SWDIO, GP27=SWCLK and GP28=RUN.
+
+The motherboard exposes these to a dedicated three-contact target pickup (`J12`) arranged as SWCLK / GND / SWDIO. The target remains powered separately; the SWD contact carries no power.
+
+The schematic is electrically frozen, but the spring-contact footprint is intentionally mechanical-TBD until the final Pico-A module variant and socket height are frozen. The PCB layout must align J12 to the actual Pico-A SWD pads and verify contact compression/clearance.
