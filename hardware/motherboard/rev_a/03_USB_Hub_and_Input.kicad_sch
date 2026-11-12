@@ -1176,7 +1176,7 @@
 	(label "HUB_XTALOUT" (at 223.81 98 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004223"))
 	(text "Hub power / reset support:"
 		(exclude_from_sim no)
-		(at 190 25 0)
+		(at 190 22 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
@@ -1185,7 +1185,7 @@
 	)
 	(text "VDDA33 pins 5/10/29/36: 0.1µF each + shared 1µF bulk; VDD33 pins 15/23: 0.1µF each."
 		(exclude_from_sim no)
-		(at 190 31 0)
+		(at 190 28 0)
 		(effects
 			(font (size 0.92 0.92))
 		)
@@ -1193,7 +1193,7 @@
 	)
 	(text "CRFILT and PLLFILT are separate: each gets 10nF + 100nF low-ESR to GND; never tie the two filter pins together."
 		(exclude_from_sim no)
-		(at 190 37 0)
+		(at 190 34 0)
 		(effects
 			(font (size 0.92 0.92))
 		)
@@ -1201,7 +1201,7 @@
 	)
 	(text "TEST pin 11 → GND. Exposed VSS pad → solid ground plane with multiple vias."
 		(exclude_from_sim no)
-		(at 190 43 0)
+		(at 190 40 0)
 		(effects
 			(font (size 0.92 0.92))
 		)
@@ -1209,7 +1209,7 @@
 	)
 	(text "RESET_N: 10k pull-up + 1µF startup delay; Pico-B GP22 can assert hard reset. Add supervisor only if measured rail timing later demands it."
 		(exclude_from_sim no)
-		(at 190 49 0)
+		(at 190 46 0)
 		(effects
 			(font (size 0.92 0.92))
 		)
@@ -1217,7 +1217,7 @@
 	)
 	(text "3V3_AUX comes from TLV62569P on POWER sheet."
 		(exclude_from_sim no)
-		(at 190 55 0)
+		(at 190 52 0)
 		(effects
 			(font (size 0.92 0.92)
 				(bold yes))

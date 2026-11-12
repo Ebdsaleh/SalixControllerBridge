@@ -533,7 +533,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 205 80 0)
+		(at 215 80 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -541,33 +541,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004020")
 		(property "Reference" "C3"
-			(at 205 76.3 0)
+			(at 215 76.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22uF 10V X7R"
-			(at 205 84.2 0)
+			(at 215 84.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 205 80 0)
+			(at 215 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 205 80 0)
+			(at 215 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "22uF 10V X7R"
-			(at 205 80 0)
+			(at 215 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -639,7 +639,7 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 205 100 0)
+		(at 215 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -647,33 +647,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004026")
 		(property "Reference" "R5"
-			(at 205 96.3 0)
+			(at 215 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "100k 1%"
-			(at 205 104.2 0)
+			(at 215 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 205 100 0)
+			(at 215 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 205 100 0)
+			(at 215 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "100k 1%"
-			(at 205 100 0)
+			(at 215 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -692,7 +692,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 245 100 0)
+		(at 265 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -700,33 +700,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004029")
 		(property "Reference" "C4"
-			(at 245 96.3 0)
+			(at 265 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "6.8pF"
-			(at 245 104.2 0)
+			(at 265 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 245 100 0)
+			(at 265 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 245 100 0)
+			(at 265 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "6.8pF"
-			(at 245 100 0)
+			(at 265 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -798,7 +798,7 @@
 	)
 	(text "TLV62569P Rev-A values:"
 		(exclude_from_sim no)
-		(at 235 48 0)
+		(at 235 47 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
@@ -807,7 +807,7 @@
 	)
 	(text "VIN = 5V_MAIN; EN tied high from 5V_MAIN (do not leave floating)"
 		(exclude_from_sim no)
-		(at 235 54 0)
+		(at 235 53 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -815,7 +815,7 @@
 	)
 	(text "L1 = 2.2µH; CIN = 4.7µF; COUT = 2×22µF"
 		(exclude_from_sim no)
-		(at 235 60 0)
+		(at 235 59 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -823,7 +823,7 @@
 	)
 	(text "RFB_TOP = 453k, RFB_BOTTOM = 100k → ~3.3V; CFF = 6.8pF"
 		(exclude_from_sim no)
-		(at 235 66 0)
+		(at 235 65 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -831,7 +831,7 @@
 	)
 	(text "PG open-drain pulled up to 3V3_AUX → 3V3_AUX_PG"
 		(exclude_from_sim no)
-		(at 235 72 0)
+		(at 235 71 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -839,7 +839,7 @@
 	)
 	(text "3V3_AUX feeds USB2514B, motherboard logic and future module-management logic."
 		(exclude_from_sim no)
-		(at 235 78 0)
+		(at 235 77 0)
 		(effects
 			(font (size 0.95 0.95))
 		)
@@ -949,17 +949,17 @@
 	)
 	(global_label "GND" (shape passive) (at 181.51 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007420"))
 	(wire
-		(pts (xy 201.19 80) (xy 196.11 80))
+		(pts (xy 211.19 80) (xy 206.11 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007421")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 188.49 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007422"))
+	(global_label "3V3_AUX" (shape passive) (at 198.49 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007422"))
 	(wire
-		(pts (xy 208.81 80) (xy 213.89 80))
+		(pts (xy 218.81 80) (xy 223.89 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007423")
 	)
-	(global_label "GND" (shape passive) (at 221.51 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007424"))
+	(global_label "GND" (shape passive) (at 231.51 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007424"))
 	(wire
 		(pts (xy 161.19 100) (xy 156.11 100))
 		(stroke (width 0) (type default))
@@ -973,29 +973,29 @@
 	)
 	(label "BUCK_FB" (at 181.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007428"))
 	(wire
-		(pts (xy 201.19 100) (xy 196.11 100))
+		(pts (xy 211.19 100) (xy 206.11 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007429")
 	)
-	(label "BUCK_FB" (at 188.49 100 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007430"))
+	(label "BUCK_FB" (at 198.49 100 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007430"))
 	(wire
-		(pts (xy 208.81 100) (xy 213.89 100))
+		(pts (xy 218.81 100) (xy 223.89 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007431")
 	)
-	(global_label "GND" (shape passive) (at 221.51 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
+	(global_label "GND" (shape passive) (at 251.51 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
 	(wire
-		(pts (xy 241.19 100) (xy 236.11 100))
+		(pts (xy 261.19 100) (xy 256.11 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007433")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 228.49 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
+	(global_label "3V3_AUX" (shape passive) (at 248.49 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
 	(wire
-		(pts (xy 248.81 100) (xy 253.89 100))
+		(pts (xy 268.81 100) (xy 273.89 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007435")
 	)
-	(label "BUCK_FB" (at 261.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
+	(label "BUCK_FB" (at 281.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
 	(wire
 		(pts (xy 181.19 120) (xy 176.11 120))
 		(stroke (width 0) (type default))
@@ -1009,13 +1009,13 @@
 	)
 	(global_label "3V3_AUX_PG" (shape passive) (at 201.51 120 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007440"))
 	(wire
-		(pts (xy 253.89 100) (xy 261.51 100))
+		(pts (xy 273.89 100) (xy 281.51 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000001")
 	)
 
 	(wire
-		(pts (xy 196.11 100) (xy 188.49 100))
+		(pts (xy 206.11 100) (xy 198.49 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000002")
 	)
@@ -1045,13 +1045,13 @@
 	)
 
 	(wire
-		(pts (xy 236.11 100) (xy 228.49 100))
+		(pts (xy 256.11 100) (xy 248.49 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000007")
 	)
 
 	(wire
-		(pts (xy 213.89 100) (xy 221.51 100))
+		(pts (xy 223.89 100) (xy 231.51 100))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000008")
 	)
@@ -1063,13 +1063,13 @@
 	)
 
 	(wire
-		(pts (xy 213.89 80) (xy 221.51 80))
+		(pts (xy 223.89 80) (xy 231.51 80))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000010")
 	)
 
 	(wire
-		(pts (xy 196.11 80) (xy 188.49 80))
+		(pts (xy 206.11 80) (xy 198.49 80))
 		(stroke (width 0) (type default))
 		(uuid "7a000000-0000-4000-8001-000000000011")
 	)
