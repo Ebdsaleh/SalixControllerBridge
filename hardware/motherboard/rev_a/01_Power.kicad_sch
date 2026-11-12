@@ -888,19 +888,19 @@
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007400")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 92.22 73.65 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007401"))
+	(global_label "5V_MAIN" (shape passive) (at 84.6 73.65 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007401"))
 	(wire
 		(pts (xy 99.84 76.19) (xy 92.22 76.19))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007402")
 	)
-	(global_label "GND" (shape passive) (at 92.22 76.19 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007403"))
+	(global_label "GND" (shape passive) (at 84.6 76.19 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007403"))
 	(wire
 		(pts (xy 99.84 81.27) (xy 92.22 81.27))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007404")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 92.22 81.27 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007405"))
+	(global_label "5V_MAIN" (shape passive) (at 84.6 81.27 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007405"))
 	(wire
 		(pts (xy 120.16 73.65) (xy 141.19 73.65))
 		(stroke (width 0) (type default))
@@ -911,103 +911,223 @@
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007407")
 	)
-	(global_label "3V3_AUX_PG" (shape passive) (at 127.78 83.81 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007408"))
+	(global_label "3V3_AUX_PG" (shape passive) (at 135.4 83.81 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007408"))
 	(wire
 		(pts (xy 120.16 86.35) (xy 127.78 86.35))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007409")
 	)
-	(label "BUCK_FB" (at 127.78 86.35 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007410"))
+	(label "BUCK_FB" (at 135.4 86.35 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007410"))
 	(wire
 		(pts (xy 66.19 95) (xy 61.11 95))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007411")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 61.11 95 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007412"))
+	(global_label "5V_MAIN" (shape passive) (at 53.49 95 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007412"))
 	(wire
 		(pts (xy 73.81 95) (xy 78.89 95))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007413")
 	)
-	(global_label "GND" (shape passive) (at 78.89 95 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007414"))
+	(global_label "GND" (shape passive) (at 86.51 95 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007414"))
 	(wire
 		(pts (xy 148.81 73.65) (xy 156.43 73.65))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007415")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 156.43 73.65 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007416"))
+	(global_label "3V3_AUX" (shape passive) (at 164.05 73.65 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007416"))
 	(wire
 		(pts (xy 161.19 80) (xy 156.11 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007417")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 156.11 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007418"))
+	(global_label "3V3_AUX" (shape passive) (at 148.49 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007418"))
 	(wire
 		(pts (xy 168.81 80) (xy 173.89 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007419")
 	)
-	(global_label "GND" (shape passive) (at 173.89 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007420"))
+	(global_label "GND" (shape passive) (at 181.51 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007420"))
 	(wire
 		(pts (xy 201.19 80) (xy 196.11 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007421")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 196.11 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007422"))
+	(global_label "3V3_AUX" (shape passive) (at 188.49 80 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007422"))
 	(wire
 		(pts (xy 208.81 80) (xy 213.89 80))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007423")
 	)
-	(global_label "GND" (shape passive) (at 213.89 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007424"))
+	(global_label "GND" (shape passive) (at 221.51 80 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007424"))
 	(wire
 		(pts (xy 161.19 100) (xy 156.11 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007425")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 156.11 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007426"))
+	(global_label "3V3_AUX" (shape passive) (at 148.49 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007426"))
 	(wire
 		(pts (xy 168.81 100) (xy 173.89 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007427")
 	)
-	(label "BUCK_FB" (at 173.89 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007428"))
+	(label "BUCK_FB" (at 181.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007428"))
 	(wire
 		(pts (xy 201.19 100) (xy 196.11 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007429")
 	)
-	(label "BUCK_FB" (at 196.11 100 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007430"))
+	(label "BUCK_FB" (at 188.49 100 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007430"))
 	(wire
 		(pts (xy 208.81 100) (xy 213.89 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007431")
 	)
-	(global_label "GND" (shape passive) (at 213.89 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
+	(global_label "GND" (shape passive) (at 221.51 100 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007432"))
 	(wire
 		(pts (xy 241.19 100) (xy 236.11 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007433")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 236.11 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
+	(global_label "3V3_AUX" (shape passive) (at 228.49 100 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007434"))
 	(wire
 		(pts (xy 248.81 100) (xy 253.89 100))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007435")
 	)
-	(label "BUCK_FB" (at 253.89 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
+	(label "BUCK_FB" (at 261.51 100 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007436"))
 	(wire
 		(pts (xy 181.19 120) (xy 176.11 120))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007437")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 176.11 120 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007438"))
+	(global_label "3V3_AUX" (shape passive) (at 168.49 120 180) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "74000000-0000-4000-8000-000000007438"))
 	(wire
 		(pts (xy 188.81 120) (xy 193.89 120))
 		(stroke (width 0) (type default))
 		(uuid "74000000-0000-4000-8000-000000007439")
 	)
-	(global_label "3V3_AUX_PG" (shape passive) (at 193.89 120 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007440"))
+	(global_label "3V3_AUX_PG" (shape passive) (at 201.51 120 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "74000000-0000-4000-8000-000000007440"))
+	(wire
+		(pts (xy 253.89 100) (xy 261.51 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000001")
+	)
+
+	(wire
+		(pts (xy 196.11 100) (xy 188.49 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000002")
+	)
+
+	(wire
+		(pts (xy 173.89 100) (xy 181.51 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000003")
+	)
+
+	(wire
+		(pts (xy 127.78 86.35) (xy 135.4 86.35))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000004")
+	)
+
+	(wire
+		(pts (xy 193.89 120) (xy 201.51 120))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000005")
+	)
+
+	(wire
+		(pts (xy 176.11 120) (xy 168.49 120))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000006")
+	)
+
+	(wire
+		(pts (xy 236.11 100) (xy 228.49 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000007")
+	)
+
+	(wire
+		(pts (xy 213.89 100) (xy 221.51 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000008")
+	)
+
+	(wire
+		(pts (xy 156.11 100) (xy 148.49 100))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000009")
+	)
+
+	(wire
+		(pts (xy 213.89 80) (xy 221.51 80))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000010")
+	)
+
+	(wire
+		(pts (xy 196.11 80) (xy 188.49 80))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000011")
+	)
+
+	(wire
+		(pts (xy 173.89 80) (xy 181.51 80))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000012")
+	)
+
+	(wire
+		(pts (xy 156.11 80) (xy 148.49 80))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000013")
+	)
+
+	(wire
+		(pts (xy 156.43 73.65) (xy 164.05 73.65))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000014")
+	)
+
+	(wire
+		(pts (xy 78.89 95) (xy 86.51 95))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000015")
+	)
+
+	(wire
+		(pts (xy 61.11 95) (xy 53.49 95))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000016")
+	)
+
+	(wire
+		(pts (xy 127.78 83.81) (xy 135.4 83.81))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000017")
+	)
+
+	(wire
+		(pts (xy 92.22 81.27) (xy 84.6 81.27))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000018")
+	)
+
+	(wire
+		(pts (xy 92.22 76.19) (xy 84.6 76.19))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000019")
+	)
+
+	(wire
+		(pts (xy 92.22 73.65) (xy 84.6 73.65))
+		(stroke (width 0) (type default))
+		(uuid "7a000000-0000-4000-8001-000000000020")
+	)
+
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051" (page "2"))
 	)

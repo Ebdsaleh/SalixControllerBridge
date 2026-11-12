@@ -5116,7 +5116,7 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006496")
 	)
-	(text "TCA9535 P00/P01 selector state; P02..P05 physical faults; P06/P07 Type-C sink attach; P10..P13 LEDs; P14/P15 selected-run; P16/P17 CHG."
+	(text "TCA9535: P00/P01=SEL; P02–P05=FAULT; P06/P07=SINK; P10–P13=LED; P14/P15=RUN; P16/P17=CHG."
 		(exclude_from_sim no)
 		(at 20 234 0)
 		(effects
@@ -5125,7 +5125,7 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006497")
 	)
-	(text "A0=BOARD_ID; A1=A2=GND. Central motherboard I²C pull-ups remain on the motherboard, not duplicated here."
+	(text "A0=BOARD_ID; A1=A2=GND. I²C pull-ups live on the motherboard."
 		(exclude_from_sim no)
 		(at 20 240 0)
 		(effects
@@ -5134,7 +5134,7 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006498")
 	)
-	(text "Hub PRTPWR is active-high and gates both physical VBUS switches in each bank through SN74LVC2G08. Either physical FAULT_N drives the bank OCS_N low through a hardware AND combiner."
+	(text "PRTPWR (active HIGH) gates both A/C VBUS switches; either FAULT_N pulls bank OCS_N LOW."
 		(exclude_from_sim no)
 		(at 20 246 0)
 		(effects
@@ -5144,7 +5144,7 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006499")
 	)
-	(text "Exact push-push switch and USB receptacle manufacturer footprints remain mechanical decisions until front-panel/enclosure dimensions are frozen."
+	(text "Switch and USB receptacle footprints stay TBD until the enclosure dimensions are frozen."
 		(exclude_from_sim no)
 		(at 20 252 0)
 		(effects

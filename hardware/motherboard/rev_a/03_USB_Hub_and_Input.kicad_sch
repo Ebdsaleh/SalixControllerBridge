@@ -1321,8 +1321,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 216.19 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007348"))
-	(global_label "MGMT_I2C_SDA" (shape passive) (at 223.81 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007349"))
+	(global_label "3V3_AUX" (shape passive) (at 208.57 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007348"))
+	(global_label "MGMT_I2C_SDA" (shape passive) (at 231.43 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007349"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 270 180 0)
@@ -1363,8 +1363,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 266.19 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007353"))
-	(global_label "MGMT_I2C_SCL" (shape passive) (at 273.81 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007354"))
+	(global_label "3V3_AUX" (shape passive) (at 258.57 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007353"))
+	(global_label "MGMT_I2C_SCL" (shape passive) (at 281.43 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007354"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 320 180 0)
@@ -1405,8 +1405,8 @@
 			)
 		)
 	)
-	(label "HUB_HS_IND" (at 316.19 180 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007358"))
-	(global_label "GND" (shape passive) (at 323.81 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007359"))
+	(label "HUB_HS_IND" (at 308.57 180 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007358"))
+	(global_label "GND" (shape passive) (at 331.43 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007359"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 370 180 0)
@@ -1447,8 +1447,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 366.19 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007363"))
-	(global_label "HUB_RESET_N" (shape passive) (at 373.81 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007364"))
+	(global_label "3V3_AUX" (shape passive) (at 358.57 180 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007363"))
+	(global_label "HUB_RESET_N" (shape passive) (at 381.43 180 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007364"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 370 202 0)
@@ -1489,8 +1489,8 @@
 			)
 		)
 	)
-	(global_label "HUB_RESET_N" (shape passive) (at 366.19 202 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007368"))
-	(global_label "GND" (shape passive) (at 373.81 202 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007369"))
+	(global_label "HUB_RESET_N" (shape passive) (at 358.57 202 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007368"))
+	(global_label "GND" (shape passive) (at 381.43 202 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007369"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 220 205 0)
@@ -1531,8 +1531,8 @@
 			)
 		)
 	)
-	(global_label "5V_MAIN" (shape passive) (at 216.19 205 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007373"))
-	(label "HUB_VBUS_DET" (at 223.81 205 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007374"))
+	(global_label "5V_MAIN" (shape passive) (at 208.57 205 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007373"))
+	(label "HUB_VBUS_DET" (at 231.43 205 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007374"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 270 205 0)
@@ -1573,8 +1573,8 @@
 			)
 		)
 	)
-	(label "HUB_VBUS_DET" (at 266.19 205 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007378"))
-	(global_label "GND" (shape passive) (at 273.81 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007379"))
+	(label "HUB_VBUS_DET" (at 258.57 205 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007378"))
+	(global_label "GND" (shape passive) (at 281.43 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007379"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 320 205 0)
@@ -1615,8 +1615,8 @@
 			)
 		)
 	)
-	(global_label "PICO_A_GP16_USB_DP" (shape passive) (at 316.19 205 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007383"))
-	(global_label "GND" (shape passive) (at 323.81 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007384"))
+	(global_label "PICO_A_GP16_USB_DP" (shape passive) (at 308.57 205 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007383"))
+	(global_label "GND" (shape passive) (at 331.43 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007384"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 370 215 0)
@@ -1657,8 +1657,8 @@
 			)
 		)
 	)
-	(global_label "PICO_A_GP17_USB_DM" (shape passive) (at 366.19 215 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007388"))
-	(global_label "GND" (shape passive) (at 373.81 215 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007389"))
+	(global_label "PICO_A_GP17_USB_DM" (shape passive) (at 358.57 215 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007388"))
+	(global_label "GND" (shape passive) (at 381.43 215 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007389"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 215 230 0)
@@ -1699,8 +1699,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 211.19 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007393"))
-	(global_label "GND" (shape passive) (at 218.81 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007394"))
+	(global_label "3V3_AUX" (shape passive) (at 203.57 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007393"))
+	(global_label "GND" (shape passive) (at 226.43 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007394"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 250 230 0)
@@ -1741,8 +1741,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 246.19 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007398"))
-	(global_label "GND" (shape passive) (at 253.81 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007399"))
+	(global_label "3V3_AUX" (shape passive) (at 238.57 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007398"))
+	(global_label "GND" (shape passive) (at 261.43 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007399"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 285 230 0)
@@ -1783,8 +1783,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 281.19 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007403"))
-	(global_label "GND" (shape passive) (at 288.81 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007404"))
+	(global_label "3V3_AUX" (shape passive) (at 273.57 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007403"))
+	(global_label "GND" (shape passive) (at 296.43 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007404"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 320 230 0)
@@ -1825,8 +1825,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 316.19 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007408"))
-	(global_label "GND" (shape passive) (at 323.81 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007409"))
+	(global_label "3V3_AUX" (shape passive) (at 308.57 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007408"))
+	(global_label "GND" (shape passive) (at 331.43 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007409"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 355 230 0)
@@ -1867,8 +1867,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 351.19 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007413"))
-	(global_label "GND" (shape passive) (at 358.81 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007414"))
+	(global_label "3V3_AUX" (shape passive) (at 343.57 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007413"))
+	(global_label "GND" (shape passive) (at 366.43 230 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007414"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 215 250 0)
@@ -1909,8 +1909,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 211.19 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007418"))
-	(global_label "GND" (shape passive) (at 218.81 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007419"))
+	(global_label "3V3_AUX" (shape passive) (at 203.57 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007418"))
+	(global_label "GND" (shape passive) (at 226.43 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007419"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 250 250 0)
@@ -1951,8 +1951,8 @@
 			)
 		)
 	)
-	(global_label "3V3_AUX" (shape passive) (at 246.19 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007423"))
-	(global_label "GND" (shape passive) (at 253.81 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007424"))
+	(global_label "3V3_AUX" (shape passive) (at 238.57 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007423"))
+	(global_label "GND" (shape passive) (at 261.43 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007424"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 285 250 0)
@@ -1993,8 +1993,8 @@
 			)
 		)
 	)
-	(label "HUB_CRFILT" (at 281.19 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007428"))
-	(global_label "GND" (shape passive) (at 288.81 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007429"))
+	(label "HUB_CRFILT" (at 273.57 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007428"))
+	(global_label "GND" (shape passive) (at 296.43 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007429"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 320 250 0)
@@ -2035,8 +2035,8 @@
 			)
 		)
 	)
-	(label "HUB_CRFILT" (at 316.19 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007433"))
-	(global_label "GND" (shape passive) (at 323.81 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007434"))
+	(label "HUB_CRFILT" (at 308.57 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007433"))
+	(global_label "GND" (shape passive) (at 331.43 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007434"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 355 250 0)
@@ -2077,8 +2077,8 @@
 			)
 		)
 	)
-	(label "HUB_PLLFILT" (at 351.19 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007438"))
-	(global_label "GND" (shape passive) (at 358.81 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007439"))
+	(label "HUB_PLLFILT" (at 343.57 250 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007438"))
+	(global_label "GND" (shape passive) (at 366.43 250 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007439"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 210 270 0)
@@ -2119,8 +2119,8 @@
 			)
 		)
 	)
-	(label "HUB_PLLFILT" (at 206.19 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007443"))
-	(global_label "GND" (shape passive) (at 213.81 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007444"))
+	(label "HUB_PLLFILT" (at 198.57 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007443"))
+	(global_label "GND" (shape passive) (at 221.43 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007444"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 250 270 0)
@@ -2161,8 +2161,8 @@
 			)
 		)
 	)
-	(label "HUB_XTALIN" (at 246.19 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007448"))
-	(global_label "GND" (shape passive) (at 253.81 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007449"))
+	(label "HUB_XTALIN" (at 238.57 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007448"))
+	(global_label "GND" (shape passive) (at 261.43 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007449"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 290 270 0)
@@ -2203,8 +2203,8 @@
 			)
 		)
 	)
-	(label "HUB_XTALOUT" (at 286.19 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007453"))
-	(global_label "GND" (shape passive) (at 293.81 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007454"))
+	(label "HUB_XTALOUT" (at 278.57 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007453"))
+	(global_label "GND" (shape passive) (at 301.43 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007454"))
 	(text "USB2514B SUPPORT NETWORK — REV-A" (exclude_from_sim no) (at 210 120 0) (effects (font (size 1 1) (bold yes))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007455"))
 	(text "SMBus: CFG_SEL0/SCL=1 via 4.7k pull-up; CFG_SEL1/HS_IND=0 via 10k pull-down. Pico-B configures hub over MGMT_I2C." (exclude_from_sim no) (at 210 156 0) (effects (font (size 0.76 0.76))
@@ -2213,6 +2213,270 @@
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007457"))
 	(text "Pico-A upstream is PIO-USB Full-/Low-Speed only: 22ohm series + 15k host pulldowns. No 480Mbps end-to-end claim." (exclude_from_sim no) (at 210 168 0) (effects (font (size 0.76 0.76) (bold yes))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007458"))
+	(wire
+		(pts (xy 286.19 270) (xy 278.57 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000001")
+	)
+
+	(wire
+		(pts (xy 246.19 270) (xy 238.57 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000002")
+	)
+
+	(wire
+		(pts (xy 206.19 270) (xy 198.57 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000003")
+	)
+
+	(wire
+		(pts (xy 351.19 250) (xy 343.57 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000004")
+	)
+
+	(wire
+		(pts (xy 316.19 250) (xy 308.57 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000005")
+	)
+
+	(wire
+		(pts (xy 281.19 250) (xy 273.57 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000006")
+	)
+
+	(wire
+		(pts (xy 266.19 205) (xy 258.57 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000007")
+	)
+
+	(wire
+		(pts (xy 223.81 205) (xy 231.43 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000008")
+	)
+
+	(wire
+		(pts (xy 316.19 180) (xy 308.57 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000009")
+	)
+
+	(wire
+		(pts (xy 293.81 270) (xy 301.43 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000010")
+	)
+
+	(wire
+		(pts (xy 253.81 270) (xy 261.43 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000011")
+	)
+
+	(wire
+		(pts (xy 213.81 270) (xy 221.43 270))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000012")
+	)
+
+	(wire
+		(pts (xy 358.81 250) (xy 366.43 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000013")
+	)
+
+	(wire
+		(pts (xy 323.81 250) (xy 331.43 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000014")
+	)
+
+	(wire
+		(pts (xy 288.81 250) (xy 296.43 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000015")
+	)
+
+	(wire
+		(pts (xy 253.81 250) (xy 261.43 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000016")
+	)
+
+	(wire
+		(pts (xy 246.19 250) (xy 238.57 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000017")
+	)
+
+	(wire
+		(pts (xy 218.81 250) (xy 226.43 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000018")
+	)
+
+	(wire
+		(pts (xy 211.19 250) (xy 203.57 250))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000019")
+	)
+
+	(wire
+		(pts (xy 358.81 230) (xy 366.43 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000020")
+	)
+
+	(wire
+		(pts (xy 351.19 230) (xy 343.57 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000021")
+	)
+
+	(wire
+		(pts (xy 323.81 230) (xy 331.43 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000022")
+	)
+
+	(wire
+		(pts (xy 316.19 230) (xy 308.57 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000023")
+	)
+
+	(wire
+		(pts (xy 288.81 230) (xy 296.43 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000024")
+	)
+
+	(wire
+		(pts (xy 281.19 230) (xy 273.57 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000025")
+	)
+
+	(wire
+		(pts (xy 253.81 230) (xy 261.43 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000026")
+	)
+
+	(wire
+		(pts (xy 246.19 230) (xy 238.57 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000027")
+	)
+
+	(wire
+		(pts (xy 218.81 230) (xy 226.43 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000028")
+	)
+
+	(wire
+		(pts (xy 211.19 230) (xy 203.57 230))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000029")
+	)
+
+	(wire
+		(pts (xy 373.81 215) (xy 381.43 215))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000030")
+	)
+
+	(wire
+		(pts (xy 366.19 215) (xy 358.57 215))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000031")
+	)
+
+	(wire
+		(pts (xy 323.81 205) (xy 331.43 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000032")
+	)
+
+	(wire
+		(pts (xy 316.19 205) (xy 308.57 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000033")
+	)
+
+	(wire
+		(pts (xy 273.81 205) (xy 281.43 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000034")
+	)
+
+	(wire
+		(pts (xy 216.19 205) (xy 208.57 205))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000035")
+	)
+
+	(wire
+		(pts (xy 373.81 202) (xy 381.43 202))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000036")
+	)
+
+	(wire
+		(pts (xy 366.19 202) (xy 358.57 202))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000037")
+	)
+
+	(wire
+		(pts (xy 373.81 180) (xy 381.43 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000038")
+	)
+
+	(wire
+		(pts (xy 366.19 180) (xy 358.57 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000039")
+	)
+
+	(wire
+		(pts (xy 323.81 180) (xy 331.43 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000040")
+	)
+
+	(wire
+		(pts (xy 273.81 180) (xy 281.43 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000041")
+	)
+
+	(wire
+		(pts (xy 266.19 180) (xy 258.57 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000042")
+	)
+
+	(wire
+		(pts (xy 223.81 180) (xy 231.43 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000043")
+	)
+
+	(wire
+		(pts (xy 216.19 180) (xy 208.57 180))
+		(stroke (width 0) (type default))
+		(uuid "7b000000-0000-4000-8001-000000000044")
+	)
+
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000053" (page "4"))
 	)

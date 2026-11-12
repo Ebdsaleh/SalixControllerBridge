@@ -1591,7 +1591,7 @@
 	)
 	(text "FROZEN / RESERVED:"
 		(exclude_from_sim no)
-		(at 230 40 0)
+		(at 220 40 0)
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -1603,10 +1603,9 @@
 	)
 	(text "GP0–GP7  = direct console-module PIO lane pool (GP3/4/5 preserve proven SNES wiring)"
 		(exclude_from_sim no)
-		(at 230 46 0)
+		(at 220 46 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1614,10 +1613,9 @@
 	)
 	(text "GP8/GP9  = developer UART / spare"
 		(exclude_from_sim no)
-		(at 230 52 0)
+		(at 220 52 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1625,10 +1623,9 @@
 	)
 	(text "GP10–13  = inter-Pico SPI1: SCK / MOSI / MISO / CS"
 		(exclude_from_sim no)
-		(at 230 58 0)
+		(at 220 58 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1636,10 +1633,9 @@
 	)
 	(text "GP14/15  = A→B IRQ / B→A IRQ"
 		(exclude_from_sim no)
-		(at 230 64 0)
+		(at 220 64 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1647,10 +1643,9 @@
 	)
 	(text "GP16/17  = 4-port USB hub root D+ / D− (22Ω series at Pico side)"
 		(exclude_from_sim no)
-		(at 230 70 0)
+		(at 220 70 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1658,10 +1653,9 @@
 	)
 	(text "GP18–21  = console-module SPI0: SCK / MOSI / MISO / CS"
 		(exclude_from_sim no)
-		(at 230 76 0)
+		(at 220 76 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1669,10 +1663,9 @@
 	)
 	(text "GP22      = console-module IRQ"
 		(exclude_from_sim no)
-		(at 230 82 0)
+		(at 220 82 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1680,10 +1673,9 @@
 	)
 	(text "GP26–28   = intentionally free on Rev A"
 		(exclude_from_sim no)
-		(at 230 88 0)
+		(at 220 88 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 			)
 		
 			(justify left))
@@ -1691,10 +1683,9 @@
 	)
 	(text "Bench GP18/19 second PIO-USB root is RETIRED by the motherboard hub."
 		(exclude_from_sim no)
-		(at 230 99 0)
+		(at 220 99 0)
 		(effects
-			(font
-				(size 0.95 0.95)
+			(font (size 0.8 0.8)
 				(bold yes)
 			)
 		
