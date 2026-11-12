@@ -559,6 +559,12 @@
 					(name "OUT" (effects (font (size 0.78 0.78))))
 					(number "12" (effects (font (size 0.78 0.78))))
 				)
+				(pin power_in line
+					(at 12.7 -10.16 180)
+					(length 2.54)
+					(name "EP_GND" (effects (font (size 0.78 0.78))))
+					(number "13" (effects (font (size 0.78 0.78))))
+				)
 			)
 		)
 		(symbol "Salix:TCA9535_PW"
@@ -2072,6 +2078,7 @@
 		(pin "10" (uuid "60000000-0000-4000-8000-000000006144"))
 		(pin "11" (uuid "60000000-0000-4000-8000-000000006145"))
 		(pin "12" (uuid "60000000-0000-4000-8000-000000006146"))
+		(pin "13" (uuid "8e000000-0000-4000-8000-000000000023"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -2156,7 +2163,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_2.3x2mm_P0.5mm"
 			(at 292.3 88 0)
 			(effects
 					(font (size 1 1))
@@ -2809,6 +2816,7 @@
 		(pin "10" (uuid "60000000-0000-4000-8000-000000006223"))
 		(pin "11" (uuid "60000000-0000-4000-8000-000000006224"))
 		(pin "12" (uuid "60000000-0000-4000-8000-000000006225"))
+		(pin "13" (uuid "8e000000-0000-4000-8000-000000000027"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -2893,7 +2901,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_2.3x2mm_P0.5mm"
 			(at 292.3 220 0)
 			(effects
 					(font (size 1 1))
@@ -3184,6 +3192,7 @@
 	(label "REF_A_C" (at 230.64 134.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006290"))
 	(label "CC1_A" (at 230.64 129.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006291"))
 	(global_label "GND" (shape passive) (at 230.64 137.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006292"))
+	(global_label "GND" (shape passive) (at 230.64 142.16 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "8e000000-0000-4000-8000-000000100023"))
 	(label "CC2_A" (at 230.64 126.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006293"))
 	(label "VBUS_A_C" (at 230.64 121.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006294"))
 	(global_label "GND" (shape passive) (at 255.88 84.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006295"))
@@ -3242,6 +3251,7 @@
 	(label "REF_B_C" (at 230.64 266.54 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006349"))
 	(label "CC1_B" (at 230.64 261.46 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006350"))
 	(global_label "GND" (shape passive) (at 230.64 269.08 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006351"))
+	(global_label "GND" (shape passive) (at 230.64 274.16 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "8e000000-0000-4000-8000-000000100027"))
 	(label "CC2_B" (at 230.64 258.92 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006352"))
 	(label "VBUS_B_C" (at 230.64 253.84 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006353"))
 	(global_label "GND" (shape passive) (at 232.38 216.19 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006354"))
@@ -4498,7 +4508,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_2.3x2mm_P0.5mm"
 			(at 340 88 0)
 			(effects
 					(font (size 1 1))
@@ -4557,7 +4567,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_2.3x2mm_P0.5mm"
 			(at 340 220 0)
 			(effects
 					(font (size 1 1))
@@ -4616,7 +4626,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "Package_SO:VSSOP-8_2.3x2mm_P0.5mm"
 			(at 345 157.5 0)
 			(effects
 					(font (size 1 1))
@@ -5465,6 +5475,12 @@
 	)
 
 	(wire
+		(pts (xy 225.56 274.16) (xy 230.64 274.16))
+		(stroke (width 0) (type default))
+		(uuid "8e000000-0000-4000-8000-000000200027")
+	)
+
+	(wire
 		(pts (xy 225.56 261.46) (xy 230.64 261.46))
 		(stroke (width 0) (type default))
 		(uuid "7c000000-0000-4000-8001-000000000004")
@@ -5565,6 +5581,12 @@
 		(pts (xy 225.56 137.08) (xy 230.64 137.08))
 		(stroke (width 0) (type default))
 		(uuid "7c000000-0000-4000-8001-000000000021")
+	)
+
+	(wire
+		(pts (xy 225.56 142.16) (xy 230.64 142.16))
+		(stroke (width 0) (type default))
+		(uuid "8e000000-0000-4000-8000-000000200023")
 	)
 
 	(wire
