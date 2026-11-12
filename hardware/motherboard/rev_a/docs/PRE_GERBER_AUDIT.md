@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC supplied on 2026-11-12 reached **0 errors**. Remaining warnings were 548 endpoint-off-grid and 125 library-symbol-mismatch warnings.
+- Native KiCad ERC rerun from `kicad_fixes(20261112-205437).zip` remained at **0 errors**. It reports 675 warnings: 550 endpoint-off-grid and 125 library-symbol-mismatch. The +2 off-grid warnings versus the prior run are the two newly explicit TPS25821 exposed-pad-to-GND wire endpoints; no new ERC category or electrical error appeared.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.

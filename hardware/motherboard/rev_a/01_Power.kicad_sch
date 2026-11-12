@@ -331,7 +331,7 @@
 			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004000")
 	)
-	(text "Power target: regulated 5V input, 5A minimum / 6A recommended for full eight-receptacle charging headroom."
+	(text "Power budget NOT frozen: exposed-port demand is 5.6A default / 9.6A at 1.5A Type-C, before Picos, logic and fans."
 		(exclude_from_sim no)
 		(at 20 20 0)
 		(effects
