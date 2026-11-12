@@ -68,6 +68,8 @@ Each physical power controller keeps its own FAULT_N signal for Pico-B diagnosti
 
 ## Still deliberately open
 
+- Add >=120uF VBUS reservoir at each USB-A TPS2553 OUT; exact capacitor MPN/footprint TBD.
+- Freeze the 47uF Type-C input-capacitor MPN/package and prove >=120uF effective total per TPS25821 at 5V after DC bias and tolerance.
 - Exact latching push-push SPDT switch manufacturer/footprint.
 - Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
 - Final LED colors.

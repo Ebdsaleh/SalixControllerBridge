@@ -31,8 +31,8 @@ Retired bench mapping: GP18/GP19 are no longer a second PIO-USB root. The 4-port
 |---|---|---|
 | GP0 | Management I²C SDA | Motherboard / future module-management devices. |
 | GP1 | Management I²C SCL | Motherboard / future module-management devices. |
-| GP2 | FAN0 PWM / ENABLE | Fan power driven from 5V_MAIN via driver/load switch. |
-| GP3 | FAN0 TACH | Tach input; pull-up topology TBD with fan choice. |
+| GP2 | FAN0 PWM / ENABLE | 2N7002 open-drain PWM command; FAN0 5V is switched by TPS22919DCK. |
+| GP3 | FAN0 TACH | Tach input with 10k pull-up to 3V3_AUX. |
 | GP4 | TFT touch IRQ | TF034 touch interrupt. |
 | GP5 | TFT backlight PWM | Drives backlight driver/enable, not backlight current directly. |
 | GP6 | TFT RESET | Front TF034 display. |
@@ -43,8 +43,8 @@ Retired bench mapping: GP18/GP19 are no longer a second PIO-USB root. The 4-port
 | GP11 | Inter-Pico SPI1 MISO | B TX → A GP12. |
 | GP12 | Inter-Pico SPI1 MOSI | B RX ← A GP11. |
 | GP13 | Inter-Pico SPI1 CS | Chip-select from Pico-A. |
-| GP14 | FAN1 PWM / ENABLE | Second independent cooling channel. |
-| GP15 | FAN1 TACH | Second fan tach input. |
+| GP14 | FAN1 PWM / ENABLE | 2N7002 open-drain PWM command; FAN1 5V is switched by TPS22919DCK. |
+| GP15 | FAN1 TACH | Second fan tach input with 10k pull-up to 3V3_AUX. |
 | GP16 | B→A IRQ | Connects to Pico-A GP15. |
 | GP17 | A→B IRQ | Connects from Pico-A GP14. |
 | GP18 | TFT+SD SPI0 SCK | Shared non-realtime service bus. |
@@ -68,7 +68,7 @@ The frozen inter-Pico physical nets are:
 - `FAN0_PWM_EN` / `FAN0_TACH`: Pico-B GP2 / GP3.
 - `FAN1_PWM_EN` / `FAN1_TACH`: Pico-B GP14 / GP15.
 
-The fan `+5V_FAN` pins remain intentionally unconnected until the Rev-A load-switch/driver is selected. This is a deliberate ERC-visible fabrication blocker, not a no-connect.
+The fan power paths are implemented: 5V_MAIN -> TPS22919DCK load switch -> FANx_5V, with local input/output capacitance, open-drain 2N7002 PWM sinks, and 10k tach pull-ups to 3V3_AUX.
 
 ## Power / physical constraints
 

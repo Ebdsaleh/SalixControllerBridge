@@ -8,10 +8,10 @@ Module SPI,SPI0 SCK/MOSI/MISO/CS,Pico-A,GP18..GP21,FROZEN,High-speed active-card
 Module IRQ,IRQ,Pico-A,GP22,FROZEN,Active console module event
 Raw spare,FREE,Pico-A,GP26..GP28,FREE,Intentionally unallocated
 Management,I2C SDA/SCL,Pico-B,GP0/GP1,FROZEN,Module/motherboard management
-Cooling,FAN0 PWM/TACH,Pico-B,GP2/GP3,FROZEN,5V fan driver required
+Cooling,FAN0 PWM/TACH,Pico-B,GP2/GP3,FROZEN,TPS22919 switched 5V + 2N7002 open-drain PWM + 10k tach pull-up implemented
 TFT,Touch IRQ / BL PWM / RESET / DC / Touch CS / LCD CS,Pico-B,GP4..GP9,FROZEN,TF034 service display
 Runtime RPC,SPI1 SCK/MISO/MOSI/CS,Pico-B,GP10..GP13,FROZEN,B slave; GP11/12 cross TX/RX versus A
-Cooling,FAN1 PWM/TACH,Pico-B,GP14/GP15,FROZEN,5V fan driver required
+Cooling,FAN1 PWM/TACH,Pico-B,GP14/GP15,FROZEN,TPS22919 switched 5V + 2N7002 open-drain PWM + 10k tach pull-up implemented
 Runtime RPC,IRQ B2A / A2B,Pico-B,GP16/GP17,FROZEN,Crossed to Pico-A GP15/GP14
 Service SPI,TFT+SD SPI0 SCK/MOSI/MISO,Pico-B,GP18..GP20,FROZEN,Shared non-realtime bus
 Storage,SD_CS,Pico-B,GP21,FROZEN,microSD belongs only to Pico-B

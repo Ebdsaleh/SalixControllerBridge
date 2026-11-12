@@ -13,14 +13,14 @@ TFT/front-panel UI,12-position keyed logical service header,1,LOGICAL PINOUT FRO
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
 Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
 Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treated as open-collector/open-drain
-USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN HUB FAMILY,4-port USB2 Hi-Speed hub
+USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN FAMILY / FOOTPRINT,Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias; 4-port USB2 Hi-Speed hub
 USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and hub upstream pair
 USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
 USB hub clock,24.000MHz crystal ±350ppm or better,1,PART TBD,Exact package/CL not frozen
 USB hub filter caps,100nF low-ESR fitted + optional DNP tuning pad,2 networks,FROZEN FITTED VALUE,Separate CRFILT and PLLFILT networks; each fitted network <=0.1uF
 USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
 3V3_AUX regulator,TI TLV62569P SOT23-6,1,FROZEN FAMILY,2A 5V-to-3.3V buck with power-good
-3V3_AUX inductor,2.2uH >=2.5A class,1,FROZEN VALUE,TLV62569P output filter
+3V3_AUX inductor,Coilcraft XAL4020-222ME 2.2uH,1,FROZEN MPN / FOOTPRINT,Inductor_SMD:L_Coilcraft_XxL4020; TI reference-design part
 3V3_AUX input capacitor,4.7uF 10V X7R,1,FROZEN VALUE,Close to regulator VIN
 3V3_AUX output capacitors,22uF 10V X7R,2,FROZEN VALUE,Recommended 2.2uH + 2x22uF combination
 3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
@@ -37,17 +37,17 @@ USB-C REF resistor,100k 0.5%,2 per daughterboard,FROZEN VALUE,TPS25821 reference
 Port LEDs + resistors,LED + 1k resistor,4 per daughterboard,FROZEN VALUE/COLOUR TBD,Active connector and fault indication
 Latching selector switch,SPDT push-push mechanical,2 per daughterboard,MECHANICAL TBD,Direct hardware A/C selection
 Service disable jumper,2-pin shunt input,4 per daughterboard,FROZEN SEMANTICS,OPEN=RUN / SHORT=OFF
-Hard-disable selector,TI SN74LVC2G157 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_3x3mm_P0.65mm
+Hard-disable selector,TI SN74LVC2G157 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_2.3x2mm_P0.5mm
 Run pull-ups,10k 1% 0603,4 per daughterboard,FROZEN VALUE,OPEN jumper defaults each physical port to RUN
 Board-enable fail-safe pull-up,100k 1% 0603,1 per daughterboard,FROZEN VALUE,BOARD_ENABLE_N defaults disabled if control line floats
-Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,FROZEN VALUE,3 per TPS25821 gives 141uF input bulk
+Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,VALUE TARGET / MPN BLOCKER,3 per TPS25821 gives 141uF nominal; exact MPN/package must retain >=120uF effective total at 5V after DC-bias/tolerance
 Type-C output bypass capacitor,4.7uF >=10V X5R/X7R,2 per daughterboard,FROZEN VALUE,Less than 10uF at Type-C OUT/VBUS
 Type-C CHG default pulldown,100k 1% 0603,2 per daughterboard,FROZEN VALUE,Defaults current advertisement to STD at power-up
-Hub power gates,TI SN74LVC2G08 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_3x3mm_P0.65mm
+Hub power gates,TI SN74LVC2G08 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_2.3x2mm_P0.5mm
 USB hub rail decoupling,100nF X7R,6,FROZEN VALUE,4x VDDA33 + 2x VDD33 close to pins
 USB hub analog bulk,1uF X7R,1,FROZEN VALUE,Shared VDDA33 bulk
 USB hub SMBus pullups,4.7k 1% 0603,2,FROZEN VALUE,SDA and SCL / CFG_SEL0 pullups to 3V3_AUX
-USB hub CFG_SEL1 pulldown,10k 1% 0603,1,FROZEN VALUE,HS_IND/CFG_SEL1 low selects MCU/SoC configuration
+USB hub CFG_SEL1 pulldown,100k 1% 0603,1,FROZEN VALUE,Microchip-recommended low strap; CFG_SEL1=0 with CFG_SEL0=1 selects SMBus MCU configuration
 USB hub reset RC,10k 1% + 1uF X7R,1 pair,FROZEN VALUES,RESET_N pullup/delay with Pico-B GP22 hard reset
 USB hub VBUS detect divider,100k 1% 0603,2,FROZEN VALUE,5V_MAIN divided to HUB_VBUS_DET
 PIO USB host pulldowns,15k 1% 0603,2,FROZEN VALUE,Explicit D+ and D- host pulldowns on Pico-A side
@@ -75,3 +75,5 @@ TFT logic bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Local J14 3
 
 Front-board INT pullups,10k 1% 0603,2,FROZEN VALUE,PRIMARY_INT_N and EXTENDED_INT_N pull-ups to 3V3_AUX
 Front-board management bypass,100nF X7R 0603,1,FROZEN VALUE,Local TCA9536 VCC bypass
+
+USB-A VBUS reservoir,>=120uF per USB-A downstream receptacle,2 per daughterboard,ELECTRICAL BLOCKER / MPN+FOOTPRINT TBD,Required downstream-facing-port VBUS bulk; add to schematic at each TPS2553 OUT before PCB layout
