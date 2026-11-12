@@ -17,6 +17,12 @@ Rendering strategy:
 PyMuPDF is installed automatically into the active Python environment only if
 the PDF fallback is needed and PyMuPDF is not already available.
 
+The script also runs KiCad ERC and writes:
+    %USERPROFILE%\\Downloads\\kicad_fixes\\ERC.rpt
+
+ERC violations are captured in the report but do not abort the render/ZIP
+workflow.
+
 Typical use from the repository root:
     py tools\\render_kicad_schematics.py
 
@@ -291,8 +297,45 @@ def clean_previous_outputs(output_dir: Path, zip_path: Path) -> None:
         if png.is_file():
             png.unlink()
 
+    erc_path = output_dir / "ERC.rpt"
+    if erc_path.exists():
+        erc_path.unlink()
+
     if zip_path.exists():
         zip_path.unlink()
+
+
+def generate_erc_report(
+    kicad_cli: Path,
+    root_schematic: Path,
+    report_path: Path,
+) -> None:
+    """
+    Run KiCad ERC and write a complete human-readable report.
+
+    We intentionally do not pass --exit-code-violations. ERC findings are
+    expected during development and should be captured without preventing the
+    image/ZIP workflow from completing.
+    """
+    command = [
+        str(kicad_cli),
+        "sch",
+        "erc",
+        "--output",
+        str(report_path),
+        "--format",
+        "report",
+        "--units",
+        "mm",
+        "--severity-all",
+        str(root_schematic),
+    ]
+    run_checked(command)
+
+    if not report_path.is_file():
+        raise RuntimeError(
+            f"KiCad ERC reported success but did not create: {report_path}"
+        )
 
 
 def render_page_native_png(
@@ -390,11 +433,15 @@ def render_page_via_pdf(
 
 
 def create_zip(output_dir: Path, zip_path: Path) -> None:
-    images = sorted(output_dir.glob("*.png"))
+    payload = sorted(output_dir.glob("*.png"))
+
+    erc_path = output_dir / "ERC.rpt"
+    if erc_path.is_file():
+        payload.append(erc_path)
 
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for image in images:
-            archive.write(image, arcname=image.name)
+        for item in payload:
+            archive.write(item, arcname=item.name)
 
 
 def parse_args() -> argparse.Namespace:
@@ -441,6 +488,11 @@ def parse_args() -> argparse.Namespace:
         "--no-clean",
         action="store_true",
         help="Do not remove existing PNGs from the output directory first.",
+    )
+    parser.add_argument(
+        "--no-erc",
+        action="store_true",
+        help="Do not run KiCad ERC or create ERC.rpt.",
     )
     parser.add_argument(
         "--no-zip",
@@ -538,13 +590,28 @@ def main() -> int:
                         pymupdf=pymupdf,
                     )
 
+        erc_path = output_dir / "ERC.rpt"
+        if not args.no_erc:
+            print()
+            print("Running KiCad ERC...")
+            generate_erc_report(
+                kicad_cli=kicad_cli,
+                root_schematic=root_schematic,
+                report_path=erc_path,
+            )
+            print(f"ERC       : {erc_path}")
+
         if not args.no_zip:
             create_zip(output_dir, zip_path)
-            print()
             print(f"ZIP       : {zip_path}")
 
         print()
-        print("Done. The PNG filenames match their .kicad_sch source filenames.")
+        if args.no_erc:
+            print("Done. The PNG filenames match their .kicad_sch source filenames.")
+        else:
+            print(
+                "Done. PNGs and ERC.rpt are ready; PNG names match the schematic sources."
+            )
         return 0
 
     except (FileNotFoundError, RuntimeError, ValueError, OSError) as exc:
