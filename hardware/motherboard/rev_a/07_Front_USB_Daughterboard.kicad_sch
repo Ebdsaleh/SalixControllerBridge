@@ -5792,27 +5792,27 @@
 	(wire
 		(pts (xy 175.16 73.08) (xy 182.78 73.08))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000001")
+		(uuid "a4070000-0000-4000-8000-000000000001")
 	)
-	(label "USB_SHIELD" (at 182.78 73.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000002"))
+	(label "USB_SHIELD" (at 182.78 73.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000002"))
 	(wire
 		(pts (xy 177.7 117.08) (xy 185.32 117.08))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000003")
+		(uuid "a4070000-0000-4000-8000-000000000003")
 	)
-	(label "USB_SHIELD" (at 185.32 117.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000004"))
+	(label "USB_SHIELD" (at 185.32 117.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000004"))
 	(wire
 		(pts (xy 165.16 205.08) (xy 172.78 205.08))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000005")
+		(uuid "a4070000-0000-4000-8000-000000000005")
 	)
-	(label "USB_SHIELD" (at 172.78 205.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000006"))
+	(label "USB_SHIELD" (at 172.78 205.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000006"))
 	(wire
 		(pts (xy 167.7 249.08) (xy 175.32 249.08))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000007")
+		(uuid "a4070000-0000-4000-8000-000000000007")
 	)
-	(label "USB_SHIELD" (at 175.32 249.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000008"))
+	(label "USB_SHIELD" (at 175.32 249.08 0) (effects (font (size 0.62 0.62)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000008"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 270 150 0)
@@ -5821,14 +5821,14 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "95070000-0000-4000-8100-000000000R48")
+		(uuid "a4070000-0000-4000-8000-000000000009")
 		(property "Reference" "R48" (at 270 147 0) (effects (font (size 0.9 0.9))))
 		(property "Value" "330R" (at 270 153 0) (effects (font (size 0.9 0.9))))
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 270 150 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "~" (at 270 150 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Description" "USB shield-to-digital-ground EMC/ESD treatment" (at 270 150 0) (effects (font (size 1 1)) (hide yes)))
-		(pin "1" (uuid "95070000-0000-4000-8100-000000000001"))
-		(pin "2" (uuid "95070000-0000-4000-8100-000000000002"))
+		(pin "1" (uuid "a4070000-0000-4000-8000-000000000010"))
+		(pin "2" (uuid "a4070000-0000-4000-8000-000000000011"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -5841,15 +5841,15 @@
 	(wire
 		(pts (xy 266.19 150) (xy 261.11 150))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000009")
+		(uuid "a4070000-0000-4000-8000-000000000012")
 	)
-	(label "USB_SHIELD" (at 261.11 150 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "95070000-0000-4000-8002-000000000010"))
+	(label "USB_SHIELD" (at 261.11 150 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "a4070000-0000-4000-8000-000000000013"))
 	(wire
 		(pts (xy 273.81 150) (xy 278.89 150))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000011")
+		(uuid "a4070000-0000-4000-8000-000000000014")
 	)
-	(global_label "GND" (shape passive) (at 278.89 150 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000012"))
+	(global_label "GND" (shape passive) (at 278.89 150 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000015"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 270 158 0)
@@ -5858,14 +5858,14 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "95070000-0000-4000-8100-000000000C41")
+		(uuid "a4070000-0000-4000-8000-000000000016")
 		(property "Reference" "C41" (at 270 155 0) (effects (font (size 0.9 0.9))))
 		(property "Value" "100nF" (at 270 161 0) (effects (font (size 0.9 0.9))))
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 270 158 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "~" (at 270 158 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Description" "USB shield-to-digital-ground EMC/ESD treatment" (at 270 158 0) (effects (font (size 1 1)) (hide yes)))
-		(pin "1" (uuid "95070000-0000-4000-8100-000000000001"))
-		(pin "2" (uuid "95070000-0000-4000-8100-000000000002"))
+		(pin "1" (uuid "a4070000-0000-4000-8000-000000000017"))
+		(pin "2" (uuid "a4070000-0000-4000-8000-000000000018"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -5878,15 +5878,15 @@
 	(wire
 		(pts (xy 266.19 158) (xy 261.11 158))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000013")
+		(uuid "a4070000-0000-4000-8000-000000000019")
 	)
-	(label "USB_SHIELD" (at 261.11 158 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "95070000-0000-4000-8002-000000000014"))
+	(label "USB_SHIELD" (at 261.11 158 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "a4070000-0000-4000-8000-000000000020"))
 	(wire
 		(pts (xy 273.81 158) (xy 278.89 158))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000015")
+		(uuid "a4070000-0000-4000-8000-000000000021")
 	)
-	(global_label "GND" (shape passive) (at 278.89 158 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000016"))
+	(global_label "GND" (shape passive) (at 278.89 158 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000022"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 270 166 0)
@@ -5895,14 +5895,14 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp yes)
-		(uuid "95070000-0000-4000-8100-000000000R49")
+		(uuid "a4070000-0000-4000-8000-000000000023")
 		(property "Reference" "R49" (at 270 163 0) (effects (font (size 0.9 0.9))))
 		(property "Value" "0R DNP" (at 270 169 0) (effects (font (size 0.9 0.9))))
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 270 166 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "~" (at 270 166 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Description" "USB shield-to-digital-ground EMC/ESD treatment" (at 270 166 0) (effects (font (size 1 1)) (hide yes)))
-		(pin "1" (uuid "95070000-0000-4000-8100-000000000001"))
-		(pin "2" (uuid "95070000-0000-4000-8100-000000000002"))
+		(pin "1" (uuid "a4070000-0000-4000-8000-000000000024"))
+		(pin "2" (uuid "a4070000-0000-4000-8000-000000000025"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -5915,15 +5915,15 @@
 	(wire
 		(pts (xy 266.19 166) (xy 261.11 166))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000017")
+		(uuid "a4070000-0000-4000-8000-000000000026")
 	)
-	(label "USB_SHIELD" (at 261.11 166 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "95070000-0000-4000-8002-000000000018"))
+	(label "USB_SHIELD" (at 261.11 166 180) (effects (font (size 0.65 0.65)) (justify right bottom)) (uuid "a4070000-0000-4000-8000-000000000027"))
 	(wire
 		(pts (xy 273.81 166) (xy 278.89 166))
 		(stroke (width 0) (type default))
-		(uuid "95070000-0000-4000-8001-000000000019")
+		(uuid "a4070000-0000-4000-8000-000000000028")
 	)
-	(global_label "GND" (shape passive) (at 278.89 166 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "95070000-0000-4000-8002-000000000020"))
+	(global_label "GND" (shape passive) (at 278.89 166 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000029"))
 	
 
 	(sheet_instances

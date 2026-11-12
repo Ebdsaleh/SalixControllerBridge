@@ -104,6 +104,16 @@ def tbox(s,x,y,z,j):
     return [x1,y1,x2,y2]
 
 
+def uuid_lint(raw):
+    """Validate KiCad object UUID syntax and uniqueness."""
+    vals=re.findall(r'\\(uuid\\s+"([^"]+)"\\)',raw)
+    pat=re.compile(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')
+    invalid=sorted(set(x for x in vals if not pat.fullmatch(x)))
+    counts={}
+    for x in vals: counts[x]=counts.get(x,0)+1
+    duplicates=[{"uuid":x,"count":n} for x,n in sorted(counts.items()) if n>1]
+    return {"invalid":invalid,"duplicates":duplicates}
+
 def electrical_lint(root, libs):
     """Geometry-based electrical sanity checks.
 
@@ -263,7 +273,8 @@ def electrical_lint(root, libs):
 
 
 def render(path,out):
-    root=parse(path.read_text(encoding="utf-8"))
+    raw=path.read_text(encoding="utf-8")
+    root=parse(raw)
     p=O(root,"paper"); pn=A(p,1,"A4") if p else "A4"; w,h=PAPER.get(pn,(297,210))
     svg=SVG(w,h);svg.rect(8,8,w-8,h-8,fill="none",wid=.18)
     # KiCad places the worksheet title block in the lower-right corner. Keep
@@ -335,11 +346,14 @@ def render(path,out):
         if intersects(box,title_keepout):
             title_hits.append({"type":"title-block-symbol","item":ref or "<unnamed>","box":box})
     lint=electrical_lint(root,libs)
+    uuid_report=uuid_lint(raw)
     report={
         "file":str(path),
         "likely_overlaps":hits,
         "title_block_intrusions":title_hits,
         "electrical_lint":lint,
+        "uuid_lint":uuid_report,
+        "page_edge_intrusions":page_hits,
     }
     out.mkdir(parents=True,exist_ok=True)
     (out/(path.stem+".svg")).write_text(svg.done(),encoding="utf-8")
@@ -349,9 +363,12 @@ def render(path,out):
         f"{len(title_hits)} title-block intrusion(s), "
         f"{len(page_hits)} page-edge intrusion(s), "
         f"{len(lint['orphan_labels'])} orphan label(s), "
-        f"{len(lint['pin_net_mismatches'])} obvious pin/net mismatch(es)"
+        f"{len(lint['pin_net_mismatches'])} obvious pin/net mismatch(es), "
+        f"{len(uuid_report['invalid'])} invalid UUID(s), "
+        f"{len(uuid_report['duplicates'])} duplicate UUID(s)"
     )
-    return len(hits)+len(title_hits)+len(page_hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
+    return (len(hits)+len(title_hits)+len(page_hits)+len(lint["orphan_labels"])+
+            len(lint["pin_net_mismatches"])+len(uuid_report["invalid"])+len(uuid_report["duplicates"]))
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input",type=Path);ap.add_argument("-o","--out",type=Path,default=Path("kicad_visuals"));ap.add_argument("--recursive",action="store_true")

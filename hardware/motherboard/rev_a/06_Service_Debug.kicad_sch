@@ -448,15 +448,15 @@
 	(wire
 		(pts (xy 59.84 63.73) (xy 52.22 63.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000001")
+		(uuid "a4060000-0000-4000-8000-000000000001")
 	)
-	(label "FAN0_5V" (at 52.22 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000002"))
+	(label "FAN0_5V" (at 52.22 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000002"))
 	(wire
 		(pts (xy 59.84 98.73) (xy 52.22 98.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000003")
+		(uuid "a4060000-0000-4000-8000-000000000003")
 	)
-	(label "FAN1_5V" (at 52.22 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000004"))
+	(label "FAN1_5V" (at 52.22 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000004"))
 	(symbol
 		(lib_id "Salix:TPS22919_DCK")
 		(at 120 63.73 0)
@@ -465,7 +465,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8100-000000000012")
+		(uuid "a4060000-0000-4000-8000-000000000005")
 		(property "Reference" "U12"
 			(at 120 53.73 0)
 			(effects (font (size 0.9 0.9)))
@@ -486,12 +486,12 @@
 			(at 120 63.73 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8100-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8100-000000000002"))
-		(pin "3" (uuid "94060000-0000-4000-8100-000000000003"))
-		(pin "4" (uuid "94060000-0000-4000-8100-000000000004"))
-		(pin "5" (uuid "94060000-0000-4000-8100-000000000005"))
-		(pin "6" (uuid "94060000-0000-4000-8100-000000000006"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000006"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000007"))
+		(pin "3" (uuid "a4060000-0000-4000-8000-000000000008"))
+		(pin "4" (uuid "a4060000-0000-4000-8000-000000000009"))
+		(pin "5" (uuid "a4060000-0000-4000-8000-000000000010"))
+		(pin "6" (uuid "a4060000-0000-4000-8000-000000000011"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -509,7 +509,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8100-000000000013")
+		(uuid "a4060000-0000-4000-8000-000000000012")
 		(property "Reference" "U13"
 			(at 120 88.73 0)
 			(effects (font (size 0.9 0.9)))
@@ -530,12 +530,12 @@
 			(at 120 98.73 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8100-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8100-000000000002"))
-		(pin "3" (uuid "94060000-0000-4000-8100-000000000003"))
-		(pin "4" (uuid "94060000-0000-4000-8100-000000000004"))
-		(pin "5" (uuid "94060000-0000-4000-8100-000000000005"))
-		(pin "6" (uuid "94060000-0000-4000-8100-000000000006"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000013"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000014"))
+		(pin "3" (uuid "a4060000-0000-4000-8000-000000000015"))
+		(pin "4" (uuid "a4060000-0000-4000-8000-000000000016"))
+		(pin "5" (uuid "a4060000-0000-4000-8000-000000000017"))
+		(pin "6" (uuid "a4060000-0000-4000-8000-000000000018"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -548,66 +548,66 @@
 	(wire
 		(pts (xy 111.11 63.73) (xy 106.03 63.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000005")
+		(uuid "a4060000-0000-4000-8000-000000000019")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 106.03 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000006"))
+	(global_label "5V_MAIN" (shape passive) (at 106.03 63.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000020"))
 	(wire
 		(pts (xy 111.11 59.919999999999995) (xy 106.03 59.919999999999995))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000007")
+		(uuid "a4060000-0000-4000-8000-000000000021")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 106.03 59.919999999999995 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000008"))
+	(global_label "3V3_AUX" (shape passive) (at 106.03 59.919999999999995 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000022"))
 	(wire
 		(pts (xy 111.11 67.53999999999999) (xy 106.03 67.53999999999999))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000009")
+		(uuid "a4060000-0000-4000-8000-000000000023")
 	)
-	(global_label "GND" (shape passive) (at 106.03 67.53999999999999 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000010"))
+	(global_label "GND" (shape passive) (at 106.03 67.53999999999999 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000024"))
 	(wire
 		(pts (xy 128.89 63.73) (xy 133.97 63.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000011")
+		(uuid "a4060000-0000-4000-8000-000000000025")
 	)
-	(label "FAN0_5V" (at 133.97 63.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000012"))
+	(label "FAN0_5V" (at 133.97 63.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000026"))
 	(no_connect
 		(at 128.89 59.919999999999995)
-		(uuid "94060000-0000-4000-8003-000000000013")
+		(uuid "a4060000-0000-4000-8000-000000000027")
 	)
 	(no_connect
 		(at 128.89 67.53999999999999)
-		(uuid "94060000-0000-4000-8003-000000000014")
+		(uuid "a4060000-0000-4000-8000-000000000028")
 	)
 	(wire
 		(pts (xy 111.11 98.73) (xy 106.03 98.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000015")
+		(uuid "a4060000-0000-4000-8000-000000000029")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 106.03 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000016"))
+	(global_label "5V_MAIN" (shape passive) (at 106.03 98.73 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000030"))
 	(wire
 		(pts (xy 111.11 94.92) (xy 106.03 94.92))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000017")
+		(uuid "a4060000-0000-4000-8000-000000000031")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 106.03 94.92 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000018"))
+	(global_label "3V3_AUX" (shape passive) (at 106.03 94.92 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000032"))
 	(wire
 		(pts (xy 111.11 102.54) (xy 106.03 102.54))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000019")
+		(uuid "a4060000-0000-4000-8000-000000000033")
 	)
-	(global_label "GND" (shape passive) (at 106.03 102.54 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000020"))
+	(global_label "GND" (shape passive) (at 106.03 102.54 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000034"))
 	(wire
 		(pts (xy 128.89 98.73) (xy 133.97 98.73))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000021")
+		(uuid "a4060000-0000-4000-8000-000000000035")
 	)
-	(label "FAN1_5V" (at 133.97 98.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000022"))
+	(label "FAN1_5V" (at 133.97 98.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000036"))
 	(no_connect
 		(at 128.89 94.92)
-		(uuid "94060000-0000-4000-8003-000000000023")
+		(uuid "a4060000-0000-4000-8000-000000000037")
 	)
 	(no_connect
 		(at 128.89 102.54)
-		(uuid "94060000-0000-4000-8003-000000000024")
+		(uuid "a4060000-0000-4000-8000-000000000038")
 	)
 	(symbol
 		(lib_id "Salix:C")
@@ -617,7 +617,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8200-000000000C70")
+		(uuid "a4060000-0000-4000-8000-000000000039")
 		(property "Reference" "C70"
 			(at 145 38 0)
 			(effects (font (size 0.9 0.9)))
@@ -638,8 +638,8 @@
 			(at 145 48 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000040"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000041"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -652,15 +652,15 @@
 	(wire
 		(pts (xy 141.19 48) (xy 136.11 48))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000025")
+		(uuid "a4060000-0000-4000-8000-000000000042")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 136.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000026"))
+	(global_label "5V_MAIN" (shape passive) (at 136.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000043"))
 	(wire
 		(pts (xy 148.81 48) (xy 153.89 48))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000027")
+		(uuid "a4060000-0000-4000-8000-000000000044")
 	)
-	(global_label "GND" (shape passive) (at 153.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000028"))
+	(global_label "GND" (shape passive) (at 153.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000045"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 145 56 0)
@@ -669,7 +669,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8200-000000000C71")
+		(uuid "a4060000-0000-4000-8000-000000000046")
 		(property "Reference" "C71"
 			(at 145 46 0)
 			(effects (font (size 0.9 0.9)))
@@ -690,8 +690,8 @@
 			(at 145 56 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000047"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000048"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -704,15 +704,15 @@
 	(wire
 		(pts (xy 141.19 56) (xy 136.11 56))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000029")
+		(uuid "a4060000-0000-4000-8000-000000000049")
 	)
-	(label "FAN0_5V" (at 136.11 56 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000030"))
+	(label "FAN0_5V" (at 136.11 56 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000050"))
 	(wire
 		(pts (xy 148.81 56) (xy 153.89 56))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000031")
+		(uuid "a4060000-0000-4000-8000-000000000051")
 	)
-	(global_label "GND" (shape passive) (at 153.89 56 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000032"))
+	(global_label "GND" (shape passive) (at 153.89 56 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000052"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 145 83 0)
@@ -721,7 +721,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8200-000000000C72")
+		(uuid "a4060000-0000-4000-8000-000000000053")
 		(property "Reference" "C72"
 			(at 145 73 0)
 			(effects (font (size 0.9 0.9)))
@@ -742,8 +742,8 @@
 			(at 145 83 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000054"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000055"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -756,15 +756,15 @@
 	(wire
 		(pts (xy 141.19 83) (xy 136.11 83))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000033")
+		(uuid "a4060000-0000-4000-8000-000000000056")
 	)
-	(global_label "5V_MAIN" (shape passive) (at 136.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000034"))
+	(global_label "5V_MAIN" (shape passive) (at 136.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000057"))
 	(wire
 		(pts (xy 148.81 83) (xy 153.89 83))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000035")
+		(uuid "a4060000-0000-4000-8000-000000000058")
 	)
-	(global_label "GND" (shape passive) (at 153.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000036"))
+	(global_label "GND" (shape passive) (at 153.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000059"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 145 91 0)
@@ -773,7 +773,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8200-000000000C73")
+		(uuid "a4060000-0000-4000-8000-000000000060")
 		(property "Reference" "C73"
 			(at 145 81 0)
 			(effects (font (size 0.9 0.9)))
@@ -794,8 +794,8 @@
 			(at 145 91 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8200-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8200-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000061"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000062"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -808,15 +808,15 @@
 	(wire
 		(pts (xy 141.19 91) (xy 136.11 91))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000037")
+		(uuid "a4060000-0000-4000-8000-000000000063")
 	)
-	(label "FAN1_5V" (at 136.11 91 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000038"))
+	(label "FAN1_5V" (at 136.11 91 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000064"))
 	(wire
 		(pts (xy 148.81 91) (xy 153.89 91))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000039")
+		(uuid "a4060000-0000-4000-8000-000000000065")
 	)
-	(global_label "GND" (shape passive) (at 153.89 91 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000040"))
+	(global_label "GND" (shape passive) (at 153.89 91 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000066"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 48 0)
@@ -825,7 +825,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R70")
+		(uuid "a4060000-0000-4000-8000-000000000067")
 		(property "Reference" "R70"
 			(at 170 45 0)
 			(effects (font (size 0.9 0.9)))
@@ -846,8 +846,8 @@
 			(at 170 48 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000068"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000069"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -860,15 +860,15 @@
 	(wire
 		(pts (xy 166.19 48) (xy 161.11 48))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000041")
+		(uuid "a4060000-0000-4000-8000-000000000070")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 161.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000042"))
+	(global_label "3V3_AUX" (shape passive) (at 161.11 48 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000071"))
 	(wire
 		(pts (xy 173.81 48) (xy 178.89 48))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000043")
+		(uuid "a4060000-0000-4000-8000-000000000072")
 	)
-	(global_label "FAN0_TACH" (shape passive) (at 178.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000044"))
+	(global_label "FAN0_TACH" (shape passive) (at 178.89 48 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000073"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 64 0)
@@ -877,7 +877,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R71")
+		(uuid "a4060000-0000-4000-8000-000000000074")
 		(property "Reference" "R71"
 			(at 170 61 0)
 			(effects (font (size 0.9 0.9)))
@@ -898,8 +898,8 @@
 			(at 170 64 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000075"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000076"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -912,15 +912,15 @@
 	(wire
 		(pts (xy 166.19 64) (xy 161.11 64))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000045")
+		(uuid "a4060000-0000-4000-8000-000000000077")
 	)
-	(global_label "FAN0_PWM_EN" (shape passive) (at 161.11 64 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000046"))
+	(global_label "FAN0_PWM_EN" (shape passive) (at 161.11 64 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000078"))
 	(wire
 		(pts (xy 173.81 64) (xy 178.89 64))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000047")
+		(uuid "a4060000-0000-4000-8000-000000000079")
 	)
-	(label "FAN0_PWM_GATE" (at 178.89 64 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000048"))
+	(label "FAN0_PWM_GATE" (at 178.89 64 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000080"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 76 0)
@@ -929,7 +929,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R72")
+		(uuid "a4060000-0000-4000-8000-000000000081")
 		(property "Reference" "R72"
 			(at 170 73 0)
 			(effects (font (size 0.9 0.9)))
@@ -950,8 +950,8 @@
 			(at 170 76 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000082"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000083"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -964,15 +964,15 @@
 	(wire
 		(pts (xy 166.19 76) (xy 161.11 76))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000049")
+		(uuid "a4060000-0000-4000-8000-000000000084")
 	)
-	(label "FAN0_PWM_GATE" (at 161.11 76 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000050"))
+	(label "FAN0_PWM_GATE" (at 161.11 76 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000085"))
 	(wire
 		(pts (xy 173.81 76) (xy 178.89 76))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000051")
+		(uuid "a4060000-0000-4000-8000-000000000086")
 	)
-	(global_label "GND" (shape passive) (at 178.89 76 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000052"))
+	(global_label "GND" (shape passive) (at 178.89 76 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000087"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 83 0)
@@ -981,7 +981,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R73")
+		(uuid "a4060000-0000-4000-8000-000000000088")
 		(property "Reference" "R73"
 			(at 170 82 0)
 			(effects (font (size 0.9 0.9)))
@@ -1002,8 +1002,8 @@
 			(at 170 83 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000089"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000090"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -1016,15 +1016,15 @@
 	(wire
 		(pts (xy 166.19 83) (xy 161.11 83))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000053")
+		(uuid "a4060000-0000-4000-8000-000000000091")
 	)
-	(global_label "3V3_AUX" (shape passive) (at 161.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000054"))
+	(global_label "3V3_AUX" (shape passive) (at 161.11 83 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000092"))
 	(wire
 		(pts (xy 173.81 83) (xy 178.89 83))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000055")
+		(uuid "a4060000-0000-4000-8000-000000000093")
 	)
-	(global_label "FAN1_TACH" (shape passive) (at 178.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000056"))
+	(global_label "FAN1_TACH" (shape passive) (at 178.89 83 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000094"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 99 0)
@@ -1033,7 +1033,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R74")
+		(uuid "a4060000-0000-4000-8000-000000000095")
 		(property "Reference" "R74"
 			(at 170 96 0)
 			(effects (font (size 0.9 0.9)))
@@ -1054,8 +1054,8 @@
 			(at 170 99 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000096"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000097"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -1068,15 +1068,15 @@
 	(wire
 		(pts (xy 166.19 99) (xy 161.11 99))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000057")
+		(uuid "a4060000-0000-4000-8000-000000000098")
 	)
-	(global_label "FAN1_PWM_EN" (shape passive) (at 161.11 99 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000058"))
+	(global_label "FAN1_PWM_EN" (shape passive) (at 161.11 99 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000099"))
 	(wire
 		(pts (xy 173.81 99) (xy 178.89 99))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000059")
+		(uuid "a4060000-0000-4000-8000-000000000100")
 	)
-	(label "FAN1_PWM_GATE" (at 178.89 99 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000060"))
+	(label "FAN1_PWM_GATE" (at 178.89 99 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000101"))
 	(symbol
 		(lib_id "Salix:R")
 		(at 170 111 0)
@@ -1085,7 +1085,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8300-000000000R75")
+		(uuid "a4060000-0000-4000-8000-000000000102")
 		(property "Reference" "R75"
 			(at 170 108 0)
 			(effects (font (size 0.9 0.9)))
@@ -1106,8 +1106,8 @@
 			(at 170 111 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8300-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8300-000000000002"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000103"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000104"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -1120,15 +1120,15 @@
 	(wire
 		(pts (xy 166.19 111) (xy 161.11 111))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000061")
+		(uuid "a4060000-0000-4000-8000-000000000105")
 	)
-	(label "FAN1_PWM_GATE" (at 161.11 111 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000062"))
+	(label "FAN1_PWM_GATE" (at 161.11 111 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000106"))
 	(wire
 		(pts (xy 173.81 111) (xy 178.89 111))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000063")
+		(uuid "a4060000-0000-4000-8000-000000000107")
 	)
-	(global_label "GND" (shape passive) (at 178.89 111 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000064"))
+	(global_label "GND" (shape passive) (at 178.89 111 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000108"))
 	(symbol
 		(lib_id "Salix:NMOS_GSD")
 		(at 200 71.35 0)
@@ -1137,7 +1137,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8400-000000000070")
+		(uuid "a4060000-0000-4000-8000-000000000109")
 		(property "Reference" "Q70"
 			(at 200 61.349999999999994 0)
 			(effects (font (size 0.9 0.9)))
@@ -1158,9 +1158,9 @@
 			(at 200 71.35 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8400-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8400-000000000002"))
-		(pin "3" (uuid "94060000-0000-4000-8400-000000000003"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000110"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000111"))
+		(pin "3" (uuid "a4060000-0000-4000-8000-000000000112"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -1178,7 +1178,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "94060000-0000-4000-8400-000000000071")
+		(uuid "a4060000-0000-4000-8000-000000000113")
 		(property "Reference" "Q71"
 			(at 200 96.35 0)
 			(effects (font (size 0.9 0.9)))
@@ -1199,9 +1199,9 @@
 			(at 200 106.35 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(pin "1" (uuid "94060000-0000-4000-8400-000000000001"))
-		(pin "2" (uuid "94060000-0000-4000-8400-000000000002"))
-		(pin "3" (uuid "94060000-0000-4000-8400-000000000003"))
+		(pin "1" (uuid "a4060000-0000-4000-8000-000000000114"))
+		(pin "2" (uuid "a4060000-0000-4000-8000-000000000115"))
+		(pin "3" (uuid "a4060000-0000-4000-8000-000000000116"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056"
@@ -1214,39 +1214,39 @@
 	(wire
 		(pts (xy 191.11 71.35) (xy 186.03 71.35))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000065")
+		(uuid "a4060000-0000-4000-8000-000000000117")
 	)
-	(label "FAN0_PWM_GATE" (at 186.03 71.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000066"))
+	(label "FAN0_PWM_GATE" (at 186.03 71.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000118"))
 	(wire
 		(pts (xy 208.89 68.80999999999999) (xy 213.97 68.80999999999999))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000067")
+		(uuid "a4060000-0000-4000-8000-000000000119")
 	)
-	(label "FAN0_PWM_OD" (at 213.97 68.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000068"))
+	(label "FAN0_PWM_OD" (at 213.97 68.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000120"))
 	(wire
 		(pts (xy 208.89 73.89) (xy 213.97 73.89))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000069")
+		(uuid "a4060000-0000-4000-8000-000000000121")
 	)
-	(global_label "GND" (shape passive) (at 213.97 73.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000070"))
+	(global_label "GND" (shape passive) (at 213.97 73.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000122"))
 	(wire
 		(pts (xy 191.11 106.35) (xy 186.03 106.35))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000071")
+		(uuid "a4060000-0000-4000-8000-000000000123")
 	)
-	(label "FAN1_PWM_GATE" (at 186.03 106.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "94060000-0000-4000-8002-000000000072"))
+	(label "FAN1_PWM_GATE" (at 186.03 106.35 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "a4060000-0000-4000-8000-000000000124"))
 	(wire
 		(pts (xy 208.89 103.80999999999999) (xy 213.97 103.80999999999999))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000073")
+		(uuid "a4060000-0000-4000-8000-000000000125")
 	)
-	(label "FAN1_PWM_OD" (at 213.97 103.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000074"))
+	(label "FAN1_PWM_OD" (at 213.97 103.80999999999999 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000126"))
 	(wire
 		(pts (xy 208.89 108.89) (xy 213.97 108.89))
 		(stroke (width 0) (type default))
-		(uuid "94060000-0000-4000-8001-000000000075")
+		(uuid "a4060000-0000-4000-8000-000000000127")
 	)
-	(global_label "GND" (shape passive) (at 213.97 108.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "94060000-0000-4000-8002-000000000076"))
+	(global_label "GND" (shape passive) (at 213.97 108.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000128"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056" (page "7"))
 	)
