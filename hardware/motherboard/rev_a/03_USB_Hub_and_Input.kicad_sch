@@ -1097,7 +1097,7 @@
 	(global_label "MGMT_I2C_SDA" (shape passive) (at 36.76 56.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004144"))
 	(global_label "MGMT_I2C_SCL" (shape passive) (at 36.76 59.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004145"))
 	(label "PRIMARY_INT_N" (at 36.76 61.65 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004146"))
-	(label "PRIMARY_BOARD_ID" (at 36.76 64.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004147"))
+	(global_label "GND" (shape passive) (at 36.76 64.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004147"))
 	(label "PRIMARY_ENABLE_N" (at 36.76 66.73 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004148"))
 	(label "USB_DN1_DM" (at 36.76 69.27 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004149"))
 	(label "USB_DN1_DP" (at 36.76 71.81 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004150"))
@@ -1117,7 +1117,7 @@
 	(global_label "MGMT_I2C_SDA" (shape passive) (at 36.76 110.57 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004164"))
 	(global_label "MGMT_I2C_SCL" (shape passive) (at 36.76 113.11 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004165"))
 	(label "EXTENDED_INT_N" (at 36.76 115.65 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004166"))
-	(label "EXTENDED_BOARD_ID" (at 36.76 118.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004167"))
+	(global_label "3V3_AUX" (shape passive) (at 36.76 118.19 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004167"))
 	(label "EXTENDED_ENABLE_N" (at 36.76 120.73 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004168"))
 	(label "USB_DN3_DM" (at 36.76 123.27 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004169"))
 	(label "USB_DN3_DP" (at 36.76 125.81 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004170"))
@@ -1156,7 +1156,6 @@
 	(label "HUB_HS_IND" (at 167.94 69.3 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004203"))
 	(global_label "HUB_RESET_N" (shape passive) (at 167.94 71.84 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004204"))
 	(label "HUB_VBUS_DET" (at 167.94 74.38 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004205"))
-	(label "HUB_SUSP_IND" (at 167.94 76.92 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004206"))
 	(global_label "3V3_AUX" (shape passive) (at 167.94 79.46 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004207"))
 	(label "HUB_USBDM_UP" (at 167.94 82 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004208"))
 	(label "HUB_USBDP_UP" (at 167.94 84.54 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004209"))
@@ -2485,6 +2484,11 @@
 	(global_label "GND" (shape passive) (at 175.56 99.78 0)
 		(effects (font (size 0.85 0.85)) (justify left bottom))
 		(uuid "8e000000-0000-4000-8000-000000000002")
+	)
+
+	(no_connect
+		(at 167.94 76.92)
+		(uuid "93030000-0000-4000-8000-000000000001")
 	)
 
 	(sheet_instances

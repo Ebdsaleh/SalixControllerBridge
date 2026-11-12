@@ -28,3 +28,13 @@ Logical 20-position interface:
 20 GND
 
 The physical connector family remains TBD; this is not the Intel/PC USB3 header pinout.
+
+
+## Board-ID address straps
+
+The daughterboard TCA9535 uses A0=BOARD_ID with A1=A2=GND.
+
+- PRIMARY connector: BOARD_ID is strapped to GND -> TCA9535 address 0x20.
+- EXTENDED connector: BOARD_ID is strapped to 3V3_AUX -> TCA9535 address 0x21.
+
+This keeps the two otherwise-identical front boards on distinct management-I2C addresses without consuming a Pico-B GPIO.
