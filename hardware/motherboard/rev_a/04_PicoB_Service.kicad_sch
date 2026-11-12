@@ -532,7 +532,8 @@
 				(size 1.8 1.8)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001136")
 	)
 	(text "Red USB-C Pico 2 preferred; both 20-pin rails socketed. Pico-B owns service, storage, UI and recovery."
@@ -542,7 +543,8 @@
 			(font
 				(size 1.05 1.05)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001137")
 	)
 	(symbol
@@ -709,144 +711,158 @@
 	)
 	(text "FROZEN / RESERVED:"
 		(exclude_from_sim no)
-		(at 190 38 0)
+		(at 185 38 0)
 		(effects
 			(font
 				(size 1.15 1.15)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001180")
 	)
 	(text "GP0/1     = motherboard/module-management I²C SDA/SCL"
 		(exclude_from_sim no)
-		(at 190 44 0)
+		(at 185 44 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001181")
 	)
 	(text "GP2/3     = FAN0 PWM/EN + TACH"
 		(exclude_from_sim no)
-		(at 190 50 0)
+		(at 185 50 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001182")
 	)
 	(text "GP4       = TFT touch IRQ"
 		(exclude_from_sim no)
-		(at 190 56 0)
+		(at 185 56 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001183")
 	)
 	(text "GP5       = TFT backlight PWM"
 		(exclude_from_sim no)
-		(at 190 62 0)
+		(at 185 62 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001184")
 	)
 	(text "GP6/7     = TFT RESET / D-C"
 		(exclude_from_sim no)
-		(at 190 68 0)
+		(at 185 68 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001185")
 	)
 	(text "GP8/9     = TFT TOUCH_CS / LCD_CS"
 		(exclude_from_sim no)
-		(at 190 74 0)
+		(at 185 74 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001186")
 	)
 	(text "GP10–13   = inter-Pico SPI1; B GP11=MISO, B GP12=MOSI (crossed vs A master)"
 		(exclude_from_sim no)
-		(at 190 80 0)
+		(at 185 80 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001187")
 	)
 	(text "GP14/15   = FAN1 PWM/EN + TACH"
 		(exclude_from_sim no)
-		(at 190 86 0)
+		(at 185 86 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001188")
 	)
 	(text "GP16/17   = B→A IRQ / A→B IRQ"
 		(exclude_from_sim no)
-		(at 190 92 0)
+		(at 185 92 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001189")
 	)
 	(text "GP18–20   = shared TFT+SD SPI0 SCK / MOSI / MISO"
 		(exclude_from_sim no)
-		(at 190 98 0)
+		(at 185 98 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001190")
 	)
 	(text "GP21      = SD_CS; GP22 = USB2514B HUB_RESET_N"
 		(exclude_from_sim no)
-		(at 190 104 0)
+		(at 185 104 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001191")
 	)
 	(text "GP26/27/28 = Pico-A SWDIO / SWCLK / RUN recovery"
 		(exclude_from_sim no)
-		(at 190 110 0)
+		(at 185 110 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001192")
 	)
 	(text "TFT and SD share SPI0 intentionally; both are non-realtime Pico-B peripherals."
 		(exclude_from_sim no)
-		(at 190 121 0)
+		(at 185 121 0)
 		(effects
 			(font
 				(size 0.95 0.95)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001193")
 	)
 	(wire

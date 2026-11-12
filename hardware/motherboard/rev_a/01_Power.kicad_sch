@@ -283,7 +283,8 @@
 		(effects
 			(font (size 1.8 1.8)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004000")
 	)
 	(text "Power target: regulated 5V input, 5A minimum / 6A recommended for full eight-receptacle charging headroom."
@@ -291,7 +292,8 @@
 		(at 20 20 0)
 		(effects
 			(font (size 1 1))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004001")
 	)
 	(text "Main input connector/eFuse stays provisional until final enclosure and current budget are frozen."
@@ -299,7 +301,8 @@
 		(at 20 26 0)
 		(effects
 			(font (size 0.95 0.95))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004002")
 	)
 	(text "3V3_AUX is concrete and electrically netted: TLV62569P 2A synchronous buck. Short wire stubs keep net labels clear of pins."
@@ -308,7 +311,8 @@
 		(effects
 			(font (size 1 1)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004003")
 	)
 	(symbol
@@ -476,7 +480,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 175 80 0)
+		(at 165 80 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -484,33 +488,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004017")
 		(property "Reference" "C2"
-			(at 175 76.3 0)
+			(at 165 76.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22uF 10V X7R"
-			(at 175 84.2 0)
+			(at 165 84.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 175 80 0)
+			(at 165 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 175 80 0)
+			(at 165 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "22uF 10V X7R"
-			(at 175 80 0)
+			(at 165 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -529,7 +533,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 190 80 0)
+		(at 205 80 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -537,33 +541,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004020")
 		(property "Reference" "C3"
-			(at 190 76.3 0)
+			(at 205 76.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "22uF 10V X7R"
-			(at 190 84.2 0)
+			(at 205 84.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 190 80 0)
+			(at 205 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 190 80 0)
+			(at 205 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "22uF 10V X7R"
-			(at 190 80 0)
+			(at 205 80 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -582,7 +586,7 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 175 95 0)
+		(at 165 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -590,33 +594,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004023")
 		(property "Reference" "R4"
-			(at 175 91.3 0)
+			(at 165 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "453k 1%"
-			(at 175 99.2 0)
+			(at 165 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 175 95 0)
+			(at 165 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 175 95 0)
+			(at 165 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "453k 1%"
-			(at 175 95 0)
+			(at 165 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -635,7 +639,7 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 190 95 0)
+		(at 205 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -643,33 +647,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004026")
 		(property "Reference" "R5"
-			(at 190 91.3 0)
+			(at 205 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "100k 1%"
-			(at 190 99.2 0)
+			(at 205 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 190 95 0)
+			(at 205 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 190 95 0)
+			(at 205 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "100k 1%"
-			(at 190 95 0)
+			(at 205 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -688,7 +692,7 @@
 	)
 	(symbol
 		(lib_id "Salix:C")
-		(at 205 95 0)
+		(at 245 100 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -696,33 +700,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004029")
 		(property "Reference" "C4"
-			(at 205 91.3 0)
+			(at 245 96.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "6.8pF"
-			(at 205 99.2 0)
+			(at 245 104.2 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 205 95 0)
+			(at 245 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 205 95 0)
+			(at 245 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "6.8pF"
-			(at 205 95 0)
+			(at 245 100 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -741,7 +745,7 @@
 	)
 	(symbol
 		(lib_id "Salix:R")
-		(at 175 110 0)
+		(at 185 120 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -749,33 +753,33 @@
 		(dnp no)
 		(uuid "40000000-0000-4000-8000-000000004032")
 		(property "Reference" "R6"
-			(at 175 106.3 0)
+			(at 185 116.3 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Value" "100k PG pull-up"
-			(at 175 115 0)
+			(at 185 125 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 175 110 0)
+			(at 185 120 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 175 110 0)
+			(at 185 120 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "100k PG pull-up"
-			(at 175 110 0)
+			(at 185 120 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -847,7 +851,8 @@
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004041")
 	)
 	(text "• Pico-A VSYS   • Pico-B VSYS   • PRIMARY front board   • EXTENDED front board   • FAN0/FAN1"
@@ -855,7 +860,8 @@
 		(at 35 141 0)
 		(effects
 			(font (size 0.95 0.95))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004042")
 	)
 	(text "Per-receptacle current limiting/backfeed protection lives on the USB daughterboards, not here."
@@ -864,7 +870,8 @@
 		(effects
 			(font (size 0.95 0.95)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004043")
 	)
 	(text "Candidate input protection: TPS25947-class eFuse if final current limit ≤5.5A; otherwise select a higher-current part."
@@ -872,7 +879,8 @@
 		(at 35 153 0)
 		(effects
 			(font (size 0.95 0.95))
-		)
+		
+			(justify left))
 		(uuid "40000000-0000-4000-8000-000000004044")
 	)
 	(wire

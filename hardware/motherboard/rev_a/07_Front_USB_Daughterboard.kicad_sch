@@ -1412,7 +1412,8 @@
 		(effects
 			(font (size 1.8 1.8)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006000")
 	)
 	(text "Same PCB serves PRIMARY or EXTENDED. A/C selection and service-disable are hardware paths; Pico-B only supervises."
@@ -1420,7 +1421,8 @@
 		(at 20 20 0)
 		(effects
 			(font (size 1 1))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006001")
 	)
 	(text "OPEN jumper = RUN (10k pull-up). SHORT jumper = OFF/GND. Inactive receptacle remains powered unless its own jumper is shorted."
@@ -1429,7 +1431,8 @@
 		(effects
 			(font (size 0.95 0.95)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006002")
 	)
 	(symbol
@@ -3829,7 +3832,7 @@
 	(label "GND" (at 248.81 270 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006431"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 285 138 0)
+		(at 250 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3837,6 +3840,61 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006432")
 		(property "Reference" "C30"
+			(at 250 135 0)
+			(effects
+					(font (size 0.85 0.85))
+				)
+		)
+		(property "Value" "47uF"
+			(at 250 141 0)
+			(effects
+					(font (size 0.85 0.85))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 250 138 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 250 138 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "47uF"
+			(at 250 138 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "60000000-0000-4000-8000-000000006433"))
+		(pin "2" (uuid "60000000-0000-4000-8000-000000006434"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "5V_BOARD" (at 246.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
+	(label "GND" (at 253.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
+	(symbol
+		(lib_id "Salix:C")
+		(at 285 138 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "60000000-0000-4000-8000-000000006437")
+		(property "Reference" "C31"
 			(at 285 135 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -3869,61 +3927,6 @@
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "60000000-0000-4000-8000-000000006433"))
-		(pin "2" (uuid "60000000-0000-4000-8000-000000006434"))
-		(instances
-			(project "SalixControllerBridge_RevA"
-				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
-					(reference "C30")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "5V_BOARD" (at 281.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006435"))
-	(label "GND" (at 288.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006436"))
-	(symbol
-		(lib_id "Salix:C")
-		(at 300 138 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "60000000-0000-4000-8000-000000006437")
-		(property "Reference" "C31"
-			(at 300 135 0)
-			(effects
-					(font (size 0.85 0.85))
-				)
-		)
-		(property "Value" "47uF"
-			(at 300 141 0)
-			(effects
-					(font (size 0.85 0.85))
-				)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 300 138 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Datasheet" "~"
-			(at 300 138 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Description" "47uF"
-			(at 300 138 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
 		(pin "1" (uuid "60000000-0000-4000-8000-000000006438"))
 		(pin "2" (uuid "60000000-0000-4000-8000-000000006439"))
 		(instances
@@ -3935,11 +3938,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 296.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006440"))
-	(label "GND" (at 303.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006441"))
+	(label "5V_BOARD" (at 281.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006440"))
+	(label "GND" (at 288.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006441"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 315 138 0)
+		(at 320 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3947,33 +3950,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006442")
 		(property "Reference" "C32"
-			(at 315 135 0)
+			(at 320 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 315 141 0)
+			(at 320 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 315 138 0)
+			(at 320 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 315 138 0)
+			(at 320 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 315 138 0)
+			(at 320 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -3990,11 +3993,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 311.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006445"))
-	(label "GND" (at 318.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006446"))
+	(label "5V_BOARD" (at 316.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006445"))
+	(label "GND" (at 323.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006446"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 330 138 0)
+		(at 355 138 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4002,33 +4005,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006447")
 		(property "Reference" "C33"
-			(at 330 135 0)
+			(at 355 135 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 330 141 0)
+			(at 355 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 330 138 0)
+			(at 355 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 330 138 0)
+			(at 355 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 330 138 0)
+			(at 355 138 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4045,8 +4048,63 @@
 			)
 		)
 	)
-	(label "VBUS_A_C" (at 326.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006450"))
-	(label "GND" (at 333.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
+	(label "VBUS_A_C" (at 351.19 138 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006450"))
+	(label "GND" (at 358.81 138 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006451"))
+	(symbol
+		(lib_id "Salix:C")
+		(at 250 240 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "60000000-0000-4000-8000-000000006452")
+		(property "Reference" "C34"
+			(at 250 237 0)
+			(effects
+					(font (size 0.85 0.85))
+				)
+		)
+		(property "Value" "47uF"
+			(at 250 243 0)
+			(effects
+					(font (size 0.85 0.85))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 250 240 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "~"
+			(at 250 240 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "47uF"
+			(at 250 240 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(pin "1" (uuid "60000000-0000-4000-8000-000000006453"))
+		(pin "2" (uuid "60000000-0000-4000-8000-000000006454"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "5V_BOARD" (at 246.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
+	(label "GND" (at 253.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 285 240 0)
@@ -4055,8 +4113,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "60000000-0000-4000-8000-000000006452")
-		(property "Reference" "C34"
+		(uuid "60000000-0000-4000-8000-000000006457")
+		(property "Reference" "C35"
 			(at 285 237 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4089,61 +4147,6 @@
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "60000000-0000-4000-8000-000000006453"))
-		(pin "2" (uuid "60000000-0000-4000-8000-000000006454"))
-		(instances
-			(project "SalixControllerBridge_RevA"
-				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
-					(reference "C34")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "5V_BOARD" (at 281.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006455"))
-	(label "GND" (at 288.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006456"))
-	(symbol
-		(lib_id "Salix:C")
-		(at 300 240 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "60000000-0000-4000-8000-000000006457")
-		(property "Reference" "C35"
-			(at 300 237 0)
-			(effects
-					(font (size 0.85 0.85))
-				)
-		)
-		(property "Value" "47uF"
-			(at 300 243 0)
-			(effects
-					(font (size 0.85 0.85))
-				)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 300 240 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Datasheet" "~"
-			(at 300 240 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Description" "47uF"
-			(at 300 240 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
 		(pin "1" (uuid "60000000-0000-4000-8000-000000006458"))
 		(pin "2" (uuid "60000000-0000-4000-8000-000000006459"))
 		(instances
@@ -4155,11 +4158,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 296.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
-	(label "GND" (at 303.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
+	(label "5V_BOARD" (at 281.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006460"))
+	(label "GND" (at 288.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006461"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 315 240 0)
+		(at 320 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4167,33 +4170,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006462")
 		(property "Reference" "C36"
-			(at 315 237 0)
+			(at 320 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "47uF"
-			(at 315 243 0)
+			(at 320 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 315 240 0)
+			(at 320 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 315 240 0)
+			(at 320 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "47uF"
-			(at 315 240 0)
+			(at 320 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4210,11 +4213,11 @@
 			)
 		)
 	)
-	(label "5V_BOARD" (at 311.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
-	(label "GND" (at 318.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
+	(label "5V_BOARD" (at 316.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006465"))
+	(label "GND" (at 323.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006466"))
 	(symbol
 		(lib_id "Salix:C")
-		(at 330 240 0)
+		(at 355 240 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4222,33 +4225,33 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006467")
 		(property "Reference" "C37"
-			(at 330 237 0)
+			(at 355 237 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "4.7uF"
-			(at 330 243 0)
+			(at 355 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 330 240 0)
+			(at 355 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Datasheet" "~"
-			(at 330 240 0)
+			(at 355 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
 		(property "Description" "4.7uF"
-			(at 330 240 0)
+			(at 355 240 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
@@ -4265,8 +4268,8 @@
 			)
 		)
 	)
-	(label "VBUS_B_C" (at 326.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
-	(label "GND" (at 333.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
+	(label "VBUS_B_C" (at 351.19 240 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006470"))
+	(label "GND" (at 358.81 240 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006471"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 365 112 0)
@@ -5024,7 +5027,8 @@
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006487")
 	)
 	(text "RUN_x = 1 from 10k pull-up when jumper OPEN; shorting jumper forces RUN_x=0 and directly disables that port's VBUS switch."
@@ -5032,7 +5036,8 @@
 		(at 20 164 0)
 		(effects
 			(font (size 0.88 0.88))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006488")
 	)
 	(text "SN74LVC2G157 selects RUN_A or RUN_C using the same mechanical SEL. Its complement output Y_N drives TS3USB221A OE."
@@ -5040,7 +5045,8 @@
 		(at 20 170 0)
 		(effects
 			(font (size 0.88 0.88))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006489")
 	)
 	(text "BOARD_ENABLE_N is fail-safe pulled HIGH: HIGH forces Y_N=HIGH → USB data disconnected. Motherboard must actively pull LOW to enable board data."
@@ -5049,7 +5055,8 @@
 		(effects
 			(font (size 0.88 0.88)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006490")
 	)
 	(text "Therefore: selected enabled port + board enabled => OE LOW/connect; selected jumper short OR board disabled => OE HIGH/disconnect."
@@ -5058,7 +5065,8 @@
 		(effects
 			(font (size 0.88 0.88)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006491")
 	)
 	(text "The other physical receptacle remains powered for charge-only operation while the hub logical port is ON; PRTPWR gates both A/C VBUS paths."
@@ -5066,7 +5074,8 @@
 		(at 20 188 0)
 		(effects
 			(font (size 0.88 0.88))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006492")
 	)
 	(text "TYPE-C SUPPORT:"
@@ -5075,7 +5084,8 @@
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006493")
 	)
 	(text "TPS25821: 3×47µF = 141µF at IN, 4.7µF at OUT/VBUS, 100k 0.5% REF. CHG has 100k pulldown so power-up default is STD advertisement."
@@ -5083,7 +5093,8 @@
 		(at 20 208 0)
 		(effects
 			(font (size 0.86 0.86))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006494")
 	)
 	(text "FAULT_N / SINK_N are open drain and are monitored by TCA9535; CC1/CC2 connect directly to receptacle. Type-C VBUS remains cold-socketed."
@@ -5091,7 +5102,8 @@
 		(at 20 214 0)
 		(effects
 			(font (size 0.86 0.86))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006495")
 	)
 	(text "MANAGEMENT:"
@@ -5100,7 +5112,8 @@
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006496")
 	)
 	(text "TCA9535 P00/P01 selector state; P02..P05 physical faults; P06/P07 Type-C sink attach; P10..P13 LEDs; P14/P15 selected-run; P16/P17 CHG."
@@ -5108,7 +5121,8 @@
 		(at 20 234 0)
 		(effects
 			(font (size 0.86 0.86))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006497")
 	)
 	(text "A0=BOARD_ID; A1=A2=GND. Central motherboard I²C pull-ups remain on the motherboard, not duplicated here."
@@ -5116,7 +5130,8 @@
 		(at 20 240 0)
 		(effects
 			(font (size 0.86 0.86))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006498")
 	)
 	(text "Hub PRTPWR is active-high and gates both physical VBUS switches in each bank through SN74LVC2G08. Either physical FAULT_N drives the bank OCS_N low through a hardware AND combiner."
@@ -5125,7 +5140,8 @@
 		(effects
 			(font (size 0.86 0.86)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006499")
 	)
 	(text "Exact push-push switch and USB receptacle manufacturer footprints remain mechanical decisions until front-panel/enclosure dimensions are frozen."
@@ -5134,7 +5150,8 @@
 		(effects
 			(font (size 0.86 0.86)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006500")
 	)
 	(text "USB2 DATA ONLY in Rev A. Hub logical port ON powers both physical A/C receptacles (subject to each service jumper); only the selected receptacle owns USB data."
@@ -5143,7 +5160,8 @@
 		(effects
 			(font (size 1 1)
 				(bold yes))
-		)
+		
+			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006501")
 	)
 	(wire

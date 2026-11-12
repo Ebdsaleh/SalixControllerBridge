@@ -90,7 +90,7 @@ class SVG:
         x,y=min(x1,x2),min(y1,y2);w,h=abs(x2-x1),abs(y2-y1)
         self.p.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" stroke="{col}" stroke-width="{wid}" fill="{fill}" fill-opacity="{op}"/>')
     def text(self,s,x,y,z=1,r=0,b=False,j=set(),col="#103e8f"):
-        anc="end" if "right" in j else ("middle" if "center" in j else "start")
+        anc="end" if "right" in j else ("start" if "left" in j else "middle")
         tr=f' transform="rotate({r} {x} {y})"' if r else ""
         self.p.append(f'<text x="{x}" y="{y}" font-size="{z}px" font-weight="{"700" if b else "400"}" text-anchor="{anc}" fill="{col}"{tr}>{html.escape(str(s))}</text>')
     def done(self): return "\n".join(self.p+["</g>","</svg>"])
@@ -324,9 +324,13 @@ def render(path,out):
     def intersects(a,b):
         return not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
     title_hits=[]
+    page_hits=[]
+    page_box=[8,8,w-8,h-8]
     for kind,name,box in texts:
         if intersects(box,title_keepout):
             title_hits.append({"type":"title-block-text","item":f"{kind}:{name}","box":box})
+        if box[0] < page_box[0] or box[1] < page_box[1] or box[2] > page_box[2] or box[3] > page_box[3]:
+            page_hits.append({"type":"page-edge-text","item":f"{kind}:{name}","box":box})
     for ref,box in boxes:
         if intersects(box,title_keepout):
             title_hits.append({"type":"title-block-symbol","item":ref or "<unnamed>","box":box})
@@ -343,10 +347,11 @@ def render(path,out):
     print(
         f"{path.name}: {len(hits)} likely text overlap(s), "
         f"{len(title_hits)} title-block intrusion(s), "
+        f"{len(page_hits)} page-edge intrusion(s), "
         f"{len(lint['orphan_labels'])} orphan label(s), "
         f"{len(lint['pin_net_mismatches'])} obvious pin/net mismatch(es)"
     )
-    return len(hits)+len(title_hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
+    return len(hits)+len(title_hits)+len(page_hits)+len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input",type=Path);ap.add_argument("-o","--out",type=Path,default=Path("kicad_visuals"));ap.add_argument("--recursive",action="store_true")

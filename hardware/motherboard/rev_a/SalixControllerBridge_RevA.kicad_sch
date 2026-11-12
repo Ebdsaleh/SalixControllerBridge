@@ -14,7 +14,8 @@
 				(size 2.2 2.2)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000048")
 	)
 	(text "Dual-Pico reusable motherboard + dual-bank USB input modules"
@@ -24,7 +25,8 @@
 			(font
 				(size 1.4 1.4)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000049")
 	)
 	(text "ARCHITECTURE SKELETON — NOT YET FABRICATION READY"
@@ -35,7 +37,8 @@
 				(size 1.2 1.2)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000050")
 	)
 	(sheet

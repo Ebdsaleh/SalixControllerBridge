@@ -14,7 +14,8 @@
 				(size 2 2)
 				(bold yes)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000032")
 	)
 	(text "Mainboard stays console-agnostic; RJ50 sockets live on future console personality cards."
@@ -24,7 +25,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000033")
 	)
 	(text "Bus categories: +5V_AUX, +3V3_AUX, GND, SPI, I2C, IRQ, RESET, CARD_ID/PRESENT/ENABLE."
@@ -34,7 +36,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000034")
 	)
 	(text "Reserve several direct low-latency Pico GPIO/PIO lanes for active console card."
@@ -44,7 +47,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000035")
 	)
 	(text "Only selected card may own shared direct PIO lines; unselected cards isolated."
@@ -54,7 +58,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000036")
 	)
 	(text "Rev-A personality cards are NOT hot-swappable."
@@ -64,7 +69,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000037")
 	)
 	(text "STATUS: exact connector, lane count and selection/isolation ICs not frozen."
@@ -74,7 +80,8 @@
 			(font
 				(size 1.1 1.1)
 			)
-		)
+		
+			(justify left))
 		(uuid "10000000-0000-4000-8000-000000000038")
 	)
 	(sheet_instances
