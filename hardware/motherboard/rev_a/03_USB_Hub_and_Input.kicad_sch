@@ -1619,7 +1619,7 @@
 	(global_label "GND" (shape passive) (at 323.81 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007384"))
 	(symbol
 		(lib_id "Salix:R")
-		(at 370 205 0)
+		(at 370 215 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1627,23 +1627,23 @@
 		(dnp no)
 		(uuid "73000000-0000-4000-8000-000000007385")
 		(property "Reference" "R57"
-			(at 370 201 0)
+			(at 370 211 0)
 			(effects (font (size 0.85 0.85)))
 		)
 		(property "Value" "15k 1%"
-			(at 370 209 0)
+			(at 370 219 0)
 			(effects (font (size 0.85 0.85)))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 370 205 0)
+			(at 370 215 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
 		(property "Datasheet" "~"
-			(at 370 205 0)
+			(at 370 215 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
 		(property "Description" "15k 1%"
-			(at 370 205 0)
+			(at 370 215 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
 		(pin "1" (uuid "73000000-0000-4000-8000-000000007386"))
@@ -1657,8 +1657,8 @@
 			)
 		)
 	)
-	(global_label "PICO_A_GP17_USB_DM" (shape passive) (at 366.19 205 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007388"))
-	(global_label "GND" (shape passive) (at 373.81 205 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007389"))
+	(global_label "PICO_A_GP17_USB_DM" (shape passive) (at 366.19 215 0) (effects (font (size 0.85 0.85)) (justify right bottom)) (uuid "73000000-0000-4000-8000-000000007388"))
+	(global_label "GND" (shape passive) (at 373.81 215 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007389"))
 	(symbol
 		(lib_id "Salix:C")
 		(at 215 230 0)
