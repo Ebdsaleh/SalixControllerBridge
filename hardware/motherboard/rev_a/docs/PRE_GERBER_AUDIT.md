@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-105840).zip` remained **0 errors** and improved to **670 warnings**: 550 endpoint-off-grid + 120 library-symbol-mismatch. The Molex Micro-Fit 3.0 J7/J8/J20 footprint assignment produced no new warning category or electrical regression.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-125005).zip` remained **0 errors** and improved to **669 warnings**: 551 endpoint-off-grid + 118 library-symbol-mismatch. The +1 off-grid warning is the new J13 shell-to-GND wire endpoint; the J13/J14 connector batch introduced no electrical warning/error category.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -28,7 +28,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - The Micro-Fit 3.0 J7/J8/J20 assignment is now native-KiCad validated green.
 - J13 microSD is now frozen to Hirose DM3AT-SF-PEJM5 with stock KiCad footprint `Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5`; card-detect switch pads 9/10 are explicitly NC in Rev A and shell pad 11 is tied to GND.
 - J14 service/TFT interface is now frozen to JST S12B-PH-SM4-TB with stock KiCad footprint `Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal`; mating harness is PHR-12 with SPH-002T-P0.5S contacts.
-- The 670-warning / 0-error native ERC baseline predates the J13/J14 service-connector freeze; rerun native KiCad after this commit.
+- J13 Hirose microSD and J14 JST PH service/TFT connector assignments are now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
