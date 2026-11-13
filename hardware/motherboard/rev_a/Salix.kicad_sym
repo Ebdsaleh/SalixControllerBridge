@@ -3523,164 +3523,198 @@
 					)
 				)
 			)
-	(symbol "USB_A_HOST"
-				(pin_names (offset 1.016))
-				(exclude_from_sim no)
-				(in_bom yes)
-				(on_board yes)
-			(property "Reference" "J"
-				(at 0 9.620000000000001 0)
-				(effects
-						(font (size 0.9 0.9))
-					)
+		(symbol "USB_A_HOST"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "J"
+			(at 0 9.620000000000001 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "USB-A HOST — Molex 67643-2910"
+			(at 0 -9.620000000000001 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Connector_USB:USB_A_Molex_67643_Horizontal"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/676432910"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "Molex 67643-2910 USB 2.0 Type-A receptacle; right-angle through-hole; black high-temperature nylon; 1.5A/contact; 1.6mm PCB"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(symbol "USB_A_HOST_0_1"
+			(rectangle (start -7.62 7.62) (end 7.62 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "USB_A_HOST_1_1"
+			(pin power_in line (at -10.16 5.08 0) (length 2.54)
+				(name "VBUS" (effects (font (size 0.78 0.78))))
+				(number "1" (effects (font (size 0.78 0.78))))
 			)
-			(property "Value" "USB-A HOST"
-				(at 0 -9.620000000000001 0)
-				(effects
-						(font (size 0.9 0.9))
-					)
+			(pin bidirectional line (at -10.16 1.69 0) (length 2.54)
+				(name "D-" (effects (font (size 0.78 0.78))))
+				(number "2" (effects (font (size 0.78 0.78))))
 			)
-			(property "Footprint" ""
+			(pin bidirectional line (at -10.16 -1.69 0) (length 2.54)
+				(name "D+" (effects (font (size 0.78 0.78))))
+				(number "3" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line (at -10.16 -5.08 0) (length 2.54)
+				(name "GND" (effects (font (size 0.78 0.78))))
+				(number "4" (effects (font (size 0.78 0.78))))
+			)
+			(pin passive line (at 10.16 -5.08 180) (length 2.54)
+				(name "SHIELD" (effects (font (size 0.78 0.78))))
+				(number "5" (effects (font (size 0.78 0.78))))
+			)
+		)
+	)
+		(symbol "USB_C_HOST"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "J"
+			(at 0 13.43 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Value" "USB-C HOST — GCT USB4085-GF-A"
+			(at 0 -13.43 0)
+			(effects (font (size 0.9 0.9)))
+		)
+		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4085"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://gct.co/files/drawings/usb4085.pdf"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "GCT USB4085-GF-A USB 2.0 Type-C receptacle; fully through-hole; physical A/B pin numbering retained; SBU1/SBU2 intentionally NC"
+			(at 0 0 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(symbol "USB_C_HOST_0_1"
+			(rectangle (start -10.16 11.43) (end 10.16 -11.43) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "USB_C_HOST_1_1"
+			(pin power_in line
+				(at -12.7 8.89 0)
+				(length 2.54)
+				(name "VBUS" (effects (font (size 0.78 0.78))))
+				(number "A4" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 8.89 0)
+				(length 2.54)
+				(hide yes)
+				(name "VBUS" (effects (font (size 0.78 0.78))))
+				(number "A9" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 8.89 0)
+				(length 2.54)
+				(hide yes)
+				(name "VBUS" (effects (font (size 0.78 0.78))))
+				(number "B4" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 8.89 0)
+				(length 2.54)
+				(hide yes)
+				(name "VBUS" (effects (font (size 0.78 0.78))))
+				(number "B9" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at -12.7 5.08 0)
+				(length 2.54)
+				(name "D-" (effects (font (size 0.78 0.78))))
+				(number "A7" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at -12.7 5.08 0)
+				(length 2.54)
+				(hide yes)
+				(name "D-" (effects (font (size 0.78 0.78))))
+				(number "B7" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at -12.7 1.27 0)
+				(length 2.54)
+				(name "D+" (effects (font (size 0.78 0.78))))
+				(number "A6" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at -12.7 1.27 0)
+				(length 2.54)
+				(hide yes)
+				(name "D+" (effects (font (size 0.78 0.78))))
+				(number "B6" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at 12.7 5.08 180)
+				(length 2.54)
+				(name "CC1" (effects (font (size 0.78 0.78))))
+				(number "A5" (effects (font (size 0.78 0.78))))
+			)
+			(pin bidirectional line
+				(at 12.7 1.27 180)
+				(length 2.54)
+				(name "CC2" (effects (font (size 0.78 0.78))))
+				(number "B5" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 -5.08 0)
+				(length 2.54)
+				(name "GND" (effects (font (size 0.78 0.78))))
+				(number "A1" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 -5.08 0)
+				(length 2.54)
+				(hide yes)
+				(name "GND" (effects (font (size 0.78 0.78))))
+				(number "A12" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 -5.08 0)
+				(length 2.54)
+				(hide yes)
+				(name "GND" (effects (font (size 0.78 0.78))))
+				(number "B1" (effects (font (size 0.78 0.78))))
+			)
+			(pin power_in line
+				(at -12.7 -5.08 0)
+				(length 2.54)
+				(hide yes)
+				(name "GND" (effects (font (size 0.78 0.78))))
+				(number "B12" (effects (font (size 0.78 0.78))))
+			)
+			(pin no_connect line
 				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
+				(length 2.54)
+				(hide yes)
+				(name "SBU1" (effects (font (size 0.78 0.78))))
+				(number "A8" (effects (font (size 0.78 0.78))))
 			)
-			(property "Datasheet" "~"
+			(pin no_connect line
 				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
+				(length 2.54)
+				(hide yes)
+				(name "SBU2" (effects (font (size 0.78 0.78))))
+				(number "B8" (effects (font (size 0.78 0.78))))
 			)
-			(property "Description" "USB-A host receptacle; exact mechanical part TBD"
-				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
+			(pin passive line
+				(at 12.7 -5.08 180)
+				(length 2.54)
+				(name "SHIELD" (effects (font (size 0.78 0.78))))
+				(number "S1" (effects (font (size 0.78 0.78))))
 			)
-				(symbol "USB_A_HOST_0_1"
-					(rectangle (start -7.62 7.62) (end 7.62 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
-				)
-				(symbol "USB_A_HOST_1_1"
-					(pin power_in line
-						(at -10.16 5.08 0)
-						(length 2.54)
-						(name "VBUS" (effects (font (size 0.78 0.78))))
-						(number "1" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at -10.16 1.69 0)
-						(length 2.54)
-						(name "D-" (effects (font (size 0.78 0.78))))
-						(number "2" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at -10.16 -1.69 0)
-						(length 2.54)
-						(name "D+" (effects (font (size 0.78 0.78))))
-						(number "3" (effects (font (size 0.78 0.78))))
-					)
-					(pin power_in line
-						(at -10.16 -5.08 0)
-						(length 2.54)
-						(name "GND" (effects (font (size 0.78 0.78))))
-						(number "4" (effects (font (size 0.78 0.78))))
-					)
-					(pin passive line
-						(at 10.16 -5.08 180)
-						(length 2.54)
-						(name "SHIELD" (effects (font (size 0.78 0.78))))
-						(number "S" (effects (font (size 0.78 0.78))))
-					)
-				)
-			)
-	(symbol "USB_C_HOST"
-				(pin_names (offset 1.016))
-				(exclude_from_sim no)
-				(in_bom yes)
-				(on_board yes)
-			(property "Reference" "J"
-				(at 0 13.43 0)
-				(effects
-						(font (size 0.9 0.9))
-					)
-			)
-			(property "Value" "USB-C HOST"
-				(at 0 -13.43 0)
-				(effects
-						(font (size 0.9 0.9))
-					)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
-			)
-			(property "Description" "USB-C source receptacle; USB2 data path"
-				(at 0 0 0)
-				(effects
-						(font (size 1 1))
-						(hide yes)
-					)
-			)
-				(symbol "USB_C_HOST_0_1"
-					(rectangle (start -10.16 11.43) (end 10.16 -11.43) (stroke (width 0.254) (type default)) (fill (type background)))
-				)
-				(symbol "USB_C_HOST_1_1"
-					(pin power_in line
-						(at -12.7 8.89 0)
-						(length 2.54)
-						(name "VBUS" (effects (font (size 0.78 0.78))))
-						(number "1" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at -12.7 5.08 0)
-						(length 2.54)
-						(name "D-" (effects (font (size 0.78 0.78))))
-						(number "2" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at -12.7 1.27 0)
-						(length 2.54)
-						(name "D+" (effects (font (size 0.78 0.78))))
-						(number "3" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at 12.7 5.08 180)
-						(length 2.54)
-						(name "CC1" (effects (font (size 0.78 0.78))))
-						(number "4" (effects (font (size 0.78 0.78))))
-					)
-					(pin bidirectional line
-						(at 12.7 1.27 180)
-						(length 2.54)
-						(name "CC2" (effects (font (size 0.78 0.78))))
-						(number "5" (effects (font (size 0.78 0.78))))
-					)
-					(pin power_in line
-						(at -12.7 -5.08 0)
-						(length 2.54)
-						(name "GND" (effects (font (size 0.78 0.78))))
-						(number "6" (effects (font (size 0.78 0.78))))
-					)
-					(pin passive line
-						(at 12.7 -5.08 180)
-						(length 2.54)
-						(name "SHIELD" (effects (font (size 0.78 0.78))))
-						(number "S" (effects (font (size 0.78 0.78))))
-					)
-				)
-			)
+		)
+	)
 )

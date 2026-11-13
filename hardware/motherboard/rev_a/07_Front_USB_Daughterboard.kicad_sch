@@ -755,118 +755,82 @@
 				)
 			)
 		)
-		(symbol "Salix:USB_A_HOST"
+				(symbol "Salix:USB_A_HOST"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-		(property "Reference" "J"
-			(at 0 9.620000000000001 0)
-			(effects
-					(font (size 0.9 0.9))
-				)
-		)
-		(property "Value" "USB-A HOST"
-			(at 0 -9.620000000000001 0)
-			(effects
-					(font (size 0.9 0.9))
-				)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Description" "USB-A host receptacle; exact mechanical part TBD"
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
+			(property "Reference" "J"
+				(at 0 9.620000000000001 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Value" "USB-A HOST — Molex 67643-2910"
+				(at 0 -9.620000000000001 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Footprint" "Connector_USB:USB_A_Molex_67643_Horizontal"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/676432910"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Description" "Molex 67643-2910 USB 2.0 Type-A receptacle; right-angle through-hole; black high-temperature nylon; 1.5A/contact; 1.6mm PCB"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
 			(symbol "USB_A_HOST_0_1"
 				(rectangle (start -7.62 7.62) (end 7.62 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
 			(symbol "USB_A_HOST_1_1"
-				(pin power_in line
-					(at -10.16 5.08 0)
-					(length 2.54)
+				(pin power_in line (at -10.16 5.08 0) (length 2.54)
 					(name "VBUS" (effects (font (size 0.78 0.78))))
 					(number "1" (effects (font (size 0.78 0.78))))
 				)
-				(pin bidirectional line
-					(at -10.16 1.69 0)
-					(length 2.54)
+				(pin bidirectional line (at -10.16 1.69 0) (length 2.54)
 					(name "D-" (effects (font (size 0.78 0.78))))
 					(number "2" (effects (font (size 0.78 0.78))))
 				)
-				(pin bidirectional line
-					(at -10.16 -1.69 0)
-					(length 2.54)
+				(pin bidirectional line (at -10.16 -1.69 0) (length 2.54)
 					(name "D+" (effects (font (size 0.78 0.78))))
 					(number "3" (effects (font (size 0.78 0.78))))
 				)
-				(pin power_in line
-					(at -10.16 -5.08 0)
-					(length 2.54)
+				(pin power_in line (at -10.16 -5.08 0) (length 2.54)
 					(name "GND" (effects (font (size 0.78 0.78))))
 					(number "4" (effects (font (size 0.78 0.78))))
 				)
-				(pin passive line
-					(at 10.16 -5.08 180)
-					(length 2.54)
+				(pin passive line (at 10.16 -5.08 180) (length 2.54)
 					(name "SHIELD" (effects (font (size 0.78 0.78))))
-					(number "S" (effects (font (size 0.78 0.78))))
+					(number "5" (effects (font (size 0.78 0.78))))
 				)
 			)
 		)
-		(symbol "Salix:USB_C_HOST"
+				(symbol "Salix:USB_C_HOST"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-		(property "Reference" "J"
-			(at 0 13.43 0)
-			(effects
-					(font (size 0.9 0.9))
-				)
-		)
-		(property "Value" "USB-C HOST"
-			(at 0 -13.43 0)
-			(effects
-					(font (size 0.9 0.9))
-				)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
-		(property "Description" "USB-C source receptacle; USB2 data path"
-			(at 0 0 0)
-			(effects
-					(font (size 1 1))
-					(hide yes)
-				)
-		)
+			(property "Reference" "J"
+				(at 0 13.43 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Value" "USB-C HOST — GCT USB4085-GF-A"
+				(at 0 -13.43 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4085"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Datasheet" "https://gct.co/files/drawings/usb4085.pdf"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Description" "GCT USB4085-GF-A USB 2.0 Type-C receptacle; fully through-hole; physical A/B pin numbering retained; SBU1/SBU2 intentionally NC"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
 			(symbol "USB_C_HOST_0_1"
 				(rectangle (start -10.16 11.43) (end 10.16 -11.43) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
@@ -875,43 +839,113 @@
 					(at -12.7 8.89 0)
 					(length 2.54)
 					(name "VBUS" (effects (font (size 0.78 0.78))))
-					(number "1" (effects (font (size 0.78 0.78))))
+					(number "A4" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 8.89 0)
+					(length 2.54)
+					(hide yes)
+					(name "VBUS" (effects (font (size 0.78 0.78))))
+					(number "A9" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 8.89 0)
+					(length 2.54)
+					(hide yes)
+					(name "VBUS" (effects (font (size 0.78 0.78))))
+					(number "B4" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 8.89 0)
+					(length 2.54)
+					(hide yes)
+					(name "VBUS" (effects (font (size 0.78 0.78))))
+					(number "B9" (effects (font (size 0.78 0.78))))
 				)
 				(pin bidirectional line
 					(at -12.7 5.08 0)
 					(length 2.54)
 					(name "D-" (effects (font (size 0.78 0.78))))
-					(number "2" (effects (font (size 0.78 0.78))))
+					(number "A7" (effects (font (size 0.78 0.78))))
+				)
+				(pin bidirectional line
+					(at -12.7 5.08 0)
+					(length 2.54)
+					(hide yes)
+					(name "D-" (effects (font (size 0.78 0.78))))
+					(number "B7" (effects (font (size 0.78 0.78))))
 				)
 				(pin bidirectional line
 					(at -12.7 1.27 0)
 					(length 2.54)
 					(name "D+" (effects (font (size 0.78 0.78))))
-					(number "3" (effects (font (size 0.78 0.78))))
+					(number "A6" (effects (font (size 0.78 0.78))))
+				)
+				(pin bidirectional line
+					(at -12.7 1.27 0)
+					(length 2.54)
+					(hide yes)
+					(name "D+" (effects (font (size 0.78 0.78))))
+					(number "B6" (effects (font (size 0.78 0.78))))
 				)
 				(pin bidirectional line
 					(at 12.7 5.08 180)
 					(length 2.54)
 					(name "CC1" (effects (font (size 0.78 0.78))))
-					(number "4" (effects (font (size 0.78 0.78))))
+					(number "A5" (effects (font (size 0.78 0.78))))
 				)
 				(pin bidirectional line
 					(at 12.7 1.27 180)
 					(length 2.54)
 					(name "CC2" (effects (font (size 0.78 0.78))))
-					(number "5" (effects (font (size 0.78 0.78))))
+					(number "B5" (effects (font (size 0.78 0.78))))
 				)
 				(pin power_in line
 					(at -12.7 -5.08 0)
 					(length 2.54)
 					(name "GND" (effects (font (size 0.78 0.78))))
-					(number "6" (effects (font (size 0.78 0.78))))
+					(number "A1" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(hide yes)
+					(name "GND" (effects (font (size 0.78 0.78))))
+					(number "A12" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(hide yes)
+					(name "GND" (effects (font (size 0.78 0.78))))
+					(number "B1" (effects (font (size 0.78 0.78))))
+				)
+				(pin power_in line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(hide yes)
+					(name "GND" (effects (font (size 0.78 0.78))))
+					(number "B12" (effects (font (size 0.78 0.78))))
+				)
+				(pin no_connect line
+					(at 0 0 0)
+					(length 2.54)
+					(hide yes)
+					(name "SBU1" (effects (font (size 0.78 0.78))))
+					(number "A8" (effects (font (size 0.78 0.78))))
+				)
+				(pin no_connect line
+					(at 0 0 0)
+					(length 2.54)
+					(hide yes)
+					(name "SBU2" (effects (font (size 0.78 0.78))))
+					(number "B8" (effects (font (size 0.78 0.78))))
 				)
 				(pin passive line
 					(at 12.7 -5.08 180)
 					(length 2.54)
 					(name "SHIELD" (effects (font (size 0.78 0.78))))
-					(number "S" (effects (font (size 0.78 0.78))))
+					(number "S1" (effects (font (size 0.78 0.78))))
 				)
 			)
 		)
@@ -1764,21 +1798,21 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_USB:USB_A_Molex_67643_Horizontal"
 			(at 165 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/676432910"
 			(at 165 68 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "USB-A BANK A"
+		(property "Description" "Molex 67643-2910 USB 2.0 Type-A receptacle; right-angle through-hole; 1.5A/contact"
 			(at 165 68 0)
 			(effects
 					(font (size 1 1))
@@ -1789,7 +1823,7 @@
 		(pin "2" (uuid "60000000-0000-4000-8000-000000006096"))
 		(pin "3" (uuid "60000000-0000-4000-8000-000000006097"))
 		(pin "4" (uuid "60000000-0000-4000-8000-000000006098"))
-		(pin "S" (uuid "60000000-0000-4000-8000-000000006099"))
+		(pin "5" (uuid "60000000-0000-4000-8000-000000006099"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -1820,34 +1854,44 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4085"
 			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://gct.co/files/drawings/usb4085.pdf"
 			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "USB-C BANK A"
+		(property "Description" "GCT USB4085-GF-A USB 2.0 Type-C receptacle; physical A/B contacts retained; SBU NC"
 			(at 165 112 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "60000000-0000-4000-8000-000000006101"))
-		(pin "2" (uuid "60000000-0000-4000-8000-000000006102"))
-		(pin "3" (uuid "60000000-0000-4000-8000-000000006103"))
-		(pin "4" (uuid "60000000-0000-4000-8000-000000006104"))
-		(pin "5" (uuid "60000000-0000-4000-8000-000000006105"))
-		(pin "6" (uuid "60000000-0000-4000-8000-000000006106"))
-		(pin "S" (uuid "60000000-0000-4000-8000-000000006107"))
+		(pin "A4" (uuid "60000000-0000-4000-8000-000000006101"))
+		(pin "A9" (uuid "c0220000-0000-4000-8000-000000000001"))
+		(pin "B4" (uuid "c0220000-0000-4000-8000-000000000002"))
+		(pin "B9" (uuid "c0220000-0000-4000-8000-000000000003"))
+		(pin "A7" (uuid "60000000-0000-4000-8000-000000006102"))
+		(pin "B7" (uuid "c0220000-0000-4000-8000-000000000004"))
+		(pin "A6" (uuid "60000000-0000-4000-8000-000000006103"))
+		(pin "B6" (uuid "c0220000-0000-4000-8000-000000000005"))
+		(pin "A5" (uuid "60000000-0000-4000-8000-000000006104"))
+		(pin "B5" (uuid "60000000-0000-4000-8000-000000006105"))
+		(pin "A1" (uuid "60000000-0000-4000-8000-000000006106"))
+		(pin "A12" (uuid "c0220000-0000-4000-8000-000000000006"))
+		(pin "B1" (uuid "c0220000-0000-4000-8000-000000000007"))
+		(pin "B12" (uuid "c0220000-0000-4000-8000-000000000008"))
+		(pin "A8" (uuid "c0220000-0000-4000-8000-000000000009"))
+		(pin "B8" (uuid "c0220000-0000-4000-8000-000000000010"))
+		(pin "S1" (uuid "60000000-0000-4000-8000-000000006107"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -2502,21 +2546,21 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_USB:USB_A_Molex_67643_Horizontal"
 			(at 155 200 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/676432910"
 			(at 155 200 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "USB-A BANK B"
+		(property "Description" "Molex 67643-2910 USB 2.0 Type-A receptacle; right-angle through-hole; 1.5A/contact"
 			(at 155 200 0)
 			(effects
 					(font (size 1 1))
@@ -2527,7 +2571,7 @@
 		(pin "2" (uuid "60000000-0000-4000-8000-000000006175"))
 		(pin "3" (uuid "60000000-0000-4000-8000-000000006176"))
 		(pin "4" (uuid "60000000-0000-4000-8000-000000006177"))
-		(pin "S" (uuid "60000000-0000-4000-8000-000000006178"))
+		(pin "5" (uuid "60000000-0000-4000-8000-000000006178"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
@@ -2558,34 +2602,44 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4085"
 			(at 155 244 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://gct.co/files/drawings/usb4085.pdf"
 			(at 155 244 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "USB-C BANK B"
+		(property "Description" "GCT USB4085-GF-A USB 2.0 Type-C receptacle; physical A/B contacts retained; SBU NC"
 			(at 155 244 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(pin "1" (uuid "60000000-0000-4000-8000-000000006180"))
-		(pin "2" (uuid "60000000-0000-4000-8000-000000006181"))
-		(pin "3" (uuid "60000000-0000-4000-8000-000000006182"))
-		(pin "4" (uuid "60000000-0000-4000-8000-000000006183"))
-		(pin "5" (uuid "60000000-0000-4000-8000-000000006184"))
-		(pin "6" (uuid "60000000-0000-4000-8000-000000006185"))
-		(pin "S" (uuid "60000000-0000-4000-8000-000000006186"))
+		(pin "A4" (uuid "60000000-0000-4000-8000-000000006180"))
+		(pin "A9" (uuid "c0240000-0000-4000-8000-000000000001"))
+		(pin "B4" (uuid "c0240000-0000-4000-8000-000000000002"))
+		(pin "B9" (uuid "c0240000-0000-4000-8000-000000000003"))
+		(pin "A7" (uuid "60000000-0000-4000-8000-000000006181"))
+		(pin "B7" (uuid "c0240000-0000-4000-8000-000000000004"))
+		(pin "A6" (uuid "60000000-0000-4000-8000-000000006182"))
+		(pin "B6" (uuid "c0240000-0000-4000-8000-000000000005"))
+		(pin "A5" (uuid "60000000-0000-4000-8000-000000006183"))
+		(pin "B5" (uuid "60000000-0000-4000-8000-000000006184"))
+		(pin "A1" (uuid "60000000-0000-4000-8000-000000006185"))
+		(pin "A12" (uuid "c0240000-0000-4000-8000-000000000006"))
+		(pin "B1" (uuid "c0240000-0000-4000-8000-000000000007"))
+		(pin "B12" (uuid "c0240000-0000-4000-8000-000000000008"))
+		(pin "A8" (uuid "c0240000-0000-4000-8000-000000000009"))
+		(pin "B8" (uuid "c0240000-0000-4000-8000-000000000010"))
+		(pin "S1" (uuid "60000000-0000-4000-8000-000000006186"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"

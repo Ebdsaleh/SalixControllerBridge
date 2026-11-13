@@ -6,6 +6,13 @@ Each bank now uses SN74LVC2G157 as the hard-isolation selector companion to TS3U
 
 TS3USB221A U21/U25 physical package is frozen to TI RSE0010A using the project-local footprint `SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm`. The copper land geometry follows TI package drawing 4220307/A rather than the larger DRC/VSON package used by other TS3USB221 variants. Pin 1 is upper-left in top view; pin 10 is top-center; pin 5 is bottom-center.
 
+Front-panel receptacles are now frozen:
+
+- J21/J23 USB-A: Molex 67643-2910, black USB 2.0 Type-A receptacle, right-angle through-hole, intended for 1.6mm PCB; KiCad footprint `Connector_USB:USB_A_Molex_67643_Horizontal`. The connector is rated 1.5A/contact, above the Rev-A TPS2553 ~0.9A target. Shield is physical pad 5.
+- J22/J24 USB-C: GCT USB4085-GF-A, fully through-hole horizontal USB 2.0 Type-C receptacle with 16 electrical contacts; KiCad footprint `Connector_USB:USB_C_Receptacle_GCT_USB4085`.
+- The custom `USB_C_HOST` symbol now uses the real physical contact IDs. A4/A9/B4/B9 share VBUS; A7/B7 share D-; A6/B6 share D+; A5=CC1; B5=CC2; A1/A12/B1/B12 share GND; S1 is shield. A8/B8 are explicit hidden no-connect pins because Rev-A does not use SBU1/SBU2.
+- This physical pin model deliberately replaces the old logical 1..6/S abstraction, eliminating the risk of silently attaching a Type-C footprint whose alphanumeric pad numbers do not match the schematic.
+
 Service jumpers are active-low disable inputs implemented as active-high RUN nets:
 
 - OPEN jumper: 10k pull-up makes RUN=1.
@@ -78,7 +85,6 @@ Each physical power controller keeps its own FAULT_N signal for Pico-B diagnosti
 ## Still deliberately open
 
 - Exact latching push-push SPDT switch manufacturer/footprint.
-- Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
 - Final LED colors.
 
 
