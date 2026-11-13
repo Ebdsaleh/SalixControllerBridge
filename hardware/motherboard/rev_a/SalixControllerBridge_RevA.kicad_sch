@@ -344,6 +344,32 @@
     )
   )
 
+  (sheet
+    (at 25 166)
+    (size 80 22)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (fields_autoplaced yes)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid "10000000-0000-4000-8000-000000000059")
+    (property "Sheetname" "12V BARREL / AUTOMOTIVE FRONT END"
+      (at 25 165.2884 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "09_Barrel_Input.kicad_sch"
+      (at 25 189.0046 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "SalixControllerBridge_RevA"
+        (path "/10000000-0000-4000-8000-000000000047" (page "10"))
+      )
+    )
+  )
+
 	(sheet_instances
 		(path "/" (page "1"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000051" (page "2"))
@@ -354,6 +380,7 @@
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000056" (page "7"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (page "8"))
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000058" (page "9"))
+		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000059" (page "10"))
 	)
 	(embedded_fonts no)
 )

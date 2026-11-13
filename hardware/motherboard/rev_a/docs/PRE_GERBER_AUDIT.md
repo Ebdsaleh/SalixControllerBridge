@@ -57,6 +57,13 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - Native KiCad 10.0.8 validation after the AUX net-isolation/layout repair is **0 errors / 682 warnings**. The AUX recharge circuit is electrically green; the remaining count is warning-hygiene work rather than an ERC error.
 - U3 now has project-local footprint `SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm`, based on TI drawing 4225183/A and cross-checked against the current KiCad upstream package proposal. Native KiCad 10.0.8 was rerun after assignment and remained **0 errors / 682 warnings**, so the AUX recharge branch and U3 footprint are schematic-level frozen.
 
+## 12V barrel / automotive front-end batch awaiting native KiCad validation
+
+- New page 09 adds the primary-source path J16 → F1 → SMBJ33CA → U6 LM74800-Q1 + Q9/Q10 IAUC100N08S5N034 common-drain pair → BARREL_PROT.
+- J16, U6 and Q9/Q10 MPNs are selected; their exact PCB footprints remain deliberately pending this first schematic validation. F1 holder/MPN and C13 exact MPN also remain open.
+- R26/R27 = 137k / 10k sets a nominal LM74800 rising OVP threshold near 18.10V. Native KiCad 10 render/ERC must be run before this batch can be considered electrically green.
+- Automotive capability remains conditional on final TVS energy margin, MOSFET SOA/inrush, fuse/harness selection, PCB layout and physical transient testing; no compliance claim is made at schematic stage.
+
 ## Fabrication blockers
 
 1. **Main external-source front end is only partially frozen.** The deliberate barrel>PD>AUX priority mux is now implemented on sheet 08 using U4/U5 LTC4418 + Q1-Q8 Si7155DP. Still TBD: exact 12V barrel connector and automotive/reverse/load-dump protection, USB-C PD sink/controller, and the SYS_IN→5V_MAIN high-current buck.
