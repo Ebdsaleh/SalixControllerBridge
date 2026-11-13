@@ -12,7 +12,18 @@ Both controller concepts use the same Salix primary face-action symbols:
 
 - **Salix action legends:** ا / ب / φ / π
 
-Physical orientation/order is intentionally **not frozen yet**; that will be decided during the later ergonomics/mechanical pass.
+Screen Pro default face-button diamond is now:
+- **ا (Alif)** = up
+- **ب (Ba)** = down
+- **φ (phi)** = left
+- **π (pi)** = right
+
+Saturn-Hybrid retains the same four core symbols and adds two Saturn-only secondary symbols in the six-button cluster:
+- **Σ (uppercase Sigma)** = purple upper-right secondary
+- **و (Waw)** = blue lower-right tertiary, positioned after **π**
+- **ا (Alif)** = yellow upper-middle, directly above **π**
+
+Fine mechanical spacing/orientation remains subject to later ergonomic tuning.
 
 For production shells, these face legends should be converted to **vector artwork/outlines rather than relying on a runtime font**, so the exact Arabic/Greek glyph shapes are preserved across CAD, silkscreen, engraving and mould tooling.
 

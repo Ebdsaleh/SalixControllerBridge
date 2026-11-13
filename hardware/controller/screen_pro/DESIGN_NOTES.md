@@ -8,7 +8,7 @@ This project parks the modern ergonomic controller concept so it can be revisite
 
 - Original modern ergonomic shell inspired by the comfort goals of a Switch-Pro-style pad, not a direct copy.
 - Left analog stick high, D-pad lower-left.
-- Four-symbol Salix action cluster upper-right: **π left, ب top, φ right, ا bottom**; right analog stick lower-right.
+- Four-symbol Salix action cluster upper-right: **ا up, ب down, φ left, π right**; right analog stick lower-right.
 - Central 2.4-inch touchscreen.
 - Dual shoulder/trigger controls, stick clicks, menu buttons and dual rumble/haptics.
 
@@ -21,7 +21,7 @@ Button legends: use **ا / ب / φ / π** as the Salix face-action standard. Fin
 - User-owned TF034-labelled **2.4inch RPi Display**, marked **320x240 Pixels**, used as the baseline display.
 - Display/touch treated as shared-SPI in this parked schematic; **exact 26-pin header mapping must be verified on the physical unit before any PCB is made**.
 - Dedicated microSD is included for VMU images, controller profiles, firmware assets and diagnostics.
-- Digital buttons are abstracted behind an I2C input-expander bank to preserve MCU GPIO. The four primary action inputs use the Salix legends **ا / ب / φ / π**; physical order/orientation is intentionally deferred.
+- Digital buttons are abstracted behind an I2C input-expander bank to preserve MCU GPIO. The four primary action inputs use the Salix legends **ا / ب / φ / π** with the default diamond mapping **ا up, ب down, φ left, π right**.
 - Dual analog sticks + optional analog triggers feed MCU ADC channels.
 - Two independent rumble/haptic channels are reserved.
 
