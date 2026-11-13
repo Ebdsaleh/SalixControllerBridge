@@ -10,10 +10,9 @@ This directory intentionally parks two future Salix USB-controller concepts whil
 
 Both controller concepts use the same Salix primary face-action symbols:
 
-- **ϖ** = left
-- **ب** = top
-- **φ** = right
-- **ا** = bottom / primary confirm position
+- **Salix action legends:** ا / ب / φ / π
+
+Physical orientation/order is intentionally **not frozen yet**; that will be decided during the later ergonomics/mechanical pass.
 
 For production shells, these face legends should be converted to **vector artwork/outlines rather than relying on a runtime font**, so the exact Arabic/Greek glyph shapes are preserved across CAD, silkscreen, engraving and mould tooling.
 

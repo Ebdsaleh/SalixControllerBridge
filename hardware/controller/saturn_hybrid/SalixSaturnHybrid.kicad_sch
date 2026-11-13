@@ -418,11 +418,11 @@
     (exclude_from_sim no) (at 18 20 0)
     (effects (font (size 0.95 0.95) (bold yes)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000003143"))
-  (text "Control layout target: Saturn-inspired wide shell / D-pad upper-left / left stick lower-left / Salix face cluster upper-right: varpi left / Ba top / phi right / Alef bottom / right stick lower-right, with central touchscreen."
+  (text "Control layout target: Saturn-inspired wide shell / D-pad upper-left / left stick lower-left / Salix face cluster upper-right: Alef / Ba / phi / pi / right stick lower-right, with central touchscreen."
     (exclude_from_sim no) (at 18 25 0)
     (effects (font (size 0.74 0.74)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000003144"))
-  (text "Digital controls: D-pad, varpi/Ba/phi/Alef face buttons, L/R shoulders, stick-clicks and menu buttons. Primary order: varpi=left, Ba=top, phi=right, Alef=bottom."
+  (text "Digital controls: D-pad, pi/Ba/phi/Alef face buttons, L/R shoulders, stick-clicks and menu buttons. Physical order/orientation TBD during the later ergonomics pass."
     (exclude_from_sim no) (at 18 29 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000003145"))
