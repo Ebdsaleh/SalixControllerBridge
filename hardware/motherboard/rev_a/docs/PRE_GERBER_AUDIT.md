@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-093843).zip` remained at **0 errors** and **677 warnings**: 550 endpoint-off-grid and 127 library-symbol-mismatch. The new project-local `SalixFP` library and U21/U25 TS3USB221A RSE0010A footprint assignments caused no ERC-count or category regression.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-095055).zip` exposed **1 error / 674 warnings** after the Type-C physical-pin conversion. The error was a symbol-modeling regression: duplicated VBUS contacts marked as hidden power pins were auto-connected by KiCad to global `VBUS`, unintentionally tying the independent Bank A and Bank B TPS25821 outputs together. The accompanying `multiple_net_names` warning on J22 confirmed the same root cause.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -23,7 +23,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - TS3USB221A U21/U25 now use the project-local `SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm` footprint. Copper lands follow TI RSE0010A drawing 4220307/A: 1.35mm left/right pad-column center spacing, 1.8mm top/bottom end-pad center spacing, 0.5mm side-row pitch, 0.55mm side-land length, 0.25mm corner-land height, 0.20mm inner-land height, and 0.6x0.3mm end lands. Footprint uses 0.05mm mask expansion for the TI-preferred NSMD treatment.
 - Native KiCad 10.0.8 has now validated the `SalixFP` footprint library resolution and both U21/U25 assignments with no new ERC warning or error.
 - Front receptacles are now frozen: J21/J23 use Molex 67643-2910 with `Connector_USB:USB_A_Molex_67643_Horizontal`; J22/J24 use GCT USB4085-GF-A with `Connector_USB:USB_C_Receptacle_GCT_USB4085`. The USB-C symbol has been converted from logical pin numbers to the connector’s physical A/B contact IDs, with SBU1/SBU2 explicitly NC.
-- The 677-warning / 0-error native ERC baseline predates the USB-A/USB-C receptacle and USB-C physical-pin freeze; rerun native KiCad after this commit.
+- The first native test of the USB receptacle batch was RED as described above. The follow-up fix keeps duplicated Type-C VBUS/D+/D-/GND contacts as stacked **visible** pins on the same local endpoint; only SBU1/SBU2 remain hidden explicit NC pins. Rerun native KiCad before considering the receptacle batch validated.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers

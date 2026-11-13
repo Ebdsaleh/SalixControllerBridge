@@ -11,6 +11,7 @@ Front-panel receptacles are now frozen:
 - J21/J23 USB-A: Molex 67643-2910, black USB 2.0 Type-A receptacle, right-angle through-hole, intended for 1.6mm PCB; KiCad footprint `Connector_USB:USB_A_Molex_67643_Horizontal`. The connector is rated 1.5A/contact, above the Rev-A TPS2553 ~0.9A target. Shield is physical pad 5.
 - J22/J24 USB-C: GCT USB4085-GF-A, fully through-hole horizontal USB 2.0 Type-C receptacle with 16 electrical contacts; KiCad footprint `Connector_USB:USB_C_Receptacle_GCT_USB4085`.
 - The custom `USB_C_HOST` symbol now uses the real physical contact IDs. A4/A9/B4/B9 share VBUS; A7/B7 share D-; A6/B6 share D+; A5=CC1; B5=CC2; A1/A12/B1/B12 share GND; S1 is shield. A8/B8 are explicit hidden no-connect pins because Rev-A does not use SBU1/SBU2.
+- KiCad-specific rule discovered in the first native test: duplicate physical contacts that share a local net must be stacked on the same **visible** endpoint. Marking duplicate VBUS contacts as hidden power pins caused KiCad to auto-connect them to a global `VBUS` net and short Bank A/B TPS25821 outputs. The corrected model leaves A9/B4/B9, B7, B6, A12/B1/B12 visible and stacked; only unused SBU1/SBU2 remain hidden NC.
 - This physical pin model deliberately replaces the old logical 1..6/S abstraction, eliminating the risk of silently attaching a Type-C footprint whose alphanumeric pad numbers do not match the schematic.
 
 Service jumpers are active-low disable inputs implemented as active-high RUN nets:
