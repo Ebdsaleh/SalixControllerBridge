@@ -189,7 +189,7 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     # agnostic so generated and KiCad-saved files are treated the same.
     sheet_starts = [
         match.start()
-        for match in re.finditer(r'(?m)^[ \\t]*\\(sheet\\s*$', text)
+        for match in re.finditer(r'(?m)^[ \t]*\(sheet\s*$', text)
     ]
 
     for start in sheet_starts:
@@ -204,7 +204,7 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
             if quoted:
                 if escaped:
                     escaped = False
-                elif char == "\\\\":
+                elif char == "\\":
                     escaped = True
                 elif char == '"':
                     quoted = False
@@ -228,14 +228,14 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
         block = text[start:end]
 
         file_match = re.search(
-            r'\\(property\\s+"Sheetfile"\\s+"([^"]+)"',
+            r'\(property\s+"Sheetfile"\s+"([^"]+)"',
             block,
         )
         if not file_match:
             continue
 
         page_match = re.search(
-            r'\\(page\\s+"([^"]+)"\\)',
+            r'\(page\s+"([^"]+)"\)',
             block,
         )
 
