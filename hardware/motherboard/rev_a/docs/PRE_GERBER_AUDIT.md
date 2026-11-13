@@ -59,7 +59,9 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## 12V barrel / automotive front-end batch awaiting native KiCad validation
 
-- New page 09 adds the primary-source path J16 → F1 → SMBJ33CA → U6 LM74800-Q1 + Q9/Q10 IAUC100N08S5N034 common-drain pair → BARREL_PROT.
+- First native page-10 validation produced **6 ERC errors / 875 warnings**. All six errors were confined to the new barrel sheet: Q9/Q10 gate stubs and the U6 LM74800 pin fanout were vertically mirrored by generated-coordinate orientation, and the RTN thermal-pad no-connect flag was placed on the wrong side. These have been remapped to the actual KiCad coordinates. TI Rev-C also confirms the 12V example TVS is **SMBJ36CA** and that the exposed RTN thermal pad must be left floating; both are now reflected in the schematic.
+
+- New page 09 adds the primary-source path J16 → F1 → SMBJ36CA → U6 LM74800-Q1 + Q9/Q10 IAUC100N08S5N034 common-drain pair → BARREL_PROT.
 - J16, U6 and Q9/Q10 MPNs are selected; their exact PCB footprints remain deliberately pending this first schematic validation. F1 holder/MPN and C13 exact MPN also remain open.
 - R26/R27 = 137k / 10k sets a nominal LM74800 rising OVP threshold near 18.10V. Native KiCad 10 render/ERC must be run before this batch can be considered electrically green.
 - Automotive capability remains conditional on final TVS energy margin, MOSFET SOA/inrush, fuse/harness selection, PCB layout and physical transient testing; no compliance claim is made at schematic stage.
