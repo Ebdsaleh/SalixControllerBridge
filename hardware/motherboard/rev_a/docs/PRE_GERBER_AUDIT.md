@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-092432).zip` remained at **0 errors** and **677 warnings**: 550 endpoint-off-grid and 127 library-symbol-mismatch. The USB2514B pin-25/pin-28 bidirectional symbol correction and pin-28 no-connect rationale caused no ERC-count or category regression.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-093843).zip` remained at **0 errors** and **677 warnings**: 550 endpoint-off-grid and 127 library-symbol-mismatch. The new project-local `SalixFP` library and U21/U25 TS3USB221A RSE0010A footprint assignments caused no ERC-count or category regression.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -21,7 +21,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - TLV62569P 2.2uH reference inductor is frozen as Coilcraft XAL4020-222ME with `Inductor_SMD:L_Coilcraft_XxL4020`.
 - SN74LVC2G157 fail-safe logic is intentional: strobe HIGH forces Y=0 and complementary Y_N=1; TS3USB221A OE HIGH disconnects the data mux.
 - TS3USB221A U21/U25 now use the project-local `SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm` footprint. Copper lands follow TI RSE0010A drawing 4220307/A: 1.35mm left/right pad-column center spacing, 1.8mm top/bottom end-pad center spacing, 0.5mm side-row pitch, 0.55mm side-land length, 0.25mm corner-land height, 0.20mm inner-land height, and 0.6x0.3mm end lands. Footprint uses 0.05mm mask expansion for the TI-preferred NSMD treatment.
-- The 677-warning / 0-error native ERC baseline predates assignment of the new project-local TS3USB221A footprint; rerun native KiCad after this commit.
+- Native KiCad 10.0.8 has now validated the `SalixFP` footprint library resolution and both U21/U25 assignments with no new ERC warning or error.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
