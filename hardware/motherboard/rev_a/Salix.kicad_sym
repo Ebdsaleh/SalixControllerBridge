@@ -885,7 +885,7 @@
 					)
 				)
 		
-			(property "Value" "FAN_4PIN_5V"
+			(property "Value" "MOLEX 47053-1000 FAN HEADER"
 					(at 0 -6.35 0)
 					(effects
 						(font
@@ -894,7 +894,7 @@
 					)
 				)
 		
-			(property "Footprint" ""
+			(property "Footprint" "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 					(at 0 0 0)
 					(effects
 						(font
@@ -904,7 +904,7 @@
 					)
 				)
 		
-			(property "Datasheet" "~"
+			(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/470531000"
 					(at 0 0 0)
 					(effects
 						(font
@@ -914,7 +914,7 @@
 					)
 				)
 		
-			(property "Description" "Salix 5V fan header: GND, +5V, TACH, PWM/ENABLE"
+			(property "Description" "Molex 47053-1000 standard 4-wire PWM fan PCB header; pin 1 GND, 2 +5V, 3 TACH, 4 PWM; mates standard 47054/A2543-class fan plug"
 					(at 0 0 0)
 					(effects
 						(font

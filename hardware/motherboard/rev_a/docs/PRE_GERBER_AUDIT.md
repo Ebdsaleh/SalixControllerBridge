@@ -29,17 +29,19 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - J13 microSD is now frozen to Hirose DM3AT-SF-PEJM5 with stock KiCad footprint `Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5`; card-detect switch pads 9/10 are explicitly NC in Rev A and shell pad 11 is tied to GND.
 - J14 service/TFT interface is now frozen to JST S12B-PH-SM4-TB with stock KiCad footprint `Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal`; mating harness is PHR-12 with SPH-002T-P0.5S contacts.
 - J13 Hirose microSD and J14 JST PH service/TFT connector assignments are now native-KiCad validated green.
+- Cooling is now frozen to two Noctua NF-A4x10 5V PWM fans. Manufacturer maximum current is 0.07A / 0.35W per fan with locked-rotor auto-shutdown/retry, giving very large margin against each TPS22919 1.5A continuous rating.
+- J10/J11 are frozen to Molex 47053-1000 standard 4-wire PWM fan headers using project-local `SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical`, built from Molex drawing SD-47053-001 including its keyed locator hole.
+- The 669-warning / 0-error native ERC baseline predates the fan/header freeze; rerun native KiCad after this commit.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
 
 1. **Main 5V input/protection is not designed/frozen.** Exact connector, TVS, fuse/eFuse, reverse-current/backfeed behavior, inrush strategy and high-current copper are TBD.
 2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
-3. **Nine placed physical parts still have no footprint.** They are J12; J10/J11; and SW1/D25/D26/SW2/D27/D28. J13 microSD and J14 service/TFT are now frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
-4. **Fan selection remains a current/thermal check.** TPS22919 is rated for 1.5A maximum continuous current; the exact 5V PWM fan MPN must have normal and startup/stall demand compatible with that switch and the connector/traces.
-5. **Mechanical footprints remain open.** Latching selector switches, fan headers, SWD spring contacts and front-board LEDs remain TBD.
-6. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, thermal copper, keepouts and DRC remain outstanding.
-7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
+3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
+5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
+6. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
 
 ## Layout/current constraints
 

@@ -20,7 +20,9 @@ Each fan PWM input is driven through a 2N7002 open-drain stage. A 1k gate resist
 
 Each TACH line has a 10k pull-up to 3V3_AUX before entering Pico-B. The existing I²C/AUX expansion remains separate.
 
-The final 5V fan MPN must stay within the TPS22919 1.5A continuous-current capability and its startup transient behavior must be validated before fabrication.
+Rev-A fan choice is now frozen to Noctua NF-A4x10 5V PWM. Noctua rates the fan at 5V, 0.07A maximum / 0.35W maximum, 5000rpm maximum, with locked-rotor auto power-off after about 1 second and automatic restart attempts every 2-6 seconds. This is more than 20x below the TPS22919 1.5A continuous-current capability, leaving large electrical margin. The fan uses the standard 4-wire pinout: pin 1 GND, 2 Vcc, 3 RPM/tach, 4 PWM.
+
+J10/J11 are frozen to Molex 47053-1000 standard 4-wire fan headers. The project-local `SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical` footprint follows Molex drawing SD-47053-001 including the four 1.02mm nominal plated pin holes and the 1.25mm nominal PCB locating hole. The fan itself remains enclosure-mounted, not PCB-mounted; final airflow direction and grille geometry are mechanical-layout tasks. Firmware should use the standard 4-wire PWM target near 25kHz and preserve the existing fail-safe release-to-full-speed behavior.
 
 ## Safety / service rules
 - PRIMARY/EXTENDED front USB inputs never route to Pico-B.

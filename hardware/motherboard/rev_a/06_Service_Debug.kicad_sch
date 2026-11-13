@@ -19,7 +19,7 @@
 				)
 			)
 	
-		(property "Value" "FAN_4PIN_5V"
+		(property "Value" "MOLEX 47053-1000 FAN HEADER"
 				(at 0 -6.35 0)
 				(effects
 					(font
@@ -28,7 +28,7 @@
 				)
 			)
 	
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 				(at 0 0 0)
 				(effects
 					(font
@@ -38,7 +38,7 @@
 				)
 			)
 	
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/470531000"
 				(at 0 0 0)
 				(effects
 					(font
@@ -48,7 +48,7 @@
 				)
 			)
 	
-		(property "Description" "Salix 5V fan header: GND, +5V, TACH, PWM/ENABLE"
+		(property "Description" "Molex 47053-1000 standard 4-wire PWM fan PCB header; pin 1 GND, 2 +5V, 3 TACH, 4 PWM; mates standard 47054/A2543-class fan plug"
 				(at 0 0 0)
 				(effects
 					(font
@@ -234,7 +234,7 @@
 				)
 			)
 		)
-		(property "Value" "FAN0"
+		(property "Value" "FAN0 — MOLEX 47053-1000"
 			(at 70 72.62 0)
 			(effects
 				(font
@@ -242,7 +242,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 			(at 70 65 0)
 			(effects
 				(font
@@ -251,7 +251,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/470531000"
 			(at 70 65 0)
 			(effects
 				(font
@@ -260,7 +260,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "FAN0"
+		(property "Description" "FAN0 header for Noctua NF-A4x10 5V PWM; standard 4-wire pinout GND/+5V/TACH/PWM"
 			(at 70 65 0)
 			(effects
 				(font
@@ -299,7 +299,7 @@
 				)
 			)
 		)
-		(property "Value" "FAN1"
+		(property "Value" "FAN1 — MOLEX 47053-1000"
 			(at 70 107.62 0)
 			(effects
 				(font
@@ -307,7 +307,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 			(at 70 100 0)
 			(effects
 				(font
@@ -316,7 +316,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/470531000"
 			(at 70 100 0)
 			(effects
 				(font
@@ -325,7 +325,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "FAN1"
+		(property "Description" "FAN1 header for Noctua NF-A4x10 5V PWM; standard 4-wire pinout GND/+5V/TACH/PWM"
 			(at 70 100 0)
 			(effects
 				(font
@@ -389,7 +389,7 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000001209")
 	)
-	(text "TACH: open-collector input with 10k pull-up to 3V3_AUX. Exact 5V fan connector/MPN remains TBD."
+	(text "TACH: open-collector + 10k to 3V3_AUX. Fan frozen: Noctua NF-A4x10 5V PWM; J10/J11 = Molex 47053-1000."
 		(exclude_from_sim no)
 		(at 145 137 0)
 		(effects

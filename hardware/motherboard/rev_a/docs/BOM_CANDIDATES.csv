@@ -12,7 +12,8 @@ microSD,Hirose DM3AT-SF-PEJM5 push-push microSD socket,1,FROZEN MPN / FOOTPRINT,
 TFT/front-panel UI,JST S12B-PH-SM4-TB 12-position 2.0mm side-entry SMT header,1,FROZEN MPN / FOOTPRINT,Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal; 2A at AWG24; adapter/harness maps to TF034
 TFT/service harness housing,JST PHR-12 12-position PH receptacle housing,1,FROZEN MPN,2.0mm pitch friction-lock housing for J14
 TFT/service harness contact,JST SPH-002T-P0.5S tin receptacle crimp contact,12,FROZEN MPN,AWG30-24; use harness wire appropriate to signal/current
-Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
+Fan headers,Molex 47053-1000 KK 254 standard 4-wire PWM fan PCB header,2,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical; pin 1 GND 2 +5V 3 TACH 4 PWM; 4A/contact; keyed/polarized; mates 47054/A2543-class plug
+Cooling fans,Noctua NF-A4x10 5V PWM,2,FROZEN MPN / OFF-BOARD MECHANICAL,5V 4-wire PWM fan; current Noctua spec 40x40x11mm without pads; 0.07A max 0.35W max; 5000rpm max; 8.9m3/h; locked-rotor auto-shutdown/retry; standard GND/Vcc/TACH/PWM plug
 Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
 Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treated as open-collector/open-drain
 USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN FAMILY / FOOTPRINT,Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias; 4-port USB2 Hi-Speed hub
