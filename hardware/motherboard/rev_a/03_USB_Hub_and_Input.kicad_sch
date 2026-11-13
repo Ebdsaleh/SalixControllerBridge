@@ -192,7 +192,7 @@
 					(name "SCL/SMBCLK/CFG_SEL0" (effects (font (size 0.85 0.85))))
 					(number "24" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin bidirectional line
 					(at 27.94 12.7 180)
 					(length 2.54)
 					(name "HS_IND/CFG_SEL1" (effects (font (size 0.85 0.85))))
@@ -210,7 +210,7 @@
 					(name "VBUS_DET" (effects (font (size 0.85 0.85))))
 					(number "27" (effects (font (size 0.85 0.85))))
 				)
-				(pin output line
+				(pin bidirectional line
 					(at 27.94 5.079999999999998 180)
 					(length 2.54)
 					(name "SUSP_IND/LOCAL_PWR/NON_REM0" (effects (font (size 0.85 0.85))))
@@ -1196,6 +1196,15 @@
 	(global_label "GND" (shape passive) (at 223.81 112 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004221"))
 	(label "HUB_XTALIN" (at 216.19 98 0) (effects (font (size 0.9 0.9)) (justify right bottom)) (uuid "40000000-0000-4000-8000-000000004222"))
 	(label "HUB_XTALOUT" (at 223.81 98 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40000000-0000-4000-8000-000000004223"))
+	(text "U1 pin 28 intentionally NC in Rev A: SMBus mode (CFG_SEL=01) disables NON_REM straps; fixed self-powered config uses SELF_BUS_PWR=1 and DYNAMIC=0; no SUSP_IND LED is required."
+		(exclude_from_sim no)
+		(at 190 58 0)
+		(effects
+			(font (size 0.78 0.78)
+				(bold yes))
+			(justify left))
+		(uuid "ad030000-0000-4000-8000-000000000001")
+	)
 	(text "Hub power / reset support:"
 		(exclude_from_sim no)
 		(at 190 22 0)

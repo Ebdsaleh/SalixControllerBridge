@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-090546).zip` remained at **0 errors** and **677 warnings**: 550 endpoint-off-grid and 127 library-symbol-mismatch. The TPS25821 C30-C32/C34-C36 0805-to-1206/MPN freeze caused no ERC-count or category regression.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-091441).zip` remained at **0 errors** and **677 warnings**: 550 endpoint-off-grid and 127 library-symbol-mismatch. The USB2514B Y1/C62/C63 crystal freeze caused no ERC-count or category regression.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -15,9 +15,10 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - TPS2553 local input bypass is now explicit: C44/C45 are 100nF 25V X7R 0603 from `5V_BOARD` to GND and must be placed adjacent to each switch IN/GND pair.
 - SN74LVC2G157/SN74LVC2G08 DCU devices use the correct 0.5mm-pitch DCU land pattern: `Package_SO:VSSOP-8_2.3x2mm_P0.5mm`.
 - USB2514B SMBus straps are CFG_SEL1=0 / CFG_SEL0=1; CFG_SEL1 low strap is normalized to 100k.
+- USB2514B pin 28 (`SUSP_IND/LOCAL_PWR/NON_REM0`) is intentionally NC in Rev A: SMBus configuration disables strap options; fixed self-powered operation uses `SELF_BUS_PWR=1` and `DYNAMIC=0`; front ports remain removable with `NR_DEVICE=0x00`; no suspend-status LED is fitted. Pins 25 and 28 are modeled as bidirectional to reflect their multifunction I/O behavior.
+- The 677-warning / 0-error native ERC baseline predates the pin-25/pin-28 symbol-type cleanup and explanatory note; rerun native KiCad after this commit.
 - USB2514B clock is now frozen: Y1 is CTS 445I25A24M00000, 24.000MHz, 10pF CL, ±20ppm tolerance, ±50ppm stability, 40ohm ESR, -40C to +85C, with `Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm`.
 - C62/C63 are frozen as Yageo CC0603JRNPO9BN180, 18pF ±5%, 50V, C0G/NP0, 0603. For equal 18pF caps with roughly 1-2pF stray per side, the effective load is about 9.5-10pF, matching Y1 CL=10pF; final frequency/stability still requires board-level measurement as Microchip recommends.
-- The 677-warning / 0-error native ERC baseline predates the Y1/C62/C63 clock freeze; rerun native KiCad after this commit to validate the updated footprint/part properties.
 - TLV62569P 2.2uH reference inductor is frozen as Coilcraft XAL4020-222ME with `Inductor_SMD:L_Coilcraft_XxL4020`.
 - SN74LVC2G157 fail-safe logic is intentional: strobe HIGH forces Y=0 and complementary Y_N=1; TS3USB221A OE HIGH disconnects the data mux.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).

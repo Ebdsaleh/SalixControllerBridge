@@ -25,6 +25,9 @@ PRIMARY and EXTENDED each use one dual-bank motherboard interface carrying two U
 - RESET_N has 10k pull-up to 3V3_AUX and 1uF to GND for power-up delay; Pico-B may assert reset low.
 - VBUS_DET uses a 100k/100k divider from 5V_MAIN.
 - The bridge is self-powered; the internal Pico-A PIO root has no separate upstream connector VBUS source.
+- U1 pin 28 (`SUSP_IND/LOCAL_PWR/NON_REM0`) is intentionally left unconnected in Rev A. `CFG_SEL[1:0]=01` selects SMBus configuration, which disables the hardware strap options, so `NON_REM0` is not sampled as a configuration strap.
+- Pico-B hub configuration must explicitly use fixed self-powered operation: `CONFIG_BYTE_1.SELF_BUS_PWR=1`, `CONFIG_BYTE_2.DYNAMIC=0`, and `NR_DEVICE=0x00` for the four removable front-panel ports. With dynamic power switching disabled, `LOCAL_PWR` is not required; Rev A also does not use the optional `SUSP_IND` status LED, so pin 28 has no electrical job and the KiCad no-connect marker is intentional.
+- U1 pins 25 and 28 are modeled as bidirectional in the custom symbol because both are sampled as inputs during configuration/reset in some modes and can act as status outputs afterward.
 
 ## Hub support network
 
