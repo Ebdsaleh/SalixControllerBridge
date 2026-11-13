@@ -63,7 +63,8 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 - New page 09 adds the primary-source path J16 → F1 → SMBJ36CA → U6 LM74800-Q1 + Q9/Q10 IAUC100N08S5N034 common-drain pair → BARREL_PROT.
 - J16, U6 and Q9/Q10 MPNs are selected; their exact PCB footprints remain deliberately pending this first schematic validation. F1 holder/MPN and C13 exact MPN also remain open.
-- R26/R27 = 137k / 10k sets a nominal LM74800 rising OVP threshold near 18.10V. Native KiCad 10 render/ERC must be run before this batch can be considered electrically green.
+- Native KiCad rerun after the wiring correction is **0 errors / 870 warnings**. Warning breakdown is 713 endpoint_off_grid + 153 lib_symbol_mismatch + 4 intentional isolated AUX management labels. Visual review shows the corrected U6/Q9/Q10 topology is coherent.
+- Manufacturer review found the original 137k + 10k OVP divider exceeded TI's recommended <120k total resistance for leakage-error control. It has been changed to **93.1k + 6.19k (99.29k total)** for ~19.75V nominal cutoff and ~18.81–20.71V first-pass worst-case range, keeping U6 as a backup protection layer above the frozen LTC4418 barrel-validity ceiling. One final native rerun is required before electrical freeze.
 - Automotive capability remains conditional on final TVS energy margin, MOSFET SOA/inrush, fuse/harness selection, PCB layout and physical transient testing; no compliance claim is made at schematic stage.
 
 ## Fabrication blockers

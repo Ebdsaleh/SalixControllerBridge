@@ -110,6 +110,6 @@ USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / 
 12V automotive front-end controller,TI LM74800QDRRRQ1 WSON-12,1,FROZEN MPN / FOOTPRINT PENDING,AEC-Q100 3-65V ideal-diode/reverse-battery/OV controller; common-drain application feeds BARREL_PROT
 12V automotive front-end MOSFET,Infineon IAUC100N08S5N034ATMA1 PG-TDSON-8-34,2,FROZEN MPN / FOOTPRINT PENDING,80V AEC-Q101 N-channel; 3.4mOhm max at 10V; ±20V VGS; common-drain pair Q9/Q10
 12V automotive TVS,SMBJ36CA bidirectional 600W-class SMB TVS,1,FROZEN FAMILY / FOOTPRINT,TI-recommended 12V automotive transient clamp; Diode_SMD:D_SMB
-12V barrel OVP divider,137k + 10k 1% 0603,1 network,PROVISIONAL VALUES,LM74800 nominal rising cutoff about 18.10V; tolerance review required before freeze
+12V barrel OVP divider,93.1k + 6.19k 1% 0603,1 network,PROVISIONAL VALUES,LM74800 nominal rising cutoff about 19.75V; total divider 99.29k stays below TI 120k leakage-accuracy guidance; first-pass worst-case about 18.81V to 20.71V
 12V barrel HGATE dVdt network,100R 1% + 10nF 50V X7R 0603,1 network,FROZEN TOPOLOGY / PROVISIONAL VALUE,TI common-drain application style inrush shaping; final SOA/inrush calculation after downstream capacitance freeze
 12V barrel input fuse,7.5A nominal fuse/holder,1,MPN / HOLDER TBD,Board-level primary input fuse placeholder; final time-current curve and holder chosen with PSU/harness current policy
