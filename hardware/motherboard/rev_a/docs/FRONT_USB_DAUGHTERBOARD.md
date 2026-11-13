@@ -4,6 +4,8 @@
 
 Each bank now uses SN74LVC2G157 as the hard-isolation selector companion to TS3USB221A.
 
+TS3USB221A U21/U25 physical package is frozen to TI RSE0010A using the project-local footprint `SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm`. The copper land geometry follows TI package drawing 4220307/A rather than the larger DRC/VSON package used by other TS3USB221 variants. Pin 1 is upper-left in top view; pin 10 is top-center; pin 5 is bottom-center.
+
 Service jumpers are active-low disable inputs implemented as active-high RUN nets:
 
 - OPEN jumper: 10k pull-up makes RUN=1.

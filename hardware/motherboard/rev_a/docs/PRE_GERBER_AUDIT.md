@@ -20,19 +20,20 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - C62/C63 are frozen as Yageo CC0603JRNPO9BN180, 18pF ±5%, 50V, C0G/NP0, 0603. For equal 18pF caps with roughly 1-2pF stray per side, the effective load is about 9.5-10pF, matching Y1 CL=10pF; final frequency/stability still requires board-level measurement as Microchip recommends.
 - TLV62569P 2.2uH reference inductor is frozen as Coilcraft XAL4020-222ME with `Inductor_SMD:L_Coilcraft_XxL4020`.
 - SN74LVC2G157 fail-safe logic is intentional: strobe HIGH forces Y=0 and complementary Y_N=1; TS3USB221A OE HIGH disconnects the data mux.
+- TS3USB221A U21/U25 now use the project-local `SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm` footprint. Copper lands follow TI RSE0010A drawing 4220307/A: 1.35mm left/right pad-column center spacing, 1.8mm top/bottom end-pad center spacing, 0.5mm side-row pitch, 0.55mm side-land length, 0.25mm corner-land height, 0.20mm inner-land height, and 0.6x0.3mm end lands. Footprint uses 0.05mm mask expansion for the TI-preferred NSMD treatment.
+- The 677-warning / 0-error native ERC baseline predates assignment of the new project-local TS3USB221A footprint; rerun native KiCad after this commit.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
 
 1. **Main 5V input/protection is not designed/frozen.** Exact connector, TVS, fuse/eFuse, reverse-current/backfeed behavior, inrush strategy and high-current copper are TBD.
 2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of port demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
-3. **Twenty placed physical parts still have no footprint.** They are J7/J8; J12/J13/J14; J10/J11; and J20/J21/J22/U21/SW1/D25/D26/J23/J24/U25/SW2/D27/D28. Y1 is now footprinted; C42-C45 are footprinted; C30-C32/C34-C36 are frozen to 1206.
+3. **Eighteen placed physical parts still have no footprint.** They are J7/J8; J12/J13/J14; J10/J11; and J20/J21/J22/SW1/D25/D26/J23/J24/SW2/D27/D28. U21/U25 are now frozen to the project-local TI RSE0010A footprint; Y1 is footprinted; C42-C45 are footprinted; C30-C32/C34-C36 are frozen to 1206.
 4. **USB-C connector pad mapping is not frozen.** The current `USB_C_HOST` schematic symbol is a logical 7-pin abstraction. The final receptacle footprint must map all physical receptacle contacts correctly: A6+B6 -> D+, A7+B7 -> D-, all VBUS contacts -> VBUS, all GND contacts -> GND, with separate CC1/CC2 and shield. Do not attach a stock alphanumeric Type-C footprint to the logical symbol without reconciling pad numbers.
-5. **TS3USB221A requires the exact TI RSE0010A land pattern.** The A-variant is offered in the 10-pin 2.0x1.5mm, 0.5mm-pitch UQFN RSE package; do not substitute the larger DRC/VSON land pattern used by the non-A TS3USB221.
-6. **Fan selection remains a current/thermal check.** TPS22919 is rated for 1.5A maximum continuous current; the exact 5V PWM fan MPN must have normal and startup/stall demand compatible with that switch and the connector/traces.
-7. **Mechanical footprints remain open.** USB-A/USB-C receptacles, 20-pin front-board connectors, latching selector switches, fan headers, microSD socket, SWD spring contacts, TFT/service connector and LEDs remain TBD.
-8. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, thermal copper, keepouts and DRC remain outstanding.
-9. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
+5. **Fan selection remains a current/thermal check.** TPS22919 is rated for 1.5A maximum continuous current; the exact 5V PWM fan MPN must have normal and startup/stall demand compatible with that switch and the connector/traces.
+6. **Mechanical footprints remain open.** USB-A/USB-C receptacles, 20-pin front-board connectors, latching selector switches, fan headers, microSD socket, SWD spring contacts, TFT/service connector and LEDs remain TBD.
+7. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, thermal copper, keepouts and DRC remain outstanding.
+8. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
 
 ## Layout/current constraints
 

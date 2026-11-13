@@ -27,7 +27,7 @@ USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
 Main input eFuse,TPS25947-class or higher-current equivalent,1,CANDIDATE,Final part depends on 5V_MAIN current budget
 Front-board interface,20-position keyed/locking connector class,2,LOGICAL PINOUT FROZEN,Exact mechanical family TBD
-Front USB data mux,TI TS3USB221A RSE UQFN-10,2 per daughterboard,FROZEN FAMILY / FOOTPRINT PENDING,480Mbps A/C data selection with hardware OE disconnect; exact TI RSE0010A land pattern required
+Front USB data mux,TI TS3USB221A RSE UQFN-10,2 per daughterboard,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,480Mbps A/C data selection with hardware OE disconnect; SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm follows TI drawing 4220307/A example-board land pattern
 USB-C source controller,TI TPS25821DSS WSON-12,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65
 USB-A power switch,TI TPS2553 SOT-23-6,2 per daughterboard,FROZEN FAMILY,Adjustable current limit + reverse-voltage protection
 Front-board GPIO expander,TI TCA9535 TSSOP-24,1 per daughterboard,FROZEN FAMILY,I2C selector/fault/LED/charge policy
