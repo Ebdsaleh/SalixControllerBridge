@@ -40,7 +40,7 @@ Service disable jumper,2-pin shunt input,4 per daughterboard,FROZEN SEMANTICS,OP
 Hard-disable selector,TI SN74LVC2G157 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_2.3x2mm_P0.5mm
 Run pull-ups,10k 1% 0603,4 per daughterboard,FROZEN VALUE,OPEN jumper defaults each physical port to RUN
 Board-enable fail-safe pull-up,100k 1% 0603,1 per daughterboard,FROZEN VALUE,BOARD_ENABLE_N defaults disabled if control line floats
-Type-C input bulk capacitor,47uF >=10V X5R/X7R,6 per daughterboard,VALUE TARGET / MPN BLOCKER,3 per TPS25821 gives 141uF nominal; exact MPN/package must retain >=120uF effective total at 5V after DC-bias/tolerance
+Type-C input bulk capacitor,Murata GRM31CR61A476KE15L 47uF 10V ±10% X5R 1206,6 per daughterboard,FROZEN MPN / FOOTPRINT,Exact TPS25820/21 EVM BOM part; 3 per TPS25821 on IN; Capacitor_SMD:C_1206_3216Metric; place as close as possible to IN/GND
 Type-C output bypass capacitor,4.7uF >=10V X5R/X7R,2 per daughterboard,FROZEN VALUE,Less than 10uF at Type-C OUT/VBUS
 Type-C CHG default pulldown,100k 1% 0603,2 per daughterboard,FROZEN VALUE,Defaults current advertisement to STD at power-up
 Hub power gates,TI SN74LVC2G08 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_2.3x2mm_P0.5mm

@@ -3956,13 +3956,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 297.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 297.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -3976,7 +3976,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 297.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -4011,13 +4011,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 322.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 322.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -4031,7 +4031,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 322.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -4066,13 +4066,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 347.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 347.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -4086,7 +4086,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 347.86 138 0)
 			(effects
 					(font (size 1 1))
@@ -4176,13 +4176,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 275 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 275 240 0)
 			(effects
 					(font (size 1 1))
@@ -4196,7 +4196,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 275 240 0)
 			(effects
 					(font (size 1 1))
@@ -4231,13 +4231,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 300 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 300 240 0)
 			(effects
 					(font (size 1 1))
@@ -4251,7 +4251,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 300 240 0)
 			(effects
 					(font (size 1 1))
@@ -4286,13 +4286,13 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "47uF"
+		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
 			(at 325 243 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 325 240 0)
 			(effects
 					(font (size 1 1))
@@ -4306,7 +4306,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "47uF"
+		(property "Description" "TPS25821 IN bulk; Murata GRM31CR61A476KE15L, 47uF 10V ±10% X5R 1206; TI EVM reference part"
 			(at 325 240 0)
 			(effects
 					(font (size 1 1))
@@ -5199,7 +5199,7 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006493")
 	)
-	(text "TPS25821: 3×47µF = 141µF at IN, 4.7µF at OUT/VBUS, 100k 0.5% REF. CHG has 100k pulldown so power-up default is STD advertisement."
+	(text "TPS25821: IN bulk follows TI EVM: 3× Murata GRM31CR61A476KE15L, 47µF 10V ±10% X5R 1206. OUT/VBUS=4.7µF; REF=100k 0.5%; CHG defaults STD via 100k pulldown."
 		(exclude_from_sim no)
 		(at 20 208 0)
 		(effects

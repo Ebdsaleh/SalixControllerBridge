@@ -29,7 +29,8 @@ Result:
 
 Each Type-C port uses TPS25821:
 
-- 3 x 47uF input bulk = 141uF at IN.
+- C30/C31/C32 for Bank A and C34/C35/C36 for Bank B: 3 x Murata GRM31CR61A476KE15L, 47uF, 10V, ±10%, X5R, 1206 at IN. This exactly follows the TPS25820/21 EVM BOM and its three-capacitor input topology.
+- Use `Capacitor_SMD:C_1206_3216Metric` and place the three-capacitor bank as close as possible to the corresponding TPS25821 IN/GND pins.
 - 4.7uF ceramic at OUT/VBUS (<10uF).
 - 100k 0.5% REF resistor.
 - 100k CHG pulldown for STD advertisement by default.
@@ -74,7 +75,6 @@ Each physical power controller keeps its own FAULT_N signal for Pico-B diagnosti
 
 ## Still deliberately open
 
-- Freeze the 47uF Type-C input-capacitor MPN/package and prove >=120uF effective total per TPS25821 at 5V after DC bias and tolerance.
 - Exact latching push-push SPDT switch manufacturer/footprint.
 - Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.
 - Final LED colors.
