@@ -176,26 +176,78 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     """
     Discover the root and direct child sheets, preserving KiCad page numbers.
 
-    Rev-A currently has a flat hierarchy. If a page number cannot be recovered
-    from sheet_instances, appearance order is used as a safe fallback.
+    Rev-A currently has a flat hierarchy. KiCad allows arbitrary whitespace
+    before a top-level "(sheet" expression, so sheet discovery must not depend
+    on tabs versus spaces.
     """
     text = root_schematic.read_text(encoding="utf-8")
 
-    children: list[tuple[str, Path]] = []
+    children: list[SheetPage] = []
 
-    # KiCad does not require a specific indentation style. Earlier versions of
-    # this helper looked only for "\\n\\t(sheet\\n", which silently skipped a
-    # valid child sheet if it happened to be indented with spaces. Find every
-    # top-level-looking sheet expression by scanning all "(sheet" starts and
-    # parsing each balanced S-expression instead.
-    sheet_starts = [m.start() for m in re.finditer(r'(?m)^[ \\t]*\\(sheet\\s*
-    pages = [SheetPage("1", root_schematic)]
-    for fallback_index, (uuid, child) in enumerate(children, start=2):
-        pages.append(SheetPage(page_map.get(uuid, str(fallback_index)), child))
+    # Find every top-level-looking "(sheet" line regardless of indentation,
+    # then parse that balanced S-expression. This is deliberately whitespace
+    # agnostic so generated and KiCad-saved files are treated the same.
+    sheet_starts = [
+        match.start()
+        for match in re.finditer(r'(?m)^[ \\t]*\\(sheet\\s*$', text)
+    ]
+
+    for start in sheet_starts:
+        depth = 0
+        quoted = False
+        escaped = False
+        end = None
+
+        for pos in range(start, len(text)):
+            char = text[pos]
+
+            if quoted:
+                if escaped:
+                    escaped = False
+                elif char == "\\\\":
+                    escaped = True
+                elif char == '"':
+                    quoted = False
+                continue
+
+            if char == '"':
+                quoted = True
+            elif char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    end = pos + 1
+                    break
+
+        if end is None:
+            raise ValueError(
+                f"Unbalanced KiCad sheet S-expression near offset {start}"
+            )
+
+        block = text[start:end]
+
+        file_match = re.search(
+            r'\\(property\\s+"Sheetfile"\\s+"([^"]+)"',
+            block,
+        )
+        if not file_match:
+            continue
+
+        page_match = re.search(
+            r'\\(page\\s+"([^"]+)"\\)',
+            block,
+        )
+
+        source = root_schematic.parent / file_match.group(1)
+        page = page_match.group(1) if page_match else str(len(children) + 2)
+        children.append(SheetPage(page, source))
+
+    pages = [SheetPage("1", root_schematic), *children]
 
     def sort_key(item: SheetPage) -> tuple[Any, ...]:
         pieces = re.split(r"([0-9]+)", item.page)
-        return tuple(int(p) if p.isdigit() else p for p in pieces)
+        return tuple(int(piece) if piece.isdigit() else piece for piece in pieces)
 
     return sorted(pages, key=sort_key)
 
