@@ -459,22 +459,80 @@ def render_page_via_pdf(
         command.extend(["--theme", theme])
 
     command.append(str(root_schematic if is_root else sheet.source))
-    run_checked(command)
+    result = run_command(command)
 
-    if not pdf_path.is_file():
+    if result.returncode == 0 and pdf_path.is_file():
+        document = pymupdf.open(str(pdf_path))
+        try:
+            if len(document) != 1:
+                raise RuntimeError(
+                    f"Expected a one-page PDF for schematic page {sheet.page}, "
+                    f"but KiCad produced {len(document)} pages."
+                )
+
+            page = document[0]
+            pixmap = page.get_pixmap(dpi=dpi, alpha=False)
+            pixmap.save(str(destination))
+            return
+        finally:
+            document.close()
+
+    if is_root:
+        quoted = subprocess.list2cmdline(command)
         raise RuntimeError(
-            f"KiCad reported success but did not create the expected PDF: {pdf_path}"
+            f"Command failed with exit code {result.returncode}:\n"
+            f"{quoted}\n\n{result.stdout}"
         )
 
-    document = pymupdf.open(str(pdf_path))
+    # Some KiCad 10 builds can load a child through the project hierarchy but
+    # reject that same child as a standalone CLI input. Fall back to exporting
+    # the complete root hierarchy, then rasterize the requested numeric page.
+    hierarchy_pdf = page_dir / "hierarchy.pdf"
+    hierarchy_command = [
+        str(kicad_cli),
+        "sch",
+        "export",
+        "pdf",
+        "--output",
+        str(hierarchy_pdf),
+    ]
+    if theme:
+        hierarchy_command.extend(["--theme", theme])
+    hierarchy_command.append(str(root_schematic))
+
+    hierarchy_result = run_command(hierarchy_command)
+    if hierarchy_result.returncode != 0 or not hierarchy_pdf.is_file():
+        direct_quoted = subprocess.list2cmdline(command)
+        hierarchy_quoted = subprocess.list2cmdline(hierarchy_command)
+        raise RuntimeError(
+            "Direct child render failed, and the full-hierarchy fallback also "
+            "failed.\n\n"
+            f"Direct command (exit {result.returncode}):\n{direct_quoted}\n"
+            f"{result.stdout}\n\n"
+            f"Hierarchy command (exit {hierarchy_result.returncode}):\n"
+            f"{hierarchy_quoted}\n{hierarchy_result.stdout}"
+        )
+
+    if not sheet.page.isdigit():
+        raise RuntimeError(
+            f"Cannot select non-numeric fallback page {sheet.page!r} from "
+            "the full-hierarchy PDF."
+        )
+
+    document = pymupdf.open(str(hierarchy_pdf))
     try:
-        if len(document) != 1:
+        page_index = int(sheet.page) - 1
+        if page_index < 0 or page_index >= len(document):
             raise RuntimeError(
-                f"Expected a one-page PDF for schematic page {sheet.page}, "
-                f"but KiCad produced {len(document)} pages."
+                f"Requested page {sheet.page}, but the full-hierarchy PDF "
+                f"contains {len(document)} pages."
             )
 
-        page = document[0]
+        print(
+            f"        direct child export failed; using hierarchy page "
+            f"{sheet.page}/{len(document)}"
+        )
+        page = document[page_index]
         pixmap = page.get_pixmap(dpi=dpi, alpha=False)
         pixmap.save(str(destination))
     finally:
