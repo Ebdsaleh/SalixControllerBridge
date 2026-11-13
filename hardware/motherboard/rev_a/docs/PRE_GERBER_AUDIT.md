@@ -38,7 +38,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 - AUX recharge / optional-power interface has been added to 01_Power: U3 TPS259474LRPWR, J15 Molex 43045-1000, CHARGE_PWR protection/qualification, AUX_PWR return path and reserved module-management pins. The first native render exposed one real wiring error: the C5 GND stub overlapped the C6 CHARGE_PWR stub, merging those nets. That overlap has been removed and the AUX block has been respaced onto the 1.27mm grid; native ERC must now be rerun.
 - Native KiCad 10.0.8 validation after the AUX net-isolation/layout repair is **0 errors / 682 warnings**. The AUX recharge circuit is electrically green; the remaining count is warning-hygiene work rather than an ERC error.
-- U3 now has project-local footprint `SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm`, based on TI drawing 4225183/A and cross-checked against the current KiCad upstream package proposal. Native KiCad must be rerun once after this assignment.
+- U3 now has project-local footprint `SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm`, based on TI drawing 4225183/A and cross-checked against the current KiCad upstream package proposal. Native KiCad 10.0.8 was rerun after assignment and remained **0 errors / 682 warnings**, so the AUX recharge branch and U3 footprint are schematic-level frozen.
 
 ## Fabrication blockers
 
