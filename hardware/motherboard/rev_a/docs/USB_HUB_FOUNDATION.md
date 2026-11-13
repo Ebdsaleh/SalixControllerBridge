@@ -29,8 +29,10 @@ PRIMARY and EXTENDED each use one dual-bank motherboard interface carrying two U
 ## Hub support network
 
 - RBIAS: 12.0kΩ ±1% to GND.
-- Reference clock: 24.000MHz, ±350ppm or better.
-- Crystal load capacitors remain value-TBD until the exact crystal and its CL are selected.
+- Reference clock: CTS 445I25A24M00000, 24.000MHz, 10pF load, ±20ppm tolerance, ±50ppm stability, 40Ω ESR, -40°C to +85°C, two-pad 5.0x3.2mm SMD.
+- Y1 footprint: `Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm`.
+- C62/C63: Yageo CC0603JRNPO9BN180, 18pF ±5%, 50V, C0G/NP0, 0603.
+- Load check: with equal 18pF physical caps and approximately 1-2pF stray capacitance per side, Microchip's load relation gives about 9.5-10pF effective load, matching Y1's 10pF CL. Keep crystal traces short/symmetric and verify oscillation frequency/stability on hardware.
 - VDDA33: one 100nF at each of four power pins plus shared 1uF bulk.
 - VDD33: one 100nF at each of two power pins.
 - CRFILT: 100nF low-ESR to GND. Optional parallel tuning pad is DNP by default.
@@ -51,7 +53,6 @@ Shared motherboard signals are KiCad global nets:
 
 ## Still deliberately open
 
-- Exact 24MHz crystal manufacturer/package and calculated load-cap values.
 - Exact reset supervisor part, only if measured power sequencing requires one.
 - Exact J7/J8 keyed locking connector family.
 - Final PCB placement/routing constraints and USB differential-pair tuning.

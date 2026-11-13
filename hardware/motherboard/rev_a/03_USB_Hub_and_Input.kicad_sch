@@ -1074,27 +1074,27 @@
 					(font (size 0.95 0.95))
 				)
 		)
-		(property "Value" "24.000MHz ±350ppm"
+		(property "Value" "CTS 445I25A24M00000 24MHz 10pF"
 			(at 220 102 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm"
 			(at 220 98 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.ctscorp.com/Files/DataSheets/Passives/FCP/Crystals/crystals-445-datasheet.pdf"
 			(at 220 98 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "24.000MHz ±350ppm"
+		(property "Description" "CTS 445I25A24M00000; 24MHz; 10pF CL; ±20ppm tolerance; ±50ppm stability; 40R ESR; -40C to +85C"
 			(at 220 98 0)
 			(effects
 					(font (size 1 1))
@@ -2156,7 +2156,7 @@
 			(at 223.5 266 0)
 			(effects (font (size 0.85 0.85)))
 		)
-		(property "Value" "TBD pF - crystal CL"
+		(property "Value" "CC0603JRNPO9BN180 18pF C0G"
 			(at 223.5 274 0)
 			(effects (font (size 0.85 0.85)))
 		)
@@ -2164,11 +2164,11 @@
 			(at 223.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.digikey.com.au/en/products/detail/yageo/CC0603JRNPO9BN180/302971"
 			(at 223.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Description" "TBD pF - crystal CL"
+		(property "Description" "USB2514B crystal load capacitor; Yageo CC0603JRNPO9BN180; 18pF ±5% 50V C0G/NP0 0603"
 			(at 223.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
@@ -2198,7 +2198,7 @@
 			(at 263.5 266 0)
 			(effects (font (size 0.85 0.85)))
 		)
-		(property "Value" "TBD pF - crystal CL"
+		(property "Value" "CC0603JRNPO9BN180 18pF C0G"
 			(at 263.5 274 0)
 			(effects (font (size 0.85 0.85)))
 		)
@@ -2206,11 +2206,11 @@
 			(at 263.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.digikey.com.au/en/products/detail/yageo/CC0603JRNPO9BN180/302971"
 			(at 263.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
-		(property "Description" "TBD pF - crystal CL"
+		(property "Description" "USB2514B crystal load capacitor; Yageo CC0603JRNPO9BN180; 18pF ±5% 50V C0G/NP0 0603"
 			(at 263.5 270 0)
 			(effects (font (size 0.85 0.85)) (hide yes))
 		)
@@ -2229,6 +2229,13 @@
 	(global_label "GND" (shape passive) (at 274.93 270 0) (effects (font (size 0.85 0.85)) (justify left bottom)) (uuid "73000000-0000-4000-8000-000000007454"))
 	(text "USB2514B SUPPORT NETWORK — REV-A" (exclude_from_sim no) (at 210 120 0) (effects (font (size 1 1) (bold yes))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007455"))
+	(text "Clock frozen: Y1 CTS 445I25A24M00000 (24MHz, CL=10pF, 2-pad 5032); C62/C63=18pF C0G. With ~1-2pF stray per side, effective CL≈9.5-10pF."
+		(exclude_from_sim no)
+		(at 210 150 0)
+		(effects (font (size 0.76 0.76)) (justify left))
+		(uuid "ac030000-0000-4000-8000-000000000001")
+	)
+
 	(text "SMBus: CFG_SEL0/SCL=1 via 4.7k pull-up; CFG_SEL1/HS_IND=0 via 100k pull-down. Pico-B configures hub over MGMT_I2C." (exclude_from_sim no) (at 210 156 0) (effects (font (size 0.76 0.76))
 			(justify left)) (uuid "73000000-0000-4000-8000-000000007456"))
 	(text "RESET_N: 10k + 1uF; Pico-B GP22 hard reset. VBUS_DET: 100k/100k from 5V_MAIN." (exclude_from_sim no) (at 210 162 0) (effects (font (size 0.76 0.76))

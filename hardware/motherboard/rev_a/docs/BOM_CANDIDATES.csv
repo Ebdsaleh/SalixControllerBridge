@@ -16,7 +16,7 @@ Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treate
 USB Hub,Microchip USB2514B/M2 36-pin SQFN,1,FROZEN FAMILY / FOOTPRINT,Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias; 4-port USB2 Hi-Speed hub
 USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and hub upstream pair
 USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
-USB hub clock,24.000MHz crystal ±350ppm or better,1,PART TBD,Exact package/CL not frozen
+USB hub clock,CTS 445I25A24M00000 24.000MHz 10pF CL 2-SMD 5.0x3.2mm,1,FROZEN MPN / FOOTPRINT,±20ppm tolerance ±50ppm stability 40ohm ESR -40C to +85C; Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm
 USB hub filter caps,100nF low-ESR fitted + optional DNP tuning pad,2 networks,FROZEN FITTED VALUE,Separate CRFILT and PLLFILT networks; each fitted network <=0.1uF
 USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
 3V3_AUX regulator,TI TLV62569P SOT23-6,1,FROZEN FAMILY,2A 5V-to-3.3V buck with power-good
@@ -51,7 +51,7 @@ USB hub CFG_SEL1 pulldown,100k 1% 0603,1,FROZEN VALUE,Microchip-recommended low 
 USB hub reset RC,10k 1% + 1uF X7R,1 pair,FROZEN VALUES,RESET_N pullup/delay with Pico-B GP22 hard reset
 USB hub VBUS detect divider,100k 1% 0603,2,FROZEN VALUE,5V_MAIN divided to HUB_VBUS_DET
 PIO USB host pulldowns,15k 1% 0603,2,FROZEN VALUE,Explicit D+ and D- host pulldowns on Pico-A side
-USB hub crystal load caps,TBD pF,2,PART-DEPENDENT,Calculate from selected 24MHz crystal CL and PCB parasitics
+USB hub crystal load caps,Yageo CC0603JRNPO9BN180 18pF ±5% 50V C0G/NP0 0603,2,FROZEN MPN / FOOTPRINT,With Y1 CL=10pF and about 1-2pF stray per side gives about 9.5-10pF effective load; Capacitor_SMD:C_0603_1608Metric
 
 Fan PWM open-drain,Nexperia 2N7002 SOT-23,2,FROZEN FAMILY,Open-drain sink for 4-wire fan PWM; fail-safe released/high on reset
 Fan PWM gate series,1k 1% 0603,2,FROZEN VALUE,Pico-B GPIO to 2N7002 gate
