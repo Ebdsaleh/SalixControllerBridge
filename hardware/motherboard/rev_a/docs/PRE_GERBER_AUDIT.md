@@ -38,8 +38,8 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 - New sheet 08 implements the two-stage source-priority mux: BARREL_PROT > PD_PWR → EXT_CHARGE_IN, then EXT_CHARGE_IN > AUX_PWR → SYS_IN.
 - U4/U5 are LTC4418IUF#PBF; Q1-Q8 are Si7155DP-T1-GE3 back-to-back P-channel MOSFETs.
-- This commit has source-level s-expression validation only. Do not call the source-priority batch green until native KiCad 10 ERC and the schematic visualizer are rerun.
-- The previously validated baseline before this batch remains **0 errors / 682 warnings**.
+- Native KiCad 10.0.8 ERC on the first page-9 batch is **0 errors / 721 warnings**. The increase from 682 is entirely 39 additional `lib_symbol_issues`; `endpoint_off_grid` remains 551 and the four intentionally isolated AUX management labels remain unchanged.
+- ERC already sees `/MAIN SOURCE PRIORITY / POWERPATH/`, but the helper renderer initially exported only eight PNGs because its sheet discovery assumed tab indentation. The renderer has been fixed; page-9 visual review is still required before this batch is called fully green.
 
 ## Newly added / awaiting native KiCad validation
 
