@@ -116,3 +116,11 @@ USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / 
 12V barrel input fuse,Littelfuse 099707.5WXN MINI 58V 7.5A,1,PROVISIONAL CURRENT RATING,Active automotive 58V blade fuse; 1kA breaking capacity; -40C to +125C; final amp rating must follow full load/inrush budget
 
 12V barrel output reservoir,Panasonic EEETQV470XAP 47uF 35V ±20% TQ SMD aluminum electrolytic,1,FROZEN MPN / FOOTPRINT,AEC-Q200; -40C to +125C; 2000h at 125C; 300mOhm max ESR at 100kHz; Capacitor_SMD:CP_Elec_6.3x7.7
+
+USB-C PD sink controller,TI TPS25730ADREFR 38-WQFN REF,1,FROZEN MPN / FOOTPRINT PENDING,Active 2026 PD3.2 sink-only controller; integrated managed 20V 5A path; no firmware/EEPROM required; pin-strapped 15-20V 3A operating/5A max
+USB-C PD power receptacle,GCT USB4085-GF-A 16-contact through-hole USB-C,1,FROZEN MPN / FOOTPRINT,Connector_USB:USB_C_Receptacle_GCT_USB4085; 5A/48V/240W; dedicated power-only instance; D+/D- unused
+USB-C PD VBUS surge clamp,TI TVS2200DRVR 22V flat-clamp WSON-6,1,FROZEN MPN / FOOTPRINT PENDING,Place adjacent to J17 VBUS; 40A 8/20us capability; protects TPS25730 VBUS/VBUS_IN
+USB-C PD CC protector,TI TPD4S201RUKR WQFN-20,1,FROZEN MPN / FOOTPRINT PENDING,28V short-to-VBUS OVP + IEC ESD for CC; EVM-proven companion to TPS25730A
+USB-C PD ADCIN1 strap,162k + 38.0k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Decoded value 3 -> 15V minimum
+USB-C PD ADCIN2 strap,38.3k + 162k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Decoded value 6 -> 20V maximum with auto-disable on capability mismatch; PD5VMAX tied low
+USB-C PD ADCIN3/4 straps,162k + 38.0k 1% 0603,2 networks,FROZEN FIRST-PASS VALUE,Decoded 3/3 -> 3A operating current / 5A maximum current

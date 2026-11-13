@@ -70,9 +70,16 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - F1 holder MPN is selected as Littelfuse 178.6764.0001 MINI FL1 58V PCB holder. Fuse candidate is Littelfuse 099707.5WXN (7.5A, 58V, 1kA interrupt), but **7.5A remains provisional** until the full 5V load + AUX-recharge + inrush policy is frozen. Holder footprint remains pending exact manufacturer-hole transcription.
 - Automotive capability remains conditional on final TVS energy margin, MOSFET SOA/inrush, fuse/harness selection, PCB layout and physical transient testing; no compliance claim is made at schematic stage.
 
+## USB-C PD secondary-input batch awaiting native KiCad validation
+
+- New sheet 10 adds J17 GCT USB4085-GF-A dedicated power-only receptacle, U8 TVS2200 VBUS clamp, U9 TPD4S201 CC OVP/ESD protector and U7 TPS25730AD integrated 5A PD sink path feeding `PD_PWR`.
+- Pin straps target 15–20V, 3A operating / 5A maximum, auto-disable on capability mismatch. I2C is intentionally grounded for this first standalone pass; negotiated-contract telemetry is deferred to a power-safe buffered interface.
+- U7/U8/U9 exact footprints and exact PD capacitor MPNs are deliberately pending native render/ERC validation. J17 uses the already-frozen stock GCT USB4085 footprint.
+- Native KiCad render/ERC is required before this PD electrical batch can be considered green; do not alter the frozen barrel or LTC4418 source-priority sheets while validating it.
+
 ## Fabrication blockers
 
-1. **Main external-source front end is partially frozen.** Source priority (sheet 08) and the 12V barrel/reverse/load-dump electrical front end (sheet 09) are frozen. J16 exact footprint plus Q9/Q10 exact PG-TDSON-8-34 footprint remain open mechanical items. Still TBD electrically: USB-C PD sink/controller and SYS_IN→5V_MAIN high-current buck.
+1. **Main external-source front end is partially frozen.** Source priority (sheet 08) and the 12V barrel/reverse/load-dump electrical front end (sheet 09) are frozen. USB-C PD secondary-source circuitry is now on sheet 10 awaiting native validation. J16/F1/Q9/Q10 physical footprints remain open. After PD validation, the major remaining electrical blocker is SYS_IN→5V_MAIN high-current buck.
 2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
