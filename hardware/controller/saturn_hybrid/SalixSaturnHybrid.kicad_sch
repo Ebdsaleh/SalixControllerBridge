@@ -2,7 +2,7 @@
   (version 20260306)
   (generator "salix_chatgpt")
   (generator_version "1.0")
-  (uuid "SalixSaturnHybrid")
+  (uuid "d3000000-0000-4000-8000-000000000002")
   (paper "A4")
   (lib_symbols
   (symbol "SalixController:PICO2_CONTROLLER_CORE"
@@ -454,7 +454,7 @@
     (pin "4" (uuid "d2000000-0000-4000-8000-000000003004"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "J1") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "J1") (unit 1))
       )
     )
   )
@@ -494,7 +494,7 @@
     (pin "25" (uuid "d2000000-0000-4000-8000-000000003030"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "U1") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "U1") (unit 1))
       )
     )
   )
@@ -520,7 +520,7 @@
     (pin "11" (uuid "d2000000-0000-4000-8000-000000003042"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "J2") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "J2") (unit 1))
       )
     )
   )
@@ -541,7 +541,7 @@
     (pin "6" (uuid "d2000000-0000-4000-8000-000000003049"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "J3") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "J3") (unit 1))
       )
     )
   )
@@ -563,7 +563,7 @@
     (pin "7" (uuid "d2000000-0000-4000-8000-000000003057"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "U2") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "U2") (unit 1))
       )
     )
   )
@@ -580,7 +580,7 @@
     (pin "2" (uuid "d2000000-0000-4000-8000-000000003060"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "SW1") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "SW1") (unit 1))
       )
     )
   )
@@ -603,7 +603,7 @@
     (pin "8" (uuid "d2000000-0000-4000-8000-000000003069"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "J4") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "J4") (unit 1))
       )
     )
   )
@@ -622,7 +622,7 @@
     (pin "4" (uuid "d2000000-0000-4000-8000-000000003074"))
     (instances
       (project "SalixSaturnHybrid"
-        (path "/SalixSaturnHybrid" (reference "M1") (unit 1))
+        (path "/d3000000-0000-4000-8000-000000000002" (reference "M1") (unit 1))
       )
     )
   )
