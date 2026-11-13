@@ -36,7 +36,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Newly added / awaiting native KiCad validation
 
-- AUX recharge / optional-power interface has been added to 01_Power: U3 TPS259474LRPWR, J15 Molex 43045-1000, CHARGE_PWR protection/qualification, AUX_PWR return path and reserved module-management pins.
+- AUX recharge / optional-power interface has been added to 01_Power: U3 TPS259474LRPWR, J15 Molex 43045-1000, CHARGE_PWR protection/qualification, AUX_PWR return path and reserved module-management pins. The first native render exposed one real wiring error: the C5 GND stub overlapped the C6 CHARGE_PWR stub, merging those nets. That overlap has been removed and the AUX block has been respaced onto the 1.27mm grid; native ERC must now be rerun.
 - The previous **0 errors / 667 warnings** native-KiCad baseline predates this AUX-power commit. Do **not** call this batch electrically green until native KiCad 10 ERC and the project visualizer are rerun on a fresh pull.
 - U3's exact TI RPW0010A fabrication footprint remains intentionally TBD; the electrical MPN is frozen but fabrication cannot proceed until the land pattern is created/validated.
 
