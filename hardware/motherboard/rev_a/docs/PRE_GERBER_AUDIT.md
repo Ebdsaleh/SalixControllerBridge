@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-095655).zip` returned to **0 errors / 673 warnings** after the stacked Type-C duplicate-pin fix. Breakdown: 550 endpoint-off-grid + 123 library-symbol-mismatch. The prior `pin_to_pin` error and `multiple_net_names` warning are gone; no accidental global `VBUS` net remains between Bank A and Bank B.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-105840).zip` remained **0 errors** and improved to **670 warnings**: 550 endpoint-off-grid + 120 library-symbol-mismatch. The Molex Micro-Fit 3.0 J7/J8/J20 footprint assignment produced no new warning category or electrical regression.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -25,7 +25,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - Front receptacles are now frozen: J21/J23 use Molex 67643-2910 with `Connector_USB:USB_A_Molex_67643_Horizontal`; J22/J24 use GCT USB4085-GF-A with `Connector_USB:USB_C_Receptacle_GCT_USB4085`. The USB-C symbol has been converted from logical pin numbers to the connector’s physical A/B contact IDs, with SBU1/SBU2 explicitly NC.
 - The USB receptacle / physical Type-C pin-map batch is now native-KiCad validated green. Duplicated physical contacts remain explicit stacked visible pins, while only unused SBU1/SBU2 are hidden NC.
 - The motherboard/daughterboard connector family is now frozen to Molex 43045-2000 Micro-Fit 3.0, 20-circuit 2x10 right-angle through-hole, using stock KiCad footprint `Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal` for J7/J8/J20. Harness mating housing is 43025-2000; 43030-0007 covers 20-24AWG and 43030-0010 covers 26-30AWG loose tin female crimp contacts. Final harness length remains mechanical/enclosure-dependent.
-- The 673-warning / 0-error native ERC baseline predates assignment of the Micro-Fit J7/J8/J20 footprints; rerun native KiCad after this commit.
+- The Micro-Fit 3.0 J7/J8/J20 assignment is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
