@@ -34,6 +34,13 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - The Noctua NF-A4x10 5V PWM + Molex 47053-1000 J10/J11 fan/header batch is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
+## Source-priority mux batch awaiting native KiCad validation
+
+- New sheet 08 implements the two-stage source-priority mux: BARREL_PROT > PD_PWR → EXT_CHARGE_IN, then EXT_CHARGE_IN > AUX_PWR → SYS_IN.
+- U4/U5 are LTC4418IUF#PBF; Q1-Q8 are Si7155DP-T1-GE3 back-to-back P-channel MOSFETs.
+- This commit has source-level s-expression validation only. Do not call the source-priority batch green until native KiCad 10 ERC and the schematic visualizer are rerun.
+- The previously validated baseline before this batch remains **0 errors / 682 warnings**.
+
 ## Newly added / awaiting native KiCad validation
 
 - AUX recharge / optional-power interface has been added to 01_Power: U3 TPS259474LRPWR, J15 Molex 43045-1000, CHARGE_PWR protection/qualification, AUX_PWR return path and reserved module-management pins. The first native render exposed one real wiring error: the C5 GND stub overlapped the C6 CHARGE_PWR stub, merging those nets. That overlap has been removed and the AUX block has been respaced onto the 1.27mm grid; native ERC must now be rerun.
@@ -42,7 +49,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Fabrication blockers
 
-1. **Main external-source front end is not designed/frozen.** The 12V barrel connector/protection, USB-C PD sink, deliberate barrel>PD>AUX priority mux, automotive/caravan transient protection and high-current conversion to 5V_MAIN remain TBD. The new AUX recharge branch only protects CHARGE_PWR and must not be mistaken for the whole-system input stage.
+1. **Main external-source front end is only partially frozen.** The deliberate barrel>PD>AUX priority mux is now implemented on sheet 08 using U4/U5 LTC4418 + Q1-Q8 Si7155DP. Still TBD: exact 12V barrel connector and automotive/reverse/load-dump protection, USB-C PD sink/controller, and the SYS_IN→5V_MAIN high-current buck.
 2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.

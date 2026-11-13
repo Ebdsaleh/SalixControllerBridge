@@ -8,7 +8,15 @@ Rev-A is being frozen around three source classes, with the source front-end sti
 2. **USB-C PD power input — secondary.** Separate from the frozen DEBUG/UPDATE USB-C. The PD source is qualified before it can feed the system or the recharge branch.
 3. **AUX_PWR module — tertiary.** Optional plug-in module. The motherboard does not assume a battery chemistry.
 
-The future source mux must enforce this priority deliberately; it must not rely on whichever source happens to have the highest instantaneous voltage.
+The source-priority mux is now implemented on `08_Source_Priority.kicad_sch` using two cascaded LTC4418 controllers and eight Si7155DP P-channel MOSFETs:
+
+- U4: V1 = BARREL_PROT, V2 = PD_PWR, output = EXT_CHARGE_IN.
+- U5: V1 = EXT_CHARGE_IN, V2 = AUX_PWR, output = SYS_IN.
+- Each channel uses a back-to-back Si7155DP pair for reverse/cross-conduction isolation.
+- This topology structurally prevents AUX_PWR from ever feeding EXT_CHARGE_IN, so an AUX battery module cannot source its own CHARGE_PWR input.
+- SYS_IN remains an unregulated selected-source rail. The future high-current buck converts SYS_IN to 5V_MAIN.
+
+Priority is therefore explicit in hardware: **barrel > USB-C PD > AUX**. It does not depend on which source has the numerically highest voltage.
 
 ## AUX power / recharge interface
 
@@ -39,7 +47,7 @@ Recharge branch first-pass electrical contract:
 - C5 = 1uF / 35V local input bypass. C6 = 10uF / 35V local output reservoir.
 - R11/R12 = 56.2k / 10k create the CHARGE_PWR power-good threshold; R13 = 100k pulls AUX_CHG_PG to 3V3_AUX.
 
-EXT_CHARGE_IN is presently an upstream-contract net with an ERC power flag. The future barrel/PD source-selection block must be the only thing that drives it. A weak USB-C source may therefore power the bridge while leaving EXT_CHARGE_IN unavailable; a sufficiently capable source may power the bridge and recharge the optional module simultaneously.
+EXT_CHARGE_IN is now driven by the U4 external-source priority stage (barrel over PD). A weak USB-C source may therefore power the bridge while leaving EXT_CHARGE_IN unavailable; a sufficiently capable source may power the bridge and recharge the optional module simultaneously.
 
 ## 5V_MAIN
 
@@ -81,3 +89,21 @@ The Rev-A power sheet now electrically names 5V_MAIN, 3V3_AUX, 3V3_AUX_PG and GN
 Each TPS25821 currently has 3 x 47uF at IN (141uF nominal), so four Type-C ports contribute 564uF nominal input bulk across the two daughterboards. The exact capacitor MPN/package must be selected by **effective capacitance at 5V**, not nameplate value alone, because TI calls for at least 120uF close to each TPS25821 IN.
 
 The main input connector and protection stage must tolerate/shape charging of that bulk plus the rest of the system. USB-A downstream reservoir capacitors are separately required at each TPS2553 OUT and are charged behind the per-port switches.
+
+
+## Source-priority validity windows
+
+The LTC4418 uses its internal 3% hysteresis mode (HYS tied to GND) and approximately 1MΩ three-resistor divider strings. Nominal 1V-comparator windows are:
+
+| Channel | Divider top / middle / bottom | Nominal UV | Nominal OV |
+|---|---|---:|---:|
+| U4 V1 BARREL_PROT | 887k / 61.9k / 56.2k | 8.51V | 17.88V |
+| U4 V2 PD_PWR | 931k / 30.1k / 44.2k | 13.53V | 22.74V |
+| U5 V1 EXT_CHARGE_IN | 887k / 80.6k / 44.2k | 8.11V | 22.89V |
+| U5 V2 AUX_PWR | 887k / 56.2k / 60.4k | 8.61V | 16.62V |
+
+These are source-validation windows, not surge-clamp specifications. The barrel path still requires its own automotive/reverse/load-dump front end, and PD_PWR is still required to come from a compliant PD sink controller.
+
+Both LTC4418s use 1nF TMR capacitors (about 16ms nominal validation time) and 100nF INTVCC bypass capacitors. VALID1/VALID2 and CAS are intentionally not used in this first source-mux pass.
+
+The Si7155DP is a 40V P-channel PowerPAK SO-8 part. Rev-A uses its conservative 4.6mΩ maximum RDS(on) at -4.5V for preliminary conduction-loss budgeting. The selected external source traverses four MOSFETs (two in U4 plus two in U5); AUX traverses only the U5 pair. Final PCB copper and thermal validation remain mandatory.

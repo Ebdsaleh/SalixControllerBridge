@@ -52,6 +52,23 @@ U3's land pattern is now frozen to project-local footprint `SalixFP:TI_RPW0010A_
 
 The J15 management pins are reserved electrically in this pass; firmware ownership and AUX_ID encoding are not frozen yet. They must not be repurposed casually because the whole point of J15 is to keep the Rev-A motherboard compatible with future smart power modules.
 
+## Main source-priority PowerPath
+
+Rev-A now implements source priority on sheet 08 with two LTC4418IUF#PBF controllers:
+
+- Stage U4 selects BARREL_PROT over PD_PWR and produces EXT_CHARGE_IN.
+- EXT_CHARGE_IN feeds both the existing U3 AUX recharge protection branch and U5's highest-priority input.
+- Stage U5 selects EXT_CHARGE_IN over AUX_PWR and produces SYS_IN.
+- SYS_IN will feed the future wide-input high-current 5V_MAIN buck.
+
+This two-stage topology is deliberate. AUX_PWR is introduced only after EXT_CHARGE_IN exists, so there is no copper path by which the optional battery module can feed its own CHARGE_PWR input.
+
+Q1-Q8 are frozen to Vishay Si7155DP-T1-GE3 P-channel MOSFETs in PowerPAK SO-8. The device uses pins 1-4 as source, pin 5 as gate and pins 6-8 as drain. Each LTC4418 channel uses a common-source back-to-back pair.
+
+U4/U5 are frozen to LTC4418IUF#PBF using the stock KiCad 20-pin 4x4mm QFN footprint. HYS is tied to GND for internal 3% hysteresis; TMR is 1nF for roughly 16ms validation; INTVCC is locally bypassed by 100nF. EN and SHDN are held from INTVCC for normal always-enabled operation. VALID and CAS are unused in this pass.
+
+The source-validity resistor windows are documented in POWER_ARCHITECTURE.md. They are not substitutes for surge/transient protection. BARREL_PROT must still be produced by an automotive-capable protected front end, and PD_PWR must still be produced by the future USB-C PD sink.
+
 ## Manufacturing strategy
 Quote the complete architecture first. If optional blocks make PCBA too expensive, DNP them rather than deleting the footprints/nets where possible.
 

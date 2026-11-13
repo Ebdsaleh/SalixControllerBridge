@@ -29,6 +29,15 @@ USB dual-bank motherboard PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2
 3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
 Main input protection / source mux,Higher-current wide-input protected stage,1,TBD,Must cover the whole bridge load and barrel/PD/AUX priority; AUX recharge TPS259474L is not the main-system eFuse
+
+Source priority controller,Analog Devices LTC4418IUF#PBF 20-QFN 4x4mm,2,FROZEN MPN / STOCK FOOTPRINT,Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm; U4 barrel>PD and U5 external>AUX
+Source priority P-MOSFET,Vishay Si7155DP-T1-GE3 PowerPAK SO-8,8,FROZEN MPN / STOCK FOOTPRINT,Package_SO:PowerPAK_SO-8_Single; 40V P-channel; back-to-back pairs Q1-Q8
+Source priority BARREL divider,887k + 61.9k + 56.2k 1% 0603,1 network,FROZEN VALUES,U4 V1 nominal 8.51V UV / 17.88V OV before internal hysteresis
+Source priority PD divider,931k + 30.1k + 44.2k 1% 0603,1 network,FROZEN VALUES,U4 V2 nominal 13.53V UV / 22.74V OV before internal hysteresis
+Source priority EXT divider,887k + 80.6k + 44.2k 1% 0603,1 network,FROZEN VALUES,U5 V1 nominal 8.11V UV / 22.89V OV before internal hysteresis
+Source priority AUX divider,887k + 56.2k + 60.4k 1% 0603,1 network,FROZEN VALUES,U5 V2 nominal 8.61V UV / 16.62V OV before internal hysteresis
+Source priority timer capacitor,1nF 50V 0603,2,FROZEN VALUE,About 16ms nominal LTC4418 input validation time
+Source priority INTVCC bypass,100nF 10V X7R 0603,2,FROZEN VALUE,Local bypass at U4/U5 INTVCC
 AUX recharge eFuse,TI TPS259474LRPWR RPW-10,1,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm; TI drawing 4225183/A land geometry; dedicated to CHARGE_PWR branch
 AUX power module PCB header,Molex 43045-1000 Micro-Fit 3.0 10-circuit 2x5 right-angle through-hole,1,FROZEN MPN / FOOTPRINT,Connector_Molex:Molex_Micro-Fit_3.0_43045-1000_2x05_P3.00mm_Horizontal; duplicated AUX_PWR/GND/CHARGE_PWR contacts
 AUX power module harness housing,Molex 43025-1000 Micro-Fit 3.0 10-circuit receptacle,1 per module harness,FROZEN MPN,Mates J15; final harness length and wire gauges depend on enclosure/module placement
