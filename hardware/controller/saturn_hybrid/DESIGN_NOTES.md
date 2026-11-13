@@ -9,10 +9,12 @@ This project parks the Saturn-inspired controller concept so it can be revisited
 - Original wide, softly curved shell carrying Sega-Saturn-era ergonomic character without reproducing an official Sega shell.
 - Strong D-pad position at upper-left for 2D/fighting/retro use.
 - Left analog stick below the D-pad and right analog stick below the face cluster.
-- Four-button Salix face-action cluster using **Π left, Ω top, Φ right, Α bottom**.
+- Four-button Salix face-action cluster using **ϖ left, ب top, φ right, ا bottom**.
 - Central 2.4-inch touchscreen.
 - Modern shoulder/trigger controls, stick clicks, menu buttons and dual rumble/haptics.
 - Ergonomic target: **Saturn visual language with modern deep-grip comfort**, rather than a flat historical Saturn-pad profile.
+
+Button legends: use **ϖ left / ب top / φ right / ا bottom** as the Salix face-action standard. Final shell artwork should use vector outlines, not a font dependency.
 
 ## Electrical feasibility baseline
 
@@ -22,7 +24,7 @@ This project parks the Saturn-inspired controller concept so it can be revisited
 - User-owned TF034-labelled **2.4inch RPi Display**, marked **320x240 Pixels**, as baseline display.
 - Display/touch is represented as shared-SPI; **the real 2x13 header must be electrically verified before fabrication**.
 - Dedicated microSD for VMU images/profiles/assets.
-- Digital controls use the same abstracted I2C expansion bank as the Screen Pro concept, with the same **Π / Ω / Φ / Α** primary action mapping.
+- Digital controls use the same abstracted I2C expansion bank as the Screen Pro concept, with the same **ϖ / ب / φ / ا** primary action mapping.
 - Dual analog sticks + optional analog triggers.
 - Dual rumble/haptic channels.
 
@@ -34,4 +36,4 @@ The controller should remain useful on PC and other consoles even when no Dreamc
 
 ## Revisit checklist
 
-Prototype grip shape first; verify comfort against the user's preferred modern controller feel; then freeze screen placement, PCB envelope and four-button Greek-symbol spacing. After that, verify the TF034 header, choose exact sticks/switches/haptics, and replace the abstract electronics blocks with production components.
+Prototype grip shape first; verify comfort against the user's preferred modern controller feel; then freeze screen placement, PCB envelope and four-button Salix-symbol spacing. After that, verify the TF034 header, choose exact sticks/switches/haptics, and replace the abstract electronics blocks with production components.
