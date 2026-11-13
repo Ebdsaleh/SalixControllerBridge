@@ -107,3 +107,7 @@ These are source-validation windows, not surge-clamp specifications. The barrel 
 Both LTC4418s use 1nF TMR capacitors (about 16ms nominal validation time) and 100nF INTVCC bypass capacitors. VALID1/VALID2 and CAS are intentionally not used in this first source-mux pass.
 
 The Si7155DP is a 40V P-channel PowerPAK SO-8 part. Rev-A uses its conservative 4.6mΩ maximum RDS(on) at -4.5V for preliminary conduction-loss budgeting. The selected external source traverses four MOSFETs (two in U4 plus two in U5); AUX traverses only the U5 pair. Final PCB copper and thermal validation remain mandatory.
+
+### Datasheet verification — source-priority stage
+
+The U4/U5 LTC4418 symbol and Q1-Q8 Si7155DP switching topology were independently rechecked against the manufacturer datasheets on 2026-11-13. LTC4418 pin numbering matches the 20-lead UF QFN definition, including exposed pad 21. Each Si7155DP uses pins 1-4 as source, pin 5 as gate and pins 6-8 as drain. Each source channel uses a common-source back-to-back P-channel pair; VS1/VS2 connect to those common-source nodes, G1/G2 drive the paired gates, and VOUT senses the selected output. HYS is grounded for internal 3% hysteresis, EN and SHDN are tied to INTVCC, TMR uses 1nF to ground and INTVCC uses 100nF to ground. The electrical architecture is therefore datasheet-consistent; only the final page-9 native visual rerender remains before schematic-level freeze.

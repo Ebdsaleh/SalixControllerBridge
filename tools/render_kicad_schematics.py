@@ -388,6 +388,7 @@ def render_page_native_png(
     page_dir = scratch / f"page_{sheet.page.replace('/', '_')}"
     page_dir.mkdir(parents=True, exist_ok=True)
 
+    is_root = sheet.source.resolve() == root_schematic.resolve()
     command = [
         str(kicad_cli),
         "sch",
@@ -397,14 +398,19 @@ def render_page_native_png(
         str(page_dir),
         "--dpi",
         str(dpi),
-        "--pages",
-        sheet.page,
     ]
+
+    # KiCad 10 can enumerate a newly-added hierarchical page yet export that
+    # page as title-block-only through the root hierarchy. Child schematics are
+    # therefore rendered directly from their own source file; the root sheet
+    # alone uses --pages 1.
+    if is_root:
+        command.extend(["--pages", sheet.page])
 
     if theme:
         command.extend(["--theme", theme])
 
-    command.append(str(root_schematic))
+    command.append(str(root_schematic if is_root else sheet.source))
     run_checked(command)
 
     produced = sorted(page_dir.glob("*.png"))
@@ -433,6 +439,7 @@ def render_page_via_pdf(
 
     pdf_path = page_dir / "sheet.pdf"
 
+    is_root = sheet.source.resolve() == root_schematic.resolve()
     command = [
         str(kicad_cli),
         "sch",
@@ -440,14 +447,18 @@ def render_page_via_pdf(
         "pdf",
         "--output",
         str(pdf_path),
-        "--pages",
-        sheet.page,
     ]
+
+    # Render child sheets directly. This avoids a KiCad 10 PDF-export quirk
+    # where a valid late-added child can be present in ERC/page enumeration but
+    # export as a blank title block when selected through the root schematic.
+    if is_root:
+        command.extend(["--pages", sheet.page])
 
     if theme:
         command.extend(["--theme", theme])
 
-    command.append(str(root_schematic))
+    command.append(str(root_schematic if is_root else sheet.source))
     run_checked(command)
 
     if not pdf_path.is_file():

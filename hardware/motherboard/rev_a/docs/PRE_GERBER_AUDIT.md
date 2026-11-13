@@ -34,12 +34,15 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - The Noctua NF-A4x10 5V PWM + Molex 47053-1000 J10/J11 fan/header batch is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
-## Source-priority mux batch awaiting native KiCad validation
+## Source-priority mux batch — ERC green; visual rerender pending
 
 - New sheet 08 implements the two-stage source-priority mux: BARREL_PROT > PD_PWR → EXT_CHARGE_IN, then EXT_CHARGE_IN > AUX_PWR → SYS_IN.
 - U4/U5 are LTC4418IUF#PBF; Q1-Q8 are Si7155DP-T1-GE3 back-to-back P-channel MOSFETs.
 - Native KiCad 10.0.8 ERC on the first page-9 batch is **0 errors / 721 warnings**. The increase from 682 is entirely 39 additional `lib_symbol_issues`; `endpoint_off_grid` remains 551 and the four intentionally isolated AUX management labels remain unchanged.
-- ERC already sees `/MAIN SOURCE PRIORITY / POWERPATH/`, but the helper renderer initially exported only eight PNGs because its sheet discovery assumed tab indentation. The renderer has been fixed; page-9 visual review is still required before this batch is called fully green.
+- ERC already sees `/MAIN SOURCE PRIORITY / POWERPATH/`. The helper renderer sheet-discovery bug was fixed and page 9 is now enumerated, but KiCad 10.0.8 exported the page as title-block-only when selected through the root hierarchy. The helper now renders child schematics directly to work around that KiCad CLI export behavior; a final visual rerender is still required.
+- LTC4418 U4/U5 pin numbering has been rechecked against the Analog Devices Rev-A datasheet: TMR=1, UV1=2, OV1=3, UV2=4, OV2=5, VALID1=6, VALID2=7, GND=8, CAS=9, INTVCC=10, G2=11, VS2=12, G1=13, VS1=14, VOUT=15, V2=16, V1=17, EN=18, SHDN=19, HYS=20, exposed pad=21.
+- The control connections also match the datasheet intent: HYS→GND (internal 3% hysteresis), EN/SHDN→INTVCC when unused, TMR uses 1nF to GND (~16ms nominal), INTVCC uses 100nF to GND, CAS/VALID outputs are unused, and VS1/VS2 sense the common-source nodes.
+- Q1-Q8 Si7155DP pinout is confirmed from Vishay: pins 1-4 source, 5 gate, 6-8 drain. Each channel's two P-FETs are arranged common-source back-to-back, with VSx at the common-source node and both gates driven together, matching the LTC4418 application topology.
 
 ## Newly added / awaiting native KiCad validation
 
