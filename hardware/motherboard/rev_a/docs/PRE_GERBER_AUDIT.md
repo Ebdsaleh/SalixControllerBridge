@@ -6,7 +6,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Confirmed good / corrected
 
-- Native KiCad ERC rerun from `kicad_fixes(20261113-125005).zip` remained **0 errors** and improved to **669 warnings**: 551 endpoint-off-grid + 118 library-symbol-mismatch. The +1 off-grid warning is the new J13 shell-to-GND wire endpoint; the J13/J14 connector batch introduced no electrical warning/error category.
+- Native KiCad ERC rerun from `kicad_fixes(20261113-131905).zip` remained **0 errors** and improved to **667 warnings**: 551 endpoint-off-grid + 116 library-symbol-mismatch. The Noctua/Molex fan-header batch and front-board annotation move introduced no electrical warning/error category.
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
@@ -31,7 +31,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - J13 Hirose microSD and J14 JST PH service/TFT connector assignments are now native-KiCad validated green.
 - Cooling is now frozen to two Noctua NF-A4x10 5V PWM fans. Manufacturer maximum current is 0.07A / 0.35W per fan with locked-rotor auto-shutdown/retry, giving very large margin against each TPS22919 1.5A continuous rating.
 - J10/J11 are frozen to Molex 47053-1000 standard 4-wire PWM fan headers using project-local `SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical`, built from Molex drawing SD-47053-001 including its keyed locator hole.
-- The 669-warning / 0-error native ERC baseline predates the fan/header freeze; rerun native KiCad after this commit.
+- The Noctua NF-A4x10 5V PWM + Molex 47053-1000 J10/J11 fan/header batch is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
