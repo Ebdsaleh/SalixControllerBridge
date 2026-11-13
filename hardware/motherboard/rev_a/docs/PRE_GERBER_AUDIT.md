@@ -36,6 +36,8 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## Source-priority mux batch — ERC green; visual rerender pending
 
+- KiCad GUI subsequently exposed the actual page-9 load failure at line 187: the generated Si7155DP duplicate source/drain pins used invalid pin text-effects syntax `(effects (...)) hide`. KiCad requires `hide` inside the `effects` block. The embedded page-9 symbol and project `Salix.kicad_sym` copy have both been corrected. This was a file-format defect only; it did not change the verified Si7155DP pin numbers or source-priority electrical topology.
+
 - New sheet 08 implements the two-stage source-priority mux: BARREL_PROT > PD_PWR → EXT_CHARGE_IN, then EXT_CHARGE_IN > AUX_PWR → SYS_IN.
 - U4/U5 are LTC4418IUF#PBF; Q1-Q8 are Si7155DP-T1-GE3 back-to-back P-channel MOSFETs.
 - Native KiCad 10.0.8 ERC on the first page-9 batch is **0 errors / 721 warnings**. The increase from 682 is entirely 39 additional `lib_symbol_issues`; `endpoint_off_grid` remains 551 and the four intentionally isolated AUX management labels remain unchanged.
