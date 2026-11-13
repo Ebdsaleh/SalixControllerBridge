@@ -3900,7 +3900,7 @@
 	  (exclude_from_sim no) (in_bom yes) (on_board yes)
 	  (property "Reference" "U" (at 0 -19.0 0) (effects (font (size 0.9 0.9))))
 	  (property "Value" "LM74800QDRRRQ1" (at 0 19.0 0) (effects (font (size 0.78 0.78))))
-	  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+	  (property "Footprint" "SalixFP:TI_DRR0012E_WSON-12_3x3mm_P0.5mm_FloatingEP" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/lm7480-q1.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (property "Description" "TI LM74800-Q1 automotive ideal diode / reverse battery / overvoltage controller, WSON-12 DRR" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (symbol "LM74800_Q1_0_1"
