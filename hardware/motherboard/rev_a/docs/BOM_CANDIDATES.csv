@@ -28,7 +28,17 @@ USB dual-bank motherboard PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2
 3V3_AUX output capacitors,22uF 10V X7R,2,FROZEN VALUE,Recommended 2.2uH + 2x22uF combination
 3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
-Main input eFuse,TPS25947-class or higher-current equivalent,1,CANDIDATE,Final part depends on 5V_MAIN current budget
+Main input protection / source mux,Higher-current wide-input protected stage,1,TBD,Must cover the whole bridge load and barrel/PD/AUX priority; AUX recharge TPS259474L is not the main-system eFuse
+AUX recharge eFuse,TI TPS259474LRPWR RPW-10,1,FROZEN MPN / FOOTPRINT TBD,Circuit-breaker + latch-off + true reverse-current blocking; 2.7-23V device; dedicated to CHARGE_PWR branch
+AUX power module PCB header,Molex 43045-1000 Micro-Fit 3.0 10-circuit 2x5 right-angle through-hole,1,FROZEN MPN / FOOTPRINT,Connector_Molex:Molex_Micro-Fit_3.0_43045-1000_2x05_P3.00mm_Horizontal; duplicated AUX_PWR/GND/CHARGE_PWR contacts
+AUX power module harness housing,Molex 43025-1000 Micro-Fit 3.0 10-circuit receptacle,1 per module harness,FROZEN MPN,Mates J15; final harness length and wire gauges depend on enclosure/module placement
+AUX recharge UVLO/OVLO divider,464k + 52.3k + 30.1k 1% 0603,1 network,FROZEN VALUES,Nominal thresholds about 7.96V UVLO / 21.78V OVLO using 1.2V reference; tolerance check still required
+AUX recharge current-limit resistor,1.33k 1% 0603,1,FROZEN VALUE,About 2.5A nominal TPS259474L breaker threshold; module contract is <=2.0A continuous
+AUX recharge dVdt capacitor,3.3nF 50V 0603,1,FROZEN VALUE,Controlled CHARGE_PWR ramp / hot-plug inrush shaping
+AUX recharge input bypass,1uF 35V X7R 0805,1,FROZEN VALUE,Place immediately at U3 IN/GND
+AUX recharge output reservoir,10uF 35V X7R 1210,1,FROZEN VALUE,Local CHARGE_PWR reservoir after U3
+AUX recharge PGTH divider,56.2k + 10k 1% 0603,1 network,FROZEN VALUES,CHARGE_PWR power-good threshold
+AUX recharge PG pullup,100k 1% 0603 to 3V3_AUX,1,FROZEN VALUE,AUX_CHG_PG open-drain pull-up
 Front-board interface PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2x10 right-angle through-hole,1 per daughterboard,FROZEN MPN / FOOTPRINT,Same header on motherboard and daughterboard enables female-to-female harness; stock KiCad exact footprint
 Front-board harness housing,Molex 43025-2000 Micro-Fit 3.0 20-circuit dual-row receptacle,2 per harness,FROZEN FAMILY / MPN,Positive-latch polarized female housing at each end; final cable length depends on enclosure
 Front-board harness power contact,Molex 43030-0007 female crimp terminal tin 20-24AWG,as required,FROZEN MPN,Use for 5V/GND and other conductors where 20-24AWG is selected

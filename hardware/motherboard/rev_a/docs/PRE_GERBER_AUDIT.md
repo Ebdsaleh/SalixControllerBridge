@@ -34,11 +34,17 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - The Noctua NF-A4x10 5V PWM + Molex 47053-1000 J10/J11 fan/header batch is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
+## Newly added / awaiting native KiCad validation
+
+- AUX recharge / optional-power interface has been added to 01_Power: U3 TPS259474LRPWR, J15 Molex 43045-1000, CHARGE_PWR protection/qualification, AUX_PWR return path and reserved module-management pins.
+- The previous **0 errors / 667 warnings** native-KiCad baseline predates this AUX-power commit. Do **not** call this batch electrically green until native KiCad 10 ERC and the project visualizer are rerun on a fresh pull.
+- U3's exact TI RPW0010A fabrication footprint remains intentionally TBD; the electrical MPN is frozen but fabrication cannot proceed until the land pattern is created/validated.
+
 ## Fabrication blockers
 
-1. **Main 5V input/protection is not designed/frozen.** Exact connector, TVS, fuse/eFuse, reverse-current/backfeed behavior, inrush strategy and high-current copper are TBD.
+1. **Main external-source front end is not designed/frozen.** The 12V barrel connector/protection, USB-C PD sink, deliberate barrel>PD>AUX priority mux, automotive/caravan transient protection and high-current conversion to 5V_MAIN remain TBD. The new AUX recharge branch only protects CHARGE_PWR and must not be mistaken for the whole-system input stage.
 2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
-3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+3. **Eight placed physical parts still have no footprint.** They are U3, J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
 6. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.

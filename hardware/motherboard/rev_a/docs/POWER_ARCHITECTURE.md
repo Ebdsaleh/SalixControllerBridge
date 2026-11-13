@@ -1,13 +1,54 @@
 # Power Architecture — Rev A
 
+## Target source architecture
+
+Rev-A is being frozen around three source classes, with the source front-end still to be implemented on the power sheet:
+
+1. **12V DC barrel — primary.** Normal full-power input and supplied-adapter path. The same input is intended to be made tolerant of a properly fused 12V car/caravan accessory feed after the automotive transient front end is designed.
+2. **USB-C PD power input — secondary.** Separate from the frozen DEBUG/UPDATE USB-C. The PD source is qualified before it can feed the system or the recharge branch.
+3. **AUX_PWR module — tertiary.** Optional plug-in module. The motherboard does not assume a battery chemistry.
+
+The future source mux must enforce this priority deliberately; it must not rely on whichever source happens to have the highest instantaneous voltage.
+
+## AUX power / recharge interface
+
+J15 is frozen as a 10-circuit Molex 43045-1000 Micro-Fit 3.0 right-angle header with the following contract:
+
+| Pin | Net | Direction at motherboard | Purpose |
+|---|---|---|---|
+| 1 | AUX_PWR | in | Module output power, contact A |
+| 2 | AUX_PWR | in | Module output power, contact B |
+| 3 | GND | common | Power return A |
+| 4 | GND | common | Power return B |
+| 5 | CHARGE_PWR | out | Protected recharge-module feed A |
+| 6 | CHARGE_PWR | out | Protected recharge-module feed B |
+| 7 | AUX_ID | in | Module identification / presence |
+| 8 | AUX_SDA | bidirectional | Reserved management I2C data |
+| 9 | AUX_SCL | out | Reserved management I2C clock |
+| 10 | AUX_INT_N | in | Reserved module interrupt/fault |
+
+The recharge path is **not a cell charger**. U3 (TPS259474LRPWR) qualifies and protects external power before presenting it as CHARGE_PWR. The optional module remains responsible for the chemistry-specific charger, BMS/protection, balancing where required, temperature sensing, fuel gauging and any buck/boost conversion its pack needs.
+
+Recharge branch first-pass electrical contract:
+- EXT_CHARGE_IN qualified operating window: approximately **8V to 21V**.
+- R7/R8/R9 = 464k / 52.3k / 30.1k (1%) gives nominal UVLO ≈7.96V and OVLO ≈21.78V using the TPS25947 1.2V threshold equations. Threshold tolerance must still be checked against the datasheet min/max values before fabrication.
+- U3 = **TPS259474L** circuit-breaker / latch-off variant with true reverse-current blocking.
+- R10 = 1.33k (1%), setting a nominal overcurrent threshold of about **2.5A**. The module contract is deliberately lower: **≤2.0A continuous CHARGE_PWR draw**.
+- C7 = 3.3nF on dVdt, giving a controlled output ramp rather than a hard hot-plug step.
+- ITIMER is intentionally left open for the fastest circuit-breaker response.
+- C5 = 1uF / 35V local input bypass. C6 = 10uF / 35V local output reservoir.
+- R11/R12 = 56.2k / 10k create the CHARGE_PWR power-good threshold; R13 = 100k pulls AUX_CHG_PG to 3V3_AUX.
+
+EXT_CHARGE_IN is presently an upstream-contract net with an ERC power flag. The future barrel/PD source-selection block must be the only thing that drives it. A weak USB-C source may therefore power the bridge while leaving EXT_CHARGE_IN unavailable; a sufficiently capable source may power the bridge and recharge the optional module simultaneously.
+
 ## 5V_MAIN
 
-- Regulated 5V external system input.
+- Target regulated **internal** 5V system rail. The existing Rev-A schematic currently starts at 5V_MAIN; the 12V-barrel / USB-C-PD / AUX source mux and wide-input high-current 5V buck remain to be drawn and frozen.
 - The input-current budget is **not frozen**. The current front-board policy can power both physical A/C receptacles in each logical bank.
 - With four banks, nominal exposed-port demand is 5.6A at the default Type-C STD advertisement (4 x 0.9A USB-A + 4 x 0.5A Type-C), before Pico/logic/fan loads.
 - If firmware enables the Type-C 1.5A advertisement on all four C ports, exposed-port demand becomes 9.6A (4 x 0.9A + 4 x 1.5A), before motherboard/fan loads.
 - Therefore the older 5A/6A system-input assumption is not a valid worst-case target. Final simultaneous-port policy, PSU rating, connector rating, copper, fuse/eFuse and reverse-current strategy must be frozen together.
-- TPS25947-class remains only a candidate if the final allowed system current fits its range; otherwise select a higher-current protection stage.
+- The whole-system protection/mux stage must be sized for the full bridge load and is still TBD. The TPS259474L now used on the AUX recharge branch is **not** the main-system eFuse and must not be reused there by assumption.
 
 5V_MAIN feeds both Pico VSYS inputs, both USB front-board power feeds, fan power, and the 3V3_AUX regulator.
 

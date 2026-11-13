@@ -32,6 +32,24 @@ J10/J11 are frozen to Molex 47053-1000 standard 4-wire fan headers. The project-
 - Console cards are power-off insert/remove for Rev A; no hot-swap promise.
 - Keep labelled test points for rails, hub root, inter-Pico RPC and both SWD interfaces.
 
+
+## AUX power module / recharge contract
+
+Rev-A now reserves a dedicated optional-power interface rather than choosing a battery chemistry on the motherboard.
+
+J15 is a Molex 43045-1000 10-circuit Micro-Fit 3.0 right-angle header. Pins 1/2 duplicate AUX_PWR from the module into the motherboard; pins 3/4 duplicate GND; pins 5/6 duplicate CHARGE_PWR from the motherboard to the module. Pins 7-10 reserve AUX_ID, AUX_SDA, AUX_SCL and AUX_INT_N for module identification, telemetry and fault reporting.
+
+The two power directions are intentionally separate:
+- **AUX_PWR** is produced by the optional module and will later enter the motherboard source-priority mux as the tertiary source.
+- **CHARGE_PWR** is produced by the motherboard recharge-protection branch from qualified external power and is consumed by the optional module.
+- The motherboard must never connect a cell stack directly to CHARGE_PWR and must never assume Li-ion, LiFePO4, NiMH or any other chemistry.
+
+U3 is frozen to TPS259474LRPWR for the recharge branch because this variant combines adjustable UVLO/OVLO, circuit-breaker overcurrent response, latch-off after fault and true reverse-current blocking. The first-pass divider values target an approximately 8V-to-21V accepted external-charge window. R10 = 1.33k sets about a 2.5A nominal breaker threshold; the interface contract limits a module to 2.0A continuous draw so normal charging is not designed to ride the protection threshold.
+
+The module must contain the chemistry-specific charger/BMS/protection, any required cell balancing, temperature supervision and whatever DC/DC conversion is required. This deliberately allows a future NiMH, Li-ion, LiFePO4 or other protected rechargeable module to use the same motherboard.
+
+The J15 management pins are reserved electrically in this pass; firmware ownership and AUX_ID encoding are not frozen yet. They must not be repurposed casually because the whole point of J15 is to keep the Rev-A motherboard compatible with future smart power modules.
+
 ## Manufacturing strategy
 Quote the complete architecture first. If optional blocks make PCBA too expensive, DNP them rather than deleting the footprints/nets where possible.
 
