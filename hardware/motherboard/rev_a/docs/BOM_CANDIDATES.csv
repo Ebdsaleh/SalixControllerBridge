@@ -8,8 +8,10 @@ Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
 Pico sockets,1x20 female headers x2 per Pico,4,FROZEN FORM,Two socketed Pico modules
 Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
-microSD,8-contact push-push or push-pull socket,1,LOGICAL INTERFACE FROZEN / MECHANICAL TBD,Native 3.3V SPI on Pico-B GP18-21; exact socket footprint TBD
-TFT/front-panel UI,12-position keyed logical service header,1,LOGICAL PINOUT FROZEN / MECHANICAL TBD,Adapter/harness maps J14 to user-owned TF034; exact panel pinout and connector TBD
+microSD,Hirose DM3AT-SF-PEJM5 push-push microSD socket,1,FROZEN MPN / FOOTPRINT,Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5; card-detect switch pins 9/10 intentionally NC in Rev A; shell pad 11 tied GND
+TFT/front-panel UI,JST S12B-PH-SM4-TB 12-position 2.0mm side-entry SMT header,1,FROZEN MPN / FOOTPRINT,Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal; 2A at AWG24; adapter/harness maps to TF034
+TFT/service harness housing,JST PHR-12 12-position PH receptacle housing,1,FROZEN MPN,2.0mm pitch friction-lock housing for J14
+TFT/service harness contact,JST SPH-002T-P0.5S tin receptacle crimp contact,12,FROZEN MPN,AWG30-24; use harness wire appropriate to signal/current
 Fan headers,4-pin 5V fan connector class,2,PROVISIONAL,GND + 5V + TACH + PWM/EN
 Fan load switches,TI TPS22919DCK SC-70-6,2,FROZEN FAMILY / FOOTPRINT,5V_MAIN to fan motor rail; Package_TO_SOT_SMD:SOT-363_SC-70-6; ON tied to 3V3_AUX
 Fan tach pullups,10k 1% 0603 to 3V3_AUX,2,FROZEN VALUE,4-wire fan tach is treated as open-collector/open-drain

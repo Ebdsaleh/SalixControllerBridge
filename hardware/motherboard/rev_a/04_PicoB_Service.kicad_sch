@@ -607,16 +607,16 @@
 			)
 		)
 
-		(symbol "Salix:MICROSD_SPI_8"
+				(symbol "Salix:MICROSD_SPI_8"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J" (at 0 -15 0) (effects (font (size 0.9 0.9))))
-			(property "Value" "MICROSD SPI SOCKET" (at 0 15 0) (effects (font (size 0.9 0.9))))
-			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(property "Description" "8-contact microSD socket wired for 3.3V SPI mode; exact push-push/push-pull footprint TBD" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Value" "HIROSE DM3AT-SF-PEJM5" (at 0 15 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "https://www.hirose.com/en/product/p/CL0609-0031-0-00" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "Hirose DM3AT-SF-PEJM5 push-push microSD socket; 8 card contacts plus card-detect switch pins 9/10 and shell pad 11" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(symbol "MICROSD_SPI_8_0_1"
 				(rectangle (start -12.7 12.7) (end 12.7 -12.7) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
@@ -629,6 +629,9 @@
 				(pin power_in line (at 15.24 7.62 180) (length 2.54) (name "VSS" (effects (font (size 0.72 0.72)))) (number "6" (effects (font (size 0.72 0.72)))))
 				(pin output line (at -15.24 0 0) (length 2.54) (name "DAT0/MISO" (effects (font (size 0.72 0.72)))) (number "7" (effects (font (size 0.72 0.72)))))
 				(pin passive line (at -15.24 -2.54 0) (length 2.54) (name "DAT1/RSV" (effects (font (size 0.72 0.72)))) (number "8" (effects (font (size 0.72 0.72)))))
+				(pin passive line (at 15.24 5.08 180) (length 2.54) (name "CARD_DET_A" (effects (font (size 0.72 0.72)))) (number "9" (effects (font (size 0.72 0.72)))))
+				(pin passive line (at 15.24 2.54 180) (length 2.54) (name "CARD_DET_B" (effects (font (size 0.72 0.72)))) (number "10" (effects (font (size 0.72 0.72)))))
+				(pin passive line (at 15.24 0 180) (length 2.54) (name "SHIELD" (effects (font (size 0.72 0.72)))) (number "11" (effects (font (size 0.72 0.72)))))
 			)
 		)
 
@@ -669,10 +672,10 @@
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)(in_bom yes)(on_board yes)
 			(property "Reference" "J" (at 0 -15 0) (effects (font (size 0.9 0.9))))
-			(property "Value" "SERVICE UI 12P" (at 0 15 0) (effects (font (size 0.9 0.9))))
-			(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-			(property "Description" "Logical front-panel TFT/touch interface; exact keyed connector and TF034 adapter are mechanical/module-specific" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Value" "JST PH 12P SERVICE UI" (at 0 15 0) (effects (font (size 0.9 0.9))))
+			(property "Footprint" "Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+			(property "Description" "JST S12B-PH-SM4-TB 12-position side-entry PH service/UI header; 2A with AWG24; mates PHR-12" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 			(symbol "SERVICE_UI_HEADER_12_0_1"
 				(rectangle(start -13 12.7)(end 13 -12.7)(stroke(width 0.254)(type default))(fill(type background)))
 			)
@@ -1300,10 +1303,10 @@
 		(dnp no)
 		(uuid "a4040000-0000-4000-8000-000000000009")
 		(property "Reference" "J13" (at 72 138 0) (effects (font (size 0.9 0.9))))
-		(property "Value" "MICROSD SPI SOCKET" (at 72 162 0) (effects (font (size 0.9 0.9))))
-		(property "Footprint" "" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
-		(property "Datasheet" "~" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
-		(property "Description" "microSD socket in native 3.3V SPI mode; exact mechanical footprint TBD" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Value" "HIROSE DM3AT-SF-PEJM5" (at 72 162 0) (effects (font (size 0.9 0.9))))
+		(property "Footprint" "Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "https://www.hirose.com/en/product/p/CL0609-0031-0-00" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Hirose DM3AT-SF-PEJM5 push-push microSD socket; card detect unused in Rev A; shell grounded" (at 72 150 0) (effects (font (size 1 1)) (hide yes)))
 		(pin "1" (uuid "a4040000-0000-4000-8000-000000000010"))
 		(pin "2" (uuid "a4040000-0000-4000-8000-000000000011"))
 		(pin "3" (uuid "a4040000-0000-4000-8000-000000000012"))
@@ -1312,6 +1315,9 @@
 		(pin "6" (uuid "a4040000-0000-4000-8000-000000000015"))
 		(pin "7" (uuid "a4040000-0000-4000-8000-000000000016"))
 		(pin "8" (uuid "a4040000-0000-4000-8000-000000000017"))
+		(pin "11" (uuid "a4040000-0000-4000-8000-000000000092"))
+		(pin "10" (uuid "a4040000-0000-4000-8000-000000000091"))
+		(pin "9" (uuid "a4040000-0000-4000-8000-000000000090"))
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054"
@@ -1369,6 +1375,22 @@
 		(uuid "a4040000-0000-4000-8000-000000000032")
 	)
 	(global_label "GND" (shape passive) (at 92.32 142.38 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "a4040000-0000-4000-8000-000000000033"))
+
+	(no_connect
+		(at 87.24 144.92)
+		(uuid "a4040000-0000-4000-8000-000000000093")
+	)
+	(no_connect
+		(at 87.24 147.46)
+		(uuid "a4040000-0000-4000-8000-000000000094")
+	)
+	(wire
+		(pts (xy 87.24 150) (xy 92.32 150))
+		(stroke (width 0) (type default))
+		(uuid "a4040000-0000-4000-8000-000000000095")
+	)
+	(global_label "GND" (shape passive) (at 92.32 150 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "a4040000-0000-4000-8000-000000000096"))
+
 	(symbol
 		(lib_id "Salix:R_SD")
 		(at 112 122 0)
@@ -1687,10 +1709,10 @@
 		(dnp no)
 		(uuid "a5040000-0000-4000-8000-000000000025")
 		(property "Reference" "J14" (at 225 135.5 0) (effects (font (size 0.85 0.85))))
-		(property "Value" "SERVICE UI 12P" (at 225 164.5 0) (effects (font (size 0.85 0.85))))
-		(property "Footprint" "" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
-		(property "Datasheet" "~" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
-		(property "Description" "Logical TFT/touch front-panel interface; exact keyed connector and TF034 adapter TBD" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Value" "JST S12B-PH-SM4-TB" (at 225 164.5 0) (effects (font (size 0.85 0.85))))
+		(property "Footprint" "Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "12-position side-entry JST PH service/UI header; mates PHR-12; TF034 mapping remains on adapter harness" (at 225 150 0) (effects (font (size 1 1)) (hide yes)))
 		(pin "1" (uuid "a5040000-0000-4000-8000-000000000013"))
 		(pin "2" (uuid "a5040000-0000-4000-8000-000000000014"))
 		(pin "3" (uuid "a5040000-0000-4000-8000-000000000015"))

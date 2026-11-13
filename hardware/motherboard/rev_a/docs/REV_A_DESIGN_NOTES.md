@@ -57,7 +57,7 @@ DAT1 and DAT2 are not used as host data lines in SPI mode but remain pulled up. 
 
 No level shifter is used because Pico-B and the card bus are both 3.3V. No card-detect GPIO is allocated in Rev A; firmware detects media through SPI initialization.
 
-The exact microSD mechanical socket is still TBD.
+J13 is frozen to Hirose DM3AT-SF-PEJM5, a push-push SMT microSD socket using KiCad footprint `Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5`. The connector card-detect switch contacts are physical pads 9/10 and are explicitly NC in Rev A; repeated shell pad 11 is tied to digital GND.
 
 
 ## Front-panel UI interface
@@ -73,6 +73,8 @@ The motherboard no longer assumes a specific undocumented TF034 connector. Inste
 - logic-only backlight PWM.
 
 33R branch series resistors isolate the front-panel cable from the on-board microSD branch. LCD_CS_N and TOUCH_CS_N are pulled high at boot; backlight PWM is pulled low.
+
+J14 is frozen to JST S12B-PH-SM4-TB, a 12-position 2.0mm side-entry SMT PH header using `Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal`. The mating harness uses PHR-12 with SPH-002T-P0.5S contacts (AWG30-24). The PH family is rated 2A with AWG24, giving useful margin for the optional 5V auxiliary panel feed.
 
 The front-panel/TF034 adapter must provide the exact module pin mapping and actual backlight-current driver. The motherboard GP5 signal must never source backlight current directly.
 
