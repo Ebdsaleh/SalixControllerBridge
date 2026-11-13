@@ -5,8 +5,15 @@ This directory intentionally parks two future Salix USB-controller concepts whil
 ## Projects
 
 - `screen_pro/` — modern ergonomic dual-stick controller with a central TF034 2.4-inch touchscreen and VMU-oriented storage/UI.
-- `saturn_hybrid/` — Saturn-inspired wide controller with D-pad emphasis, six face buttons, modern analog sticks/haptics and the same central touchscreen/VMU architecture.
+- `saturn_hybrid/` — Saturn-inspired wide controller with D-pad emphasis, the shared four-button Salix Greek action cluster, modern analog sticks/haptics and the same central touchscreen/VMU architecture.
 - `common/` — shared concept-stage KiCad symbol library and display notes.
+
+Both controller concepts use the same Salix primary face-action symbols:
+
+- **Π** = left
+- **Ω** = top
+- **Φ** = right
+- **Α** = bottom / primary confirm position
 
 These are **not fabrication-ready PCBs**. They are deliberately small feasibility projects intended to preserve architecture and layout intent for later.
 

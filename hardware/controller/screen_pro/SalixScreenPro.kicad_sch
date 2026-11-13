@@ -418,11 +418,11 @@
     (exclude_from_sim no) (at 18 20 0)
     (effects (font (size 0.95 0.95) (bold yes)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000001143"))
-  (text "Control layout target: left stick high / D-pad lower-left / ABXY upper-right / right stick lower-right, with central touchscreen."
+  (text "Control layout target: left stick high / D-pad lower-left / Salix face cluster upper-right: Pi left / Omega top / Phi right / Alpha bottom / right stick lower-right, with central touchscreen."
     (exclude_from_sim no) (at 18 25 0)
     (effects (font (size 0.74 0.74)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000001144"))
-  (text "Digital controls: D-pad, ABXY, L/R shoulders, stick-clicks and menu buttons. Final matrix count TBD."
+  (text "Digital controls: D-pad, Pi/Omega/Phi/Alpha face buttons, L/R shoulders, stick-clicks and menu buttons. Primary order: Pi=left, Omega=top, Phi=right, Alpha=bottom."
     (exclude_from_sim no) (at 18 29 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "d2000000-0000-4000-8000-000000001145"))
