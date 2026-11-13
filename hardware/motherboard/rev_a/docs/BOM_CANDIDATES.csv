@@ -29,7 +29,7 @@ USB dual-bank motherboard PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2
 3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
 Main input protection / source mux,Higher-current wide-input protected stage,1,TBD,Must cover the whole bridge load and barrel/PD/AUX priority; AUX recharge TPS259474L is not the main-system eFuse
-AUX recharge eFuse,TI TPS259474LRPWR RPW-10,1,FROZEN MPN / FOOTPRINT TBD,Circuit-breaker + latch-off + true reverse-current blocking; 2.7-23V device; dedicated to CHARGE_PWR branch
+AUX recharge eFuse,TI TPS259474LRPWR RPW-10,1,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm; TI drawing 4225183/A land geometry; dedicated to CHARGE_PWR branch
 AUX power module PCB header,Molex 43045-1000 Micro-Fit 3.0 10-circuit 2x5 right-angle through-hole,1,FROZEN MPN / FOOTPRINT,Connector_Molex:Molex_Micro-Fit_3.0_43045-1000_2x05_P3.00mm_Horizontal; duplicated AUX_PWR/GND/CHARGE_PWR contacts
 AUX power module harness housing,Molex 43025-1000 Micro-Fit 3.0 10-circuit receptacle,1 per module harness,FROZEN MPN,Mates J15; final harness length and wire gauges depend on enclosure/module placement
 AUX recharge UVLO/OVLO divider,464k + 52.3k + 30.1k 1% 0603,1 network,FROZEN VALUES,Nominal thresholds about 7.96V UVLO / 21.78V OVLO using 1.2V reference; tolerance check still required

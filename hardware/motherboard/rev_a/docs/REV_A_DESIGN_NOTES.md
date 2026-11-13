@@ -48,6 +48,8 @@ U3 is frozen to TPS259474LRPWR for the recharge branch because this variant comb
 
 The module must contain the chemistry-specific charger/BMS/protection, any required cell balancing, temperature supervision and whatever DC/DC conversion is required. This deliberately allows a future NiMH, Li-ion, LiFePO4 or other protected rechargeable module to use the same motherboard.
 
+U3's land pattern is now frozen to project-local footprint `SalixFP:TI_RPW0010A_VQFN-HR-10_2x2mm_P0.475mm`. The copper geometry follows TI RPW0010A drawing 4225183/A and was cross-checked against the current KiCad upstream footprint proposal for the same package. The project footprint uses 0.05mm NSMD mask expansion and split paste apertures on the long IN/OUT lands.
+
 The J15 management pins are reserved electrically in this pass; firmware ownership and AUX_ID encoding are not frozen yet. They must not be repurposed casually because the whole point of J15 is to keep the Rev-A motherboard compatible with future smart power modules.
 
 ## Manufacturing strategy
