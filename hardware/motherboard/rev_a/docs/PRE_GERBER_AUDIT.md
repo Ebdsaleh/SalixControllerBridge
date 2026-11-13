@@ -34,9 +34,9 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - The Noctua NF-A4x10 5V PWM + Molex 47053-1000 J10/J11 fan/header batch is now native-KiCad validated green.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
-## Source-priority mux batch — ERC green; visual rerender pending
+## Source-priority mux batch — FROZEN GREEN
 
-- Once the page-9 syntax defect was corrected, KiCad could finally instantiate the sheet fully and exposed **40 real ERC errors** caused by generated wiring coordinates using the wrong local-Y orientation. The LTC4418 symbol/pin numbering itself remained correct, but the instance fanout was mirrored vertically and all eight MOSFET gate stubs were attached on the wrong side of the rotated symbols. The page-9 wiring has now been remapped to the actual KiCad pin coordinates; native ERC rerun is required before freeze.
+- Once the page-9 syntax defect was corrected, KiCad could finally instantiate the sheet fully and exposed **40 real ERC errors** caused by generated wiring coordinates using the wrong local-Y orientation. The LTC4418 symbol/pin numbering itself remained correct, but the instance fanout was mirrored vertically and all eight MOSFET gate stubs were attached on the wrong side of the rotated symbols. Those coordinates were corrected and the sheet rerendered.
 
 - KiCad GUI subsequently exposed the actual page-9 load failure at line 187: the generated Si7155DP duplicate source/drain pins used invalid pin text-effects syntax `(effects (...)) hide`. KiCad requires `hide` inside the `effects` block. The embedded page-9 symbol and project `Salix.kicad_sym` copy have both been corrected. This was a file-format defect only; it did not change the verified Si7155DP pin numbers or source-priority electrical topology.
 
@@ -47,6 +47,9 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - LTC4418 U4/U5 pin numbering has been rechecked against the Analog Devices Rev-A datasheet: TMR=1, UV1=2, OV1=3, UV2=4, OV2=5, VALID1=6, VALID2=7, GND=8, CAS=9, INTVCC=10, G2=11, VS2=12, G1=13, VS1=14, VOUT=15, V2=16, V1=17, EN=18, SHDN=19, HYS=20, exposed pad=21.
 - The control connections also match the datasheet intent: HYS→GND (internal 3% hysteresis), EN/SHDN→INTVCC when unused, TMR uses 1nF to GND (~16ms nominal), INTVCC uses 100nF to GND, CAS/VALID outputs are unused, and VS1/VS2 sense the common-source nodes.
 - Q1-Q8 Si7155DP pinout is confirmed from Vishay: pins 1-4 source, 5 gate, 6-8 drain. Each channel's two P-FETs are arranged common-source back-to-back, with VSx at the common-source node and both gates driven together, matching the LTC4418 application topology.
+- Native KiCad 10.0.8 rerun after the coordinate repair is now **0 errors / 810 warnings**. Warning breakdown: **663 endpoint_off_grid + 143 lib_symbol_mismatch + 4 isolated_pin_label**. The four isolated labels remain the intentional J15 AUX_ID/AUX_SDA/AUX_SCL/AUX_INT_N management pins. No source-priority electrical errors remain.
+- Page 9 now loads directly in KiCad and renders normally without the hierarchy fallback. Visual review confirms both LTC4418 stages, all four back-to-back P-FET channel pairs, gate-control nets, source-sense nodes, divider networks, TMR capacitors and INTVCC bypass capacitors are present and connected as intended.
+- The U4/U5 source-priority stage is therefore **schematic-level frozen**. Remaining page-9 issues are cosmetic/warning-hygiene only; do not alter the verified source-priority topology while proceeding to the barrel, PD and SYS_IN→5V_MAIN front-end batches.
 
 ## Newly added / awaiting native KiCad validation
 

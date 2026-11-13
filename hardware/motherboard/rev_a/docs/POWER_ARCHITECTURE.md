@@ -111,3 +111,7 @@ The Si7155DP is a 40V P-channel PowerPAK SO-8 part. Rev-A uses its conservative 
 ### Datasheet verification — source-priority stage
 
 The U4/U5 LTC4418 symbol and Q1-Q8 Si7155DP switching topology were independently rechecked against the manufacturer datasheets on 2026-11-13. LTC4418 pin numbering matches the 20-lead UF QFN definition, including exposed pad 21. Each Si7155DP uses pins 1-4 as source, pin 5 as gate and pins 6-8 as drain. Each source channel uses a common-source back-to-back P-channel pair; VS1/VS2 connect to those common-source nodes, G1/G2 drive the paired gates, and VOUT senses the selected output. HYS is grounded for internal 3% hysteresis, EN and SHDN are tied to INTVCC, TMR uses 1nF to ground and INTVCC uses 100nF to ground. The electrical architecture is therefore datasheet-consistent; only the final page-9 native visual rerender remains before schematic-level freeze.
+
+## Source-priority schematic freeze
+
+Native KiCad 10.0.8 validation after the final pin-coordinate repair is **0 errors / 810 warnings**. The source-priority page now opens and renders directly. The warning count is hygiene-only: 663 endpoint-off-grid, 143 library-symbol-mismatch and 4 intentionally isolated AUX management labels. U4/U5 + Q1-Q8 are therefore frozen at schematic level and should not be functionally changed while the remaining external-source front end is implemented.
