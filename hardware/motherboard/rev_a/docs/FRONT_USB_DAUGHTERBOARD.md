@@ -79,6 +79,30 @@ Each TPS2553 now has the support capacitance called out explicitly:
 
 A0=BOARD_ID; A1=A2=0. Central management-I2C pull-ups belong on the motherboard.
 
+## Motherboard / daughterboard interconnect
+
+Rev-A now freezes the 20-way PCB interface to Molex Micro-Fit 3.0.
+
+PCB headers on motherboard J7/J8 and daughterboard J20:
+
+- Molex 43045-2000.
+- 20 circuits, 2 x 10, 3.0mm pitch.
+- right-angle through-hole, polarized/shrouded, latch-compatible.
+- stock KiCad footprint: `Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal`.
+- manufacturer/system maximum current rating is substantially above the ~2.4A worst-case logical-bank load; harness current must still be derated for wire gauge, ambient temperature and contact population.
+
+Harness ends:
+
+- Molex 43025-2000 20-way female receptacle housing.
+- Molex 43030-0007 loose tin female terminal for 20-24AWG.
+- Molex 43030-0010 loose tin female terminal for 26-30AWG.
+- use heavier 20-22AWG conductors for each 5V bank feed and its return conductors.
+- route BANK_A_DM/DP and BANK_B_DM/DP as dedicated twisted pairs through the harness; keep each pair together from PCB breakout to PCB breakout.
+- Rev-A's Pico-A PIO-USB root is Full-/Low-Speed, so this interconnect is not being claimed as a USB Hi-Speed-qualified cable assembly. PCB routing on both sides should still preserve 90-ohm USB differential-pair discipline for robustness and future flexibility.
+- final harness length remains enclosure-dependent and is not a PCB-footprint decision.
+
+Existing logical pin numbering is retained. In the exact 2x10 KiCad footprint, Bank-A DM/DP remain adjacent pads 11/12 and Bank-B DM/DP remain adjacent pads 15/16.
+
 ## Hub overcurrent handling
 
 Each physical power controller keeps its own FAULT_N signal for Pico-B diagnostics. Four 10k pull-ups define those open-drain lines. A third SN74LVC2G08 combines the two fault signals per bank as active-low OCS_N: the hub sees OCS_N low if either the A or C receptacle faults. Type-C SINK_N and the TCA9535 INT_N also receive explicit 10k pull-ups because TCA9535 GPIOs do not provide internal pull-ups.

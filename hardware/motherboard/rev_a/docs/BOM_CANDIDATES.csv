@@ -18,7 +18,7 @@ USB upstream termination,22 ohm 1% 0603,2,FROZEN,Between Pico-A GP16/17 root and
 USB hub RBIAS,12.0k 1% 0603,1,FROZEN,Microchip required transceiver bias
 USB hub clock,CTS 445I25A24M00000 24.000MHz 10pF CL 2-SMD 5.0x3.2mm,1,FROZEN MPN / FOOTPRINT,±20ppm tolerance ±50ppm stability 40ohm ESR -40C to +85C; Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm
 USB hub filter caps,100nF low-ESR fitted + optional DNP tuning pad,2 networks,FROZEN FITTED VALUE,Separate CRFILT and PLLFILT networks; each fitted network <=0.1uF
-USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD,PRIMARY and EXTENDED; two USB2 channels each
+USB dual-bank motherboard PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2x10 right-angle through-hole,2,FROZEN MPN / FOOTPRINT,PRIMARY and EXTENDED; Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal; 8.5A/contact maximum system rating; actual harness current must be derated
 3V3_AUX regulator,TI TLV62569P SOT23-6,1,FROZEN FAMILY,2A 5V-to-3.3V buck with power-good
 3V3_AUX inductor,Coilcraft XAL4020-222ME 2.2uH,1,FROZEN MPN / FOOTPRINT,Inductor_SMD:L_Coilcraft_XxL4020; TI reference-design part
 3V3_AUX input capacitor,4.7uF 10V X7R,1,FROZEN VALUE,Close to regulator VIN
@@ -26,7 +26,10 @@ USB dual-bank motherboard interface,8-signal keyed/locking connector class,2,TBD
 3V3_AUX feedback resistors,453k + 100k 1%,2,FROZEN VALUE,Sets about 3.3V
 3V3_AUX feed-forward capacitor,6.8pF,1,FROZEN VALUE,TI recommendation with 100k lower resistor
 Main input eFuse,TPS25947-class or higher-current equivalent,1,CANDIDATE,Final part depends on 5V_MAIN current budget
-Front-board interface,20-position keyed/locking connector class,2,LOGICAL PINOUT FROZEN,Exact mechanical family TBD
+Front-board interface PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2x10 right-angle through-hole,1 per daughterboard,FROZEN MPN / FOOTPRINT,Same header on motherboard and daughterboard enables female-to-female harness; stock KiCad exact footprint
+Front-board harness housing,Molex 43025-2000 Micro-Fit 3.0 20-circuit dual-row receptacle,2 per harness,FROZEN FAMILY / MPN,Positive-latch polarized female housing at each end; final cable length depends on enclosure
+Front-board harness power contact,Molex 43030-0007 female crimp terminal tin 20-24AWG,as required,FROZEN MPN,Use for 5V/GND and other conductors where 20-24AWG is selected
+Front-board harness signal contact,Molex 43030-0010 female crimp terminal tin 26-30AWG,as required,FROZEN MPN,Use for USB twisted-pair/control conductors where 26-30AWG is selected
 Front USB data mux,TI TS3USB221A RSE UQFN-10,2 per daughterboard,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,480Mbps A/C data selection with hardware OE disconnect; SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm follows TI drawing 4220307/A example-board land pattern
 USB-A front receptacle,Molex 67643-2910 USB 2.0 Type-A right-angle through-hole black,2 per daughterboard,FROZEN MPN / FOOTPRINT,1.5A/contact; 1.6mm PCB; Connector_USB:USB_A_Molex_67643_Horizontal; shield is physical pad 5
 USB-C front receptacle,GCT USB4085-GF-A USB 2.0 Type-C 16-contact fully through-hole right-angle,2 per daughterboard,FROZEN MPN / FOOTPRINT,Connector_USB:USB_C_Receptacle_GCT_USB4085; physical A/B contact numbering retained; SBU1/SBU2 intentionally NC

@@ -24,24 +24,26 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - Native KiCad 10.0.8 has now validated the `SalixFP` footprint library resolution and both U21/U25 assignments with no new ERC warning or error.
 - Front receptacles are now frozen: J21/J23 use Molex 67643-2910 with `Connector_USB:USB_A_Molex_67643_Horizontal`; J22/J24 use GCT USB4085-GF-A with `Connector_USB:USB_C_Receptacle_GCT_USB4085`. The USB-C symbol has been converted from logical pin numbers to the connector’s physical A/B contact IDs, with SBU1/SBU2 explicitly NC.
 - The USB receptacle / physical Type-C pin-map batch is now native-KiCad validated green. Duplicated physical contacts remain explicit stacked visible pins, while only unused SBU1/SBU2 are hidden NC.
+- The motherboard/daughterboard connector family is now frozen to Molex 43045-2000 Micro-Fit 3.0, 20-circuit 2x10 right-angle through-hole, using stock KiCad footprint `Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal` for J7/J8/J20. Harness mating housing is 43025-2000; 43030-0007 covers 20-24AWG and 43030-0010 covers 26-30AWG loose tin female crimp contacts. Final harness length remains mechanical/enclosure-dependent.
+- The 673-warning / 0-error native ERC baseline predates assignment of the Micro-Fit J7/J8/J20 footprints; rerun native KiCad after this commit.
 - Primary/extended front-board TCA9535 address straps are separated by BOARD_ID (primary low / extended high).
 
 ## Fabrication blockers
 
 1. **Main 5V input/protection is not designed/frozen.** Exact connector, TVS, fuse/eFuse, reverse-current/backfeed behavior, inrush strategy and high-current copper are TBD.
-2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of port demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
-3. **Fourteen placed physical parts still have no footprint.** They are J7/J8; J12/J13/J14; J10/J11; and J20/SW1/D25/D26/SW2/D27/D28. J21/J23 USB-A and J22/J24 USB-C are now frozen to exact receptacle MPNs/footprints; U21/U25 use the project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+2. **Power budget must be frozen with firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A of demand before Picos, logic and fans. Default Type-C STD advertisement reduces nominal exposed-port demand to 5.6A, still before system loads.
+3. **Eleven placed physical parts still have no footprint.** They are J12/J13/J14; J10/J11; and SW1/D25/D26/SW2/D27/D28. J7/J8/J20 are now frozen to Molex 43045-2000 Micro-Fit 3.0; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Fan selection remains a current/thermal check.** TPS22919 is rated for 1.5A maximum continuous current; the exact 5V PWM fan MPN must have normal and startup/stall demand compatible with that switch and the connector/traces.
-5. **Mechanical footprints remain open.** The 20-pin front-board connector, latching selector switches, fan headers, microSD socket, SWD spring contacts, TFT/service connector and LEDs remain TBD.
+5. **Mechanical footprints remain open.** Latching selector switches, fan headers, microSD socket, SWD spring contacts, TFT/service connector and LEDs remain TBD.
 6. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, thermal copper, keepouts and DRC remain outstanding.
 7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
 
 ## Layout/current constraints
 
-- Each logical bank can power both physical USB-A and USB-C while only one receives data. A bank can therefore require about 2.4A nominal when Type-C advertises 1.5A. Select/derate front-board connector contacts for this current; do not use an unrated signal-only connector.
+- Each logical bank can power both physical USB-A and USB-C while only one receives data. A bank can therefore require about 2.4A nominal when Type-C advertises 1.5A. The selected Micro-Fit 3.0 connector provides ample connector-contact margin, but the actual 5V/GND harness conductors and crimp contacts must still be selected/derated for wire gauge, ambient temperature and population.
 - Four TPS25821 inputs contribute 564uF nominal ceramic bulk across two daughterboards using the TI EVM 47uF/10V/1206 part set. Main-input soft-start/inrush behavior must account for it.
 - Four USB-A downstream reservoirs contribute 880uF total switched capacitance across the two daughterboards. They sit after the TPS2553 switches, so place each reservoir at its downstream VBUS/receptacle region and preserve the switch-controlled turn-on path.
-- USB D+/D- cross the motherboard/front-board interconnect. Preserve pair adjacency and return paths through the selected connector/harness and route controlled differential pairs during PCB layout.
+- USB D+/D- cross the motherboard/front-board Micro-Fit harness. Bank-A pins 11/12 and Bank-B pins 15/16 are adjacent in the 2x10 header; use dedicated twisted pairs through the harness and preserve 90-ohm differential routing/return paths on both PCBs. Rev-A does not claim the discrete-wire harness as USB Hi-Speed-qualified because the Pico-A PIO root is Full-/Low-Speed.
 - TPS25821 OUT is kept below 10uF (currently 4.7uF), consistent with TI's Type-C cold-socket recommendation.
 - Per-port current limiting, fault monitoring, ESD arrays and shield RC networks are present conceptually, but their physical placement is a PCB-layout requirement.
 - The Salix Module Bus sheet is explicitly future-only in Rev A and contains no fabricated hardware. Do not treat that sheet as a completed backplane/interface during PCB placement.
