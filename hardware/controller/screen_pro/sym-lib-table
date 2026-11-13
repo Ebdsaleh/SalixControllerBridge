@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "SalixController")(type "KiCad")(uri "${KIPRJMOD}/../common/SalixController.kicad_sym")(options "")(descr "Shared Salix controller concept symbols"))
+)
