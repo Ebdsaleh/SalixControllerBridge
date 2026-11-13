@@ -5237,7 +5237,7 @@
 	)
 	(text "TYPE-C SUPPORT:"
 		(exclude_from_sim no)
-		(at 20 202 0)
+		(at 20 212 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
@@ -5247,7 +5247,7 @@
 	)
 	(text "TPS25821: IN bulk follows TI EVM: 3× Murata GRM31CR61A476KE15L, 47µF 10V ±10% X5R 1206. OUT/VBUS=4.7µF; REF=100k 0.5%; CHG defaults STD via 100k pulldown."
 		(exclude_from_sim no)
-		(at 20 208 0)
+		(at 20 218 0)
 		(effects
 			(font (size 0.86 0.86))
 		
@@ -5256,7 +5256,7 @@
 	)
 	(text "FAULT_N / SINK_N are open drain and are monitored by TCA9535; CC1/CC2 connect directly to receptacle. Type-C VBUS remains cold-socketed."
 		(exclude_from_sim no)
-		(at 20 214 0)
+		(at 20 224 0)
 		(effects
 			(font (size 0.86 0.86))
 		
@@ -5265,7 +5265,7 @@
 	)
 	(text "MANAGEMENT:"
 		(exclude_from_sim no)
-		(at 20 228 0)
+		(at 20 238 0)
 		(effects
 			(font (size 1.05 1.05)
 				(bold yes))
@@ -5275,7 +5275,7 @@
 	)
 	(text "TCA9535: P00/P01=SEL; P02–P05=FAULT; P06/P07=SINK; P10–P13=LED; P14/P15=RUN; P16/P17=CHG."
 		(exclude_from_sim no)
-		(at 20 234 0)
+		(at 20 244 0)
 		(effects
 			(font (size 0.86 0.86))
 		
@@ -5284,7 +5284,7 @@
 	)
 	(text "A0=BOARD_ID; A1=A2=GND. I²C pull-ups live on the motherboard."
 		(exclude_from_sim no)
-		(at 20 240 0)
+		(at 20 250 0)
 		(effects
 			(font (size 0.86 0.86))
 		
@@ -5293,7 +5293,7 @@
 	)
 	(text "PRTPWR (active HIGH) gates both A/C VBUS switches; either FAULT_N pulls bank OCS_N LOW."
 		(exclude_from_sim no)
-		(at 20 246 0)
+		(at 20 256 0)
 		(effects
 			(font (size 0.86 0.86)
 				(bold yes))
@@ -5301,9 +5301,9 @@
 			(justify left))
 		(uuid "60000000-0000-4000-8000-000000006499")
 	)
-	(text "TS3USB221A U21/U25 footprint is frozen to project-local TI RSE0010A land pattern. Switch and USB receptacle footprints remain TBD until enclosure/mechanical selection."
+	(text "TS3USB221A U21/U25 plus USB-A/USB-C receptacle footprints are frozen. Selector-switch and front LED mechanics remain TBD."
 		(exclude_from_sim no)
-		(at 20 252 0)
+		(at 20 262 0)
 		(effects
 			(font (size 0.86 0.86)
 				(bold yes))
