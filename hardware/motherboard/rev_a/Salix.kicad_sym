@@ -640,6 +640,65 @@
 	
 				)
 			)
+	(symbol "CP_FRONT"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "C"
+			(at 0 3.81 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+		(property "Value" "220uF 25V"
+			(at 0 -3.81 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "https://na.industrial.panasonic.com/products/capacitors/polymer-capacitors/lineup/polymer-hybrid-aluminum-electrolytic-capacitor/series/150072/model/150128"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "Polarized hybrid aluminum electrolytic capacitor; Panasonic EEHZL1E221XP"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "CP_FRONT_0_1"
+				(polyline (pts (xy -0.5 1.2) (xy -0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy 0.5 1.2) (xy 0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.9 1.2) (xy -1.1 1.2)) (stroke (width 0.2) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.5 0.8) (xy -1.5 1.6)) (stroke (width 0.2) (type default)) (fill (type none)))
+			)
+			(symbol "CP_FRONT_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "+" (effects (font (size 0.78 0.78))))
+					(number "1" (effects (font (size 0.78 0.78))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "-" (effects (font (size 0.78 0.78))))
+					(number "2" (effects (font (size 0.78 0.78))))
+				)
+			)
+		)
 	(symbol "CRYSTAL_2PIN"
 				(pin_names (offset 1.016))
 				(exclude_from_sim no)

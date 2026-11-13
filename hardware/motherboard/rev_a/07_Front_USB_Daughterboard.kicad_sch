@@ -1319,6 +1319,65 @@
 				)
 			)
 		)
+		(symbol "Salix:CP_FRONT"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+		(property "Reference" "C"
+			(at 0 3.81 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+		(property "Value" "220uF 25V"
+			(at 0 -3.81 0)
+			(effects
+					(font (size 0.9 0.9))
+				)
+		)
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Datasheet" "https://na.industrial.panasonic.com/products/capacitors/polymer-capacitors/lineup/polymer-hybrid-aluminum-electrolytic-capacitor/series/150072/model/150128"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+		(property "Description" "Polarized hybrid aluminum electrolytic capacitor; Panasonic EEHZL1E221XP"
+			(at 0 0 0)
+			(effects
+					(font (size 1 1))
+					(hide yes)
+				)
+		)
+			(symbol "CP_FRONT_0_1"
+				(polyline (pts (xy -0.5 1.2) (xy -0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy 0.5 1.2) (xy 0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.9 1.2) (xy -1.1 1.2)) (stroke (width 0.2) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.5 0.8) (xy -1.5 1.6)) (stroke (width 0.2) (type default)) (fill (type none)))
+			)
+			(symbol "CP_FRONT_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "+" (effects (font (size 0.78 0.78))))
+					(number "1" (effects (font (size 0.78 0.78))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "-" (effects (font (size 0.78 0.78))))
+					(number "2" (effects (font (size 0.78 0.78))))
+				)
+			)
+		)
 		(symbol "Salix:SN74LVC2G08"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
@@ -5947,6 +6006,127 @@
 	)
 	(global_label "GND" (shape passive) (at 278.89 166 0) (effects (font (size 0.65 0.65)) (justify left bottom)) (uuid "a4070000-0000-4000-8000-000000000029"))
 	
+
+	(symbol
+		(lib_id "Salix:CP_FRONT")
+		(at 243.84 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab070000-0000-4000-8000-000000000001")
+		(property "Reference" "C42" (at 243.84 26.67 0) (effects (font (size 0.85 0.85))))
+		(property "Value" "EEHZL1E221XP 220uF 25V" (at 243.84 34.29 0) (effects (font (size 0.85 0.85))))
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7" (at 243.84 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "https://na.industrial.panasonic.com/products/capacitors/polymer-capacitors/lineup/polymer-hybrid-aluminum-electrolytic-capacitor/series/150072/model/150128" (at 243.84 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "USB-A Bank A downstream VBUS reservoir; polarized; positive to VBUS_A_A" (at 243.84 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "ab070000-0000-4000-8000-000000000002"))
+		(pin "2" (uuid "ab070000-0000-4000-8000-000000000003"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:CP_FRONT")
+		(at 243.84 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab070000-0000-4000-8000-000000000004")
+		(property "Reference" "C43" (at 243.84 158.75 0) (effects (font (size 0.85 0.85))))
+		(property "Value" "EEHZL1E221XP 220uF 25V" (at 243.84 166.37 0) (effects (font (size 0.85 0.85))))
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7" (at 243.84 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "https://na.industrial.panasonic.com/products/capacitors/polymer-capacitors/lineup/polymer-hybrid-aluminum-electrolytic-capacitor/series/150072/model/150128" (at 243.84 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "USB-A Bank B downstream VBUS reservoir; polarized; positive to VBUS_B_A" (at 243.84 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "ab070000-0000-4000-8000-000000000005"))
+		(pin "2" (uuid "ab070000-0000-4000-8000-000000000006"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:C_FRONT")
+		(at 284.48 30.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab070000-0000-4000-8000-000000000007")
+		(property "Reference" "C44" (at 284.48 26.67 0) (effects (font (size 0.85 0.85))))
+		(property "Value" "100nF 25V X7R" (at 284.48 34.29 0) (effects (font (size 0.85 0.85))))
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 284.48 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 284.48 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "TPS2553 U22 local input bypass; place adjacent to IN/GND" (at 284.48 30.48 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "ab070000-0000-4000-8000-000000000008"))
+		(pin "2" (uuid "ab070000-0000-4000-8000-000000000009"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C44")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:C_FRONT")
+		(at 284.48 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab070000-0000-4000-8000-000000000010")
+		(property "Reference" "C45" (at 284.48 158.75 0) (effects (font (size 0.85 0.85))))
+		(property "Value" "100nF 25V X7R" (at 284.48 166.37 0) (effects (font (size 0.85 0.85))))
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 284.48 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 284.48 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "TPS2553 U26 local input bypass; place adjacent to IN/GND" (at 284.48 162.56 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "ab070000-0000-4000-8000-000000000011"))
+		(pin "2" (uuid "ab070000-0000-4000-8000-000000000012"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
+					(reference "C45")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(wire (pts (xy 240.03 30.48) (xy 234.95 30.48)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000013"))
+	(label "VBUS_A_A" (at 234.95 30.48 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "ab070000-0000-4000-8000-000000000014"))
+	(wire (pts (xy 247.65 30.48) (xy 252.73 30.48)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000015"))
+	(global_label "GND" (shape passive) (at 252.73 30.48 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "ab070000-0000-4000-8000-000000000016"))
+
+	(wire (pts (xy 240.03 162.56) (xy 234.95 162.56)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000017"))
+	(label "VBUS_B_A" (at 234.95 162.56 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "ab070000-0000-4000-8000-000000000018"))
+	(wire (pts (xy 247.65 162.56) (xy 252.73 162.56)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000019"))
+	(global_label "GND" (shape passive) (at 252.73 162.56 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "ab070000-0000-4000-8000-000000000020"))
+
+	(wire (pts (xy 280.67 30.48) (xy 275.59 30.48)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000021"))
+	(label "5V_BOARD" (at 275.59 30.48 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "ab070000-0000-4000-8000-000000000022"))
+	(wire (pts (xy 288.29 30.48) (xy 293.37 30.48)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000023"))
+	(global_label "GND" (shape passive) (at 293.37 30.48 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "ab070000-0000-4000-8000-000000000024"))
+
+	(wire (pts (xy 280.67 162.56) (xy 275.59 162.56)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000025"))
+	(label "5V_BOARD" (at 275.59 162.56 180) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "ab070000-0000-4000-8000-000000000026"))
+	(wire (pts (xy 288.29 162.56) (xy 293.37 162.56)) (stroke (width 0) (type default)) (uuid "ab070000-0000-4000-8000-000000000027"))
+	(global_label "GND" (shape passive) (at 293.37 162.56 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "ab070000-0000-4000-8000-000000000028"))
 
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (page "8"))

@@ -41,6 +41,12 @@ Each Type-C port uses TPS25821:
 
 Each Type-A port uses TPS2553 with a provisional 28.7k 1% RILIM target. The jumper RUN net directly drives EN. FAULT_N is monitored by TCA9535.
 
+Each TPS2553 now has the support capacitance called out explicitly:
+
+- C44/C45: 100nF 25V X7R 0603 local input bypass from `5V_BOARD` to GND; place immediately at the corresponding TPS2553 IN/GND pins.
+- C42/C43: Panasonic EEHZL1E221XP 220uF 25V ±20% hybrid aluminum electrolytic on the downstream VBUS net. The -20% capacitance floor is 176uF, safely above 120uF.
+- C42/C43 footprint: `Capacitor_SMD:CP_Elec_6.3x7.7`; polarity is explicit, with positive to VBUS and negative to GND.
+
 ## TCA9535 map
 
 - P00: Bank A selector
@@ -68,7 +74,6 @@ Each physical power controller keeps its own FAULT_N signal for Pico-B diagnosti
 
 ## Still deliberately open
 
-- Add >=120uF VBUS reservoir at each USB-A TPS2553 OUT; exact capacitor MPN/footprint TBD.
 - Freeze the 47uF Type-C input-capacitor MPN/package and prove >=120uF effective total per TPS25821 at 5V after DC bias and tolerance.
 - Exact latching push-push SPDT switch manufacturer/footprint.
 - Exact mechanically robust USB-A and USB-C receptacle manufacturer/footprints.

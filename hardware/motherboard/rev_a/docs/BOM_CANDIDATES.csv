@@ -76,4 +76,5 @@ TFT logic bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Local J14 3
 Front-board INT pullups,10k 1% 0603,2,FROZEN VALUE,PRIMARY_INT_N and EXTENDED_INT_N pull-ups to 3V3_AUX
 Front-board management bypass,100nF X7R 0603,1,FROZEN VALUE,Local TCA9536 VCC bypass
 
-USB-A VBUS reservoir,>=120uF per USB-A downstream receptacle,2 per daughterboard,ELECTRICAL BLOCKER / MPN+FOOTPRINT TBD,Required downstream-facing-port VBUS bulk; add to schematic at each TPS2553 OUT before PCB layout
+USB-A VBUS reservoir,Panasonic EEHZL1E221XP 220uF 25V hybrid aluminum electrolytic,2 per daughterboard,FROZEN MPN / FOOTPRINT,Downstream VBUS reservoir; ±20% minimum is 176uF; Capacitor_SMD:CP_Elec_6.3x7.7; place at TPS2553 OUT / receptacle
+USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / FOOTPRINT,TI recommends >=0.1uF ceramic at each TPS2553 IN; place locally
