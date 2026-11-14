@@ -6,7 +6,10 @@ Motherboard management,TI TCA9534APWR TSSOP-16,1,FROZEN MPN / FOOTPRINT - NATIVE
 I2C isolation,PCA9548A-class mux,1,CANDIDATE,Per-card I2C isolation
 Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-port protection
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
-Pico sockets,1x20 female headers x2 per Pico,4,FROZEN FORM,Two socketed Pico modules
+Pico sockets,Samtec SSW-120-01-F-S 1x20 2.54mm vertical socket strip,4,FROZEN MPN / STOCK FOOTPRINT,Two per Pico; 8.51mm socket body; gold-flash contact/matte-tin tail; Connector_PinSocket_2.54mm:PinSocket_1x20_P2.54mm_Vertical
+Pico-A module,Raspberry Pi Pico 2 W with headers,1,FROZEN REV-A BASELINE / USER-INSTALLED,Headered official module plugs into the two motherboard sockets; factory 3-pin JST-SH debug connector avoids pogo-height dependency
+Pico-A SWD motherboard connector,JST SM03B-SRSS-TB 3-pin 1.0mm side-entry SH,1,ASSIGNED MPN / STOCK FOOTPRINT - NATIVE VALIDATION PENDING,Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal; pin 1 SWCLK pin 2 GND pin 3 SWDIO; straight-through cable to Pico-A factory debug connector
+Pico-A SWD host termination,100 ohm 1% 0603,2,ASSIGNED VALUE / FOOTPRINT - NATIVE VALIDATION PENDING,R114/R115 at Pico-B SWD host pins per Raspberry Pi 3-pin debug connector specification
 Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
 microSD,Hirose DM3AT-SF-PEJM5 push-push microSD socket,1,FROZEN MPN / FOOTPRINT,Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5; card-detect switch pins 9/10 intentionally NC in Rev A; shell pad 11 tied GND
 TFT/front-panel UI,JST S12B-PH-SM4-TB 12-position 2.0mm side-entry SMT header,1,FROZEN MPN / FOOTPRINT,Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal; 2A at AWG24; adapter/harness maps to TF034
@@ -98,7 +101,7 @@ USB shield RC resistor,330 ohm 1% 0603,1 per daughterboard,FROZEN DEFAULT,Parall
 USB shield RC capacitor,100nF >=50V X7R 0603,1 per daughterboard,FROZEN DEFAULT,Parallel shield-to-GND high-frequency path
 USB shield direct-bond option,0 ohm 0603 DNP,1 per daughterboard,EMC TUNING,Populate only if EMC/ESD validation favors direct shield-to-GND bond
 
-Pico-A SWD spring contacts,3-position spring/pogo contact set,1,MECHANICAL TBD,SWCLK/GND/SWDIO pickup to socketed Pico-A; exact footprint depends on final Pico-A variant and socket height
+Pico-A SWD cable,JST SH 3-pin straight-through cable assembly,1,OFF-BOARD HARNESS / LENGTH TBD,Connects J12 motherboard SM03B-SRSS-TB to the factory debug connector on the headered Pico 2 W; pin 1 to pin 1
 
 microSD host pullups,47k 1% 0603,5,FROZEN VALUE,CMD and DAT0-DAT3 host pull-ups; DAT1/DAT2 remain reserved in SPI mode
 microSD VDD bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Place at microSD socket VDD/VSS
