@@ -71,7 +71,7 @@ This resolves the barrel-vs-recharge concurrency architecture in favor of **load
 
 ## 5V_MAIN
 
-Rev-A now has the controller/topology and the main 12A power-train values **calculated and component-frozen**, while loop compensation and the barrel-vs-recharge concurrency policy remain open before the KiCad sheet is drawn.
+Rev-A now has the controller/topology and the main 12A power-train values **calculated and component-frozen**. Barrel-vs-recharge concurrency is resolved by the default-off AUX load-shed design; loop compensation remains the open pre-buck-sheet electrical calculation.
 
 ### Frozen controller / operating configuration
 
