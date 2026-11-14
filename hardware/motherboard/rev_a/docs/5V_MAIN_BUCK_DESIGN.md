@@ -1,6 +1,6 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN VALUES CALCULATED/FROZEN; LOOP COMPENSATION + BARREL/RECHARGE CONCURRENCY OPEN; KICAD SHEET NOT YET DRAWN**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN VALUES CALCULATED/FROZEN; BARREL/RECHARGE CONCURRENCY RESOLVED BY DEFAULT-OFF LOAD SHEDDING; LOOP COMPENSATION OPEN; KICAD BUCK SHEET NOT YET DRAWN**
 
 ## Native baseline before buck schematic work
 
@@ -182,24 +182,27 @@ The 12A converter rating is hardware capability, not a universal source budget.
 - USB-C PD: present standalone straps guarantee only 45W input; without negotiated-contract telemetry the full 60W rail must not be advertised downstream.
 - AUX: module-dependent; full power requires a module capability contract.
 
-## OPEN ARCHITECTURE DECISION — BARREL VS AUX RECHARGE CONCURRENCY
+## BARREL VS AUX RECHARGE CONCURRENCY — RESOLVED
 
-The present barrel jack, Kycon KLDHCX-8-0202-B, is rated **8A at 24V DC**. The current fuse candidate is 7.5A. At 12V, a 60W 5V_MAIN load draws roughly **5.3–5.6A** for 95–90% buck efficiency. The existing AUX recharge contract can simultaneously draw up to **2.0A** from EXT_CHARGE_IN. Combined demand is therefore roughly **7.3–7.6A before remaining upstream losses/tolerance**, leaving inadequate design margin under an 8A connector and making the 7.5A fuse unsuitable as an unconditional full-load/full-recharge policy.
+Rev-A keeps the existing 8A Kycon barrel interface and makes AUX recharge a default-off, firmware-sheddable load. The 60W system rail remains the priority load.
 
-Critically, U3 TPS259474L recharge EN/UVLO is presently a fixed resistor qualification network; there is **no existing firmware-controlled recharge-enable/load-shed path**. Do not claim firmware can solve this without an intentional schematic change.
+The load-shed implementation uses U3 EN/UVLO rather than adding another series power switch:
+- Q11 2N7002BK clamps EN/UVLO low by default.
+- A passive 100k/100k EXT_CHARGE_IN divider biases Q11 ON even before 3V3_AUX exists.
+- Q12 2N7002BK can pull Q11's gate low when management asserts AUX_CHG_ENABLE.
+- U60 is upgraded to TCA9534APWR; P4 is AUX_CHG_ENABLE and P5 reads AUX_CHG_PG.
+- TCA9534A power-up input/high-Z behavior plus Q12's 100k pulldown makes the hardware default **recharge disabled**.
+- Firmware must write the safe output value 0x03 before changing the direction register to 0xEC. P4 may only be driven high after load/source policy explicitly authorizes charging.
 
-Two legitimate directions remain:
+This retains the existing <=2A recharge contract when headroom is available while preventing full system load plus full recharge from being an unconditional barrel requirement.
 
-1. Keep the existing 8A barrel connector and add a deliberate, default-safe hardware/firmware method to disable or curtail AUX recharge when system power approaches the source budget; or
-2. If unconditional simultaneous 60W system output + 2A recharge is a hard requirement, upgrade the barrel connector/harness/fuse path to hardware with comfortable >8A continuous margin.
-
-This choice must be made before the barrel fuse/current policy is frozen. The already-frozen AUX recharge circuit must not be silently modified.
+The 7.5A fuse remains provisional until the actual load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 
 ## Remaining gates before KiCad buck-sheet freeze
 
-1. Resolve barrel/recharge concurrency architecture.
+1. Native-validate the new U60 + default-off AUX recharge load-shed schematic batch.
 2. Validate the 5.90k / 10nF compensation starting point with TI calculator/SPICE/Bode analysis; keep CHF as a tuning provision.
-3. Assign exact footprints to the frozen MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
+3. Assign exact footprints to the frozen buck MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
 4. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet.
 5. Native KiCad render/ERC and visual review.
 6. PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.

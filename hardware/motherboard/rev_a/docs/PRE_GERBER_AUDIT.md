@@ -99,10 +99,20 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - AEF first-pass is frozen around XGL6060-102MEC + EEHZC1V101V and TI Design-2 low-frequency compensation values.
 - Remaining pre-schematic blockers are loop-compensation validation and the explicit barrel-vs-AUX-recharge concurrency decision.
 
+## AUX recharge load-shed checkpoint — awaiting native validation
+
+- Decision: retain the existing 8A barrel connector; AUX charging is the deferrable load.
+- U60 changes from TCA9536DGK (4-bit, 0x41) to TCA9534APWR (8-bit, A2/A1/A0=000 -> 0x38).
+- U60 P4 = AUX_CHG_ENABLE; P5 = AUX_CHG_PG; P6/P7 reserved.
+- Q11/Q12 = Nexperia 2N7002BK,215. Q11 clamps U3 EN/UVLO low by default; Q12 only releases Q11 when management explicitly asserts AUX_CHG_ENABLE.
+- R70/R71 = 100k/100k default-off bias from EXT_CHARGE_IN; R72 = 100k Q12 gate pulldown; R73 = 10k control series.
+- Safe firmware init: Output Port 0x01 <- 0x03, then Configuration 0x03 <- 0xEC. Do not configure P4 as output before loading the safe output register.
+- Native KiCad 10.0.8 render/ERC and visual review are required before this architecture is frozen green.
+
 ## Fabrication blockers
 
 1. **Selected-source front end is electrically frozen through `SYS_IN`; 5V buck power-train values are now calculated/selected.** LM25149QRGYRQ1 single-phase ~440kHz, 5V/12A; IAUC60N04S6L039 MOSFET pair; XGL1010-222MED 2.2uH; 3mOhm Susumu shunt; 4x10uF input ceramics; 8x47uF output ceramics; XGL6060-102MEC 1uH AEF inductor; EEHZC1V101V 100uF damping bulk. Loop compensation and the barrel/recharge concurrency decision remain open before the new KiCad sheet is drawn. J16/F1/Q9/Q10 physical footprints remain open.
-2. **Barrel/recharge concurrency is now an explicit architecture blocker.** The 8A Kycon jack plus 7.5A fuse candidate has inadequate margin for unconditional 60W 5V load plus the existing 2A AUX recharge contract: calculated 12V combined demand is roughly 7.3–7.6A before remaining upstream loss/tolerance. U3 recharge EN is not presently firmware controlled. Choose either deliberate recharge load-shedding control or a higher-current barrel connector/harness/fuse path before freezing input-current policy.
+2. **Barrel/recharge concurrency direction is resolved; native validation pending.** Rev-A retains the 8A Kycon barrel interface and adds default-off AUX recharge load shedding at U3 EN/UVLO. U60 is upgraded to TCA9534APWR; P4 explicitly enables recharge and P5 reads AUX_CHG_PG. Q11/Q12 2N7002BK + passive bias ensure charging remains disabled through reset/unpowered management. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.

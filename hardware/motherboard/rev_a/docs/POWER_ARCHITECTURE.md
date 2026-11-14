@@ -49,6 +49,26 @@ Recharge branch first-pass electrical contract:
 
 EXT_CHARGE_IN is now driven by the U4 external-source priority stage (barrel over PD). A weak USB-C source may therefore power the bridge while leaving EXT_CHARGE_IN unavailable; a sufficiently capable source may power the bridge and recharge the optional module simultaneously.
 
+### AUX recharge load-shedding — adopted Option A
+
+The project retains the existing 8A barrel connector and makes AUX recharge an explicitly deferrable load. U3 TPS259474L keeps its existing UVLO/OVLO/current-limit/dVdt network, but its EN/UVLO node can now be clamped low by Q11 so the branch is **default OFF** until management firmware deliberately allows charging.
+
+Control hardware:
+- Q11/Q12 = Nexperia 2N7002BK,215, 60V AEC-Q101 SOT-23 N-MOS.
+- R70/R71 = 100k/100k from EXT_CHARGE_IN to GND, biasing Q11 gate to approximately half the selected-source voltage. Across about 8.1-23V this is about 4.05-11.5V, within the 2N7002BK +/-20V VGS limit and enough to turn Q11 on at the tiny EN-divider current.
+- Q11 drain clamps U3 EN/UVLO (AUX_UV_SENSE) to GND when charging is not explicitly enabled.
+- Q12 pulls Q11 gate low only when AUX_CHG_ENABLE is asserted high.
+- R72 = 100k Q12 gate pulldown; R73 = 10k series from the management expander.
+
+U60 on sheet 03 is upgraded from TCA9536 to **TCA9534APWR** (8-bit, TSSOP-16, address 0x38 with A2/A1/A0 grounded). P4 drives AUX_CHG_ENABLE; P5 reads AUX_CHG_PG. TI specifies all TCA9534A ports power up as high-impedance inputs, so R72 holds Q12 off and Q11 keeps U3 disabled before firmware initialization.
+
+Mandatory safe firmware initialization for U60:
+1. write Output Port register (0x01) = **0x03** first: P0/P1 high (front boards disabled), P4 low (AUX charge disabled);
+2. then write Configuration register (0x03) = **0xEC**: P0/P1/P4 outputs; P2/P3/P5/P6/P7 inputs;
+3. only after source/load policy permits charging may firmware set P4 high.
+
+This resolves the barrel-vs-recharge concurrency architecture in favor of **load shedding** without reducing the module's existing <=2A recharge contract when headroom is available.
+
 ## 5V_MAIN
 
 Rev-A now has the controller/topology and the main 12A power-train values **calculated and component-frozen**, while loop compensation and the barrel-vs-recharge concurrency policy remain open before the KiCad sheet is drawn.
@@ -96,11 +116,9 @@ Calculated starting point: RCOMP 5.90k, CCOMP 10nF, CHF DNP with a 22pF tuning o
 
 The 12A converter rating is hardware capability, not a universal source budget. Barrel is intended full-power; standalone PD remains 45W-guaranteed without negotiated-contract telemetry; AUX capability remains module-specific.
 
-### Open barrel / AUX-recharge concurrency decision
+### Barrel / AUX-recharge concurrency — RESOLVED: LOAD SHEDDING
 
-The current Kycon barrel jack is rated 8A. At 12V, a full 60W 5V rail consumes about 5.3–5.6A for 95–90% buck efficiency. The frozen AUX recharge contract may simultaneously draw up to 2.0A, producing about 7.3–7.6A combined demand before remaining upstream loss/tolerance. That is too close to an 8A connector and makes the current 7.5A fuse unsuitable as an unconditional full-load/full-recharge policy.
-
-U3 recharge EN/UVLO is presently a fixed resistor network; there is no existing firmware-controlled load-shed input. The project must explicitly choose either (A) a deliberate default-safe recharge-disable/load-shed redesign while retaining the 8A barrel interface, or (B) a higher-current barrel connector/harness/fuse path if unconditional simultaneous full-power operation is required. Do not silently alter the frozen AUX recharge circuit.
+Rev-A adopts the load-shedding direction above: retain the 8A barrel interface, keep the AUX module's <=2A recharge capability when source/system headroom exists, and default the recharge branch OFF until management firmware explicitly enables it. The 7.5A fuse remains provisional until final barrel adapter, firmware thresholds, wiring gauge and measured conversion-loss margins are frozen.
 
 5V_MAIN feeds both Pico VSYS inputs, both USB front-board power feeds, fan power, and the 3V3_AUX regulator.
 
