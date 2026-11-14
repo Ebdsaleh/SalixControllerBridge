@@ -1,6 +1,6 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION VALUES FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET NOT YET DRAWN**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION + POWER-STAGE FOOTPRINTS FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET NOT YET DRAWN**
 
 ## Native baseline before buck schematic work
 
@@ -208,7 +208,7 @@ This retains the existing <=2A recharge contract when headroom is available whil
 
 The 7.5A fuse remains provisional until the actual load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 
-## Physical footprint freeze — PASSIVES COMPLETE / MOSFET PENDING
+## Physical footprint freeze — POWER STAGE COMPLETE
 
 Exact manufacturer land-pattern review produced the following Rev-A assignments:
 
@@ -217,12 +217,12 @@ Exact manufacturer land-pattern review produced the following Rev-A assignments:
 - KRL2012E-M-R003-F-T5 -> `SalixFP:Susumu_KRL2012E_0508_LongSide`: Susumu long-side-terminal >=2mOhm/35um-Cu geometry, a=0.60 mm gap, b=2.00 mm total span, c=2.20 mm height; resulting lands are 0.70 x 2.20 mm at +/-0.65 mm centers.
 - EEHZC1V101V -> `SalixFP:Panasonic_EEH_ZC_F_VibrationProof_8x10.5mm`: Panasonic size-F vibration-proof cross land, a=2.7, b=4.0, c=4.7, d=1.3, e=1.0, f=1.7, g=1.1, h=2.5 mm. Pad 1 is positive and pad 2 negative.
 - TDK 1210 input/output ceramic banks -> stock `Capacitor_SMD:C_1210_3225Metric`.
+- IAUC60N04S6L039 -> `SalixFP:Infineon_PG_TDSON_8_33`: exact Infineon PG-TDSON-8-33 manufacturer copper/stencil geometry, 1.27 mm pitch, numeric datasheet pinout 1-3 Source / 4 Gate / 5-8 Drain. The large central drain copper reuses pad 5 and the source bridge reuses pad 2 because the package has no separate exposed-pad pin number.
 
-The IAUC60N04S6L039 package has been positively identified as **PG-TDSON-8-33**. Infineon's recommended copper drawing is available and the selected part appears explicitly in the -33 product list, but the project footprint is intentionally **not frozen in this batch** until that multi-region drain/source/gate copper pattern is independently transcribed and checked. Do not use PG-TDSON-8-57 or a generic SON-8 substitute.
+The PG-TDSON-8-33 footprint was transcribed from Infineon's current recommended PCB copper/stencil drawing and independently cross-checked against a separately authored KiCad PG-TDSON-8-33 transcription. The asymmetric source/gate region, four drain fingers, central drain copper and segmented stencil apertures agree. This closes the final 5V_MAIN power-stage footprint blocker. Do not substitute PG-TDSON-8-57 or a generic SON-8 footprint.
 
 ## Remaining gates before KiCad buck-sheet freeze
 
-1. Finish the exact Infineon PG-TDSON-8-33 project-footprint transcription for IAUC60N04S6L039.
-2. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen passive footprints and 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
-3. Native KiCad render/ERC and visual review.
-4. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.
+1. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen power-stage footprints and 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
+2. Native KiCad render/ERC and visual review.
+3. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.
