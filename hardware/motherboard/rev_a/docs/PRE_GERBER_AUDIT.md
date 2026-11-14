@@ -296,6 +296,7 @@ Planned implementation:
 - **Electrical defect fixed:** BOM always intended a series resistor per LED, but page 07 had D25-D28 wired directly from U20 TCA9535 outputs to GND. Added R110-R113 = **1k 1% 0603** in series with the four LED anodes.
 - 1k is retained as the first-pass brightness value. Typical ideal current is roughly 0.6mA for blue/green and 1.4mA for red/yellow; first-article brightness may be tuned without changing the LED mechanical footprint.
 - Native KiCad footprint export + ERC + page-07 visual review are required before SW1/SW2/D25-D28 are called frozen green.
+- **Embedded-symbol metadata correction before native validation:** post-commit audit caught that the first metadata edit accidentally placed the E-Switch default footprint on the embedded `SN74LVC2G157` symbol. No mux instance footprint/net was changed. Corrective commit restores the mux symbol default to blank (its instances retain their stock VSSOP footprints) and assigns the E-Switch footprint to the embedded `PUSH_PUSH_SPDT` symbol where intended.
 
 ## Fabrication blockers
 
