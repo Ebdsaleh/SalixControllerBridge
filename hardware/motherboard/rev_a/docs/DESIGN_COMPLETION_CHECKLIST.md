@@ -24,7 +24,8 @@ Two finish lines are tracked separately:
 - [x] Source-priority / AUX recharge control native-green
 - [x] 5V_MAIN buck schematic native-green
 - [x] Front USB data/power architecture frozen
-- [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green; J12 remains unassigned
+- [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green
+- [~] J12 is now assigned to JST SM03B-SRSS-TB with R114/R115 100R SWD host termination; native KiCad validation pending
 - [ ] No fabrication `.kicad_pcb` exists yet
 
 Useful scale reference:
@@ -105,8 +106,9 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 - [x] D28 Kingbright APDA3020LSYCK/J3-PF yellow native-green
 - [x] Keep independent per-port LEDs; selected E-Switch LC1258 is non-illuminated and preserves four-port identity/status semantics
 - [x] R110-R113 = 1k 1% 0603 LED current-limit networks restored and native-green
-- [ ] J12 spring/pogo SWD contact geometry
-- [ ] Freeze Pico-A socket / standoff / mounting height before J12
+- [x] Pico-A Rev-A baseline frozen to Raspberry Pi Pico 2 W with headers; factory JST-SH debug connector removes pogo-height dependency
+- [x] Pico sockets frozen to Samtec SSW-120-01-F-S 1x20 vertical socket strips
+- [~] J12 JST SM03B-SRSS-TB + R114/R115 100R host termination assigned — native validation pending
 - [ ] Freeze front-panel mechanical relationship to selector actuators and LEDs
 - [ ] Freeze harness wire gauge and exact crimp/contact population for high-current 5V/GND paths
 
@@ -260,7 +262,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Freeze Pico-A mechanical stack and J12 spring-contact geometry.**
+1. **Native-validate the Pico-A socket/J12 JST-SH SWD closure batch.**
 2. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
 3. **Place and route the boards; close DRC.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
