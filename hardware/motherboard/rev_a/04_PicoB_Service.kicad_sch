@@ -1215,7 +1215,7 @@
 	(global_label "PICO_A_SWDIO" (shape passive) (at 160.32 86.27 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000001"))
 	(global_label "PICO_A_SWCLK" (shape passive) (at 160.32 88.81 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000002"))
 	(symbol
-		(lib_id "Salix:R_SERVICE")
+		(lib_id "Salix:R_SWD")
 		(at 156.51 86.27 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1255,7 +1255,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Salix:R_SERVICE")
+		(lib_id "Salix:R_SWD")
 		(at 156.51 88.81 0)
 		(unit 1)
 		(exclude_from_sim no)
