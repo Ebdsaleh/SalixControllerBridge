@@ -208,9 +208,21 @@ This retains the existing <=2A recharge contract when headroom is available whil
 
 The 7.5A fuse remains provisional until the actual load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 
+## Physical footprint freeze — PASSIVES COMPLETE / MOSFET PENDING
+
+Exact manufacturer land-pattern review produced the following Rev-A assignments:
+
+- XGL1010-222MED -> `SalixFP:Coilcraft_XGL1010_11.3x10.0mm`: two 2.38 x 8.50 mm lands on 6.65 mm centers.
+- XGL6060-102MEC -> `SalixFP:Coilcraft_XGL6060_6.71x6.51mm`: two 1.43 x 5.50 mm lands on 4.04 mm centers.
+- KRL2012E-M-R003-F-T5 -> `SalixFP:Susumu_KRL2012E_0508_LongSide`: Susumu long-side-terminal >=2mOhm/35um-Cu geometry, a=0.60 mm gap, b=2.00 mm total span, c=2.20 mm height; resulting lands are 0.70 x 2.20 mm at +/-0.65 mm centers.
+- EEHZC1V101V -> `SalixFP:Panasonic_EEH_ZC_F_VibrationProof_8x10.5mm`: Panasonic size-F vibration-proof cross land, a=2.7, b=4.0, c=4.7, d=1.3, e=1.0, f=1.7, g=1.1, h=2.5 mm. Pad 1 is positive and pad 2 negative.
+- TDK 1210 input/output ceramic banks -> stock `Capacitor_SMD:C_1210_3225Metric`.
+
+The IAUC60N04S6L039 package has been positively identified as **PG-TDSON-8-33**. Infineon's recommended copper drawing is available and the selected part appears explicitly in the -33 product list, but the project footprint is intentionally **not frozen in this batch** until that multi-region drain/source/gate copper pattern is independently transcribed and checked. Do not use PG-TDSON-8-57 or a generic SON-8 substitute.
+
 ## Remaining gates before KiCad buck-sheet freeze
 
-1. Assign exact footprints to the frozen buck MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
-2. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
+1. Finish the exact Infineon PG-TDSON-8-33 project-footprint transcription for IAUC60N04S6L039.
+2. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen passive footprints and 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
 3. Native KiCad render/ERC and visual review.
 4. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.

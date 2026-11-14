@@ -149,9 +149,22 @@ Freeze **RCOMP=5.90k 1%, CCOMP=10nF, CHF=DNP with 22pF tuning option**. TI Equat
 - Safe firmware init: Output Port 0x01 <- 0x03, then Configuration 0x03 <- 0xEC. Do not configure P4 as output before loading the safe output register.
 - Native KiCad 10.0.8 render/ERC and visual review are required before this architecture is frozen green.
 
+## 5V_MAIN passive footprint audit
+
+Project-local manufacturer-derived footprints added:
+
+- `SalixFP:Coilcraft_XGL1010_11.3x10.0mm`
+- `SalixFP:Coilcraft_XGL6060_6.71x6.51mm`
+- `SalixFP:Susumu_KRL2012E_0508_LongSide`
+- `SalixFP:Panasonic_EEH_ZC_F_VibrationProof_8x10.5mm`
+
+The two TDK ceramic banks remain on stock `Capacitor_SMD:C_1210_3225Metric`.
+
+The IAUC60N04S6L039 MOSFET is verified as Infineon **PG-TDSON-8-33**, but its project footprint remains deliberately open pending a second check of the manufacturer multi-pad copper transcription. This is the only remaining 5V_MAIN power-stage footprint blocker before schematic placement.
+
 ## Fabrication blockers
 
-1. **Selected-source front end is electrically frozen through `SYS_IN`; the 5V buck power-train and loop-compensation values are now calculated/frozen for schematic entry.** LM25149QRGYRQ1 single-phase ~440kHz, 5V/12A; IAUC60N04S6L039 MOSFET pair; XGL1010-222MED 2.2uH; 3mOhm Susumu shunt; 4x10uF input ceramics; 8x47uF output ceramics; XGL6060-102MEC 1uH AEF inductor; EEHZC1V101V 100uF damping bulk; RCOMP 5.90k + CCOMP 10nF + CHF DNP/22pF option. Next blocker is exact physical footprint assignment before the new buck sheet is drawn. J16/F1/Q9/Q10 physical footprints remain open.
+1. **Selected-source front end is electrically frozen through `SYS_IN`; the 5V buck power-train and loop-compensation values are frozen for schematic entry.** Exact project footprints are now frozen for XGL1010, XGL6060, KRL2012E and the Panasonic EEHZC vibration-proof F case; 1210 ceramic banks use the stock KiCad footprint. The remaining buck-footprint blocker is an independently checked transcription of Infineon PG-TDSON-8-33 for IAUC60N04S6L039. J16/F1/Q9/Q10 physical footprints remain open.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
