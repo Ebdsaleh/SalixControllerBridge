@@ -109,6 +109,15 @@ The first native KiCad 10.0.8 run after `d509061`/`dd42ce6` returned **0 errors 
 - 0 footprint_link_issues
 
 Electrical ERC therefore passed, but visual freeze was correctly withheld. Page 03 showed U60's old bypass/pull-up layout colliding with the expanded TCA9534A presentation, and page 01 showed cramped Q11/Q12/load-shed labels plus a pre-existing CHARGE_PWR/AUX_CHG_PG label collision beside U3. The follow-up schematic batch respaces U60/C64/R58/R59, separates R13 from the U3 OUT label corridor, and rewrites the load-shed control presentation without changing the fail-safe topology.
+## AUX recharge second native render — 15 ERC errors / corrective rollback to known-good connectivity
+
+The native run at `e2a36e5` exposed **15 ERC errors** even though the visual spacing improved. All 15 errors are confined to the redrawn load-shed block:
+- 13 `pin_not_connected` errors across R70/R71/Q11/R73/Q12/R72;
+- 2 `pin_not_driven` errors on the Q11/Q12 gates.
+
+Root cause: the spacing rewrite recreated the load-shed wires by hand; several visually adjacent endpoints were not electrically snapped to their symbol pins in KiCad. This also made the cross-sheet `AUX_CHG_ENABLE` appear as a one-pin isolated label.
+
+Corrective action: restore the exact electrically-known-good load-shed geometry from `d509061` (the version that previously produced 0 ERC errors), while retaining only non-electrical readability changes to reference/value positions and text sizes. The separate U60 management-region spacing fix and the R13 `AUX_CHG_PG` separation remain because neither introduced ERC errors.
 ## AUX recharge load-shed checkpoint — awaiting native validation
 
 - Decision: retain the existing 8A barrel connector; AUX charging is the deferrable load.
