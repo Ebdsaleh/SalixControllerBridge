@@ -586,6 +586,13 @@ def render_project_footprints(
         destination_dir = svg_root / footprint.stem
         destination_dir.mkdir(parents=True, exist_ok=True)
 
+        # KiCad 10.0.8's documentation says fp export svg accepts either an
+        # individual .kicad_mod or a .pretty library directory. The Windows
+        # 10.0.8 CLI used by ERIDU rejects a direct .kicad_mod with
+        # "Footprint library does not exist or is not accessible". Use the
+        # library form and explicitly select the footprint by name; this is
+        # accepted by the CLI and still validates every project-local
+        # footprint independently.
         command = [
             str(kicad_cli),
             "fp",
@@ -595,10 +602,12 @@ def render_project_footprints(
             str(destination_dir),
             "--layers",
             FOOTPRINT_LAYERS,
+            "--footprint",
+            footprint.stem,
         ]
         if theme:
             command.extend(["--theme", theme])
-        command.append(str(footprint))
+        command.append(str(footprint_library))
 
         run_checked(command)
 
