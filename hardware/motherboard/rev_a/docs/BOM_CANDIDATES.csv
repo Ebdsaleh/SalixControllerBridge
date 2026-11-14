@@ -124,3 +124,5 @@ USB-C PD CC protector,TI TPD4S201RUKR WQFN-20,1,FROZEN MPN / FOOTPRINT PENDING,2
 USB-C PD ADCIN1 strap,162k + 38.0k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Decoded value 3 -> 15V minimum
 USB-C PD ADCIN2 strap,38.3k + 162k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Decoded value 6 -> 20V maximum with auto-disable on capability mismatch; PD5VMAX tied low
 USB-C PD ADCIN3/4 straps,162k + 38.0k 1% 0603,2 networks,FROZEN FIRST-PASS VALUE,Decoded 3/3 -> 3A operating current / 5A maximum current
+
+USB-C PD VBUS disconnect clamp,STMicroelectronics STPS5H100BY-TR 5A 100V automotive Schottky,1,FROZEN MPN / FOOTPRINT PENDING,AEC-Q101; 75A non-repetitive surge; anode to GND cathode to PD_VBUS_RAW; TI recommends Schottky VBUS-to-GND clamp for TPS25730AD cable-disconnect surge current

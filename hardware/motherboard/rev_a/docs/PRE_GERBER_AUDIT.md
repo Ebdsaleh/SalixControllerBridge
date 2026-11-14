@@ -72,6 +72,10 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## USB-C PD secondary-input batch awaiting native KiCad validation
 
+- First native KiCad validation of sheet 10 produced **2 ERC errors / 1033 warnings**. One error was expected external-source bookkeeping (J17 VBUS power-input not marked as driven); the other was caused by an accidental PD_LDO3V3-to-GND short from overlapping passive stubs. Visual/static review also found two additional real net-overlap defects that ERC did not elevate to errors: overlapping CC filter stubs and overlapping TPD4S201 VBIAS/GND vertical stubs. All three overlaps have been separated, and #FLG05 now marks external PD_VBUS_RAW as driven.
+- Datasheet re-verification confirms the TPS25730AD 38-pin mapping, VBUS-only VIN_3V3-to-GND operation, unused-I2C-to-GND guidance, and the 15V-min / 20V-max / 3A-operating / 5A-max strap policy. TPD4S201 pin mapping and its 1uF VPWR / 0.1uF VBIAS support network also match TI's reference design.
+- TI additionally recommends a Schottky clamp from VBUS to GND for cable-disconnect inductive surge current. D30 STPS5H100BY-TR (5A/100V AEC-Q101, 75A surge) has been added with A→GND and K→PD_VBUS_RAW; footprint remains pending. A fresh native KiCad render/ERC is required before the PD electrical batch can be called green.
+
 - New sheet 10 adds J17 GCT USB4085-GF-A dedicated power-only receptacle, U8 TVS2200 VBUS clamp, U9 TPD4S201 CC OVP/ESD protector and U7 TPS25730AD integrated 5A PD sink path feeding `PD_PWR`.
 - Pin straps target 15–20V, 3A operating / 5A maximum, auto-disable on capability mismatch. I2C is intentionally grounded for this first standalone pass; negotiated-contract telemetry is deferred to a power-safe buffered interface.
 - U7/U8/U9 exact footprints and exact PD capacitor MPNs are deliberately pending native render/ERC validation. J17 uses the already-frozen stock GCT USB4085 footprint.
