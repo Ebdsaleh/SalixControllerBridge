@@ -1,6 +1,6 @@
 # Rev-A Design Completion Checklist
 
-Snapshot: 2026-11-14, remote `main` at `2806c87`.
+Snapshot: 2026-11-14, remote `main` at `0cc0ba3`.
 
 ## How to read this
 
@@ -16,7 +16,7 @@ Two finish lines are tracked separately:
 ## Current snapshot
 
 - [x] 13 logical schematic sheets render natively in KiCad 10.0.8
-- [x] 15 project-local footprints export natively
+- [x] 18 project-local footprints export natively
 - [x] ERC at **0 errors**
 - [x] USB-A + USB-C per-port presence telemetry native-green
 - [x] Barrel front end native-green and physically footprinted
@@ -24,7 +24,7 @@ Two finish lines are tracked separately:
 - [x] Source-priority / AUX recharge control native-green
 - [x] 5V_MAIN buck schematic native-green
 - [x] Front USB data/power architecture frozen
-- [~] SW1/SW2 and D25-D28 now have exact parts/footprints assigned and await native validation; J12 remains unassigned
+- [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green; J12 remains unassigned
 - [ ] No fabrication `.kicad_pcb` exists yet
 
 Useful scale reference:
@@ -33,7 +33,7 @@ Useful scale reference:
 264 unique schematic reference designators
 219 are resistors/capacitors
 13 logical schematic sheets
-15 project-local footprint definitions
+18 project-local footprint definitions
 ```
 
 ## Progress gauge
@@ -54,7 +54,9 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 
 - [x] Main Pico-A real-time role defined
 - [x] Service Pico-B role defined
-- [x] Dual-bank front USB architecture defined
+- [x] Rev-A scope frozen as 8 physical USB receptacles presenting 4 logical/concurrent controller inputs across the Primary + Extended front boards
+- [x] Dual-Pico soft-linked architecture retained: Pico-A realtime/USB-host role + Pico-B service/storage/update role
+- [x] Dual-bank-per-front-board USB architecture defined
 - [x] One data-active A/C receptacle per bank
 - [x] Inactive receptacle may remain power-only
 - [x] Per-port service disable concept retained
@@ -94,14 +96,15 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 ### Still open
 
 - [x] SW1 exact latching selector MPN — E-Switch LC1258EENP1RBLK
-- [~] SW1 exact project footprint assigned — native validation pending
+- [x] SW1 exact project footprint native-green
 - [x] SW2 exact latching selector MPN — E-Switch LC1258EENP1RBLK
-- [~] SW2 exact project footprint assigned — native validation pending
-- [~] D25 exact Kingbright InGaN right-angle family/population assigned — native validation pending
-- [~] D26 Kingbright APDA3020LVBC/D blue assigned — native validation pending
-- [~] D27 Kingbright AlGaInP yellow/red population assigned — native validation pending
-- [~] D28 Kingbright APDA3020LSYCK/J3-PF yellow assigned — native validation pending
+- [x] SW2 exact project footprint native-green
+- [x] D25 exact Kingbright InGaN right-angle family/population native-green
+- [x] D26 Kingbright APDA3020LVBC/D blue native-green
+- [x] D27 Kingbright AlGaInP yellow/red population native-green
+- [x] D28 Kingbright APDA3020LSYCK/J3-PF yellow native-green
 - [x] Keep independent per-port LEDs; selected E-Switch LC1258 is non-illuminated and preserves four-port identity/status semantics
+- [x] R110-R113 = 1k 1% 0603 LED current-limit networks restored and native-green
 - [ ] J12 spring/pogo SWD contact geometry
 - [ ] Freeze Pico-A socket / standoff / mounting height before J12
 - [ ] Freeze front-panel mechanical relationship to selector actuators and LEDs
@@ -120,13 +123,13 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 Current warning baseline:
 
 ```text
-1103 endpoint_off_grid
- 247 lib_symbol_mismatch
+1111 endpoint_off_grid
+ 251 lib_symbol_mismatch
    4 isolated_pin_label
    4 lib_symbol_issues
    1 pin_to_pin
 -----------------------
-1359 warnings / 0 errors
+1371 warnings / 0 errors
 ```
 
 ## Phase D — create the actual PCBs
@@ -257,10 +260,10 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Native-validate SW1/SW2 + D25-D28 exact footprints and the restored LED current-limit resistors.**
-2. **Freeze Pico-A mechanical stack and J12 spring-contact geometry.**
-3. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
-4. **Place and route the boards; close DRC.**
-5. **Generate the fab package and obtain the first real quote.**
+1. **Freeze Pico-A mechanical stack and J12 spring-contact geometry.**
+2. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
+3. **Place and route the boards; close DRC.**
+4. **Generate the fab package and perform GerbView/fabrication review.**
+5. **Obtain the first real PCBWay quote / first-article fabrication decision.**
 
 After milestone 5, the project moves from “designing the hardware” to “building and validating the first article.”
