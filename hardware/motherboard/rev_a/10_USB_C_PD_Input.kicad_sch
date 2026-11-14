@@ -10,7 +10,7 @@
       (exclude_from_sim no) (in_bom yes) (on_board yes)
       (property "Reference" "D" (at 0 -3.2 0) (effects (font (size 0.9 0.9))))
       (property "Value" "STPS5H100BY-TR" (at 0 3.2 0) (effects (font (size 0.8 0.8))))
-      (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+      (property "Footprint" "Package_TO_SOT_SMD:TO-252-2_Rectifier" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
       (property "Datasheet" "https://www.st.com/resource/en/datasheet/stps5h100-y.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
       (property "Description" "5A 100V automotive AEC-Q101 Schottky cable-disconnect clamp; footprint/pad mapping pending physical freeze" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
       (symbol "PD_SCHOTTKY_CLAMP_0_1"
@@ -455,7 +455,7 @@
     (exclude_from_sim no) (at 18 33 0)
     (effects (font (size 0.69 0.69)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000389"))
-  (text "U8 DRV0006A and U9 RUK0020B footprints are native-validated green. U7 now uses official KiCad Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4 and awaits native validation; D30 exact footprint plus exact capacitor MPNs remain separate physical-freeze items."
+  (text "U8/U9 and U7 REF0038A footprints are native-validated green. D30 now uses KiCad TO-252-2_Rectifier for ST DPAK (pad 1=A, pad 2=K/tab, pad 3=NC) and awaits native validation; exact capacitor MPNs remain separate physical-freeze items."
     (exclude_from_sim no) (at 18 190 0)
     (effects (font (size 0.69 0.69) (bold yes)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000390"))
@@ -1023,7 +1023,7 @@
     (uuid "cf000000-0000-4000-8000-000000000510")
     (property "Reference" "D30" (at 34 44.8 0) (effects (font (size 0.82 0.82))))
     (property "Value" "STPS5H100BY-TR" (at 34 51.2 0) (effects (font (size 0.72 0.72))))
-    (property "Footprint" "" (at 34 48 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "Package_TO_SOT_SMD:TO-252-2_Rectifier" (at 34 48 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "https://www.st.com/resource/en/datasheet/stps5h100-y.pdf" (at 34 48 0) (effects (font (size 1 1)) (hide yes)))
     (property "Description" "TI-recommended VBUS-to-GND Schottky surge-current clamp; A to GND, K to VBUS" (at 34 48 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "cf000000-0000-4000-8000-000000000511"))
