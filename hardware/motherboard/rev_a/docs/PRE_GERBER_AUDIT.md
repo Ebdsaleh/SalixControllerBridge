@@ -310,7 +310,7 @@ Planned implementation:
 - Console personality cards and their RJ50 rear-I/O hardware remain future separate PCBs; sheet 05 is intentionally a future module-bus/backplane interface only and must not block the Rev-A PCBWay fabrication path.
 - Rev A remains frozen at **two independently controlled 5V 4-wire PWM chassis-fan channels**. A possible third chassis fan is deferred and does not block Rev A.
 
-## Pico-A socket and SWD closure — NATIVE VALIDATION PENDING
+## Pico-A socket and SWD closure — NATIVE GREEN / FROZEN
 
 - Rev-A Pico-A baseline is now the official **Raspberry Pi Pico 2 W with headers**, socketed and user-replaceable.
 - Motherboard Pico sockets are frozen to **Samtec SSW-120-01-F-S**, 1x20, 2.54mm vertical socket strips; the existing stock KiCad 1x20 vertical socket footprint remains appropriate.
@@ -319,9 +319,10 @@ Planned implementation:
 - The Pico 2 W with headers provides the matching factory keyed JST-SH debug connector, so J12 uses a short **straight-through pin-1-to-pin-1** SH cable instead of height-sensitive pogo contacts.
 - **R114/R115 = 100R 1% 0603** are added at the Pico-B debug-host pins for SWDIO/SWCLK source termination, following Raspberry Pi's 3-pin debug connector specification.
 - This batch changes the SWD physical interconnect and adds the two specified host-termination resistors only. The dual-Pico role split, RUN recovery path and other Pico-B assignments are unchanged.
-- Fresh KiCad 10.0.8 render/ERC and visual review are required before this closure is called native-green.
+- Returned KiCad 10.0.8 validation on `82ce636` completed at **0 ERC errors / 1373 warnings**. J6 GP26/GP27 are visibly connected through R114/R115 to the SWD nets, J12 is readable, and no new warning class is present.
+- This closure is therefore **native-green / frozen**.
 
-## Full schematic visual-hygiene gate — NATIVE VALIDATION PENDING
+## Full schematic visual-hygiene gate — PASSED / SCHEMATIC FROZEN
 
 Before any `.kicad_pcb` work begins, the complete 13-page schematic set must pass a dedicated readability review in addition to ERC.
 
@@ -336,17 +337,33 @@ Cleanup batch committed after the returned `a57d3df` native render:
 
 No circuit topology, net identity, footprint, fitted value, or frozen electrical decision is intentionally changed by this batch.
 
-**Gate:** fresh KiCad 10.0.8 render/ERC plus visual inspection of every page. Do not start PCB layout until there are 0 ERC errors and no visible overlapping labels/text or title-block bleed.
+**Gate result:** returned native run at `82ce636` rendered all **13/13** pages and **18/18** project-local footprints, finished at **0 ERC errors / 1373 warnings**, and passed a second visual inspection of the complete set. No visible label/object overlap or title-block bleed remains. The schematic phase is now **frozen for PCB layout**.
 
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
-3. **J12 is no longer unassigned.** It is now JST SM03B-SRSS-TB with stock exact KiCad footprint; R114/R115 provide the specified 100R host termination. This Pico-A SWD closure batch is awaiting native validation. SW1/SW2, D25-D28 and R110-R113 are already native-green.
+3. **J12 is native-green/frozen.** It is JST SM03B-SRSS-TB with stock exact KiCad footprint; R114/R115 provide the specified 100R host termination. SW1/SW2, D25-D28 and R110-R113 are also native-green.
 4. **The Pico-A/J12 height dependency is removed.** Rev-A uses the headered Pico 2 W factory JST-SH debug connector and a short cable to motherboard J12, while the Pico itself remains socketed. Remaining mechanical work is PCB/enclosure placement: front-panel selector/LED alignment, board outline/mounting, connector locations and airflow.
-5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
+5. **The first motherboard `.kicad_pcb` foundation now exists.** It uses a provisional 160x100mm working envelope, four 3.2mm M3 NPTH mounting holes at 5mm corner insets, and a 1.6mm four-layer working stack (F.Cu / GND intent / PWR intent / B.Cu). These dimensions are layout scaffolding, not enclosure-frozen mechanics. Native PCB DRC/render validation, schematic forward-annotation, placement, controlled USB routing, power planes/high-current paths, thermal copper, keepouts and final DRC remain outstanding.
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
-7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
+7. **Schematic warning baseline is frozen at 1373 warnings / 0 errors:** 1111 endpoint_off_grid + 253 lib_symbol_mismatch + 4 isolated_pin_label + 4 lib_symbol_issues + 1 established USB-C PD pin_to_pin. Further warning cleanup is optional housekeeping unless it reveals a real regression; new warning classes or ERC errors remain blockers.
+
+## Motherboard PCB foundation — NATIVE VALIDATION PENDING
+
+- New file: `SalixControllerBridge_RevA.kicad_pcb`.
+- Working envelope: **160.0 x 100.0mm**. This is adopted from the old concept only as a practical first placement/quote envelope; it is **not** an enclosure-frozen dimension.
+- Working board thickness: **1.6mm**.
+- Working layer count: **4 layers**:
+  - F.Cu = components / critical signals / local power copper;
+  - In1.Cu = intended continuous GND reference plane;
+  - In2.Cu = intended power-distribution plane/pours;
+  - B.Cu = secondary routing / low-speed / escape routing.
+- Working mounting pattern: **4 x M3**, 3.2mm NPTH, hole centres 5mm in from each board corner.
+- Board comments mark rear/power-service side versus front/front-USB-harness side.
+- No schematic footprints are placed yet. The board must pass a native file-format/outline DRC + render gate first; then KiCad forward annotation will populate the schematic footprints for real placement.
+- Added `tools/render_kicad_pcb.py` to produce native top/bottom renders and `PCB_DRC.rpt` in `Downloads\\kicad_pcb_validation.zip`.
+- Final copper weight, exact fab stack-up, enclosure connector coordinates and mounting geometry remain open until placement and chassis integration prove the working envelope.
 
 ## Layout/current constraints
 
