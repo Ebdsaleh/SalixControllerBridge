@@ -139,3 +139,11 @@ The PD page also includes a dedicated cable-disconnect Schottky clamp in additio
 ### USB-C PD electrical freeze
 
 Native KiCad 10.0.8 validation on commit `44a27dd` is **0 errors / 1038 warnings**. The warning count is hygiene-only: 848 endpoint-off-grid, 185 library-symbol-mismatch, 4 intentional isolated AUX management labels, and one intentional pin-to-pin warning from unused TPS25730AD I2C tied to the globally power-flagged GND net. Sheet 10 has been visually reviewed after the final net-overlap repairs and is now electrically frozen. U7/U8/U9/D30 exact PCB footprints and exact capacitor MPNs remain the next physical freeze items; the remaining major electrical design block is `SYS_IN -> 5V_MAIN`.
+
+### PD physical freeze — U8/U9
+
+U8 TVS2200DRVR is assigned to project-local `SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm`, transcribed from TI DRV0006A: six 0.45x0.30mm perimeter lands on 0.65mm pitch with a 1.0x1.6mm exposed pad. The exposed-pad paste is split into two 1.0x0.70mm apertures for approximately 88% paste coverage, following TI's example stencil.
+
+U9 TPD4S201RUKR is assigned to project-local `SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm`, transcribed from TI RUK0020B: twenty 0.60x0.20mm perimeter lands on 0.4mm pitch around a 1.7x1.7mm exposed pad. The exposed-pad paste uses four 0.75x0.75mm apertures centered at ±0.47mm, matching TI's approximately 78% stencil coverage example. Thermal vias are intentionally not embedded in the footprint; board-level via strategy remains a layout decision.
+
+U7 TPS25730AD REF0038A remains open because its 38-pin land pattern contains two separate exposed pads (GND and DRAIN) plus mixed NSMD/SMD perimeter-mask rules. It will be handled in a dedicated footprint pass rather than approximated from a generic QFN.

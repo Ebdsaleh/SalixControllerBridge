@@ -381,7 +381,7 @@
   (exclude_from_sim no) (in_bom yes) (on_board yes)
   (property "Reference" "U" (at 0 -25 0) (effects (font (size 0.9 0.9))))
   (property "Value" "TPD4S201RUKR" (at 0 25 0) (effects (font (size 0.82 0.82))))
-  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Footprint" "SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd4s201.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Description" "USB-C CC/SBU 28V short-to-VBUS and IEC ESD protector; current 2025 RUK-20 device" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (symbol "TPD4S201_RUK20_0_1"
@@ -415,7 +415,7 @@
   (exclude_from_sim no) (in_bom yes) (on_board yes)
   (property "Reference" "U" (at 0 -7 0) (effects (font (size 0.9 0.9))))
   (property "Value" "TVS2200DRVR" (at 0 7 0) (effects (font (size 0.82 0.82))))
-  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Footprint" "SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tvs2200.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Description" "TI 22V flat-clamp VBUS surge protector, WSON DRV 2x2mm" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (symbol "TVS2200_DRV_0_1"
@@ -455,7 +455,7 @@
     (exclude_from_sim no) (at 18 33 0)
     (effects (font (size 0.69 0.69)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000389"))
-  (text "U7 REF-38, U8 DRV and U9 RUK exact PCB footprints plus exact capacitor MPNs remain a separate physical freeze after native KiCad validation."
+  (text "U8 DRV0006A and U9 RUK0020B footprints are frozen project-locally. U7 REF0038A and D30 exact footprints plus exact capacitor MPNs remain separate physical-freeze items."
     (exclude_from_sim no) (at 18 190 0)
     (effects (font (size 0.69 0.69) (bold yes)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000390"))
@@ -494,7 +494,7 @@
     (uuid "cf000000-0000-4000-8000-000000000019")
     (property "Reference" "U8" (at 60 42.5 0) (effects (font (size 0.82 0.82))))
     (property "Value" "TVS2200DRVR" (at 60 53.5 0) (effects (font (size 0.72 0.72))))
-    (property "Footprint" "" (at 60 48 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm" (at 60 48 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 60 48 0) (effects (font (size 1 1)) (hide yes)))
     (property "Description" "22V flat-clamp VBUS surge protector; footprint pending" (at 60 48 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "cf000000-0000-4000-8000-000000000020"))
@@ -512,7 +512,7 @@
     (uuid "cf000000-0000-4000-8000-000000000027")
     (property "Reference" "U9" (at 92 77.5 0) (effects (font (size 0.82 0.82))))
     (property "Value" "TPD4S201RUKR" (at 92 88.5 0) (effects (font (size 0.72 0.72))))
-    (property "Footprint" "" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
     (property "Description" "CC short-to-VBUS + ESD protector; footprint pending" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "cf000000-0000-4000-8000-000000000028"))
