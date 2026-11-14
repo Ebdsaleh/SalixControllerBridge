@@ -328,7 +328,7 @@
   (exclude_from_sim no) (in_bom yes) (on_board yes)
   (property "Reference" "U" (at 0 -42 0) (effects (font (size 0.9 0.9))))
   (property "Value" "TPS25730ADREFR" (at 0 42 0) (effects (font (size 0.82 0.82))))
-  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Footprint" "Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25730a.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Description" "TI 2026 standalone sink-only USB-C PD3.2 controller, D variant integrated 5A PPHV path, 38-WQFN REF 4x6mm" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (symbol "TPS25730AD_REF38_0_1"
@@ -455,7 +455,7 @@
     (exclude_from_sim no) (at 18 33 0)
     (effects (font (size 0.69 0.69)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000389"))
-  (text "U8 DRV0006A and U9 RUK0020B footprints are frozen project-locally. U7 REF0038A and D30 exact footprints plus exact capacitor MPNs remain separate physical-freeze items."
+  (text "U8 DRV0006A and U9 RUK0020B footprints are native-validated green. U7 now uses official KiCad Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4 and awaits native validation; D30 exact footprint plus exact capacitor MPNs remain separate physical-freeze items."
     (exclude_from_sim no) (at 18 190 0)
     (effects (font (size 0.69 0.69) (bold yes)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000390"))
@@ -544,9 +544,9 @@
     (uuid "cf000000-0000-4000-8000-000000000049")
     (property "Reference" "U7" (at 165 104.5 0) (effects (font (size 0.82 0.82))))
     (property "Value" "TPS25730ADREFR" (at 165 115.5 0) (effects (font (size 0.72 0.72))))
-    (property "Footprint" "" (at 165 110 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4" (at 165 110 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 165 110 0) (effects (font (size 1 1)) (hide yes)))
-    (property "Description" "Standalone PD3.2 sink controller with integrated 5A managed power path; REF footprint pending" (at 165 110 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Description" "Standalone PD3.2 sink controller with integrated 5A managed power path; exact TI REF0038A footprint assigned from official KiCad Package_DFN_QFN library" (at 165 110 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "cf000000-0000-4000-8000-000000000050"))
     (pin "2" (uuid "cf000000-0000-4000-8000-000000000051"))
     (pin "3" (uuid "cf000000-0000-4000-8000-000000000052"))

@@ -72,7 +72,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 ## USB-C PD secondary-input — ELECTRICAL FROZEN GREEN
 
-- **PD physical sub-batch U8/U9:** U8 TVS2200DRVR now uses project-local `SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm`, derived from TI DRV0006A. U9 TPD4S201RUKR now uses `SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm`, derived from TI RUK0020B. Both footprints use manufacturer perimeter-land geometry and split exposed-pad paste examples. U7 REF0038A is intentionally deferred to its own pass because of dual exposed pads and mixed solder-mask-defined/NSMD pad groups.
+- **PD physical sub-batch U8/U9 — NATIVE GREEN:** U8 TVS2200DRVR uses project-local `SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm`; U9 TPD4S201RUKR uses `SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm`. Native KiCad 10.0.8 validation on commit `302180d` remained **0 errors / 1038 warnings** with no warning-category change, so both assignments are frozen green. **U7 REF0038A:** rather than duplicate the difficult dual-exposed-pad/mixed-mask package locally, Rev-A now assigns KiCad’s exact official `Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4`; this U7 assignment awaits native validation.
 
 - Native validation after commit `1949a2a` rendered all 11 sheets successfully and reduced sheet-10 ERC to **1 error / 1038 warnings**. The only remaining error was U9 pin 10 VPWR not being recognized as driven because U7 LDO_3V3 was modeled as a generic output. TI defines LDO_3V3 as the internal 3.3V regulator output used to supply/bypass the support rail, so U7 pin 1 has now been changed to KiCad `power_out`. LDO_1V5 remains a normal output because TI explicitly states it cannot source external circuits. One final native rerun is required before PD electrical freeze.
 - Final native KiCad 10.0.8 rerun on commit `44a27dd` is **0 errors / 1038 warnings**. Warning breakdown: **848 endpoint_off_grid + 185 lib_symbol_mismatch + 4 intentional isolated AUX management labels + 1 intentional pin_to_pin warning**. The pin_to_pin warning is U7 I2Ct_SDA (bidirectional) tied to GND, whose global net also contains a PWR_FLAG; TI explicitly permits unused I2C pins to be tied to GND. No PD electrical errors remain.
@@ -84,7 +84,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 - New sheet 10 adds J17 GCT USB4085-GF-A dedicated power-only receptacle, U8 TVS2200 VBUS clamp, U9 TPD4S201 CC OVP/ESD protector and U7 TPS25730AD integrated 5A PD sink path feeding `PD_PWR`.
 - Pin straps target 15–20V, 3A operating / 5A maximum, auto-disable on capability mismatch. I2C is intentionally grounded for this first standalone pass; negotiated-contract telemetry is deferred to a power-safe buffered interface.
-- U7/U8/U9 exact footprints and exact PD capacitor MPNs are deliberately pending native render/ERC validation. J17 uses the already-frozen stock GCT USB4085 footprint.
+- J17/U8/U9 footprints are frozen and native-validated. U7 now has the exact official KiCad REF0038A footprint assigned and awaits native render/ERC validation. D30 and exact PD capacitor MPNs remain open physical-freeze items.
 - Native KiCad render/ERC is required before this PD electrical batch can be considered green; do not alter the frozen barrel or LTC4418 source-priority sheets while validating it.
 
 ## Fabrication blockers
