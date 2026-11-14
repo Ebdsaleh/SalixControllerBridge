@@ -258,6 +258,7 @@ Planned implementation:
 - U81 addressing: A2=1, A1=0, A0=BOARD_ID -> **0x3C Primary / 0x3D Extended**.
 - U81 INT_N is open-drain and shares the existing `FRONT_INT_N` path.
 - This block changes telemetry only. Existing TS3USB221A data selection, TPS2553/TPS25821 power control, fail-safe BOARD_ENABLE_N and service jumpers are unchanged.
+- First native run at `571649c` was electrically GREEN (**0 errors / 1359 warnings**) but visual review rejected the page because U81 overlapped the existing Bank-B ESD/USB-A drawing region. The presence topology/values were not changed; U81 and its local labels are moved into the lower-left presence area and the explanatory notes are condensed below it. A second native render is required before freeze.
 - Native KiCad render/ERC is required before the presence block is frozen green.
 - **Reference-designator correction before native validation:** the first source commit used R41-R50/C46-C52/U32-U33, which overlapped existing project references. The post-commit audit caught this before user validation. The presence block was renumbered only—no values/topology changed—to **U80/U81, R100-R109 and C100-C106**.
 
