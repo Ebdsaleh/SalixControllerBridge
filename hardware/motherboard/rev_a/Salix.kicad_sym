@@ -4035,7 +4035,7 @@
 	  (exclude_from_sim no) (in_bom yes) (on_board yes)
 	  (property "Reference" "D" (at 0 -3.2 0) (effects (font (size 0.9 0.9))))
 	  (property "Value" "STPS5H100BY-TR" (at 0 3.2 0) (effects (font (size 0.8 0.8))))
-	  (property "Footprint" "Package_TO_SOT_SMD:TO-252-2_Rectifier" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+	  (property "Footprint" "SalixFP:ST_DPAK_STPS5H100Y" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (property "Datasheet" "https://www.st.com/resource/en/datasheet/stps5h100-y.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (property "Description" "5A 100V automotive AEC-Q101 Schottky cable-disconnect clamp; footprint/pad mapping pending physical freeze" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 	  (symbol "PD_SCHOTTKY_CLAMP_0_1"
@@ -4043,6 +4043,7 @@
 	  (symbol "PD_SCHOTTKY_CLAMP_1_1"
 	    (pin passive line (at -5.08 0 0) (length 2.54) (name "A" (effects (font (size 0.72 0.72)))) (number "1" (effects (font (size 0.72 0.72)))))
 	    (pin passive line (at 5.08 0 180) (length 2.54) (name "K" (effects (font (size 0.72 0.72)))) (number "2" (effects (font (size 0.72 0.72)))))
+	    (pin no_connect line (at 0 0 0) (length 0) (hide yes) (name "NC" (effects (font (size 0.72 0.72)))) (number "3" (effects (font (size 0.72 0.72)))))
 	  )
 	)
 )
