@@ -310,12 +310,23 @@ Planned implementation:
 - Console personality cards and their RJ50 rear-I/O hardware remain future separate PCBs; sheet 05 is intentionally a future module-bus/backplane interface only and must not block the Rev-A PCBWay fabrication path.
 - Rev A remains frozen at **two independently controlled 5V 4-wire PWM chassis-fan channels**. A possible third chassis fan is deferred and does not block Rev A.
 
+## Pico-A socket and SWD closure — NATIVE VALIDATION PENDING
+
+- Rev-A Pico-A baseline is now the official **Raspberry Pi Pico 2 W with headers**, socketed and user-replaceable.
+- Motherboard Pico sockets are frozen to **Samtec SSW-120-01-F-S**, 1x20, 2.54mm vertical socket strips; the existing stock KiCad 1x20 vertical socket footprint remains appropriate.
+- The previous spring/pogo J12 concept is removed. J12 is now **JST SM03B-SRSS-TB**, 3-pin 1.0mm side-entry SH, using stock KiCad footprint `Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal`.
+- J12 pinout remains unchanged and now directly follows Raspberry Pi's standardized debug connector: **1=SWCLK, 2=GND, 3=SWDIO**.
+- The Pico 2 W with headers provides the matching factory keyed JST-SH debug connector, so J12 uses a short **straight-through pin-1-to-pin-1** SH cable instead of height-sensitive pogo contacts.
+- **R114/R115 = 100R 1% 0603** are added at the Pico-B debug-host pins for SWDIO/SWCLK source termination, following Raspberry Pi's 3-pin debug connector specification.
+- This batch changes the SWD physical interconnect and adds the two specified host-termination resistors only. The dual-Pico role split, RUN recovery path and other Pico-B assignments are unchanged.
+- Fresh KiCad 10.0.8 render/ERC and visual review are required before this closure is called native-green.
+
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
-3. **J12 remains the only still-unassigned placed footprint.** SW1/SW2 and D25-D28 are now native-green / physical-footprint frozen, and R110-R113 are native-green. The new U80/U81 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
-4. **Mechanical closure remains open only where enclosure/Pico stack geometry is still required.** Selector switches and front-board LED packages are selected, footprinted and native-green; SWD spring contacts J12 remain TBD until Pico-A mounting height is frozen. Front-panel cutout/actuator/light alignment remains a PCB/enclosure placement task.
+3. **J12 is no longer unassigned.** It is now JST SM03B-SRSS-TB with stock exact KiCad footprint; R114/R115 provide the specified 100R host termination. This Pico-A SWD closure batch is awaiting native validation. SW1/SW2, D25-D28 and R110-R113 are already native-green.
+4. **The Pico-A/J12 height dependency is removed.** Rev-A uses the headered Pico 2 W factory JST-SH debug connector and a short cable to motherboard J12, while the Pico itself remains socketed. Remaining mechanical work is PCB/enclosure placement: front-panel selector/LED alignment, board outline/mounting, connector locations and airflow.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
 7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
