@@ -126,13 +126,20 @@ USB-C PD ADCIN2 strap,38.3k + 162k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Dec
 USB-C PD ADCIN3/4 straps,162k + 38.0k 1% 0603,2 networks,FROZEN FIRST-PASS VALUE,Decoded 3/3 -> 3A operating current / 5A maximum current
 
 USB-C PD VBUS disconnect clamp,STMicroelectronics STPS5H100BY-TR 5A 100V automotive Schottky,1,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,SalixFP:ST_DPAK_STPS5H100Y; exact ST DS6906 Rev 3 Figure 10 DPAK land geometry; pad 1 anode, pad 2 cathode/tab, pad 3 NC; AEC-Q101; 75A non-repetitive surge; anode to GND cathode to PD_VBUS_RAW; TI recommends Schottky VBUS-to-GND clamp for TPS25730AD cable-disconnect surge current
-USB-C PD VBUS local capacitor,Murata GRM188R6YA475KE15D 4.7uF 35V +/-10% X5R 0603,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0603_1608Metric; TPS25730A VBUS local bypass
-USB-C PD VBUS filter capacitors,Murata GRM188R71H103JA01 10nF 50V +/-5% X7R 0603,4,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0603_1608Metric; C18-C21
-USB-C PD PPHV hybrid bulk,Panasonic EEHZC1H330XP 33uF 50V +/-20% hybrid aluminum/polymer,2,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:CP_Elec_6.3x7.7; AEC-Q200; 125C; 40mOhm max ESR; C22/C23 polarized PD_PWR bulk
-USB-C PD PPHV ceramic bypass,Murata GRM32ER71H106KA12 10uF 50V +/-10% X7R 1210,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_1210_3225Metric; C24; total PPHV bank 76uF nominal with two hybrid bulk parts
-USB-C PD LDO3V3 capacitor,TDK C2012X7R1A106K125AE 10uF 10V +/-10% X7R 0805,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0805_2012Metric; C25
-USB-C PD LDO1V5 capacitor,TDK C2012X7R1A106K125AE 10uF 10V +/-10% X7R 0805,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0805_2012Metric; C26 increased from 4.7uF so tolerance/derating does not sit on TI 4.5uF minimum
-USB-C PD CC capacitors,TDK CGA3E2C0G1H331J080AE 330pF 50V +/-5% C0G 0603,2,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0603_1608Metric; AEC-Q200; C27/C28
-USB-C PD TPD VPWR capacitor,Murata GRM188R6YA105KA12 1uF 35V +/-10% X5R 0603,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0603_1608Metric; C29
-USB-C PD TPD VBIAS capacitor,TDK C2012X7R2A104K125AE 100nF 100V +/-10% X7R 0805,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0805_2012Metric; C30 upgraded from 50V because TPD4S201 requires >=63V and recommends 100V
-USB-C PD shield capacitor,TDK C2012X7R2A104K125AE 100nF 100V +/-10% X7R 0805,1,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Capacitor_SMD:C_0805_2012Metric; C31
+USB-C PD VBUS local capacitor,Murata GRM188R6YA475KE15D 4.7uF 35V +/-10% X5R 0603,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0603_1608Metric; TPS25730A VBUS local bypass
+USB-C PD VBUS filter capacitors,Murata GRM188R71H103JA01 10nF 50V +/-5% X7R 0603,4,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0603_1608Metric; C18-C21
+USB-C PD PPHV hybrid bulk,Panasonic EEHZC1H330XP 33uF 50V +/-20% hybrid aluminum/polymer,2,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:CP_Elec_6.3x7.7; AEC-Q200; 125C; 40mOhm max ESR; C22/C23 polarized PD_PWR bulk
+USB-C PD PPHV ceramic bypass,Murata GRM32ER71H106KA12 10uF 50V +/-10% X7R 1210,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_1210_3225Metric; C24; total PPHV bank 76uF nominal with two hybrid bulk parts
+USB-C PD LDO3V3 capacitor,TDK C2012X7R1A106K125AE 10uF 10V +/-10% X7R 0805,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0805_2012Metric; C25
+USB-C PD LDO1V5 capacitor,TDK C2012X7R1A106K125AE 10uF 10V +/-10% X7R 0805,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0805_2012Metric; C26 increased from 4.7uF so tolerance/derating does not sit on TI 4.5uF minimum
+USB-C PD CC capacitors,TDK CGA3E2C0G1H331J080AE 330pF 50V +/-5% C0G 0603,2,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0603_1608Metric; AEC-Q200; C27/C28
+USB-C PD TPD VPWR capacitor,Murata GRM188R6YA105KA12 1uF 35V +/-10% X5R 0603,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0603_1608Metric; C29
+USB-C PD TPD VBIAS capacitor,TDK C2012X7R2A104K125AE 100nF 100V +/-10% X7R 0805,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0805_2012Metric; C30 upgraded from 50V because TPD4S201 requires >=63V and recommends 100V
+USB-C PD shield capacitor,TDK C2012X7R2A104K125AE 100nF 100V +/-10% X7R 0805,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Capacitor_SMD:C_0805_2012Metric; C31
+
+5V_MAIN buck controller,TI LM25149QRGYRQ1 42V automotive synchronous buck controller,1,FROZEN CONTROLLER / TOPOLOGY / FOOTPRINT,Package_DFN_QFN:Texas_RGY_R-PVQFN-N24_EP2.05x3.1mm; AEC-Q100; active EMI filter + dual-random spread spectrum; single-phase 440kHz first-pass; 5V fixed-output mode
+5V_MAIN buck high-side/low-side MOSFETs,Infineon IAUC60N04S6L039 40V 4.7mOhm 7nC SON 5x6,2,PROVISIONAL POWER-STAGE CANDIDATE,TI Design-2 reference part; AEC-Q101; must pass final 12A conduction/switching/thermal and switch-node overshoot review
+5V_MAIN output inductor,Coilcraft XGL1010-222MED 2.2uH +/-20%,1,PROVISIONAL POWER-STAGE CANDIDATE,AEC-Q200; 2.3mOhm typ DCR; 36A Isat 30%-drop; 24.6A Irms for 20C rise; large margin over 12A target
+5V_MAIN current-sense shunt,Susumu KRL2012E-M-R003-F-T5 3mOhm 1% 1W 0508,1,PROVISIONAL POWER-STAGE CANDIDATE,AEC-Q200; first-pass to guarantee >12A current-limit margin using LM25149-Q1 49mV minimum threshold; final ripple/OCP calculation required
+5V_MAIN buck input ceramics,TDK CGA6P3X7S1H106K250AB 10uF 50V X7S 1210,4,PROVISIONAL POWER-STAGE CANDIDATE,AEC-Q200; TI reference family; count increased from 10A reference first-pass for 12A stage; final RMS-ripple/DC-bias review required
+5V_MAIN buck output ceramics,TDK CGA6P1X7S1A476M250AC 47uF 10V X7S 1210,6,PROVISIONAL POWER-STAGE CANDIDATE,AEC-Q200; TI reference family; final effective-capacitance/transient/loop-compensation review required

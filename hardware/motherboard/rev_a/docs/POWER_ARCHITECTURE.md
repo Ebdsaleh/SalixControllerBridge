@@ -51,12 +51,55 @@ EXT_CHARGE_IN is now driven by the U4 external-source priority stage (barrel ove
 
 ## 5V_MAIN
 
-- Target regulated **internal** 5V system rail. The existing Rev-A schematic currently starts at 5V_MAIN; the 12V-barrel / USB-C-PD / AUX source mux and wide-input high-current 5V buck remain to be drawn and frozen.
-- The input-current budget is **not frozen**. The current front-board policy can power both physical A/C receptacles in each logical bank.
-- With four banks, nominal exposed-port demand is 5.6A at the default Type-C STD advertisement (4 x 0.9A USB-A + 4 x 0.5A Type-C), before Pico/logic/fan loads.
-- If firmware enables the Type-C 1.5A advertisement on all four C ports, exposed-port demand becomes 9.6A (4 x 0.9A + 4 x 1.5A), before motherboard/fan loads.
-- Therefore the older 5A/6A system-input assumption is not a valid worst-case target. Final simultaneous-port policy, PSU rating, connector rating, copper, fuse/eFuse and reverse-current strategy must be frozen together.
-- The whole-system protection/mux stage must be sized for the full bridge load and is still TBD. The TPS259474L now used on the AUX recharge branch is **not** the main-system eFuse and must not be reused there by assumption.
+Rev-A now has a frozen **controller/topology direction** for the selected-source buck, while the exact power-stage values remain intentionally provisional until calculation/simulation/native validation.
+
+### Frozen architecture decision
+
+- Controller: **TI LM25149QRGYRQ1** (`LM25149-Q1`), AEC-Q100, 3.5V to 42V synchronous buck controller.
+- Exact KiCad footprint: `Package_DFN_QFN:Texas_RGY_R-PVQFN-N24_EP2.05x3.1mm`.
+- Topology: **single-phase synchronous buck** from `SYS_IN` to `5V_MAIN`.
+- First-pass switching frequency: **440kHz**, following TI's high-efficiency 5V/10A Design 2 rather than the 2.1MHz density-optimized example.
+- Output target: **5.0V, 12A continuous hardware capability** (60W rail).
+- Control mode: peak-current-mode; first-pass policy is FPWM for predictable fixed-frequency behavior on the USB/system rail.
+- EMI strategy: retain the LM25149-Q1 integrated active EMI filter plus dual-random spread spectrum.
+- VCCX should be returned to `5V_MAIN` once the rail is established, as in TI's 5V reference design, to reduce controller bias loss.
+- The buck is sized for the **rail capability**, not a promise that every source may deliver 12A simultaneously.
+
+TI's published Design 2 is unusually close to this project: 5.5-36V input, 5V/10A output, 440kHz, 2.2uH, 4mOhm current sensing, external N-FET half bridge and 4x47uF output ceramics. Rev-A uses that as the validated starting architecture and scales only the power-stage current margin to 12A.
+
+### Input envelope
+
+The frozen source selectors present a steady-state `SYS_IN` region of roughly **8V to 23V** across barrel, PD and AUX validity windows. The LM25149-Q1's 42V operating rating leaves useful headroom after the already-frozen source protection/mux stages; it is **not** intended to absorb raw vehicle load-dump energy directly.
+
+At 60W output, a 90-95% efficient stage would draw approximately:
+- 7.8-8.2A from an 8.1V source,
+- 5.3-5.6A from a 12V source,
+- 3.2-3.3A from a 20V source.
+
+These are design-envelope numbers, not final fuse ratings.
+
+### Source-aware output policy
+
+The physical buck may be capable of 12A, but downstream current advertisement must follow the selected source:
+
+- **Barrel:** intended full-power source. Final adapter and fuse rating must cover the 60W system rail **plus** any simultaneously permitted AUX recharge power.
+- **USB-C PD:** current standalone straps guarantee only a 15V/3A-class accepted source (45W). Without negotiated-contract telemetry, firmware must **not** expose a 60W downstream budget. At 90-95% conversion efficiency, 45W input corresponds to roughly 8.1-8.55A gross on the 5V rail before reserving Pico/logic/fan power; a conservative downstream-port budget is therefore around 7A until telemetry exists.
+- **AUX:** budget remains module-dependent and must be derived from AUX_ID / future management data or a conservative default. The motherboard must not assume every battery module can sustain the full 12A rail.
+
+### Barrel fuse / adapter consequence
+
+The previous 7.5A MINI fuse remains **provisional**. A 12A/5V system load is 60W; the AUX recharge branch can additionally accept up to 2A from `EXT_CHARGE_IN`. Simultaneous full system load and recharge can therefore approach the old fuse budget before conversion losses and transient margin are included. The final barrel adapter rating, fuse value, recharge concurrency policy and wiring gauge must be frozen together.
+
+### Provisional 12A power-stage starting point
+
+The following are **not yet electrically frozen**:
+- QHS/QLS: Infineon IAUC60N04S6L039, the 40V/4.7mOhm/7nC AEC-Q101 MOSFET used by TI's 440kHz reference.
+- LOUT: Coilcraft XGL1010-222MED, 2.2uH, 2.3mOhm typical DCR, 36A saturation rating and 24.6A RMS rating (20C rise).
+- RSENSE: Susumu KRL2012E-M-R003-F-T5, 3mOhm, 1%, 1W, AEC-Q200.
+- CIN: 4x 10uF/50V AEC-Q200 1210 ceramics as a first-pass local bank, plus the active-EMI/damping network.
+- COUT: 6x 47uF/10V AEC-Q200 1210 ceramics as a first-pass local bank.
+
+Before drawing/final-freezing the sheet, calculate worst-case inductor ripple, OCP min/typ/max, MOSFET conduction/switching loss, shunt loss, inductor temperature rise, input-cap RMS ripple, output effective capacitance/transient droop and compensation. The first KiCad buck batch should remain isolated from the frozen source-priority/barrel/PD sheets.
 
 5V_MAIN feeds both Pico VSYS inputs, both USB front-board power feeds, fan power, and the 3V3_AUX regulator.
 
@@ -170,5 +213,5 @@ TI specifies TPS25730A capacitor minima after tolerance and voltage/DC-bias dera
 
 For the TPS25730AD PPHV bank, C22 + C23 + C24 provide **76uF nominal**. The two hybrid parts alone have a tolerance-only minimum of 52.8uF; including C24's tolerance gives a nominal-tolerance range of **61.8uF to 90.2uF**, inside TI's 47-100uF D-variant window before relying on the ceramic for the minimum. C22/C23 are now represented as polarized capacitors with `PD_PWR` on `+` and GND on `-`.
 
-This exact-capacitor batch requires a native KiCad 10.0.8 render/ERC cycle before it is called physically frozen. If it returns to the established **0 errors / 1038 warnings** baseline with no new category, the USB-C PD physical freeze is complete and the next major electrical block is `SYS_IN -> 5V_MAIN`.
+Native KiCad 10.0.8 validation after commit `c852b84` completed with **0 errors / 1036 warnings**: 848 endpoint-off-grid + 183 library-symbol-mismatch + 4 intentional isolated AUX labels + 1 intentional pin-to-pin warning. No new warning category appeared; the two-warning reduction is from C22/C23 moving to the dedicated `CP_PD` library symbol. Page 11 was visually checked with C22/C23 polarity correct (`PD_PWR` to `+`, GND to `-`). The USB-C PD electrical and physical stage is therefore **fully frozen green**.
 
