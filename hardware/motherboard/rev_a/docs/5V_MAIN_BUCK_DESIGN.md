@@ -1,6 +1,6 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN VALUES CALCULATED/FROZEN; BARREL/RECHARGE CONCURRENCY RESOLVED BY DEFAULT-OFF LOAD SHEDDING; LOOP COMPENSATION OPEN; KICAD BUCK SHEET NOT YET DRAWN**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION VALUES FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET NOT YET DRAWN**
 
 ## Native baseline before buck schematic work
 
@@ -158,17 +158,27 @@ Using TI's 1.0V typical EN threshold and 10uA hysteresis gives approximately **7
 
 This stays below the lowest frozen source-valid window (~8.1V), so the buck does not reject a source that the upstream power-path logic has already accepted.
 
-## Loop compensation — CALCULATED STARTING POINT, NOT FROZEN
+## Loop compensation — ANALYTICALLY FROZEN FOR SCHEMATIC
 
-The output bank is intentionally larger than TI Design 2, so copying its 4.22k / 15nF / 150pF compensation without recalculation is not justified.
-
-Using TI Equation 46 with RS=3mOhm, GCS=10, gm=1200uS, VOUT/VREF=6.25, a conservative 200uF effective output bank and a 30kHz target crossover gives **RCOMP ≈5.9k**. Equation 47 then gives **CCOMP ≈9nF**, so the current starting point is:
+Freeze the external type-II network as:
 
 - RCOMP = **5.90k 1%**
 - CCOMP = **10nF**
-- CHF = **DNP initially**, with a 22pF tuning option
+- CHF = **DNP by default**, with a **22pF fitted/tuning option**
 
-At the typical ~320uF effective output bank the same values imply a lower crossover, roughly 19kHz. This is intentionally conservative. Compensation remains **provisional** until TI calculator/SPICE/Bode validation because actual effective capacitance, ESR and PCB parasitics materially affect the loop.
+The values were rechecked directly against the LM25149-Q1 datasheet equations rather than copied from Design 2.
+
+Using TI Equation 46 with VOUT/VREF=6.25, RS=3mOhm, GCS=10, gm=1200uS, conservative effective COUT=200uF and a 30kHz target crossover gives **RCOMP=5.89kOhm**, which maps directly to the selected 5.90kOhm E96 value.
+
+At 12A the 5V load is about 0.417Ohm. With 200uF, the load pole is about **1.91kHz**, while fc/10 is **3.00kHz**; TI therefore places the compensation zero at about 3kHz. Equation 47 gives **CCOMP about 8.98nF**. The selected 10nF standard value places the zero at about **2.70kHz**.
+
+At the more typical **320uF** effective output bank, the same 5.90k network naturally reduces crossover to about **18.78kHz**. The 10nF zero remains about 2.70kHz, roughly fc/7, keeping the loop intentionally conservative.
+
+TI also states CHF may be unpopulated when the calculated high-frequency capacitor is negligible, with **22pF** offered as a small noise-filter option. Rev-A therefore leaves CHF DNP by default and provides 22pF as a tuning value.
+
+TI Design 2 at 440kHz uses 4.22k / 15nF / 150pF with 2.2uH, 4mOhm and 4x47uF. Rev-A does not copy that network because its 3mOhm shunt and substantially larger effective output bank change the required loop gain.
+
+The current TI A4 quickstart calculator is acknowledged as the official spreadsheet tool, but its XLSM could not be directly executed/retrieved in this environment. No claim is made that it was run. These schematic values are frozen from TI's published equations and cross-check against the 440kHz reference architecture; **physical Bode measurement remains a board-level validation gate before production release**.
 
 ## PGOOD
 
@@ -200,9 +210,7 @@ The 7.5A fuse remains provisional until the actual load-shed thresholds, adapter
 
 ## Remaining gates before KiCad buck-sheet freeze
 
-1. Native-validate the new U60 + default-off AUX recharge load-shed schematic batch.
-2. Validate the 5.90k / 10nF compensation starting point with TI calculator/SPICE/Bode analysis; keep CHF as a tuning provision.
-3. Assign exact footprints to the frozen buck MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
-4. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet.
-5. Native KiCad render/ERC and visual review.
-6. PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.
+1. Assign exact footprints to the frozen buck MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
+2. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
+3. Native KiCad render/ERC and visual review.
+4. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.

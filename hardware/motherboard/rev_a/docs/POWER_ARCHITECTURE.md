@@ -71,7 +71,7 @@ This resolves the barrel-vs-recharge concurrency architecture in favor of **load
 
 ## 5V_MAIN
 
-Rev-A now has the controller/topology and the main 12A power-train values **calculated and component-frozen**. Barrel-vs-recharge concurrency is resolved by the default-off AUX load-shed design; loop compensation remains the open pre-buck-sheet electrical calculation.
+Rev-A now has the controller/topology, main 12A power-train and first-production loop-compensation values **calculated and component-frozen**. Barrel-vs-recharge concurrency is resolved by the native-green default-off AUX load-shed design. The remaining pre-buck-sheet work is physical footprint assignment.
 
 ### Frozen controller / operating configuration
 

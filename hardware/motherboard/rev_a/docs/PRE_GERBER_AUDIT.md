@@ -97,7 +97,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - XGL1010-222MED and IAUC60N04S6L039 are therefore frozen as power-train MPNs pending PCB thermal/ringing validation.
 - COUT is increased from six to **eight** CGA6P1X7S1A476M250AC parts. Using ~40uF effective/part at 5V gives ~320uF typical; conservative stacked tolerance/temperature estimate is ~200uF, enough for about 156mV idealized 12A load-off overshoot.
 - AEF first-pass is frozen around XGL6060-102MEC + EEHZC1V101V and TI Design-2 low-frequency compensation values.
-- Remaining pre-buck-sheet electrical work is loop-compensation validation; the barrel-vs-AUX-recharge direction is resolved by the default-off load-shed circuit and now awaits native KiCad validation.
+- AUX recharge load shedding is native-green/frozen. The 5V_MAIN loop-compensation values are analytically frozen; remaining pre-buck-sheet work is physical footprint assignment.
 
 ## AUX recharge load-shed first native render — ERC GREEN / VISUAL RED
 
@@ -118,7 +118,28 @@ The native run at `e2a36e5` exposed **15 ERC errors** even though the visual spa
 Root cause: the spacing rewrite recreated the load-shed wires by hand; several visually adjacent endpoints were not electrically snapped to their symbol pins in KiCad. This also made the cross-sheet `AUX_CHG_ENABLE` appear as a one-pin isolated label.
 
 Corrective action: restore the exact electrically-known-good load-shed geometry from `d509061` (the version that previously produced 0 ERC errors), while retaining only non-electrical readability changes to reference/value positions and text sizes. The separate U60 management-region spacing fix and the R13 `AUX_CHG_PG` separation remain because neither introduced ERC errors.
-## AUX recharge load-shed checkpoint — awaiting native validation
+## AUX recharge load-shed final native render — GREEN / FROZEN
+
+The corrective run at `1145008` passed native KiCad 10.0.8 validation:
+
+- **0 errors / 1065 warnings**
+- 873 endpoint_off_grid
+- 187 lib_symbol_mismatch
+- 4 isolated_pin_label
+- 1 pin_to_pin
+- **0 footprint_link_issues**
+- `pin_not_connected = 0`
+- `pin_not_driven = 0`
+
+Visual review of `01_Power.png` confirms the restored Q11/Q12/R70-R73 block is electrically coherent, while `03_USB_Hub_and_Input.png` confirms the respaced TCA9534A/C64/R58/R59 management block is intact. `AUX_CHG_ENABLE` is no longer isolated.
+
+The AUX recharge load-shed architecture is therefore **schematic-level frozen green**. Do not alter its topology unless a verified defect is found.
+
+## 5V_MAIN loop-compensation analytical freeze
+
+Freeze **RCOMP=5.90k 1%, CCOMP=10nF, CHF=DNP with 22pF tuning option**. TI Equation 46 gives 5.89k at a 30kHz target using the conservative 200uF effective bank; Equation 47 gives about 8.98nF. With the typical ~320uF bank, crossover naturally falls to ~18.8kHz. Physical Bode measurement remains a board-level production gate.
+
+## AUX recharge load-shed checkpoint — FROZEN GREEN
 
 - Decision: retain the existing 8A barrel connector; AUX charging is the deferrable load.
 - U60 changes from TCA9536DGK (4-bit, 0x41) to TCA9534APWR (8-bit, A2/A1/A0=000 -> 0x38).
@@ -130,12 +151,12 @@ Corrective action: restore the exact electrically-known-good load-shed geometry 
 
 ## Fabrication blockers
 
-1. **Selected-source front end is electrically frozen through `SYS_IN`; 5V buck power-train values are now calculated/selected.** LM25149QRGYRQ1 single-phase ~440kHz, 5V/12A; IAUC60N04S6L039 MOSFET pair; XGL1010-222MED 2.2uH; 3mOhm Susumu shunt; 4x10uF input ceramics; 8x47uF output ceramics; XGL6060-102MEC 1uH AEF inductor; EEHZC1V101V 100uF damping bulk. Barrel/recharge concurrency is resolved by default-off load shedding; loop compensation remains open before the new KiCad buck sheet is drawn. J16/F1/Q9/Q10 physical footprints remain open.
-2. **Barrel/recharge concurrency direction is resolved; native validation pending.** Rev-A retains the 8A Kycon barrel interface and adds default-off AUX recharge load shedding at U3 EN/UVLO. U60 is upgraded to TCA9534APWR; P4 explicitly enables recharge and P5 reads AUX_CHG_PG. Q11/Q12 2N7002BK + passive bias ensure charging remains disabled through reset/unpowered management. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
+1. **Selected-source front end is electrically frozen through `SYS_IN`; the 5V buck power-train and loop-compensation values are now calculated/frozen for schematic entry.** LM25149QRGYRQ1 single-phase ~440kHz, 5V/12A; IAUC60N04S6L039 MOSFET pair; XGL1010-222MED 2.2uH; 3mOhm Susumu shunt; 4x10uF input ceramics; 8x47uF output ceramics; XGL6060-102MEC 1uH AEF inductor; EEHZC1V101V 100uF damping bulk; RCOMP 5.90k + CCOMP 10nF + CHF DNP/22pF option. Next blocker is exact physical footprint assignment before the new buck sheet is drawn. J16/F1/Q9/Q10 physical footprints remain open.
+2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
-6. **Buck control-loop validation remains.** RCOMP=5.90k and CCOMP=10nF are calculated starting values; CHF is DNP with a 22pF tuning option. Validate with TI calculator/SPICE/Bode analysis before the new buck sheet is called electrically frozen.
+6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
 7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
 
 ## Layout/current constraints

@@ -2,7 +2,7 @@ Block,Candidate / Class,Qty,Status,Why
 USB Hub,USB2514B-class 4-port USB2 hub,1,CANDIDATE,Four logical input banks to one Pico-A root
 PIO USB series resistors,22 ohm 1%,2,FROZEN VALUE,Pico-PIO-USB root GP16/17
 3V3_AUX,TI TLV62569P SOT23-6,1,FROZEN FAMILY,Hub/logic/module rail
-Motherboard management,TI TCA9534APWR TSSOP-16,1,FROZEN MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Package_SO:TSSOP-16_4.4x5mm_P0.65mm; A2/A1/A0=000 gives address 0x38; P0/P1 board ENABLE_N; P2/P3 board INT_N; P4 AUX_CHG_ENABLE; P5 AUX_CHG_PG; P6/P7 reserved
+Motherboard management,TI TCA9534APWR TSSOP-16,1,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Package_SO:TSSOP-16_4.4x5mm_P0.65mm; A2/A1/A0=000 gives address 0x38; P0/P1 board ENABLE_N; P2/P3 board INT_N; P4 AUX_CHG_ENABLE; P5 AUX_CHG_PG; P6/P7 reserved
 I2C isolation,PCA9548A-class mux,1,CANDIDATE,Per-card I2C isolation
 Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-port protection
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
@@ -101,7 +101,7 @@ TFT backlight command pulldown,100k 1% 0603,1,FROZEN VALUE,TFT_BL_PWM logic defa
 TFT logic bypass,100nF X7R 0603 + 10uF X7R 0805,1 pair,FROZEN VALUES,Local J14 3V3_AUX bypass
 
 Front-board INT pullups,10k 1% 0603,2,FROZEN VALUE,PRIMARY_INT_N and EXTENDED_INT_N pull-ups to 3V3_AUX
-Front-board management bypass,100nF X7R 0603,1,FROZEN VALUE,Local TCA9536 VCC bypass
+Motherboard management bypass,100nF X7R 0603,1,FROZEN VALUE,Local TCA9534A VCC bypass
 
 USB-A VBUS reservoir,Panasonic EEHZL1E221XP 220uF 25V hybrid aluminum electrolytic,2 per daughterboard,FROZEN MPN / FOOTPRINT,Downstream VBUS reservoir; ±20% minimum is 176uF; Capacitor_SMD:CP_Elec_6.3x7.7; place at TPS2553 OUT / receptacle
 USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / FOOTPRINT,TI recommends >=0.1uF ceramic at each TPS2553 IN; place locally
@@ -150,8 +150,8 @@ USB-C PD shield capacitor,TDK C2012X7R2A104K125AE 100nF 100V +/-10% X7R 0805,1,F
 5V_MAIN operating-mode straps,PFM/SYNC to GND + VCCX to 5V_MAIN,1 network,FROZEN TOPOLOGY - SCHEMATIC PENDING,FPWM; VCCX output bias follows TI 5V reference design
 5V_MAIN UVLO divider,49.9k + 8.06k 1%,1 network,FROZEN VALUES - SCHEMATIC PENDING,Nominal about 7.19V on 6.69V off; worst-case about 6.72-7.68V on and 6.12-7.28V off using TI EN threshold/hysteresis limits
 5V_MAIN controller bypass,CVCC 2.2uF + CBOOT 100nF + CVDDA 100nF,1 network,FROZEN VALUES - SCHEMATIC PENDING,TI reference values; place tightly at controller pins
-5V_MAIN loop compensation,RCOMP 5.90k 1% + CCOMP 10nF + CHF DNP with 22pF option,1 network,PROVISIONAL CALCULATED VALUES,Calculated around 30kHz crossover at conservative 200uF effective output capacitance; validate with TI calculator/SPICE/Bode before freeze
+5V_MAIN loop compensation,RCOMP 5.90k 1% + CCOMP 10nF + CHF DNP with 22pF option,1 network,FROZEN SCHEMATIC VALUES / PHYSICAL BODE LATER,TI Eq46 gives 5.89k at 30kHz with conservative 200uF effective COUT; Eq47 gives 8.98nF so 10nF selected; typical 320uF bank yields about 18.8kHz crossover
 5V_MAIN PGOOD pullup,100k 1% to 3V3_AUX,1,PROVISIONAL SIGNAL ROUTING,LM25149-Q1 PG/SYNCOUT is open-drain PGOOD in single-phase primary mode; receiving Pico/service GPIO still TBD
-AUX recharge load-shed MOSFETs,Nexperia 2N7002BK,215 60V AEC-Q101 N-MOS SOT-23,2,ASSIGNED EXACT MPN / FOOTPRINT - NATIVE VALIDATION PENDING,Package_TO_SOT_SMD:SOT-23; Q11 default-off EN/UVLO clamp and Q12 firmware release pull-down
+AUX recharge load-shed MOSFETs,Nexperia 2N7002BK,215 60V AEC-Q101 N-MOS SOT-23,2,FROZEN MPN / FOOTPRINT - NATIVE GREEN,Package_TO_SOT_SMD:SOT-23; Q11 default-off EN/UVLO clamp and Q12 firmware release pull-down
 AUX recharge default-off bias,100k + 100k 1% 0603,1 divider,ASSIGNED VALUES / FOOTPRINTS - NATIVE VALIDATION PENDING,R70/R71 bias Q11 gate to half EXT_CHARGE_IN; about 4-11.5V over selected-source range and within 2N7002 VGS rating
 AUX recharge control gate,10k series + 100k pulldown 1% 0603,1 network,ASSIGNED VALUES / FOOTPRINTS - NATIVE VALIDATION PENDING,R73 AUX_CHG_ENABLE series plus R72 Q12 gate pulldown; high-Z/reset defaults Q12 off and recharge disabled
