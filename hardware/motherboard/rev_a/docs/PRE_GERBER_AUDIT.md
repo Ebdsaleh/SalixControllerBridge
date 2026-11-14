@@ -99,6 +99,16 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - AEF first-pass is frozen around XGL6060-102MEC + EEHZC1V101V and TI Design-2 low-frequency compensation values.
 - Remaining pre-buck-sheet electrical work is loop-compensation validation; the barrel-vs-AUX-recharge direction is resolved by the default-off load-shed circuit and now awaits native KiCad validation.
 
+## AUX recharge load-shed first native render — ERC GREEN / VISUAL RED
+
+The first native KiCad 10.0.8 run after `d509061`/`dd42ce6` returned **0 errors / 1062 warnings** with no new warning class:
+- 870 endpoint_off_grid
+- 187 lib_symbol_mismatch
+- 4 isolated_pin_label
+- 1 pin_to_pin
+- 0 footprint_link_issues
+
+Electrical ERC therefore passed, but visual freeze was correctly withheld. Page 03 showed U60's old bypass/pull-up layout colliding with the expanded TCA9534A presentation, and page 01 showed cramped Q11/Q12/load-shed labels plus a pre-existing CHARGE_PWR/AUX_CHG_PG label collision beside U3. The follow-up schematic batch respaces U60/C64/R58/R59, separates R13 from the U3 OUT label corridor, and rewrites the load-shed control presentation without changing the fail-safe topology.
 ## AUX recharge load-shed checkpoint — awaiting native validation
 
 - Decision: retain the existing 8A barrel connector; AUX charging is the deferrable load.

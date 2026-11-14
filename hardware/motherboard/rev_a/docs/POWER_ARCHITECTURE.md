@@ -58,7 +58,7 @@ Control hardware:
 - R70/R71 = 100k/100k from EXT_CHARGE_IN to GND, biasing Q11 gate to approximately half the selected-source voltage. Across about 8.1-23V this is about 4.05-11.5V, within the 2N7002BK +/-20V VGS limit and enough to turn Q11 on at the tiny EN-divider current.
 - Q11 drain clamps U3 EN/UVLO (AUX_UV_SENSE) to GND when charging is not explicitly enabled.
 - Q12 pulls Q11 gate low only when AUX_CHG_ENABLE is asserted high.
-- R72 = 100k Q12 gate pulldown; R73 = 10k series from the management expander.
+- R72 = 100k AUX_CHG_ENABLE high-Z/reset pulldown; R73 = 10k series from the management expander to Q12 gate.
 
 U60 on sheet 03 is upgraded from TCA9536 to **TCA9534APWR** (8-bit, TSSOP-16, address 0x38 with A2/A1/A0 grounded). P4 drives AUX_CHG_ENABLE; P5 reads AUX_CHG_PG. TI specifies all TCA9534A ports power up as high-impedance inputs, so R72 holds Q12 off and Q11 keeps U3 disabled before firmware initialization.
 
