@@ -1,6 +1,6 @@
 # Rev-A Design Completion Checklist
 
-Snapshot: 2026-11-14, remote `main` at `0cc0ba3`.
+Snapshot: 2026-11-14. Schematic closure validated on `82ce636`; PCB foundation begins immediately afterward.
 
 ## How to read this
 
@@ -25,8 +25,9 @@ Two finish lines are tracked separately:
 - [x] 5V_MAIN buck schematic native-green
 - [x] Front USB data/power architecture frozen
 - [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green
-- [~] J12 is now assigned to JST SM03B-SRSS-TB with R114/R115 100R SWD host termination; native KiCad validation pending
-- [ ] No fabrication `.kicad_pcb` exists yet
+- [x] J12 JST SM03B-SRSS-TB + R114/R115 100R SWD host termination are native-green
+- [x] Full 13-page schematic visual-hygiene gate passed
+- [~] First fabrication `.kicad_pcb` foundation now exists; native PCB DRC/render validation pending
 
 Useful scale reference:
 
@@ -108,7 +109,7 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 - [x] R110-R113 = 1k 1% 0603 LED current-limit networks restored and native-green
 - [x] Pico-A Rev-A baseline frozen to Raspberry Pi Pico 2 W with headers; factory JST-SH debug connector removes pogo-height dependency
 - [x] Pico sockets frozen to Samtec SSW-120-01-F-S 1x20 vertical socket strips
-- [~] J12 JST SM03B-SRSS-TB + R114/R115 100R host termination assigned — native validation pending
+- [x] J12 JST SM03B-SRSS-TB + R114/R115 100R host termination native-green
 - [ ] Freeze front-panel mechanical relationship to selector actuators and LEDs
 - [ ] Freeze harness wire gauge and exact crimp/contact population for high-current 5V/GND paths
 
@@ -120,31 +121,33 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 - [ ] Retain documented disposition for established USB-C PD pin-to-pin warning
 - [ ] Verify every fabricated BOM line has an exact MPN or explicitly approved generic class
 - [ ] Remove stale `SCHEMATIC PENDING` / `NATIVE VALIDATION PENDING` labels where the corresponding block is already frozen
-- [~] Final schematic visual-review pass on every sheet — full readability/overlap cleanup batch committed; native rerender + second visual audit pending
+- [x] Final schematic visual-review pass on every sheet — no visible label/object overlap or title-block bleed in the validated 13-page set
 
-Current warning baseline:
+Current frozen schematic warning baseline:
 
 ```text
 1111 endpoint_off_grid
- 251 lib_symbol_mismatch
+ 253 lib_symbol_mismatch
    4 isolated_pin_label
    4 lib_symbol_issues
    1 pin_to_pin
 -----------------------
-1371 warnings / 0 errors
+1373 warnings / 0 errors
 ```
+
+The +2 library-copy warnings versus the pre-SWD 1371 baseline are R114/R115 using the dedicated `R_SWD` symbol. No new warning class is introduced.
 
 ## Phase D — create the actual PCBs
 
-No fabrication PCB exists yet, so every item below is still open.
+The first motherboard PCB foundation now exists. Mechanical coordinates below are a **working layout envelope**, not enclosure-frozen geometry.
 
 ### Motherboard
 
-- [ ] Create `.kicad_pcb`
-- [ ] Freeze board dimensions / outline
-- [ ] Freeze mounting-hole locations
+- [x] Create `.kicad_pcb`
+- [~] Working board envelope = 160 x 100mm; validate placement before enclosure freeze
+- [~] Working mounting pattern = four M3 / 3.2mm NPTH holes, 5mm in from each corner
 - [ ] Freeze connector positions relative to enclosure
-- [ ] Choose PCB stack-up / copper weight
+- [~] Working stack = 4 layers, 1.6mm: F.Cu / solid-GND intent / power-plane intent / B.Cu; final copper weight and fab stack-up still open
 - [ ] Place Pico-A / Pico-B / SD / TFT / module connectors
 - [ ] Place source-priority and power-conversion blocks
 - [ ] Place fans / airflow-sensitive parts
@@ -262,9 +265,9 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Native-validate the final J12 + full schematic visual-hygiene closure batch; require 0 ERC errors and a clean 13-page visual audit.**
-2. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
-3. **Place and route the boards; close DRC.**
+1. **Native-validate the new motherboard PCB foundation with KiCad 10 PCB DRC + top/bottom render.**
+2. **Forward-annotate the motherboard schematic population into the validated board and perform functional block placement.**
+3. **Route the motherboard, then create/finalize the universal front USB PCB; close DRC on both.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
 5. **Obtain the first real PCBWay quote / first-article fabrication decision.**
 
