@@ -3,7 +3,7 @@
 	(generator "salix_chatgpt")
 	(generator_version "1.0")
 	(uuid "10000000-0000-4000-8000-000000000047")
-	(paper "A4")
+	(paper "A3")
 	(lib_symbols
 	)
 	(text "SALIX CONTROLLER BRIDGE — REV A"
@@ -422,6 +422,32 @@
       )
     )
   )
+
+	(sheet
+		(at 300 136)
+		(size 80 22)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke (width 0.1524) (type solid))
+		(fill (color 0 0 0 0.0000))
+		(uuid "10000000-0000-4000-8000-000000000062")
+		(property "Sheetname" "FRONT USB PRESENCE / MANAGEMENT"
+			(at 300 135.2884 0)
+			(effects (font (size 1.27 1.27)) (justify left bottom))
+		)
+		(property "Sheetfile" "07a_Front_USB_Presence.kicad_sch"
+			(at 300 159.0046 0)
+			(effects (font (size 1.27 1.27)) (justify left top))
+		)
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047" (page "13"))
+			)
+		)
+	)
 
 	(sheet_instances
 		(path "/" (page "1"))
