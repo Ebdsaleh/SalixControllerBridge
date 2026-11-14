@@ -262,6 +262,8 @@ Planned implementation:
 - Presence circuitry is now moved intact to new page 13, `07a_Front_USB_Presence.kicad_sch`, representing the **same physical universal front daughterboard**. Page 07 retains USB power/mux/selector circuitry. No presence values or control topology changed.
 - Cross-page connectivity uses global anchors only for `USB_A_A_DP`, `USB_A_A_DM`, `USB_B_A_DP`, `USB_B_A_DM`, `BOARD_ID`, and `FRONT_INT_N`; I2C, 3V3_AUX and GND were already global.
 - The root architecture overview is enlarged from A4 to A3 to accommodate the thirteenth logical schematic page cleanly. A fresh native render/ERC/visual pass is required before presence freeze.
+- First native validation of the 13-page split at `17eaeac` rendered all **13/13** sheets and **15/15** local footprints, but ERC correctly reported **4 errors**: U81 reserved pins P4-P7 were missing their no-connect flags because those four flags retained their pre-split coordinates. The same run also added six `same_local_global_label` warnings from mixing the new global cross-page anchors with old local aliases.
+- Corrective batch moves the four NC flags onto U81 P4-P7 and converts every page-07 occurrence of the six cross-page nets to consistent global labels. **No electrical net identity, presence value, threshold, address, mux/power behavior or component footprint changes.**
 - Native KiCad render/ERC is required before the presence block is frozen green.
 - **Reference-designator correction before native validation:** the first source commit used R41-R50/C46-C52/U32-U33, which overlapped existing project references. The post-commit audit caught this before user validation. The presence block was renumbered only—no values/topology changed—to **U80/U81, R100-R109 and C100-C106**.
 
