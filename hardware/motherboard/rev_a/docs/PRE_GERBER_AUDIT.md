@@ -270,7 +270,7 @@ Planned implementation:
 - Visual review of page 07, page 13 and the A3 root hierarchy is clean. USB-A + USB-C per-port presence telemetry is therefore **native-green / frozen**.
 - **Reference-designator correction before native validation:** the first source commit used R41-R50/C46-C52/U32-U33, which overlapped existing project references. The post-commit audit caught this before user validation. The presence block was renumbered only—no values/topology changed—to **U80/U81, R100-R109 and C100-C106**.
 
-## Front selector switches and status LEDs — NATIVE VALIDATION PENDING
+## Front selector switches and status LEDs — NATIVE GREEN / FROZEN
 
 - SW1/SW2 exact selection: **E-Switch LC1258EENP1RBLK**, SPDT latching ON-ON, non-shorting, right-angle through-hole, black 1RBLK cap.
 - Project footprint: `SalixFP:E_Switch_LC1258EENP1RBLK`.
@@ -295,15 +295,27 @@ Planned implementation:
   - D28 B-C: yellow APDA3020LSYCK/J3-PF on both.
 - **Electrical defect fixed:** BOM always intended a series resistor per LED, but page 07 had D25-D28 wired directly from U20 TCA9535 outputs to GND. Added R110-R113 = **1k 1% 0603** in series with the four LED anodes.
 - 1k is retained as the first-pass brightness value. Typical ideal current is roughly 0.6mA for blue/green and 1.4mA for red/yellow; first-article brightness may be tuned without changing the LED mechanical footprint.
-- Native KiCad footprint export + ERC + page-07 visual review are required before SW1/SW2/D25-D28 are called frozen green.
+- Returned KiCad 10.0.8 validation on commit `0cc0ba3` rendered all **13/13** schematic sheets and exported all **18/18** project-local footprints, including the E-Switch and both Kingbright APDA3020L variants.
+- ERC finished at **0 errors / 1371 warnings**: 1111 endpoint_off_grid + 251 lib_symbol_mismatch + 4 isolated_pin_label + 4 lib_symbol_issues + 1 established USB-C PD pin_to_pin warning. No new warning class appeared.
+- Page-07 visual review confirms R110-R113 are in series with D25-D28 and the LED control nets enter on the resistor-input side; the restored current-limit resistors are not bypassed.
+- Native footprint review confirms the E-Switch footprint has three electrical terminals plus two mechanical NPTH locators, and both Kingbright variants preserve the same optical direction while mapping project pads to the correct A/K polarity.
+- SW1/SW2, D25-D28 and R110-R113 are therefore **native-green / physical-footprint frozen**.
 - **Embedded-symbol metadata correction before native validation:** post-commit audit caught that the first metadata edit accidentally placed the E-Switch default footprint on the embedded `SN74LVC2G157` symbol. No mux instance footprint/net was changed. Corrective commit restores the mux symbol default to blank (its instances retain their stock VSSOP footprints) and assigns the E-Switch footprint to the embedded `PUSH_PUSH_SPDT` symbol where intended.
+
+## Rev-A scope boundary
+
+- Rev A is the **SalixControllerBridge box motherboard/front-USB platform**, not the future console-personality-card/backplane fabrication job.
+- Front I/O presents **8 physical USB receptacles** as **4 logical/concurrent controller inputs** across the Primary + Extended front boards.
+- The two Pico-class MCUs remain **soft-linked with isolated roles**: Pico-A handles realtime USB-host/controller-bridge work; Pico-B handles service/storage/update/diagnostics.
+- Console personality cards and their RJ50 rear-I/O hardware remain future separate PCBs; sheet 05 is intentionally a future module-bus/backplane interface only and must not block the Rev-A PCBWay fabrication path.
+- Rev A remains frozen at **two independently controlled 5V 4-wire PWM chassis-fan channels**. A possible third chassis fan is deferred and does not block Rev A.
 
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
-3. **J12 remains the only still-unassigned placed footprint.** SW1/SW2 and D25-D28 now have exact project footprints assigned pending native validation. The new U80/U81 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
-4. **Mechanical closure remains open only where enclosure/Pico stack geometry is still required.** Selector switches and front-board LED packages are selected/footprinted pending native validation; SWD spring contacts J12 remain TBD until Pico-A mounting height is frozen. Front-panel cutout/actuator/light alignment remains a PCB/enclosure placement task.
+3. **J12 remains the only still-unassigned placed footprint.** SW1/SW2 and D25-D28 are now native-green / physical-footprint frozen, and R110-R113 are native-green. The new U80/U81 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+4. **Mechanical closure remains open only where enclosure/Pico stack geometry is still required.** Selector switches and front-board LED packages are selected, footprinted and native-green; SWD spring contacts J12 remain TBD until Pico-A mounting height is frozen. Front-panel cutout/actuator/light alignment remains a PCB/enclosure placement task.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
 7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
