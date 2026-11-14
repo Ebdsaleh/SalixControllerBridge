@@ -163,9 +163,16 @@ The two TDK ceramic banks remain on stock `Capacitor_SMD:C_1210_3225Metric`.
 
 The Infineon footprint's four drain fingers, central drain region, three source fingers/source bridge and separate gate were independently cross-checked against a second PG-TDSON-8-33 KiCad transcription. The 5V_MAIN power-stage footprint set is now complete; the next gate is schematic placement and native validation.
 
+## 5V_MAIN first KiCad sheet implementation — native validation pending
+
+- Added hierarchical page 12: `11_5V_MAIN_Buck.kicad_sch`.
+- Implements the frozen LM25149QRGYRQ1 single-phase FPWM/DRSS architecture from `SYS_IN` to `5V_MAIN`.
+- Includes the complete AEF network, 1uH input inductor, 100uF post-filter hybrid bulk, 4x10uF input ceramics, IAUC60N04S6L039 half bridge, 2.2uH output inductor, 3mOhm Kelvin shunt, 8x47uF output bank, UVLO, bias decoupling, fixed-5V FB strap, 5.90k/10nF compensation with CHF DNP option and 100k PGOOD pull-up.
+- This entry is **not native-green yet**. The next user-side gate is a KiCad 10.0.8 render/ERC/visual cycle.
+
 ## Fabrication blockers
 
-1. **Selected-source front end is electrically frozen through `SYS_IN`; the 5V buck power-train, loop-compensation values and power-stage footprints are frozen for schematic entry.** Exact project footprints are frozen for IAUC60N04S6L039 PG-TDSON-8-33, XGL1010, XGL6060, KRL2012E and the Panasonic EEHZC vibration-proof F case; 1210 ceramic banks use the stock KiCad footprint. The next 5V_MAIN blocker is drawing and native-validating the isolated `SYS_IN -> 5V_MAIN` buck sheet. J16/F1/Q9/Q10 physical footprints remain open.
+1. **Selected-source front end is electrically frozen through `SYS_IN`; the 5V buck power-train, loop-compensation values and power-stage footprints are frozen and the first complete `11_5V_MAIN_Buck.kicad_sch` implementation is now drawn.** Exact project footprints are frozen for IAUC60N04S6L039 PG-TDSON-8-33, XGL1010, XGL6060, KRL2012E and the Panasonic EEHZC vibration-proof F case; 1210 ceramic banks use the stock KiCad footprint. The immediate 5V_MAIN blocker is native KiCad render/ERC/visual acceptance of page 12; do not advance to PCB layout if the new sheet is red. J16/F1/Q9/Q10 physical footprints remain open.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.

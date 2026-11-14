@@ -1,6 +1,6 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION + POWER-STAGE FOOTPRINTS FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET NOT YET DRAWN**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION + POWER-STAGE FOOTPRINTS FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET DRAWN — NATIVE VALIDATION PENDING**
 
 ## Native baseline before buck schematic work
 
@@ -221,8 +221,14 @@ Exact manufacturer land-pattern review produced the following Rev-A assignments:
 
 The PG-TDSON-8-33 footprint was transcribed from Infineon's current recommended PCB copper/stencil drawing and independently cross-checked against a separately authored KiCad PG-TDSON-8-33 transcription. The asymmetric source/gate region, four drain fingers, central drain copper and segmented stencil apertures agree. This closes the final 5V_MAIN power-stage footprint blocker. Do not substitute PG-TDSON-8-57 or a generic SON-8 footprint.
 
+## KiCad buck-sheet implementation checkpoint
+
+Commit pending native validation adds `11_5V_MAIN_Buck.kicad_sch` as page 12 and instantiates the complete frozen first-pass Rev-A power stage, controller straps, UVLO, biasing, compensation, AEF network, PGOOD pull-up, four input ceramics, eight output ceramics, exact power-stage footprints and the current-sense orientation required by TI.
+
+The new sheet deliberately keeps local functional nets explicit (`BUCK_VIN`, `BUCK_SW`, `BUCK_ISNS_PLUS`, `BUCK_SEN`, `BUCK_INJ`, etc.) so the native render is easy to audit before PCB placement.
+
 ## Remaining gates before KiCad buck-sheet freeze
 
-1. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet using the frozen power-stage footprints and 5.90k / 10nF / CHF-DNP(+22pF option) compensation.
-2. Native KiCad render/ERC and visual review.
+1. Native KiCad 10.0.8 render/ERC and visual review of page 12.
+2. Resolve any sheet-specific native errors before changing the frozen topology.
 3. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.
