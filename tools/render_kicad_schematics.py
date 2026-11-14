@@ -20,6 +20,14 @@ the PDF fallback is needed and PyMuPDF is not already available.
 The script also runs KiCad ERC and writes:
     %USERPROFILE%\\Downloads\\kicad_fixes\\ERC.rpt
 
+Every project-local footprint in hardware/motherboard/rev_a/Salix.pretty is
+also exported natively through "kicad-cli fp export svg" into:
+    %USERPROFILE%\\Downloads\\kicad_fixes\\footprints_svg
+
+This forces KiCad itself to parse every .kicad_mod file, including footprints
+that are not yet referenced by a schematic. Footprint SVGs are included in the
+ZIP alongside the schematic PNGs and ERC report.
+
 ERC violations are captured in the report but do not abort the render/ZIP
 workflow.
 
@@ -51,6 +59,10 @@ from typing import Any, Iterable
 DEFAULT_RELATIVE_SCHEMATIC = Path(
     "hardware/motherboard/rev_a/SalixControllerBridge_RevA.kicad_sch"
 )
+DEFAULT_RELATIVE_FOOTPRINT_LIBRARY = Path(
+    "hardware/motherboard/rev_a/Salix.pretty"
+)
+FOOTPRINT_LAYERS = "F.Cu,F.Paste,F.Mask,F.SilkS,F.Fab,F.CrtYd"
 DEFAULT_DPI = 300
 
 
@@ -339,6 +351,10 @@ def clean_previous_outputs(output_dir: Path, zip_path: Path) -> None:
     if erc_path.exists():
         erc_path.unlink()
 
+    footprint_dir = output_dir / "footprints_svg"
+    if footprint_dir.exists():
+        shutil.rmtree(footprint_dir)
+
     if zip_path.exists():
         zip_path.unlink()
 
@@ -539,6 +555,68 @@ def render_page_via_pdf(
         document.close()
 
 
+def render_project_footprints(
+    kicad_cli: Path,
+    footprint_library: Path,
+    output_dir: Path,
+    theme: str | None,
+) -> int:
+    """
+    Force KiCad to parse every project-local footprint and export SVG layers.
+
+    A separate subdirectory is used per footprint so KiCad's per-layer SVG
+    filenames cannot collide. A successful command plus at least one SVG is
+    required for every .kicad_mod file.
+    """
+    footprints = sorted(
+        p for p in footprint_library.glob("*.kicad_mod") if p.is_file()
+    )
+    if not footprints:
+        raise RuntimeError(
+            f"No .kicad_mod files found in project footprint library: "
+            f"{footprint_library}"
+        )
+
+    svg_root = output_dir / "footprints_svg"
+    svg_root.mkdir(parents=True, exist_ok=True)
+
+    print(f"Validating project-local footprints: {len(footprints)}")
+
+    for index, footprint in enumerate(footprints, start=1):
+        destination_dir = svg_root / footprint.stem
+        destination_dir.mkdir(parents=True, exist_ok=True)
+
+        command = [
+            str(kicad_cli),
+            "fp",
+            "export",
+            "svg",
+            "--output",
+            str(destination_dir),
+            "--layers",
+            FOOTPRINT_LAYERS,
+        ]
+        if theme:
+            command.extend(["--theme", theme])
+        command.append(str(footprint))
+
+        run_checked(command)
+
+        produced = sorted(destination_dir.rglob("*.svg"))
+        if not produced:
+            raise RuntimeError(
+                f"KiCad accepted {footprint.name} but produced no SVG files in "
+                f"{destination_dir}"
+            )
+
+        print(
+            f"[FP {index}/{len(footprints)}] {footprint.name} -> "
+            f"{len(produced)} SVG layer file(s)"
+        )
+
+    return len(footprints)
+
+
 def create_zip(output_dir: Path, zip_path: Path) -> None:
     payload = sorted(output_dir.glob("*.png"))
 
@@ -546,9 +624,16 @@ def create_zip(output_dir: Path, zip_path: Path) -> None:
     if erc_path.is_file():
         payload.append(erc_path)
 
+    footprint_dir = output_dir / "footprints_svg"
+    if footprint_dir.is_dir():
+        payload.extend(sorted(footprint_dir.rglob("*.svg")))
+
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for item in payload:
-            archive.write(item, arcname=item.name)
+            archive.write(
+                item,
+                arcname=item.relative_to(output_dir).as_posix(),
+            )
 
 
 def parse_args() -> argparse.Namespace:
@@ -602,6 +687,11 @@ def parse_args() -> argparse.Namespace:
         help="Do not run KiCad ERC or create ERC.rpt.",
     )
     parser.add_argument(
+        "--no-footprints",
+        action="store_true",
+        help="Do not natively parse/render project-local .kicad_mod footprints.",
+    )
+    parser.add_argument(
         "--no-zip",
         action="store_true",
         help="Do not create Downloads\\kicad_fixes.zip after rendering.",
@@ -616,6 +706,10 @@ def main() -> int:
     root_schematic = args.schematic.expanduser().resolve()
     output_dir = args.output.expanduser().resolve()
     zip_path = output_dir.parent / f"{output_dir.name}.zip"
+    repo_root = Path(__file__).resolve().parents[1]
+    footprint_library = (
+        repo_root / DEFAULT_RELATIVE_FOOTPRINT_LIBRARY
+    ).resolve()
 
     if not root_schematic.is_file():
         print(f"ERROR: schematic not found: {root_schematic}", file=sys.stderr)
@@ -623,6 +717,13 @@ def main() -> int:
 
     if args.dpi < 72 or args.dpi > 1200:
         print("ERROR: --dpi must be between 72 and 1200.", file=sys.stderr)
+        return 2
+
+    if not args.no_footprints and not footprint_library.is_dir():
+        print(
+            f"ERROR: project footprint library not found: {footprint_library}",
+            file=sys.stderr,
+        )
         return 2
 
     try:
@@ -661,6 +762,8 @@ def main() -> int:
         print(f"Output    : {output_dir}")
         print(f"DPI       : {args.dpi}")
         print(f"Sheets    : {len(pages)}")
+        if not args.no_footprints:
+            print(f"Footprints: {footprint_library}")
         print()
 
         with tempfile.TemporaryDirectory(prefix="salix_kicad_png_") as temp:
@@ -697,6 +800,15 @@ def main() -> int:
                         pymupdf=pymupdf,
                     )
 
+        if not args.no_footprints:
+            print()
+            render_project_footprints(
+                kicad_cli=kicad_cli,
+                footprint_library=footprint_library,
+                output_dir=output_dir,
+                theme=args.theme,
+            )
+
         erc_path = output_dir / "ERC.rpt"
         if not args.no_erc:
             print()
@@ -713,11 +825,21 @@ def main() -> int:
             print(f"ZIP       : {zip_path}")
 
         print()
-        if args.no_erc:
+        if args.no_erc and args.no_footprints:
             print("Done. The PNG filenames match their .kicad_sch source filenames.")
-        else:
+        elif args.no_erc:
+            print(
+                "Done. PNGs and native footprint SVGs are ready; "
+                "PNG names match the schematic sources."
+            )
+        elif args.no_footprints:
             print(
                 "Done. PNGs and ERC.rpt are ready; PNG names match the schematic sources."
+            )
+        else:
+            print(
+                "Done. PNGs, native footprint SVGs, and ERC.rpt are ready; "
+                "the ZIP contains the complete validation bundle."
             )
         return 0
 
