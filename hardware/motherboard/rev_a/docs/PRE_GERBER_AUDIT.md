@@ -218,7 +218,7 @@ The frozen workflow is:
 
 This avoids optimizing against imaginary costs and accidentally deleting features that may cost only cents while overlooking the parts, PCB area, assembly operations or connectors that actually dominate the quote.
 
-Current schematic source contains **245 unique reference designators** across the 12 sheets. This is not 245 unique expensive MPNs: 164 are resistors/capacitors, and many other references are repeated interface/support parts. Physical placement count can still be higher when a daughterboard design is fabricated more than once, so the costed BOM—not raw reference count—will be the governing metric.
+Current schematic source contains **264 unique reference designators** across the 13 logical child sheets. This is not 264 unique expensive MPNs: 219 are resistors/capacitors, and many other references are repeated interface/support parts. Physical placement count can still be higher when a daughterboard design is fabricated more than once, so the costed BOM—not raw reference count—will be the governing metric.
 
 ### USB port-presence telemetry — proceed in Rev A
 
@@ -235,7 +235,7 @@ Planned implementation:
   - present/selected (active).
 - Keep the sensing circuits electrically separable so the later cost-down pass can remove or simplify them cleanly if the real quote shows they materially affect cost.
 
-## Front USB per-port presence implementation — NATIVE VALIDATION PENDING
+## Front USB per-port presence implementation — NATIVE GREEN / FROZEN
 
 - USB-C presence was already present through TPS25821 `SINK_A_C_N` / `SINK_B_C_N`, both monitored by the existing TCA9535.
 - U20 TCA9535 is fully allocated; no existing selector/fault/LED/charge signal was repurposed.
@@ -264,7 +264,10 @@ Planned implementation:
 - The root architecture overview is enlarged from A4 to A3 to accommodate the thirteenth logical schematic page cleanly. A fresh native render/ERC/visual pass is required before presence freeze.
 - First native validation of the 13-page split at `17eaeac` rendered all **13/13** sheets and **15/15** local footprints, but ERC correctly reported **4 errors**: U81 reserved pins P4-P7 were missing their no-connect flags because those four flags retained their pre-split coordinates. The same run also added six `same_local_global_label` warnings from mixing the new global cross-page anchors with old local aliases.
 - Corrective batch moves the four NC flags onto U81 P4-P7 and converts every page-07 occurrence of the six cross-page nets to consistent global labels. **No electrical net identity, presence value, threshold, address, mux/power behavior or component footprint changes.**
-- Native KiCad render/ERC is required before the presence block is frozen green.
+- Returned KiCad 10.0.8 validation on commit `2806c87` rendered **13/13** sheets, exported **15/15** project-local footprints, and finished at **0 ERC errors / 1359 warnings**.
+- Final warning classes are: 1103 endpoint_off_grid + 247 lib_symbol_mismatch + 4 isolated_pin_label + 4 lib_symbol_issues + 1 established USB-C PD pin_to_pin warning.
+- The temporary split-specific `pin_not_connected`, `no_connect_dangling`, and `same_local_global_label` classes are gone.
+- Visual review of page 07, page 13 and the A3 root hierarchy is clean. USB-A + USB-C per-port presence telemetry is therefore **native-green / frozen**.
 - **Reference-designator correction before native validation:** the first source commit used R41-R50/C46-C52/U32-U33, which overlapped existing project references. The post-commit audit caught this before user validation. The presence block was renumbered only—no values/topology changed—to **U80/U81, R100-R109 and C100-C106**.
 
 ## Fabrication blockers
