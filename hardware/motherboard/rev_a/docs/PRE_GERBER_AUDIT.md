@@ -188,31 +188,48 @@ The Infineon footprint's four drain fingers, central drain region, three source 
 - The native J16 SVG was visually checked: two plated electrical slots, one locator hole and two NPTH retention slots render as intended.
 - J16 is therefore **native-green / physical-footprint frozen**.
 
-## Barrel F1 exact physical footprint — NATIVE VALIDATION PENDING
+## Barrel F1 exact physical footprint — NATIVE GREEN / FROZEN
 
 - F1 holder remains Littelfuse **178.6764.0001 MINI FL1**, current official rating **22A continuous / 30A maximum**, PCB mount.
-- New project footprint: `SalixFP:Littelfuse_178.6764.0001_MINI_FL1`.
-- Littelfuse's older official dimension drawing shows a **repeating row pattern**; the nine-hole illustration is not a single holder. A single holder occupies one repeated row:
-  - electrical terminal 1: center **(-4.00, -0.80)mm**;
-  - electrical terminal 2: center **(+4.00, -0.80)mm**;
-  - central plastic locking feature: center **(0, 0)mm**.
-- Manufacturer single-holder geometry:
-  - electrical terminal spacing: **8.00 ±0.15mm**;
-  - electrical-terminal offset from lock centerline: **0.80 ±0.05mm**;
-  - electrical terminal holes: **Ø1.50 ±0.10mm**;
-  - central locking hole: **Ø2.70 ±0.10mm**.
-- The project uses the manufacturer maximum finished-hole sizes for assembly tolerance:
-  - pads 1/2 plated drill **Ø1.60mm**, copper diameter **2.40mm**;
-  - center lock **Ø2.80mm NPTH**.
-- This geometry independently matches the current third-party ECAD transcription positions (-4/+4, -0.8) and central 2.8mm NPTH, but the manufacturer drawing remains the authority.
-- The body fabrication outline uses the manufacturer's **14.2mm width x 6.0mm depth** envelope.
-- The holder's textual "fits a 7.62mm pitch" statement is not used to override the dimensioned manufacturer hole drawing's nominal **8.00mm** terminal-center spacing.
-- The fuse candidate remains Littelfuse **099707.5WXN 7.5A / 58V** and the **7.5A current rating is still provisional**; this footprint freeze does not freeze the final fuse amperage.
-- F1 is **not native-green yet**. The next user validation must export the new footprint through KiCad.
+- Project footprint: `SalixFP:Littelfuse_178.6764.0001_MINI_FL1`.
+- Returned KiCad 10.0.8 validation on commit `e0ea0aa` rendered all **12/12** sheets and exported all **15/15** project-local footprints, including `Littelfuse_178.6764.0001_MINI_FL1.kicad_mod`.
+- ERC remains **0 errors / 1261 warnings**, unchanged from the J16 validation; no new electrical warning class appeared.
+- Native F1 render was visually checked and shows exactly two plated electrical holes plus the central NPTH lock hole.
+- Single-holder manufacturer geometry remains:
+  - electrical terminal 1: **(-4.00, -0.80)mm**;
+  - electrical terminal 2: **(+4.00, -0.80)mm**;
+  - central lock: **(0, 0)mm**;
+  - terminal holes: **Ø1.50 ±0.10mm**; project plated drills use the manufacturer maximum **Ø1.60mm**;
+  - lock hole: **Ø2.70 ±0.10mm**; project NPTH uses the manufacturer maximum **Ø2.80mm**.
+- F1 holder is therefore **native-green / physical-footprint frozen**.
+- The fuse candidate remains Littelfuse **099707.5WXN 7.5A / 58V**, but the **7.5A current rating remains provisional** pending the final source/load-shed/harness/inrush budget.
+
+## Rev-A cost discipline — AUD$150 target
+
+The user has set a practical **AUD$150 maximum target for the complete Rev-A build**. Treat this as an engineering constraint, not an afterthought.
+
+Rules from this checkpoint forward:
+- do not add hardware solely because a feature is interesting;
+- prefer reusing signals/functions already provided by required ICs;
+- any new feature circuit must either prevent a credible failure mode, replace an existing part/function, or have negligible BOM/assembly impact;
+- keep optional telemetry and convenience features electrically separable or defer them to Rev B when they materially increase BOM, PCB area or routing complexity;
+- before PCB release, perform a costed BOM checkpoint using realistic Australian landed pricing / assembly assumptions rather than only schematic part count.
+
+Current schematic source contains **245 unique reference designators** across the 12 sheets. This is not 245 unique expensive MPNs: 164 are resistors/capacitors, and many other references are repeated interface/support parts. Physical placement count can still be higher when a daughterboard design is fabricated more than once, so the costed BOM—not raw reference count—will be the governing metric.
+
+### USB port-presence telemetry idea — documented, not yet added
+
+Desired behaviour: management firmware can distinguish **EMPTY**, **PRESENT + INACTIVE**, and **PRESENT + SELECTED** for each physical USB receptacle.
+
+Cost-aware path:
+- USB-C: existing TPS25821 `SINK_N` provides attach/detach information from CC detection, so this can potentially reuse hardware already required.
+- USB-A: reliable inactive-port presence detection would need additional high-impedance D+/D- line-state sensing or equivalent hardware; TPS2553 `FAULT_N` is fault telemetry, not device-presence telemetry.
+- Do **not** add the USB-A presence detector to Rev A until the TCA9535 spare-I/O allocation, loading/signal-integrity impact, BOM increment and AUD$150 budget are explicitly reviewed.
+- Preserve the idea for a later cost/feature checkpoint so it is not lost.
 
 ## Fabrication blockers
 
-1. **Selected-source front end and the complete `SYS_IN -> 5V_MAIN` buck schematic are native-green/electrically frozen.** Buck power-stage footprints, Q9/Q10 PG-TDSON-8-34 and J16 Kycon are native-green. F1 now has `SalixFP:Littelfuse_178.6764.0001_MINI_FL1` assigned from the reconciled single-holder manufacturer hole pattern, pending the next native footprint-export confirmation. The 7.5A fuse current remains provisional.
+1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
