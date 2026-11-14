@@ -321,6 +321,23 @@ Planned implementation:
 - This batch changes the SWD physical interconnect and adds the two specified host-termination resistors only. The dual-Pico role split, RUN recovery path and other Pico-B assignments are unchanged.
 - Fresh KiCad 10.0.8 render/ERC and visual review are required before this closure is called native-green.
 
+## Full schematic visual-hygiene gate — NATIVE VALIDATION PENDING
+
+Before any `.kicad_pcb` work begins, the complete 13-page schematic set must pass a dedicated readability review in addition to ERC.
+
+Cleanup batch committed after the returned `a57d3df` native render:
+- page 01: separated crowded 3V3_AUX/GND and AUX-control annotations;
+- page 04: removed R114/R115 text congestion at the Pico-B pins while retaining the same 100R series termination and added one clear SWD termination note;
+- page 07: shortened repeated visible TPS25821 bulk-capacitor values; exact Murata MPN remains in hidden part metadata/BOM documentation;
+- page 07A: removed the stale spring-contact/TBD wording now that Pico-A SWD is JST-SH;
+- page 08: moved the lower validity-window engineering note completely clear of the title block;
+- page 10: shortened C27/C28 visible CC-filter values while retaining full device detail in hidden metadata;
+- page 11: shortened repeated capacitor/shunt display strings and moved the bottom-right controller-bypass/PGOOD row above the title block.
+
+No circuit topology, net identity, footprint, fitted value, or frozen electrical decision is intentionally changed by this batch.
+
+**Gate:** fresh KiCad 10.0.8 render/ERC plus visual inspection of every page. Do not start PCB layout until there are 0 ERC errors and no visible overlapping labels/text or title-block bleed.
+
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
