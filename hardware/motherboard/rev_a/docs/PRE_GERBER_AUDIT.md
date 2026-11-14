@@ -204,28 +204,36 @@ The Infineon footprint's four drain fingers, central drain region, three source 
 - F1 holder is therefore **native-green / physical-footprint frozen**.
 - The fuse candidate remains Littelfuse **099707.5WXN 7.5A / 58V**, but the **7.5A current rating remains provisional** pending the final source/load-shed/harness/inrush budget.
 
-## Rev-A cost discipline — AUD$150 target
+## Rev-A design-first / quote-second / cost-down-third strategy
 
-The user has set a practical **AUD$150 maximum target for the complete Rev-A build**. Treat this as an engineering constraint, not an afterthought.
+The user has an eventual **AUD$150 target**, but Rev-A will **not** be prematurely stripped to hit that number before the real fabrication/BOM cost is known.
 
-Rules from this checkpoint forward:
-- do not add hardware solely because a feature is interesting;
-- prefer reusing signals/functions already provided by required ICs;
-- any new feature circuit must either prevent a credible failure mode, replace an existing part/function, or have negligible BOM/assembly impact;
-- keep optional telemetry and convenience features electrically separable or defer them to Rev B when they materially increase BOM, PCB area or routing complexity;
-- before PCB release, perform a costed BOM checkpoint using realistic Australian landed pricing / assembly assumptions rather than only schematic part count.
+The frozen workflow is:
+
+1. Finish the electrically and mechanically complete design the project actually wants.
+2. Preserve useful features that materially improve the product, including port-presence telemetry, unless they create a verified technical problem.
+3. Complete PCB placement/routing and generate the first realistic BOM/fabrication/assembly package.
+4. Obtain an actual quote using Australian landed-cost assumptions.
+5. Only then perform a deliberate cost-down pass, ranking changes by real dollar impact rather than schematic intuition.
+
+This avoids optimizing against imaginary costs and accidentally deleting features that may cost only cents while overlooking the parts, PCB area, assembly operations or connectors that actually dominate the quote.
 
 Current schematic source contains **245 unique reference designators** across the 12 sheets. This is not 245 unique expensive MPNs: 164 are resistors/capacitors, and many other references are repeated interface/support parts. Physical placement count can still be higher when a daughterboard design is fabricated more than once, so the costed BOM—not raw reference count—will be the governing metric.
 
-### USB port-presence telemetry idea — documented, not yet added
+### USB port-presence telemetry — proceed in Rev A
 
 Desired behaviour: management firmware can distinguish **EMPTY**, **PRESENT + INACTIVE**, and **PRESENT + SELECTED** for each physical USB receptacle.
 
-Cost-aware path:
-- USB-C: existing TPS25821 `SINK_N` provides attach/detach information from CC detection, so this can potentially reuse hardware already required.
-- USB-A: reliable inactive-port presence detection would need additional high-impedance D+/D- line-state sensing or equivalent hardware; TPS2553 `FAULT_N` is fault telemetry, not device-presence telemetry.
-- Do **not** add the USB-A presence detector to Rev A until the TCA9535 spare-I/O allocation, loading/signal-integrity impact, BOM increment and AUD$150 budget are explicitly reviewed.
-- Preserve the idea for a later cost/feature checkpoint so it is not lost.
+Planned implementation:
+- USB-C: use existing TPS25821 `SINK_N` attach/detach indication from CC detection.
+- USB-A: add a high-impedance line-state presence detector that observes the USB attach pull-up state without loading D+/D- enough to disturb signalling.
+- Feed the per-port presence bits into available TCA9535 GPIO inputs; use its `INT_N` path so the main controller can react to plug/unplug changes without polling every port continuously.
+- Firmware combines `PRESENT` with the existing bank selection state to derive:
+  - empty/inactive;
+  - selected but empty;
+  - present/inactive (waiting);
+  - present/selected (active).
+- Keep the sensing circuits electrically separable so the later cost-down pass can remove or simplify them cleanly if the real quote shows they materially affect cost.
 
 ## Fabrication blockers
 
