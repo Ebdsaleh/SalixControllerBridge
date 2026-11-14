@@ -180,7 +180,7 @@
   (exclude_from_sim no) (in_bom yes) (on_board yes)
   (property "Reference" "Q" (at 0 -6.8 0) (effects (font (size 0.9 0.9))))
   (property "Value" "IAUC100N08S5N034ATMA1" (at 0 6.8 0) (effects (font (size 0.72 0.72))))
-  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Footprint" "SalixFP:Infineon_PG_TDSON_8_34" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Datasheet" "https://www.infineon.com/assets/row/public/documents/10/49/infineon-iauc100n08s5n034-datasheet-en.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (property "Description" "80V automotive N-MOSFET PG-TDSON-8-34; pins 1-3 source, 4 gate, 5-8 drain" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (symbol "IAUC100N08S5N034_0_1"
@@ -243,7 +243,7 @@
     (exclude_from_sim no) (at 18 31 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "bd000000-0000-4000-8000-000000000143"))
-  (text "U6 DRR0012E footprint and C13 are frozen. J16, F1 holder and Q9/Q10 exact PCB footprints remain separate mechanical freeze items; F1 fuse current remains provisional pending full load/inrush policy."
+  (text "U6 DRR0012E, Q9/Q10 PG-TDSON-8-34 and C13 footprints are frozen. J16 and the F1 holder remain separate mechanical freeze items; F1 fuse current remains provisional pending full load/inrush policy."
     (exclude_from_sim no) (at 18 184 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "bd000000-0000-4000-8000-000000000144"))
@@ -310,7 +310,7 @@
     (uuid "bd000000-0000-4000-8000-000000000013")
     (property "Reference" "Q9" (at 95 45.23 0) (effects (font (size 0.85 0.85))))
     (property "Value" "IAUC100N08S5N034ATMA1" (at 95 56.23 0) (effects (font (size 0.75 0.75))))
-    (property "Footprint" "" (at 95 50.73 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "SalixFP:Infineon_PG_TDSON_8_34" (at 95 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 95 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (property "Description" "Input ideal-diode MOSFET; PG-TDSON-8-34 footprint pending" (at 95 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "bd000000-0000-4000-8000-000000000014"))
@@ -329,7 +329,7 @@
     (uuid "bd000000-0000-4000-8000-000000000022")
     (property "Reference" "Q10" (at 125 43.93 0) (effects (font (size 0.85 0.85))))
     (property "Value" "IAUC100N08S5N034ATMA1" (at 125 57.529999999999994 0) (effects (font (size 0.75 0.75))))
-    (property "Footprint" "" (at 125 50.73 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "SalixFP:Infineon_PG_TDSON_8_34" (at 125 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 125 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (property "Description" "Output disconnect MOSFET; PG-TDSON-8-34 footprint pending" (at 125 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "bd000000-0000-4000-8000-000000000023"))

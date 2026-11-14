@@ -1,6 +1,6 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION + POWER-STAGE FOOTPRINTS FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET DRAWN — NATIVE VALIDATION PENDING**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN + LOOP-COMPENSATION + POWER-STAGE FOOTPRINTS FROZEN; BARREL/RECHARGE LOAD-SHED NATIVE GREEN; KICAD BUCK SHEET NATIVE GREEN / ELECTRICALLY FROZEN**
 
 ## Native baseline before buck schematic work
 
@@ -221,14 +221,17 @@ Exact manufacturer land-pattern review produced the following Rev-A assignments:
 
 The PG-TDSON-8-33 footprint was transcribed from Infineon's current recommended PCB copper/stencil drawing and independently cross-checked against a separately authored KiCad PG-TDSON-8-33 transcription. The asymmetric source/gate region, four drain fingers, central drain copper and segmented stencil apertures agree. This closes the final 5V_MAIN power-stage footprint blocker. Do not substitute PG-TDSON-8-57 or a generic SON-8 footprint.
 
-## KiCad buck-sheet implementation checkpoint
+## KiCad buck-sheet native validation — GREEN / FROZEN
 
-Commit pending native validation adds `11_5V_MAIN_Buck.kicad_sch` as page 12 and instantiates the complete frozen first-pass Rev-A power stage, controller straps, UVLO, biasing, compensation, AEF network, PGOOD pull-up, four input ceramics, eight output ceramics, exact power-stage footprints and the current-sense orientation required by TI.
+The first native page-12 run exposed eight generated-coordinate endpoint errors around U70 and the two MOSFET gate stubs. Commit `5c50e41` corrected only those wire/label endpoint coordinates; no component values, footprints or frozen topology changed.
 
-The new sheet deliberately keeps local functional nets explicit (`BUCK_VIN`, `BUCK_SW`, `BUCK_ISNS_PLUS`, `BUCK_SEN`, `BUCK_INJ`, etc.) so the native render is easy to audit before PCB placement.
+The returned KiCad 10.0.8 rerun after `5c50e41` is **0 errors / 1258 warnings** and successfully renders all 12 schematic sheets plus all 12 project-local footprints. Warning breakdown is **1024 endpoint_off_grid + 226 lib_symbol_mismatch + 4 isolated_pin_label + 3 lib_symbol_issues + 1 established USB-C PD pin_to_pin warning**. The page-12 image was visually reviewed after the correction and the U70/Q70/Q71 endpoints are coherent.
 
-## Remaining gates before KiCad buck-sheet freeze
+Therefore `11_5V_MAIN_Buck.kicad_sch` is **native-green and electrically frozen**. Do not alter the frozen buck topology except for a verified defect.
 
-1. Native KiCad 10.0.8 render/ERC and visual review of page 12.
-2. Resolve any sheet-specific native errors before changing the frozen topology.
-3. Physical Bode measurement, PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.
+## Remaining board-level validation gates
+
+1. Physical Bode measurement.
+2. PCB-level thermal and switch-node ringing validation.
+3. Hard-short/current-limit and load-transient validation.
+4. Conducted/radiated EMI validation with the real PCB/enclosure/harness.
