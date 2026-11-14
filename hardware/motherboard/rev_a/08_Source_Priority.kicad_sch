@@ -825,7 +825,7 @@
   (wire (pts (xy 143.81 184) (xy 148.89000000000001 184)) (stroke (width 0) (type default)) (uuid "ac000000-0000-4000-8000-000000000347"))
   (global_label "GND" (shape passive) (at 148.89000000000001 184 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "ac000000-0000-4000-8000-000000000348"))
   (text "Nominal validity windows: EXT_SELECTED ≈8.11–22.89V; AUX ≈8.61–16.62V. AUX module target contract remains ≈9–15V."
-    (exclude_from_sim no) (at 170 184 0)
+    (exclude_from_sim no) (at 170 145 0)
     (effects (font (size 0.68 0.68)) (justify left))
     (uuid "ac000000-0000-4000-8000-000000000349"))
   (text "Si7155DP path loss check: use 4.6mΩ max/FET conservative value; external path has 4 FETs in series, AUX path 2. Thermal/layout validation remains required."
