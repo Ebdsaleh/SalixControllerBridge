@@ -4060,7 +4060,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 297.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4115,7 +4115,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 322.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4170,7 +4170,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 347.86 141 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4280,7 +4280,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 275 243 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4335,7 +4335,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 300 243 0)
 			(effects
 					(font (size 0.85 0.85))
@@ -4390,7 +4390,7 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "GRM31CR61A476KE15L 47uF 10V X5R"
+		(property "Value" "47uF 10V X5R"
 			(at 325 243 0)
 			(effects
 					(font (size 0.85 0.85))
