@@ -58,6 +58,10 @@ USB-C front receptacle,GCT USB4085-GF-A USB 2.0 Type-C 16-contact fully through-
 USB-C source controller,TI TPS25821DSS WSON-12,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65
 USB-A power switch,TI TPS2553 SOT-23-6,2 per daughterboard,FROZEN FAMILY,Adjustable current limit + reverse-voltage protection
 Front-board GPIO expander,TI TCA9535 TSSOP-24,1 per daughterboard,FROZEN FAMILY,I2C selector/fault/LED/charge policy
+USB-A presence comparator,TI TLV3704IPWR TSSOP-14,1 per daughterboard,FROZEN MPN / STOCK FOOTPRINT - NATIVE VALIDATION PENDING,Package_SO:TSSOP-14_4.4x5mm_P0.65mm; four nanopower rail-to-rail comparators sense filtered D+/D- attach levels
+USB-A presence GPIO expander,TI TCA9534APWR TSSOP-16,1 per daughterboard,FROZEN MPN / STOCK FOOTPRINT - NATIVE VALIDATION PENDING,Package_SO:TSSOP-16_4.4x5mm_P0.65mm; A2=1 A1=0 A0=BOARD_ID gives Primary 0x3C / Extended 0x3D; INT_N shares FRONT_INT_N
+USB-A presence sense network,100k series + 1M pulldown + 100nF per D+/D- line plus 180k/100k reference,4 channels per daughterboard,FROZEN FIRST-PASS VALUES - NATIVE VALIDATION PENDING,Each USB line sees about 1.1M DC load; RC time constant about 9.1ms; 3.3V reference divider threshold about 1.18V; 2.7V attach level yields about 2.45V filtered high
+USB-A presence local decoupling,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / FOOTPRINT,Local bypass for TLV3704 and TCA9534A
 USB data ESD,TI TPD2EUSB30A DRT SOT-9X3,4 per daughterboard,FROZEN FAMILY / FOOTPRINT,Use Package_TO_SOT_SMD:Texas_DRT-3; place close to each receptacle
 USB-A current limit resistor,28.7k 1%,2 per daughterboard,PROVISIONAL VALUE,About 0.9A nominal target; tolerance review still required
 USB-C REF resistor,100k 0.5%,2 per daughterboard,FROZEN VALUE,TPS25821 reference resistor

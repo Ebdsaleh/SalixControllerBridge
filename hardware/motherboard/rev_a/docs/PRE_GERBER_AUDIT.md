@@ -226,8 +226,8 @@ Desired behaviour: management firmware can distinguish **EMPTY**, **PRESENT + IN
 
 Planned implementation:
 - USB-C: use existing TPS25821 `SINK_N` attach/detach indication from CC detection.
-- USB-A: add a high-impedance line-state presence detector that observes the USB attach pull-up state without loading D+/D- enough to disturb signalling.
-- Feed the per-port presence bits into available TCA9535 GPIO inputs; use its `INT_N` path so the main controller can react to plug/unplug changes without polling every port continuously.
+- USB-A: Rev-A now uses high-impedance filtered D+/D- sensing with TLV3704 comparators. Each line is isolated by 100k, pulled down by 1M and filtered by 100nF; firmware ORs the two line-state bits per USB-A receptacle.
+- The existing TCA9535 is fully allocated, so USB-A presence uses a second TCA9534A on the same management bus. Address straps are A2=1, A1=0, A0=BOARD_ID -> Primary 0x3C / Extended 0x3D. Its open-drain INT_N shares `FRONT_INT_N`.
 - Firmware combines `PRESENT` with the existing bank selection state to derive:
   - empty/inactive;
   - selected but empty;
@@ -235,11 +235,36 @@ Planned implementation:
   - present/selected (active).
 - Keep the sensing circuits electrically separable so the later cost-down pass can remove or simplify them cleanly if the real quote shows they materially affect cost.
 
+## Front USB per-port presence implementation — NATIVE VALIDATION PENDING
+
+- USB-C presence was already present through TPS25821 `SINK_A_C_N` / `SINK_B_C_N`, both monitored by the existing TCA9535.
+- U20 TCA9535 is fully allocated; no existing selector/fault/LED/charge signal was repurposed.
+- Added U32 **TLV3704IPWR** (TSSOP-14) and U33 **TCA9534APWR** (TSSOP-16) to the universal front daughterboard.
+- USB-A line sensing is deliberately high impedance and slow:
+  - D+ or D- -> **100k** series -> sense node;
+  - sense node -> **1M** pulldown + **100nF** to GND;
+  - DC load seen from each USB line is about **1.1M**;
+  - first-order filter time constant is approximately **9.1ms**;
+  - comparator reference is **180k / 100k** from 3V3_AUX, about **1.18V**;
+  - a conservative **2.7V** attached-line level produces about **2.45V** at the sense node.
+- TLV3704 input bias is in the pA/nA range and its input common-mode range includes the rails, so the sense-divider error is negligible relative to the attach margin.
+- U33 mapping:
+  - P0 = A D+ presence;
+  - P1 = A D- presence;
+  - P2 = B D+ presence;
+  - P3 = B D- presence;
+  - P4-P7 reserved.
+- Firmware derives USB-A port presence as `DP_PRESENT || DM_PRESENT` and should debounce attach/detach for roughly **50ms**, which also masks USB reset/SE0 transients.
+- U33 addressing: A2=1, A1=0, A0=BOARD_ID -> **0x3C Primary / 0x3D Extended**.
+- U33 INT_N is open-drain and shares the existing `FRONT_INT_N` path.
+- This block changes telemetry only. Existing TS3USB221A data selection, TPS2553/TPS25821 power control, fail-safe BOARD_ENABLE_N and service jumpers are unchanged.
+- Native KiCad render/ERC is required before the presence block is frozen green.
+
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
-3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+3. **Seven earlier placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. The new U32/U33 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
