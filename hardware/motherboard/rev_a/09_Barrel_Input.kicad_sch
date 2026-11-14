@@ -150,9 +150,9 @@
   (exclude_from_sim no) (in_bom yes) (on_board yes)
   (property "Reference" "F" (at 0 -3.2 0) (effects (font (size 0.9 0.9))))
   (property "Value" "FUSE" (at 0 3.2 0) (effects (font (size 0.8 0.8))))
-  (property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-  (property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-  (property "Description" "Input fuse placeholder; exact holder and MPN not frozen" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Footprint" "SalixFP:Littelfuse_178.6764.0001_MINI_FL1" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Datasheet" "https://www.littelfuse.com/de/assetdocs/mini-fl1-datasheet?assetguid=86e3ab08-0473-4acb-98d6-4cf3dbe2f0fa" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+  (property "Description" "Littelfuse 178.6764.0001 MINI FL1 PCB holder; exact project-local single-holder drill pattern assigned; fuse current remains provisional" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
   (symbol "FUSE_2PIN_0_1"
     (rectangle (start -2.54 1.0) (end 2.54 -1.0) (stroke (width 0.254) (type default)) (fill (type background))))
   (symbol "FUSE_2PIN_1_1"
@@ -243,7 +243,7 @@
     (exclude_from_sim no) (at 18 31 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "bd000000-0000-4000-8000-000000000143"))
-  (text "U6 DRR0012E, Q9/Q10 PG-TDSON-8-34, J16 Kycon drill pattern and C13 footprints are assigned. J16 awaits native footprint-export confirmation; the F1 holder remains the barrel mechanical blocker. F1 fuse current remains provisional pending full load/inrush policy."
+  (text "U6 DRR0012E, Q9/Q10 PG-TDSON-8-34, J16 Kycon and C13 are native-green/assigned; F1 now has the exact Littelfuse single-holder pattern assigned pending native export. F1 fuse current remains provisional pending full load/inrush policy."
     (exclude_from_sim no) (at 18 184 0)
     (effects (font (size 0.72 0.72)) (justify left))
     (uuid "bd000000-0000-4000-8000-000000000144"))
@@ -271,9 +271,9 @@
     (uuid "bd000000-0000-4000-8000-000000000004")
     (property "Reference" "F1" (at 58 45.23 0) (effects (font (size 0.85 0.85))))
     (property "Value" "MINI FL1 HOLDER / 7.5A PROVISIONAL" (at 58 56.23 0) (effects (font (size 0.75 0.75))))
-    (property "Footprint" "" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
-    (property "Datasheet" "~" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
-    (property "Description" "Littelfuse 178.6764.0001 MINI FL1 PCB holder; 099707.5WXN 7.5A fuse candidate; current rating provisional" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Footprint" "SalixFP:Littelfuse_178.6764.0001_MINI_FL1" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Datasheet" "https://www.littelfuse.com/de/assetdocs/mini-fl1-datasheet?assetguid=86e3ab08-0473-4acb-98d6-4cf3dbe2f0fa" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
+    (property "Description" "Littelfuse 178.6764.0001 MINI FL1 PCB holder; exact single-holder drill pattern assigned; 099707.5WXN 7.5A fuse candidate remains provisional" (at 58 50.73 0) (effects (font (size 1 1)) (hide yes)))
     (pin "1" (uuid "bd000000-0000-4000-8000-000000000005"))
     (pin "2" (uuid "bd000000-0000-4000-8000-000000000006"))
     (instances (project "SalixControllerBridge_RevA" (path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000059" (reference "F1") (unit 1))))

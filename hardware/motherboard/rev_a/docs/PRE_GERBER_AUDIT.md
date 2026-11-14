@@ -179,24 +179,40 @@ The Infineon footprint's four drain fingers, central drain region, three source 
 - Q9/Q10 are therefore **native-green / physical-footprint frozen**.
 - J16 and F1 remained open at that checkpoint; the next sub-batch addresses J16 from the manufacturer engineering drawing.
 
-## Barrel J16 exact physical footprint — NATIVE VALIDATION PENDING
+## Barrel J16 exact physical footprint — NATIVE GREEN / FROZEN
 
 - J16 remains Kycon **KLDHCX-8-0202-B**, 2.5mm center pin, 8A / 24V DC.
-- New project footprint: `SalixFP:Kycon_KLDHCX-8-0202-B`.
-- Source: Kycon engineering drawing `KLDHCX-8-0202-x` Rev A3, recommended PCB layout (top view).
-- Manufacturer mechanical/drill coordinates are transcribed with the jack front face at x=0:
-  - electrical pin 1 / center positive: plated vertical slot **3.00 x 1.00mm**, center **(12.0, 0)**;
-  - electrical pin 2 / sleeve: plated vertical slot **2.30 x 1.00mm**, center **(6.0, 0)**;
-  - unnumbered locator: **1.60mm NPTH**, center **(3.0, 0)**;
-  - two unnumbered retention slots: **2.50 x 1.00mm NPTH**, centers **(5.0, -4.5)** and **(5.0, +4.5)**.
-- Only manufacturer-numbered terminals 1 and 2 are electrical copper pads. The unnumbered locator/retention features are deliberately mechanical NPTH features and are not tied to GND/shield.
-- The manufacturer drawing specifies finished hole/slot geometry rather than copper annulus. The project footprint adds **0.40mm copper annulus** around the two plated electrical slots (pad 1 = 1.80 x 3.80mm; pad 2 = 1.80 x 3.10mm) without changing the manufacturer drill geometry.
-- Body fabrication outline uses the manufacturer **13.0 x 10.0mm** envelope; the front face is explicitly marked for later board-edge placement.
-- J16 is **not native-green yet**. The next user validation must export this footprint through KiCad before the assignment is frozen.
+- Project footprint: `SalixFP:Kycon_KLDHCX-8-0202-B`.
+- Returned KiCad 10.0.8 validation on commit `9930159` is **0 errors / 1261 warnings** and exports all **14/14** project-local footprints, including `Kycon_KLDHCX-8-0202-B.kicad_mod`.
+- Warning classes are unchanged: 1024 endpoint_off_grid + 229 lib_symbol_mismatch + 4 isolated_pin_label + 3 lib_symbol_issues + 1 established USB-C PD pin_to_pin warning.
+- The native J16 SVG was visually checked: two plated electrical slots, one locator hole and two NPTH retention slots render as intended.
+- J16 is therefore **native-green / physical-footprint frozen**.
+
+## Barrel F1 exact physical footprint — NATIVE VALIDATION PENDING
+
+- F1 holder remains Littelfuse **178.6764.0001 MINI FL1**, current official rating **22A continuous / 30A maximum**, PCB mount.
+- New project footprint: `SalixFP:Littelfuse_178.6764.0001_MINI_FL1`.
+- Littelfuse's older official dimension drawing shows a **repeating row pattern**; the nine-hole illustration is not a single holder. A single holder occupies one repeated row:
+  - electrical terminal 1: center **(-4.00, -0.80)mm**;
+  - electrical terminal 2: center **(+4.00, -0.80)mm**;
+  - central plastic locking feature: center **(0, 0)mm**.
+- Manufacturer single-holder geometry:
+  - electrical terminal spacing: **8.00 ±0.15mm**;
+  - electrical-terminal offset from lock centerline: **0.80 ±0.05mm**;
+  - electrical terminal holes: **Ø1.50 ±0.10mm**;
+  - central locking hole: **Ø2.70 ±0.10mm**.
+- The project uses the manufacturer maximum finished-hole sizes for assembly tolerance:
+  - pads 1/2 plated drill **Ø1.60mm**, copper diameter **2.40mm**;
+  - center lock **Ø2.80mm NPTH**.
+- This geometry independently matches the current third-party ECAD transcription positions (-4/+4, -0.8) and central 2.8mm NPTH, but the manufacturer drawing remains the authority.
+- The body fabrication outline uses the manufacturer's **14.2mm width x 6.0mm depth** envelope.
+- The holder's textual "fits a 7.62mm pitch" statement is not used to override the dimensioned manufacturer hole drawing's nominal **8.00mm** terminal-center spacing.
+- The fuse candidate remains Littelfuse **099707.5WXN 7.5A / 58V** and the **7.5A current rating is still provisional**; this footprint freeze does not freeze the final fuse amperage.
+- F1 is **not native-green yet**. The next user validation must export the new footprint through KiCad.
 
 ## Fabrication blockers
 
-1. **Selected-source front end and the complete `SYS_IN -> 5V_MAIN` buck schematic are native-green/electrically frozen.** Buck power-stage footprints and Q9/Q10 `SalixFP:Infineon_PG_TDSON_8_34` are native-green. J16 now has `SalixFP:Kycon_KLDHCX-8-0202-B` assigned from the exact Kycon recommended drill pattern, pending the next native footprint-export confirmation. The remaining barrel physical blocker after J16 validation is F1; do not infer the Littelfuse holder pattern from pitch alone.
+1. **Selected-source front end and the complete `SYS_IN -> 5V_MAIN` buck schematic are native-green/electrically frozen.** Buck power-stage footprints, Q9/Q10 PG-TDSON-8-34 and J16 Kycon are native-green. F1 now has `SalixFP:Littelfuse_178.6764.0001_MINI_FL1` assigned from the reconciled single-holder manufacturer hole pattern, pending the next native footprint-export confirmation. The 7.5A fuse current remains provisional.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
