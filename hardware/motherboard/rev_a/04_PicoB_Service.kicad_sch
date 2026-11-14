@@ -524,7 +524,7 @@
 			)
 		)
 	
-		(symbol "Salix:PICO_A_SWD_CONTACT_3"
+		(symbol "Salix:PICO_A_SWD_HEADER_3"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -533,26 +533,26 @@
 				(at 0 -8 0)
 				(effects (font (size 0.9 0.9)))
 			)
-			(property "Value" "PICO-A SWD SPRING CONTACT"
+			(property "Value" "PICO-A SWD JST-SH"
 				(at 0 8 0)
 				(effects (font (size 0.9 0.9)))
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal"
 				(at 0 0 0)
 				(effects (font (size 1 1)) (hide yes))
 			)
-			(property "Datasheet" "https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html"
+			(property "Datasheet" "https://pip.raspberrypi.com/documents/RP-008189-DS"
 				(at 0 0 0)
 				(effects (font (size 1 1)) (hide yes))
 			)
-			(property "Description" "Three-contact motherboard pickup for Pico-A SWD pads; exact spring-contact footprint depends on final Pico-A mechanical variant"
+			(property "Description" "JST SH 3-pin side-entry motherboard connector for Pico-A SWD; pin 1 SWCLK, pin 2 GND, pin 3 SWDIO; straight-through cable to Pico 2 W with headers debug connector"
 				(at 0 0 0)
 				(effects (font (size 1 1)) (hide yes))
 			)
-			(symbol "PICO_A_SWD_CONTACT_3_0_1"
+			(symbol "PICO_A_SWD_HEADER_3_0_1"
 				(rectangle (start -8 5.5) (end 8 -5.5) (stroke (width 0.254) (type default)) (fill (type background)))
 			)
-			(symbol "PICO_A_SWD_CONTACT_3_1_1"
+			(symbol "PICO_A_SWD_HEADER_3_1_1"
 				(pin passive line (at -10.54 2.54 0) (length 2.54)
 					(name "SWCLK" (effects (font (size 0.78 0.78))))
 					(number "1" (effects (font (size 0.78 0.78))))
@@ -1194,20 +1194,90 @@
 		(at 152.7 109.13)
 		(uuid "92040000-0000-4000-8003-000000000005")
 	)
-	(wire
-		(pts (xy 152.7 86.27) (xy 160.32 86.27))
-		(stroke (width 0) (type default))
-		(uuid "96040000-0000-4000-8001-000000000001")
-	)
 	(global_label "PICO_A_SWDIO" (shape passive) (at 160.32 86.27 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000001"))
-	(wire
-		(pts (xy 152.7 88.81) (xy 160.32 88.81))
-		(stroke (width 0) (type default))
-		(uuid "96040000-0000-4000-8001-000000000002")
-	)
 	(global_label "PICO_A_SWCLK" (shape passive) (at 160.32 88.81 0) (effects (font (size 0.64 0.64)) (justify left bottom)) (uuid "96040000-0000-4000-8002-000000000002"))
 	(symbol
-		(lib_id "Salix:PICO_A_SWD_CONTACT_3")
+		(lib_id "Salix:R_SD")
+		(at 156.51 86.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b1140000-0000-4000-8100-000000000114")
+		(property "Reference" "R114"
+			(at 156.51 83.635 0)
+			(effects (font (size 0.82 0.82)))
+		)
+		(property "Value" "100R"
+			(at 156.51 88.905 0)
+			(effects (font (size 0.82 0.82)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 156.51 86.27 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://pip.raspberrypi.com/documents/RP-008189-DS"
+			(at 156.51 86.27 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "Pico-B debug-host SWDIO source termination; Raspberry Pi debug connector specification"
+			(at 156.51 86.27 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "b1140000-0000-4000-8101-000000000001"))
+		(pin "2" (uuid "b1140000-0000-4000-8101-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054"
+					(reference "R114")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:R_SD")
+		(at 156.51 88.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b1150000-0000-4000-8100-000000000115")
+		(property "Reference" "R115"
+			(at 156.51 86.175 0)
+			(effects (font (size 0.82 0.82)))
+		)
+		(property "Value" "100R"
+			(at 156.51 91.445 0)
+			(effects (font (size 0.82 0.82)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 156.51 88.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Datasheet" "https://pip.raspberrypi.com/documents/RP-008189-DS"
+			(at 156.51 88.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Description" "Pico-B debug-host SWCLK source termination; Raspberry Pi debug connector specification"
+			(at 156.51 88.81 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(pin "1" (uuid "b1150000-0000-4000-8101-000000000001"))
+		(pin "2" (uuid "b1150000-0000-4000-8101-000000000002"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000054"
+					(reference "R115")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Salix:PICO_A_SWD_HEADER_3")
 		(at 155 145 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1219,19 +1289,19 @@
 			(at 155 135.50 0)
 			(effects (font (size 0.9 0.9)))
 		)
-		(property "Value" "PICO-A SWD SPRING CONTACT"
+		(property "Value" "PICO-A SWD JST-SH"
 			(at 155 154.50 0)
 			(effects (font (size 0.9 0.9)))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal"
 			(at 155 145 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Datasheet" "https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html"
+		(property "Datasheet" "https://pip.raspberrypi.com/documents/RP-008189-DS"
 			(at 155 145 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Description" "Three-contact motherboard pickup for Pico-A SWD pads; exact spring-contact footprint depends on final Pico-A mechanical variant"
+		(property "Description" "JST SH 3-pin side-entry motherboard connector for Pico-A SWD; pin 1 SWCLK, pin 2 GND, pin 3 SWDIO; straight-through cable to Pico 2 W with headers debug connector"
 			(at 155 145 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
