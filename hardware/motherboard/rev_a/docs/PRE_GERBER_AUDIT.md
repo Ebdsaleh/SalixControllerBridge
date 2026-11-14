@@ -175,12 +175,28 @@ The Infineon footprint's four drain fingers, central drain region, three source 
 - Q9/Q10 remain Infineon **IAUC100N08S5N034ATMA1**, 80V AEC-Q101, package **PG-TDSON-8-34**.
 - New project footprint: `SalixFP:Infineon_PG_TDSON_8_34`.
 - Infineon's SSO8 package application note explicitly specifies one recommended PCB copper/stencil footprint for **PG-TDSON-8-33/34/43/53**. The new -34 library entry therefore intentionally reuses the already-native-green -33 manufacturer geometry while preserving the correct package-variant name and IAUC100N08S5N034 datasheet traceability.
-- Native KiCad footprint export is required on the next user run before this new library entry itself is called native-green.
-- J16 and F1 remain open; the Littelfuse holder's complete multi-hole/stake pattern is being treated separately rather than inferred from terminal pitch alone.
+- Returned KiCad 10.0.8 validation on commit `42444a0` is **0 errors / 1260 warnings** and exports all **13/13** project-local footprints, including `Infineon_PG_TDSON_8_34.kicad_mod`. Warning classes are unchanged: 1024 endpoint_off_grid + 228 lib_symbol_mismatch + 4 isolated_pin_label + 3 lib_symbol_issues + 1 established USB-C PD pin_to_pin warning.
+- Q9/Q10 are therefore **native-green / physical-footprint frozen**.
+- J16 and F1 remained open at that checkpoint; the next sub-batch addresses J16 from the manufacturer engineering drawing.
+
+## Barrel J16 exact physical footprint — NATIVE VALIDATION PENDING
+
+- J16 remains Kycon **KLDHCX-8-0202-B**, 2.5mm center pin, 8A / 24V DC.
+- New project footprint: `SalixFP:Kycon_KLDHCX-8-0202-B`.
+- Source: Kycon engineering drawing `KLDHCX-8-0202-x` Rev A3, recommended PCB layout (top view).
+- Manufacturer mechanical/drill coordinates are transcribed with the jack front face at x=0:
+  - electrical pin 1 / center positive: plated vertical slot **3.00 x 1.00mm**, center **(12.0, 0)**;
+  - electrical pin 2 / sleeve: plated vertical slot **2.30 x 1.00mm**, center **(6.0, 0)**;
+  - unnumbered locator: **1.60mm NPTH**, center **(3.0, 0)**;
+  - two unnumbered retention slots: **2.50 x 1.00mm NPTH**, centers **(5.0, -4.5)** and **(5.0, +4.5)**.
+- Only manufacturer-numbered terminals 1 and 2 are electrical copper pads. The unnumbered locator/retention features are deliberately mechanical NPTH features and are not tied to GND/shield.
+- The manufacturer drawing specifies finished hole/slot geometry rather than copper annulus. The project footprint adds **0.40mm copper annulus** around the two plated electrical slots (pad 1 = 1.80 x 3.80mm; pad 2 = 1.80 x 3.10mm) without changing the manufacturer drill geometry.
+- Body fabrication outline uses the manufacturer **13.0 x 10.0mm** envelope; the front face is explicitly marked for later board-edge placement.
+- J16 is **not native-green yet**. The next user validation must export this footprint through KiCad before the assignment is frozen.
 
 ## Fabrication blockers
 
-1. **Selected-source front end and the complete `SYS_IN -> 5V_MAIN` buck schematic are native-green/electrically frozen.** Exact project footprints are frozen for the buck power stage, and Q9/Q10 now have project-local `SalixFP:Infineon_PG_TDSON_8_34` assigned pending the next native footprint-export confirmation. The remaining barrel physical blockers are J16 and F1; do not infer the Littelfuse holder pattern from pitch alone.
+1. **Selected-source front end and the complete `SYS_IN -> 5V_MAIN` buck schematic are native-green/electrically frozen.** Buck power-stage footprints and Q9/Q10 `SalixFP:Infineon_PG_TDSON_8_34` are native-green. J16 now has `SalixFP:Kycon_KLDHCX-8-0202-B` assigned from the exact Kycon recommended drill pattern, pending the next native footprint-export confirmation. The remaining barrel physical blocker after J16 validation is F1; do not infer the Littelfuse holder pattern from pitch alone.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
