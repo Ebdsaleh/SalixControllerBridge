@@ -120,7 +120,7 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 - [ ] Retain documented disposition for established USB-C PD pin-to-pin warning
 - [ ] Verify every fabricated BOM line has an exact MPN or explicitly approved generic class
 - [ ] Remove stale `SCHEMATIC PENDING` / `NATIVE VALIDATION PENDING` labels where the corresponding block is already frozen
-- [ ] Final schematic visual-review pass on every sheet
+- [~] Final schematic visual-review pass on every sheet — full readability/overlap cleanup batch committed; native rerender + second visual audit pending
 
 Current warning baseline:
 
@@ -262,7 +262,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Native-validate the Pico-A socket/J12 JST-SH SWD closure batch.**
+1. **Native-validate the final J12 + full schematic visual-hygiene closure batch; require 0 ERC errors and a clean 13-page visual audit.**
 2. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
 3. **Place and route the boards; close DRC.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
