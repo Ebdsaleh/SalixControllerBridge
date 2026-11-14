@@ -4046,4 +4046,64 @@
 	    (pin no_connect line (at 0 0 0) (length 0) (hide yes) (name "NC" (effects (font (size 0.72 0.72)))) (number "3" (effects (font (size 0.72 0.72)))))
 	  )
 	)
+	(symbol "CP_PD"
+				(pin_names (offset 1.016))
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+			(property "Reference" "C"
+				(at 0 3.81 0)
+				(effects
+						(font (size 0.9 0.9))
+					)
+			)
+			(property "Value" "33uF 50V"
+				(at 0 -3.81 0)
+				(effects
+						(font (size 0.9 0.9))
+					)
+			)
+			(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
+				(at 0 0 0)
+				(effects
+						(font (size 1 1))
+						(hide yes)
+					)
+			)
+			(property "Datasheet" "https://industrial.panasonic.com/ww/products/pt/hybrid-aluminum/models/EEHZC1H330XP"
+				(at 0 0 0)
+				(effects
+						(font (size 1 1))
+						(hide yes)
+					)
+			)
+			(property "Description" "Polarized hybrid aluminum electrolytic capacitor; Panasonic EEHZC1H330XP; 33uF 50V +/-20%; AEC-Q200; 125C"
+				(at 0 0 0)
+				(effects
+						(font (size 1 1))
+						(hide yes)
+					)
+			)
+				(symbol "CP_PD_0_1"
+					(polyline (pts (xy -0.5 1.2) (xy -0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+					(polyline (pts (xy 0.5 1.2) (xy 0.5 -1.2)) (stroke (width 0.254) (type default)) (fill (type none)))
+					(polyline (pts (xy -1.9 1.2) (xy -1.1 1.2)) (stroke (width 0.2) (type default)) (fill (type none)))
+					(polyline (pts (xy -1.5 0.8) (xy -1.5 1.6)) (stroke (width 0.2) (type default)) (fill (type none)))
+				)
+				(symbol "CP_PD_1_1"
+					(pin passive line
+						(at -3.81 0 0)
+						(length 2.54)
+						(name "+" (effects (font (size 0.78 0.78))))
+						(number "1" (effects (font (size 0.78 0.78))))
+					)
+					(pin passive line
+						(at 3.81 0 180)
+						(length 2.54)
+						(name "-" (effects (font (size 0.78 0.78))))
+						(number "2" (effects (font (size 0.78 0.78))))
+					)
+				)
+			)
+
 )

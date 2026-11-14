@@ -138,7 +138,7 @@ The PD page also includes a dedicated cable-disconnect Schottky clamp in additio
 
 ### USB-C PD electrical freeze
 
-Native KiCad 10.0.8 validation on commit `44a27dd` is **0 errors / 1038 warnings**. The warning count is hygiene-only: 848 endpoint-off-grid, 185 library-symbol-mismatch, 4 intentional isolated AUX management labels, and one intentional pin-to-pin warning from unused TPS25730AD I2C tied to the globally power-flagged GND net. Sheet 10 has been visually reviewed after the final net-overlap repairs and is now electrically frozen. Native validation after commit `302180d` remained **0 errors / 1038 warnings**, so U8/U9 footprint assignments are frozen green. Native validation after commit `644dca0` again remained **0 errors / 1038 warnings** with the same warning categories, so U7 REF0038A is also frozen green. The first D30 native validation produced **0 errors / 1039 warnings**: the established 1038 warning baseline plus one `footprint_link_issues` warning because `Package_TO_SOT_SMD:TO-252-2_Rectifier` is absent in KiCad 10.0.8. D30 now uses exact project-local ST DPAK geometry and awaits a corrective native rerun; exact PD capacitor MPNs remain open. The remaining major electrical design block is `SYS_IN -> 5V_MAIN`.
+Native KiCad 10.0.8 validation on commit `44a27dd` is **0 errors / 1038 warnings**. The warning count is hygiene-only: 848 endpoint-off-grid, 185 library-symbol-mismatch, 4 intentional isolated AUX management labels, and one intentional pin-to-pin warning from unused TPS25730AD I2C tied to the globally power-flagged GND net. Sheet 10 has been visually reviewed after the final net-overlap repairs and is now electrically frozen. Native validation after commit `302180d` remained **0 errors / 1038 warnings**, so U8/U9 footprint assignments are frozen green. Native validation after commit `644dca0` again remained **0 errors / 1038 warnings** with the same warning categories, so U7 REF0038A is also frozen green. The first D30 native validation produced **0 errors / 1039 warnings** because `Package_TO_SOT_SMD:TO-252-2_Rectifier` is absent in KiCad 10.0.8. Corrective commit `a8f9131` moved D30 to project-local ST geometry; the native rerun returned to the established **0 errors / 1038 warnings** baseline with **0 footprint-link warnings**, so D30 is now physically frozen green. Exact PD capacitor MPNs are assigned in the next physical sub-batch and await native validation. The remaining major electrical design block is `SYS_IN -> 5V_MAIN`.
 
 ### PD physical freeze — U8/U9/U7 native green; D30 assigned
 
@@ -150,4 +150,25 @@ Native KiCad 10.0.8 validation on commit `302180d` remained **0 errors / 1038 wa
 
 U7 TPS25730AD REF0038A is deliberately **not** approximated from a generic QFN. KiCad already ships the exact manufacturer-specific `Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4` footprint, including separate exposed pads 39/40 and the package-specific mask treatment. Native KiCad 10.0.8 validation after `644dca0` remained **0 errors / 1038 warnings** with the unchanged 848 + 185 + 4 + 1 warning breakdown, so U7 is now physically assigned and frozen green.
 
-D30 STPS5H100BY-TR is an ST automotive DPAK Schottky. The manufacturer package drawing identifies the tab as cathode, one lead as anode and the other as NC. The attempted stock `TO-252-2_Rectifier` assignment is not present in KiCad 10.0.8 and was rejected by ERC. Rev-A now uses project-local `SalixFP:ST_DPAK_STPS5H100Y` derived directly from ST Figure 10. Symbol pin 1 maps to the anode, symbol pin 2 maps to the cathode/tab and hidden symbol pin 3 maps to the package NC lead. Native validation is required before freezing D30.
+D30 STPS5H100BY-TR is an ST automotive DPAK Schottky. The manufacturer package drawing identifies the tab as cathode, one lead as anode and the other as NC. Rev-A uses project-local `SalixFP:ST_DPAK_STPS5H100Y` derived directly from ST Figure 10. Symbol pin 1 maps to the anode, symbol pin 2 maps to the cathode/tab and hidden symbol pin 3 maps to the package NC lead. The corrective native KiCad 10.0.8 rerun after `a8f9131` returned **0 errors / 1038 warnings** with no footprint-link warning, so D30 is frozen green.
+### PD physical freeze — exact capacitor batch assigned
+
+TI specifies TPS25730A capacitor minima after tolerance and voltage/DC-bias derating, so the final Rev-A choices are based on real part technology rather than nominal capacitance alone. This batch intentionally changes only component selections/footprints on the already-frozen PD topology:
+
+| Ref(s) | Exact part | Electrical role / reason |
+|---|---|---|
+| C17 | Murata GRM188R6YA475KE15D, 4.7uF 35V X5R 0603 | VBUS local bypass; matches the TPS25730A EVM-class choice. |
+| C18-C21 | Murata GRM188R71H103JA01, 10nF 50V X7R 0603 | High-voltage filtering/snubbing support. |
+| C22/C23 | Panasonic EEHZC1H330XP, 33uF 50V hybrid, 6.3x7.7mm | Polarized PPHV bulk. Hybrid technology avoids Class-II MLCC DC-bias collapse; AEC-Q200 and 125C rated. |
+| C24 | Murata GRM32ER71H106KA12, 10uF 50V X7R 1210 | PPHV high-frequency ceramic bypass. |
+| C25 | TDK C2012X7R1A106K125AE, 10uF 10V X7R 0805 | LDO_3V3 bypass. |
+| C26 | TDK C2012X7R1A106K125AE, 10uF 10V X7R 0805 | LDO_1V5 bypass; increased from 4.7uF because TI requires at least 4.5uF after tolerance/derating and permits up to 12uF. |
+| C27/C28 | TDK CGA3E2C0G1H331J080AE, 330pF 50V C0G 0603 | CC filtering within TI's 200-480pF requirement; AEC-Q200. |
+| C29 | Murata GRM188R6YA105KA12, 1uF 35V X5R 0603 | TPD4S201 VPWR bypass; comfortably above the 0.3uF effective minimum. |
+| C30 | TDK C2012X7R2A104K125AE, 100nF 100V X7R 0805 | TPD4S201 VBIAS bypass; upgraded from 50V because the current TPD4S201 requirement is >=63V and recommends 100V. |
+| C31 | TDK C2012X7R2A104K125AE, 100nF 100V X7R 0805 | Shield high-frequency coupling; same robust 100V part consolidates the BOM. |
+
+For the TPS25730AD PPHV bank, C22 + C23 + C24 provide **76uF nominal**. The two hybrid parts alone have a tolerance-only minimum of 52.8uF; including C24's tolerance gives a nominal-tolerance range of **61.8uF to 90.2uF**, inside TI's 47-100uF D-variant window before relying on the ceramic for the minimum. C22/C23 are now represented as polarized capacitors with `PD_PWR` on `+` and GND on `-`.
+
+This exact-capacitor batch requires a native KiCad 10.0.8 render/ERC cycle before it is called physically frozen. If it returns to the established **0 errors / 1038 warnings** baseline with no new category, the USB-C PD physical freeze is complete and the next major electrical block is `SYS_IN -> 5V_MAIN`.
+
