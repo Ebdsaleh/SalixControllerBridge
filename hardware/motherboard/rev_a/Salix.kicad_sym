@@ -1475,49 +1475,49 @@
 					(pin passive line (at 8.89 2.54 180) (length 2.54) (name "D" (effects (font (size 0.78 0.78)))) (number "3" (effects (font (size 0.78 0.78)))))
 				)
 			)
-	(symbol "PICO_A_SWD_CONTACT_3"
-				(pin_names (offset 1.016))
-				(exclude_from_sim no)
-				(in_bom yes)
-				(on_board yes)
-				(property "Reference" "J"
-					(at 0 -8 0)
-					(effects (font (size 0.9 0.9)))
+	(symbol "PICO_A_SWD_HEADER_3"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 -8 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Value" "PICO-A SWD JST-SH"
+				(at 0 8 0)
+				(effects (font (size 0.9 0.9)))
+			)
+			(property "Footprint" "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Datasheet" "https://pip.raspberrypi.com/documents/RP-008189-DS"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(property "Description" "JST SH 3-pin side-entry motherboard connector for Pico-A SWD; pin 1 SWCLK, pin 2 GND, pin 3 SWDIO; straight-through cable to Pico 2 W with headers debug connector"
+				(at 0 0 0)
+				(effects (font (size 1 1)) (hide yes))
+			)
+			(symbol "PICO_A_SWD_HEADER_3_0_1"
+				(rectangle (start -8 5.5) (end 8 -5.5) (stroke (width 0.254) (type default)) (fill (type background)))
+			)
+			(symbol "PICO_A_SWD_HEADER_3_1_1"
+				(pin passive line (at -10.54 2.54 0) (length 2.54)
+					(name "SWCLK" (effects (font (size 0.78 0.78))))
+					(number "1" (effects (font (size 0.78 0.78))))
 				)
-				(property "Value" "PICO-A SWD SPRING CONTACT"
-					(at 0 8 0)
-					(effects (font (size 0.9 0.9)))
+				(pin passive line (at -10.54 0 0) (length 2.54)
+					(name "GND" (effects (font (size 0.78 0.78))))
+					(number "2" (effects (font (size 0.78 0.78))))
 				)
-				(property "Footprint" ""
-					(at 0 0 0)
-					(effects (font (size 1 1)) (hide yes))
-				)
-				(property "Datasheet" "https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html"
-					(at 0 0 0)
-					(effects (font (size 1 1)) (hide yes))
-				)
-				(property "Description" "Three-contact motherboard pickup for Pico-A SWD pads; exact spring-contact footprint depends on final Pico-A mechanical variant"
-					(at 0 0 0)
-					(effects (font (size 1 1)) (hide yes))
-				)
-				(symbol "PICO_A_SWD_CONTACT_3_0_1"
-					(rectangle (start -8 5.5) (end 8 -5.5) (stroke (width 0.254) (type default)) (fill (type background)))
-				)
-				(symbol "PICO_A_SWD_CONTACT_3_1_1"
-					(pin passive line (at -10.54 2.54 0) (length 2.54)
-						(name "SWCLK" (effects (font (size 0.78 0.78))))
-						(number "1" (effects (font (size 0.78 0.78))))
-					)
-					(pin passive line (at -10.54 0 0) (length 2.54)
-						(name "GND" (effects (font (size 0.78 0.78))))
-						(number "2" (effects (font (size 0.78 0.78))))
-					)
-					(pin passive line (at -10.54 -2.54 0) (length 2.54)
-						(name "SWDIO" (effects (font (size 0.78 0.78))))
-						(number "3" (effects (font (size 0.78 0.78))))
-					)
+				(pin passive line (at -10.54 -2.54 0) (length 2.54)
+					(name "SWDIO" (effects (font (size 0.78 0.78))))
+					(number "3" (effects (font (size 0.78 0.78))))
 				)
 			)
+		)
 	(symbol "PICO_LEFT_1_20"
 				(pin_names (offset 1.016))
 				(exclude_from_sim no)
@@ -2328,6 +2328,24 @@
 					(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type background)))
 				)
 				(symbol "R_SD_1_1"
+					(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.72 0.72)))) (number "1" (effects (font (size 0.72 0.72)))))
+					(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.72 0.72)))) (number "2" (effects (font (size 0.72 0.72)))))
+				)
+			)
+	(symbol "R_SWD"
+				(pin_names (offset 1.016))
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "R" (at 0 2.635 0) (effects (font (size 0.82 0.82))))
+				(property "Value" "R" (at 0 -2.635 0) (effects (font (size 0.82 0.82))))
+				(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+				(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+				(property "Description" "SWD source-termination resistor" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+				(symbol "R_SWD_0_1"
+					(rectangle (start -1.27 0.635) (end 1.27 -0.635) (stroke (width 0.254) (type default)) (fill (type background)))
+				)
+				(symbol "R_SWD_1_1"
 					(pin passive line (at -3.81 0 0) (length 2.54) (name "~" (effects (font (size 0.72 0.72)))) (number "1" (effects (font (size 0.72 0.72)))))
 					(pin passive line (at 3.81 0 180) (length 2.54) (name "~" (effects (font (size 0.72 0.72)))) (number "2" (effects (font (size 0.72 0.72)))))
 				)
