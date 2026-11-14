@@ -1054,7 +1054,7 @@
 			(justify left))
 		(uuid "20000000-0000-4000-8000-000000001000")
 	)
-	(text "Pico 2 W preferred; both 20-pin rails socketed. Raw breakout mirrors all 40 physical header pins."
+	(text "Rev-A Pico-A baseline: Raspberry Pi Pico 2 W with headers; both 20-pin rails socketed. Factory JST-SH SWD connects to J12; raw breakout mirrors all 40 physical header pins."
 		(exclude_from_sim no)
 		(at 20 21 0)
 		(effects
