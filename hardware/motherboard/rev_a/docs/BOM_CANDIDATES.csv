@@ -65,8 +65,12 @@ USB-A presence local decoupling,100nF 25V X7R 0603,2 per daughterboard,FROZEN VA
 USB data ESD,TI TPD2EUSB30A DRT SOT-9X3,4 per daughterboard,FROZEN FAMILY / FOOTPRINT,Use Package_TO_SOT_SMD:Texas_DRT-3; place close to each receptacle
 USB-A current limit resistor,28.7k 1%,2 per daughterboard,PROVISIONAL VALUE,About 0.9A nominal target; tolerance review still required
 USB-C REF resistor,100k 0.5%,2 per daughterboard,FROZEN VALUE,TPS25821 reference resistor
-Port LEDs + resistors,LED + 1k resistor,4 per daughterboard,FROZEN VALUE/COLOUR TBD,Active connector and fault indication
-Latching selector switch,SPDT push-push mechanical,2 per daughterboard,MECHANICAL TBD,Direct hardware A/C selection
+Front LED D25 Bank-A USB-A,Kingbright APDA3020LVBC/D blue (Primary) or APDA3020LZGCK green (Extended),1 per daughterboard,FROZEN FAMILY / EXACT PROJECT FOOTPRINT - NATIVE VALIDATION PENDING,SalixFP:Kingbright_APDA3020L_InGaN_RightAngle_AK; 3.0x2.0mm right-angle low-current InGaN; 2mA test; same universal PCB footprint
+Front LED D26 Bank-A USB-C,Kingbright APDA3020LVBC/D blue,1 per daughterboard,FROZEN MPN / EXACT PROJECT FOOTPRINT - NATIVE VALIDATION PENDING,SalixFP:Kingbright_APDA3020L_InGaN_RightAngle_AK; 470nm; right-angle low-current; 2mA test
+Front LED D27 Bank-B USB-A,Kingbright APDA3020LSYCK/J3-PF yellow (Primary) or APDA3020LSECK/J3-PF red (Extended),1 per daughterboard,FROZEN FAMILY / EXACT PROJECT FOOTPRINT - NATIVE VALIDATION PENDING,SalixFP:Kingbright_APDA3020L_AlGaInP_RightAngle_AK; 3.0x2.0mm right-angle low-current AlGaInP; Rev-A Extended chooses red rather than purple to retain exact family geometry/polarity
+Front LED D28 Bank-B USB-C,Kingbright APDA3020LSYCK/J3-PF yellow,1 per daughterboard,FROZEN MPN / EXACT PROJECT FOOTPRINT - NATIVE VALIDATION PENDING,SalixFP:Kingbright_APDA3020L_AlGaInP_RightAngle_AK; 590nm; right-angle low-current; 2mA test
+Front LED current limit,R110-R113 1k 1% 0603,4 per daughterboard,FROZEN VALUE / STOCK FOOTPRINT - NATIVE VALIDATION PENDING,Resistor_SMD:R_0603_1608Metric; schematic defect fixed: LEDs are no longer driven directly from TCA9535 outputs; brightness may be tuned after first article
+Latching selector switch,E-Switch LC1258EENP1RBLK SPDT latching ON-ON non-shorting right-angle THT with black cap,2 per daughterboard,FROZEN MPN / EXACT PROJECT FOOTPRINT - NATIVE VALIDATION PENDING,SalixFP:E_Switch_LC1258EENP1RBLK; terminal 2 common; 3x 0.90mm electrical holes on 2.50mm pitch + 2x 1.20mm NPTH locating holes; 300mA 30VDC
 Service disable jumper,2-pin shunt input,4 per daughterboard,FROZEN SEMANTICS,OPEN=RUN / SHORT=OFF
 Hard-disable selector,TI SN74LVC2G157 DCU VSSOP-8,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SO:VSSOP-8_2.3x2mm_P0.5mm
 Run pull-ups,10k 1% 0603,4 per daughterboard,FROZEN VALUE,OPEN jumper defaults each physical port to RUN

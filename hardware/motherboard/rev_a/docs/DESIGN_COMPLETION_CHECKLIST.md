@@ -24,7 +24,7 @@ Two finish lines are tracked separately:
 - [x] Source-priority / AUX recharge control native-green
 - [x] 5V_MAIN buck schematic native-green
 - [x] Front USB data/power architecture frozen
-- [ ] Seven placed/mechanical parts still need final physical closure: J12, SW1, SW2, D25-D28
+- [~] SW1/SW2 and D25-D28 now have exact parts/footprints assigned and await native validation; J12 remains unassigned
 - [ ] No fabrication `.kicad_pcb` exists yet
 
 Useful scale reference:
@@ -93,15 +93,15 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 
 ### Still open
 
-- [ ] SW1 exact latching selector MPN
-- [ ] SW1 exact mechanical footprint
-- [ ] SW2 exact latching selector MPN
-- [ ] SW2 exact mechanical footprint
-- [ ] D25 exact LED MPN / optical package
-- [ ] D26 exact LED MPN / optical package
-- [ ] D27 exact LED MPN / optical package
-- [ ] D28 exact LED MPN / optical package
-- [ ] Decide whether selector switch illumination can replace/simplify separate indicator LEDs without reducing desired UI behaviour
+- [x] SW1 exact latching selector MPN — E-Switch LC1258EENP1RBLK
+- [~] SW1 exact project footprint assigned — native validation pending
+- [x] SW2 exact latching selector MPN — E-Switch LC1258EENP1RBLK
+- [~] SW2 exact project footprint assigned — native validation pending
+- [~] D25 exact Kingbright InGaN right-angle family/population assigned — native validation pending
+- [~] D26 Kingbright APDA3020LVBC/D blue assigned — native validation pending
+- [~] D27 Kingbright AlGaInP yellow/red population assigned — native validation pending
+- [~] D28 Kingbright APDA3020LSYCK/J3-PF yellow assigned — native validation pending
+- [x] Keep independent per-port LEDs; selected E-Switch LC1258 is non-illuminated and preserves four-port identity/status semantics
 - [ ] J12 spring/pogo SWD contact geometry
 - [ ] Freeze Pico-A socket / standoff / mounting height before J12
 - [ ] Freeze front-panel mechanical relationship to selector actuators and LEDs
@@ -257,7 +257,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Freeze SW1/SW2 and D25-D28 physical choices.**
+1. **Native-validate SW1/SW2 + D25-D28 exact footprints and the restored LED current-limit resistors.**
 2. **Freeze Pico-A mechanical stack and J12 spring-contact geometry.**
 3. **Create the first real motherboard/front-board PCB outlines and mounting geometry.**
 4. **Place and route the boards; close DRC.**

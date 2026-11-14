@@ -290,7 +290,7 @@
 					(font (size 0.9 0.9))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:E_Switch_LC1258EENP1RBLK"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -965,14 +965,14 @@
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.e-switch.com/product/lc-series-right-angle-pushbutton-switch/?part-number=LC1258EENP1RBLK"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "Latching push-push SPDT selector; final mechanical part awaits enclosure spacing"
+		(property "Description" "E-Switch LC1258EENP1RBLK right-angle latching SPDT ON-ON selector; exact project footprint assigned; front-panel cutout/board placement remains enclosure-dependent"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -1208,7 +1208,7 @@
 					(hide yes)
 				)
 		)
-		(property "Description" "Port identity/status LED; colour population option"
+		(property "Description" "Kingbright APDA3020L low-current right-angle status LED; project uses polarity-aware InGaN and AlGaInP footprint variants; pin 1=A pin 2=K"
 			(at 0 0 0)
 			(effects
 					(font (size 1 1))
@@ -2262,21 +2262,21 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:E_Switch_LC1258EENP1RBLK"
 			(at 263.5 88 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.e-switch.com/product/lc-series-right-angle-pushbutton-switch/?part-number=LC1258EENP1RBLK"
 			(at 263.5 88 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "BANK A SELECT"
+		(property "Description" "E-Switch LC1258EENP1RBLK; SPDT latching ON-ON non-shorting; right-angle THT; terminal 2 common; black 1RBLK cap"
 			(at 263.5 88 0)
 			(effects
 					(font (size 1 1))
@@ -2475,27 +2475,27 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "LED A-A"
+		(property "Value" "A-A BLUE/GREEN"
 			(at 340 58 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Kingbright_APDA3020L_InGaN_RightAngle_AK"
 			(at 340 52 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.kingbrightusa.com/category.asp?Page=2&catalog_name=LED&category_name=KCLow+Current+Single+Color&orderby="
 			(at 340 52 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "LED A-A"
+		(property "Description" "Bank A USB-A LED: Primary=Kingbright APDA3020LVBC/D blue; Extended=APDA3020LZGCK green; InGaN polarity footprint"
 			(at 340 52 0)
 			(effects
 					(font (size 1 1))
@@ -2528,27 +2528,27 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "LED A-C"
+		(property "Value" "A-C BLUE"
 			(at 340 132 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Kingbright_APDA3020L_InGaN_RightAngle_AK"
 			(at 340 126 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.kingbrightusa.com/images/catalog/SPEC/APDA3020LVBC-D.pdf"
 			(at 340 126 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "LED A-C"
+		(property "Description" "Bank A USB-C LED: Kingbright APDA3020LVBC/D blue on Primary and Extended; InGaN polarity footprint"
 			(at 340 126 0)
 			(effects
 					(font (size 1 1))
@@ -3010,21 +3010,21 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:E_Switch_LC1258EENP1RBLK"
 			(at 240 220 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.e-switch.com/product/lc-series-right-angle-pushbutton-switch/?part-number=LC1258EENP1RBLK"
 			(at 240 220 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "BANK B SELECT"
+		(property "Description" "E-Switch LC1258EENP1RBLK; SPDT latching ON-ON non-shorting; right-angle THT; terminal 2 common; black 1RBLK cap"
 			(at 240 220 0)
 			(effects
 					(font (size 1 1))
@@ -3223,27 +3223,27 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "LED B-A"
+		(property "Value" "B-A YELLOW/RED"
 			(at 340 193.5 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Kingbright_APDA3020L_AlGaInP_RightAngle_AK"
 			(at 340 187.5 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.kingbrightusa.com/category.asp?Page=2&catalog_name=LED&category_name=KCLow+Current+Single+Color&orderby="
 			(at 340 187.5 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "LED B-A"
+		(property "Description" "Bank B USB-A LED: Primary=Kingbright APDA3020LSYCK/J3-PF yellow; Extended=APDA3020LSECK/J3-PF red; AlGaInP polarity footprint"
 			(at 340 187.5 0)
 			(effects
 					(font (size 1 1))
@@ -3276,27 +3276,27 @@
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Value" "LED B-C"
+		(property "Value" "B-C YELLOW"
 			(at 355.6 253.65 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "SalixFP:Kingbright_APDA3020L_AlGaInP_RightAngle_AK"
 			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.kingbrightusa.com/images/catalog/SPEC/APDA3020LSYCK-J3-PF.pdf"
 			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
 					(hide yes)
 				)
 		)
-		(property "Description" "LED B-C"
+		(property "Description" "Bank B USB-C LED: Kingbright APDA3020LSYCK/J3-PF yellow on Primary and Extended; AlGaInP polarity footprint"
 			(at 355.6 247.65 0)
 			(effects
 					(font (size 1 1))
@@ -3432,13 +3432,13 @@
 	(global_label "GND" (shape passive) (at 272.62 184 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006366"))
 	(label "RUN_B_C" (at 257.38 258 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006367"))
 	(global_label "GND" (shape passive) (at 272.62 258 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006368"))
-	(label "LED_A_A" (at 334.92 52 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006369"))
+	(label "LED_A_A" (at 321.19 52 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006369"))
 	(global_label "GND" (shape passive) (at 345.08 52 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006370"))
-	(label "LED_A_C" (at 334.92 126 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006371"))
+	(label "LED_A_C" (at 321.19 126 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006371"))
 	(global_label "GND" (shape passive) (at 345.08 126 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006372"))
-	(label "LED_B_A" (at 334.92 187.5 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006373"))
+	(label "LED_B_A" (at 321.19 187.5 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006373"))
 	(global_label "GND" (shape passive) (at 345.08 187.5 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006374"))
-	(label "LED_B_C" (at 350.52 247.65 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006375"))
+	(label "LED_B_C" (at 336.19 247.65 0) (effects (font (size 0.82 0.82)) (justify right bottom)) (uuid "60000000-0000-4000-8000-000000006375"))
 	(global_label "GND" (shape passive) (at 360.68 247.65 0) (effects (font (size 0.82 0.82)) (justify left bottom)) (uuid "60000000-0000-4000-8000-000000006376"))
 	(symbol
 		(lib_id "Salix:R_FRONT")
@@ -6238,6 +6238,98 @@
 	
 	
 	
+	(symbol
+		(lib_id "Salix:R_FRONT")
+		(at 325 52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d8110000-0000-4000-8000-000000000001")
+		(property "Reference" "R110" (at 325 49 0) (effects (font (size 0.75 0.75))))
+		(property "Value" "1k 1%" (at 325 55 0) (effects (font (size 0.7 0.7))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 325 52 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 325 52 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Front status LED current-limit resistor; 1k first-pass value; tune brightness only after first article if required" (at 325 52 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "d8110000-0000-4000-8000-000000000002"))
+		(pin "2" (uuid "d8110000-0000-4000-8000-000000000003"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (reference "R110") (unit 1))
+			)
+		)
+	)
+	(wire (pts (xy 328.81 52) (xy 334.92 52)) (stroke (width 0) (type default)) (uuid "d8110000-0000-4000-8000-000000000004"))
+	(symbol
+		(lib_id "Salix:R_FRONT")
+		(at 325 126 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d8110000-0000-4000-8000-000000000005")
+		(property "Reference" "R111" (at 325 123 0) (effects (font (size 0.75 0.75))))
+		(property "Value" "1k 1%" (at 325 129 0) (effects (font (size 0.7 0.7))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 325 126 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 325 126 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Front status LED current-limit resistor; 1k first-pass value; tune brightness only after first article if required" (at 325 126 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "d8110000-0000-4000-8000-000000000006"))
+		(pin "2" (uuid "d8110000-0000-4000-8000-000000000007"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (reference "R111") (unit 1))
+			)
+		)
+	)
+	(wire (pts (xy 328.81 126) (xy 334.92 126)) (stroke (width 0) (type default)) (uuid "d8110000-0000-4000-8000-000000000008"))
+	(symbol
+		(lib_id "Salix:R_FRONT")
+		(at 325 187.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d8110000-0000-4000-8000-000000000009")
+		(property "Reference" "R112" (at 325 184.5 0) (effects (font (size 0.75 0.75))))
+		(property "Value" "1k 1%" (at 325 190.5 0) (effects (font (size 0.7 0.7))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 325 187.5 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 325 187.5 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Front status LED current-limit resistor; 1k first-pass value; tune brightness only after first article if required" (at 325 187.5 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "d8110000-0000-4000-8000-000000000010"))
+		(pin "2" (uuid "d8110000-0000-4000-8000-000000000011"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (reference "R112") (unit 1))
+			)
+		)
+	)
+	(wire (pts (xy 328.81 187.5) (xy 334.92 187.5)) (stroke (width 0) (type default)) (uuid "d8110000-0000-4000-8000-000000000012"))
+	(symbol
+		(lib_id "Salix:R_FRONT")
+		(at 340 247.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d8110000-0000-4000-8000-000000000013")
+		(property "Reference" "R113" (at 340 244.65 0) (effects (font (size 0.75 0.75))))
+		(property "Value" "1k 1%" (at 340 250.65 0) (effects (font (size 0.7 0.7))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 340 247.65 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Datasheet" "~" (at 340 247.65 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Front status LED current-limit resistor; 1k first-pass value; tune brightness only after first article if required" (at 340 247.65 0) (effects (font (size 1 1)) (hide yes)))
+		(pin "1" (uuid "d8110000-0000-4000-8000-000000000014"))
+		(pin "2" (uuid "d8110000-0000-4000-8000-000000000015"))
+		(instances
+			(project "SalixControllerBridge_RevA"
+				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (reference "R113") (unit 1))
+			)
+		)
+	)
+	(wire (pts (xy 343.81 247.65) (xy 350.52 247.65)) (stroke (width 0) (type default)) (uuid "d8110000-0000-4000-8000-000000000016"))
 	(sheet_instances
 		(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057" (page "8"))
 	)

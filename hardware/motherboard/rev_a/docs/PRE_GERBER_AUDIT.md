@@ -270,12 +270,39 @@ Planned implementation:
 - Visual review of page 07, page 13 and the A3 root hierarchy is clean. USB-A + USB-C per-port presence telemetry is therefore **native-green / frozen**.
 - **Reference-designator correction before native validation:** the first source commit used R41-R50/C46-C52/U32-U33, which overlapped existing project references. The post-commit audit caught this before user validation. The presence block was renumbered only—no values/topology changed—to **U80/U81, R100-R109 and C100-C106**.
 
+## Front selector switches and status LEDs — NATIVE VALIDATION PENDING
+
+- SW1/SW2 exact selection: **E-Switch LC1258EENP1RBLK**, SPDT latching ON-ON, non-shorting, right-angle through-hole, black 1RBLK cap.
+- Project footprint: `SalixFP:E_Switch_LC1258EENP1RBLK`.
+- E-Switch drawing XP0274P Rev A transcribed as:
+  - terminal 3: (-2.50, 0), Ø0.90 plated drill;
+  - terminal 2 common: (0, 0), Ø0.90 plated drill;
+  - terminal 1: (+2.50, 0), Ø0.90 plated drill;
+  - unnumbered mechanical locator: (-5.70, +1.20), Ø1.20 NPTH;
+  - unnumbered mechanical locator: (+5.60, -2.20), Ø1.20 NPTH.
+- Footprint F.Fab also records the 12.0mm body and actuator/cap direction so enclosure/front-panel placement cannot silently reverse the switch.
+- D25-D28 use Kingbright **APDA3020L** 3.0x2.0mm low-current right-angle LEDs. Manufacturer land pattern is two 2.0x1.0mm pads with 1.0mm gap, centers ±1.5mm.
+- Kingbright's APDA3020L polarity orientation differs by material while the right-angle optical direction must remain the same:
+  - InGaN blue/green: manufacturer terminal 1 is cathode-side and terminal 2 anode-side;
+  - AlGaInP red/yellow: manufacturer terminal 1 is anode-side and terminal 2 cathode-side.
+- Rev-A therefore uses two geometry-identical project footprints whose **project pad numbers follow the existing Salix semantic pinout 1=A / 2=K**:
+  - `SalixFP:Kingbright_APDA3020L_InGaN_RightAngle_AK` for D25/D26;
+  - `SalixFP:Kingbright_APDA3020L_AlGaInP_RightAngle_AK` for D27/D28.
+- Population:
+  - D25 A-A: Primary blue APDA3020LVBC/D; Extended green APDA3020LZGCK;
+  - D26 A-C: blue APDA3020LVBC/D on both;
+  - D27 B-A: Primary yellow APDA3020LSYCK/J3-PF; Extended red APDA3020LSECK/J3-PF;
+  - D28 B-C: yellow APDA3020LSYCK/J3-PF on both.
+- **Electrical defect fixed:** BOM always intended a series resistor per LED, but page 07 had D25-D28 wired directly from U20 TCA9535 outputs to GND. Added R110-R113 = **1k 1% 0603** in series with the four LED anodes.
+- 1k is retained as the first-pass brightness value. Typical ideal current is roughly 0.6mA for blue/green and 1.4mA for red/yellow; first-article brightness may be tuned without changing the LED mechanical footprint.
+- Native KiCad footprint export + ERC + page-07 visual review are required before SW1/SW2/D25-D28 are called frozen green.
+
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
 2. **Barrel/recharge concurrency and AUX load-shed implementation are native-green/frozen.** Rev-A retains the 8A Kycon barrel interface; U3 recharge is hardware-default OFF through Q11/Q12 and is only released by U60 P4 after safe firmware initialization. The 7.5A fuse remains provisional until firmware load-shed thresholds, adapter rating, harness gauge and measured losses are frozen.
-3. **Seven earlier placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. The new U80/U81 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
-4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
+3. **J12 remains the only still-unassigned placed footprint.** SW1/SW2 and D25-D28 now have exact project footprints assigned pending native validation. The new U80/U81 presence ICs use stock exact TSSOP footprints and do not add a mechanical-footprint blocker. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
+4. **Mechanical closure remains open only where enclosure/Pico stack geometry is still required.** Selector switches and front-board LED packages are selected/footprinted pending native validation; SWD spring contacts J12 remain TBD until Pico-A mounting height is frozen. Front-panel cutout/actuator/light alignment remains a PCB/enclosure placement task.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
 7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
