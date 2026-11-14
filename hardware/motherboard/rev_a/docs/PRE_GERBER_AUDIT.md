@@ -89,14 +89,25 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 
 - **PD exact-capacitor batch — NATIVE GREEN:** C17 Murata GRM188R6YA475KE15D; C18-C21 Murata GRM188R71H103JA01; C22/C23 Panasonic EEHZC1H330XP polarized hybrids; C24 Murata GRM32ER71H106KA12; C25/C26 TDK C2012X7R1A106K125AE; C27/C28 TDK CGA3E2C0G1H331J080AE; C29 Murata GRM188R6YA105KA12; C30/C31 TDK C2012X7R2A104K125AE. PPHV nominal is 76uF and tolerance-only 61.8-90.2uF. The two hybrid bulk parts alone have a 52.8uF tolerance floor, so the design does not rely on a highly DC-biased large MLCC to meet TI's 47uF minimum.
 
+## 5V_MAIN calculated power-train checkpoint — 2026-11-14
+
+- Documentation-only pull `3224768` was followed by a native KiCad 10.0.8 rerun: **0 errors / 1036 warnings**, unchanged categories.
+- Worst 12A ripple corner used for screening: 23V input, 1.76uH, 400kHz -> **5.56A p-p**, **14.78A peak**.
+- 3mOhm shunt guarantees approximately **13.31A** equivalent load current at the 49mV low threshold with worst ripple/tolerance allowance; dissipation about **0.45W**.
+- XGL1010-222MED and IAUC60N04S6L039 are therefore frozen as power-train MPNs pending PCB thermal/ringing validation.
+- COUT is increased from six to **eight** CGA6P1X7S1A476M250AC parts. Using ~40uF effective/part at 5V gives ~320uF typical; conservative stacked tolerance/temperature estimate is ~200uF, enough for about 156mV idealized 12A load-off overshoot.
+- AEF first-pass is frozen around XGL6060-102MEC + EEHZC1V101V and TI Design-2 low-frequency compensation values.
+- Remaining pre-schematic blockers are loop-compensation validation and the explicit barrel-vs-AUX-recharge concurrency decision.
+
 ## Fabrication blockers
 
-1. **Selected-source front end is electrically frozen through `SYS_IN`.** Source priority (sheet 08), 12V barrel/reverse/load-dump stage (sheet 09) and USB-C PD stage (sheet 10) are frozen green. The next major electrical blocker is the `SYS_IN -> 5V_MAIN` high-current buck. Controller/topology is now selected as single-phase TI LM25149QRGYRQ1 at 440kHz, 5V/12A target; exact power-stage values and the new KiCad sheet remain to be calculated/drawn/validated. J16/F1/Q9/Q10 physical footprints remain open.
-2. **Power budget must be frozen with source-aware firmware policy.** Four USB-A paths at ~0.9A plus four Type-C paths at 1.5A can expose 9.6A before Picos, logic and fans. The buck hardware target is 12A continuous, but the present standalone PD policy guarantees only 45W input and therefore cannot expose the full 60W 5V rail. Barrel, PD and AUX require different downstream-current budgets.
+1. **Selected-source front end is electrically frozen through `SYS_IN`; 5V buck power-train values are now calculated/selected.** LM25149QRGYRQ1 single-phase ~440kHz, 5V/12A; IAUC60N04S6L039 MOSFET pair; XGL1010-222MED 2.2uH; 3mOhm Susumu shunt; 4x10uF input ceramics; 8x47uF output ceramics; XGL6060-102MEC 1uH AEF inductor; EEHZC1V101V 100uF damping bulk. Loop compensation and the barrel/recharge concurrency decision remain open before the new KiCad sheet is drawn. J16/F1/Q9/Q10 physical footprints remain open.
+2. **Barrel/recharge concurrency is now an explicit architecture blocker.** The 8A Kycon jack plus 7.5A fuse candidate has inadequate margin for unconditional 60W 5V load plus the existing 2A AUX recharge contract: calculated 12V combined demand is roughly 7.3–7.6A before remaining upstream loss/tolerance. U3 recharge EN is not presently firmware controlled. Choose either deliberate recharge load-shedding control or a higher-current barrel connector/harness/fuse path before freezing input-current policy.
 3. **Seven placed physical parts still have no footprint.** They are J12 and SW1/D25/D26/SW2/D27/D28. J10/J11 are now Molex 47053-1000 fan headers; J15 is the Molex 43045-1000 AUX power-module header; J13 microSD and J14 service/TFT are frozen; J7/J8/J20 are Micro-Fit; J21/J23 USB-A and J22/J24 USB-C are frozen; U21/U25 use the exact project-local TI RSE0010A footprint; Y1 and the frozen capacitor networks are footprinted.
 4. **Mechanical footprints remain open.** Latching selector switches, SWD spring contacts and front-board LEDs remain TBD.
 5. **No fabrication PCB exists yet.** The repository has schematics but no `.kicad_pcb`; board outline, mounting holes, stack-up, placement, controlled USB routing, power planes/high-current paths, fan airflow/mechanical placement, thermal copper, keepouts and DRC remain outstanding.
-6. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
+6. **Buck control-loop validation remains.** RCOMP=5.90k and CCOMP=10nF are calculated starting values; CHF is DNP with a 22pF tuning option. Validate with TI calculator/SPICE/Bode analysis before the new buck sheet is called electrically frozen.
+7. **ERC warning hygiene remains.** Endpoint-off-grid and library-symbol-mismatch warnings should be reduced or explicitly dispositioned before schematic freeze so later regressions stay visible.
 
 ## Layout/current constraints
 

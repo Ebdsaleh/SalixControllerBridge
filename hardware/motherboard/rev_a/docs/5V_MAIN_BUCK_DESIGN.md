@@ -1,92 +1,205 @@
 # 5V_MAIN Buck Design — Rev A
 
-Status: **CONTROLLER / TOPOLOGY FROZEN; POWER STAGE PROVISIONAL**
+Status: **CONTROLLER / TOPOLOGY + POWER-TRAIN VALUES CALCULATED/FROZEN; LOOP COMPENSATION + BARREL/RECHARGE CONCURRENCY OPEN; KICAD SHEET NOT YET DRAWN**
 
-## Design target
+## Native baseline before buck schematic work
+
+The documentation-only architecture pull was followed by a full native KiCad 10.0.8 rerun on the unchanged schematics. Result: **0 errors / 1036 warnings** (848 endpoint-off-grid + 183 library-symbol-mismatch + 4 intentional isolated AUX labels + 1 intentional pin-to-pin). This confirms the frozen source-priority, barrel and USB-C PD sheets remained unchanged before the buck design moved into calculation.
+
+## Frozen architecture
 
 - Input net: `SYS_IN`
-- Steady-state selected-source envelope: approximately **8V to 23V**
+- Steady-state selected-source design envelope: approximately **8.1V to 23V**
 - Output net: `5V_MAIN`
-- Output target: **5.0V / 12A continuous** (60W)
-- Topology: single-phase synchronous buck
-- First-pass switching frequency: **440kHz**
+- Output target: **5.0V / 12A continuous hardware capability** (60W)
 - Controller: **TI LM25149QRGYRQ1**
 - Controller footprint: `Package_DFN_QFN:Texas_RGY_R-PVQFN-N24_EP2.05x3.1mm`
-- First-pass operating mode: FPWM, active EMI filter enabled, dual-random spread spectrum enabled
-- VCCX: return to the established 5V output as recommended by TI for the 5V design
+- Topology: single-phase synchronous buck
+- RT: **49.9k 1%**; TI reference value, approximately 435–440kHz nominal depending equation/rounding
+- CNFG: **41.2k 1% to AGND** = primary, single-phase, DRSS enabled
+- PFM/SYNC: **GND** = FPWM
+- FB: **24.9k to VDDA** = fixed 5V output mode
+- VCCX: **5V_MAIN** after output establishes
+- CVCC: 2.2uF; CBOOT: 0.1uF; CVDDA: 0.1uF
 
-## Why LM25149-Q1
+Important datasheet reconciliation: TI Figure 9-18 labels RCNFG as 24.9k, but the current electrical-characteristics table and Table 8-2 define **41.2k** as the valid primary/single-phase/spread-spectrum configuration. Rev-A follows the current configuration tables, not the inconsistent figure label.
 
-The LM25149-Q1 is a current-production AEC-Q100 42V synchronous buck controller with peak-current-mode control, external MOSFETs, integrated active EMI filtering and dual-random spread spectrum. Its 3.5-42V operating range comfortably spans the already-protected selected-source rail.
+## TI reference basis
 
-TI Design 2 in the LM25149-Q1 datasheet is a particularly close reference:
-- 5.5-36V input
-- 5V / 10A output
-- 440kHz
-- 2.2uH output inductor
-- 4mOhm shunt
-- two external 40V N-channel MOSFETs
-- 4x47uF output capacitors
-- approximately 95% full-load target efficiency
+TI Design 2 is the starting point: 5.5–36V input, 5V/10A output, 440kHz, 2.2uH, 4mOhm current shunt, external 40V MOSFET half bridge, active EMI filter, 3x10uF local input ceramics, 100uF damping bulk and 4x47uF output ceramics. Rev-A preserves that architecture and scales current margin to 12A.
 
-Rev-A scales the current capability from 10A to 12A while preserving the proven control/EMI architecture.
+## Output inductor — FROZEN
 
-## Power envelope
+Part: **Coilcraft XGL1010-222MED**
 
-The buck is a **12A-capable rail**, not a guarantee that every source can supply 12A.
+- 2.2uH ±20%
+- DCR: 2.3mOhm typical / 2.6mOhm maximum at 25C
+- Isat: 15A at 10% drop, 26A at 20% drop, 36A at 30% drop
+- Irms: 24.6A for 20C rise / 33A for 40C rise
+- AEC-Q200
 
-Approximate input current for 60W output:
-- 8.1V source: ~7.8A at 95% efficiency, ~8.2A at 90%
-- 12V source: ~5.3A at 95%, ~5.6A at 90%
-- 20V source: ~3.2A at 95%, ~3.3A at 90%
+Calculated inductor ripple, using the nominal part and the 49.9k RT operating point, is approximately:
 
-### Barrel
+| SYS_IN | nominal ripple p-p |
+|---:|---:|
+| 8.1V | 2.00A |
+| 12V | 3.05A |
+| 20V | 3.92A |
+| 23V | 4.09A |
 
-Barrel is the intended full-power source. Final adapter and fuse ratings must include 5V_MAIN system power, conversion loss, any concurrently enabled AUX recharge power, and startup/inrush/transient margin. The existing 7.5A MINI fuse remains provisional.
+For a deliberately conservative ripple corner of **L = 1.76uH (-20%) and fs = 400kHz**, 23V input produces **5.56A p-p** ripple and **14.78A** peak current at a 12A load. That is within TI's preferred 30–50% ripple region at the upper input range and leaves substantial saturation margin in normal operation.
 
-### USB-C PD
+## Current sense — FROZEN
 
-The current standalone PD straps accept a 15V/3A-class source, so firmware must treat PD as **45W-guaranteed** until negotiated-contract telemetry exists. At 90-95% conversion efficiency, 45W input yields about 8.1-8.55A gross at 5V. After reserving about 1A for motherboard/Pico/fan load, a conservative downstream-port budget is around 7A. This is a policy starting point, not yet a frozen per-bank allocation.
+Part: **Susumu KRL2012E-M-R003-F-T5**
 
-### AUX
+- 3mOhm ±1%
+- 1W
+- wide 0805 / 0508
+- ±50ppm/C
+- AEC-Q200
 
-AUX source capability is module-dependent. Full 12A output must not be assumed without a module contract.
+LM25149-Q1 current threshold is 49mV min / 60mV typ / 73mV max. With the 5.56A worst-case ripple:
 
-## Provisional power-stage candidates
+- guaranteed-min equivalent load-current limit, including +1% resistance and a conservative +0.5% TCR allowance: **~13.31A**
+- typical equivalent load-current limit: **~17.22A**
+- high-threshold equivalent load-current limit, including low resistance corner: **~21.9A**
+- shunt dissipation at 12A with worst ripple: **~0.45W**, below the 1W rating
 
-### MOSFETs
+Using the 73mV high threshold, minimum shunt resistance and the controller's 65ns typical sense delay gives an approximate short-circuit peak of **~25.4A** at 23V. That can enter the XGL1010's 20%-drop saturation region but remains well below its 36A / 30%-drop rating. The 65ns delay is typical, not a guaranteed maximum, so switch-node ringing and hard-short current still require bench validation.
 
-**Infineon IAUC60N04S6L039** x2 — 40V, 4.7mOhm class, ~7nC gate charge, AEC-Q101, and TI's Design-2 reference MOSFET. Final checks: conduction loss, switching loss, dead-time/body-diode loss, switch-node overshoot, and copper/thermal spreading.
+TI's own design criterion of sizing the current threshold to at least 125% of full-load peak permits a maximum shunt of about **3.25mOhm** at this worst ripple corner, so the selected 3mOhm value has appropriate margin.
 
-### Output inductor
+## MOSFETs — FROZEN PART, THERMAL/LAYOUT VALIDATION STILL REQUIRED
 
-**Coilcraft XGL1010-222MED** — 2.2uH ±20%, 2.3mOhm typical DCR, 36A Isat (30% inductance drop), 24.6A Irms for 20C rise, AEC-Q200.
+Parts: **2x Infineon IAUC60N04S6L039**
 
-### Current shunt
+- 40V AEC-Q101 PG-TDSON-8
+- RDS(on) at 4.5V: 4.71mOhm typical / 5.90mOhm maximum
+- Qg: 15nC typical / 20nC maximum at the datasheet's 10V test condition
+- Qrr: 18nC typical
+- RthJC maximum 3.6K/W; datasheet board-level RthJA example 50K/W
 
-**Susumu KRL2012E-M-R003-F-T5** — 3mOhm, ±1%, 1W, 0508/wide-0805, AEC-Q200. LM25149-Q1 current-limit threshold is 49mV min / 60mV typ / 73mV max. The 3mOhm candidate is intentionally lower than TI's 4mOhm 10A design so minimum-threshold current limit remains above the 12A continuous target after inductor ripple. Exact OCP min/typ/max remains to be calculated.
+This is the exact MOSFET used by TI's 5V/10A/440kHz Design 2. Rev-A's maximum steady `SYS_IN` is only about 23V, giving significantly more drain-voltage headroom than TI's 36V steady-state reference.
 
-### Input capacitors
+A conservative screening calculation using the 4.5V maximum RDS(on), TI's approximate +4500ppm/C temperature coefficient, 7ns switching-edge assumptions and full datasheet reverse-recovery charge puts each MOSFET in roughly the **1.1–1.3W** range at the harsher 12A operating points. At the datasheet example 50K/W board thermal resistance this is roughly a 55–65C junction rise. That is acceptable for selection, but PCB copper, airflow, switching-node overshoot and measured junction/board temperature remain mandatory layout/bench gates.
 
-First pass: 4x TDK CGA6P3X7S1H106K250AB, 10uF / 50V / X7S / 1210 / AEC-Q200. The active EMI filter also requires its input inductor, damping reservoir and compensation network.
+## Input network — FROZEN FIRST-PASS ELECTRICAL VALUES
 
-### Output capacitors
+### Active EMI input inductor
 
-First pass: 6x TDK CGA6P1X7S1A476M250AC, 47uF / 10V / X7S / 1210 / AEC-Q200. Final count depends on effective capacitance at 5V, load-step droop, ESR/ESL and loop compensation.
+Part: **Coilcraft XGL6060-102MEC**
 
-## Next calculations before schematic freeze
+- 1.0uH ±20%
+- 2.5mOhm typical / 2.9mOhm maximum DCR
+- Isat: 11A at 10% drop / 17.2A at 20% / 23A at 30%
+- Irms: 20.5A for 20C rise
+- AEC-Q200
 
-1. Inductor ripple at min/max SYS_IN and ±20% L.
-2. RSENSE current-limit min/typ/max including ripple.
-3. MOSFET conduction + switching + gate-drive loss at 8V, 12V and 20V.
-4. Inductor copper/core loss and temperature rise.
-5. Input-cap RMS ripple and source-mux stress.
-6. Output effective capacitance and 0→12A / 6→12A load-step droop.
-7. Compensation values for the final L/C/ESR network.
-8. EN/UVLO divider so the buck does not start on an invalid/decaying SYS_IN rail.
-9. Active-EMI-filter component values.
-10. PGOOD routing into the service/realtime management logic.
-11. Startup/inrush against the downstream 5V capacitance already present on the motherboard/front boards.
-12. Barrel adapter/fuse policy with simultaneous AUX recharge.
+The 60W buck requires about 7.8–8.2A at the minimum valid source voltage, so this part has useful continuous-current and saturation margin while staying close to TI's Design-2 1uH filter.
 
-Only after those checks should the new KiCad buck sheet be called electrically frozen.
+### Local switching ceramics
+
+**4x TDK CGA6P3X7S1H106K250AB**, each 10uF / 50V / X7S / 1210 / AEC-Q200.
+
+Calculated input-capacitor AC RMS stress is approximately 5.87A at 8.1V, 5.97A at 12V, 5.25A at 20V and 5.01A at 23V for the full bank. The four ceramics share the high-frequency component; placement directly across the MOSFET power loop is mandatory.
+
+### Damping / bulk reservoir
+
+**Panasonic EEHZC1V101V**, 100uF / 35V hybrid, ±20%, 125C, AEC-Q200, 1.6Arms ripple rating at 100kHz.
+
+Place this **after** the 1uH AEF inductor as TI does with CDAMP1. Do not add a low-ESR bulk capacitor on the VIN-EMI side of LIN without rechecking AEF stability.
+
+### Active EMI compensation network
+
+Freeze the low-frequency AEF values from TI Design 2:
+
+- CSEN = 0.1uF
+- CINJ = 0.47uF
+- RINC = 0.47ohm
+- CINC = 0.1uF
+- CDAMP = 0.22uF
+- RDAMP = 17.8ohm
+- CAEFC = 1nF
+- RAEFC = 1k
+- RAEFDC = 49.9k
+- RAEFVDD = 3ohm
+- CAEFVDD = 2.2uF
+
+These are first-pass schematic values. Actual conducted/radiated EMI performance is layout- and enclosure-dependent and must be bench-tested.
+
+## Output capacitors — REVISED AND FROZEN AT 8 PARTS
+
+Part: **8x TDK CGA6P1X7S1A476M250AC**, 47uF / 10V / X7S / 1210 / AEC-Q200.
+
+A current TI design using this exact capacitor reports about **40uF effective per part at 5V**. Eight parts therefore provide roughly **320uF typical effective** at 5V. Applying a deliberately conservative additional ±20% capacitance-tolerance floor and the full X7S -22% temperature coefficient gives about **200uF** effective bank capacitance.
+
+TI's load-off energy equation for 12A, 2.2uH and 5V requires:
+
+- ~208uF for 150mV overshoot
+- ~183uF for 170mV overshoot
+- ~155uF for 200mV overshoot
+
+Thus the conservative ~200uF bank predicts roughly **156mV** idealized load-off overshoot, while the typical ~320uF bank predicts about **98mV**. The worst-ripple capacitive component is only about **8.7mV p-p** at the conservative 200uF / 400kHz corner, before ESR/ESL effects.
+
+This is why the earlier six-cap first pass is replaced by **eight** parts: six were comfortable at typical effective capacitance but not robust after stacked derating assumptions.
+
+## UVLO — FROZEN
+
+Use:
+
+- RUV1 = **49.9k 1%** from SYS_IN to EN
+- RUV2 = **8.06k 1%** from EN to GND
+
+Using TI's 1.0V typical EN threshold and 10uA hysteresis gives approximately **7.19V turn-on / 6.69V turn-off**. Including 1% resistor tolerance, the guaranteed 0.95–1.05V EN threshold and 8–12uA hysteresis range gives approximately:
+
+- turn-on: **6.72V to 7.68V**
+- turn-off: **6.12V to 7.28V**
+
+This stays below the lowest frozen source-valid window (~8.1V), so the buck does not reject a source that the upstream power-path logic has already accepted.
+
+## Loop compensation — CALCULATED STARTING POINT, NOT FROZEN
+
+The output bank is intentionally larger than TI Design 2, so copying its 4.22k / 15nF / 150pF compensation without recalculation is not justified.
+
+Using TI Equation 46 with RS=3mOhm, GCS=10, gm=1200uS, VOUT/VREF=6.25, a conservative 200uF effective output bank and a 30kHz target crossover gives **RCOMP ≈5.9k**. Equation 47 then gives **CCOMP ≈9nF**, so the current starting point is:
+
+- RCOMP = **5.90k 1%**
+- CCOMP = **10nF**
+- CHF = **DNP initially**, with a 22pF tuning option
+
+At the typical ~320uF effective output bank the same values imply a lower crossover, roughly 19kHz. This is intentionally conservative. Compensation remains **provisional** until TI calculator/SPICE/Bode validation because actual effective capacitance, ESR and PCB parasitics materially affect the loop.
+
+## PGOOD
+
+Route the open-drain PG/SYNCOUT pin as a normal PGOOD because this is single-phase primary operation. Use a **100k pull-up to 3V3_AUX** and expose the signal to service/realtime supervision. Final receiving GPIO is still to be assigned.
+
+## Source-aware power policy
+
+The 12A converter rating is hardware capability, not a universal source budget.
+
+- Barrel: intended full-power source.
+- USB-C PD: present standalone straps guarantee only 45W input; without negotiated-contract telemetry the full 60W rail must not be advertised downstream.
+- AUX: module-dependent; full power requires a module capability contract.
+
+## OPEN ARCHITECTURE DECISION — BARREL VS AUX RECHARGE CONCURRENCY
+
+The present barrel jack, Kycon KLDHCX-8-0202-B, is rated **8A at 24V DC**. The current fuse candidate is 7.5A. At 12V, a 60W 5V_MAIN load draws roughly **5.3–5.6A** for 95–90% buck efficiency. The existing AUX recharge contract can simultaneously draw up to **2.0A** from EXT_CHARGE_IN. Combined demand is therefore roughly **7.3–7.6A before remaining upstream losses/tolerance**, leaving inadequate design margin under an 8A connector and making the 7.5A fuse unsuitable as an unconditional full-load/full-recharge policy.
+
+Critically, U3 TPS259474L recharge EN/UVLO is presently a fixed resistor qualification network; there is **no existing firmware-controlled recharge-enable/load-shed path**. Do not claim firmware can solve this without an intentional schematic change.
+
+Two legitimate directions remain:
+
+1. Keep the existing 8A barrel connector and add a deliberate, default-safe hardware/firmware method to disable or curtail AUX recharge when system power approaches the source budget; or
+2. If unconditional simultaneous 60W system output + 2A recharge is a hard requirement, upgrade the barrel connector/harness/fuse path to hardware with comfortable >8A continuous margin.
+
+This choice must be made before the barrel fuse/current policy is frozen. The already-frozen AUX recharge circuit must not be silently modified.
+
+## Remaining gates before KiCad buck-sheet freeze
+
+1. Resolve barrel/recharge concurrency architecture.
+2. Validate the 5.90k / 10nF compensation starting point with TI calculator/SPICE/Bode analysis; keep CHF as a tuning provision.
+3. Assign exact footprints to the frozen MOSFET, inductors, shunt, hybrid bulk and capacitor banks.
+4. Draw the new isolated `SYS_IN -> 5V_MAIN` KiCad sheet.
+5. Native KiCad render/ERC and visual review.
+6. PCB-level thermal, switch-node ringing, short-circuit, transient and EMI validation remain later fabrication gates.

@@ -51,55 +51,56 @@ EXT_CHARGE_IN is now driven by the U4 external-source priority stage (barrel ove
 
 ## 5V_MAIN
 
-Rev-A now has a frozen **controller/topology direction** for the selected-source buck, while the exact power-stage values remain intentionally provisional until calculation/simulation/native validation.
+Rev-A now has the controller/topology and the main 12A power-train values **calculated and component-frozen**, while loop compensation and the barrel-vs-recharge concurrency policy remain open before the KiCad sheet is drawn.
 
-### Frozen architecture decision
+### Frozen controller / operating configuration
 
-- Controller: **TI LM25149QRGYRQ1** (`LM25149-Q1`), AEC-Q100, 3.5V to 42V synchronous buck controller.
-- Exact KiCad footprint: `Package_DFN_QFN:Texas_RGY_R-PVQFN-N24_EP2.05x3.1mm`.
-- Topology: **single-phase synchronous buck** from `SYS_IN` to `5V_MAIN`.
-- First-pass switching frequency: **440kHz**, following TI's high-efficiency 5V/10A Design 2 rather than the 2.1MHz density-optimized example.
-- Output target: **5.0V, 12A continuous hardware capability** (60W rail).
-- Control mode: peak-current-mode; first-pass policy is FPWM for predictable fixed-frequency behavior on the USB/system rail.
-- EMI strategy: retain the LM25149-Q1 integrated active EMI filter plus dual-random spread spectrum.
-- VCCX should be returned to `5V_MAIN` once the rail is established, as in TI's 5V reference design, to reduce controller bias loss.
-- The buck is sized for the **rail capability**, not a promise that every source may deliver 12A simultaneously.
+- TI LM25149QRGYRQ1, single-phase synchronous buck, 5V / 12A hardware target.
+- RT = 49.9k 1% (~435–440kHz nominal).
+- CNFG = 41.2k 1% to AGND: primary, single-phase, DRSS enabled. This follows current TI Table 8-2; do not copy the inconsistent 24.9k label shown in Figure 9-18.
+- PFM/SYNC = GND for FPWM.
+- FB = 24.9k to VDDA for the fixed 5V setpoint.
+- VCCX = 5V_MAIN after startup.
+- UVLO = 49.9k / 8.06k: ~7.19V nominal turn-on and ~6.69V turn-off; calculated tolerance/threshold window ~6.72–7.68V on / 6.12–7.28V off.
 
-TI's published Design 2 is unusually close to this project: 5.5-36V input, 5V/10A output, 440kHz, 2.2uH, 4mOhm current sensing, external N-FET half bridge and 4x47uF output ceramics. Rev-A uses that as the validated starting architecture and scales only the power-stage current margin to 12A.
+### Frozen 12A power train
 
-### Input envelope
+- QHS/QLS: 2x Infineon IAUC60N04S6L039.
+- LOUT: Coilcraft XGL1010-222MED, 2.2uH.
+- RSENSE: Susumu KRL2012E-M-R003-F-T5, 3mOhm.
+- CIN: 4x TDK CGA6P3X7S1H106K250AB, 10uF/50V/X7S/1210.
+- COUT: **8x** TDK CGA6P1X7S1A476M250AC, 47uF/10V/X7S/1210. Eight parts replace the earlier six-part first pass.
+- AEF LIN: Coilcraft XGL6060-102MEC, 1uH.
+- AEF damping bulk: Panasonic EEHZC1V101V, 100uF/35V hybrid.
 
-The frozen source selectors present a steady-state `SYS_IN` region of roughly **8V to 23V** across barrel, PD and AUX validity windows. The LM25149-Q1's 42V operating rating leaves useful headroom after the already-frozen source protection/mux stages; it is **not** intended to absorb raw vehicle load-dump energy directly.
+### Calculation checkpoints
 
-At 60W output, a 90-95% efficient stage would draw approximately:
-- 7.8-8.2A from an 8.1V source,
-- 5.3-5.6A from a 12V source,
-- 3.2-3.3A from a 20V source.
+- Worst deliberate ripple corner (23V, 1.76uH, 400kHz): 5.56A p-p, 14.78A peak at 12A load.
+- 3mOhm shunt minimum-threshold equivalent load limit: ~13.31A after resistor/TCR allowance; typical ~17.22A.
+- Shunt loss: ~0.45W at 12A worst-ripple case.
+- Approximate hard-short current peak using maximum threshold and 65ns typical sense delay: ~25.4A; bench validation remains required because delay is not specified as a maximum.
+- Input ceramic-bank AC RMS current: roughly 6A worst case.
+- Output bank: ~320uF typical effective at 5V using current TI reference data; conservative stacked tolerance/temperature floor ~200uF.
+- Conservative ~200uF COUT predicts ~156mV idealized 12A load-off overshoot; typical ~320uF predicts ~98mV.
+- Conservative COUT ripple component: ~8.7mV p-p at the 5.56A/400kHz corner before ESR/ESL.
 
-These are design-envelope numbers, not final fuse ratings.
+### Frozen AEF first-pass values
+
+Use TI's low-frequency Design-2 AEF network: CSEN 0.1uF, CINJ 0.47uF, RINC 0.47ohm, CINC 0.1uF, CDAMP 0.22uF, RDAMP 17.8ohm, CAEFC 1nF, RAEFC 1k, RAEFDC 49.9k, RAEFVDD 3ohm and CAEFVDD 2.2uF. Final EMI performance remains a PCB/enclosure bench test.
+
+### Loop compensation remains provisional
+
+Calculated starting point: RCOMP 5.90k, CCOMP 10nF, CHF DNP with a 22pF tuning option. This corresponds to roughly a 30kHz target crossover at a conservative ~200uF effective COUT; typical ~320uF lowers crossover toward ~19kHz. Do not call compensation frozen until TI calculator/SPICE/Bode validation is complete.
 
 ### Source-aware output policy
 
-The physical buck may be capable of 12A, but downstream current advertisement must follow the selected source:
+The 12A converter rating is hardware capability, not a universal source budget. Barrel is intended full-power; standalone PD remains 45W-guaranteed without negotiated-contract telemetry; AUX capability remains module-specific.
 
-- **Barrel:** intended full-power source. Final adapter and fuse rating must cover the 60W system rail **plus** any simultaneously permitted AUX recharge power.
-- **USB-C PD:** current standalone straps guarantee only a 15V/3A-class accepted source (45W). Without negotiated-contract telemetry, firmware must **not** expose a 60W downstream budget. At 90-95% conversion efficiency, 45W input corresponds to roughly 8.1-8.55A gross on the 5V rail before reserving Pico/logic/fan power; a conservative downstream-port budget is therefore around 7A until telemetry exists.
-- **AUX:** budget remains module-dependent and must be derived from AUX_ID / future management data or a conservative default. The motherboard must not assume every battery module can sustain the full 12A rail.
+### Open barrel / AUX-recharge concurrency decision
 
-### Barrel fuse / adapter consequence
+The current Kycon barrel jack is rated 8A. At 12V, a full 60W 5V rail consumes about 5.3–5.6A for 95–90% buck efficiency. The frozen AUX recharge contract may simultaneously draw up to 2.0A, producing about 7.3–7.6A combined demand before remaining upstream loss/tolerance. That is too close to an 8A connector and makes the current 7.5A fuse unsuitable as an unconditional full-load/full-recharge policy.
 
-The previous 7.5A MINI fuse remains **provisional**. A 12A/5V system load is 60W; the AUX recharge branch can additionally accept up to 2A from `EXT_CHARGE_IN`. Simultaneous full system load and recharge can therefore approach the old fuse budget before conversion losses and transient margin are included. The final barrel adapter rating, fuse value, recharge concurrency policy and wiring gauge must be frozen together.
-
-### Provisional 12A power-stage starting point
-
-The following are **not yet electrically frozen**:
-- QHS/QLS: Infineon IAUC60N04S6L039, the 40V/4.7mOhm/7nC AEC-Q101 MOSFET used by TI's 440kHz reference.
-- LOUT: Coilcraft XGL1010-222MED, 2.2uH, 2.3mOhm typical DCR, 36A saturation rating and 24.6A RMS rating (20C rise).
-- RSENSE: Susumu KRL2012E-M-R003-F-T5, 3mOhm, 1%, 1W, AEC-Q200.
-- CIN: 4x 10uF/50V AEC-Q200 1210 ceramics as a first-pass local bank, plus the active-EMI/damping network.
-- COUT: 6x 47uF/10V AEC-Q200 1210 ceramics as a first-pass local bank.
-
-Before drawing/final-freezing the sheet, calculate worst-case inductor ripple, OCP min/typ/max, MOSFET conduction/switching loss, shunt loss, inductor temperature rise, input-cap RMS ripple, output effective capacitance/transient droop and compensation. The first KiCad buck batch should remain isolated from the frozen source-priority/barrel/PD sheets.
+U3 recharge EN/UVLO is presently a fixed resistor network; there is no existing firmware-controlled load-shed input. The project must explicitly choose either (A) a deliberate default-safe recharge-disable/load-shed redesign while retaining the 8A barrel interface, or (B) a higher-current barrel connector/harness/fuse path if unconditional simultaneous full-power operation is required. Do not silently alter the frozen AUX recharge circuit.
 
 5V_MAIN feeds both Pico VSYS inputs, both USB front-board power feeds, fan power, and the 3V3_AUX regulator.
 
