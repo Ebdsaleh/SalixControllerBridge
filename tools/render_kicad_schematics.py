@@ -264,6 +264,48 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     return sorted(pages, key=sort_key)
 
 
+def validate_root_sheet_instances(root_schematic: Path) -> None:
+    """Ensure every direct child sheet is present in root sheet_instances."""
+    text = root_schematic.read_text(encoding="utf-8")
+    child_uuids: list[tuple[str, str]] = []
+
+    for block in extract_balanced_blocks(text, "(sheet"):
+        file_match = re.search(
+            r'\(property\s+"Sheetfile"\s+"([^"]+)"',
+            block,
+        )
+        uuid_match = re.search(r'\(uuid\s+"([^"]+)"\)', block)
+        if file_match and uuid_match:
+            child_uuids.append((uuid_match.group(1), file_match.group(1)))
+
+    instance_start = text.find("(sheet_instances")
+    if instance_start < 0:
+        raise RuntimeError("Root schematic has no sheet_instances table.")
+
+    instance_block = next(
+        extract_balanced_blocks(text[instance_start:], "(sheet_instances"),
+        None,
+    )
+    if instance_block is None:
+        raise RuntimeError("Could not parse root sheet_instances table.")
+
+    missing = [
+        (uuid, filename)
+        for uuid, filename in child_uuids
+        if uuid not in instance_block
+    ]
+    if missing:
+        listing = "\n".join(
+            f"  - {filename}: {uuid}"
+            for uuid, filename in missing
+        )
+        raise RuntimeError(
+            "Root schematic sheet_instances is incomplete. "
+            "KiCad may treat the hierarchy as not fully instantiated:\n"
+            f"{listing}"
+        )
+
+
 def validate_reference_annotation(pages: list[SheetPage]) -> None:
     """Fail early if the schematic hierarchy is not globally annotation-safe."""
     owners: dict[str, set[str]] = {}
@@ -791,6 +833,7 @@ def main() -> int:
             listing = "\n".join(f"  - {p}" for p in missing)
             raise FileNotFoundError(f"Referenced schematic sheet(s) missing:\n{listing}")
 
+        validate_root_sheet_instances(root_schematic)
         validate_reference_annotation(pages)
 
         pymupdf = None
