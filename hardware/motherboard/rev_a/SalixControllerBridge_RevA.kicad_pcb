@@ -258,7 +258,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "00d454a7-2c93-4d06-81ef-fd80f789f4a1")
-		(at 166.255 131.675)
+		(at 113 72 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q5"
@@ -454,7 +454,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -2.67 -1.905)
+			(at -2.67 -1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
@@ -463,7 +463,7 @@
 			(uuid "299a0a31-763f-41d7-9059-d091efb44f6e")
 		)
 		(pad "2" smd rect
-			(at -2.67 -0.635)
+			(at -2.67 -0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
@@ -472,7 +472,7 @@
 			(uuid "6a196fde-5e43-41ed-b738-c7183943d67e")
 		)
 		(pad "3" smd rect
-			(at -2.67 0.635)
+			(at -2.67 0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
@@ -481,7 +481,7 @@
 			(uuid "b8b49366-f156-4543-96cc-8d224f10def6")
 		)
 		(pad "4" smd rect
-			(at -2.67 1.905)
+			(at -2.67 1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_G1")
@@ -490,7 +490,7 @@
 			(uuid "d4cb7bd9-448e-41eb-9884-b20494c17d6a")
 		)
 		(pad "5" smd rect
-			(at 0.69 0)
+			(at 0.69 0 180)
 			(size 3.81 3.91)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -499,7 +499,7 @@
 			(uuid "ff059df1-10be-4337-901e-01fd1d8cbf91")
 		)
 		(pad "5" smd rect
-			(at 2.795 -1.905)
+			(at 2.795 -1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -508,7 +508,7 @@
 			(uuid "4385eb10-2708-49c4-a6a5-9151f92782e1")
 		)
 		(pad "5" smd rect
-			(at 2.795 -0.635)
+			(at 2.795 -0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -517,7 +517,7 @@
 			(uuid "2e3273e8-6012-44be-9451-1158e5128029")
 		)
 		(pad "5" smd rect
-			(at 2.795 0.635)
+			(at 2.795 0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -526,7 +526,7 @@
 			(uuid "8e2290b4-60c5-433d-9a04-b2a82ec0cf99")
 		)
 		(pad "5" smd rect
-			(at 2.795 1.905)
+			(at 2.795 1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -1504,7 +1504,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "0534df0b-4e48-475f-9152-96b8a8880cd8")
-		(at 166.255 118.575)
+		(at 121 56.5)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q3"
@@ -13631,7 +13631,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "489bd67f-4d4f-41de-bf19-759534dea9cb")
-		(at 174.795 105.475)
+		(at 121 72)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q6"
@@ -15422,7 +15422,7 @@
 	(footprint "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm"
 		(layer "F.Cu")
 		(uuid "551537b4-0ff4-495a-af47-db847d4f0291")
-		(at 181.995 120.385)
+		(at 104.5 52.25)
 		(descr "QFN, 20 Pin (http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=274)")
 		(tags "QFN NoLead")
 		(property "Reference" "U4"
@@ -18381,7 +18381,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "62ecb524-4ab1-4b89-aac3-424218fafccb")
-		(at 166.255 105.475)
+		(at 121 48)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q1"
@@ -18832,7 +18832,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "67055ac6-1e74-4952-8ca2-1006208466dd")
-		(at 166.255 112.025)
+		(at 113 48 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q2"
@@ -19028,7 +19028,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -2.67 -1.905)
+			(at -2.67 -1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS1")
@@ -19037,7 +19037,7 @@
 			(uuid "b8788076-481a-4da8-be72-632cd4b60ce8")
 		)
 		(pad "2" smd rect
-			(at -2.67 -0.635)
+			(at -2.67 -0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS1")
@@ -19046,7 +19046,7 @@
 			(uuid "85d05fe3-11d2-4916-b255-a23b0d6f237f")
 		)
 		(pad "3" smd rect
-			(at -2.67 0.635)
+			(at -2.67 0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS1")
@@ -19055,7 +19055,7 @@
 			(uuid "097a3aea-0a26-4232-b566-4eaa503f3cd0")
 		)
 		(pad "4" smd rect
-			(at -2.67 1.905)
+			(at -2.67 1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_G1")
@@ -19064,7 +19064,7 @@
 			(uuid "f092025a-8371-461f-8721-4c0ea3281d5d")
 		)
 		(pad "5" smd rect
-			(at 0.69 0)
+			(at 0.69 0 180)
 			(size 3.81 3.91)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -19073,7 +19073,7 @@
 			(uuid "e34d4266-ca48-4dd3-8a1d-d39638bced55")
 		)
 		(pad "5" smd rect
-			(at 2.795 -1.905)
+			(at 2.795 -1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -19082,7 +19082,7 @@
 			(uuid "2da19737-95ed-4458-8ddd-ec2563130348")
 		)
 		(pad "5" smd rect
-			(at 2.795 -0.635)
+			(at 2.795 -0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -19091,7 +19091,7 @@
 			(uuid "01810b2c-e21a-4b7c-8546-6dfd306e197a")
 		)
 		(pad "5" smd rect
-			(at 2.795 0.635)
+			(at 2.795 0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -19100,7 +19100,7 @@
 			(uuid "10b06d1f-1872-4294-90c9-0477ea60d557")
 		)
 		(pad "5" smd rect
-			(at 2.795 1.905)
+			(at 2.795 1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -19124,7 +19124,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "6c7e689d-9ca4-415d-a403-b38f995fbf30")
-		(at 174.795 112.025)
+		(at 113 80.5 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q7"
@@ -19320,7 +19320,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -2.67 -1.905)
+			(at -2.67 -1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS2")
@@ -19329,7 +19329,7 @@
 			(uuid "8ebc65df-2089-4799-b6e0-bb9a15778c59")
 		)
 		(pad "2" smd rect
-			(at -2.67 -0.635)
+			(at -2.67 -0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS2")
@@ -19338,7 +19338,7 @@
 			(uuid "0fef230b-8fb0-48f4-b5a4-d7aa4451a8a7")
 		)
 		(pad "3" smd rect
-			(at -2.67 0.635)
+			(at -2.67 0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS2")
@@ -19347,7 +19347,7 @@
 			(uuid "11869d48-5da5-44d5-bb37-5ff0077ea872")
 		)
 		(pad "4" smd rect
-			(at -2.67 1.905)
+			(at -2.67 1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_G2")
@@ -19356,7 +19356,7 @@
 			(uuid "67d53947-0bfd-48d6-b93d-827529c4e2b4")
 		)
 		(pad "5" smd rect
-			(at 0.69 0)
+			(at 0.69 0 180)
 			(size 3.81 3.91)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "AUX_PWR")
@@ -19365,7 +19365,7 @@
 			(uuid "c16f4ae9-0b6c-4a31-ac94-026280bfa53b")
 		)
 		(pad "5" smd rect
-			(at 2.795 -1.905)
+			(at 2.795 -1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "AUX_PWR")
@@ -19374,7 +19374,7 @@
 			(uuid "c3ae71a9-ec32-47b8-8db8-0d3c87481408")
 		)
 		(pad "5" smd rect
-			(at 2.795 -0.635)
+			(at 2.795 -0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "AUX_PWR")
@@ -19383,7 +19383,7 @@
 			(uuid "7892fded-17b0-48a0-9947-0638e5365c5d")
 		)
 		(pad "5" smd rect
-			(at 2.795 0.635)
+			(at 2.795 0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "AUX_PWR")
@@ -19392,7 +19392,7 @@
 			(uuid "f82f7139-14ea-4a58-85cb-eb06f84befa8")
 		)
 		(pad "5" smd rect
-			(at 2.795 1.905)
+			(at 2.795 1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "AUX_PWR")
@@ -22362,7 +22362,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "846a72ef-941e-4b92-9b90-0bc164947d55")
-		(at 174.795 118.575)
+		(at 121 80.5)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q8"
@@ -26025,7 +26025,7 @@
 	(footprint "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm"
 		(layer "F.Cu")
 		(uuid "9b91c5c2-7e11-4b41-9c32-7ee40597ede0")
-		(at 181.995 126.635)
+		(at 104.5 76.25)
 		(descr "QFN, 20 Pin (http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=274)")
 		(tags "QFN NoLead")
 		(property "Reference" "U5"
@@ -34023,7 +34023,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "bbafe949-1d70-4970-b893-62ffa805e851")
-		(at 166.255 125.125)
+		(at 113 56.5 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q4"
@@ -34219,7 +34219,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -2.67 -1.905)
+			(at -2.67 -1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS2")
@@ -34228,7 +34228,7 @@
 			(uuid "14f09ba9-6383-4b1a-8f9b-90b13370d9ba")
 		)
 		(pad "2" smd rect
-			(at -2.67 -0.635)
+			(at -2.67 -0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS2")
@@ -34237,7 +34237,7 @@
 			(uuid "2ed2a33f-ee26-4984-93f9-a1e88f3abba6")
 		)
 		(pad "3" smd rect
-			(at -2.67 0.635)
+			(at -2.67 0.635 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_VS2")
@@ -34246,7 +34246,7 @@
 			(uuid "15914df9-188f-439f-a3a3-999d1ef061bd")
 		)
 		(pad "4" smd rect
-			(at -2.67 1.905)
+			(at -2.67 1.905 180)
 			(size 1.27 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_G2")
@@ -34255,7 +34255,7 @@
 			(uuid "84b56a5b-e06b-41ef-80ab-6c46b7581c03")
 		)
 		(pad "5" smd rect
-			(at 0.69 0)
+			(at 0.69 0 180)
 			(size 3.81 3.91)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -34264,7 +34264,7 @@
 			(uuid "859b5cb3-5b5e-413f-9f8b-3a5aa8d1db2e")
 		)
 		(pad "5" smd rect
-			(at 2.795 -1.905)
+			(at 2.795 -1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -34273,7 +34273,7 @@
 			(uuid "6176b083-7528-451a-85a0-2c625f40bc22")
 		)
 		(pad "5" smd rect
-			(at 2.795 -0.635)
+			(at 2.795 -0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -34282,7 +34282,7 @@
 			(uuid "47d05f3a-67a6-4cac-8203-42141ff82ff9")
 		)
 		(pad "5" smd rect
-			(at 2.795 0.635)
+			(at 2.795 0.635 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
@@ -34291,7 +34291,7 @@
 			(uuid "f97fab98-7174-477a-b6c9-5f2454d515b5")
 		)
 		(pad "5" smd rect
-			(at 2.795 1.905)
+			(at 2.795 1.905 180)
 			(size 1.02 0.61)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "EXT_CHARGE_IN")
