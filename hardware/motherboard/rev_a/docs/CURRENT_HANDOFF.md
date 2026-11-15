@@ -344,3 +344,56 @@ Corrected references:
 The validator now hard-fails if any of these rotated footprints has pad angles that do not match its placed board orientation.
 
 This correction is **SOURCE-FIXED / NATIVE RETEST REQUIRED**. Do not advance placement until a returned KiCad run confirms that the Q9/Q10/U6 internal-short class disappears.
+
+
+### Batch-2 native validation — GREEN
+
+Returned user-side KiCad 10.0.8 validation after the absolute-pad-angle correction confirms the serialization defect is closed.
+
+Guards:
+- 224 total footprints;
+- 220 non-scaffold motherboard footprints;
+- no page-07/page-07A leakage;
+- J16 center-positive mapping verified;
+- rotated-placement absolute pad-angle guard passed.
+
+DRC changed from **362 -> 312** total violations.
+
+Most importantly:
+- previous `shorting_items` count fell from **15 -> 4**;
+- Q9 has **0** short/clearance violations;
+- Q10 has **0** short/clearance violations;
+- U6 has **0** short/clearance violations;
+- the four remaining shorting findings are all the temporary J8-vs-still-piled J6 overlap and are therefore placement-pile noise.
+
+The barrel protection core placement is therefore **NATIVE GREEN / FROZEN**.
+
+## PCB placement batch 3 — LM7480 support network
+
+Board commit:
+
+```text
+81604ce  Place LM7480 support network
+```
+
+Validator update:
+
+```text
+33768c1  Extend rotated placement guard to LM7480 passives
+```
+
+Placed only the seven local LM7480 support passives around U6:
+
+- C12 BARREL_FUSED-to-GND input bypass -> (146.7, 61.3), 270 deg;
+- C14 BARREL_MID-to-GND bypass -> (152.6, 57.2), 0 deg;
+- C15 BARREL_CAP-to-BARREL_MID -> (145.4, 57.2), 180 deg;
+- C16 BARREL_DVDT-to-GND -> (155.8, 60.0), 0 deg;
+- R26 OV_TOP-to-OV -> (149.25, 61.3), 270 deg;
+- R27 OV-to-GND -> (149.25, 64.5), 270 deg;
+- R28 HGATE-to-DVDT -> (152.6, 60.0), 0 deg.
+
+No routing was added and no other block was moved.
+
+Source-level post-commit review confirms all seven references retained their original nets. The absolute-pad-angle validator now also covers C12, C15, R26 and R27.
+
+Batch 3 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
