@@ -306,6 +306,52 @@ def validate_root_sheet_instances(root_schematic: Path) -> None:
         )
 
 
+def validate_project_local_pinmaps(root_schematic: Path) -> None:
+    """Verify Salix project symbols do not reference pads absent from SalixFP footprints."""
+    project_dir = root_schematic.parent
+    symbol_lib = project_dir / "Salix.kicad_sym"
+    footprint_dir = project_dir / "Salix.pretty"
+
+    if not symbol_lib.is_file() or not footprint_dir.is_dir():
+        return
+
+    text = symbol_lib.read_text(encoding="utf-8")
+    failures: list[str] = []
+
+    for block in extract_balanced_blocks(text, "(symbol"):
+        name_match = re.match(r'\(symbol\s+"([^"]+)"', block)
+        fp_match = re.search(r'\(property\s+"Footprint"\s+"SalixFP:([^"]+)"', block)
+        if not name_match or not fp_match:
+            continue
+
+        symbol_name = name_match.group(1)
+        footprint_name = fp_match.group(1)
+        footprint_path = footprint_dir / f"{footprint_name}.kicad_mod"
+
+        if not footprint_path.is_file():
+            failures.append(
+                f"{symbol_name}: missing project-local footprint {footprint_name}"
+            )
+            continue
+
+        pin_numbers = set(re.findall(r'\(number\s+"([^"]+)"', block))
+        footprint_text = footprint_path.read_text(encoding="utf-8")
+        pad_numbers = set(re.findall(r'\(pad\s+"([^"]+)"', footprint_text))
+        missing = sorted(pin_numbers - pad_numbers)
+
+        if missing:
+            failures.append(
+                f"{symbol_name} -> {footprint_name}: missing pad(s) "
+                + ", ".join(missing)
+            )
+
+    if failures:
+        raise RuntimeError(
+            "Project-local symbol/footprint pin-map preflight failed:\n"
+            + "\n".join(f"  - {line}" for line in failures)
+        )
+
+
 def validate_reference_annotation(pages: list[SheetPage]) -> None:
     """Fail early if the schematic hierarchy is not globally annotation-safe."""
     owners: dict[str, set[str]] = {}
@@ -833,6 +879,7 @@ def main() -> int:
 
         validate_root_sheet_instances(root_schematic)
         validate_reference_annotation(pages)
+        validate_project_local_pinmaps(root_schematic)
 
         pymupdf = None
         if not renderer.native_png:
