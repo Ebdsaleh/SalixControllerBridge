@@ -40,3 +40,24 @@ At this stage many unrouted/unconnected-pad DRC findings are expected because th
 ## Why this is interactive
 
 KiCad 10 documents **Update PCB from Schematic** as the preferred forward-annotation workflow and performs it through the editor's F8 tool. `kicad-cli` can export schematic netlists, run ERC/DRC, and render boards, but does not expose the F8 update operation as a CLI subcommand.
+
+
+## First populated-board correction cycle
+
+The first successful F8 population proved the motherboard boundary but reported 92 pin-map errors / 72 warnings. The complete copied F8 report was used to close every error class in source.
+
+After pulling the correction commits, **do not restore or delete the locally saved populated .kicad_pcb**. Reopen it and run F8 again with the same options so KiCad replaces the affected footprints and remaps corrected symbols.
+
+Expected update result:
+- **0 errors**;
+- **4 known warnings only**, for unnetted MP mechanical mounting pads on J12/J14;
+- no page-07/page-07A front-board population.
+
+After the corrected update:
+1. click Update PCB;
+2. close the dialog;
+3. leave the imported group as-is (do not manually arrange yet);
+4. Ctrl+S;
+5. run `py tools\render_kicad_pcb.py --expect-populated`.
+
+The piled first-import placement is temporary and its overlap/clearance DRC noise is not a routing/layout failure.
