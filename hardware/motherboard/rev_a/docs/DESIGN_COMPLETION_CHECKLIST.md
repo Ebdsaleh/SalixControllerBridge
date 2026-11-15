@@ -1,6 +1,6 @@
 # Rev-A Design Completion Checklist
 
-Snapshot: 2026-11-14. Schematic closure validated on `82ce636`; PCB foundation begins immediately afterward.
+Snapshot: 2026-11-15. Schematics are frozen/green; corrected populated motherboard baseline is captured in Git at `c12a1be`; active work is functional PCB placement.
 
 ## How to read this
 
@@ -16,7 +16,7 @@ Two finish lines are tracked separately:
 ## Current snapshot
 
 - [x] 13 logical schematic sheets render natively in KiCad 10.0.8
-- [x] 18 project-local footprints export natively
+- [x] 25 project-local footprints export natively
 - [x] ERC at **0 errors**
 - [x] USB-A + USB-C per-port presence telemetry native-green
 - [x] Barrel front end native-green and physically footprinted
@@ -33,10 +33,12 @@ Two finish lines are tracked separately:
 Useful scale reference:
 
 ```text
-264 unique schematic reference designators
-219 are resistors/capacitors
+310 unique non-power schematic reference designators
+316 total instance references including hidden power flags
 13 logical schematic sheets
-18 project-local footprint definitions
+25 project-local footprint definitions
+224 PCB footprints total after F8 population
+220 non-scaffold motherboard footprints
 ```
 
 ## Progress gauge
@@ -124,19 +126,13 @@ The apparent mismatch is expected: most circuit decisions are done, but PCB layo
 - [ ] Remove stale `SCHEMATIC PENDING` / `NATIVE VALIDATION PENDING` labels where the corresponding block is already frozen
 - [x] Final schematic visual-review pass on every sheet — no visible label/object overlap or title-block bleed in the validated 13-page set
 
-Current frozen schematic warning baseline:
+Current validated schematic warning baseline after the PCB-facing symbol/footprint mapping cleanup:
 
 ```text
-1111 endpoint_off_grid
- 253 lib_symbol_mismatch
-   4 isolated_pin_label
-   4 lib_symbol_issues
-   1 pin_to_pin
------------------------
-1373 warnings / 0 errors
+1375 warnings / 0 errors
 ```
 
-The +2 library-copy warnings versus the pre-SWD 1371 baseline are R114/R115 using the dedicated `R_SWD` symbol. No new warning class is introduced.
+The warning classes remain the established endpoint/grid, library-copy, isolated-pin/library-symbol and one documented USB-C PD pin-to-pin classes; there is no new ERC error class. Use the latest native `ERC.rpt` rather than older per-class counts when checking regressions.
 
 ## Phase D — create the actual PCBs
 
@@ -274,7 +270,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Capture the corrected populated `.kicad_pcb` in Git, then begin functional block placement while preserving the 160x100mm working-envelope review gate.**
+1. **Begin functional motherboard placement from Git baseline `c12a1be`, preserving the 160x100mm working-envelope review gate.**
 2. **Perform functional block placement and review the 160x100mm working envelope before routing.**
 3. **Route the motherboard, then create/finalize the universal front USB PCB; close DRC on both.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
