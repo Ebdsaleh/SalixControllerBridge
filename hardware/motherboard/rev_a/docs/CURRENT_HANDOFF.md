@@ -549,3 +549,32 @@ Source-level post-commit audit confirms every moved passive retained its origina
 No routing was added and no other block was moved.
 
 Batch 5 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+
+### Batch-5 first native validation — two INTVCC bypass collisions corrected
+
+Returned KiCad 10.0.8 validation after placing the LTC4418 threshold/timing networks kept all structural guards green.
+
+Native DRC:
+- total violations improved from **298 -> 294**;
+- the prior four J8-vs-J6 pile shorts remained;
+- two new shorts were introduced by the first INTVCC bypass coordinates:
+  - C9 GND pad touched Q4 EXT_CHARGE_IN drain copper;
+  - C11 GND pad touched Q7 AUX_PWR drain copper.
+- both also produced courtyard/solder-mask overlap findings.
+- all other U4/U5 support passives were clean apart from expected unrouted/silkscreen findings.
+
+Correction:
+
+```text
+fdae328  Correct LTC4418 INTVCC bypass placement
+02060cd  Guard rotated LTC4418 INTVCC bypasses
+```
+
+C9 and C11 were moved inward and rotated 90 deg:
+- C9 -> (107.6, 34.2), 90 deg;
+- C11 -> (107.6, 58.2), 90 deg.
+
+This keeps each capacitor local to the corresponding LTC4418 INTVCC pin while clearing the adjacent PowerPAK drain/courtyard. Their placed-pad absolute angles are now covered by the regression guard.
+
+Batch 5 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**.
