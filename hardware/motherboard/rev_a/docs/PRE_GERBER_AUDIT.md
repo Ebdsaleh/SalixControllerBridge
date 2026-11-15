@@ -380,6 +380,19 @@ Repository preflight now sees **310 unique non-power designators / 0 duplicate d
 
 Returned KiCad 10.0.8 validation after the reference-only cleanup rendered all **13/13** sheets and **19/19** project-local footprints at **0 ERC errors / 1373 warnings**, unchanged in warning classes. Visual review of pages 01, 04, 06 and 07 confirms the new 200-series references are readable and introduce no new overlap/title-block bleed. The global annotation gate is therefore **native-green/frozen**, and KiCad F8 may be retried.
 
+## Root hierarchy instance closure — SOURCE FIXED / NATIVE RETEST REQUIRED
+
+A second KiCad F8 attempt still opened the annotation dialog even after all 310 non-power references were globally unique. Source audit found the remaining structural defect: page 13 (`07a_Front_USB_Presence.kicad_sch`, sheet UUID `...0062`) existed as a child sheet and its symbols carried valid instance paths, but the root `sheet_instances` table stopped at page 12 and omitted the page-13 path.
+
+This can make KiCad treat the hierarchy as not fully instantiated even though direct child rendering and ERC continue to succeed.
+
+Corrective action:
+- restored the page-13 root sheet-instance path;
+- added `validate_root_sheet_instances()` to `render_kicad_schematics.py`;
+- the renderer now fails early if any direct child sheet is missing from the root `sheet_instances` table.
+
+A fresh native schematic validation is required before retrying F8.
+
 ## Motherboard / front-board schematic boundary
 
 The system schematic intentionally includes both physical PCBs, but KiCad supports one board per project. For the Rev-A motherboard project:
