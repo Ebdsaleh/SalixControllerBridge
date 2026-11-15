@@ -339,6 +339,18 @@ No circuit topology, net identity, footprint, fitted value, or frozen electrical
 
 **Gate result:** returned native run at `82ce636` rendered all **13/13** pages and **18/18** project-local footprints, finished at **0 ERC errors / 1373 warnings**, and passed a second visual inspection of the complete set. No visible label/object overlap or title-block bleed remains. The schematic phase is now **frozen for PCB layout**.
 
+## Capacitor reliability policy — FROZEN DESIGN INTENT
+
+Rev-A uses a motherboard-class reliability policy for capacitors:
+
+- **Do not replace appropriate ceramics simply because they are ceramics.** C0G/NP0 and quality X7R/X7S MLCCs are preferred for high-frequency decoupling, bypass, feedback, timing and regulator loops where low ESL/ESR and small loop area are electrically required.
+- Use reputable parts from Murata / TDK / Yageo-class vendors; favor automotive/AEC-Q200 grades where practical.
+- Avoid Y5V/Z5U dielectric on critical rails.
+- **Polarized bulk energy-storage positions should preferentially use conductive-polymer or conductive-polymer-hybrid aluminum capacitors** rather than commodity wet aluminum electrolytics, unless a control-loop or damping requirement explicitly needs the higher ESR of a wet part.
+- Existing Rev-A bulk choices already align strongly with this policy: Panasonic EEH-series hybrid parts are used for USB-A VBUS bulk, USB-C PD bulk and 5V_MAIN damping.
+- The remaining conventional wet 12V barrel output reservoir is now a pre-Gerber upgrade item. Candidate: **Panasonic EEHZC1V470P, 47uF / 35V ZC hybrid**. Panasonic specifies -55C to +125C, 4000h at 125C, 60mOhm max ESR at 100kHz and 900mArms ripple at 125C. Because this is a major ESR reduction from the previous wet candidate, the LM74800/source-priority transient/inrush/damping behavior must be rechecked before freezing the swap.
+- Capacitor substitution is therefore **not** a blanket "replace every MLCC with a can" policy. Part technology is selected by electrical role, with reliability/temperature/ripple margin treated as first-class constraints.
+
 ## Fabrication blockers
 
 1. **Selected-source front end, barrel front end and complete `SYS_IN -> 5V_MAIN` buck are native-green/electrically frozen, and the complete barrel physical footprint set is closed.** J16, F1, U6, Q9/Q10 and C13 all have native-green/frozen footprints. Only the final F1 fuse amperage remains provisional; the current candidate is 7.5A.
