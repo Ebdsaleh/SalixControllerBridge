@@ -916,3 +916,52 @@ Next placement zone is:
 5. fan/AUX/service connectors and remaining management logic.
 
 Before moving the Pico socket pairs, preserve the already-frozen barrel, source-priority and complete 5V_MAIN buck zones. The remaining raw DRC noise is expected to change significantly as the service/storage import pile is extracted into its final locations.
+
+
+## PCB placement batch 9 — dual Pico socket / breakout geometry
+
+Board commit:
+
+```text
+5a943e9  Place dual Pico socket and breakout geometry
+```
+
+Batch 9 moves only the removable-Pico socket/breakout rails. No routing was added and no frozen power component was moved.
+
+Pico-A / realtime module:
+- J1 socket left 1-20 -> (48.00, 46.50), 0 deg;
+- J2 socket right 21-40 -> (65.78, 46.50), 0 deg;
+- J3 raw breakout 1-20 -> (43.50, 46.50), 0 deg;
+- J4 raw breakout 21-40 -> (70.28, 46.50), 0 deg.
+
+Pico-B / service module:
+- J5 socket left 1-20 -> (79.00, 64.00), 0 deg;
+- J6 socket right 21-40 -> (96.78, 64.00), 0 deg.
+
+Mechanical intent:
+- both socket pairs use the 17.78mm Pico row spacing;
+- Pico-A uses the official Raspberry Pi Pico 2 W mechanical baseline already frozen in the project;
+- Pico-A's wireless antenna end faces the front/bottom side of its module zone, with the area beyond it reserved from metal/copper placement so the antenna is not boxed in by the motherboard layout;
+- J3/J4 sit 4.5mm outboard from the corresponding Pico-A socket rows, keeping the raw breakout accessible without consuming the module body area;
+- Pico-B is staggered lower than Pico-A so its body clears the frozen U5 threshold/support row and remains between the J7/J8 front-connector corridors rather than overlapping them.
+
+Source-level audit after the edit confirms:
+- J1-J2 spacing = exactly 17.78mm;
+- J5-J6 spacing = exactly 17.78mm;
+- J3/J4 remain exactly 4.5mm outboard of J1/J2;
+- all six placements remain 0 degrees, so no new absolute-pad-angle guard entries are required;
+- barrel, source-priority and complete 5V_MAIN buck coordinates are untouched.
+
+Batch 9 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+Do not move J12, J13, J14 or their local service/storage passives until this socket geometry has been returned through native KiCad validation. The current service/storage pile is expected to continue generating temporary DRC collisions until those parts are extracted.
+
+Next user action:
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`. If Batch 9 is clean, freeze the Pico socket geometry, then place J12/J13/J14 plus their local service/storage support as the next small functional batch.
