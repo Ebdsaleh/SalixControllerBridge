@@ -311,3 +311,36 @@ py tools\render_kicad_pcb.py --expect-populated
 ```
 
 Return the console output plus `kicad_pcb_validation.zip`. Inspect top/bottom renders before placing the remaining U6 support passives or moving the source-priority block.
+
+
+### Batch-2 rotated-pad serialization correction
+
+The first native validation of placement batch 2 returned the expected population and J16 polarity guards, but DRC exposed impossible same-footprint shorts inside Q9/Q10 and U6.
+
+Root cause was **not** the manufacturer land patterns:
+
+- Infineon PG-TDSON-8-34 source geometry matches the IAUC100N08S5N034 recommended copper/stencil drawing;
+- TI DRR0012E source geometry matches drawing 4224874/C for LM7480-Q1.
+
+The defect was introduced by direct PCB text placement: footprint-level rotation had been changed without also updating each placed pad's absolute rotation angle. In a placed `.kicad_pcb`, KiCad expects pad angles to be absolute board angles. This rotated pad centres but left non-square copper shapes at their old orientation, creating false/internal copper shorts.
+
+Corrections:
+
+```text
+347eafd  Correct absolute pad angles for rotated PCB placements
+5d7e4ed  Guard absolute pad angles on rotated PCB placements
+```
+
+Corrected references:
+- J16 = 270 deg;
+- J17 = 180 deg;
+- F1 = 180 deg;
+- D29 = 90 deg;
+- Q9 = 270 deg;
+- Q10 = 90 deg;
+- U6 = 90 deg;
+- C13 = 180 deg.
+
+The validator now hard-fails if any of these rotated footprints has pad angles that do not match its placed board orientation.
+
+This correction is **SOURCE-FIXED / NATIVE RETEST REQUIRED**. Do not advance placement until a returned KiCad run confirms that the Q9/Q10/U6 internal-short class disappears.
