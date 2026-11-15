@@ -578,3 +578,31 @@ C9 and C11 were moved inward and rotated 90 deg:
 This keeps each capacitor local to the corresponding LTC4418 INTVCC pin while clearing the adjacent PowerPAK drain/courtyard. Their placed-pad absolute angles are now covered by the regression guard.
 
 Batch 5 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**.
+
+
+### Batch-5 corrected native validation — electrical GREEN, courtyard micro-adjustment
+
+Returned KiCad 10.0.8 validation after the C9/C11 90-degree correction confirms the electrical collision is closed:
+
+- structural/population/J16/rotation guards all pass;
+- total DRC is **298**;
+- `shorting_items` is back to **4**, and all four are still only the known J8-vs-still-piled-J6 collision;
+- C9 and C11 have **no shorting or clearance violations**;
+- the only remaining functional-block issue is a tiny courtyard overlap of C9 with U4 and C11 with U5.
+
+The render also shows the source-priority block as a coherent physical zone in the upper-middle/rear section, clear of the service/storage pile.
+
+Final source micro-adjustment:
+
+```text
+a28c18d  Clear LTC4418 bypass courtyards
+```
+
+C9 and C11 were each shifted +0.3mm in X while preserving their 90-degree rotation and net assignments:
+
+- C9 -> (107.9, 34.2), 90 deg;
+- C11 -> (107.9, 58.2), 90 deg.
+
+This should clear the U4/U5 courtyard edge while retaining comfortable separation from the adjacent Q4/Q7 PowerPAK drain copper.
+
+Batch 5 remains **SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED** before the complete source-priority subsystem is frozen.
