@@ -404,6 +404,22 @@ Corrective action:
 
 No electrical topology, visible reference, value, footprint, or net changed.
 
+## First F8 population pin-map closure — SOURCE FIXED / NATIVE RETEST REQUIRED
+
+The first successful motherboard F8 population imported the real circuit group, but KiCad reported **92 errors / 72 warnings**. The user captured the complete F8 report before closing the dialog. All 92 errors reduce to five deterministic pin-map classes:
+
+- **J2/J4/J6 = 60 errors:** schematic right rails use physical Pico pin IDs 21-40, while ordinary 1x20 footprints expose pads 1-20. Added project-local 21-40 pin socket/header footprints and assigned them to the right rails.
+- **Q1-Q8 = 24 errors:** the Si7155DP symbol incorrectly described pins 1-4 as source and pin 5 as gate. Vishay's actual device is pins 1-3 source, pin 4 gate, pins 5-8 drain. The symbol is corrected and the project-local PowerPAK footprint uses KiCad's grouped drain land pad 5.
+- **U7 = 6 errors:** TI REF0038A physically groups PPHV 20-22, VBUS_IN 23-25, VBUS 32-33 and GND 34-35 into package lands represented by KiCad as pads 20/23/32/34. The TPS25730AD symbol now maps those grouped package terminals to the grouped land numbers and uses a frozen project-local REF0038A footprint.
+- **J13 = 1 error:** installed stock microSD footprint did not expose shell pad 11 to F8. The project now carries a known-good exact Hirose footprint including pads 1-11.
+- **J17 = 1 error:** installed stock GCT USB4085 footprint did not expose shell pad S1 to F8. The project now carries a known-good exact GCT footprint including S1.
+
+**92 = 60 + 24 + 6 + 1 + 1**, so every F8 error is accounted for.
+
+The project-local symbol/footprint source check now reports no missing pads for the affected symbol families. `render_kicad_schematics.py` now performs this project-local pin-map preflight automatically.
+
+The piled/overlapping first-import PCB is not a placement baseline and its DRC noise is intentionally ignored until the corrected F8 update succeeds with **0 update errors**.
+
 ## Motherboard / front-board schematic boundary
 
 The system schematic intentionally includes both physical PCBs, but KiCad supports one board per project. For the Rev-A motherboard project:
