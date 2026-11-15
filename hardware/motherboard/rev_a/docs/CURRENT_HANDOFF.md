@@ -397,3 +397,68 @@ No routing was added and no other block was moved.
 Source-level post-commit review confirms all seven references retained their original nets. The absolute-pad-angle validator now also covers C12, C15, R26 and R27.
 
 Batch 3 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+
+### Batch-3 native validation — GREEN
+
+Returned KiCad 10.0.8 validation after the LM7480 support-network placement confirms:
+
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+The seven moved LM7480 support parts (C12/C14/C15/C16/R26/R27/R28) introduced:
+
+- **0 clearance violations**;
+- **0 shorting violations**;
+- **0 courtyard violations**;
+- **0 hole violations**.
+
+Their remaining findings are silkscreen/reference-field collisions plus expected unrouted connections. Those are not functional-placement blockers and will be cleaned after the major blocks are established.
+
+The only four remaining `shorting_items` findings are still the temporary J8-versus-unplaced-J6 pile overlap.
+
+Therefore the complete **12V barrel / automotive front end is NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 4 — source-priority PowerPath core
+
+Board commit:
+
+```text
+601790c  Place source-priority PowerPath core
+```
+
+Rotation guard:
+
+```text
+6606a00  Guard rotated source-priority MOSFET placements
+```
+
+Placed only the LTC4418 high-current/controller core:
+
+- U4 -> (104.5, 52.25), 0 deg;
+- U5 -> (104.5, 76.25), 0 deg;
+- Q2 -> (113, 48), 180 deg;
+- Q1 -> (121, 48), 0 deg;
+- Q4 -> (113, 56.5), 180 deg;
+- Q3 -> (121, 56.5), 0 deg;
+- Q5 -> (113, 72), 180 deg;
+- Q6 -> (121, 72), 0 deg;
+- Q7 -> (113, 80.5), 180 deg;
+- Q8 -> (121, 80.5), 0 deg.
+
+Pairing/layout intent:
+
+- U4 channel 1: Q1/Q2 = BARREL_PROT -> EXT_CHARGE_IN;
+- U4 channel 2: Q3/Q4 = PD_PWR -> EXT_CHARGE_IN;
+- U5 channel 1: Q5/Q6 = EXT_CHARGE_IN -> SYS_IN;
+- U5 channel 2: Q7/Q8 = AUX_PWR -> SYS_IN.
+
+For each back-to-back pair the two source sides face inward, creating a compact shared VS node; the input/output drain copper faces outward. The two U4 channels share an EXT_CHARGE_IN output side, then U5 takes that rail onward toward SYS_IN. This follows the LTC4418 layout priorities: short/wide high-current paths and local OV/UV/controller wiring.
+
+No routing was added. No source-priority divider/timing passives were moved yet.
+
+Q2/Q4/Q5/Q7 are intentionally rotated 180 deg and are now included in the absolute-pad-angle regression guard.
+
+Batch 4 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
