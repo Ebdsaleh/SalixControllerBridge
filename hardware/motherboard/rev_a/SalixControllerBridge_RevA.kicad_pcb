@@ -1345,7 +1345,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "03a6c9e0-310a-4350-8db3-5158765e1c3c")
-		(at 161.205 67.625)
+		(at 172 82)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C95"
@@ -2273,7 +2273,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "089eff63-a80e-4c6d-82ae-6426eeb8aab7")
-		(at 149.905 71.875)
+		(at 167 74)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C90"
@@ -4022,7 +4022,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "1cdd2955-99bb-4e57-b38f-793f7e223338")
-		(at 161.205 71.875)
+		(at 167 86)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C96"
@@ -8922,7 +8922,7 @@
 	(footprint "SalixFP:Panasonic_EEH_ZC_F_VibrationProof_8x10.5mm"
 		(layer "F.Cu")
 		(uuid "30c4a984-fad5-43f0-8c93-acfce4a7ab18")
-		(at 169.005 71.625)
+		(at 129 66.5)
 		(descr "Panasonic surface-mount aluminum electrolytic vibration-proof size F recommended land. a=2.7 b=4.0 c=4.7 d=1.3 e=1.0 f=1.7 g=1.1 h=2.5 mm. Cross-shaped lands built from overlapping same-number pads. For EEHZC1V101V, 8.0 mm dia x 10.5 mm high.")
 		(tags "Panasonic EEH ZC F vibration-proof hybrid capacitor 8x10.5 AEC-Q200")
 		(property "Reference" "C70"
@@ -10663,7 +10663,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "37ec275b-7d5a-4be6-89a0-130ba6422f8c")
-		(at 144.255 71.875)
+		(at 139 74)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C72"
@@ -10822,7 +10822,7 @@
 	(footprint "SalixFP:Susumu_KRL2012E_0508_LongSide"
 		(layer "F.Cu")
 		(uuid "382ea245-4ff0-4647-b43e-e00a0199a0ef")
-		(at 166.685 97.475)
+		(at 162.5 82.2)
 		(descr "Susumu KRL2012D/E long-side-terminal recommended land for >=2mOhm on 35um copper: a=0.60 mm land gap, b=2.00 mm total land span, c=2.20 mm land height. Each pad is 0.70 x 2.20 mm, centers +/-0.65 mm. For KRL2012E-M-R003-F-T5.")
 		(tags "Susumu KRL2012E 0508 long-side current shunt AEC-Q200")
 		(property "Reference" "R70"
@@ -14400,7 +14400,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "4ddae6d1-03d7-4176-8cd3-3edccd9ce8ab")
-		(at 155.555 71.875)
+		(at 172 78)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C93"
@@ -17943,7 +17943,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "621b2e7f-0e4c-4dd9-b738-e52e6a2f4d4d")
-		(at 155.555 76.125)
+		(at 167 82)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C94"
@@ -21726,7 +21726,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "7b71d27a-e56c-44d8-b7aa-b4dcb0e5d212")
-		(at 161.205 76.125)
+		(at 172 86)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C97"
@@ -29994,7 +29994,7 @@
 	(footprint "SalixFP:Infineon_PG_TDSON_8_33"
 		(layer "F.Cu")
 		(uuid "ab0cfb94-e6cd-4fe0-b121-ab9f9afd851d")
-		(at 164.285 82.775)
+		(at 145 86.4)
 		(descr "Infineon PG-TDSON-8-33 exact recommended PCB copper/stencil geometry for IAUC60N04S6L039. Datasheet pinout: 1-3 Source, 4 Gate, 5-8 Drain. Central drain copper reuses pad 5; source bridge reuses pad 2. Manufacturer SSO8 package-note geometry independently cross-checked against a separate PG-TDSON-8-33 KiCad transcription.")
 		(tags "Infineon PG-TDSON-8-33 IAUC60N04S6L039 OptiMOS 5x6 AEC-Q101")
 		(property "Reference" "Q71"
@@ -32272,7 +32272,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "aec6289c-41e2-4df7-ad45-a831808f3a7c")
-		(at 149.905 76.125)
+		(at 172 74)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C91"
@@ -33226,7 +33226,7 @@
 	(footprint "SalixFP:Infineon_PG_TDSON_8_33"
 		(layer "F.Cu")
 		(uuid "b983a2f2-1fab-4f6e-b6a8-3bc4738ec5e7")
-		(at 157.11 82.775)
+		(at 145 77.8)
 		(descr "Infineon PG-TDSON-8-33 exact recommended PCB copper/stencil geometry for IAUC60N04S6L039. Datasheet pinout: 1-3 Source, 4 Gate, 5-8 Drain. Central drain copper reuses pad 5; source bridge reuses pad 2. Manufacturer SSO8 package-note geometry independently cross-checked against a separate PG-TDSON-8-33 KiCad transcription.")
 		(tags "Infineon PG-TDSON-8-33 IAUC60N04S6L039 OptiMOS 5x6 AEC-Q101")
 		(property "Reference" "Q70"
@@ -37059,7 +37059,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "c236aa3a-287c-4c19-a7f4-9c29c514ea0f")
-		(at 144.255 76.125)
+		(at 134 78)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C73"
@@ -37756,7 +37756,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "c4a0cc49-dab9-451d-9eec-17534fda8a2c")
-		(at 149.905 67.625)
+		(at 139 78)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C74"
@@ -40176,7 +40176,7 @@
 	(footprint "SalixFP:Coilcraft_XGL1010_11.3x10.0mm"
 		(layer "F.Cu")
 		(uuid "da48ac95-c0bc-466e-9049-ccf3889afe6c")
-		(at 159.235 93.775)
+		(at 155.5 82.2)
 		(descr "Coilcraft XGL1010 recommended land pattern, current datasheet Doc 1707-4 Rev 02/19/26. Body 10.0 x 11.3 mm; two lands 2.38 x 8.50 mm on 6.65 mm center spacing. For XGL1010-222MED.")
 		(tags "Coilcraft XGL1010 11.3x10.0 power inductor AEC-Q200")
 		(property "Reference" "L71"
@@ -44155,7 +44155,7 @@
 	(footprint "Package_DFN_QFN:Texas_RGY_R-PVQFN-N24_EP2.05x3.1mm"
 		(layer "F.Cu")
 		(uuid "e903b027-b11c-4b67-926b-c7dbbeb72d7a")
-		(at 170.715 82.155)
+		(at 138.5 82.2)
 		(descr "QFN, 24 Pin (http://www.ti.com/lit/ds/symlink/bq24133.pdf#page=40)")
 		(tags "QFN NoLead")
 		(property "Reference" "U70"
@@ -45182,7 +45182,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "ea5789ab-63f4-4c26-a84b-6f06fd207a0b")
-		(at 144.255 67.625)
+		(at 134 74)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C71"
@@ -45849,7 +45849,7 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "f30445fa-61db-49dd-b16d-dabeefd2d811")
-		(at 155.555 67.625)
+		(at 167 78)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C92"
@@ -46795,7 +46795,7 @@
 	(footprint "SalixFP:Coilcraft_XGL6060_6.71x6.51mm"
 		(layer "F.Cu")
 		(uuid "fab6ad73-1ea6-4d9e-ba82-941a7fca5141")
-		(at 169.035 91.475)
+		(at 127.5 76)
 		(descr "Coilcraft XGL6060 recommended land pattern, current datasheet Doc 1621-1 Rev 02/19/26. Body 6.51 x 6.71 mm; two lands 1.43 x 5.50 mm on 4.04 mm center spacing. For XGL6060-102MEC.")
 		(tags "Coilcraft XGL6060 6.71x6.51 power inductor AEC-Q200")
 		(property "Reference" "L70"
