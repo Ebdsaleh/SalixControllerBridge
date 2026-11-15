@@ -6,7 +6,7 @@ Date: 2026-11-15
 
 **Schematic phase: GREEN / FROZEN.**
 
-**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-CORRECTED AGAIN / FINAL NATIVE RETEST REQUIRED.**
+**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 11 PICO SERVICE LOCAL SUPPORT SOURCE-PLACED / NATIVE RETEST REQUIRED.**
 
 The corrected populated motherboard baseline is committed as:
 
@@ -1162,3 +1162,110 @@ py tools\render_kicad_pcb.py --expect-populated
 Return the fresh console output and `kicad_pcb_validation.zip`.
 
 If this corrected J14 position is native-clean, freeze J12/J13/J14 and proceed immediately with the sheet-04 local support network. Do not route yet and do not manually move the remaining import pile.
+
+
+### Batch-10 final native validation — GREEN / service connector anchors frozen
+
+Returned KiCad 10.0.8 validation for head `e11899c` confirms the final J14 shift closed both prior mechanical defects.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping guard passed;
+- rotated-placement absolute-pad-angle guard passed, including J14 at 90 degrees.
+
+Native DRC:
+- raw board total: **370** findings, still dominated by unrouted nets, intrinsic footprint-rule noise and the remaining sheet-04 import pile;
+- J12 has **0** short / clearance / courtyard / hole / keepout / edge faults;
+- J13 has **0** short / clearance / courtyard / hole / keepout / edge faults;
+- J14 has **0** short / clearance / courtyard / hole / keepout / edge faults;
+- H4 no longer appears in any J14-related DRC finding;
+- J12/J13/J14 findings are only expected unrouted connections, plus the already-known J13 project-local footprint-copy warning.
+
+Therefore the complete **service connector anchor batch (J12/J13/J14) is NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 11 — Pico service local support network
+
+Board commit:
+
+```text
+b94fb7c  Place Pico service local support network
+```
+
+Placed all remaining sheet-04 local support parts around their now-frozen anchors.
+
+### Pico-A SWD source termination
+
+Placed beside Pico-B J6 GP26/GP27, because these are source-termination resistors for Pico-B driving Pico-A SWD:
+
+- R114 100R SWDIO -> **(101.5, 89.4), 0 deg**;
+- R115 100R SWCLK -> **(101.5, 91.94), 0 deg**.
+
+At 0 degrees, pad 1 faces left toward the J6 source pins and pad 2 faces right toward the PICO_A_SWDIO / PICO_A_SWCLK destination nets.
+
+### microSD local support
+
+Placed in the narrow corridor between J8 and J13, immediately left of the microSD socket:
+
+- C210 10uF 3V3_AUX bypass -> **(138.5, 108.0), 0 deg**;
+- C80 100nF 3V3_AUX bypass -> **(138.5, 110.2), 0 deg**;
+- R84 47k SD_DAT1 pull-up -> **(138.5, 112.0), 0 deg**;
+- R210 47k SD_DAT2 pull-up -> **(138.5, 113.7), 0 deg**;
+- R211 47k SD_CS_N pull-up -> **(138.5, 115.4), 0 deg**;
+- R212 47k SERVICE_SPI_MOSI pull-up -> **(138.5, 117.1), 0 deg**;
+- R213 47k SERVICE_SPI_MISO pull-up -> **(138.5, 118.8), 0 deg**.
+
+This keeps the microSD VDD decoupling and default-state resistors physically local to J13 without invading J8 or the frozen LM25149 AEF zone.
+
+### TFT SPI branch damping and control defaults
+
+Placed immediately above/left of J14:
+
+- R93 33R TFT SPI SCK damping -> **(156.8, 92.5), 0 deg**;
+- R94 33R TFT SPI MOSI damping -> **(156.8, 95.0), 0 deg**;
+- R95 33R TFT SPI MISO damping -> **(156.8, 97.5), 0 deg**;
+- R90 47k TFT_LCD_CS_N pull-up -> **(150.0, 100.2), 0 deg**;
+- R91 47k TFT_TOUCH_CS_N pull-up -> **(153.2, 100.2), 0 deg**;
+- R92 100k TFT_BL_PWM pulldown -> **(156.4, 100.2), 0 deg**.
+
+The three 33R parts remain oriented source-to-load: SERVICE_SPI_* on pad 1 faces left toward Pico-B, and TFT_SPI_* on pad 2 faces right toward J14.
+
+### Front-panel 3V3 local bypass
+
+Placed in the free corridor immediately right of J14 and well above H4:
+
+- C211 100nF -> **(174.0, 92.0), 0 deg**;
+- C212 10uF -> **(174.0, 95.0), 0 deg**.
+
+### Source-level geometry audit
+
+Before commit, the complete 17-part Batch-11 set was checked against:
+- all 17 batch targets;
+- J12/J13/J14;
+- J1-J8 Pico/socket/breakout geometry;
+- the complete frozen 5V_MAIN power skeleton;
+- the LM25149 controller support network;
+- the full active-EMI-filter network.
+
+Result:
+- **0 target-target courtyard-box overlaps**;
+- **0 target-to-frozen-block courtyard-box overlaps**;
+- **0 out-of-board courtyards**.
+
+All Batch-11 parts remain at 0 degrees, so no new absolute-pad-angle guard entry is required.
+
+No routing was added.
+
+Batch 11 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+### Exact next action
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`.
+
+If Batch 11 is native-clean, freeze the entire Pico-B service/storage/UI local-support block and continue to the next still-unplaced functional motherboard zone. Do not route yet and do not manually move the remaining import pile.
