@@ -5793,7 +5793,7 @@
 		(on_board no)
 		(dnp no)
 		(uuid "8f070000-0000-4000-8000-000000000001")
-		(property "Reference" "#FLG04"
+		(property "Reference" "#FLG06"
 			(at 70 36.905 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
@@ -5817,7 +5817,7 @@
 		(instances
 			(project "SalixControllerBridge_RevA"
 				(path "/10000000-0000-4000-8000-000000000047/10000000-0000-4000-8000-000000000057"
-					(reference "#FLG04")
+					(reference "#FLG06")
 					(unit 1)
 				)
 			)
