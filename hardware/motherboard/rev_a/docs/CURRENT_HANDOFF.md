@@ -266,3 +266,48 @@ J16       : center-positive pad mapping verified (1=RAW, 2=GND)
 ```
 
 The source schematic itself was already correct and was not changed.
+
+
+## PCB placement batch 2 — 12V barrel protection core (native validation required)
+
+Board commit:
+
+```text
+2ef4c27  Place Rev-A barrel protection core
+```
+
+This batch deliberately moves only the core barrel-protection/current-path parts behind the already-frozen J16 rear-edge anchor:
+
+- F1 MINI fuse holder -> (160, 40), 180 deg;
+- D29 SMBJ36CA TVS -> (160, 49), 90 deg;
+- Q9 ideal-diode MOSFET -> (153.25, 52), 270 deg;
+- Q10 load-disconnect MOSFET -> (144.75, 52), 90 deg;
+- U6 LM74800-Q1 -> (149, 57.2), 90 deg;
+- C13 barrel protected-output bulk reservoir -> (135, 52), 180 deg.
+
+Intent:
+
+- preserve the center-positive J16 mapping and the short raw-input path into F1;
+- make Q9/Q10 a compact common-drain pair with the BARREL_MID copper facing inward;
+- keep U6 directly below the MOSFET pair for short gate/control connections;
+- place D29 close to the fused input/protection stage;
+- place C13 on the BARREL_PROT output side while reserving physical room for the planned higher-reliability hybrid-capacitor review.
+
+No routing was added. No other functional block was moved.
+
+Source-level post-commit checks confirm:
+
+- 224 footprints still exist;
+- J16 remains at (165,20), 270 deg;
+- J16 pad 1 remains BARREL_JACK_RAW and pad 2 remains GND;
+- the six moved references retain their original nets.
+
+This batch is **NOT GREEN yet**. Required native gate:
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the console output plus `kicad_pcb_validation.zip`. Inspect top/bottom renders before placing the remaining U6 support passives or moving the source-priority block.
