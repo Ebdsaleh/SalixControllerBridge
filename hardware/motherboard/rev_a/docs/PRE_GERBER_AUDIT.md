@@ -432,6 +432,50 @@ The system schematic intentionally includes both physical PCBs, but KiCad suppor
 - the future universal front-USB PCB will use its own KiCad project/root that instantiates those same physical-board source sheets with board inclusion enabled;
 - do not manually delete daughterboard footprints after motherboard forward annotation as a substitute for this boundary.
 
+## Corrected populated-board native baseline — CAPTURED
+
+After the corrected F8 update completed at **0 errors / 4 expected J12/J14 MP warnings**, the saved populated motherboard was validated natively with `render_kicad_pcb.py --expect-populated`.
+
+Population guard:
+- **224 total footprints**;
+- **220 non-scaffold motherboard footprints**;
+- **0 page-07/page-07A front-board references**.
+
+Native DRC baseline before placement/routing:
+- **265 DRC violations**;
+- **499 unconnected items**;
+- **0 footprint errors**.
+
+The 265 DRC violations are classified as:
+- 66 clearance;
+- 17 drill-out-of-range;
+- 28 copper-edge clearance;
+- 79 silkscreen-over-copper;
+- 46 silkscreen overlap;
+- 20 silkscreen-edge clearance;
+- 2 hole clearance;
+- 2 courtyard overlap;
+- 2 NPTH-inside-courtyard;
+- 2 text-height;
+- 1 solder-mask bridge.
+
+This is intentionally **not** a failure baseline: the first-import group is still piled/partly outside the 160x100mm working envelope and has not been functionally placed or routed.
+
+However, not every violation is caused by the pile. Source review of the DRC report found:
+- **56 same-footprint clearance findings on J17** (GCT USB4085);
+- **6 same-footprint clearance findings on U3** (TPS2121/related fine-pitch package);
+- **4 same-footprint clearance findings on U7** (TPS25730A REF0038A);
+- **9 x 0.20mm drill findings on U1 thermal-via pads**;
+- **8 x 0.20mm drill findings on U7 thermal-via pads**.
+
+These are board-rule/fabrication-constraint alignment items and must be closed deliberately rather than by moving components. PCBWay's published standard capabilities list 0.10mm minimum spacing and 0.20mm CNC drills for a 1.6mm board, so the physical geometries are within published manufacturing capability; KiCad's current generic 0.20mm clearance / 0.30mm minimum-hole defaults are more conservative than these exact footprints.
+
+Next physical-layout gate:
+1. capture the corrected populated `.kicad_pcb` in Git;
+2. establish functional placement zones;
+3. update board constraints/custom rules for exact fine-pitch and thermal-via features;
+4. rerun DRC after placement before routing.
+
 ## Layout/current constraints
 
 - Each logical bank can power both physical USB-A and USB-C while only one receives data. A bank can therefore require about 2.4A nominal when Type-C advertises 1.5A. The selected Micro-Fit 3.0 connector provides ample connector-contact margin, but the actual 5V/GND harness conductors and crimp contacts must still be selected/derated for wire gauge, ambient temperature and population.
