@@ -149,6 +149,8 @@ The first motherboard PCB foundation now exists. Mechanical coordinates below ar
 - [x] Motherboard forward-annotation boundary excludes physical front-USB sheets 07 + 07A
 - [x] First F8 population/pin-map correction is native-green: 0 errors / 4 expected MP mechanical-pad warnings
 - [x] Corrected F8 baseline confirmed: 0 errors / 4 known MP mechanical-pad warnings (J12/J14)
+- [x] Populated-board native guard: 224 footprints / 220 non-scaffold / no front-board leakage / 0 footprint errors
+- [~] Populated-board DRC baseline captured: 265 violations + 499 unconnected before placement/routing; fine-pitch/drill rule alignment identified separately
 - [~] Working board envelope = 160 x 100mm; validate placement before enclosure freeze
 - [~] Working mounting pattern = four M3 / 3.2mm NPTH holes, 5mm in from each corner
 - [ ] Freeze connector positions relative to enclosure
@@ -270,7 +272,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Run `render_kicad_pcb.py --expect-populated` on the saved corrected population; verify no front-board leakage and capture the unrouted populated-board DRC/render baseline.**
+1. **Capture the corrected populated `.kicad_pcb` in Git, then begin functional block placement while preserving the 160x100mm working-envelope review gate.**
 2. **Perform functional block placement and review the 160x100mm working envelope before routing.**
 3. **Route the motherboard, then create/finalize the universal front USB PCB; close DRC on both.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
