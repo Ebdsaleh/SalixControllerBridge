@@ -5567,7 +5567,7 @@
 	(footprint "SalixFP:Kycon_KLDHCX-8-0202-B"
 		(layer "F.Cu")
 		(uuid "26da1724-ee30-4bb7-b82f-c8dbc3a68937")
-		(at 176.955 71.575)
+		(at 165 20.5 90)
 		(descr "Kycon KLDHCX-8-0202-B high-current 2.5mm center-pin right-angle DC jack. Mechanical/drill pattern follows Kycon drawing KLDHCX-8-0202-x Rev A3 recommended PCB layout: pin 1 slot 3.00x1.00 at x=12.0mm, pin 2 slot 2.30x1.00 at x=6.0mm, 1.60mm locator at x=3.0mm, and two 2.50x1.00 retention slots at x=5.0mm separated 9.0mm vertically.")
 		(tags "Kycon KLDHCX-8-0202-B 8A 24V DC jack 2.5mm right angle through hole")
 		(property "Reference" "J16"
@@ -11328,7 +11328,7 @@
 	(footprint "Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "3953aa4e-855b-44a2-a300-5c28116f4ec5")
-		(at 104.605 130.295)
+		(at 45 115.75 0)
 		(descr "Molex Micro-Fit 3.0 Connector System, 43045-2000 (alternative finishes: 43045-200x), 10 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf)")
 		(tags "connector Molex Micro-Fit_3.0 horizontal")
 		(property "Reference" "J7"
@@ -25153,7 +25153,7 @@
 	(footprint "Connector_Molex:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "990844bf-1f13-4512-aeac-1a3edca7f418")
-		(at 104.605 145.015)
+		(at 105 115.75 0)
 		(descr "Molex Micro-Fit 3.0 Connector System, 43045-2000 (alternative finishes: 43045-200x), 10 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf)")
 		(tags "connector Molex Micro-Fit_3.0 horizontal")
 		(property "Reference" "J8"
@@ -35431,7 +35431,7 @@
 	(footprint "SalixFP:GCT_USB4085_Exact"
 		(layer "F.Cu")
 		(uuid "be5e476c-5a6b-450d-92c5-2cd4b1fae0e4")
-		(at 175.065 153.595)
+		(at 145 26.1 180)
 		(descr "USB 2.0 Type C Receptacle, https://gct.co/Files/Drawings/USB4085.pdf")
 		(tags "USB Type-C Receptacle Through-hole Right angle")
 		(property "Reference" "J17"
