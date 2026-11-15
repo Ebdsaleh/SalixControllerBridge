@@ -14718,7 +14718,7 @@
 	(footprint "SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm"
 		(layer "F.Cu")
 		(uuid "4f9cfa47-dfbd-4812-9186-2f7a237631ee")
-		(at 174.115 165.005)
+		(at 143 32)
 		(descr "TI DRV0006A WSON-6 2x2mm P0.65mm, EP 1.0x1.6mm. Land pattern per TI drawing 4222173/C.")
 		(tags "TI DRV0006A WSON-6 TVS2200")
 		(property "Reference" "U8"
@@ -30820,7 +30820,7 @@
 	(footprint "SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm"
 		(layer "F.Cu")
 		(uuid "ac9a005d-133d-4086-94fa-a15e5071e48c")
-		(at 188.105 147.425)
+		(at 137 32)
 		(descr "TI RUK0020B WQFN-20 3x3mm P0.4mm, EP 1.7x1.7mm. Land pattern per TI drawing 4222676/A.")
 		(tags "TI RUK0020B WQFN-20 TPD4S201")
 		(property "Reference" "U9"
@@ -40968,7 +40968,7 @@
 	(footprint "SalixFP:ST_DPAK_STPS5H100Y"
 		(layer "F.Cu")
 		(uuid "dcda716b-4360-45a4-a274-5cc1e787e1c5")
-		(at 183.805 141.025)
+		(at 151.5 32)
 		(descr "ST DPAK land pattern for STPS5H100BY-TR. Copper geometry transcribed from ST DS6906 Rev 3 Figure 10: lead lands 2.9x1.5mm, 4.75mm pitch; cathode/tab land 6.5x6.3mm; 1.8mm minimum lead-to-tab gap.")
 		(tags "ST DPAK TO-252 STPS5H100Y Schottky")
 		(property "Reference" "D30"
@@ -42619,7 +42619,7 @@
 	(footprint "SalixFP:TI_REF0038A_WQFN-38-2EP_6x4mm_P0.4"
 		(layer "F.Cu")
 		(uuid "e3549c46-e9ac-4ae3-9948-b4f09da24010")
-		(at 181.805 148.1)
+		(at 137 40.5)
 		(descr "Texas REF0038A WQFN, 38 Pin, 2EP (https://www.ti.com/lit/ds/symlink/tps25730.pdf#page=68)")
 		(tags "Texas Instruments WQFN NoLead")
 		(property "Reference" "U7"
