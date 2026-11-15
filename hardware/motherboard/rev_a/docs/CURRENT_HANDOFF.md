@@ -462,3 +462,40 @@ No routing was added. No source-priority divider/timing passives were moved yet.
 Q2/Q4/Q5/Q7 are intentionally rotated 180 deg and are now included in the absolute-pad-angle regression guard.
 
 Batch 4 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+
+### Batch-4 first native validation — core clean, zone conflict corrected
+
+The first native KiCad validation of the source-priority PowerPath core returned:
+
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+The Q1-Q8 / U4-U5 core itself had no internal short, clearance or courtyard violations. However, the lower half of the block had been placed into the still-unplaced service/storage pile:
+
+- U5 overlapped J5/J6;
+- Q5/Q6 overlapped J14;
+- Q7/Q8 overlapped J13, including the microSD keepout.
+
+These were placement-zone conflicts, not footprint defects and not reasons to move the service/storage parts prematurely.
+
+Correction:
+
+```text
+67a7e3c  Shift PowerPath core clear of service pile
+```
+
+The complete PowerPath core was translated upward 20mm as a rigid group while preserving every internal spacing and rotation:
+
+- U4 -> (104.5, 32.25);
+- Q2/Q1 -> (113/121, 28);
+- Q4/Q3 -> (113/121, 36.5);
+- U5 -> (104.5, 56.25);
+- Q5/Q6 -> (113/121, 52);
+- Q7/Q8 -> (113/121, 60.5).
+
+This keeps the U4 side near the rear BARREL/PD sources, keeps the internal back-to-back FET geometry unchanged, and clears J5/J6/J13/J14 without touching those still-unplaced service parts.
+
+Batch 4 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**. Do not place U4/U5 divider/timing passives until the shifted core passes native KiCad validation.
