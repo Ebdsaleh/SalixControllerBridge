@@ -393,6 +393,17 @@ Corrective action:
 
 A fresh native schematic validation is required before retrying F8.
 
+## Hidden power-flag annotation closure — SOURCE FIXED / NATIVE RETEST REQUIRED
+
+KiCad's annotation dialog identified the remaining duplicate explicitly as `#FLG04`. The earlier global-reference preflight intentionally ignored hidden `#...` references, so it missed that page 01 Power and page 07 Front USB both used `#FLG04`.
+
+Corrective action:
+- page 07 Front USB power flag `#FLG04` -> **`#FLG06`**;
+- `#FLG05` remains reserved by the USB-C PD sheet;
+- annotation preflight now validates hidden `#FLG/#PWR` instance references globally instead of skipping them.
+
+No electrical topology, visible reference, value, footprint, or net changed.
+
 ## Motherboard / front-board schematic boundary
 
 The system schematic intentionally includes both physical PCBs, but KiCad supports one board per project. For the Rev-A motherboard project:
