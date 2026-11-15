@@ -606,3 +606,82 @@ C9 and C11 were each shifted +0.3mm in X while preserving their 90-degree rotati
 This should clear the U4/U5 courtyard edge while retaining comfortable separation from the adjacent Q4/Q7 PowerPAK drain copper.
 
 Batch 5 remains **SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED** before the complete source-priority subsystem is frozen.
+
+
+### Batch-5 final native validation — GREEN / source-priority subsystem frozen
+
+Returned KiCad 10.0.8 validation after the final C9/C11 +0.3mm courtyard adjustment confirms the complete source-priority subsystem is clean for placement.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive mapping passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+Native DRC:
+- total violations improved **298 -> 295**;
+- C9 and C11 now have **0** short, clearance, courtyard or hole violations;
+- Q1-Q8 and U4/U5 remain free of short/clearance/courtyard/keepout errors;
+- the only four remaining `shorting_items` are still the known temporary J8-vs-still-piled-J6 overlap.
+
+Therefore the entire **MAIN SOURCE PRIORITY / POWERPATH subsystem is NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 6 — 5V_MAIN 12A buck power-stage core
+
+Board commit:
+
+```text
+cfd4a64  Place 5V_MAIN buck power-stage core
+```
+
+Placed the high-current/switching skeleton in actual power-flow order:
+
+- C70 bulk input hybrid -> (129, 66.5);
+- L70 SYS_IN input/filter inductor -> (127.5, 76);
+- C71/C72/C73/C74 BUCK_VIN ceramics -> (134/139, 74/78);
+- Q70 high-side MOSFET -> (145, 77.8);
+- Q71 low-side MOSFET -> (145, 86.4);
+- U70 LM25149-Q1 controller -> (138.5, 82.2);
+- L71 output inductor -> (155.5, 82.2);
+- R70 3mR current shunt -> (162.5, 82.2);
+- C90-C97 47uF 5V output bank -> two columns at x=167/172 and y=74/78/82/86.
+
+Placement intent follows the electrical path:
+
+```text
+SYS_IN -> L70 -> BUCK_VIN/input capacitors
+                    |
+                    v
+              Q70 / Q71 half-bridge
+                    |
+                 BUCK_SW
+                    |
+                   L71
+                    |
+               BUCK_ISNS_PLUS
+                    |
+                   R70
+                    |
+                 5V_MAIN
+                    |
+                C90-C97
+```
+
+Important geometry:
+- Q70 and Q71 are vertically stacked with a deliberate courtyard gap; Q70 source/SW side faces Q71 drain/SW side;
+- L71 pad 1 (BUCK_SW) faces the FET pair and pad 2 (BUCK_ISNS_PLUS) faces R70;
+- R70 pad 2 (5V_MAIN) faces the output-capacitor bank;
+- the four ceramic VIN capacitors sit immediately upstream of Q70;
+- C70 provides bulk energy storage but is kept out of the tight switching-loop geometry;
+- U70 is placed immediately left of the half-bridge for short HO/LO/SW control paths.
+
+No component in this batch was rotated; no absolute-pad-angle update was required.
+
+Source-level post-commit audit confirms:
+- all 19 moved footprints retained their original net assignments;
+- no target-target courtyard rectangles overlap;
+- all target courtyards remain inside the 160x100mm working board envelope.
+
+No routing was added. Compensation, bootstrap, VCC/VDDA, enable/FB/RT/CNFG, PGOOD and AEF parts remain unplaced.
+
+Batch 6 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before any small-signal buck support parts move.
