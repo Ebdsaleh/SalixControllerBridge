@@ -4817,7 +4817,7 @@
 	(footprint "Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "256e7652-a73d-489c-bbea-1240c0226bfb")
-		(at 124.305 71.125)
+		(at 173 102)
 		(descr "JST PH series connector, S12B-PH-SM4-TB (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf)")
 		(tags "connector JST PH horizontal")
 		(property "Reference" "J14"
@@ -5801,7 +5801,7 @@
 	(footprint "SalixFP:Hirose_DM3AT-SF-PEJM5_Exact"
 		(layer "F.Cu")
 		(uuid "2772ede3-05dd-4feb-bb98-0825c8b497ed")
-		(at 117.525 86.095)
+		(at 149 111)
 		(descr "Micro SD, SMD, right-angle, push-pull (https://www.hirose.com/product/en/download_file/key_name/DM3AT-SF-PEJM5/category/Drawing%20(2D)/doc_file_id/44099/?file_category_id=6&item_id=06090031000&is_series=)")
 		(tags "Micro SD")
 		(property "Reference" "J13"
@@ -31331,7 +31331,7 @@
 	(footprint "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "ad1ec3a4-1baa-457b-8663-a0d26a9fb9df")
-		(at 129.855 95.615)
+		(at 56.9 39.5)
 		(descr "JST SH series connector, SM03B-SRSS-TB (http://www.jst-mfg.com/product/pdf/eng/eSH.pdf)")
 		(tags "connector JST SH horizontal")
 		(property "Reference" "J12"
