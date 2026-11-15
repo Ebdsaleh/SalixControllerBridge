@@ -365,7 +365,7 @@ No circuit topology, net identity, footprint, fitted value, or frozen electrical
 - Added `tools/render_kicad_pcb.py` to produce native top/bottom renders and `PCB_DRC.rpt` in `Downloads\\kicad_pcb_validation.zip`.
 - Final copper weight, exact fab stack-up, enclosure connector coordinates and mounting geometry remain open until placement and chassis integration prove the working envelope.
 
-## Global reference-annotation closure — SOURCE CLEAN / NATIVE VALIDATION PENDING
+## Global reference-annotation closure — NATIVE GREEN / FROZEN
 
 KiCad F8 requires every non-power symbol in the complete hierarchy to have a globally unique reference, including sheets marked Exclude from board. A pre-F8 audit found **36 duplicate designators** created historically as sheets were developed independently.
 
@@ -378,7 +378,7 @@ This was corrected by reference-only renumbering; no value, footprint, net, symb
 
 Repository preflight now sees **310 unique non-power designators / 0 duplicate designators**. `render_kicad_schematics.py` now performs this annotation preflight automatically and fails before rendering if a `?` reference or cross-sheet duplicate is present.
 
-A fresh native schematic render/ERC/visual pass is required because visible reference labels changed. Only after that pass should KiCad F8 be attempted again.
+Returned KiCad 10.0.8 validation after the reference-only cleanup rendered all **13/13** sheets and **19/19** project-local footprints at **0 ERC errors / 1373 warnings**, unchanged in warning classes. Visual review of pages 01, 04, 06 and 07 confirms the new 200-series references are readable and introduce no new overlap/title-block bleed. The global annotation gate is therefore **native-green/frozen**, and KiCad F8 may be retried.
 
 ## Motherboard / front-board schematic boundary
 
