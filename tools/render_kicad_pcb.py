@@ -63,6 +63,7 @@ ROTATED_PLACEMENT_PAD_ANGLES = {
     "C77": 180.0,
     "C78": 180.0,
     "C79": 180.0,
+    "J14": 90.0,
 }
 
 
