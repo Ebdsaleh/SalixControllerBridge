@@ -6,12 +6,12 @@ Motherboard management,TI TCA9534APWR TSSOP-16,1,FROZEN MPN / FOOTPRINT - NATIVE
 I2C isolation,PCA9548A-class mux,1,CANDIDATE,Per-card I2C isolation
 Power protection,eFuse/reverse-current/high-side switch,TBD,TBD,5V_MAIN and per-port protection
 USB ESD,USB2/USB3-capable low-capacitance arrays,TBD,TBD,External connector protection
-Pico sockets,Samtec SSW-120-01-F-S 1x20 2.54mm vertical socket strip,4,FROZEN MPN / STOCK FOOTPRINT,Two per Pico; 8.51mm socket body; gold-flash contact/matte-tin tail; Connector_PinSocket_2.54mm:PinSocket_1x20_P2.54mm_Vertical
+Pico sockets,Samtec SSW-120-01-F-S 1x20 2.54mm vertical socket strip,4,FROZEN MPN / FOOTPRINTS,Two per Pico; left rail uses stock 1-20 footprint; right rail uses SalixFP:Salix_PinSocket_1x20_P2.54mm_Vertical_P21-40 so schematic physical pins 21-40 map directly
 Pico-A module,Raspberry Pi Pico 2 W with headers,1,FROZEN REV-A BASELINE / USER-INSTALLED,Headered official module plugs into the two motherboard sockets; factory 3-pin JST-SH debug connector avoids pogo-height dependency
 Pico-A SWD motherboard connector,JST SM03B-SRSS-TB 3-pin 1.0mm side-entry SH,1,ASSIGNED MPN / STOCK FOOTPRINT - NATIVE VALIDATION PENDING,Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal; pin 1 SWCLK pin 2 GND pin 3 SWDIO; straight-through cable to Pico-A factory debug connector
 Pico-A SWD host termination,100 ohm 1% 0603,2,ASSIGNED VALUE / FOOTPRINT - NATIVE VALIDATION PENDING,R114/R115 at Pico-B SWD host pins per Raspberry Pi 3-pin debug connector specification
 Pico-A raw breakout,1x20 male headers,2,FROZEN FORM,Mirrors physical Pico-A pins 1-40
-microSD,Hirose DM3AT-SF-PEJM5 push-push microSD socket,1,FROZEN MPN / FOOTPRINT,Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5; card-detect switch pins 9/10 intentionally NC in Rev A; shell pad 11 tied GND
+microSD,Hirose DM3AT-SF-PEJM5 push-push microSD socket,1,FROZEN MPN / PROJECT-LOCAL EXACT FOOTPRINT,SalixFP:Hirose_DM3AT-SF-PEJM5_Exact; card-detect switch pins 9/10 intentionally NC in Rev A; shell pad 11 tied GND
 TFT/front-panel UI,JST S12B-PH-SM4-TB 12-position 2.0mm side-entry SMT header,1,FROZEN MPN / FOOTPRINT,Connector_JST:JST_PH_S12B-PH-SM4-TB_1x12-1MP_P2.00mm_Horizontal; 2A at AWG24; adapter/harness maps to TF034
 TFT/service harness housing,JST PHR-12 12-position PH receptacle housing,1,FROZEN MPN,2.0mm pitch friction-lock housing for J14
 TFT/service harness contact,JST SPH-002T-P0.5S tin receptacle crimp contact,12,FROZEN MPN,AWG30-24; use harness wire appropriate to signal/current
@@ -34,7 +34,7 @@ USB dual-bank motherboard PCB header,Molex 43045-2000 Micro-Fit 3.0 20-circuit 2
 Main input protection / source mux,Higher-current wide-input protected stage,1,TBD,Must cover the whole bridge load and barrel/PD/AUX priority; AUX recharge TPS259474L is not the main-system eFuse
 
 Source priority controller,Analog Devices LTC4418IUF#PBF 20-QFN 4x4mm,2,FROZEN MPN / STOCK FOOTPRINT,Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm; U4 barrel>PD and U5 external>AUX
-Source priority P-MOSFET,Vishay Si7155DP-T1-GE3 PowerPAK SO-8,8,FROZEN MPN / STOCK FOOTPRINT,Package_SO:PowerPAK_SO-8_Single; 40V P-channel; back-to-back pairs Q1-Q8
+Source priority P-MOSFET,Vishay Si7155DP-T1-GE3 PowerPAK SO-8,8,FROZEN MPN / PROJECT-LOCAL EXACT FOOTPRINT,SalixFP:Vishay_PowerPAK_SO-8_Single; pins 1-3 source / 4 gate / 5-8 drain; grouped drain land maps to pad 5; back-to-back pairs Q1-Q8
 Source priority BARREL divider,887k + 61.9k + 56.2k 1% 0603,1 network,FROZEN VALUES,U4 V1 nominal 8.51V UV / 17.88V OV before internal hysteresis
 Source priority PD divider,931k + 30.1k + 44.2k 1% 0603,1 network,FROZEN VALUES,U4 V2 nominal 13.53V UV / 22.74V OV before internal hysteresis
 Source priority EXT divider,887k + 80.6k + 44.2k 1% 0603,1 network,FROZEN VALUES,U5 V1 nominal 8.11V UV / 22.89V OV before internal hysteresis
@@ -57,7 +57,7 @@ Front-board harness power contact,Molex 43030-0007 female crimp terminal tin 20-
 Front-board harness signal contact,Molex 43030-0010 female crimp terminal tin 26-30AWG,as required,FROZEN MPN,Use for USB twisted-pair/control conductors where 26-30AWG is selected
 Front USB data mux,TI TS3USB221A RSE UQFN-10,2 per daughterboard,FROZEN MPN / PROJECT-LOCAL FOOTPRINT,480Mbps A/C data selection with hardware OE disconnect; SalixFP:TI_RSE0010A_UQFN-10_1.5x2.0mm_P0.5mm follows TI drawing 4220307/A example-board land pattern
 USB-A front receptacle,Molex 67643-2910 USB 2.0 Type-A right-angle through-hole black,2 per daughterboard,FROZEN MPN / FOOTPRINT,1.5A/contact; 1.6mm PCB; Connector_USB:USB_A_Molex_67643_Horizontal; shield is physical pad 5
-USB-C front receptacle,GCT USB4085-GF-A USB 2.0 Type-C 16-contact fully through-hole right-angle,2 per daughterboard,FROZEN MPN / FOOTPRINT,Connector_USB:USB_C_Receptacle_GCT_USB4085; physical A/B contact numbering retained; SBU1/SBU2 intentionally NC
+USB-C front receptacle,GCT USB4085-GF-A USB 2.0 Type-C 16-contact fully through-hole right-angle,2 per daughterboard,FROZEN MPN / FOOTPRINT,SalixFP:GCT_USB4085_Exact; physical A/B contact numbering retained; SBU1/SBU2 intentionally NC
 USB-C source controller,TI TPS25821DSS WSON-12,2 per daughterboard,FROZEN FAMILY / FOOTPRINT,Package_SON:WSON-12-1EP_3x2mm_P0.5mm_EP1x2.65
 USB-A power switch,TI TPS2553 SOT-23-6,2 per daughterboard,FROZEN FAMILY,Adjustable current limit + reverse-voltage protection
 Front-board GPIO expander,TI TCA9535 TSSOP-24,1 per daughterboard,FROZEN FAMILY,I2C selector/fault/LED/charge policy
@@ -128,8 +128,8 @@ USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / 
 
 12V barrel output reservoir,Panasonic EEETQV470XAP 47uF 35V ±20% TQ SMD aluminum electrolytic,1,FROZEN MPN / FOOTPRINT,AEC-Q200; -40C to +125C; 2000h at 125C; 300mOhm max ESR at 100kHz; Capacitor_SMD:CP_Elec_6.3x7.7
 
-USB-C PD sink controller,TI TPS25730ADREFR 38-WQFN REF,1,FROZEN MPN / FOOTPRINT,Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4; official KiCad exact TI REF0038A land pattern; Active 2026 PD3.2 sink-only controller; integrated managed 20V 5A path; no firmware/EEPROM required; pin-strapped 15-20V 3A operating/5A max
-USB-C PD power receptacle,GCT USB4085-GF-A 16-contact through-hole USB-C,1,FROZEN MPN / FOOTPRINT,Connector_USB:USB_C_Receptacle_GCT_USB4085; 5A/48V/240W; dedicated power-only instance; D+/D- unused
+USB-C PD sink controller,TI TPS25730ADREFR 38-WQFN REF,1,FROZEN MPN / PROJECT-LOCAL EXACT FOOTPRINT,SalixFP:TI_REF0038A_WQFN-38-2EP_6x4mm_P0.4; official KiCad exact TI REF0038A land pattern; Active 2026 PD3.2 sink-only controller; integrated managed 20V 5A path; no firmware/EEPROM required; pin-strapped 15-20V 3A operating/5A max
+USB-C PD power receptacle,GCT USB4085-GF-A 16-contact through-hole USB-C,1,FROZEN MPN / FOOTPRINT,SalixFP:GCT_USB4085_Exact; 5A/48V/240W; dedicated power-only instance; D+/D- unused
 USB-C PD VBUS surge clamp,TI TVS2200DRVR 22V flat-clamp WSON-6,1,FROZEN MPN / FOOTPRINT,SalixFP:TI_DRV0006A_WSON-6_2x2mm_P0.65mm_EP1x1.6mm; TI DRV0006A 2x2mm land pattern; 40A 8/20us capability; place adjacent to J17 VBUS
 USB-C PD CC protector,TI TPD4S201RUKR WQFN-20,1,FROZEN MPN / FOOTPRINT,SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm; RUK0020B 3x3mm P0.4mm EP1.7x1.7; 28V short-to-VBUS OVP + IEC ESD for CC
 USB-C PD ADCIN1 strap,162k + 38.0k 1% 0603,1 network,FROZEN FIRST-PASS VALUE,Decoded value 3 -> 15V minimum
