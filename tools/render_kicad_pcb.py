@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -25,6 +26,10 @@ from render_kicad_schematics import find_kicad_cli
 
 DEFAULT_RELATIVE_BOARD = Path(
     "hardware/motherboard/rev_a/SalixControllerBridge_RevA.kicad_pcb"
+)
+FRONT_BOARD_SHEETS = (
+    "07_Front_USB_Daughterboard.kicad_sch",
+    "07a_Front_USB_Presence.kicad_sch",
 )
 
 
@@ -58,7 +63,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("board", nargs="?", type=Path, default=default_board)
     parser.add_argument("--output", type=Path, default=default_output)
     parser.add_argument("--kicad-cli", default=None)
+    parser.add_argument(
+        "--expect-populated",
+        action="store_true",
+        help=(
+            "Fail if the PCB still contains only the four H1-H4 scaffold "
+            "mounting holes after Update PCB from Schematic."
+        ),
+    )
     return parser.parse_args()
+
+
+def board_references(board: Path) -> list[str]:
+    text = board.read_text(encoding="utf-8")
+    return re.findall(r'\(property\s+"Reference"\s+"([^"]+)"', text)
+
+
+def schematic_instance_references(sheet: Path) -> set[str]:
+    text = sheet.read_text(encoding="utf-8")
+    return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
 
 
 def main() -> int:
@@ -75,6 +98,18 @@ def main() -> int:
         kicad_cli = find_kicad_cli(args.kicad_cli)
         version = run_checked([str(kicad_cli), "--version"]).stdout.strip()
 
+        references = board_references(board)
+        non_scaffold = [
+            ref for ref in references if ref not in {"H1", "H2", "H3", "H4"}
+        ]
+
+        front_refs: set[str] = set()
+        for name in FRONT_BOARD_SHEETS:
+            sheet = board.parent / name
+            if sheet.is_file():
+                front_refs.update(schematic_instance_references(sheet))
+        leaked_front_refs = sorted(set(references) & front_refs)
+
         if output.exists():
             shutil.rmtree(output)
         output.mkdir(parents=True, exist_ok=True)
@@ -89,6 +124,26 @@ def main() -> int:
         print(f"KiCad     : {version}")
         print(f"Board     : {board}")
         print(f"Output    : {output}")
+        print(f"Footprints: {len(references)}")
+        print(f"Population: {len(non_scaffold)} non-scaffold footprint(s)")
+        if leaked_front_refs:
+            print(
+                "ERROR: front-board references leaked onto motherboard PCB: "
+                + ", ".join(leaked_front_refs),
+                file=sys.stderr,
+            )
+            return 3
+        print("Front PCB : no excluded page-07/07A references detected")
+
+        if args.expect_populated and not non_scaffold:
+            print(
+                "ERROR: motherboard is still scaffold-only (H1-H4). "
+                "Run KiCad F8 Update PCB from Schematic, click Update PCB, "
+                "close the dialog, then Ctrl+S the board before validating.",
+                file=sys.stderr,
+            )
+            return 4
+
         print()
 
         print("Running PCB DRC...")
