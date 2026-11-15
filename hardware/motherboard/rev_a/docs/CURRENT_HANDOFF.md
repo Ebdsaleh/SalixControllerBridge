@@ -499,3 +499,53 @@ The complete PowerPath core was translated upward 20mm as a rigid group while pr
 This keeps the U4 side near the rear BARREL/PD sources, keeps the internal back-to-back FET geometry unchanged, and clears J5/J6/J13/J14 without touching those still-unplaced service parts.
 
 Batch 4 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**. Do not place U4/U5 divider/timing passives until the shifted core passes native KiCad validation.
+
+
+### Batch-4 corrected native validation — GREEN
+
+Returned KiCad 10.0.8 validation after shifting the PowerPath core upward confirms the zone correction worked.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+Native DRC:
+- total violations improved from **312 -> 298**;
+- `shorting_items` remains **4**, all four still the known J8-vs-still-piled-J6 overlap;
+- Q1-Q8 and U4/U5 now report **only unconnected-item entries**;
+- Q1-Q8/U4/U5 have **0** short, clearance, courtyard, hole or keepout violations;
+- the previous J5/J6/J13/J14 zone conflicts are gone.
+
+Therefore the source-priority high-current/controller core is **NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 5 — LTC4418 local threshold/timing networks
+
+Board commit:
+
+```text
+c8e4331  Place LTC4418 local threshold networks
+```
+
+Placed the complete U4/U5 local divider/timing/INTVCC support set:
+
+U4:
+- R14/R15/R16 = BARREL_PROT UV1/OV1 divider row at y=28.5;
+- R17/R18/R19 = PD_PWR UV2/OV2 divider row at y=34.0;
+- C8 = U4 TMR capacitor at (100.5, 26.0);
+- C9 = U4 INTVCC bypass at (108.5, 34.2).
+
+U5:
+- R20/R21/R22 = EXT_CHARGE_IN UV1/OV1 divider row at y=52.5;
+- R23/R24/R25 = AUX_PWR UV2/OV2 divider row at y=58.0;
+- C10 = U5 TMR capacitor at (100.5, 50.0);
+- C11 = U5 INTVCC bypass at (108.5, 58.2).
+
+All 16 parts remain at 0 deg rotation, so no additional absolute-pad-angle guard is required.
+
+Source-level post-commit audit confirms every moved passive retained its original net assignments and the two three-resistor chains remain electrically ordered input -> UV -> OV -> GND.
+
+No routing was added and no other block was moved.
+
+Batch 5 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
