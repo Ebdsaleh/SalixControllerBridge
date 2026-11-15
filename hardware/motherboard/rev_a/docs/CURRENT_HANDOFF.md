@@ -203,3 +203,30 @@ Long KiCad reports can be captured by Select All -> Copy -> paste into a text fi
 - prefer small, auditable batches;
 - native KiCad validation after each structural/electrical change;
 - do not call a gate GREEN until the returned user-side native validation proves it.
+
+
+## PCB placement batch 1 — chassis-facing anchors
+
+Commit:
+
+```text
+d4a0232  Place Rev-A chassis-facing connector anchors
+```
+
+Placed only the four safest chassis-facing anchors:
+
+- J16 barrel input: rear edge, body extending inward;
+- J17 dedicated USB-C PD power input: rear edge, exact footprint PCB-edge datum aligned to board edge;
+- J7 PRIMARY front-board Micro-Fit: front edge;
+- J8 EXTENDED front-board Micro-Fit: front edge.
+
+No Picos, power-stage ICs, passives, fans, AUX, or routing were moved in this batch.
+
+The next gate is user-side native PCB validation:
+
+```bat
+git pull --ff-only
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Inspect top/bottom renders before continuing placement.
