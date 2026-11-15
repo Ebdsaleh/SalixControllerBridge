@@ -27,7 +27,7 @@ Two finish lines are tracked separately:
 - [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green
 - [x] J12 JST SM03B-SRSS-TB + R114/R115 100R SWD host termination are native-green
 - [x] Full 13-page schematic visual-hygiene gate passed
-- [~] First fabrication `.kicad_pcb` foundation now exists; native PCB DRC/render validation pending
+- [x] First motherboard `.kicad_pcb` foundation is native-green: 0 DRC violations / 0 unconnected pads / 0 footprint errors
 
 Useful scale reference:
 
@@ -144,6 +144,8 @@ The first motherboard PCB foundation now exists. Mechanical coordinates below ar
 ### Motherboard
 
 - [x] Create `.kicad_pcb`
+- [x] Empty-board native PCB gate: 0 DRC violations / 0 unconnected pads / 0 footprint errors
+- [x] Motherboard forward-annotation boundary excludes physical front-USB sheets 07 + 07A
 - [~] Working board envelope = 160 x 100mm; validate placement before enclosure freeze
 - [~] Working mounting pattern = four M3 / 3.2mm NPTH holes, 5mm in from each corner
 - [ ] Freeze connector positions relative to enclosure
@@ -265,8 +267,8 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Native-validate the new motherboard PCB foundation with KiCad 10 PCB DRC + top/bottom render.**
-2. **Forward-annotate the motherboard schematic population into the validated board and perform functional block placement.**
+1. **Forward-annotate the motherboard-only schematic population with KiCad F8; verify pages 07/07A remain excluded and H1-H4 remain.**
+2. **Perform functional block placement and review the 160x100mm working envelope before routing.**
 3. **Route the motherboard, then create/finalize the universal front USB PCB; close DRC on both.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
 5. **Obtain the first real PCBWay quote / first-article fabrication decision.**
