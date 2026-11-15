@@ -6,7 +6,7 @@ Date: 2026-11-15
 
 **Schematic phase: GREEN / FROZEN.**
 
-**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-PLACED / NATIVE RETEST REQUIRED.**
+**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED.**
 
 The corrected populated motherboard baseline is committed as:
 
@@ -1036,3 +1036,73 @@ If Batch 10 is native-clean, freeze J12/J13/J14 and place the remaining sheet-04
 - local 3V3_AUX / 5V_AUX decoupling.
 
 Do not route yet and do not manually move the remaining import pile.
+
+
+### Batch-10 first native validation — J12/J13 GREEN, J14 edge fault corrected
+
+Returned KiCad 10.0.8 validation for head `e98453c` kept every global structural guard green:
+
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping guard passed;
+- existing rotated-placement absolute-pad-angle guard passed.
+
+Connector-specific native DRC:
+
+**J12 Pico-A SWD**
+- 0 shorting violations;
+- 0 copper-clearance violations;
+- 0 courtyard / hole / keepout / edge violations;
+- only expected unrouted connections.
+
+**J13 microSD**
+- 0 shorting violations;
+- 0 copper-clearance violations;
+- 0 courtyard / hole / keepout / board-edge violations;
+- only expected unrouted connections plus the already-known project-local library-copy warning.
+
+**J14 TFT/service**
+- no short or inter-component clearance fault;
+- one real board-edge placement defect:
+  - pad 10 touched the board edge at x=180.0 mm;
+  - J14 silkscreen was clipped by the board edge.
+
+This is a genuine Batch-10 placement error, not import-pile noise. J12 and J13 are therefore individually clean, but Batch 10 is not frozen until corrected J14 passes native KiCad.
+
+Correction commits:
+
+```text
+25d4c1c  Rotate TFT service connector clear of board edge
+27dde82  Guard rotated TFT service connector placement
+```
+
+Corrected J14 placement:
+- J14 -> **(174.0, 104.0), 90 deg**.
+
+The 90-degree orientation turns the long 12-pin connector body into the vertical lower-right service corridor rather than extending it through the right board edge.
+
+Source-level post-correction geometry audit:
+- J14 courtyard bbox = x **168.9 .. 179.1 mm**, y **89.4 .. 118.6 mm**;
+- right-board courtyard margin = **0.9 mm**;
+- bottom-board courtyard margin = **1.4 mm**;
+- 0 courtyard-box overlaps with J13;
+- 0 overlaps with the frozen Pico socket/breakout blocks;
+- 0 overlaps with the frozen 5V_MAIN output bank / L71 / R70;
+- all fourteen J14 pads/mechanical pads now carry the correct absolute **90-degree** placed-pad angle;
+- `tools/render_kicad_pcb.py` now guards J14 at 90 degrees.
+
+No routing was added and no sheet-04 support passives were moved.
+
+Batch 10 is **SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED**.
+
+### Exact next action after J14 correction
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`.
+
+If the corrected J14 gate is native-clean, freeze J12/J13/J14 and place the remaining sheet-04 local support network around those anchors. Do not route yet and do not manually move the remaining import pile.
