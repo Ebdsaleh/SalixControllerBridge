@@ -854,3 +854,65 @@ Placement intent:
 Source-level post-placement audit reports **0 courtyard-box overlaps** among the complete buck power skeleton, controller-support network, and all batch-8 AEF footprints.
 
 Batch 8 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before any further functional block is moved.
+
+
+### Batch-8 native validation — GREEN / complete 5V_MAIN buck frozen
+
+Returned user-side KiCad 10.0.8 validation for commit `671da22` confirms the LM25149 active-EMI-filter placement is clean inside the actual page-11 subsystem.
+
+Structural guards remain GREEN:
+
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping verified;
+- absolute-pad-angle guard verified for all rotated anchors/blocks.
+
+Native DRC reports **475 total violations**, but the hard findings involving batch-8 AEF parts are all collisions with still-unplaced service/storage pile parts:
+
+- C81 BUCK_SEN against C212 3V3_AUX;
+- R81 BUCK_SEN against C212 GND;
+- C84 clearance against J12 mechanical pad.
+
+These are not AEF-to-AEF or AEF-to-buck faults. Within the complete page-11 buck target set there are:
+
+- **0 internal shorting violations**;
+- **0 internal copper-clearance violations**;
+- **0 internal courtyard / hole / solder-mask functional faults**;
+- only expected unrouted connections and silkscreen/reference-field noise remain internally.
+
+All 42 page-11 references are now extracted from the import pile and placed:
+
+- power skeleton: C70-C74, C90-C97, L70/L71, Q70/Q71, R70, U70;
+- controller-local support: C75-C79, R71-R76, R78;
+- AEF network: C81-C86, R79-R83.
+
+Therefore the entire **5V_MAIN 12A synchronous buck subsystem is NATIVE GREEN / FROZEN for placement**.
+
+## Handoff freshness invariant — required from this point onward
+
+The project handoff must be updated on **every hardware work batch / pull request / push that advances placement or validation**.
+
+Each handoff update must record, at minimum:
+
+- current repo head / relevant commits;
+- latest returned native KiCad validation result;
+- which functional blocks are GREEN/FROZEN;
+- which block is currently active or source-placed;
+- known temporary import-pile collisions that must not be mistaken for real layout defects;
+- the exact next user command/action.
+
+Do not leave `CURRENT_HANDOFF.md` one batch behind the PCB state.
+
+## Immediate next work after Batch 8
+
+Continue **functional placement only; do not route yet**.
+
+Next placement zone is:
+
+1. Pico-A / Pico-B socket-pair mechanical geometry and their local breakout/debug access;
+2. microSD and service/TFT interface;
+3. USB hub + Pico-A USB interface;
+4. motherboard/front-board harness connectors;
+5. fan/AUX/service connectors and remaining management logic.
+
+Before moving the Pico socket pairs, preserve the already-frozen barrel, source-priority and complete 5V_MAIN buck zones. The remaining raw DRC noise is expected to change significantly as the service/storage import pile is extracted into its final locations.
