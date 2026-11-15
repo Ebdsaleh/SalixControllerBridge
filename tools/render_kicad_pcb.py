@@ -32,6 +32,21 @@ FRONT_BOARD_SHEETS = (
     "07a_Front_USB_Presence.kicad_sch",
 )
 
+# KiCad .kicad_pcb files store placed-pad angles as absolute board angles,
+# not footprint-local angles.  These references have been deliberately rotated
+# during placement and are guarded because changing only the footprint-level
+# angle leaves rectangular pad copper at the old orientation.
+ROTATED_PLACEMENT_PAD_ANGLES = {
+    "J16": 270.0,
+    "J17": 180.0,
+    "F1": 180.0,
+    "D29": 90.0,
+    "Q9": 270.0,
+    "Q10": 90.0,
+    "U6": 90.0,
+    "C13": 180.0,
+}
+
 
 def run_checked(command: list[str]) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(
@@ -144,6 +159,52 @@ def validate_j16_center_positive(board: Path) -> None:
         )
 
 
+def validate_rotated_placement_pad_angles(board: Path) -> None:
+    text = board.read_text(encoding="utf-8")
+
+    def norm(angle: float) -> float:
+        value = angle % 360.0
+        return 0.0 if abs(value - 360.0) < 1e-9 else value
+
+    for reference, expected in ROTATED_PLACEMENT_PAD_ANGLES.items():
+        footprint = extract_footprint_by_reference(text, reference)
+
+        footprint_at = re.search(
+            r'\n\s*\(at\s+[-+0-9.]+\s+[-+0-9.]+(?:\s+([-+0-9.]+))?\)',
+            footprint,
+        )
+        if not footprint_at:
+            raise RuntimeError(f"{reference} footprint position/rotation not found")
+        footprint_angle = norm(float(footprint_at.group(1) or 0.0))
+        if abs(footprint_angle - norm(expected)) > 1e-6:
+            raise RuntimeError(
+                f"{reference} footprint rotation regression: "
+                f"{footprint_angle:g} deg; expected {expected:g} deg"
+            )
+
+        pad_angles = re.findall(
+            r'\(pad\s+"[^"]*"\s+\S+\s+\S+\s+'
+            r'\(at\s+[-+0-9.]+\s+[-+0-9.]+(?:\s+([-+0-9.]+))?\)',
+            footprint,
+        )
+        if not pad_angles:
+            raise RuntimeError(f"{reference} has no pads to validate")
+
+        missing = sum(1 for angle in pad_angles if angle == "")
+        wrong = [
+            angle
+            for angle in pad_angles
+            if angle != "" and abs(norm(float(angle)) - norm(expected)) > 1e-6
+        ]
+        if missing or wrong:
+            raise RuntimeError(
+                f"{reference} absolute-pad-angle regression: "
+                f"{missing} pad(s) missing angle, "
+                f"{len(wrong)} pad(s) at wrong angle; "
+                f"expected every placed pad at {expected:g} deg"
+            )
+
+
 def schematic_instance_references(sheet: Path) -> set[str]:
     text = sheet.read_text(encoding="utf-8")
     return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
@@ -202,6 +263,9 @@ def main() -> int:
 
         validate_j16_center_positive(board)
         print("J16       : center-positive pad mapping verified (1=RAW, 2=GND)")
+
+        validate_rotated_placement_pad_angles(board)
+        print("Rotation  : placed-pad absolute angles verified for rotated anchors/block")
 
         if args.expect_populated and not non_scaffold:
             print(
