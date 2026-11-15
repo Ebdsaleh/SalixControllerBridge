@@ -444,6 +444,26 @@ The system schematic intentionally includes both physical PCBs, but KiCad suppor
 - the future universal front-USB PCB will use its own KiCad project/root that instantiates those same physical-board source sheets with board inclusion enabled;
 - do not manually delete daughterboard footprints after motherboard forward annotation as a substitute for this boundary.
 
+## J16 center-positive PCB mapping regression guard — ACTIVE
+
+During functional-placement preparation, a source-vs-PCB audit found that the saved populated PCB had J16 pad nets inverted even though the schematic source and exact project-local footprint were correct:
+
+- schematic J16 pin 1 = `CENTER_+` -> `BARREL_JACK_RAW`;
+- schematic J16 pin 2 = `SLEEVE_GND` -> GND;
+- exact Kycon footprint pad 1 is the center-contact terminal and is marked `1 +`;
+- exact Kycon footprint pad 2 is the sleeve terminal.
+
+The populated PCB at baseline `c12a1be` instead carried pad 1=GND / pad 2=BARREL_JACK_RAW. The board mapping was corrected in commit `3aac37b`.
+
+`render_kicad_pcb.py` now hard-fails if J16 is not:
+
+```text
+pad 1 = /12V BARREL / AUTOMOTIVE FRONT END/BARREL_JACK_RAW
+pad 2 = GND
+```
+
+This is a permanent regression guard. Any future F8/update cycle must preserve it.
+
 ## Corrected populated-board native baseline — CAPTURED
 
 After the corrected F8 update completed at **0 errors / 4 expected J12/J14 MP warnings**, the saved populated motherboard was validated natively with `render_kicad_pcb.py --expect-populated`.
