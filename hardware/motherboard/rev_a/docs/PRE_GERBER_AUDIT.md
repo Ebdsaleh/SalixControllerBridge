@@ -10,7 +10,7 @@ This file is the fabrication gate for the Rev-A motherboard + universal front US
 - USB2514B /M2 pin map has been checked against Microchip. Exposed die paddle is physical pad 37 and is represented that way.
 - USB2514B /M2 is frozen to 36-pin 6x6mm, 0.5mm-pitch SQFN with 3.7x3.7mm e-pad; KiCad footprint: `Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias`.
 - TPS25821 DSS exposed thermal pad 13 is explicit and tied to GND.
-- TPS25821 IN bulk is now frozen to TI’s own EVM choice: C30/C31/C32 and C34/C35/C36 are Murata GRM31CR61A476KE15L, 47uF, 10V, ±10%, X5R, 1206; footprint `Capacitor_SMD:C_1206_3216Metric`. TI’s EVM uses three of these per controller and recommends 120uF input capacitance with the capacitors kept close to the IC.
+- TPS25821 IN bulk is now frozen to TI’s own EVM choice: C230/C231/C32 and C34/C35/C36 are Murata GRM31CR61A476KE15L, 47uF, 10V, ±10%, X5R, 1206; footprint `Capacitor_SMD:C_1206_3216Metric`. TI’s EVM uses three of these per controller and recommends 120uF input capacitance with the capacitors kept close to the IC.
 - USB-A TPS2553 downstream reservoirs are now explicit: C42/C43 on each daughterboard are Panasonic EEHZL1E221XP, 220uF, 25V, ±20% hybrid aluminum electrolytics. Their -20% tolerance floor is 176uF, above the 120uF downstream-port requirement; footprint is `Capacitor_SMD:CP_Elec_6.3x7.7`.
 - TPS2553 local input bypass is now explicit: C44/C45 are 100nF 25V X7R 0603 from `5V_BOARD` to GND and must be placed adjacent to each switch IN/GND pair.
 - SN74LVC2G157/SN74LVC2G08 DCU devices use the correct 0.5mm-pitch DCU land pattern: `Package_SO:VSSOP-8_2.3x2mm_P0.5mm`.
@@ -112,7 +112,7 @@ Electrical ERC therefore passed, but visual freeze was correctly withheld. Page 
 ## AUX recharge second native render — 15 ERC errors / corrective rollback to known-good connectivity
 
 The native run at `e2a36e5` exposed **15 ERC errors** even though the visual spacing improved. All 15 errors are confined to the redrawn load-shed block:
-- 13 `pin_not_connected` errors across R70/R71/Q11/R73/Q12/R72;
+- 13 `pin_not_connected` errors across R200/R201/Q11/R203/Q12/R202;
 - 2 `pin_not_driven` errors on the Q11/Q12 gates.
 
 Root cause: the spacing rewrite recreated the load-shed wires by hand; several visually adjacent endpoints were not electrically snapped to their symbol pins in KiCad. This also made the cross-sheet `AUX_CHG_ENABLE` appear as a one-pin isolated label.
@@ -131,7 +131,7 @@ The corrective run at `1145008` passed native KiCad 10.0.8 validation:
 - `pin_not_connected = 0`
 - `pin_not_driven = 0`
 
-Visual review of `01_Power.png` confirms the restored Q11/Q12/R70-R73 block is electrically coherent, while `03_USB_Hub_and_Input.png` confirms the respaced TCA9534A/C64/R58/R59 management block is intact. `AUX_CHG_ENABLE` is no longer isolated.
+Visual review of `01_Power.png` confirms the restored Q11/Q12/R200-R203 block is electrically coherent, while `03_USB_Hub_and_Input.png` confirms the respaced TCA9534A/C64/R58/R59 management block is intact. `AUX_CHG_ENABLE` is no longer isolated.
 
 The AUX recharge load-shed architecture is therefore **schematic-level frozen green**. Do not alter its topology unless a verified defect is found.
 
@@ -145,7 +145,7 @@ Freeze **RCOMP=5.90k 1%, CCOMP=10nF, CHF=DNP with 22pF tuning option**. TI Equat
 - U60 changes from TCA9536DGK (4-bit, 0x41) to TCA9534APWR (8-bit, A2/A1/A0=000 -> 0x38).
 - U60 P4 = AUX_CHG_ENABLE; P5 = AUX_CHG_PG; P6/P7 reserved.
 - Q11/Q12 = Nexperia 2N7002BK,215. Q11 clamps U3 EN/UVLO low by default; Q12 only releases Q11 when management explicitly asserts AUX_CHG_ENABLE.
-- R70/R71 = 100k/100k default-off bias from EXT_CHARGE_IN; R72 = 100k Q12 gate pulldown; R73 = 10k control series.
+- R200/R201 = 100k/100k default-off bias from EXT_CHARGE_IN; R202 = 100k Q12 gate pulldown; R203 = 10k control series.
 - Safe firmware init: Output Port 0x01 <- 0x03, then Configuration 0x03 <- 0xEC. Do not configure P4 as output before loading the safe output register.
 - Native KiCad 10.0.8 render/ERC and visual review are required before this architecture is frozen green.
 
@@ -364,6 +364,21 @@ No circuit topology, net identity, footprint, fitted value, or frozen electrical
 - No schematic footprints are placed yet. The board must pass a native file-format/outline DRC + render gate first; then KiCad forward annotation will populate the schematic footprints for real placement.
 - Added `tools/render_kicad_pcb.py` to produce native top/bottom renders and `PCB_DRC.rpt` in `Downloads\\kicad_pcb_validation.zip`.
 - Final copper weight, exact fab stack-up, enclosure connector coordinates and mounting geometry remain open until placement and chassis integration prove the working envelope.
+
+## Global reference-annotation closure — SOURCE CLEAN / NATIVE VALIDATION PENDING
+
+KiCad F8 requires every non-power symbol in the complete hierarchy to have a globally unique reference, including sheets marked Exclude from board. A pre-F8 audit found **36 duplicate designators** created historically as sheets were developed independently.
+
+This was corrected by reference-only renumbering; no value, footprint, net, symbol, or topology changed:
+
+- page 01 Power: R70-R73 -> **R200-R203**;
+- page 04 Pico-B Service: R80-R83 -> **R210-R213**; C81/C90/C91 -> **C210-C212**;
+- page 06 Service/Debug: R70-R75 -> **R220-R225**; C70-C73 -> **C220-C223**; Q70/Q71 -> **Q220/Q221**;
+- page 07 Front USB: R30-R44 -> **R230-R244**; C30/C31 -> **C230/C231**.
+
+Repository preflight now sees **310 unique non-power designators / 0 duplicate designators**. `render_kicad_schematics.py` now performs this annotation preflight automatically and fails before rendering if a `?` reference or cross-sheet duplicate is present.
+
+A fresh native schematic render/ERC/visual pass is required because visible reference labels changed. Only after that pass should KiCad F8 be attempted again.
 
 ## Motherboard / front-board schematic boundary
 
