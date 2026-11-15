@@ -264,6 +264,49 @@ def discover_pages(root_schematic: Path) -> list[SheetPage]:
     return sorted(pages, key=sort_key)
 
 
+def validate_reference_annotation(pages: list[SheetPage]) -> None:
+    """Fail early if the schematic hierarchy is not globally annotation-safe."""
+    owners: dict[str, set[str]] = {}
+    unannotated: list[tuple[str, str]] = []
+
+    for sheet in pages:
+        text = sheet.source.read_text(encoding="utf-8")
+        local_refs = set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
+
+        for ref in sorted(local_refs):
+            if ref.startswith("#"):
+                continue
+            if "?" in ref:
+                unannotated.append((ref, sheet.source.name))
+                continue
+            owners.setdefault(ref, set()).add(sheet.source.name)
+
+    duplicates = {
+        ref: sorted(files)
+        for ref, files in owners.items()
+        if len(files) > 1
+    }
+
+    if unannotated or duplicates:
+        lines = [
+            "Schematic annotation preflight failed.",
+            "KiCad Update PCB from Schematic requires globally unique references.",
+        ]
+        if unannotated:
+            lines.append("Unannotated references:")
+            lines.extend(
+                f"  - {ref}: {filename}"
+                for ref, filename in unannotated
+            )
+        if duplicates:
+            lines.append("Duplicate references:")
+            lines.extend(
+                f"  - {ref}: {', '.join(files)}"
+                for ref, files in sorted(duplicates.items())
+            )
+        raise RuntimeError("\n".join(lines))
+
+
 def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         command,
@@ -747,6 +790,8 @@ def main() -> int:
         if missing:
             listing = "\n".join(f"  - {p}" for p in missing)
             raise FileNotFoundError(f"Referenced schematic sheet(s) missing:\n{listing}")
+
+        validate_reference_annotation(pages)
 
         pymupdf = None
         if not renderer.native_png:
