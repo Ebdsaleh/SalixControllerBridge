@@ -7409,7 +7409,7 @@
 	(footprint "SalixFP:Salix_PinSocket_1x20_P2.54mm_Vertical_P21-40"
 		(layer "F.Cu")
 		(uuid "2cb19dc2-63b2-4b95-b960-4d1251f6f853")
-		(at 106.885 67.795)
+		(at 96.78 64)
 		(descr "Through hole straight socket strip, 1x20, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
 		(tags "Through hole socket strip THT 1x20 2.54mm single row")
 		(property "Reference" "J6"
@@ -22654,7 +22654,7 @@
 	(footprint "SalixFP:Salix_PinHeader_1x20_P2.54mm_Vertical_P21-40"
 		(layer "F.Cu")
 		(uuid "89f6920a-4279-4636-a55d-d06ecb54888a")
-		(at 148.315 104.505)
+		(at 70.28 46.5)
 		(descr "Through hole straight pin header, 1x20, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x20 2.54mm single row")
 		(property "Reference" "J4"
@@ -37915,7 +37915,7 @@
 	(footprint "Connector_PinSocket_2.54mm:PinSocket_1x20_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "c4b0742f-4ae6-4b25-bc98-4479fbe1f3be")
-		(at 102.295 67.795)
+		(at 79 64)
 		(descr "Through hole straight socket strip, 1x20, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
 		(tags "Through hole socket strip THT 1x20 2.54mm single row")
 		(property "Reference" "J5"
@@ -42179,7 +42179,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x20_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "e2ee21f1-7f0e-4d5f-ac86-3fd86ab2a6e2")
-		(at 143.725 104.505)
+		(at 43.5 46.5)
 		(descr "Through hole straight pin header, 1x20, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x20 2.54mm single row")
 		(property "Reference" "J3"
@@ -46167,7 +46167,7 @@
 	(footprint "Connector_PinSocket_2.54mm:PinSocket_1x20_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "f879ecea-a588-49e0-8374-0ec6948fbd79")
-		(at 152.905 104.495)
+		(at 48 46.5)
 		(descr "Through hole straight socket strip, 1x20, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
 		(tags "Through hole socket strip THT 1x20 2.54mm single row")
 		(property "Reference" "J1"
@@ -47746,7 +47746,7 @@
 	(footprint "SalixFP:Salix_PinSocket_1x20_P2.54mm_Vertical_P21-40"
 		(layer "F.Cu")
 		(uuid "fe7af168-ee03-4718-b01d-f14d605ff289")
-		(at 157.495 104.495)
+		(at 65.78 46.5)
 		(descr "Through hole straight socket strip, 1x20, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
 		(tags "Through hole socket strip THT 1x20 2.54mm single row")
 		(property "Reference" "J2"
