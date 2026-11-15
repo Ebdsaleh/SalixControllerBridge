@@ -151,6 +151,8 @@ The first motherboard PCB foundation now exists. Mechanical coordinates below ar
 - [x] Corrected F8 baseline confirmed: 0 errors / 4 known MP mechanical-pad warnings (J12/J14)
 - [x] Populated-board native guard: 224 footprints / 220 non-scaffold / no front-board leakage / 0 footprint errors
 - [~] Populated-board DRC baseline captured: 265 violations + 499 unconnected before placement/routing; fine-pitch/drill rule alignment identified separately
+- [x] High-reliability capacitor policy frozen: quality MLCCs for HF/loop roles; polymer/hybrid for bulk polarized storage
+- [~] Replace/revalidate remaining conventional wet 12V reservoir with Panasonic EEH-ZC hybrid candidate before Gerber
 - [~] Working board envelope = 160 x 100mm; validate placement before enclosure freeze
 - [~] Working mounting pattern = four M3 / 3.2mm NPTH holes, 5mm in from each corner
 - [ ] Freeze connector positions relative to enclosure
