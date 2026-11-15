@@ -23,14 +23,17 @@ Both sheet instances are serialized as `on_board no` in the motherboard project 
 8. Keep **Update footprint fields from symbols** checked.
 9. Confirm the changes pane reports **0 errors**.
 10. Click **Update PCB**, then **Close**.
-11. Place the imported footprint group temporarily in the middle of the working board area; do not individually arrange/rout yet.
-12. Save the board.
+11. After clicking **Update PCB**, the PCB canvas must visibly show the imported footprint group attached to the cursor / placed on the board. If the board still shows only H1-H4, the update did not apply.
+12. Place the imported footprint group temporarily in the middle of the working board area; do not individually arrange/rout yet.
+13. Press **Ctrl+S** in PCB Editor and confirm the board is saved.
 
 The next automated gate is:
 
 ```bat
-py tools\render_kicad_pcb.py
+py tools\render_kicad_pcb.py --expect-populated
 ```
+
+The validator now prints the footprint count, fails if the board is still scaffold-only, and rejects any reference that belongs to the excluded page-07/page-07A front USB PCB.
 
 At this stage many unrouted/unconnected-pad DRC findings are expected because the real circuit population has just been introduced. The important gate is that KiCad successfully imports the correct motherboard population and does **not** import the front-USB daughterboard population.
 
