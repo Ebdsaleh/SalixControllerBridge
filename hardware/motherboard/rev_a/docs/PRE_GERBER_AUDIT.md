@@ -349,7 +349,7 @@ No circuit topology, net identity, footprint, fitted value, or frozen electrical
 6. **Buck control-loop schematic values are analytically frozen.** RCOMP=5.90k, CCOMP=10nF, CHF=DNP with a 22pF tuning option follow TI Equations 46-48 for the Rev-A shunt/output-bank values. Physical Bode measurement remains required before production release.
 7. **Schematic warning baseline is frozen at 1373 warnings / 0 errors:** 1111 endpoint_off_grid + 253 lib_symbol_mismatch + 4 isolated_pin_label + 4 lib_symbol_issues + 1 established USB-C PD pin_to_pin. Further warning cleanup is optional housekeeping unless it reveals a real regression; new warning classes or ERC errors remain blockers.
 
-## Motherboard PCB foundation — NATIVE VALIDATION PENDING
+## Motherboard PCB foundation — NATIVE GREEN / FROZEN AS WORKING SCAFFOLD
 
 - New file: `SalixControllerBridge_RevA.kicad_pcb`.
 - Working envelope: **160.0 x 100.0mm**. This is adopted from the old concept only as a practical first placement/quote envelope; it is **not** an enclosure-frozen dimension.
@@ -364,6 +364,16 @@ No circuit topology, net identity, footprint, fitted value, or frozen electrical
 - No schematic footprints are placed yet. The board must pass a native file-format/outline DRC + render gate first; then KiCad forward annotation will populate the schematic footprints for real placement.
 - Added `tools/render_kicad_pcb.py` to produce native top/bottom renders and `PCB_DRC.rpt` in `Downloads\\kicad_pcb_validation.zip`.
 - Final copper weight, exact fab stack-up, enclosure connector coordinates and mounting geometry remain open until placement and chassis integration prove the working envelope.
+
+## Motherboard / front-board schematic boundary
+
+The system schematic intentionally includes both physical PCBs, but KiCad supports one board per project. For the Rev-A motherboard project:
+
+- sheet 07 `FRONT USB DUAL-BANK DAUGHTERBOARD` is marked **Exclude from board** (`on_board no`);
+- sheet 07A `FRONT USB PRESENCE / MANAGEMENT` is marked **Exclude from board** (`on_board no`);
+- this preserves the complete system schematic and cross-board signal documentation while preventing those daughterboard components from being forward-annotated onto the motherboard PCB;
+- the future universal front-USB PCB will use its own KiCad project/root that instantiates those same physical-board source sheets with board inclusion enabled;
+- do not manually delete daughterboard footprints after motherboard forward annotation as a substitute for this boundary.
 
 ## Layout/current constraints
 
