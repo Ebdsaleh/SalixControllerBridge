@@ -79,6 +79,71 @@ def board_references(board: Path) -> list[str]:
     return re.findall(r'\(property\s+"Reference"\s+"([^"]+)"', text)
 
 
+def extract_footprint_by_reference(text: str, reference: str) -> str:
+    ref_match = re.search(
+        rf'\(property\s+"Reference"\s+"{re.escape(reference)}"',
+        text,
+    )
+    if not ref_match:
+        raise RuntimeError(f"PCB footprint {reference} not found")
+
+    start = text.rfind("(footprint ", 0, ref_match.start())
+    if start < 0:
+        raise RuntimeError(f"PCB footprint block for {reference} not found")
+
+    depth = 0
+    in_string = False
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+        elif char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth == 0:
+                return text[start:index + 1]
+
+    raise RuntimeError(f"Unbalanced PCB footprint block for {reference}")
+
+
+def validate_j16_center_positive(board: Path) -> None:
+    text = board.read_text(encoding="utf-8")
+    footprint = extract_footprint_by_reference(text, "J16")
+
+    expected = {
+        "1": "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_JACK_RAW",
+        "2": "GND",
+    }
+    actual: dict[str, str] = {}
+
+    for pad_number in expected:
+        pad_match = re.search(
+            rf'\(pad\s+"{pad_number}"[\s\S]*?\(net\s+"([^"]+)"\)',
+            footprint,
+        )
+        if not pad_match:
+            raise RuntimeError(f"J16 pad {pad_number} net assignment not found")
+        actual[pad_number] = pad_match.group(1)
+
+    if actual != expected:
+        raise RuntimeError(
+            "J16 center-positive mapping regression: "
+            f"pad1={actual.get('1')!r}, pad2={actual.get('2')!r}; "
+            "expected pad1=BARREL_JACK_RAW and pad2=GND"
+        )
+
+
 def schematic_instance_references(sheet: Path) -> set[str]:
     text = sheet.read_text(encoding="utf-8")
     return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
@@ -134,6 +199,9 @@ def main() -> int:
             )
             return 3
         print("Front PCB : no excluded page-07/07A references detected")
+
+        validate_j16_center_positive(board)
+        print("J16       : center-positive pad mapping verified (1=RAW, 2=GND)")
 
         if args.expect_populated and not non_scaffold:
             print(
