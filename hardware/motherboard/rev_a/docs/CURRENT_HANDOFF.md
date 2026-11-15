@@ -243,3 +243,26 @@ Correction:
 - J8 currently overlaps the still-unplaced Pico-B footprint pile; this is temporary and must not be interpreted as an anchor collision.
 
 Revalidate before freezing batch 1.
+
+
+### J16 polarity catch during batch-1 freeze
+
+The corrected mechanical orientation validated, but tracing the barrel current path exposed a stale PCB net assignment:
+
+- source schematic: J16 pin 1 CENTER_+ -> BARREL_JACK_RAW; pin 2 SLEEVE_GND -> GND;
+- project-local footprint: pad 1 is the positive/center terminal and pad 2 is sleeve;
+- populated PCB baseline had those two nets reversed.
+
+Board-only correction:
+- `3aac37b Correct J16 center-positive PCB net mapping`
+
+Validator hardening:
+- `aba2484 Guard J16 center-positive PCB mapping`
+
+Do not route the barrel block unless `render_kicad_pcb.py --expect-populated` prints:
+
+```text
+J16       : center-positive pad mapping verified (1=RAW, 2=GND)
+```
+
+The source schematic itself was already correct and was not changed.
