@@ -5567,7 +5567,7 @@
 	(footprint "SalixFP:Kycon_KLDHCX-8-0202-B"
 		(layer "F.Cu")
 		(uuid "26da1724-ee30-4bb7-b82f-c8dbc3a68937")
-		(at 165 20.5 90)
+		(at 165 20 270)
 		(descr "Kycon KLDHCX-8-0202-B high-current 2.5mm center-pin right-angle DC jack. Mechanical/drill pattern follows Kycon drawing KLDHCX-8-0202-x Rev A3 recommended PCB layout: pin 1 slot 3.00x1.00 at x=12.0mm, pin 2 slot 2.30x1.00 at x=6.0mm, 1.60mm locator at x=3.0mm, and two 2.50x1.00 retention slots at x=5.0mm separated 9.0mm vertically.")
 		(tags "Kycon KLDHCX-8-0202-B 8A 24V DC jack 2.5mm right angle through hole")
 		(property "Reference" "J16"
