@@ -800,3 +800,57 @@ The first source placement briefly overlapped R75/C76 with L70's courtyard; comm
 No routing was added.
 
 Batch 7 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before the AEF network is moved.
+
+
+### Batch-7 native validation — GREEN / LM25149 local support frozen
+
+Returned KiCad 10.0.8 validation after the controller-local support placement confirms all structural guards still pass.
+
+When the native DRC is filtered to the frozen buck power skeleton plus batch-7 support references (R71-R76, R78, C75-C79):
+- **0 internal shorting violations**;
+- **0 internal copper-clearance violations**;
+- **0 internal courtyard / solder-mask / hole violations**;
+- only expected unrouted connections and silkscreen/reference-field findings remain inside the block.
+
+The raw board DRC count is still dominated by page-11/page-04 components that remain in the import pile and temporarily overlap already placed buck parts.
+
+Therefore the **LM25149 controller-local support network is NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 8 — LM25149 active EMI filter network
+
+Board commit:
+
+```text
+9062958  Place LM25149 active EMI filter network
+```
+
+Placed the remaining page-11 AEF network as a quiet small-signal cluster below/left of U70 and away from Q70/Q71/L71/SW copper.
+
+Local AEFVDDA supply pair:
+- R83 BUCK_VCC -> BUCK_AEFVDDA -> (136.2, 88.8), 0 deg;
+- C86 BUCK_AEFVDDA -> GND -> (139.5, 90.0), 0 deg.
+
+Signal-flow rows:
+- C81 SYS_IN -> BUCK_SEN -> (134.0, 96.0), 0 deg;
+- R81 BUCK_SEN -> BUCK_INJ -> (137.5, 96.0), 0 deg;
+
+- C84 BUCK_SEN -> AEF_COMP_MID -> (134.0, 98.5), 0 deg;
+- R80 AEF_COMP_MID -> BUCK_INJ -> (137.5, 98.5), 0 deg;
+
+- C82 SYS_IN -> AEF_DAMP_TOP -> (134.0, 101.0), 0 deg;
+- R79 AEF_DAMP_TOP -> BUCK_INJ -> (137.5, 101.0), 0 deg;
+- C83 AEF_DAMP_TOP -> BUCK_INJ -> (137.5, 103.5), 0 deg;
+
+- C85 SYS_IN -> AEF_RINC_MID -> (134.0, 106.0), 0 deg;
+- R82 AEF_RINC_MID -> GND -> (137.5, 106.0), 0 deg.
+
+Placement intent:
+- all AEF parts remain at 0 deg, so no new absolute-pad-angle guard entries are required;
+- each two-part row is arranged so the intermediate net faces inward, minimizing local analog interconnect;
+- R83/C86 are kept closer to U70 because AEFVDDA is a local controller supply;
+- the SEN/INJ shaping network is kept below the controller-local support strip and physically separated from the high-dv/dt SW side;
+- no routing was added.
+
+Source-level post-placement audit reports **0 courtyard-box overlaps** among the complete buck power skeleton, controller-support network, and all batch-8 AEF footprints.
+
+Batch 8 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before any further functional block is moved.
