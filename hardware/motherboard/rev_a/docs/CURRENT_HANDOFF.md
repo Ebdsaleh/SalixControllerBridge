@@ -6,7 +6,7 @@ Date: 2026-11-15
 
 **Schematic phase: GREEN / FROZEN.**
 
-**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED.**
+**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-CORRECTED AGAIN / FINAL NATIVE RETEST REQUIRED.**
 
 The corrected populated motherboard baseline is committed as:
 
@@ -1106,3 +1106,59 @@ py tools\render_kicad_pcb.py --expect-populated
 Return the fresh console output and `kicad_pcb_validation.zip`.
 
 If the corrected J14 gate is native-clean, freeze J12/J13/J14 and place the remaining sheet-04 local support network around those anchors. Do not route yet and do not manually move the remaining import pile.
+
+
+### Batch-10 second native validation — board edge fixed, H4 conflict found and corrected
+
+Returned KiCad 10.0.8 validation for head `2b46e33` confirms the previous J14 board-edge defect is closed, and all global structural guards remain green:
+
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping guard passed;
+- rotated-placement absolute-pad-angle guard passed, including J14 at 90 degrees.
+
+Native DRC reports **373 total findings**, still dominated by unrouted nets and the untouched sheet-04 import pile.
+
+J12 and J13 remain clean for placement.
+
+The corrected J14 no longer touches the board edge, but native KiCad exposed a second genuine mechanical conflict:
+- J14 mounting pad MP at approximately (176.9, 117.35) was only **0.0539 mm** from H4's NPTH;
+- J14 and H4 courtyards overlapped;
+- H4's NPTH was inside J14's courtyard.
+
+This is a real placement blocker, not import-pile noise.
+
+Correction:
+
+```text
+bbad511  Shift TFT service connector clear of H4
+```
+
+J14 remains rotated 90 degrees but is shifted left:
+
+- J14 -> **(165.0, 104.0), 90 deg**.
+
+Source-level post-correction geometry audit:
+- J14 courtyard bbox = x **159.9 .. 170.1 mm**, y **89.4 .. 118.6 mm**;
+- no courtyard overlap with J13;
+- no courtyard overlap with H4;
+- no overlap with C90-C97, L71 or R70;
+- no overlap with J5/J6;
+- J14 remains completely inside the board envelope;
+- all J14 pads retain their guarded absolute 90-degree orientation.
+
+No routing was added and no sheet-04 support passives were moved.
+
+Batch 10 remains **SOURCE-CORRECTED / FINAL NATIVE RETEST REQUIRED**.
+
+### Exact next action after H4 correction
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`.
+
+If this corrected J14 position is native-clean, freeze J12/J13/J14 and proceed immediately with the sheet-04 local support network. Do not route yet and do not manually move the remaining import pile.
