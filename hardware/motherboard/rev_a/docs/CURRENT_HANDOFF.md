@@ -6,7 +6,7 @@ Date: 2026-11-15
 
 **Schematic phase: GREEN / FROZEN.**
 
-**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 11 PICO SERVICE LOCAL SUPPORT SOURCE-PLACED / NATIVE RETEST REQUIRED.**
+**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 12 USB-C PD CONTROLLER/PROTECTION CORE SOURCE-PLACED / NATIVE RETEST REQUIRED.**
 
 The corrected populated motherboard baseline is committed as:
 
@@ -1269,3 +1269,74 @@ py tools\render_kicad_pcb.py --expect-populated
 Return the fresh console output and `kicad_pcb_validation.zip`.
 
 If Batch 11 is native-clean, freeze the entire Pico-B service/storage/UI local-support block and continue to the next still-unplaced functional motherboard zone. Do not route yet and do not manually move the remaining import pile.
+
+
+### Batch-11 native validation — GREEN / Pico service local support frozen
+
+Returned KiCad 10.0.8 validation for head `fd12f25` confirms the complete 17-part sheet-04 local-support placement is internally clean.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+Native DRC:
+- raw board total improved to **210 violations**;
+- Batch-11 target set has **0 shorting violations**;
+- **0 copper-clearance violations**;
+- **0 courtyard / hole / keepout / solder-mask faults**;
+- remaining Batch-11 findings are only expected unrouted connections and silkscreen/reference-text overlap noise.
+
+Therefore the complete **Pico-B service/storage/UI local-support block is NATIVE GREEN / FROZEN for placement**.
+
+The remaining unplaced population is now 109 footprints across four functional sheets:
+- 03_USB_Hub_and_Input: 31;
+- 10_USB_C_PD_Input: 35;
+- 01_Power: 27;
+- 06_Service_Debug: 16.
+
+The next zone is the USB-C PD input because J17 is already mechanically frozen on the rear edge and its PD_PWR output feeds the already-frozen LTC4418 source-priority stage.
+
+## PCB placement batch 12 — USB-C PD controller/protection core
+
+Board commit:
+
+```text
+5d5f9ca  Place USB-C PD controller protection core
+```
+
+Placed only the critical PD controller/protection devices:
+
+- U9 TPD4S201 CC/ESD protector -> **(137.0, 32.0), 0 deg**;
+- U8 TVS2200 VBUS flat-clamp protector -> **(143.0, 32.0), 0 deg**;
+- D30 STPS5H100BY Schottky surge-current clamp -> **(151.5, 32.0), 0 deg**;
+- U7 TPS25730A standalone PD sink controller/power path -> **(137.0, 40.5), 0 deg**.
+
+Placement intent:
+- U9 is closest to J17's CC1/CC2 connector-side nets so the CC protection path remains short;
+- U8 sits directly beneath J17's raw VBUS region for local overvoltage clamping;
+- D30 is immediately adjacent to the raw-VBUS protection region while remaining clear of the barrel-input F1 zone below;
+- U7 sits immediately inward of the connector-side protection devices, between J17 and the already-frozen PD_PWR LTC4418 channel;
+- all four devices remain at 0 degrees, so no new absolute-pad-angle guard is required.
+
+Source-level pre-commit courtyard audit against every currently placed motherboard footprint reports:
+- **0 target-target courtyard-box overlaps**;
+- **0 target-to-frozen-block courtyard-box overlaps**;
+- all four targets remain inside the board envelope.
+
+No routing was added. The remaining USB-C PD capacitors/resistors and PD_PWR bulk/output capacitors remain unplaced until this core passes native KiCad.
+
+Batch 12 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+### Exact next action
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`.
+
+If Batch 12 is native-clean, freeze the PD controller/protection core and place the TPS25730A local decoupling/configuration/CC support plus PD_PWR output bulk capacitors in the next small batch. Do not route yet and do not manually move the remaining import pile.
