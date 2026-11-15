@@ -258,7 +258,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "00d454a7-2c93-4d06-81ef-fd80f789f4a1")
-		(at 113 72 180)
+		(at 113 52 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q5"
@@ -1504,7 +1504,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "0534df0b-4e48-475f-9152-96b8a8880cd8")
-		(at 121 56.5)
+		(at 121 36.5)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q3"
@@ -13631,7 +13631,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "489bd67f-4d4f-41de-bf19-759534dea9cb")
-		(at 121 72)
+		(at 121 52)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q6"
@@ -15422,7 +15422,7 @@
 	(footprint "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm"
 		(layer "F.Cu")
 		(uuid "551537b4-0ff4-495a-af47-db847d4f0291")
-		(at 104.5 52.25)
+		(at 104.5 32.25)
 		(descr "QFN, 20 Pin (http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=274)")
 		(tags "QFN NoLead")
 		(property "Reference" "U4"
@@ -18381,7 +18381,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "62ecb524-4ab1-4b89-aac3-424218fafccb")
-		(at 121 48)
+		(at 121 28)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q1"
@@ -18832,7 +18832,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "67055ac6-1e74-4952-8ca2-1006208466dd")
-		(at 113 48 180)
+		(at 113 28 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q2"
@@ -19124,7 +19124,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "6c7e689d-9ca4-415d-a403-b38f995fbf30")
-		(at 113 80.5 180)
+		(at 113 60.5 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q7"
@@ -22362,7 +22362,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "846a72ef-941e-4b92-9b90-0bc164947d55")
-		(at 121 80.5)
+		(at 121 60.5)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q8"
@@ -26025,7 +26025,7 @@
 	(footprint "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm"
 		(layer "F.Cu")
 		(uuid "9b91c5c2-7e11-4b41-9c32-7ee40597ede0")
-		(at 104.5 76.25)
+		(at 104.5 56.25)
 		(descr "QFN, 20 Pin (http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=274)")
 		(tags "QFN NoLead")
 		(property "Reference" "U5"
@@ -34023,7 +34023,7 @@
 	(footprint "SalixFP:Vishay_PowerPAK_SO-8_Single"
 		(layer "F.Cu")
 		(uuid "bbafe949-1d70-4970-b893-62ffa805e851")
-		(at 113 56.5 180)
+		(at 113 36.5 180)
 		(descr "PowerPAK SO-8 Single (https://www.vishay.com/docs/71655/powerpak.pdf, https://www.vishay.com/docs/72599/72599.pdf)")
 		(tags "PowerPAK SO-8 Single")
 		(property "Reference" "Q4"
