@@ -27,6 +27,7 @@ Two finish lines are tracked separately:
 - [x] SW1/SW2 and D25-D28 exact parts/footprints plus R110-R113 LED current-limit networks are native-green
 - [x] J12 JST SM03B-SRSS-TB + R114/R115 100R SWD host termination are native-green
 - [x] Full 13-page schematic visual-hygiene gate passed
+- [~] Global reference annotation preflight: 310 unique designators / 0 duplicates in source; native rerender pending after reference-only cleanup
 - [x] First motherboard `.kicad_pcb` foundation is native-green: 0 DRC violations / 0 unconnected pads / 0 footprint errors
 
 Useful scale reference:
@@ -267,7 +268,7 @@ Only begin this after the first real quote.
 
 ## Next five milestones
 
-1. **Forward-annotate the motherboard-only schematic population with KiCad F8; verify pages 07/07A remain excluded and H1-H4 remain.**
+1. **Native-rerender the reference-clean schematic hierarchy, then retry KiCad F8; verify pages 07/07A remain excluded and H1-H4 remain.**
 2. **Perform functional block placement and review the 160x100mm working envelope before routing.**
 3. **Route the motherboard, then create/finalize the universal front USB PCB; close DRC on both.**
 4. **Generate the fab package and perform GerbView/fabrication review.**
