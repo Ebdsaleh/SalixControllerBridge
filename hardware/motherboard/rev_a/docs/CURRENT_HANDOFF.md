@@ -727,3 +727,76 @@ This placement is intentional:
 TI LM25149-Q1 layout guidance explicitly recommends minimizing the high-di/dt loop area and placing the ceramic input capacitors as close as possible to the high-side MOSFET / low-side MOSFET switching loop.
 
 Batch 6 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**. The next native run should be evaluated by filtering out still-unplaced pile collisions; do not move U70 support/AEF/compensation parts until the corrected core itself is confirmed free of internal short/clearance/courtyard faults.
+
+
+### Batch-6 corrected native validation — GREEN / buck power skeleton frozen
+
+Returned KiCad 10.0.8 validation after moving C71-C74 into the corrected VIN ceramic row confirms the 5V_MAIN high-current power skeleton is internally clean.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+Native DRC report contains **504 total violations**, but that raw number is dominated by still-unplaced page-11/page-04 pile parts occupying the same coordinates as already placed buck parts.
+
+When filtered to the frozen buck power-stage target set:
+- C70, L70, C71-C74, Q70, Q71, U70, L71, R70 and C90-C97 have **0 internal shorting violations**;
+- **0 internal copper-clearance violations**;
+- **0 internal courtyard / hole / solder-mask violations**;
+- remaining target-target items are only expected unrouted connections and silkscreen/reference-field warnings.
+
+Therefore the **5V_MAIN high-current buck power skeleton is NATIVE GREEN / FROZEN for placement**. Unplaced-pile collisions remain temporary until those page-11/page-04 parts are extracted into their final zones.
+
+## PCB placement batch 7 — LM25149 controller-local support network
+
+Initial placement commit:
+
+```text
+a8c475e  Place LM25149 controller support network
+```
+
+Rotation guard:
+
+```text
+1f2c6fa  Guard rotated LM25149 support placements
+```
+
+Source-level geometry refinement:
+
+```text
+80579be  Refine LM25149 support spacing
+```
+
+Placed only the controller-local non-AEF support set:
+
+- R75 CNFG -> (133.0, 75.2), 180 deg;
+- R74 RT -> (133.0, 77.2), 180 deg;
+- C76 22pF DNP compensation HF capacitor -> (129.5, 81.0), 180 deg;
+- R73 FB network -> (133.0, 81.0), 0 deg;
+- C75 COMP_RC capacitor -> (129.5, 83.5), 180 deg;
+- R76 compensation resistor -> (133.0, 83.5), 180 deg;
+- C77 VCC bypass -> (133.0, 85.8), 180 deg;
+- C78 VDDA bypass -> (133.0, 88.1), 180 deg;
+- C79 bootstrap capacitor -> (139.5, 86.8), 180 deg;
+- R71/R72 EN divider -> (129.5/133.0, 90.5), 0 deg;
+- R78 PGOOD pull-up -> (133.0, 93.0), 0 deg.
+
+Placement intent:
+- analog/configuration and compensation components form a narrow strip immediately left of U70, separated from the SW node and Q70/Q71;
+- VCC and VDDA bypass capacitors remain local to U70;
+- C79 is isolated just below/right of U70 to keep the CBOOT-to-SW loop short without entering Q71's courtyard;
+- EN and PGOOD support parts sit below the analog strip;
+- the active EMI filter parts C81-C86 and R79-R83 remain unplaced for a separate sensitive-analog batch.
+
+TI LM25149-Q1 guidance places CVCC, CVDDA and CBOOT locally at their associated pins and keeps sensitive small-signal circuitry away from the high-dv/dt SW region.
+
+Eight deliberately rotated 0603 parts are added to the absolute-pad-angle regression guard:
+R75, R74, C76, C75, R76, C77, C78 and C79.
+
+The first source placement briefly overlapped R75/C76 with L70's courtyard; commit 80579be reorganized the support parts into the current narrow strip. Post-refinement source audit reports **0 courtyard-box overlaps** among the buck power skeleton and all batch-7 support footprints.
+
+No routing was added.
+
+Batch 7 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before the AEF network is moved.
