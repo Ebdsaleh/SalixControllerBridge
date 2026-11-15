@@ -1,4 +1,5 @@
 Block,Candidate / Class,Qty,Status,Why
+Capacitor quality policy,High-reliability motherboard-class capacitor selection,all fitted capacitors,FROZEN DESIGN POLICY,Use reputable Murata/TDK/Yageo MLCCs (C0G/NP0 or X7R/X7S; automotive/AEC-Q200 grades where practical) for high-frequency bypass/filter/decoupling; use Panasonic-class conductive-polymer or conductive-polymer-hybrid aluminum parts for polarized bulk storage; avoid commodity wet aluminum electrolytics unless an electrical requirement such as minimum ESR/stability explicitly requires one; no Y5V/Z5U on critical rails
 USB Hub,USB2514B-class 4-port USB2 hub,1,CANDIDATE,Four logical input banks to one Pico-A root
 PIO USB series resistors,22 ohm 1%,2,FROZEN VALUE,Pico-PIO-USB root GP16/17
 3V3_AUX,TI TLV62569P SOT23-6,1,FROZEN FAMILY,Hub/logic/module rail
@@ -126,7 +127,7 @@ USB-A switch input bypass,100nF 25V X7R 0603,2 per daughterboard,FROZEN VALUE / 
 12V barrel input fuse holder,Littelfuse 178.6764.0001 MINI FL1 58V PCB holder,1,FROZEN MPN / EXACT PROJECT FOOTPRINT / NATIVE GREEN,SalixFP:Littelfuse_178.6764.0001_MINI_FL1; 22A continuous 30A max holder; single-holder pattern uses two 1.60mm plated drills at (-4,-0.8)/(+4,-0.8) and one 2.80mm central NPTH lock hole; manufacturer hole drawing nominal 8.00mm electrical spacing / 0.80mm offset / 1.50+/-0.10mm terminal holes / 2.70+/-0.10mm lock hole; 7.5A fuse rating remains provisional
 12V barrel input fuse,Littelfuse 099707.5WXN MINI 58V 7.5A,1,PROVISIONAL CURRENT RATING,Active automotive 58V blade fuse; 1kA breaking capacity; -40C to +125C; final amp rating must follow full load/inrush budget
 
-12V barrel output reservoir,Panasonic EEETQV470XAP 47uF 35V ±20% TQ SMD aluminum electrolytic,1,FROZEN MPN / FOOTPRINT,AEC-Q200; -40C to +125C; 2000h at 125C; 300mOhm max ESR at 100kHz; Capacitor_SMD:CP_Elec_6.3x7.7
+12V barrel output reservoir,Panasonic EEHZC1V470P 47uF 35V ±20% conductive-polymer hybrid aluminum,1,CANDIDATE UPGRADE / PRE-GERBER VALIDATION,Panasonic ZC hybrid; -55C to +125C; 4000h at 125C; 60mOhm max ESR at 100kHz; 900mArms ripple at 125C; candidate replacement for conventional wet EEETQV470XAP; verify LM74800/source-priority transient/inrush/damping behavior and update exact footprint/body height before Gerber
 
 USB-C PD sink controller,TI TPS25730ADREFR 38-WQFN REF,1,FROZEN MPN / PROJECT-LOCAL EXACT FOOTPRINT,SalixFP:TI_REF0038A_WQFN-38-2EP_6x4mm_P0.4; official KiCad exact TI REF0038A land pattern; Active 2026 PD3.2 sink-only controller; integrated managed 20V 5A path; no firmware/EEPROM required; pin-strapped 15-20V 3A operating/5A max
 USB-C PD power receptacle,GCT USB4085-GF-A 16-contact through-hole USB-C,1,FROZEN MPN / FOOTPRINT,SalixFP:GCT_USB4085_Exact; 5A/48V/240W; dedicated power-only instance; D+/D- unused
