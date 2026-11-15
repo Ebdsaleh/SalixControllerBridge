@@ -316,8 +316,6 @@ def validate_reference_annotation(pages: list[SheetPage]) -> None:
         local_refs = set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
 
         for ref in sorted(local_refs):
-            if ref.startswith("#"):
-                continue
             if "?" in ref:
                 unannotated.append((ref, sheet.source.name))
                 continue
