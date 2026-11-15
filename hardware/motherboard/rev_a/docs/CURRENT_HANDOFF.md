@@ -685,3 +685,45 @@ Source-level post-commit audit confirms:
 No routing was added. Compensation, bootstrap, VCC/VDDA, enable/FB/RT/CNFG, PGOOD and AEF parts remain unplaced.
 
 Batch 6 is **SOURCE-PLACED / NATIVE RETEST REQUIRED** before any small-signal buck support parts move.
+
+
+### Batch-6 first native validation — buck core topology good, VIN ceramic row corrected
+
+Returned KiCad 10.0.8 validation after the first 5V_MAIN power-stage placement kept all global guards green:
+
+- 224 total footprints / 220 non-scaffold;
+- no page-07/page-07A leakage;
+- J16 center-positive guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+The raw DRC count rose because the newly placed buck core occupies the same coordinates as many still-unplaced page-11 small-signal parts and page-04 service/storage parts. Those pile collisions are not evidence that the power-stage zone itself is wrong; the right-center zone is intentionally retained because it keeps the SYS_IN handoff from the frozen source-priority stage short and avoids the permanent Pico-B socket corridor at J5/J6.
+
+One genuine internal batch-6 defect was identified:
+
+- C74 BUCK_VIN pad overlapped U70 GND, creating a real BUCK_VIN-to-GND short;
+- C73/C74 courtyards also crowded U70.
+
+Correction:
+
+```text
+c85956e  Clear buck VIN ceramic bank from controller
+```
+
+C71-C74 were reorganized into one horizontal ceramic row directly above Q70:
+
+- C71 -> (136, 70.5);
+- C72 -> (141, 70.5);
+- C73 -> (146, 70.5);
+- C74 -> (151, 70.5).
+
+All remain at 0 degrees.
+
+This placement is intentional:
+- the ceramic bank is now immediately adjacent to the high-side switching FET region;
+- C70 remains the bulk hybrid reservoir and is not forced into the high-frequency loop;
+- the row is mechanically separated from U70 and Q70;
+- source-level courtyard audit reports **0 target-target overlaps** among the buck power-stage footprints after the correction.
+
+TI LM25149-Q1 layout guidance explicitly recommends minimizing the high-di/dt loop area and placing the ceramic input capacitors as close as possible to the high-side MOSFET / low-side MOSFET switching loop.
+
+Batch 6 remains **SOURCE-CORRECTED / NATIVE RETEST REQUIRED**. The next native run should be evaluated by filtering out still-unplaced pile collisions; do not move U70 support/AEF/compensation parts until the corrected core itself is confirmed free of internal short/clearance/courtyard faults.
