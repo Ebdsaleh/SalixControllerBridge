@@ -404,7 +404,7 @@ Corrective action:
 
 No electrical topology, visible reference, value, footprint, or net changed.
 
-## First F8 population pin-map closure — SOURCE FIXED / NATIVE RETEST REQUIRED
+## First F8 population pin-map closure — NATIVE GREEN
 
 The first successful motherboard F8 population imported the real circuit group, but KiCad reported **92 errors / 72 warnings**. The user captured the complete F8 report before closing the dialog. All 92 errors reduce to five deterministic pin-map classes:
 
@@ -419,6 +419,8 @@ The first successful motherboard F8 population imported the real circuit group, 
 The project-local symbol/footprint source check now reports no missing pads for the affected symbol families. `render_kicad_schematics.py` now performs this project-local pin-map preflight automatically.
 
 The piled/overlapping first-import PCB is not a placement baseline and its DRC noise is intentionally ignored until the corrected F8 update succeeds with **0 update errors**.
+
+Corrected F8 native result: **0 errors / 4 warnings**. The four warnings are exactly the two mechanical `MP` pads on J12 and the two mechanical `MP` pads on J14, which intentionally have no schematic pins/nets. All 92 hard pad-map errors and the other 68 warnings are gone. The F8 population/pin-map correction gate is therefore **native-green**.
 
 ## Motherboard / front-board schematic boundary
 
