@@ -230,3 +230,16 @@ py tools\render_kicad_pcb.py --expect-populated
 ```
 
 Inspect top/bottom renders before continuing placement.
+
+
+### Batch-1 validation correction
+
+Returned native render/DRC showed J16 had been rotated the wrong direction in the initial anchor batch: its electrical pads landed outside the rear board edge. J17 and front anchors J7/J8 were mechanically correct.
+
+Correction:
+- J16 -> (165, 20) at 270 degrees, placing the jack front face on the rear y=20 edge and the jack body/pins inward.
+- J17 remains aligned to rear y=20 through its exact PCB-edge datum.
+- J7/J8 remain on the front y=120 edge.
+- J8 currently overlaps the still-unplaced Pico-B footprint pile; this is temporary and must not be interpreted as an anchor collision.
+
+Revalidate before freezing batch 1.
