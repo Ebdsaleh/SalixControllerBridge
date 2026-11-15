@@ -6,7 +6,7 @@ Date: 2026-11-15
 
 **Schematic phase: GREEN / FROZEN.**
 
-**Motherboard PCB phase: POPULATED / READY FOR FUNCTIONAL PLACEMENT.**
+**Motherboard PCB phase: FUNCTIONAL PLACEMENT IN PROGRESS — BATCH 10 CONNECTOR ANCHORS SOURCE-PLACED / NATIVE RETEST REQUIRED.**
 
 The corrected populated motherboard baseline is committed as:
 
@@ -965,3 +965,74 @@ py tools\render_kicad_pcb.py --expect-populated
 ```
 
 Return the fresh console output and `kicad_pcb_validation.zip`. If Batch 9 is clean, freeze the Pico socket geometry, then place J12/J13/J14 plus their local service/storage support as the next small functional batch.
+
+
+### Batch-9 native validation — GREEN / dual-Pico geometry frozen
+
+Returned KiCad 10.0.8 validation for head `cdc4828` confirms the dual-Pico socket/breakout placement is mechanically and electrically clean for placement.
+
+Structural guards:
+- 224 total footprints / 220 non-scaffold motherboard footprints;
+- no page-07/page-07A front-board leakage;
+- J16 center-positive mapping guard passed;
+- rotated-placement absolute-pad-angle guard passed.
+
+Native DRC:
+- raw board total: **413** findings, still dominated by unrouted nets and the remaining import/service pile;
+- filtering to J1-J6 finds **0 shorting violations**;
+- **0 copper-clearance violations**;
+- **0 courtyard / hole / keepout / solder-mask faults**;
+- only expected unrouted connections plus two silkscreen-over-copper warnings involving still-piled nearby resistors.
+
+The top/bottom native renders also show the three socket/breakout pairs separated correctly with no mechanical collision.
+
+Therefore the complete **Pico-A / Pico-B socket and breakout geometry is NATIVE GREEN / FROZEN for placement**.
+
+## PCB placement batch 10 — service connector anchors
+
+Board commit:
+
+```text
+34726bc  Place service connector anchors
+```
+
+Moved only the three mechanically constrained service connectors:
+
+- J12 Pico-A SWD JST-SH -> **(56.9, 39.5), 0 deg**;
+- J13 Hirose DM3AT-SF-PEJM5 microSD -> **(149.0, 111.0), 0 deg**;
+- J14 12-pin JST PH TFT/service connector -> **(173.0, 102.0), 0 deg**.
+
+Placement intent:
+- J12 sits above the Pico-A socket pair at the USB/debug end, leaving the opposite Pico 2 W antenna end unobstructed;
+- J13 is placed at the lower board edge so the push-push microSD card slot is physically accessible instead of buried in the board interior;
+- J14 occupies the lower-right service/UI zone, clear of the frozen buck output bank and clear of J13 while keeping the TFT/service harness out of the Pico socket corridor;
+- all three remain at 0 deg, so no new absolute-pad-angle guard entry is required.
+
+Source-level courtyard audit after the move reports:
+- **0 J12/J13/J14 target-target overlaps**;
+- **0 overlaps with the frozen Pico socket/breakout blocks**;
+- **0 overlaps with the frozen 5V_MAIN buck power-stage anchors**;
+- all three courtyards remain inside the 160 x 100 mm working board envelope.
+
+No routing was added. No sheet-04 support passives were moved yet. The SD/TFT pull-ups, SPI series resistors, SWD series resistors and local decoupling remain in the import pile for the next small placement batch.
+
+Batch 10 is **SOURCE-PLACED / NATIVE RETEST REQUIRED**.
+
+### Exact next action
+
+```bat
+git pull --ff-only && ^
+git log -8 --oneline && ^
+py tools\render_kicad_pcb.py --expect-populated
+```
+
+Return the fresh console output and `kicad_pcb_validation.zip`.
+
+If Batch 10 is native-clean, freeze J12/J13/J14 and place the remaining sheet-04 support network around those anchors:
+- microSD pulls/decoupling;
+- shared SPI series network;
+- TFT logic/pull network;
+- Pico-A SWD series pair;
+- local 3V3_AUX / 5V_AUX decoupling.
+
+Do not route yet and do not manually move the remaining import pile.
