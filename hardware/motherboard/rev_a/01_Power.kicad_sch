@@ -875,7 +875,7 @@
 				)
 		)
 		(property "Value" "100k PG pull-up"
-			(at 185 125 0)
+			(at 185 123 0)
 			(effects
 					(font (size 0.95 0.95))
 				)
@@ -1569,8 +1569,8 @@
 	(global_label "CHARGE_PWR" (shape passive) (at 119.38 137.16 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "9d000000-0000-4000-8000-000000000090"))
 	(wire (pts (xy 100.33 149.86) (xy 100.33 154.94000000000003)) (stroke (width 0) (type default)) (uuid "9d000000-0000-4000-8000-000000000091"))
 	(label "AUX_DVDT" (at 100.33 154.94000000000003 90) (effects (font (size 0.66 0.66)) (justify left bottom)) (uuid "9d000000-0000-4000-8000-000000000092"))
-	(wire (pts (xy 102.87 149.86) (xy 102.87 154.94000000000003)) (stroke (width 0) (type default)) (uuid "9d000000-0000-4000-8000-000000000093"))
-	(global_label "GND" (shape passive) (at 102.87 154.94000000000003 90) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "9d000000-0000-4000-8000-000000000094"))
+	(wire (pts (xy 102.87 149.86) (xy 102.87 157.48)) (stroke (width 0) (type default)) (uuid "9d000000-0000-4000-8000-000000000093"))
+	(global_label "GND" (shape passive) (at 102.87 157.48 90) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "9d000000-0000-4000-8000-000000000094"))
 	(wire (pts (xy 105.41 149.86) (xy 105.41 154.94000000000003)) (stroke (width 0) (type default)) (uuid "9d000000-0000-4000-8000-000000000095"))
 	(label "AUX_ILM" (at 105.41 154.94000000000003 90) (effects (font (size 0.66 0.66)) (justify left bottom)) (uuid "9d000000-0000-4000-8000-000000000096"))
 	(wire (pts (xy 41.91 170.18) (xy 36.83 170.18)) (stroke (width 0) (type default)) (uuid "9d000000-0000-4000-8000-000000000097"))
