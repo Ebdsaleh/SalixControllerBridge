@@ -4174,9 +4174,9 @@
 		(exclude_from_sim no)(in_bom yes)(on_board yes)
 		(property "Reference" "BT" (at 0 -7.62 0) (effects (font (size 0.9 0.9))))
 		(property "Value" "CR2032" (at 0 7.62 0) (effects (font (size 0.9 0.9))))
-		(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Footprint" "SalixFP:Keystone_1174_CR2032_Vertical_Exact" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "https://www.keyelco.com/product.cfm/product_id/14915" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-		(property "Description" "User-replaceable CR2032 primary-cell holder; Keystone 1174 vertical locking THM candidate. Exact project-local footprint withheld until terminal polarity/mounting mapping is verified from authoritative drawing." (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+		(property "Description" "Keystone 1174 locking vertical THM CR2032 holder; exact project-local footprint uses manufacturer Rev-B hole geometry and polarity" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
 		(symbol "CR2032_HOLDER_0_1"
 			(rectangle (start -6.35 5.08) (end 6.35 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
 		)
