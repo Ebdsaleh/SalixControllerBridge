@@ -2913,13 +2913,13 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C220"
-			(at 2 0 90)
+			(at 3.1 0 90)
 			(layer "F.SilkS")
 			(uuid "02637637-c691-4f88-ac65-4e7355f9f6e5")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.7 0.7)
+					(thickness 0.12)
 				)
 			)
 		)
@@ -29251,13 +29251,13 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q220"
-			(at -2.2 0 90)
+			(at -2.6 0 90)
 			(layer "F.SilkS")
 			(uuid "403b7848-bfdb-4611-a72f-6f663d6ffb2b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.7 0.7)
+					(thickness 0.12)
 				)
 			)
 		)
@@ -32753,13 +32753,13 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C221"
-			(at 3 0 90)
+			(at 2 0 90)
 			(layer "F.SilkS")
 			(uuid "5232348c-b149-4b7e-b9c1-8839816f5cfc")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.7 0.7)
+					(thickness 0.12)
 				)
 			)
 		)
@@ -38388,13 +38388,13 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R220"
-			(at 2.2 0 90)
+			(at 2.4 0.6 90)
 			(layer "F.SilkS")
 			(uuid "2a03c65e-735e-454e-a0a1-ac708d6331bf")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.7 0.7)
+					(thickness 0.12)
 				)
 			)
 		)
