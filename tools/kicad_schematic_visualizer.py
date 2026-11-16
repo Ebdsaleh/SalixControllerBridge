@@ -338,11 +338,13 @@ def render(path,out):
                             nx,ny=a[0],a[1]-.5
                             svg.text(no,nx,ny,.58,j={"center"},col="#9b1c1c")
                             pin_ann.append({"ref":ref,"pin":no,"role":"number","text":no,
+                                            "anchor":a,
                                             "box":tbox(no,nx,ny,.58,{"center"})})
                         if nm2 and nm2!="~":
                             nx,ny=(a[0]+b[0])/2,(a[1]+b[1])/2-.45
                             svg.text(nm2,nx,ny,.58,j={"center"},col="#267d6d")
                             pin_ann.append({"ref":ref,"pin":no,"role":"name","text":nm2,
+                                            "anchor":a,
                                             "box":tbox(nm2,nx,ny,.58,{"center"})})
             if pts:
                 xs=[x for x,_ in pts];ys=[y for _,y in pts];boxes.append((ref,[min(xs),min(ys),max(xs),max(ys)]))
@@ -390,9 +392,16 @@ def render(path,out):
     pin_hits=[]
     for t in texts:
         for p in pin_ann:
+            # Labels placed directly at a pin endpoint are intentional
+            # connectivity annotations, not visual collisions.  Suppress
+            # only the label attached to that same endpoint; the 1 mm
+            # threshold stays well below normal 2.54 mm connector pitch.
+            if t["kind"] in ("label","global_label","hierarchical_label"):
+                ax,ay=p["anchor"]
+                if math.hypot(t["x"]-ax,t["y"]-ay) <= 1.0:
+                    continue
             if t["owner"]==p["ref"] and t["kind"] in ("Reference","Value"):
-                # Same-symbol ref/value collisions are still invalid, so do
-                # not suppress them.  This branch documents intent.
+                # Same-symbol ref/value collisions are still invalid.
                 pass
             if intersects(t["box"],p["box"]):
                 pin_hits.append({
@@ -449,4 +458,6 @@ def main():
     a=ap.parse_args()
     fs=sorted(a.input.glob("**/*.kicad_sch" if a.recursive else "*.kicad_sch")) if a.input.is_dir() else [a.input]
     total=sum(render(p,a.out) for p in fs);print("Total review findings:",total)
+    if total:
+        raise SystemExit(1)
 if __name__=="__main__":main()
