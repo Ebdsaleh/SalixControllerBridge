@@ -49453,7 +49453,7 @@
 		(layer "Edge.Cuts")
 		(uuid "a2000000-0000-4000-8000-000000000001")
 	)
-	(gr_text "4-LAYER WORKING STACK: F.Cu / GND / PWR / B.Cu — 1.6 mm"
+	(gr_text "4-LAYER FAB TARGET: 2oz F/B / 1oz GND/PWR — 1.6 mm; FINAL IMPEDANCE STACKUP AT FAB"
 		(at 100 108 0)
 		(layer "Cmts.User")
 		(uuid "a2000000-0000-4000-8000-000000000005")
