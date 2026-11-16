@@ -5,12 +5,17 @@ on:
     branches: [ main ]
     paths:
       - "hardware/motherboard/rev_a/**/*.kicad_sch"
+      - "hardware/motherboard/rev_a/**/*.kicad_pcb"
+      - "hardware/motherboard/rev_a/**/*.kicad_mod"
+      - "hardware/motherboard/rev_a/**/*.kicad_sym"
       - "tools/kicad_schematic_visualizer.py"
+      - "tools/render_kicad_schematics.py"
+      - "tools/render_kicad_pcb.py"
       - ".github/workflows/kicad-visual-review.yml"
   workflow_dispatch:
 
 jobs:
-  render:
+  source-visualizer:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,17 +23,91 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Render Rev-A schematics
+      - name: Render source-level Rev-A schematics
         run: |
           python tools/kicad_schematic_visualizer.py \
             hardware/motherboard/rev_a \
             --recursive \
             --out artifacts/kicad_visuals
 
-      - name: Upload visual review artifact
+      - name: Upload source visual review artifact
         uses: actions/upload-artifact@v4
         with:
-          name: kicad-visual-review
+          name: kicad-source-visual-review
           path: artifacts/kicad_visuals
           if-no-files-found: error
           retention-days: 14
+
+  native-kicad-10-0-8:
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:10.0.8-full
+      options: --user 0
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify pinned KiCad
+        shell: bash
+        run: |
+          set -euo pipefail
+          kicad-cli --version | tee /tmp/kicad-version.txt
+          grep -F "10.0.8" /tmp/kicad-version.txt
+
+      - name: Prepare Python renderer environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-venv
+          python3 -m venv /tmp/salix-kicad-ci
+          /tmp/salix-kicad-ci/bin/python -m pip install --disable-pip-version-check --no-cache-dir PyMuPDF
+
+      - name: Native schematic render and ERC
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/kicad_native_schematics
+          /tmp/salix-kicad-ci/bin/python tools/render_kicad_schematics.py \
+            --output "$GITHUB_WORKSPACE/artifacts/kicad_native_schematics" \
+            --no-zip
+
+      - name: Native PCB DRC and render
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/kicad_native_pcb
+          /tmp/salix-kicad-ci/bin/python tools/render_kicad_pcb.py \
+            --expect-populated \
+            --output "$GITHUB_WORKSPACE/artifacts/kicad_native_pcb"
+
+      - name: Upload native KiCad review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kicad-native-10.0.8-review
+          path: |
+            artifacts/kicad_native_schematics
+            artifacts/kicad_native_pcb
+            artifacts/kicad_native_pcb.zip
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Enforce zero native ERC errors
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          report="artifacts/kicad_native_schematics/ERC.rpt"
+          if [[ ! -f "$report" ]]; then
+            echo "Native ERC report was not produced."
+            exit 1
+          fi
+          errors="$(grep -c '^[[:space:]]*; error[[:space:]]*$' "$report" || true)"
+          echo "Native ERC errors: $errors"
+          if [[ "$errors" -ne 0 ]]; then
+            grep -n -B 1 -A 3 '^[[:space:]]*; error[[:space:]]*$' "$report" || true
+            exit 1
+          fi
