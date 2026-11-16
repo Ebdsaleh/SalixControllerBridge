@@ -17,3 +17,11 @@
     (condition "A.Reference == 'U7' && B.Reference == 'U7'")
     (constraint clearance (min 0.125mm))
 )
+
+# J15/J16/J17 are intentionally edge-mounted and their component-body silk
+# intersects Edge.Cuts. Ignore only that specific silk-to-edge condition.
+(rule "Allow designated edge-connector silk at board edge"
+    (severity ignore)
+    (condition "(A.Reference == 'J15' || A.Reference == 'J16' || A.Reference == 'J17') && B.Layer == 'Edge.Cuts'")
+    (constraint silk_clearance)
+)
