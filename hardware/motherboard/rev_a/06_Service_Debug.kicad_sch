@@ -705,7 +705,7 @@
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "1uF"
-			(at 145 51.5 0)
+			(at 145 50.5 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
@@ -753,7 +753,7 @@
 		(dnp no)
 		(uuid "a4060000-0000-4000-8000-000000000046")
 		(property "Reference" "C221"
-			(at 145 52.5 0)
+			(at 145 53.5 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "10uF"
@@ -809,7 +809,7 @@
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "1uF"
-			(at 145 86.5 0)
+			(at 145 85.5 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
@@ -857,7 +857,7 @@
 		(dnp no)
 		(uuid "a4060000-0000-4000-8000-000000000060")
 		(property "Reference" "C223"
-			(at 145 87.5 0)
+			(at 145 88.5 0)
 			(effects (font (size 0.9 0.9)))
 		)
 		(property "Value" "10uF"

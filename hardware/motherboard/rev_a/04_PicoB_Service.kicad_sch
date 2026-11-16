@@ -2130,7 +2130,7 @@
 		(dnp no)
 		(uuid "a5040000-0000-4000-8000-000000000094")
 		(property "Reference" "C211" (at 240 164.2 0) (effects (font (size 0.85 0.85))))
-		(property "Value" "100nF" (at 225 169 0) (effects (font (size 0.85 0.85))))
+		(property "Value" "100nF" (at 225 168.5 0) (effects (font (size 0.85 0.85))))
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 225 166 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "~" (at 225 166 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Description" "Front-panel 3V3 logic local bypass" (at 225 166 0) (effects (font (size 1 1)) (hide yes)))
