@@ -297,7 +297,7 @@
     (lib_id "Salix:LTC4418_UF20") (at 120 56 0) (unit 1)
     (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
     (uuid "ac000000-0000-4000-8000-000000000061")
-    (property "Reference" "U4" (at 120 39 0) (effects (font (size 0.85 0.85))))
+    (property "Reference" "U4" (at 136 39 0) (effects (font (size 0.85 0.85))))
     (property "Value" "LTC4418IUF#PBF" (at 120 74 0) (effects (font (size 0.75 0.75))))
     (property "Footprint" "Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm" (at 120 56 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4418.pdf" (at 120 56 0) (effects (font (size 1 1)) (hide yes)))

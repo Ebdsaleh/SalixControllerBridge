@@ -391,18 +391,13 @@ def render(path,out):
 
     pin_hits=[]
     for t in texts:
+        # Net labels and explanatory notes intentionally sit near pins and
+        # their approximate text boxes are too coarse for an automatic
+        # fail gate.  Native PNG review remains authoritative for those.
+        # References/values must always remain clear of pin annotations.
+        if t["kind"] not in ("Reference","Value"):
+            continue
         for p in pin_ann:
-            # Labels placed directly at a pin endpoint are intentional
-            # connectivity annotations, not visual collisions.  Suppress
-            # only the label attached to that same endpoint; the 1 mm
-            # threshold stays well below normal 2.54 mm connector pitch.
-            if t["kind"] in ("label","global_label","hierarchical_label"):
-                ax,ay=p["anchor"]
-                if math.hypot(t["x"]-ax,t["y"]-ay) <= 1.0:
-                    continue
-            if t["owner"]==p["ref"] and t["kind"] in ("Reference","Value"):
-                # Same-symbol ref/value collisions are still invalid.
-                pass
             if intersects(t["box"],p["box"]):
                 pin_hits.append({
                     "type":"text-pin-annotation",

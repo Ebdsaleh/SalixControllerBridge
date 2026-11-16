@@ -564,7 +564,7 @@
     (lib_id "Salix:TPD4S201_RUK20") (at 92 83 0) (unit 1)
     (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
     (uuid "cf000000-0000-4000-8000-000000000027")
-    (property "Reference" "U9" (at 92 59.5 0) (effects (font (size 0.82 0.82))))
+    (property "Reference" "U9" (at 80 59.5 0) (effects (font (size 0.82 0.82))))
     (property "Value" "TPD4S201RUKR" (at 92 108.5 0) (effects (font (size 0.72 0.72))))
     (property "Footprint" "SalixFP:TI_RUK0020B_WQFN-20_3x3mm_P0.4mm_EP1.7x1.7mm" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
     (property "Datasheet" "~" (at 92 83 0) (effects (font (size 1 1)) (hide yes)))
