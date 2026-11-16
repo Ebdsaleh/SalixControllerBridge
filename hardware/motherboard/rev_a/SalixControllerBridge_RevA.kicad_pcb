@@ -41978,38 +41978,24 @@
 				)
 			)
 		)
-		(pad "1" smd custom
-			(at -0.725 -0.875)
-			(size 0.25 0.25)
+		(pad "1" smd roundrect
+			(at -0.9 -0.875)
+			(size 0.6 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
 			(net "/POWER {slash} PROTECTION/AUX_UV_SENSE")
 			(pinfunction "EN/UVLO_1")
 			(pintype "input")
-			(thermal_bridge_angle 90)
-			(options
-				(clearance outline)
-				(anchor circle)
-			)
-			(primitives
-				(gr_poly
-					(pts
-						(xy -0.125 -0.275) (xy -0.121194 -0.294134) (xy -0.110355 -0.310355) (xy -0.094134 -0.321194)
-						(xy -0.075 -0.325) (xy 0.075 -0.325) (xy 0.094134 -0.321194) (xy 0.110355 -0.310355) (xy 0.121194 -0.294134)
-						(xy 0.125 -0.275) (xy 0.125 0.275) (xy 0.121194 0.294134) (xy 0.110355 0.310355) (xy 0.094134 0.321194)
-						(xy 0.075 0.325) (xy -0.075 0.325) (xy -0.094134 0.321194) (xy -0.110355 0.310355) (xy -0.121194 0.294134)
-						(xy -0.125 0.275)
-					)
-					(width 0)
-					(fill yes)
-				)
-				(gr_poly
-					(pts
-						(xy -0.425 0.275) (xy 0.075 0.275) (xy 0.075 -0.275) (xy -0.075 -0.275) (xy -0.075 0.075) (xy -0.425 0.075)
-					)
-					(width 0.1)
-					(fill yes)
-				)
-			)
+			(uuid "07ca9f2b-bfa3-4db7-9af2-606cea5ce701")
+		)
+		(pad "1" smd roundrect
+			(at -0.725 -0.875)
+			(size 0.25 0.65)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
+			(net "/POWER {slash} PROTECTION/AUX_UV_SENSE")
+			(pinfunction "EN/UVLO_1")
+			(pintype "input")
 			(uuid "07ca9f2b-bfa3-4db7-9af2-606cea5ce7eb")
 		)
 		(pad "2" smd roundrect
@@ -42032,38 +42018,24 @@
 			(pintype "open_collector")
 			(uuid "67f69bf1-f019-464c-88e2-0140a1174b7e")
 		)
-		(pad "4" smd custom
-			(at -0.725 0.875)
-			(size 0.25 0.25)
+		(pad "4" smd roundrect
+			(at -0.9 0.875)
+			(size 0.6 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
 			(net "/POWER {slash} PROTECTION/AUX_PGTH")
 			(pinfunction "PGTH_4")
 			(pintype "input")
-			(thermal_bridge_angle 90)
-			(options
-				(clearance outline)
-				(anchor circle)
-			)
-			(primitives
-				(gr_poly
-					(pts
-						(xy -0.125 0.275) (xy -0.121194 0.294134) (xy -0.110355 0.310355) (xy -0.094134 0.321194) (xy -0.075 0.325)
-						(xy 0.075 0.325) (xy 0.094134 0.321194) (xy 0.110355 0.310355) (xy 0.121194 0.294134) (xy 0.125 0.275)
-						(xy 0.125 -0.275) (xy 0.121194 -0.294134) (xy 0.110355 -0.310355) (xy 0.094134 -0.321194) (xy 0.075 -0.325)
-						(xy -0.075 -0.325) (xy -0.094134 -0.321194) (xy -0.110355 -0.310355) (xy -0.121194 -0.294134)
-						(xy -0.125 -0.275)
-					)
-					(width 0)
-					(fill yes)
-				)
-				(gr_poly
-					(pts
-						(xy -0.425 -0.275) (xy 0.075 -0.275) (xy 0.075 0.275) (xy -0.075 0.275) (xy -0.075 -0.075) (xy -0.425 -0.075)
-					)
-					(width 0.1)
-					(fill yes)
-				)
-			)
+			(uuid "ccf76f27-cf0d-4021-b5d4-f5f929cad204")
+		)
+		(pad "4" smd roundrect
+			(at -0.725 0.875)
+			(size 0.25 0.65)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
+			(net "/POWER {slash} PROTECTION/AUX_PGTH")
+			(pinfunction "PGTH_4")
+			(pintype "input")
 			(uuid "ccf76f27-cf0d-4021-b5d4-f5f929cad2ed")
 		)
 		(pad "5" smd roundrect
@@ -42086,38 +42058,24 @@
 			(pintype "power_out")
 			(uuid "7bdd2281-6b65-45a3-ae0d-5fee4447c144")
 		)
-		(pad "7" smd custom
-			(at 0.725 0.875 180)
-			(size 0.25 0.25)
+		(pad "7" smd roundrect
+			(at 0.9 0.875)
+			(size 0.6 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
 			(net "/POWER {slash} PROTECTION/AUX_DVDT")
 			(pinfunction "DVDT_7")
 			(pintype "output")
-			(thermal_bridge_angle 90)
-			(options
-				(clearance outline)
-				(anchor circle)
-			)
-			(primitives
-				(gr_poly
-					(pts
-						(xy -0.125 -0.275) (xy -0.121194 -0.294134) (xy -0.110355 -0.310355) (xy -0.094134 -0.321194)
-						(xy -0.075 -0.325) (xy 0.075 -0.325) (xy 0.094134 -0.321194) (xy 0.110355 -0.310355) (xy 0.121194 -0.294134)
-						(xy 0.125 -0.275) (xy 0.125 0.275) (xy 0.121194 0.294134) (xy 0.110355 0.310355) (xy 0.094134 0.321194)
-						(xy 0.075 0.325) (xy -0.075 0.325) (xy -0.094134 0.321194) (xy -0.110355 0.310355) (xy -0.121194 0.294134)
-						(xy -0.125 0.275)
-					)
-					(width 0)
-					(fill yes)
-				)
-				(gr_poly
-					(pts
-						(xy -0.425 0.275) (xy 0.075 0.275) (xy 0.075 -0.275) (xy -0.075 -0.275) (xy -0.075 0.075) (xy -0.425 0.075)
-					)
-					(width 0.1)
-					(fill yes)
-				)
-			)
+			(uuid "cffd54a4-562a-4a3f-8e2b-511e03a0a707")
+		)
+		(pad "7" smd roundrect
+			(at 0.725 0.875)
+			(size 0.25 0.65)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
+			(net "/POWER {slash} PROTECTION/AUX_DVDT")
+			(pinfunction "DVDT_7")
+			(pintype "output")
 			(uuid "cffd54a4-562a-4a3f-8e2b-511e03a0af87")
 		)
 		(pad "8" smd roundrect
@@ -42140,38 +42098,24 @@
 			(pintype "output")
 			(uuid "ef34a93e-a359-4046-a7cd-314a7193e7cb")
 		)
-		(pad "10" smd custom
-			(at 0.725 -0.875 180)
-			(size 0.25 0.25)
+		(pad "10" smd roundrect
+			(at 0.9 -0.875)
+			(size 0.6 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
 			(net "unconnected-(U3-ITIMER-Pad10)")
 			(pinfunction "ITIMER_10")
 			(pintype "no_connect")
-			(thermal_bridge_angle 90)
-			(options
-				(clearance outline)
-				(anchor circle)
-			)
-			(primitives
-				(gr_poly
-					(pts
-						(xy -0.125 0.275) (xy -0.121194 0.294134) (xy -0.110355 0.310355) (xy -0.094134 0.321194) (xy -0.075 0.325)
-						(xy 0.075 0.325) (xy 0.094134 0.321194) (xy 0.110355 0.310355) (xy 0.121194 0.294134) (xy 0.125 0.275)
-						(xy 0.125 -0.275) (xy 0.121194 -0.294134) (xy 0.110355 -0.310355) (xy 0.094134 -0.321194) (xy 0.075 -0.325)
-						(xy -0.075 -0.325) (xy -0.094134 -0.321194) (xy -0.110355 -0.310355) (xy -0.121194 -0.294134)
-						(xy -0.125 -0.275)
-					)
-					(width 0)
-					(fill yes)
-				)
-				(gr_poly
-					(pts
-						(xy -0.425 -0.275) (xy 0.075 -0.275) (xy 0.075 0.275) (xy -0.075 0.275) (xy -0.075 -0.075) (xy -0.425 -0.075)
-					)
-					(width 0.1)
-					(fill yes)
-				)
-			)
+			(uuid "7ad7fee4-4cfc-4354-b4da-ff667b410010")
+		)
+		(pad "10" smd roundrect
+			(at 0.725 -0.875)
+			(size 0.25 0.65)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.4)
+			(net "unconnected-(U3-ITIMER-Pad10)")
+			(pinfunction "ITIMER_10")
+			(pintype "no_connect")
 			(uuid "7ad7fee4-4cfc-4354-b4da-ff667b41239d")
 		)
 		(embedded_fonts no)
