@@ -296,11 +296,13 @@ def render(path,out):
     title_keepout=[w-110,h-30,w-8,h-8]
     svg.rect(*title_keepout,col="#d97706",fill="#f59e0b",wid=.12,op=.06)
     lr=O(root,"lib_symbols");libs={A(x,1):x for x in C(lr,"symbol")} if lr else {}
-    boxes=[]; texts=[]
+    boxes=[]; pin_ann=[]; texts=[]
     def addtxt(n,kind,col):
         s=A(n,1,"");x,y,r=AT(n);z,b,hi,j=FX(n)
         if hi:return
-        svg.text(s,x,y,z,r,b,j,col);texts.append((kind,s,tbox(s,x,y,z,j)))
+        box=tbox(s,x,y,z,j)
+        svg.text(s,x,y,z,r,b,j,col)
+        texts.append({"kind":kind,"name":s,"box":box,"x":x,"y":y,"owner":None})
     for n in root[1:]:
         if not isinstance(n,list):continue
         k=H(n)
@@ -332,26 +334,79 @@ def render(path,out):
                         a=xf(px,py,sx,sy,sr);ex=px-ln*math.cos(math.radians(pr));ey=py+ln*math.sin(math.radians(pr));b=xf(ex,ey,sx,sy,sr)
                         svg.line(a,b,col="#9b1c1c")
                         no=A(O(pin,"number"),1,"");nm2=A(O(pin,"name"),1,"")
-                        if no:svg.text(no,a[0],a[1]-.5,.58,col="#9b1c1c")
-                        if nm2 and nm2!="~":svg.text(nm2,(a[0]+b[0])/2,(a[1]+b[1])/2-.45,.58,col="#267d6d")
+                        if no:
+                            nx,ny=a[0],a[1]-.5
+                            svg.text(no,nx,ny,.58,j={"center"},col="#9b1c1c")
+                            pin_ann.append({"ref":ref,"pin":no,"role":"number","text":no,
+                                            "box":tbox(no,nx,ny,.58,{"center"})})
+                        if nm2 and nm2!="~":
+                            nx,ny=(a[0]+b[0])/2,(a[1]+b[1])/2-.45
+                            svg.text(nm2,nx,ny,.58,j={"center"},col="#267d6d")
+                            pin_ann.append({"ref":ref,"pin":no,"role":"name","text":nm2,
+                                            "box":tbox(nm2,nx,ny,.58,{"center"})})
             if pts:
                 xs=[x for x,_ in pts];ys=[y for _,y in pts];boxes.append((ref,[min(xs),min(ys),max(xs),max(ys)]))
             for pr in C(n,"property"):
                 if A(pr,1) in ("Reference","Value"):
                     s=A(pr,2,"");x,y,r=AT(pr);z,b,hi,j=FX(pr)
-                    if not hi:svg.text(s,x,y,z,r,b,j,"#267d6d");texts.append((A(pr,1),s,tbox(s,x,y,z,j)))
-    hits=[]
-    for i,(ka,na,a) in enumerate(texts):
-        for kb,nb,b in texts[i+1:]:
-            if not (a[2]<b[0] or b[2]<a[0] or a[3]<b[1] or b[3]<a[1]):
-                if ka=="label" and kb=="label" and na==nb:continue
-                hits.append({"type":"text-text","a":f"{ka}:{na}","b":f"{kb}:{nb}"})
+                    if not hi:
+                        box=tbox(s,x,y,z,j)
+                        svg.text(s,x,y,z,r,b,j,"#267d6d")
+                        texts.append({"kind":A(pr,1),"name":s,"box":box,
+                                      "x":x,"y":y,"owner":ref})
     def intersects(a,b):
         return not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
+
+    hits=[]
+    for i,ta in enumerate(texts):
+        for tb in texts[i+1:]:
+            if intersects(ta["box"],tb["box"]):
+                if ta["kind"]=="label" and tb["kind"]=="label" and ta["name"]==tb["name"]:
+                    continue
+                hits.append({
+                    "type":"text-text",
+                    "a":f'{ta["kind"]}:{ta["name"]}',
+                    "b":f'{tb["kind"]}:{tb["name"]}',
+                    "a_owner":ta["owner"],"b_owner":tb["owner"],
+                    "a_xy":[ta["x"],ta["y"]],"b_xy":[tb["x"],tb["y"]],
+                    "a_box":ta["box"],"b_box":tb["box"],
+                })
+
+    body_hits=[]
+    for t in texts:
+        for ref,box in boxes:
+            if t["owner"]==ref and t["kind"] in ("Reference","Value"):
+                # Still report a same-symbol property if it physically enters
+                # the symbol body: references/values must remain outside.
+                pass
+            if intersects(t["box"],box):
+                body_hits.append({
+                    "type":"text-symbol-body",
+                    "text":f'{t["kind"]}:{t["name"]}',
+                    "text_owner":t["owner"],"symbol":ref or "<unnamed>",
+                    "xy":[t["x"],t["y"]],"text_box":t["box"],"symbol_box":box,
+                })
+
+    pin_hits=[]
+    for t in texts:
+        for p in pin_ann:
+            if t["owner"]==p["ref"] and t["kind"] in ("Reference","Value"):
+                # Same-symbol ref/value collisions are still invalid, so do
+                # not suppress them.  This branch documents intent.
+                pass
+            if intersects(t["box"],p["box"]):
+                pin_hits.append({
+                    "type":"text-pin-annotation",
+                    "text":f'{t["kind"]}:{t["name"]}',
+                    "text_owner":t["owner"],"symbol":p["ref"],
+                    "pin":p["pin"],"pin_role":p["role"],"pin_text":p["text"],
+                    "xy":[t["x"],t["y"]],"text_box":t["box"],"pin_box":p["box"],
+                })
     title_hits=[]
     page_hits=[]
     page_box=[8,8,w-8,h-8]
-    for kind,name,box in texts:
+    for t in texts:
+        box=t["box"];kind=t["kind"];name=t["name"]
         if intersects(box,title_keepout):
             title_hits.append({"type":"title-block-text","item":f"{kind}:{name}","box":box})
         if box[0] < page_box[0] or box[1] < page_box[1] or box[2] > page_box[2] or box[3] > page_box[3]:
@@ -364,6 +419,8 @@ def render(path,out):
     report={
         "file":str(path),
         "likely_overlaps":hits,
+        "text_symbol_body_collisions":body_hits,
+        "text_pin_annotation_collisions":pin_hits,
         "title_block_intrusions":title_hits,
         "electrical_lint":lint,
         "uuid_lint":uuid_report,
@@ -374,6 +431,8 @@ def render(path,out):
     (out/(path.stem+".overlaps.json")).write_text(json.dumps(report,indent=2),encoding="utf-8")
     print(
         f"{path.name}: {len(hits)} likely text overlap(s), "
+        f"{len(body_hits)} text/body collision(s), "
+        f"{len(pin_hits)} text/pin collision(s), "
         f"{len(title_hits)} title-block intrusion(s), "
         f"{len(page_hits)} page-edge intrusion(s), "
         f"{len(lint['orphan_labels'])} orphan label(s), "
@@ -381,8 +440,9 @@ def render(path,out):
         f"{len(uuid_report['invalid'])} invalid UUID(s), "
         f"{len(uuid_report['duplicates'])} duplicate UUID(s)"
     )
-    return (len(hits)+len(title_hits)+len(page_hits)+len(lint["orphan_labels"])+
-            len(lint["pin_net_mismatches"])+len(uuid_report["invalid"])+len(uuid_report["duplicates"]))
+    return (len(hits)+len(body_hits)+len(pin_hits)+len(title_hits)+len(page_hits)+
+            len(lint["orphan_labels"])+len(lint["pin_net_mismatches"])+
+            len(uuid_report["invalid"])+len(uuid_report["duplicates"]))
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input",type=Path);ap.add_argument("-o","--out",type=Path,default=Path("kicad_visuals"));ap.add_argument("--recursive",action="store_true")
