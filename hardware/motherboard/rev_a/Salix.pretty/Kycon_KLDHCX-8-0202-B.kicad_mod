@@ -58,10 +58,10 @@
     (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_text user "1 +"
-    (at 12 -2.6 0)
+    (at 12 -4.0 0)
     (layer "F.SilkS")
     (uuid "b2160000-0000-4000-8000-000000000025")
-    (effects (font (size 0.75 0.75) (thickness 0.12)))
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_text user "${REFERENCE}"
     (at 6.5 0 0)
