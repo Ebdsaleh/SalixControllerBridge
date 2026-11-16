@@ -483,7 +483,7 @@
 	)
 	(text "Retain rear DEBUG/UPDATE USB-C→Pico-B, SWD-A/SWD-B test pads, rail power-good and service LEDs."
 		(exclude_from_sim no)
-		(at 145 147 0)
+		(at 145 142 0)
 		(effects
 			(font
 				(size 0.95 0.95)
