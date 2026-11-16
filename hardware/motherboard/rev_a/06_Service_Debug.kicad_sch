@@ -1331,9 +1331,10 @@
 	(global_label "GND" (shape passive) (at 213.97 108.89 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "a4060000-0000-4000-8000-000000000128"))
 
 
-	(text "RTC / PERSISTENT SERVICE TIME" (exclude_from_sim no) (at 82 153 0) (effects (font (size 1.1 1.1) (bold yes)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000001"))
-	(text "CR2032 is a primary cell: RV-3028 TCE must remain disabled; configure LSM backup switchover in EEPROM." (exclude_from_sim no) (at 82 157 0) (effects (font (size 0.82 0.82)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000002"))
-	(text "INT/CLKOUT unused on Rev-A; poll over MGMT_I2C. EVI held low by 10k. BT1 footprint waits for verified Keystone 1174 terminal map." (exclude_from_sim no) (at 82 160.5 0) (effects (font (size 0.82 0.82)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000003"))
+	(text "RTC / PERSISTENT SERVICE TIME" (exclude_from_sim no) (at 82 146.5 0) (effects (font (size 1.1 1.1) (bold yes)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000001"))
+	(text "CR2032 primary cell: keep RV-3028 TCE disabled; configure LSM backup switching." (exclude_from_sim no) (at 82 150.5 0) (effects (font (size 0.72 0.72)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000002"))
+	(text "INT/CLKOUT NC on Rev-A; poll over MGMT_I2C; EVI held low by 10k." (exclude_from_sim no) (at 82 153.5 0) (effects (font (size 0.72 0.72)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000003"))
+	(text "BT1: Keystone 1174 vertical locking CR2032 holder." (exclude_from_sim no) (at 82 156.5 0) (effects (font (size 0.72 0.72)) (justify left)) (uuid "c3028000-0000-4000-8000-000000000004"))
 
 	(symbol (lib_id "Salix:CR2032_HOLDER") (at 92 167.46 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
 		(uuid "c3028000-0000-4000-8000-000000000010")
@@ -1370,7 +1371,7 @@
 
 	(symbol (lib_id "Salix:RV3028_C7") (at 150 170 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
 		(uuid "c3028000-0000-4000-8000-000000000040")
-		(property "Reference" "U14" (at 150 156.5 0) (effects (font (size 0.9 0.9))))
+		(property "Reference" "U14" (at 157.5 158.5 0) (effects (font (size 0.9 0.9))))
 		(property "Value" "RV-3028-C7" (at 150 183.5 0) (effects (font (size 0.9 0.9))))
 		(property "Footprint" "SalixFP:MicroCrystal_RV-3028-C7" (at 150 170 0) (effects (font (size 1 1)) (hide yes)))
 		(property "Datasheet" "https://www.microcrystal.com/fileadmin/Media/Products/RTC/App.Manual/RV-3028-C7_App-Manual.pdf" (at 150 170 0) (effects (font (size 1 1)) (hide yes)))
