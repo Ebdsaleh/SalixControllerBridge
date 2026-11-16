@@ -10,6 +10,9 @@
         "silk_line_width": 0.15,
         "silk_text_size_h": 1,
         "silk_text_size_v": 1
+      },
+      "rules": {
+        "min_through_hole_diameter": 0.2
       }
     }
   },

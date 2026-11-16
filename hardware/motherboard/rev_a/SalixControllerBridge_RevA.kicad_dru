@@ -1,0 +1,19 @@
+(version 1)
+
+# Manufacturer/library-intrinsic fine-pitch copper geometry.
+# These rules apply only within the named footprint instance; normal board routing
+# remains on the 0.20 mm Default netclass clearance.
+(rule "U3 RPW0010A intrinsic pad clearance"
+    (condition "A.Reference == 'U3' && B.Reference == 'U3'")
+    (constraint clearance (min 0.15mm))
+)
+
+(rule "J17 USB4085 intrinsic contact clearance"
+    (condition "A.Reference == 'J17' && B.Reference == 'J17'")
+    (constraint clearance (min 0.15mm))
+)
+
+(rule "U7 REF0038A intrinsic pad clearance"
+    (condition "A.Reference == 'U7' && B.Reference == 'U7'")
+    (constraint clearance (min 0.125mm))
+)
