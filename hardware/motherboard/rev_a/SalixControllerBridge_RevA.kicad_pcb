@@ -8025,7 +8025,7 @@
 	(footprint "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "2de65f04-6f1e-46ef-816f-8bb3cfe3b103")
-		(at 116 81 180)
+		(at 121 78 180)
 		(descr "Molex 47053-1000 KK 254 4-pin vertical PWM fan header with friction lock. Pad and locator-hole geometry follows Molex drawing SD-47053-001.")
 		(tags "Molex 47053-1000 470531000 KK254 fan PWM 4-pin")
 		(property "Reference" "J10"
