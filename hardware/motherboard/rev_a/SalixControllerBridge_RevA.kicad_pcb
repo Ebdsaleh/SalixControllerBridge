@@ -8025,7 +8025,7 @@
 	(footprint "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "2de65f04-6f1e-46ef-816f-8bb3cfe3b103")
-		(at 195.075 105.875)
+		(at 116 81 180)
 		(descr "Molex 47053-1000 KK 254 4-pin vertical PWM fan header with friction lock. Pad and locator-hole geometry follows Molex drawing SD-47053-001.")
 		(tags "Molex 47053-1000 470531000 KK254 fan PWM 4-pin")
 		(property "Reference" "J10"
@@ -8207,7 +8207,7 @@
 			(uuid "b2d7efff-4ae3-49ed-a075-0b1a5cb1b9ba")
 		)
 		(pad "1" thru_hole rect
-			(at 0 0)
+			(at 0 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -8218,7 +8218,7 @@
 			(uuid "1207a845-a31d-44c0-acde-38d66bfedc04")
 		)
 		(pad "2" thru_hole circle
-			(at 2.54 0)
+			(at 2.54 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -8229,7 +8229,7 @@
 			(uuid "3f161cc3-5949-471f-b218-bcc3037c3e24")
 		)
 		(pad "3" thru_hole circle
-			(at 5.08 0)
+			(at 5.08 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -8240,7 +8240,7 @@
 			(uuid "9a0b5fde-e729-45b4-b709-54dda464c758")
 		)
 		(pad "4" thru_hole circle
-			(at 7.62 0)
+			(at 7.62 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -10115,7 +10115,7 @@
 	(footprint "SalixFP:Molex_47053-1000_1x04_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "36656e7c-ec10-4109-a039-38431cba1dca")
-		(at 195.075 113.725)
+		(at 116 100 180)
 		(descr "Molex 47053-1000 KK 254 4-pin vertical PWM fan header with friction lock. Pad and locator-hole geometry follows Molex drawing SD-47053-001.")
 		(tags "Molex 47053-1000 470531000 KK254 fan PWM 4-pin")
 		(property "Reference" "J11"
@@ -10297,7 +10297,7 @@
 			(uuid "1c56684f-b1f7-4ab5-951c-6b212942f788")
 		)
 		(pad "1" thru_hole rect
-			(at 0 0)
+			(at 0 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -10308,7 +10308,7 @@
 			(uuid "4dd545ba-4276-4215-b4ad-feafa77b3a0c")
 		)
 		(pad "2" thru_hole circle
-			(at 2.54 0)
+			(at 2.54 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -10319,7 +10319,7 @@
 			(uuid "138c72c8-2c5a-4d79-8f21-91595ea4d3bb")
 		)
 		(pad "3" thru_hole circle
-			(at 5.08 0)
+			(at 5.08 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
@@ -10330,7 +10330,7 @@
 			(uuid "165f5c36-77ba-44a5-873a-2c962cc21f8c")
 		)
 		(pad "4" thru_hole circle
-			(at 7.62 0)
+			(at 7.62 0 180)
 			(size 1.7 1.7)
 			(drill 1.05)
 			(layers "*.Cu" "*.Mask")
