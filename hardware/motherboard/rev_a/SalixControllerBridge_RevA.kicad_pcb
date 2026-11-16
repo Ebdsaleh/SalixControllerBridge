@@ -49526,9 +49526,9 @@
 		(uuid "ba16f002-0000-4000-8000-000000000001")
 	)
 	(segment
-		(start 155 46)
+		(start 156 46)
 		(end 160 51.15)
-		(width 2.5)
+		(width 1.2)
 		(layer "F.Cu")
 		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_FUSED")
 		(uuid "ba16f002-0000-4000-8000-000000000002")
