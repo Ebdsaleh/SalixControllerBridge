@@ -224,7 +224,7 @@
 )
   )
   (text "09 — 12V BARREL / AUTOMOTIVE FRONT END"
-    (exclude_from_sim no) (at 18 12 0)
+    (exclude_from_sim no) (at 18 13.5 0)
     (effects (font (size 1.8 1.8) (bold yes)) (justify left))
     (uuid "bd000000-0000-4000-8000-000000000139"))
   (text "Primary source only: KLDHCX-8-0202-B → fuse → SMBJ36CA → LM74800-Q1 + common-drain 80V N-FET pair → BARREL_PROT."

@@ -486,7 +486,7 @@
 )
   )
   (text "10 — USB-C PD POWER INPUT"
-    (exclude_from_sim no) (at 18 12 0)
+    (exclude_from_sim no) (at 18 13.5 0)
     (effects (font (size 1.8 1.8) (bold yes)) (justify left))
     (uuid "cf000000-0000-4000-8000-000000000384"))
   (text "Dedicated power-only USB-C: GCT USB4085-GF-A → TVS2200 / TPD4S201 → TPS25730AD integrated 5A sink path → PD_PWR."

@@ -193,7 +193,7 @@
   )
 
   (text "08 — MAIN SOURCE PRIORITY / POWERPATH"
-    (exclude_from_sim no) (at 18 12 0)
+    (exclude_from_sim no) (at 18 13.5 0)
     (effects (font (size 1.8 1.8) (bold yes)) (justify left))
     (uuid "ac000000-0000-4000-8000-000000000001"))
   (text "Hardware priority: BARREL_PROT > PD_PWR > AUX_PWR. EXT_CHARGE_IN exists before AUX is admitted, preventing AUX self-charge."
@@ -802,11 +802,11 @@
     (effects (font (size 0.68 0.68)) (justify left))
     (uuid "ac000000-0000-4000-8000-000000000349"))
   (text "Si7155DP path loss check: use 4.6mΩ max/FET conservative value; external path has 4 FETs in series, AUX path 2. Thermal/layout validation remains required."
-    (exclude_from_sim no) (at 18 194.5 0)
+    (exclude_from_sim no) (at 18 191.5 0)
     (effects (font (size 0.7 0.7)) (justify left))
     (uuid "ac000000-0000-4000-8000-000000000350"))
   (text "SYS_IN is the input to the future high-current wide-input synchronous buck. It is NOT 5V_MAIN yet."
-    (exclude_from_sim no) (at 18 198 0)
+    (exclude_from_sim no) (at 18 195.5 0)
     (effects (font (size 0.74 0.74) (bold yes)) (justify left))
     (uuid "ac000000-0000-4000-8000-000000000351"))
 
