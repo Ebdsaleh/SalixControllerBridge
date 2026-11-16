@@ -345,6 +345,41 @@ def validate_pad_centers_inside_board_outline(board: Path) -> None:
             + "\n  ".join(outside)
         )
 
+
+ALLOWED_ROUTING_DRC_CATEGORIES = {
+    "lib_footprint_mismatch",
+    "unconnected_items",
+}
+
+
+def validate_routing_drc_baseline(report: Path) -> None:
+    text = report.read_text(encoding="utf-8", errors="replace")
+    categories = re.findall(r"^\[([^\]]+)\]:", text, re.MULTILINE)
+    counts: dict[str, int] = {}
+    for category in categories:
+        counts[category] = counts.get(category, 0) + 1
+
+    unexpected = sorted(set(counts) - ALLOWED_ROUTING_DRC_CATEGORIES)
+    if unexpected:
+        details = ", ".join(
+            f"{category}={counts[category]}" for category in unexpected
+        )
+        raise RuntimeError(
+            "Unexpected PCB DRC category regression: "
+            + details
+            + ". Only library-instance mismatch warnings and unrouted "
+              "connections are allowed during routing."
+        )
+
+    if "** Found 0 Footprint errors **" not in text:
+        raise RuntimeError("PCB DRC reports one or more footprint errors")
+
+    summary = ", ".join(
+        f"{category}={counts.get(category, 0)}"
+        for category in sorted(ALLOWED_ROUTING_DRC_CATEGORIES)
+    )
+    print(f"DRC gate  : {summary}; no unexpected categories")
+
 def schematic_instance_references(sheet: Path) -> set[str]:
     text = sheet.read_text(encoding="utf-8")
     return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
@@ -430,6 +465,7 @@ def main() -> int:
             str(board),
         ])
         print(f"DRC       : {drc}")
+        validate_routing_drc_baseline(drc)
 
         print("Rendering top...")
         run_checked([
