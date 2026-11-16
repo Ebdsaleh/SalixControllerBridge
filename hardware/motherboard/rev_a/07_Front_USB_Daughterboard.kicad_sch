@@ -1638,13 +1638,13 @@
 		(dnp no)
 		(uuid "60000000-0000-4000-8000-000000006003")
 		(property "Reference" "J20"
-			(at 45 62 0)
+			(at 45 50 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
 		)
 		(property "Value" "MOTHERBOARD IF"
-			(at 45 98 0)
+			(at 45 110 0)
 			(effects
 					(font (size 0.85 0.85))
 				)
