@@ -49767,37 +49767,38 @@
 	)
 
 
+
 	(segment
 		(start 148.053 53.905)
 		(end 148.053 54.88)
 		(width 0.8)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000001")
+		(uuid "ba16f006-0000-4000-8000-000000000001")
 	)
 	(segment
 		(start 148.053 54.88)
-		(end 146 54.88)
+		(end 142 54.88)
 		(width 0.8)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000002")
+		(uuid "ba16f006-0000-4000-8000-000000000002")
 	)
 	(segment
-		(start 146 54.88)
-		(end 146 56.5)
+		(start 142 54.88)
+		(end 142 56.5)
 		(width 0.8)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000003")
+		(uuid "ba16f006-0000-4000-8000-000000000003")
 	)
 	(segment
-		(start 146 56.5)
+		(start 142 56.5)
 		(end 138 56.5)
 		(width 2.5)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000004")
+		(uuid "ba16f006-0000-4000-8000-000000000004")
 	)
 	(segment
 		(start 138 56.5)
@@ -49805,7 +49806,7 @@
 		(width 2.5)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000005")
+		(uuid "ba16f006-0000-4000-8000-000000000005")
 	)
 	(segment
 		(start 149.25 55.81)
@@ -49813,7 +49814,7 @@
 		(width 0.25)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000006")
+		(uuid "ba16f006-0000-4000-8000-000000000006")
 	)
 	(segment
 		(start 149.25 54.88)
@@ -49821,7 +49822,7 @@
 		(width 0.25)
 		(layer "F.Cu")
 		(net "BARREL_PROT")
-		(uuid "ba16f005-0000-4000-8000-000000000007")
+		(uuid "ba16f006-0000-4000-8000-000000000007")
 	)
 
 	(embedded_fonts no)
