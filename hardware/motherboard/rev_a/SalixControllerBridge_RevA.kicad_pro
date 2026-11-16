@@ -36,7 +36,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.25,
+        "clearance": 0.2,
         "name": "Power_High",
         "track_width": 1.5,
         "via_diameter": 1,
