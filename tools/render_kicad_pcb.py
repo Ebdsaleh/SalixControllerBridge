@@ -13,6 +13,7 @@ will be forward-annotated in the next layout batch.
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import re
 import shutil
@@ -37,7 +38,7 @@ FRONT_BOARD_SHEETS = (
 # during placement and are guarded because changing only the footprint-level
 # angle leaves rectangular pad copper at the old orientation.
 ROTATED_PLACEMENT_PAD_ANGLES = {
-    "J16": 270.0,
+    "J16": 90.0,
     "J17": 180.0,
     "F1": 180.0,
     "D29": 90.0,
@@ -224,6 +225,126 @@ def validate_rotated_placement_pad_angles(board: Path) -> None:
             )
 
 
+
+def extract_sexpr_blocks(text: str, prefix: str) -> list[str]:
+    blocks: list[str] = []
+    search_from = 0
+
+    while True:
+        start = text.find(prefix, search_from)
+        if start < 0:
+            return blocks
+
+        depth = 0
+        in_string = False
+        escaped = False
+        for index in range(start, len(text)):
+            char = text[index]
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == '"':
+                    in_string = False
+                continue
+
+            if char == '"':
+                in_string = True
+            elif char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    blocks.append(text[start:index + 1])
+                    search_from = index + 1
+                    break
+        else:
+            raise RuntimeError(f"Unbalanced PCB block beginning with {prefix!r}")
+
+
+def validate_pad_centers_inside_board_outline(board: Path) -> None:
+    text = board.read_text(encoding="utf-8")
+    edge_rects = [
+        block
+        for block in extract_sexpr_blocks(text, "(gr_rect")
+        if '(layer "Edge.Cuts")' in block
+    ]
+    if len(edge_rects) != 1:
+        raise RuntimeError(
+            "Rev-A mechanical validation expects exactly one rectangular "
+            f"Edge.Cuts outline; found {len(edge_rects)}"
+        )
+
+    outline = edge_rects[0]
+    start_match = re.search(
+        r'\(start\s+([-+0-9.]+)\s+([-+0-9.]+)\)', outline
+    )
+    end_match = re.search(
+        r'\(end\s+([-+0-9.]+)\s+([-+0-9.]+)\)', outline
+    )
+    if not start_match or not end_match:
+        raise RuntimeError("Could not parse Rev-A rectangular Edge.Cuts outline")
+
+    x1, y1 = map(float, start_match.groups())
+    x2, y2 = map(float, end_match.groups())
+    min_x, max_x = sorted((x1, x2))
+    min_y, max_y = sorted((y1, y2))
+    tolerance = 1e-6
+    outside: list[str] = []
+
+    for footprint in extract_sexpr_blocks(text, "(footprint "):
+        reference_match = re.search(
+            r'\(property\s+"Reference"\s+"([^"]+)"', footprint
+        )
+        footprint_at = re.search(
+            r'\n\s*\(at\s+([-+0-9.]+)\s+([-+0-9.]+)'
+            r'(?:\s+([-+0-9.]+))?\)',
+            footprint,
+        )
+        if not reference_match or not footprint_at:
+            continue
+
+        reference = reference_match.group(1)
+        fp_x = float(footprint_at.group(1))
+        fp_y = float(footprint_at.group(2))
+        fp_angle = math.radians(float(footprint_at.group(3) or 0.0))
+        cos_a = math.cos(fp_angle)
+        sin_a = math.sin(fp_angle)
+
+        for pad in extract_sexpr_blocks(footprint, "(pad "):
+            pad_id_match = re.match(r'\(pad\s+"([^"]*)"', pad)
+            pad_at = re.search(
+                r'\(at\s+([-+0-9.]+)\s+([-+0-9.]+)'
+                r'(?:\s+[-+0-9.]+)?\)',
+                pad,
+            )
+            if not pad_at:
+                continue
+
+            local_x = float(pad_at.group(1))
+            local_y = float(pad_at.group(2))
+            board_x = fp_x + local_x * cos_a - local_y * sin_a
+            board_y = fp_y + local_x * sin_a + local_y * cos_a
+
+            if (
+                board_x < min_x - tolerance
+                or board_x > max_x + tolerance
+                or board_y < min_y - tolerance
+                or board_y > max_y + tolerance
+            ):
+                pad_id = pad_id_match.group(1) if pad_id_match else "?"
+                outside.append(
+                    f"{reference} pad {pad_id or '<mechanical>'} "
+                    f"center=({board_x:.3f}, {board_y:.3f}) mm"
+                )
+
+    if outside:
+        raise RuntimeError(
+            "Pad center(s) outside Rev-A Edge.Cuts outline:\n  "
+            + "\n  ".join(outside)
+        )
+
 def schematic_instance_references(sheet: Path) -> set[str]:
     text = sheet.read_text(encoding="utf-8")
     return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
@@ -285,6 +406,8 @@ def main() -> int:
 
         validate_rotated_placement_pad_angles(board)
         print("Rotation  : placed-pad absolute angles verified for rotated anchors/block")
+        validate_pad_centers_inside_board_outline(board)
+        print("Mechanics : all footprint pad centers lie inside Edge.Cuts")
 
         if args.expect_populated and not non_scaffold:
             print(
