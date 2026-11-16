@@ -25,3 +25,12 @@
     (condition "(A.Reference == 'J15' || A.Reference == 'J16' || A.Reference == 'J17') && B.Layer == 'Edge.Cuts'")
     (constraint silk_clearance)
 )
+
+# LM25149-Q1 gate-driver outputs carry large peak currents. TI recommends
+# HO/LO routing at 0.65 mm (25 mil) or wider and short loop geometry.
+# Keep this as an enforced floor; power-net widths remain defaults because
+# Kelvin taps and IC pin neck-downs legitimately share high-current nets.
+(rule "LM25149 gate-drive minimum track width"
+    (condition "A.Type == 'Track' && (A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_HO' || A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_LO')")
+    (constraint track_width (min 0.65mm))
+)

@@ -33,6 +33,108 @@
         "track_width": 0.2,
         "via_diameter": 0.6,
         "via_drill": 0.3
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.25,
+        "name": "Power_High",
+        "track_width": 1.5,
+        "via_diameter": 1,
+        "via_drill": 0.5
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "name": "Power_Medium",
+        "track_width": 0.8,
+        "via_diameter": 0.8,
+        "via_drill": 0.4
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "name": "Gate_Drive",
+        "track_width": 0.65,
+        "via_diameter": 0.8,
+        "via_drill": 0.4
+      }
+    ],
+    "netclass_patterns": [
+      {
+        "pattern": "5V_MAIN",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "SYS_IN",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "BARREL_PROT",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "PD_PWR",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "EXT_CHARGE_IN",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "AUX_PWR",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_JACK_RAW",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_FUSED",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_MID",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/USB-C PD POWER INPUT/PD_VBUS_RAW",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_VIN",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_SW",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_ISNS_PLUS",
+        "netclass": "Power_High"
+      },
+      {
+        "pattern": "CHARGE_PWR",
+        "netclass": "Power_Medium"
+      },
+      {
+        "pattern": "3V3_AUX",
+        "netclass": "Power_Medium"
+      },
+      {
+        "pattern": "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_5V",
+        "netclass": "Power_Medium"
+      },
+      {
+        "pattern": "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_5V",
+        "netclass": "Power_Medium"
+      },
+      {
+        "pattern": "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_HO",
+        "netclass": "Gate_Drive"
+      },
+      {
+        "pattern": "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_LO",
+        "netclass": "Gate_Drive"
       }
     ]
   },
