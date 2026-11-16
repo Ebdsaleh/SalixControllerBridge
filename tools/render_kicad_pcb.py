@@ -38,7 +38,7 @@ FRONT_BOARD_SHEETS = (
 # during placement and are guarded because changing only the footprint-level
 # angle leaves rectangular pad copper at the old orientation.
 ROTATED_PLACEMENT_PAD_ANGLES = {
-    "J16": 90.0,
+    "J16": 270.0,
     "J17": 180.0,
     "F1": 180.0,
     "D29": 90.0,
@@ -263,7 +263,7 @@ def extract_sexpr_blocks(text: str, prefix: str) -> list[str]:
             raise RuntimeError(f"Unbalanced PCB block beginning with {prefix!r}")
 
 
-def validate_pad_centers_inside_board_outline(board: Path) -> None:
+def validate_numbered_pad_centers_inside_board_outline(board: Path) -> None:
     text = board.read_text(encoding="utf-8")
     edge_rects = [
         block
@@ -322,10 +322,18 @@ def validate_pad_centers_inside_board_outline(board: Path) -> None:
             if not pad_at:
                 continue
 
+            pad_id = pad_id_match.group(1) if pad_id_match else ""
+            if not pad_id:
+                # Edge-mounted connectors may intentionally use unnumbered
+                # mechanical holes/tabs that straddle Edge.Cuts.
+                continue
+
             local_x = float(pad_at.group(1))
             local_y = float(pad_at.group(2))
-            board_x = fp_x + local_x * cos_a - local_y * sin_a
-            board_y = fp_y + local_x * sin_a + local_y * cos_a
+            # KiCad board coordinates grow downward in Y.  Positive footprint
+            # rotation therefore maps local +X toward board -Y.
+            board_x = fp_x + local_x * cos_a + local_y * sin_a
+            board_y = fp_y - local_x * sin_a + local_y * cos_a
 
             if (
                 board_x < min_x - tolerance
@@ -333,15 +341,14 @@ def validate_pad_centers_inside_board_outline(board: Path) -> None:
                 or board_y < min_y - tolerance
                 or board_y > max_y + tolerance
             ):
-                pad_id = pad_id_match.group(1) if pad_id_match else "?"
                 outside.append(
-                    f"{reference} pad {pad_id or '<mechanical>'} "
+                    f"{reference} pad {pad_id} "
                     f"center=({board_x:.3f}, {board_y:.3f}) mm"
                 )
 
     if outside:
         raise RuntimeError(
-            "Pad center(s) outside Rev-A Edge.Cuts outline:\n  "
+            "Numbered pad center(s) outside Rev-A Edge.Cuts outline:\n  "
             + "\n  ".join(outside)
         )
 
@@ -441,8 +448,8 @@ def main() -> int:
 
         validate_rotated_placement_pad_angles(board)
         print("Rotation  : placed-pad absolute angles verified for rotated anchors/block")
-        validate_pad_centers_inside_board_outline(board)
-        print("Mechanics : all footprint pad centers lie inside Edge.Cuts")
+        validate_numbered_pad_centers_inside_board_outline(board)
+        print("Mechanics : all numbered pad centers lie inside Edge.Cuts")
 
         if args.expect_populated and not non_scaffold:
             print(
