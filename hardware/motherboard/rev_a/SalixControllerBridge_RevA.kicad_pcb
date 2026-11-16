@@ -27939,7 +27939,7 @@
 	(footprint "Connector_Molex:Molex_Micro-Fit_3.0_43045-1000_2x05_P3.00mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "a0c9954a-59f5-4390-8109-f1aaab036d7b")
-		(at 197.085 146.895)
+		(at 24.25 45 90)
 		(descr "Molex Micro-Fit 3.0 Connector System, 43045-1000 (alternative finishes: 43045-100x), 5 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf)")
 		(tags "connector Molex Micro-Fit_3.0 horizontal")
 		(property "Reference" "J15"
