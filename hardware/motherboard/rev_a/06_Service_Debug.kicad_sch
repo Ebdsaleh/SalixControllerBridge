@@ -1406,6 +1406,7 @@
 	)
 
 	(wire (pts (xy 100.89 168.73) (xy 108.19 168.73)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000070"))
+	(label "RTC_BAT_RAW" (at 104.5 168.73 0) (effects (font (size 0.58 0.58)) (justify left bottom)) (uuid "c3028000-0000-4000-8000-000000000102"))
 	(wire (pts (xy 115.81 168.73) (xy 120.89 168.73)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000071"))
 	(label "RTC_VBAT" (at 120.89 168.73 0) (effects (font (size 0.68 0.68)) (justify left bottom)) (uuid "c3028000-0000-4000-8000-000000000072"))
 	(wire (pts (xy 100.89 166.19) (xy 105.97 166.19)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000073"))
@@ -1414,6 +1415,7 @@
 	(wire (pts (xy 137.3 162.38) (xy 132.22 162.38)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000075"))
 	(global_label "GND" (shape passive) (at 132.22 162.38 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "c3028000-0000-4000-8000-000000000076"))
 	(wire (pts (xy 137.3 167.46) (xy 129.81 167.46)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000077"))
+	(label "RTC_EVI" (at 133.5 167.46 0) (effects (font (size 0.58 0.58)) (justify left bottom)) (uuid "c3028000-0000-4000-8000-000000000103"))
 	(wire (pts (xy 122.19 167.46) (xy 117.11 167.46)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000078"))
 	(global_label "GND" (shape passive) (at 117.11 167.46 180) (effects (font (size 0.68 0.68)) (justify right bottom)) (uuid "c3028000-0000-4000-8000-000000000079"))
 	(wire (pts (xy 137.3 172.54) (xy 132.22 172.54)) (stroke (width 0) (type default)) (uuid "c3028000-0000-4000-8000-000000000080"))
