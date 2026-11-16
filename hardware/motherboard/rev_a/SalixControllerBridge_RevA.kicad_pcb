@@ -49582,5 +49582,28 @@
 		(uuid "ba16f002-0000-4000-8000-000000000008")
 	)
 
+	(zone
+		(net "GND")
+		(layer "In1.Cu")
+		(uuid "a2000000-0000-4000-8000-000000007001")
+		(hatch edge 0.508)
+		(connect_pads
+			(clearance 0.2)
+		)
+		(min_thickness 0.25)
+		(fill yes
+			(thermal_gap 0.3)
+			(thermal_bridge_width 0.4)
+		)
+		(polygon
+			(pts
+				(xy 20.8 20.8)
+				(xy 179.2 20.8)
+				(xy 179.2 119.2)
+				(xy 20.8 119.2)
+			)
+		)
+	)
+
 	(embedded_fonts no)
 )

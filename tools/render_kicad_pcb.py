@@ -387,6 +387,34 @@ def validate_routing_drc_baseline(report: Path) -> None:
     )
     print(f"DRC gate  : {summary}; no unexpected categories")
 
+
+def validate_inner_ground_plane(board: Path) -> None:
+    text = board.read_text(encoding="utf-8")
+    matches = [
+        zone
+        for zone in extract_sexpr_blocks(text, "(zone")
+        if '(net "GND")' in zone and '(layer "In1.Cu")' in zone
+    ]
+    if len(matches) != 1:
+        raise RuntimeError(
+            "Rev-A requires exactly one GND zone on In1.Cu; "
+            f"found {len(matches)}"
+        )
+
+    zone = matches[0]
+    required_corners = (
+        "(xy 20.8 20.8)",
+        "(xy 179.2 20.8)",
+        "(xy 179.2 119.2)",
+        "(xy 20.8 119.2)",
+    )
+    missing = [corner for corner in required_corners if corner not in zone]
+    if missing:
+        raise RuntimeError(
+            "In1.Cu GND plane no longer matches the 0.8 mm inset outline: "
+            + ", ".join(missing)
+        )
+
 def schematic_instance_references(sheet: Path) -> set[str]:
     text = sheet.read_text(encoding="utf-8")
     return set(re.findall(r'\(reference\s+"([^"]+)"\)', text))
@@ -450,6 +478,8 @@ def main() -> int:
         print("Rotation  : placed-pad absolute angles verified for rotated anchors/block")
         validate_numbered_pad_centers_inside_board_outline(board)
         print("Mechanics : all numbered pad centers lie inside Edge.Cuts")
+        validate_inner_ground_plane(board)
+        print("Plane     : In1.Cu GND zone present with 0.8 mm board-edge inset")
 
         if args.expect_populated and not non_scaffold:
             print(
@@ -465,6 +495,7 @@ def main() -> int:
         print("Running PCB DRC...")
         run_checked([
             str(kicad_cli), "pcb", "drc",
+            "--refill-zones",
             "--output", str(drc),
             "--format", "report",
             "--units", "mm",
