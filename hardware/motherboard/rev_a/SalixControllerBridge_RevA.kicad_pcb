@@ -49500,5 +49500,22 @@
 			)
 		)
 	)
+	(segment
+		(start 165 32)
+		(end 165 39.8)
+		(width 2.5)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_JACK_RAW")
+		(uuid "ba16f001-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 165 39.8)
+		(end 164 40.8)
+		(width 2.5)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_JACK_RAW")
+		(uuid "ba16f001-0000-4000-8000-000000000002")
+	)
+
 	(embedded_fonts no)
 )
