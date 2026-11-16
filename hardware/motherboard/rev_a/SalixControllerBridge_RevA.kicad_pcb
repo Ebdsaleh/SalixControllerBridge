@@ -714,7 +714,7 @@
 		(tags "resistor")
 		(property "Reference" "R34"
 			(at 2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "1631531f-c7ee-4fe0-a411-3ac532a96fee")
 			(effects
 				(font
@@ -4345,7 +4345,7 @@
 		(tags "resistor")
 		(property "Reference" "R32"
 			(at 2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "e779487a-3204-4ea5-a4de-d6fb9a7638c4")
 			(effects
 				(font
@@ -7255,7 +7255,7 @@
 		(tags "resistor")
 		(property "Reference" "R33"
 			(at -2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "1926fd3a-6881-4129-8a27-03343de17251")
 			(effects
 				(font
@@ -12841,7 +12841,7 @@
 		(tags "capacitor")
 		(property "Reference" "C26"
 			(at 2.5 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "901c7ef4-a8c8-4c63-8a9f-c5c792c72289")
 			(effects
 				(font
@@ -17153,7 +17153,7 @@
 		(tags "resistor")
 		(property "Reference" "R30"
 			(at 2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b89cee3e-49a6-49c7-8687-a8ffecb5c4e2")
 			(effects
 				(font
@@ -18678,7 +18678,7 @@
 		(tags "resistor")
 		(property "Reference" "R29"
 			(at -2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "43ace4db-15fb-40e5-a364-504317e59d9a")
 			(effects
 				(font
@@ -30507,7 +30507,7 @@
 		(tags "resistor")
 		(property "Reference" "R31"
 			(at -2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "ab490f4b-2775-4dfe-bfa1-a8dc4034b6e0")
 			(effects
 				(font
@@ -36905,7 +36905,7 @@
 		(tags "capacitor")
 		(property "Reference" "C25"
 			(at -2.5 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "e60c6a67-a464-4ecd-b4f0-48d80d3bde78")
 			(effects
 				(font
@@ -38707,7 +38707,7 @@
 		(tags "resistor")
 		(property "Reference" "R35"
 			(at -2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "72d385e1-dc80-4a77-b42c-b6c449654780")
 			(effects
 				(font
@@ -45639,7 +45639,7 @@
 		(tags "resistor")
 		(property "Reference" "R36"
 			(at 2.4 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "5547976a-d793-4d80-b923-d18451bfdf93")
 			(effects
 				(font
