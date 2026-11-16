@@ -1191,7 +1191,7 @@
 		(tags "resistor")
 		(property "Reference" "R212"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "2901ab86-9254-46e7-b680-57e918453eeb")
 			(effects
 				(font
@@ -1960,7 +1960,7 @@
 		(tags "resistor")
 		(property "Reference" "R74"
 			(at 1.7 0.2 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "4c0211a6-2d0b-4e90-8826-7b592832192c")
 			(effects
 				(font
@@ -2437,7 +2437,7 @@
 		(tags "resistor")
 		(property "Reference" "R50"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "d5166b6b-cba0-4e99-8440-604e0df69a70")
 			(effects
 				(font
@@ -2596,7 +2596,7 @@
 		(tags "capacitor")
 		(property "Reference" "C81"
 			(at -2.5 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "106230b2-6ba3-458a-9589-0f07fccedf43")
 			(effects
 				(font
@@ -2755,7 +2755,7 @@
 		(tags "capacitor")
 		(property "Reference" "C7"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "9a2a31c1-312f-472c-b2c3-1cebb7cfec54")
 			(effects
 				(font
@@ -2914,7 +2914,7 @@
 		(tags "capacitor")
 		(property "Reference" "C220"
 			(at 2.7 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "02637637-c691-4f88-ac65-4e7355f9f6e5")
 			(effects
 				(font
@@ -3073,7 +3073,7 @@
 		(tags "resistor")
 		(property "Reference" "R82"
 			(at 2.5 2 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "c4df93ce-8423-4d8c-bff5-8c1a32e43e49")
 			(effects
 				(font
@@ -5413,7 +5413,7 @@
 		(tags "resistor")
 		(property "Reference" "R201"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "db0fe83c-b619-4b49-8758-8e85943d4ae0")
 			(effects
 				(font
@@ -6619,7 +6619,7 @@
 		(tags "capacitor")
 		(property "Reference" "C52"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b6e36a92-d865-415b-828d-6890b3738c40")
 			(effects
 				(font
@@ -7871,7 +7871,7 @@
 		(tags "capacitor")
 		(property "Reference" "C57"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "fa521906-12a9-4900-8536-5c4e0c6fa0ac")
 			(effects
 				(font
@@ -9484,7 +9484,7 @@
 		(tags "resistor")
 		(property "Reference" "R210"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "a065286b-40d4-4595-9da7-b2b03b4c6e88")
 			(effects
 				(font
@@ -9961,7 +9961,7 @@
 		(tags "resistor")
 		(property "Reference" "R73"
 			(at -1.7 -1 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "28f64ebe-9f7e-462d-b4cd-8b860d128abc")
 			(effects
 				(font
@@ -12205,7 +12205,7 @@
 		(tags "resistor")
 		(property "Reference" "R202"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "836a8353-b6c8-46f8-9e23-e5de55839070")
 			(effects
 				(font
@@ -13000,7 +13000,7 @@
 		(tags "resistor")
 		(property "Reference" "R211"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "6495bf9e-6fd3-4dfd-9ab9-577f67c61c48")
 			(effects
 				(font
@@ -13318,7 +13318,7 @@
 		(tags "resistor")
 		(property "Reference" "R78"
 			(at -1.7 2 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "40e82fea-85f9-4350-9f00-b52a098e79ad")
 			(effects
 				(font
@@ -13928,7 +13928,7 @@
 		(tags "resistor")
 		(property "Reference" "R213"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "a18027f3-dcfd-497a-8b16-217ff15d82dd")
 			(effects
 				(font
@@ -15109,7 +15109,7 @@
 		(tags "resistor")
 		(property "Reference" "R2"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "0172d37f-79cb-4859-a42c-5ed3fb0cb0b8")
 			(effects
 				(font
@@ -15268,7 +15268,7 @@
 		(tags "capacitor")
 		(property "Reference" "C53"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "d68a2c7c-2d7d-4574-a41e-5e17b5be564d")
 			(effects
 				(font
@@ -16069,7 +16069,7 @@
 		(tags "resistor")
 		(property "Reference" "R12"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "70829e65-f82e-4bb4-9c5b-ebd4cf00c8a7")
 			(effects
 				(font
@@ -17312,7 +17312,7 @@
 		(tags "resistor")
 		(property "Reference" "R59"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "bdd7d755-e626-464c-a8be-986a6a11bbbc")
 			(effects
 				(font
@@ -17471,7 +17471,7 @@
 		(tags "capacitor")
 		(property "Reference" "C60"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b14c2cf0-b4f6-4b0b-8ac3-67d19a00ffb8")
 			(effects
 				(font
@@ -17630,7 +17630,7 @@
 		(tags "resistor")
 		(property "Reference" "R9"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "5604952a-837d-43a8-9b6d-b43e0da75495")
 			(effects
 				(font
@@ -17948,7 +17948,7 @@
 		(tags "capacitor")
 		(property "Reference" "C94"
 			(at -3 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "14e0f372-6b66-4a10-b56b-38fc478c4eed")
 			(effects
 				(font
@@ -20120,7 +20120,7 @@
 		(tags "resistor")
 		(property "Reference" "R54"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "756a2f87-74d7-4dd2-a7be-542ba54ce068")
 			(effects
 				(font
@@ -20597,7 +20597,7 @@
 		(tags "resistor")
 		(property "Reference" "R13"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "c07eb465-ba28-4736-9983-2e7168d06812")
 			(effects
 				(font
@@ -20756,7 +20756,7 @@
 		(tags "capacitor")
 		(property "Reference" "C59"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "9c8078ca-cc20-4d7c-a2b4-44d4cb40592e")
 			(effects
 				(font
@@ -20915,7 +20915,7 @@
 		(tags "resistor")
 		(property "Reference" "R4"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "81caee8e-2a6a-4494-bb9a-53651522ea02")
 			(effects
 				(font
@@ -21392,7 +21392,7 @@
 		(tags "resistor")
 		(property "Reference" "R200"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b6d66b96-c0fd-4168-b546-5ed2ca108458")
 			(effects
 				(font
@@ -21890,7 +21890,7 @@
 		(tags "capacitor")
 		(property "Reference" "C50"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "84732696-0fa2-4beb-b1e3-042ff3f10eb4")
 			(effects
 				(font
@@ -23434,7 +23434,7 @@
 		(tags "capacitor")
 		(property "Reference" "C5"
 			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "48e92eac-7fd7-4401-b865-e13b87ad50e7")
 			(effects
 				(font
@@ -24233,7 +24233,7 @@
 		(tags "capacitor")
 		(property "Reference" "C1"
 			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "4479737a-4d15-4734-987d-9dad139cbbed")
 			(effects
 				(font
@@ -24551,7 +24551,7 @@
 		(tags "capacitor electrolytic")
 		(property "Reference" "C23"
 			(at 0 -4.35 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "6832ce86-0f8f-4b1f-a736-c0d017a1efe8")
 			(effects
 				(font
@@ -24999,7 +24999,7 @@
 		(tags "capacitor")
 		(property "Reference" "C210"
 			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "5377b828-d050-4d1e-a421-7010b0b262cb")
 			(effects
 				(font
@@ -25712,7 +25712,7 @@
 		(tags "capacitor")
 		(property "Reference" "C58"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "a15e051b-92ea-43d6-9dd3-41298dfc2a30")
 			(effects
 				(font
@@ -26831,7 +26831,7 @@
 		(tags "resistor")
 		(property "Reference" "R52"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b241cfd9-49c5-4523-9417-a4e81be56172")
 			(effects
 				(font
@@ -26990,7 +26990,7 @@
 		(tags "capacitor")
 		(property "Reference" "C54"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "06d1774e-da1f-48c7-87c7-5d2bcfdc277d")
 			(effects
 				(font
@@ -27308,7 +27308,7 @@
 		(tags "capacitor")
 		(property "Reference" "C80"
 			(at -3 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "4f523a2b-ad37-4c1e-aebd-8e88c10e2c8a")
 			(effects
 				(font
@@ -27467,7 +27467,7 @@
 		(tags "resistor")
 		(property "Reference" "R43"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "272842c4-2856-4943-b6ab-f8478a5b24f1")
 			(effects
 				(font
@@ -29633,7 +29633,7 @@
 		(tags "capacitor")
 		(property "Reference" "C83"
 			(at 2.5 1.5 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "b47401b5-6759-4c5d-a83f-b30ea8b2a237")
 			(effects
 				(font
@@ -32436,7 +32436,7 @@
 		(tags "resistor")
 		(property "Reference" "R8"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "35af52e7-f5a5-445b-88be-ef3caf482e31")
 			(effects
 				(font
@@ -32913,7 +32913,7 @@
 		(tags "resistor")
 		(property "Reference" "R22"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "307b950c-bd34-4f2a-af28-8a698a0e9d90")
 			(effects
 				(font
@@ -35277,7 +35277,7 @@
 		(tags "resistor")
 		(property "Reference" "R57"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "07675211-6b41-4c50-96a4-65fa3cef3343")
 			(effects
 				(font
@@ -36428,7 +36428,7 @@
 		(tags "capacitor")
 		(property "Reference" "C9"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "6eb62bf9-c175-42c7-abfe-4b4c4e9563a9")
 			(effects
 				(font
@@ -36587,7 +36587,7 @@
 		(tags "resistor")
 		(property "Reference" "R53"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "05c25bfa-992a-4381-9eee-82dda379c023")
 			(effects
 				(font
@@ -38866,7 +38866,7 @@
 		(tags "resistor")
 		(property "Reference" "R11"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "9713e7a2-991e-484a-ba88-93d09af840cb")
 			(effects
 				(font
@@ -39661,7 +39661,7 @@
 		(tags "capacitor")
 		(property "Reference" "C2"
 			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "e8827dbd-1e7e-40fa-b5bf-c19769598f12")
 			(effects
 				(font
@@ -40496,7 +40496,7 @@
 		(tags "resistor")
 		(property "Reference" "R7"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "7f36358d-c093-44e6-af70-5508031065f1")
 			(effects
 				(font
@@ -40814,7 +40814,7 @@
 		(tags "resistor")
 		(property "Reference" "R1"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "c09344f8-4960-486b-b6d6-1eaaebddcc7b")
 			(effects
 				(font
@@ -43627,7 +43627,7 @@
 		(tags "capacitor")
 		(property "Reference" "C4"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "ef4a2ba0-aa86-4615-a62a-ceef0a600339")
 			(effects
 				(font
@@ -44972,7 +44972,7 @@
 		(tags "resistor")
 		(property "Reference" "R16"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "46fc7b56-9892-4024-a333-32981d925280")
 			(effects
 				(font
@@ -47059,7 +47059,7 @@
 		(tags "capacitor")
 		(property "Reference" "C61"
 			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "404fb6cd-fb49-48c5-8272-e0291606775d")
 			(effects
 				(font
@@ -47536,7 +47536,7 @@
 		(tags "resistor")
 		(property "Reference" "R75"
 			(at 1.7 1.2 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(uuid "1d3c10e4-1293-4970-aabf-f541823d020a")
 			(effects
 				(font
