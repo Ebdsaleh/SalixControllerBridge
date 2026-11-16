@@ -1354,8 +1354,8 @@
 			(uuid "be7f1fce-74a0-4f21-8bdf-803e127fef51")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -2282,8 +2282,8 @@
 			(uuid "dae57040-375f-4397-aa73-97ca55d06c3c")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -4031,8 +4031,8 @@
 			(uuid "a18925e1-ae09-4bf8-915f-f862c51e95bb")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -4508,8 +4508,8 @@
 			(uuid "b40f2ede-87f2-41b7-a194-cade14979b46")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -12045,13 +12045,13 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R95"
-			(at -2.3 0 90)
+			(at 2.2 0.5 90)
 			(layer "F.SilkS")
 			(uuid "2c5b2d52-9ab2-40b0-9fba-4f3dd241d624")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -12363,13 +12363,13 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R94"
-			(at 2.3 0 90)
+			(at 2.2 -0.5 90)
 			(layer "F.SilkS")
 			(uuid "a7428f37-1b13-4482-b45a-9c97d3d35996")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -14409,8 +14409,8 @@
 			(uuid "8eb77891-5106-4694-8d7f-5baa48f0400c")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -17952,8 +17952,8 @@
 			(uuid "14e0f372-6b66-4a10-b56b-38fc478c4eed")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -21735,8 +21735,8 @@
 			(uuid "dbf43cf6-331d-46fa-81c4-2384852a4d5e")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -29998,13 +29998,13 @@
 		(descr "Infineon PG-TDSON-8-33 exact recommended PCB copper/stencil geometry for IAUC60N04S6L039. Datasheet pinout: 1-3 Source, 4 Gate, 5-8 Drain. Central drain copper reuses pad 5; source bridge reuses pad 2. Manufacturer SSO8 package-note geometry independently cross-checked against a separate PG-TDSON-8-33 KiCad transcription.")
 		(tags "Infineon PG-TDSON-8-33 IAUC60N04S6L039 OptiMOS 5x6 AEC-Q101")
 		(property "Reference" "Q71"
-			(at 0 4.2 0)
+			(at 0 5.8 0)
 			(layer "F.SilkS")
 			(uuid "42f36eb9-5e2b-42a2-9e13-cc74434e89c3")
 			(effects
 				(font
 					(size 0.8 0.8)
-					(thickness 0.12)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -32281,8 +32281,8 @@
 			(uuid "4e663797-3f3d-4205-baa4-71dfe0769fe1")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
@@ -45802,8 +45802,8 @@
 			(uuid "3b19d6a1-e699-4d1e-9e65-942e4d9f151d")
 			(effects
 				(font
-					(size 0.7 0.7)
-					(thickness 0.12)
+					(size 0.8 0.8)
+					(thickness 0.13)
 				)
 			)
 		)
