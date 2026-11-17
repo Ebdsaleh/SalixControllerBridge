@@ -50655,5 +50655,15 @@
 	)
 
 
+	(segment
+		(start 106.4375 31.25)
+		(end 110.6 29.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f030-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
