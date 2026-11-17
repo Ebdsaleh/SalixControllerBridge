@@ -51459,69 +51459,98 @@
 
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
 	(segment
-		(start 108.8 61.135)
-		(end 110.5 60)
-		(width 0.25)
-		(layer "In2.Cu")
+		(start 105.5 54.3125)
+		(end 106.3 52.3)
+		(width 0.2)
+		(layer "F.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000001")
 	)
 	(segment
-		(start 110.5 60)
-		(end 110.5 55.2)
-		(width 0.25)
-		(layer "In2.Cu")
+		(start 106.3 52.3)
+		(end 105.6 51.5)
+		(width 0.2)
+		(layer "F.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000002")
 	)
-	(segment
-		(start 110.5 55.2)
-		(end 106 53.2)
-		(width 0.25)
-		(layer "In2.Cu")
-		(net "AUX_PWR")
-		(uuid "ba16f045-0000-4000-8000-000000000003")
-	)
 	(via
-		(at 106 53.2)
+		(at 105.6 51.5)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
 		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000003")
+	)
+	(segment
+		(start 105.6 51.5)
+		(end 104 51.5)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000004")
 	)
 	(segment
-		(start 106 53.2)
-		(end 105.5 54.3125)
-		(width 0.2)
-		(layer "F.Cu")
+		(start 104 51.5)
+		(end 102.5 55)
+		(width 0.25)
+		(layer "In2.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000005")
 	)
 	(segment
-		(start 108.8 62.405)
-		(end 104.5 63.5)
+		(start 102.5 55)
+		(end 102.5 61)
 		(width 0.25)
 		(layer "In2.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000006")
 	)
 	(segment
-		(start 104.5 63.5)
-		(end 96 63.5)
+		(start 102.5 61)
+		(end 108.8 61.135)
 		(width 0.25)
 		(layer "In2.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000007")
 	)
 	(segment
-		(start 96 63.5)
-		(end 89.5 58)
+		(start 102.5 61)
+		(end 96 61)
 		(width 0.25)
 		(layer "In2.Cu")
 		(net "AUX_PWR")
 		(uuid "ba16f045-0000-4000-8000-000000000008")
+	)
+	(segment
+		(start 96 61)
+		(end 92 60.5)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000009")
+	)
+	(segment
+		(start 92 60.5)
+		(end 89.5 58)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000010")
 	)
 	(via
 		(at 89.5 58)
@@ -51529,7 +51558,7 @@
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
 		(net "AUX_PWR")
-		(uuid "ba16f045-0000-4000-8000-000000000009")
+		(uuid "ba16f045-0000-4000-8000-000000000011")
 	)
 	(segment
 		(start 89.5 58)
@@ -51537,7 +51566,7 @@
 		(width 0.2)
 		(layer "F.Cu")
 		(net "AUX_PWR")
-		(uuid "ba16f045-0000-4000-8000-000000000010")
+		(uuid "ba16f045-0000-4000-8000-000000000012")
 	)
 
 
