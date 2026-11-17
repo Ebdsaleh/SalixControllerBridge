@@ -50352,21 +50352,33 @@
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV2")
 		(uuid "ba16f021-0000-4000-8000-000000000004")
 	)
+
+
+
+
 	(segment
 		(start 101.6 35.5)
-		(end 101.6 32.75)
+		(end 101.6 32.9)
 		(width 0.2)
 		(layer "B.Cu")
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV2")
-		(uuid "ba16f021-0000-4000-8000-000000000005")
+		(uuid "ba16f022-0000-4000-8000-000000000001")
 	)
 	(via
-		(at 101.6 32.75)
+		(at 101.6 32.9)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV2")
-		(uuid "ba16f021-0000-4000-8000-000000000006")
+		(uuid "ba16f022-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 101.6 32.9)
+		(end 101.6 32.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV2")
+		(uuid "ba16f022-0000-4000-8000-000000000003")
 	)
 	(segment
 		(start 101.6 32.75)
@@ -50374,7 +50386,7 @@
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV2")
-		(uuid "ba16f021-0000-4000-8000-000000000007")
+		(uuid "ba16f022-0000-4000-8000-000000000004")
 	)
 
 	(embedded_fonts no)
