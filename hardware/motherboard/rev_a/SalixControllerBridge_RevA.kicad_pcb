@@ -51014,5 +51014,56 @@
 
 
 
+	(segment
+		(start 118.33 50.095)
+		(end 118.33 52.635)
+		(width 1)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 115.67 51.365)
+		(end 115.67 53.905)
+		(width 1)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 115.67 51.365)
+		(end 118.33 51.365)
+		(width 1)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000003")
+	)
+	(segment
+		(start 115.67 52.635)
+		(end 118.33 52.635)
+		(width 1)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 117 52.635)
+		(end 117 55.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000005")
+	)
+	(segment
+		(start 117 55.75)
+		(end 106.4375 55.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U5_VS1")
+		(uuid "ba16f038-0000-4000-8000-000000000006")
+	)
+
+
+
 	(embedded_fonts no)
 )
