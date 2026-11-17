@@ -51713,5 +51713,40 @@
 
 
 
+	(segment
+		(start 106.4375 55.25)
+		(end 112 55.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SYS_IN")
+		(uuid "ba16f049-0000-4000-8000-000000000001")
+	)
+	(via
+		(at 112 55.25)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "SYS_IN")
+		(uuid "ba16f049-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 112 55.25)
+		(end 114 53.8)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "SYS_IN")
+		(uuid "ba16f049-0000-4000-8000-000000000003")
+	)
+	(segment
+		(start 114 53.8)
+		(end 124.4 53.8)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "SYS_IN")
+		(uuid "ba16f049-0000-4000-8000-000000000004")
+	)
+
+
+
 	(embedded_fonts no)
 )
