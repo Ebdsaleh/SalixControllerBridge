@@ -50143,5 +50143,22 @@
 		(uuid "ba16f012-0000-4000-8000-000000000009")
 	)
 
+	(segment
+		(start 92.325 28.5)
+		(end 94.175 28.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV1")
+		(uuid "ba16f013-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 94.175 28.5)
+		(end 102.5625 31.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_UV1")
+		(uuid "ba16f013-0000-4000-8000-000000000002")
+	)
+
 	(embedded_fonts no)
 )
