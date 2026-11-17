@@ -51715,14 +51715,14 @@
 
 	(segment
 		(start 106.4375 55.25)
-		(end 112 55.25)
+		(end 112 54.75)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "SYS_IN")
 		(uuid "ba16f049-0000-4000-8000-000000000001")
 	)
 	(via
-		(at 112 55.25)
+		(at 112 54.75)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
@@ -51730,7 +51730,7 @@
 		(uuid "ba16f049-0000-4000-8000-000000000002")
 	)
 	(segment
-		(start 112 55.25)
+		(start 112 54.75)
 		(end 114 53.8)
 		(width 0.25)
 		(layer "In2.Cu")
@@ -51750,7 +51750,7 @@
 
 	(segment
 		(start 124.4 62.405)
-		(end 124.4 78)
+		(end 124.75 78)
 		(width 5)
 		(layer "In2.Cu")
 		(net "SYS_IN")
