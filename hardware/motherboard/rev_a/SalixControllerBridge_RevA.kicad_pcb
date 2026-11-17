@@ -52541,5 +52541,33 @@
 	)
 
 
+
+	(segment
+		(start 134.775 101)
+		(end 136.675 101)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/AEF_DAMP_TOP")
+		(uuid "ba16f058-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 136.675 101)
+		(end 136.725 103.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/AEF_DAMP_TOP")
+		(uuid "ba16f058-0000-4000-8000-000000000002")
+	)
+
+	(segment
+		(start 134.775 104.5)
+		(end 136.875 106)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/AEF_RINC_MID")
+		(uuid "ba16f058-0000-4000-8000-000000000003")
+	)
+
+
 	(embedded_fonts no)
 )
