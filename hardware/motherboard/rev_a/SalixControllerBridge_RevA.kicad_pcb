@@ -50579,5 +50579,47 @@
 	)
 
 
+	(segment
+		(start 125.2 34.595)
+		(end 125.2 38.405)
+		(width 5)
+		(layer "In2.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f027-0000-4000-8000-000000000001")
+	)
+	(via
+		(at 125.2 37.135)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f027-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 123.795 37.135)
+		(end 125.2 37.135)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f027-0000-4000-8000-000000000003")
+	)
+	(via
+		(at 125.2 38.405)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f027-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 123.795 38.405)
+		(end 125.2 38.405)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f027-0000-4000-8000-000000000005")
+	)
+
+
 	(embedded_fonts no)
 )
