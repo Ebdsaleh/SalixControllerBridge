@@ -34,3 +34,12 @@
     (condition "A.Type == 'Track' && (A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_HO' || A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_LO')")
     (constraint track_width (min 0.65mm))
 )
+
+# U70's 0.5 mm-pitch gate-driver pins cannot physically launch a 0.65 mm
+# track while preserving 0.20 mm clearance to the adjacent controller pad.
+# Permit only the short pin-escape neck-down inside U70's courtyard; the
+# remainder of HO/LO stays subject to the 0.65 mm gate-drive floor above.
+(rule "LM25149 U70 gate-drive pin neckdown"
+    (condition "A.Type == 'Track' && (A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_HO' || A.NetName == '/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_LO') && A.intersectsCourtyard('U70')")
+    (constraint track_width (min 0.25mm))
+)

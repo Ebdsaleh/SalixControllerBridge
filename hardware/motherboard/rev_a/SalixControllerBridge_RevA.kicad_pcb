@@ -52253,14 +52253,14 @@
 
 	(segment
 		(start 136.705 84.45)
-		(end 136.705 85)
-		(width 0.65)
+		(end 136.1 85.1)
+		(width 0.25)
 		(layer "F.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_LO")
 		(uuid "ba16f054-0000-4000-8000-000000000006")
 	)
 	(via
-		(at 136.705 85)
+		(at 136.1 85.1)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
@@ -52268,7 +52268,7 @@
 		(uuid "ba16f054-0000-4000-8000-000000000007")
 	)
 	(segment
-		(start 136.705 85)
+		(start 136.1 85.1)
 		(end 148 89.395)
 		(width 0.65)
 		(layer "In2.Cu")
@@ -52294,14 +52294,22 @@
 
 	(segment
 		(start 140.295 83.95)
-		(end 141 83.2)
+		(end 141.2 83.95)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_CBOOT")
 		(uuid "ba16f054-0000-4000-8000-000000000011")
 	)
+	(segment
+		(start 141.2 83.95)
+		(end 141.2 82.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_CBOOT")
+		(uuid "ba16f054-0000-4000-8000-000000000025")
+	)
 	(via
-		(at 141 83.2)
+		(at 141.2 82.5)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
@@ -52309,7 +52317,7 @@
 		(uuid "ba16f054-0000-4000-8000-000000000012")
 	)
 	(segment
-		(start 141 83.2)
+		(start 141.2 82.5)
 		(end 140.275 87.5)
 		(width 0.25)
 		(layer "B.Cu")
