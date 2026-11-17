@@ -51459,5 +51459,88 @@
 
 
 
+	(segment
+		(start 108.8 61.135)
+		(end 110.5 60)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 110.5 60)
+		(end 110.5 55.2)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 110.5 55.2)
+		(end 106 53.2)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000003")
+	)
+	(via
+		(at 106 53.2)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 106 53.2)
+		(end 105.5 54.3125)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000005")
+	)
+	(segment
+		(start 108.8 62.405)
+		(end 104.5 63.5)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000006")
+	)
+	(segment
+		(start 104.5 63.5)
+		(end 96 63.5)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000007")
+	)
+	(segment
+		(start 96 63.5)
+		(end 89.5 58)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000008")
+	)
+	(via
+		(at 89.5 58)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000009")
+	)
+	(segment
+		(start 89.5 58)
+		(end 90.675 58)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "AUX_PWR")
+		(uuid "ba16f045-0000-4000-8000-000000000010")
+	)
+
+
+
 	(embedded_fonts no)
 )
