@@ -50307,29 +50307,17 @@
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_INTVCC")
 		(uuid "ba16f019-0000-4000-8000-000000000006")
 	)
+
+
+
+
 	(segment
-		(start 105.5 34.1875)
-		(end 107.2 34.1875)
+		(start 105.5 35)
+		(end 107.9 34.975)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_INTVCC")
-		(uuid "ba16f019-0000-4000-8000-000000000007")
-	)
-	(segment
-		(start 107.2 34.1875)
-		(end 107.2 33.425)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_INTVCC")
-		(uuid "ba16f019-0000-4000-8000-000000000008")
-	)
-	(segment
-		(start 107.2 33.425)
-		(end 107.9 33.425)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "/MAIN SOURCE PRIORITY {slash} POWERPATH/U4_INTVCC")
-		(uuid "ba16f019-0000-4000-8000-000000000009")
+		(uuid "ba16f020-0000-4000-8000-000000000001")
 	)
 
 	(embedded_fonts no)
