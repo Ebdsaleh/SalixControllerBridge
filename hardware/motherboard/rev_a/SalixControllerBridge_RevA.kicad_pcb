@@ -51702,5 +51702,16 @@
 
 
 
+	(segment
+		(start 124.4 53.905)
+		(end 124.4 61.135)
+		(width 5)
+		(layer "In2.Cu")
+		(net "SYS_IN")
+		(uuid "ba16f048-0000-4000-8000-000000000001")
+	)
+
+
+
 	(embedded_fonts no)
 )
