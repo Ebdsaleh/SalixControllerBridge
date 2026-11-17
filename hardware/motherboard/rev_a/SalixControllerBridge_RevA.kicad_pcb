@@ -52456,14 +52456,14 @@
 	)
 	(segment
 		(start 132.175 79.9)
-		(end 134.5 87.3)
+		(end 133.775 86.9)
 		(width 0.25)
 		(layer "B.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_VDDA")
 		(uuid "ba16f056-0000-4000-8000-000000000007")
 	)
 	(via
-		(at 134.5 87.3)
+		(at 133.775 86.9)
 		(size 0.6)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
@@ -52471,7 +52471,7 @@
 		(uuid "ba16f056-0000-4000-8000-000000000008")
 	)
 	(segment
-		(start 134.5 87.3)
+		(start 133.775 86.9)
 		(end 133.775 88.1)
 		(width 0.25)
 		(layer "F.Cu")
