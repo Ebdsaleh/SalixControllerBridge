@@ -50665,5 +50665,47 @@
 	)
 
 
+	(segment
+		(start 108.8 37.135)
+		(end 108.8 38.405)
+		(width 5)
+		(layer "In2.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f031-0000-4000-8000-000000000001")
+	)
+	(via
+		(at 108.8 37.135)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f031-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 110.205 37.135)
+		(end 108.8 37.135)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f031-0000-4000-8000-000000000003")
+	)
+	(via
+		(at 108.8 38.405)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f031-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 110.205 38.405)
+		(end 108.8 38.405)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "ba16f031-0000-4000-8000-000000000005")
+	)
+
+
 	(embedded_fonts no)
 )
