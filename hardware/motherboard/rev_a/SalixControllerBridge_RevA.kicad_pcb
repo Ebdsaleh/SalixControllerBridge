@@ -52294,19 +52294,27 @@
 
 	(segment
 		(start 140.295 83.95)
-		(end 141.2 83.95)
+		(end 141 83.95)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_CBOOT")
 		(uuid "ba16f054-0000-4000-8000-000000000011")
 	)
 	(segment
-		(start 141.2 83.95)
-		(end 141.2 82.5)
+		(start 141 83.95)
+		(end 141 82.4)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_CBOOT")
 		(uuid "ba16f054-0000-4000-8000-000000000025")
+	)
+	(segment
+		(start 141 82.4)
+		(end 141.2 82.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_CBOOT")
+		(uuid "ba16f054-0000-4000-8000-000000000026")
 	)
 	(via
 		(at 141.2 82.5)
