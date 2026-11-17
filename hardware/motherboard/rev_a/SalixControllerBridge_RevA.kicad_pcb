@@ -52480,5 +52480,66 @@
 	)
 
 
+
+	(segment
+		(start 134.775 96)
+		(end 136.675 96)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_SEN")
+		(uuid "ba16f057-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 133.225 98.5)
+		(end 133.225 97.55)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_SEN")
+		(uuid "ba16f057-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 133.225 97.55)
+		(end 134.775 96)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_SEN")
+		(uuid "ba16f057-0000-4000-8000-000000000003")
+	)
+
+	(segment
+		(start 134.775 98.5)
+		(end 136.675 98.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/AEF_COMP_MID")
+		(uuid "ba16f057-0000-4000-8000-000000000004")
+	)
+
+	(segment
+		(start 138.325 96)
+		(end 138.325 98.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_INJ")
+		(uuid "ba16f057-0000-4000-8000-000000000005")
+	)
+	(segment
+		(start 138.325 98.5)
+		(end 138.325 101)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_INJ")
+		(uuid "ba16f057-0000-4000-8000-000000000006")
+	)
+	(segment
+		(start 138.325 101)
+		(end 138.275 103.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_INJ")
+		(uuid "ba16f057-0000-4000-8000-000000000007")
+	)
+
+
 	(embedded_fonts no)
 )
