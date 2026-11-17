@@ -52350,5 +52350,58 @@
 	)
 
 
+
+	(segment
+		(start 130.275 83.5)
+		(end 132.175 83.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP_RC")
+		(uuid "ba16f055-0000-4000-8000-000000000001")
+	)
+
+	(segment
+		(start 130.275 81)
+		(end 131 81)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP")
+		(uuid "ba16f055-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 131 81)
+		(end 131 82.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP")
+		(uuid "ba16f055-0000-4000-8000-000000000003")
+	)
+	(segment
+		(start 131 82.5)
+		(end 133.825 82.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP")
+		(uuid "ba16f055-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 133.825 82.5)
+		(end 133.825 83.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP")
+		(uuid "ba16f055-0000-4000-8000-000000000005")
+	)
+
+	(segment
+		(start 137.025 88.8)
+		(end 138.725 90)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_AEFVDDA")
+		(uuid "ba16f055-0000-4000-8000-000000000006")
+	)
+
+
 	(embedded_fonts no)
 )
