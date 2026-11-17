@@ -50621,5 +50621,31 @@
 	)
 
 
+	(segment
+		(start 125.2 37.135)
+		(end 106.2 30)
+		(width 0.25)
+		(layer "In2.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f028-0000-4000-8000-000000000001")
+	)
+	(via
+		(at 106.2 30)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f028-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 106.2 30)
+		(end 105.5 30.3125)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "PD_PWR")
+		(uuid "ba16f028-0000-4000-8000-000000000003")
+	)
+
+
 	(embedded_fonts no)
 )
