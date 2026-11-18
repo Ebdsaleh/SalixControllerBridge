@@ -53047,5 +53047,16 @@
 	)
 
 
+
+	(segment
+		(start 153.425 60)
+		(end 155.025 60)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_DVDT")
+		(uuid "ba16f060-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
