@@ -53057,41 +53057,5 @@
 		(uuid "ba16f060-0000-4000-8000-000000000001")
 	)
 
-
-
-	(segment
-		(start 149.75 58.59)
-		(end 149.75 59.3)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_CAP")
-		(uuid "ba16f061-0000-4000-8000-000000000001")
-	)
-	(segment
-		(start 149.75 59.3)
-		(end 145.6 59.3)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_CAP")
-		(uuid "ba16f061-0000-4000-8000-000000000002")
-	)
-	(segment
-		(start 145.6 59.3)
-		(end 145.6 57.2)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_CAP")
-		(uuid "ba16f061-0000-4000-8000-000000000003")
-	)
-	(segment
-		(start 145.6 57.2)
-		(end 146.175 57.2)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_CAP")
-		(uuid "ba16f061-0000-4000-8000-000000000004")
-	)
-
-
 	(embedded_fonts no)
 )
