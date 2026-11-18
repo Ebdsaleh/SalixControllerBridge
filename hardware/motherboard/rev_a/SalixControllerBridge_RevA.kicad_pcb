@@ -53057,5 +53057,56 @@
 		(uuid "ba16f060-0000-4000-8000-000000000001")
 	)
 
+
+	(segment
+		(start 149.25 58.59)
+		(end 149.25 60.475)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV_TOP")
+		(uuid "ba16f062-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 149.75 58.59)
+		(end 149.75 59.3)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV")
+		(uuid "ba16f063-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 149.75 59.3)
+		(end 150.5 59.3)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV")
+		(uuid "ba16f063-0000-4000-8000-000000000002")
+	)
+	(segment
+		(start 150.5 59.3)
+		(end 150.5 62.125)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV")
+		(uuid "ba16f063-0000-4000-8000-000000000003")
+	)
+	(segment
+		(start 150.5 62.125)
+		(end 149.25 62.125)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV")
+		(uuid "ba16f063-0000-4000-8000-000000000004")
+	)
+	(segment
+		(start 149.25 62.125)
+		(end 149.25 63.675)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_OV")
+		(uuid "ba16f063-0000-4000-8000-000000000005")
+	)
+
+
 	(embedded_fonts no)
 )
