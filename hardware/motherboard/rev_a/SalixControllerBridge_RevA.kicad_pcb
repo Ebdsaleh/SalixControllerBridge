@@ -53272,5 +53272,32 @@
 	)
 
 
+
+	(segment
+		(start 43.5 74.44)
+		(end 48 74.44)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J1-GP9)")
+		(uuid "ba16f070-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 43.5 79.52)
+		(end 48 79.52)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "RPC_SCK")
+		(uuid "ba16f071-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 43.5 82.06)
+		(end 48 82.06)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "RPC_MOSI")
+		(uuid "ba16f072-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
