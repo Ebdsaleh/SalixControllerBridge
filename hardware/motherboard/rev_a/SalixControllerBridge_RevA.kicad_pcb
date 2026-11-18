@@ -52806,14 +52806,14 @@
 
 	(segment
 		(start 136.705 81.45)
-		(end 136.05 81.45)
+		(end 136.15 81.45)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/5V_MAIN {slash} 12A SYNCHRONOUS BUCK/BUCK_COMP")
 		(uuid "ba16f05c-0000-4000-8000-000000000001")
 	)
 	(segment
-		(start 136.05 81.45)
+		(start 136.15 81.45)
 		(end 135.55 82.2)
 		(width 0.25)
 		(layer "F.Cu")
