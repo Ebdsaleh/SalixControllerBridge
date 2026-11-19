@@ -54414,5 +54414,50 @@
 		(uuid "ad77c107-5c23-4a19-bb02-000000000101")
 	)
 
+	(segment
+		(start 137.725 110.2)
+		(end 137.675 112)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad78c108-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 137.675 112)
+		(end 137.675 113.7)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad78c108-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 137.675 113.7)
+		(end 137.675 115.4)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad78c108-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 137.675 115.4)
+		(end 137.675 117.1)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad78c108-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 137.675 117.1)
+		(end 137.675 118.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad78c108-5c23-4a19-bb02-000000000005")
+	)
+
 	(embedded_fonts no)
 )
