@@ -53464,5 +53464,48 @@
 	)
 
 
+
+	(segment
+		(start 117.9375 72)
+		(end 114.5 72)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_OD")
+		(uuid "ba16f086-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 114.5 72)
+		(end 114.5 76.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_OD")
+		(uuid "ba16f087-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 114.5 76.5)
+		(end 113.38 76.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_OD")
+		(uuid "ba16f088-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 113.38 76.5)
+		(end 113.38 78)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_OD")
+		(uuid "ba16f089-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 103.9375 99)
+		(end 108.38 100)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_OD")
+		(uuid "ba16f08a-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
