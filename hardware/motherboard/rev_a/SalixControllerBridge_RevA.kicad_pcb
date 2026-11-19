@@ -54586,15 +54586,6 @@
 		(uuid "ad83c113-5c23-4a19-bb02-000000000002")
 	)
 
-	(segment
-		(start 167.85 95)
-		(end 173.05 95)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "3V3_AUX")
-		(uuid "ad83c113-5c23-4a19-bb02-000000000003")
-	)
-
 
 	(embedded_fonts no)
 )
