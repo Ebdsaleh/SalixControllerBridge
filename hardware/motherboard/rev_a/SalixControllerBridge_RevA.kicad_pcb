@@ -53507,5 +53507,64 @@
 	)
 
 
+
+	(segment
+		(start 117.825 66.5)
+		(end 116.175 68.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_GATE")
+		(uuid "ba16f08b-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 116.175 68.5)
+		(end 116.0625 71.05)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_PWM_GATE")
+		(uuid "ba16f08c-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 102.0625 98.05)
+		(end 100.5 98.05)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_GATE")
+		(uuid "ba16f08d-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 100.5 98.05)
+		(end 100.5 103.65)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_GATE")
+		(uuid "ba16f08e-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 100.5 103.65)
+		(end 103.825 103.65)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_GATE")
+		(uuid "ba16f08f-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 103.825 103.65)
+		(end 103.825 102.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_GATE")
+		(uuid "ba16f090-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 103.825 103.65)
+		(end 102.175 104.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_PWM_GATE")
+		(uuid "ba16f091-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
