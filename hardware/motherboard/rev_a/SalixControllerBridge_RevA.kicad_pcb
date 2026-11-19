@@ -54099,5 +54099,32 @@
 		(uuid "ad72c102-5c23-4a19-bb02-000000000102")
 	)
 
+	(segment
+		(start 65.78 82.06)
+		(end 70.28 82.06)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-ADC_VREF)")
+		(uuid "ca00b235-802e-4f00-8aa1-000000000035")
+	)
+
+	(segment
+		(start 65.78 84.6)
+		(end 70.28 84.6)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-3V3_OUT)")
+		(uuid "ca00b236-802e-4f00-8aa1-000000000036")
+	)
+
+	(segment
+		(start 65.78 87.14)
+		(end 70.28 87.14)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-3V3_EN)")
+		(uuid "ca00b237-802e-4f00-8aa1-000000000037")
+	)
+
 	(embedded_fonts no)
 )
