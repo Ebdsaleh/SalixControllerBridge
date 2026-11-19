@@ -54698,5 +54698,42 @@
 	)
 
 
+	(segment
+		(start 111.675 70.5)
+		(end 109.3625 70.375)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "MGMT_I2C_SDA")
+		(uuid "ad87c117-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 109.3625 71.025)
+		(end 110.7 71.025)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "MGMT_I2C_SCL")
+		(uuid "ad87c117-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 110.7 71.025)
+		(end 110.7 72.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "MGMT_I2C_SCL")
+		(uuid "ad87c117-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 110.7 72.5)
+		(end 111.675 72.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "MGMT_I2C_SCL")
+		(uuid "ad87c117-5c23-4a19-bb02-000000000004")
+	)
+
+
 	(embedded_fonts no)
 )
