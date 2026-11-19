@@ -54794,5 +54794,25 @@
 		(uuid "ad8ac11a-5c23-4a19-bb02-000000000002")
 	)
 
+
+	(segment
+		(start 70.28 69.36)
+		(end 65.78 69.36)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "ad8bc11b-5c23-4a19-bb02-000000000001")
+	)
+
+
+	(segment
+		(start 118.46 78)
+		(end 120.05 72)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN0_5V")
+		(uuid "ad8bc11b-5c23-4a19-bb02-000000000002")
+	)
+
 	(embedded_fonts no)
 )
