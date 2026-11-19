@@ -53802,58 +53802,121 @@
 		(uuid "f1ac0005-8a19-4ca7-b001-000000000005")
 	)
 
+
+
+
+
+
+
+
+
+
 	(segment
 		(start 157.625 92.5)
-		(end 159 92.5)
+		(end 158.85 92.5)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
-		(uuid "c3a00001-ced1-4a6e-9c31-000000000001")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000001")
 	)
 
 	(segment
-		(start 159 92.5)
-		(end 165 99)
+		(start 158.85 92.5)
+		(end 156.4 92.5)
 		(width 0.25)
-		(layer "F.Cu")
+		(layer "B.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
-		(uuid "c3a00001-ced1-4a6e-9c31-000000000002")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000002")
 	)
 
 	(segment
-		(start 165 99)
-		(end 167.85 99)
+		(start 156.4 92.5)
+		(end 156.4 109)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000003")
+	)
+
+	(segment
+		(start 156.4 109)
+		(end 158.85 109)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000004")
+	)
+
+	(segment
+		(start 158.85 109)
+		(end 162.15 109)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
-		(uuid "c3a00001-ced1-4a6e-9c31-000000000003")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000005")
+	)
+
+	(via
+		(at 158.85 92.5)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000101")
+	)
+
+	(via
+		(at 158.85 109)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_SCK")
+		(uuid "bb500001-7c01-4bc0-9e31-000000000102")
 	)
 
 	(segment
 		(start 157.625 95)
-		(end 159 95)
+		(end 158.85 95)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MOSI")
-		(uuid "c3a00002-ced1-4a6e-9c31-000000000001")
+		(uuid "bb500002-7c01-4bc0-9e31-000000000001")
 	)
 
 	(segment
-		(start 159 95)
-		(end 165 101)
+		(start 158.85 95)
+		(end 158.85 107)
 		(width 0.25)
-		(layer "F.Cu")
+		(layer "B.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MOSI")
-		(uuid "c3a00002-ced1-4a6e-9c31-000000000002")
+		(uuid "bb500002-7c01-4bc0-9e31-000000000002")
 	)
 
 	(segment
-		(start 165 101)
-		(end 167.85 101)
+		(start 158.85 107)
+		(end 162.15 107)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MOSI")
-		(uuid "c3a00002-ced1-4a6e-9c31-000000000003")
+		(uuid "bb500002-7c01-4bc0-9e31-000000000003")
+	)
+
+	(via
+		(at 158.85 95)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MOSI")
+		(uuid "bb500002-7c01-4bc0-9e31-000000000101")
+	)
+
+	(via
+		(at 158.85 107)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MOSI")
+		(uuid "bb500002-7c01-4bc0-9e31-000000000102")
 	)
 
 	(segment
@@ -53862,25 +53925,25 @@
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MISO")
-		(uuid "c3a00003-ced1-4a6e-9c31-000000000001")
+		(uuid "bb500003-7c01-4bc0-9e31-000000000001")
 	)
 
 	(segment
 		(start 159 97.5)
-		(end 165 103)
+		(end 159 105)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MISO")
-		(uuid "c3a00003-ced1-4a6e-9c31-000000000002")
+		(uuid "bb500003-7c01-4bc0-9e31-000000000002")
 	)
 
 	(segment
-		(start 165 103)
-		(end 167.85 103)
+		(start 159 105)
+		(end 162.15 105)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/TFT_SPI_MISO")
-		(uuid "c3a00003-ced1-4a6e-9c31-000000000003")
+		(uuid "bb500003-7c01-4bc0-9e31-000000000003")
 	)
 
 	(embedded_fonts no)
