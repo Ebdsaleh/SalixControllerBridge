@@ -53440,11 +53440,19 @@
 	)
 	(segment
 		(start 86.9375 48)
+		(end 94.525 48)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_VBUS_DET")
+		(uuid "ba16f084-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 94.525 48)
 		(end 94.525 49.2)
 		(width 0.25)
 		(layer "F.Cu")
 		(net "/USB HUB {slash} INPUT INTERFACE/HUB_VBUS_DET")
-		(uuid "ba16f082-0000-4000-8000-000000000001")
+		(uuid "ba16f085-0000-4000-8000-000000000001")
 	)
 	(segment
 		(start 94.525 49.2)
