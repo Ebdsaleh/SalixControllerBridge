@@ -53946,5 +53946,32 @@
 		(uuid "bb500003-7c01-4bc0-9e31-000000000003")
 	)
 
+	(segment
+		(start 72.825 31)
+		(end 70.225 34)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/RTC_VBAT")
+		(uuid "abaef101-609d-4480-bb01-000000000001")
+	)
+
+	(segment
+		(start 27.9375 73.95)
+		(end 30.375 72.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_CTL_GATE")
+		(uuid "abaef102-609d-4480-bb01-000000000002")
+	)
+
+	(segment
+		(start 27.9375 73.95)
+		(end 30.375 75.3)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_CTL_GATE")
+		(uuid "abaef103-609d-4480-bb01-000000000003")
+	)
+
 	(embedded_fonts no)
 )
