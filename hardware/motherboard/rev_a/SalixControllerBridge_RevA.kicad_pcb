@@ -53973,5 +53973,131 @@
 		(uuid "abaef103-609d-4480-bb01-000000000003")
 	)
 
+	(segment
+		(start 139.325 112)
+		(end 140.7 112)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 140.7 112)
+		(end 141 111.4)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 141 111.4)
+		(end 141 106.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 141 106.3)
+		(end 144.075 106.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 144.075 106.3)
+		(end 144.075 103.275)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000005")
+	)
+
+	(via
+		(at 140.7 112)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000101")
+	)
+
+	(via
+		(at 144.075 106.3)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT1")
+		(uuid "ad71c101-5c23-4a19-bb02-000000000102")
+	)
+
+	(segment
+		(start 139.325 113.7)
+		(end 140.7 113.7)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 140.7 113.7)
+		(end 141.7 114.7)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 141.7 114.7)
+		(end 151.775 114.7)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 151.775 114.7)
+		(end 151.775 106.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 151.775 106.3)
+		(end 151.775 103.275)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000005")
+	)
+
+	(via
+		(at 140.7 113.7)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000101")
+	)
+
+	(via
+		(at 151.775 106.3)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "/PICO-B SERVICE {slash} STORAGE {slash} UI/SD_DAT2")
+		(uuid "ad72c102-5c23-4a19-bb02-000000000102")
+	)
+
 	(embedded_fonts no)
 )
