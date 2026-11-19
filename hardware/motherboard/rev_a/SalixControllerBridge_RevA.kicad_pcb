@@ -53364,5 +53364,32 @@
 	)
 
 
+
+	(segment
+		(start 65.78 61.74)
+		(end 70.28 61.74)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-GP21)")
+		(uuid "ba16f07a-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 65.78 66.82)
+		(end 70.28 66.82)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-GP22)")
+		(uuid "ba16f07b-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 65.78 71.9)
+		(end 70.28 71.9)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "Net-(J2-GP26)")
+		(uuid "ba16f07c-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
