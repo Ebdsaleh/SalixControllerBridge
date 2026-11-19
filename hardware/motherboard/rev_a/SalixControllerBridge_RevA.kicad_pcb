@@ -54135,5 +54135,14 @@
 		(uuid "ca00e227-3700-4f00-8aa1-000000000001")
 	)
 
+	(segment
+		(start 71 24)
+		(end 71.175 31)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/RTC_BAT_RAW")
+		(uuid "ca00b226-2400-4f00-8aa1-000000000001")
+	)
+
 	(embedded_fonts no)
 )
