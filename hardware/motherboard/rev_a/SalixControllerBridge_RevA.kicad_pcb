@@ -54144,5 +54144,194 @@
 		(uuid "ca00b226-2400-4f00-8aa1-000000000001")
 	)
 
+	(segment
+		(start 139.325 115.4)
+		(end 140 115.4)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 140 115.4)
+		(end 153 115.4)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 153 115.4)
+		(end 153 105.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 153 105.3)
+		(end 150.675 105.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 150.675 105.3)
+		(end 150.675 103.275)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000005")
+	)
+
+	(via
+		(at 140 115.4)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000101")
+	)
+
+	(via
+		(at 150.675 105.3)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SD_CS_N")
+		(uuid "ad73c103-5c23-4a19-bb02-000000000102")
+	)
+
+	(segment
+		(start 139.325 117.1)
+		(end 140 117.1)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 140 117.1)
+		(end 154.2 117.1)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 154.2 117.1)
+		(end 154.2 104.6)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 154.2 104.6)
+		(end 149.575 104.6)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 149.575 104.6)
+		(end 149.575 103.275)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000005")
+	)
+
+	(via
+		(at 140 117.1)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000101")
+	)
+
+	(via
+		(at 149.575 104.6)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SERVICE_SPI_MOSI")
+		(uuid "ad74c104-5c23-4a19-bb02-000000000102")
+	)
+
+	(segment
+		(start 139.325 118.8)
+		(end 140 118.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 140 118.8)
+		(end 155.4 118.8)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 155.4 118.8)
+		(end 155.4 102.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 155.4 102.3)
+		(end 145.175 102.3)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000004")
+	)
+
+	(segment
+		(start 145.175 102.3)
+		(end 145.175 103.275)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000005")
+	)
+
+	(via
+		(at 140 118.8)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000101")
+	)
+
+	(via
+		(at 145.175 102.3)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "SERVICE_SPI_MISO")
+		(uuid "ad75c105-5c23-4a19-bb02-000000000102")
+	)
+
 	(embedded_fonts no)
 )
