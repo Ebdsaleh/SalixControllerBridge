@@ -53299,5 +53299,32 @@
 	)
 
 
+
+	(segment
+		(start 43.5 84.6)
+		(end 48 84.6)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "RPC_MISO")
+		(uuid "ba16f073-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 43.5 87.14)
+		(end 48 87.14)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "RPC_CS_N")
+		(uuid "ba16f074-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 43.5 92.22)
+		(end 48 92.22)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "IRQ_A2B")
+		(uuid "ba16f075-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
