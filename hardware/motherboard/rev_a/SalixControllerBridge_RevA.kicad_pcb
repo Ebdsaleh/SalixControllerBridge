@@ -54754,5 +54754,25 @@
 	)
 
 
+
+	(segment
+		(start 24.525 63.5)
+		(end 26.175 63.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad89c119-5c23-4a19-bb02-000000000001")
+	)
+
+
+	(segment
+		(start 91.075 46.8)
+		(end 92.875 46.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "HUB_RESET_N")
+		(uuid "ad89c119-5c23-4a19-bb02-000000000002")
+	)
+
 	(embedded_fonts no)
 )
