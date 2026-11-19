@@ -54522,5 +54522,51 @@
 		(uuid "ad81c111-5c23-4a19-bb02-000000000003")
 	)
 
+	(segment
+		(start 149.175 100.2)
+		(end 149.175 99)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad82c112-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 149.175 99)
+		(end 152.375 99)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad82c112-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 152.375 99)
+		(end 152.375 100.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad82c112-5c23-4a19-bb02-000000000003")
+	)
+
+	(segment
+		(start 153.325 103.275)
+		(end 154.25 103.325)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad82c112-5c23-4a19-bb02-000000000004")
+	)
+
+	(via
+		(at 154.25 103.325)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "ad82c112-5c23-4a19-bb02-000000000101")
+	)
+
+
 	(embedded_fonts no)
 )
