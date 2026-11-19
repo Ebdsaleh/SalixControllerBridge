@@ -54227,7 +54227,7 @@
 
 	(segment
 		(start 154.2 117.1)
-		(end 154.2 104.6)
+		(end 154.2 104.35)
 		(width 0.25)
 		(layer "B.Cu")
 		(net "SERVICE_SPI_MOSI")
@@ -54235,8 +54235,8 @@
 	)
 
 	(segment
-		(start 154.2 104.6)
-		(end 149.575 104.6)
+		(start 154.2 104.35)
+		(end 149.575 104.35)
 		(width 0.25)
 		(layer "B.Cu")
 		(net "SERVICE_SPI_MOSI")
@@ -54244,7 +54244,7 @@
 	)
 
 	(segment
-		(start 149.575 104.6)
+		(start 149.575 104.35)
 		(end 149.575 103.275)
 		(width 0.25)
 		(layer "F.Cu")
@@ -54262,7 +54262,7 @@
 	)
 
 	(via
-		(at 149.575 104.6)
+		(at 149.575 104.35)
 		(size 1)
 		(drill 0.5)
 		(layers "F.Cu" "B.Cu")
