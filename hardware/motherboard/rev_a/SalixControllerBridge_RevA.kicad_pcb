@@ -54735,5 +54735,24 @@
 	)
 
 
+	(segment
+		(start 38.875 62.5)
+		(end 38.875 64.4)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_PGTH")
+		(uuid "ad88c118-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 38.875 70.9)
+		(end 38.875 72.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_UV_SENSE")
+		(uuid "ad88c118-5c23-4a19-bb02-000000000002")
+	)
+
+
 	(embedded_fonts no)
 )
