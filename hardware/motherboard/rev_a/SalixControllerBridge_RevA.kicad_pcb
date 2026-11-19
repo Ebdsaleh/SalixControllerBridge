@@ -53326,5 +53326,16 @@
 	)
 
 
+
+	(segment
+		(start 43.5 94.76)
+		(end 48 94.76)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "IRQ_B2A")
+		(uuid "ba16f076-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
