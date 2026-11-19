@@ -54894,5 +54894,35 @@
 		(uuid "ad8cc11c-5c23-4a19-bb02-000200000003")
 	)
 
+
+	(segment
+		(start 61 24)
+		(end 71 24)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/RTC_BAT_RAW")
+		(uuid "ad8dc11d-5c23-4a19-bb02-000000000001")
+	)
+
+
+	(segment
+		(start 31.625 70.7)
+		(end 30.5 70.7)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8dc11d-5c23-4a19-bb02-000000000002")
+	)
+
+
+	(via
+		(at 30.5 70.7)
+		(size 1)
+		(drill 0.5)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "ad8dc11d-5c23-4a19-bb02-000000000101")
+	)
+
 	(embedded_fonts no)
 )
