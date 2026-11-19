@@ -53429,5 +53429,32 @@
 	)
 
 
+
+	(segment
+		(start 86.9375 49)
+		(end 89.475 49.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_HS_IND")
+		(uuid "ba16f081-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 86.9375 48)
+		(end 94.525 49.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_VBUS_DET")
+		(uuid "ba16f082-0000-4000-8000-000000000001")
+	)
+	(segment
+		(start 94.525 49.2)
+		(end 96.275 49.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_VBUS_DET")
+		(uuid "ba16f083-0000-4000-8000-000000000001")
+	)
+
+
 	(embedded_fonts no)
 )
