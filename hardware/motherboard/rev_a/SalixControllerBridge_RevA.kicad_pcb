@@ -53730,5 +53730,77 @@
 		(uuid "f1a0b004-f722-4cd1-b522-000000000004")
 	)
 
+	(segment
+		(start 79 74.16)
+		(end 82.5 74.16)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN0_TACH")
+		(uuid "f0ac0001-8a19-4ca7-b001-000000000001")
+	)
+
+	(segment
+		(start 82.5 74.16)
+		(end 83.77 75.43)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN0_TACH")
+		(uuid "f0ac0002-8a19-4ca7-b001-000000000002")
+	)
+
+	(segment
+		(start 83.77 75.43)
+		(end 115.92 75.43)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN0_TACH")
+		(uuid "f0ac0003-8a19-4ca7-b001-000000000003")
+	)
+
+	(segment
+		(start 79 112.26)
+		(end 81.5 112.26)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN1_TACH")
+		(uuid "f1ac0001-8a19-4ca7-b001-000000000001")
+	)
+
+	(segment
+		(start 81.5 112.26)
+		(end 85.44 116.2)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN1_TACH")
+		(uuid "f1ac0002-8a19-4ca7-b001-000000000002")
+	)
+
+	(segment
+		(start 85.44 116.2)
+		(end 103 116.2)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN1_TACH")
+		(uuid "f1ac0003-8a19-4ca7-b001-000000000003")
+	)
+
+	(segment
+		(start 103 116.2)
+		(end 103 95)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN1_TACH")
+		(uuid "f1ac0004-8a19-4ca7-b001-000000000004")
+	)
+
+	(segment
+		(start 103 95)
+		(end 104.9 95)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "FAN1_TACH")
+		(uuid "f1ac0005-8a19-4ca7-b001-000000000005")
+	)
+
 	(embedded_fonts no)
 )
