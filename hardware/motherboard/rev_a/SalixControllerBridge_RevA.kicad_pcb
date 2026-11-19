@@ -54774,5 +54774,25 @@
 		(uuid "ad89c119-5c23-4a19-bb02-000000000002")
 	)
 
+
+	(segment
+		(start 26.175 63.5)
+		(end 26.0625 66.55)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8ac11a-5c23-4a19-bb02-000000000001")
+	)
+
+
+	(segment
+		(start 38.875 74.7)
+		(end 40.525 72.8)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_OV_SENSE")
+		(uuid "ad8ac11a-5c23-4a19-bb02-000000000002")
+	)
+
 	(embedded_fonts no)
 )
