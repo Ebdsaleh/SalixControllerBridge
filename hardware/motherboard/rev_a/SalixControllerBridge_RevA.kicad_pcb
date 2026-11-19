@@ -54814,5 +54814,85 @@
 		(uuid "ad8bc11b-5c23-4a19-bb02-000000000002")
 	)
 
+
+	(segment
+		(start 26.0625 66.55)
+		(end 25.2 66.55)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000100000001")
+	)
+
+
+	(segment
+		(start 25.2 66.55)
+		(end 24.4 67.35)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000100000002")
+	)
+
+
+	(segment
+		(start 24.4 67.35)
+		(end 24.4 72.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000100000003")
+	)
+
+
+	(segment
+		(start 24.4 72.2)
+		(end 25.2 73)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000100000004")
+	)
+
+
+	(segment
+		(start 25.2 73)
+		(end 26.0625 73)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_CHG_DIS_BIAS")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000100000005")
+	)
+
+
+	(segment
+		(start 113.46 100)
+		(end 113.46 101.8)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_5V")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000200000001")
+	)
+
+
+	(segment
+		(start 113.46 101.8)
+		(end 114.66 103)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_5V")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000200000002")
+	)
+
+
+	(segment
+		(start 114.66 103)
+		(end 120.05 103)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "/SERVICE {slash} DEBUG {slash} SUPERVISION/FAN1_5V")
+		(uuid "ad8cc11c-5c23-4a19-bb02-000200000003")
+	)
+
 	(embedded_fonts no)
 )
