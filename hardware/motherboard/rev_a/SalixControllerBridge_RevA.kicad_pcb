@@ -55591,5 +55591,32 @@
 		(uuid "ad8fc13f-5c23-4a19-bb02-000000000003")
 	)
 
+	(segment
+		(start 168.475 82)
+		(end 168.475 86)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8fc140-5c23-4a19-bb02-000000000001")
+	)
+
+	(segment
+		(start 117.825 68.5)
+		(end 120 68)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8fc140-5c23-4a19-bb02-000000000002")
+	)
+
+	(segment
+		(start 120 68)
+		(end 121.1625 68)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8fc140-5c23-4a19-bb02-000000000003")
+	)
+
 	(embedded_fonts no)
 )
