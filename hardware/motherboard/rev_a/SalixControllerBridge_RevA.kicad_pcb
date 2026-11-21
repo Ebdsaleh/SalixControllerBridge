@@ -49501,6 +49501,33 @@
 		)
 	)
 	(segment
+		(start 65.78 46.5)
+		(end 70.28 46.5)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "PICO_A_GP16_USB_DP")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000013")
+	)
+
+	(segment
+		(start 65.78 49.04)
+		(end 70.28 49.04)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "PICO_A_GP17_USB_DM")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000014")
+	)
+
+	(segment
+		(start 65.78 92.22)
+		(end 70.28 92.22)
+		(width 1.5)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000015")
+	)
+
+	(segment
 		(start 72.975 46.5)
 		(end 72.975 43.7)
 		(width 0.3)
