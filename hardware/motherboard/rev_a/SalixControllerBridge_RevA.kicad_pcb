@@ -49501,6 +49501,24 @@
 		)
 	)
 	(segment
+		(start 146.35 21.74)
+		(end 146.35 25.12)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000022")
+	)
+
+	(segment
+		(start 137.7 21.74)
+		(end 137.7 25.12)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000023")
+	)
+
+	(segment
 		(start 121.95 72)
 		(end 121 78)
 		(width 0.8)
