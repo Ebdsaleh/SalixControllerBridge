@@ -49501,6 +49501,33 @@
 		)
 	)
 	(segment
+		(start 84.85 42)
+		(end 87.725 42.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALOUT")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000016")
+	)
+
+	(segment
+		(start 140.275 90)
+		(end 143.095 89.703)
+		(width 0.6)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000017")
+	)
+
+	(segment
+		(start 146.35 25.12)
+		(end 149.05 25)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000018")
+	)
+
+	(segment
 		(start 65.78 46.5)
 		(end 70.28 46.5)
 		(width 0.3)
