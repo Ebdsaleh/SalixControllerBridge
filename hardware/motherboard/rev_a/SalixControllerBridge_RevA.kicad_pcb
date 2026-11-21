@@ -49501,6 +49501,22 @@
 		)
 	)
 	(segment
+		(start 139.9 26.1)
+		(end 139.9 24.75)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000035")
+	)
+	(segment
+		(start 144.15 24.75)
+		(end 144.15 26.1)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000036")
+	)
+	(segment
 		(start 137.75 79.405)
 		(end 139.25 79.405)
 		(width 0.2)
