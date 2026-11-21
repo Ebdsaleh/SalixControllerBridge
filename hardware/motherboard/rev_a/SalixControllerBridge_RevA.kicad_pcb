@@ -49502,6 +49502,33 @@
 	)
 	(segment
 		(start 72.975 46.5)
+		(end 72.975 43.7)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "PICO_A_GP16_USB_DP")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000010")
+	)
+
+	(segment
+		(start 72.975 49.04)
+		(end 72.975 51.84)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "PICO_A_GP17_USB_DM")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000011")
+	)
+
+	(segment
+		(start 65.78 94.76)
+		(end 70.28 94.76)
+		(width 0.8)
+		(layer "F.Cu")
+		(net "Net-(J2-VBUS)")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000012")
+	)
+
+	(segment
+		(start 72.975 46.5)
 		(end 70.28 46.5)
 		(width 0.3)
 		(layer "F.Cu")
