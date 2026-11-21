@@ -49501,6 +49501,33 @@
 		)
 	)
 	(segment
+		(start 76.55 34.6)
+		(end 76.225 38)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000026")
+	)
+
+	(segment
+		(start 78.35 34.6)
+		(end 77.775 38)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000027")
+	)
+
+	(segment
+		(start 124.025 44)
+		(end 123.795 38.405)
+		(width 1.5)
+		(layer "F.Cu")
+		(net "PD_PWR")
+		(uuid "ad8fc145-5c23-4a19-bb02-000000000028")
+	)
+
+	(segment
 		(start 34.35 36.4)
 		(end 36.265 34.95)
 		(width 0.5)
