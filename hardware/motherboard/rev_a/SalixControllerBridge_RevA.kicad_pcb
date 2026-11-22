@@ -49501,6 +49501,78 @@
 		)
 	)
 	(segment
+		(start 24.25 36)
+		(end 22.5 36)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1001")
+	)
+
+	(segment
+		(start 22.5 36)
+		(end 22.5 30.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1002")
+	)
+
+	(segment
+		(start 22.5 30.5)
+		(end 32.45 30.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1003")
+	)
+
+	(segment
+		(start 32.45 30.5)
+		(end 32.45 33.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1004")
+	)
+
+	(segment
+		(start 24.25 33)
+		(end 21.4 33)
+		(width 0.8)
+		(layer "B.Cu")
+		(net "CHARGE_PWR")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1005")
+	)
+
+	(segment
+		(start 21.4 33)
+		(end 21.4 48)
+		(width 0.8)
+		(layer "B.Cu")
+		(net "CHARGE_PWR")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1006")
+	)
+
+	(segment
+		(start 21.4 48)
+		(end 27.25 48)
+		(width 0.8)
+		(layer "B.Cu")
+		(net "CHARGE_PWR")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1007")
+	)
+
+	(segment
+		(start 27.25 48)
+		(end 27.25 45)
+		(width 0.8)
+		(layer "B.Cu")
+		(net "CHARGE_PWR")
+		(uuid "57a4d195-f690-41c2-9740-11e2026c1008")
+	)
+
+	(segment
 		(start 137.7 21.74)
 		(end 146.35 21.74)
 		(width 0.5)
