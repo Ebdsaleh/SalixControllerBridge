@@ -49501,6 +49501,42 @@
 		)
 	)
 	(segment
+		(start 137.7 21.74)
+		(end 146.35 21.74)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b81e6e77-63dd-4836-8d4d-d38bf2902e01")
+	)
+
+	(segment
+		(start 117 115.75)
+		(end 117 113.25)
+		(width 0.4)
+		(layer "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b81e6e77-63dd-4836-8d4d-d38bf2902e02")
+	)
+
+	(segment
+		(start 117 113.25)
+		(end 129 113.25)
+		(width 0.4)
+		(layer "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b81e6e77-63dd-4836-8d4d-d38bf2902e03")
+	)
+
+	(segment
+		(start 129 113.25)
+		(end 129 115.75)
+		(width 0.4)
+		(layer "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b81e6e77-63dd-4836-8d4d-d38bf2902e04")
+	)
+
+	(segment
 		(start 139.925 39.8375)
 		(end 143.225 39.2)
 		(width 0.5)
