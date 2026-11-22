@@ -49501,6 +49501,78 @@
 		)
 	)
 	(segment
+		(start 129.175 36.8)
+		(end 128.175 36.8)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780001")
+	)
+
+	(segment
+		(start 128.175 36.8)
+		(end 127.675 36.3)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780002")
+	)
+
+	(segment
+		(start 127.675 36.3)
+		(end 127.675 32)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780003")
+	)
+
+	(segment
+		(start 127.675 32)
+		(end 128.175 31.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780004")
+	)
+
+	(segment
+		(start 128.175 31.5)
+		(end 129.225 31.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780005")
+	)
+
+	(segment
+		(start 127.675 36.3)
+		(end 127.675 41.325)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780006")
+	)
+
+	(segment
+		(start 127.675 41.325)
+		(end 128.55 42.2)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780007")
+	)
+
+	(segment
+		(start 128.55 42.2)
+		(end 129.05 42.2)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_LDO3V3")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3780008")
+	)
+
+	(segment
 		(start 132.225 85.8)
 		(end 128.725 85.8)
 		(width 0.25)
