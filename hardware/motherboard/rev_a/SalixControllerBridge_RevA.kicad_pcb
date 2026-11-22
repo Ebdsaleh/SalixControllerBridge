@@ -49538,7 +49538,7 @@
 
 	(segment
 		(start 24.25 33)
-		(end 21.4 33)
+		(end 22.5 33)
 		(width 0.8)
 		(layer "B.Cu")
 		(net "CHARGE_PWR")
@@ -49546,8 +49546,8 @@
 	)
 
 	(segment
-		(start 21.4 33)
-		(end 21.4 48)
+		(start 22.5 33)
+		(end 22.5 48)
 		(width 0.8)
 		(layer "B.Cu")
 		(net "CHARGE_PWR")
@@ -49555,7 +49555,7 @@
 	)
 
 	(segment
-		(start 21.4 48)
+		(start 22.5 48)
 		(end 27.25 48)
 		(width 0.8)
 		(layer "B.Cu")
