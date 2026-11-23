@@ -49501,6 +49501,60 @@
 		)
 	)
 	(segment
+		(start 81.15 42)
+		(end 83.5 44.35)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820001")
+	)
+
+	(segment
+		(start 83.5 44.35)
+		(end 83.5 47.0625)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820002")
+	)
+
+	(segment
+		(start 84.85 42)
+		(end 84.85 45.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALOUT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820003")
+	)
+
+	(segment
+		(start 84.85 45.5)
+		(end 84 46.35)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALOUT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820004")
+	)
+
+	(segment
+		(start 84 46.35)
+		(end 84 47.0625)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_XTALOUT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820005")
+	)
+
+	(segment
+		(start 82.5 52.9375)
+		(end 82.5 51.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3820006")
+	)
+
+	(segment
 		(start 136.705 82.45)
 		(end 137.7 82.45)
 		(width 0.25)
