@@ -49501,6 +49501,24 @@
 		)
 	)
 	(segment
+		(start 103.5 30.3125)
+		(end 103.5 31.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3800001")
+	)
+
+	(segment
+		(start 103.5 54.3125)
+		(end 103.5 55.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3800002")
+	)
+
+	(segment
 		(start 129.175 36.8)
 		(end 128.175 36.8)
 		(width 0.2)
