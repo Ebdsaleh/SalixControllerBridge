@@ -57395,5 +57395,32 @@
 		(uuid "ad8fc145-5c23-4a19-bb02-000000000003")
 	)
 
+	(segment
+		(start 148.25 58.59)
+		(end 148.75 58.59)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_FUSED")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3860001")
+	)
+
+	(segment
+		(start 150.25 58.59)
+		(end 151.825 57.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_MID")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3860002")
+	)
+
+	(segment
+		(start 138.2 43.15)
+		(end 138.025 46.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3860003")
+	)
+
 	(embedded_fonts no)
 )
