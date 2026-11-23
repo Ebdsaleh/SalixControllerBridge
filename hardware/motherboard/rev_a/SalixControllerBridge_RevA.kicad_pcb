@@ -57485,5 +57485,131 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3880005")
 	)
 
+	(segment
+		(start 84.5 52.9375)
+		(end 84.5 53.55)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890001")
+	)
+
+	(segment
+		(start 84.5 53.55)
+		(end 84.3 53.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890002")
+	)
+
+	(segment
+		(start 84.3 53.75)
+		(end 82.2 53.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890003")
+	)
+
+	(segment
+		(start 82.2 53.75)
+		(end 82 53.55)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890004")
+	)
+
+	(segment
+		(start 82 53.55)
+		(end 82 52.9375)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890005")
+	)
+
+	(segment
+		(start 109.3625 69.725)
+		(end 109.5375 69.55)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890006")
+	)
+
+	(segment
+		(start 109.5375 69.55)
+		(end 112.375 69.55)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890007")
+	)
+
+	(segment
+		(start 112.375 69.55)
+		(end 113.325 70.5)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890008")
+	)
+
+	(segment
+		(start 99.325 28.5)
+		(end 99.325 27)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890009")
+	)
+
+	(segment
+		(start 99.325 27)
+		(end 98.925 26.6)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890010")
+	)
+
+	(segment
+		(start 98.925 26.6)
+		(end 98.925 25.25)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890011")
+	)
+
+	(segment
+		(start 98.925 25.25)
+		(end 99.05 25.125)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890012")
+	)
+
+	(segment
+		(start 99.05 25.125)
+		(end 100.4 25.125)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890013")
+	)
+
+	(segment
+		(start 100.4 25.125)
+		(end 101.275 26)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3890014")
+	)
+
 	(embedded_fonts no)
 )
