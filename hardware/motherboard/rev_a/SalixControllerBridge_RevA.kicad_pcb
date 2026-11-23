@@ -57422,5 +57422,23 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3860003")
 	)
 
+	(segment
+		(start 137.8 42.425)
+		(end 137.8 41.575)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_DRAIN_FLOAT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3870001")
+	)
+
+	(segment
+		(start 137.8 38.575)
+		(end 137.8 39.425)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_DRAIN_FLOAT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3870002")
+	)
+
 	(embedded_fonts no)
 )
