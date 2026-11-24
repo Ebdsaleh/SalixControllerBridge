@@ -57926,5 +57926,59 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930007")
 	)
 
+	(segment
+		(start 35.6 66.125)
+		(end 35.325 66.125)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_DVDT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940001")
+	)
+
+	(segment
+		(start 35.325 66.125)
+		(end 34.775 66.675)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_DVDT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940002")
+	)
+
+	(segment
+		(start 34.775 66.675)
+		(end 34.775 69.1)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_DVDT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940003")
+	)
+
+	(segment
+		(start 34.775 69.1)
+		(end 33.175 70.7)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/POWER {slash} PROTECTION/AUX_DVDT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940004")
+	)
+
+	(segment
+		(start 153.375 57.2)
+		(end 151.985 55.81)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940005")
+	)
+
+	(segment
+		(start 151.985 55.81)
+		(end 150.25 55.81)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940006")
+	)
+
 	(embedded_fonts no)
 )
