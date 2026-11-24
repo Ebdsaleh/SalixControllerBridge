@@ -58970,5 +58970,140 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4020018")
 	)
 
+	(segment
+		(start 151.985 55.81)
+		(end 151.61 56.185)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030001")
+	)
+
+	(segment
+		(start 146.7 62.075)
+		(end 146.95 62.075)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030002")
+	)
+
+	(segment
+		(start 146.95 62.075)
+		(end 147.7 61.325)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030003")
+	)
+
+	(segment
+		(start 151.61 56.185)
+		(end 151.61 57.415)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030004")
+	)
+
+	(segment
+		(start 151.61 57.415)
+		(end 147.7 61.325)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030005")
+	)
+
+	(via
+		(at 151.61 56.185)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030006")
+	)
+
+	(via
+		(at 147.7 61.325)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030007")
+	)
+
+	(segment
+		(start 40.525 70.9)
+		(end 40.525 70.775)
+		(width 0.35)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030008")
+	)
+
+	(segment
+		(start 40.525 70.775)
+		(end 39.65 69.9)
+		(width 0.35)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030009")
+	)
+
+	(segment
+		(start 38.75 67)
+		(end 38.75 67.25)
+		(width 0.35)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030010")
+	)
+
+	(segment
+		(start 38.75 67.25)
+		(end 39.625 68.125)
+		(width 0.35)
+		(layer "F.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030011")
+	)
+
+	(segment
+		(start 39.65 69.9)
+		(end 39.65 68.15)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030012")
+	)
+
+	(segment
+		(start 39.65 68.15)
+		(end 39.625 68.125)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030013")
+	)
+
+	(via
+		(at 39.65 69.9)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030014")
+	)
+
+	(via
+		(at 39.625 68.125)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "EXT_CHARGE_IN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030015")
+	)
+
 	(embedded_fonts no)
 )
