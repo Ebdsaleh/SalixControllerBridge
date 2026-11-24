@@ -57764,5 +57764,104 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3910007")
 	)
 
+	(segment
+		(start 40.8625 33.05)
+		(end 41.1375 33.325)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920001")
+	)
+
+	(segment
+		(start 41.1375 33.325)
+		(end 41.65 33.325)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920002")
+	)
+
+	(segment
+		(start 41.65 33.325)
+		(end 42 33.675)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920003")
+	)
+
+	(segment
+		(start 42 33.675)
+		(end 42 34.45)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920004")
+	)
+
+	(segment
+		(start 42 34.45)
+		(end 42.5 34.95)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920005")
+	)
+
+	(segment
+		(start 42.5 34.95)
+		(end 43.1375 34.95)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "5V_MAIN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920006")
+	)
+
+	(segment
+		(start 146.225 39.2)
+		(end 146.225 39.05)
+		(width 0.45)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920007")
+	)
+
+	(segment
+		(start 146.225 39.05)
+		(end 147.05 38.225)
+		(width 0.45)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920008")
+	)
+
+	(segment
+		(start 147.05 38.225)
+		(end 148.375 38.225)
+		(width 0.45)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920009")
+	)
+
+	(segment
+		(start 148.375 38.225)
+		(end 149.225 39.075)
+		(width 0.45)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920010")
+	)
+
+	(segment
+		(start 149.225 39.075)
+		(end 149.225 39.2)
+		(width 0.45)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_VBUS_RAW")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920011")
+	)
+
 	(embedded_fonts no)
 )
