@@ -58178,5 +58178,122 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3960016")
 	)
 
+	(segment
+		(start 116.0625 72.95)
+		(end 116.1125 72.9)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970001")
+	)
+
+	(segment
+		(start 116.1125 72.9)
+		(end 117.3625 72.9)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970002")
+	)
+
+	(segment
+		(start 120 70.5)
+		(end 119.9 70.6)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970003")
+	)
+
+	(segment
+		(start 119.9 70.6)
+		(end 119.8 70.6)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970004")
+	)
+
+	(segment
+		(start 117.3625 72.9)
+		(end 119.6625 70.6)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970005")
+	)
+
+	(segment
+		(start 119.6625 70.6)
+		(end 119.8 70.6)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970006")
+	)
+
+	(via
+		(at 117.3625 72.9)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970007")
+	)
+
+	(via
+		(at 119.8 70.6)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970008")
+	)
+
+	(segment
+		(start 84.775 56.5)
+		(end 84.275 56)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970009")
+	)
+
+	(segment
+		(start 84.275 56)
+		(end 84.275 55.55)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970010")
+	)
+
+	(segment
+		(start 84.275 55.55)
+		(end 79.725 51)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970011")
+	)
+
+	(segment
+		(start 79.725 51)
+		(end 77.425 51)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970012")
+	)
+
+	(via
+		(at 84.275 55.55)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3970013")
+	)
+
 	(embedded_fonts no)
 )
