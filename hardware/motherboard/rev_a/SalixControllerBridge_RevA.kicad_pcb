@@ -58727,5 +58727,86 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4000016")
 	)
 
+	(segment
+		(start 147.75 55.81)
+		(end 146.015 55.81)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_MID")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010001")
+	)
+
+	(segment
+		(start 146.015 55.81)
+		(end 144.625 57.2)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/12V BARREL {slash} AUTOMOTIVE FRONT END/BARREL_MID")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010002")
+	)
+
+	(segment
+		(start 47.025 27.5)
+		(end 46.25 28.275)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010003")
+	)
+
+	(segment
+		(start 46.25 28.275)
+		(end 46.25 28.375)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010004")
+	)
+
+	(segment
+		(start 46.85 34.95)
+		(end 46.25 34.35)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010005")
+	)
+
+	(segment
+		(start 46.25 34.35)
+		(end 46.25 32.625)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010006")
+	)
+
+	(segment
+		(start 46.25 28.375)
+		(end 46.25 32.625)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010007")
+	)
+
+	(via
+		(at 46.25 28.375)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010008")
+	)
+
+	(via
+		(at 46.25 32.625)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4010009")
+	)
+
 	(embedded_fonts no)
 )
