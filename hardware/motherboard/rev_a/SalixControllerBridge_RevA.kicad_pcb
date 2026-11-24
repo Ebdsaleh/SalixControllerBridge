@@ -57863,5 +57863,68 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3920011")
 	)
 
+	(segment
+		(start 155.575 100.2)
+		(end 156.775 99)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_BL_PWM")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930001")
+	)
+
+	(segment
+		(start 156.775 99)
+		(end 156.775 94)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_BL_PWM")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930002")
+	)
+
+	(segment
+		(start 156.775 94)
+		(end 161.15 94)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_BL_PWM")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930003")
+	)
+
+	(segment
+		(start 161.15 94)
+		(end 162.15 93)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_BL_PWM")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930004")
+	)
+
+	(segment
+		(start 133.825 90.5)
+		(end 134.225 90.9)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930005")
+	)
+
+	(segment
+		(start 134.225 90.9)
+		(end 139.375 90.9)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930006")
+	)
+
+	(segment
+		(start 139.375 90.9)
+		(end 140.275 90)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3930007")
+	)
+
 	(embedded_fonts no)
 )
