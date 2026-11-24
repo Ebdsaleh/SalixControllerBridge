@@ -59105,5 +59105,113 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4030015")
 	)
 
+	(segment
+		(start 83 47.0625)
+		(end 83 46.1875)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_PLLFILT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040001")
+	)
+
+	(segment
+		(start 83 46.1875)
+		(end 82.875 46.0625)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_PLLFILT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040002")
+	)
+
+	(segment
+		(start 82.875 46.0625)
+		(end 88.6125 46.0625)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_PLLFILT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040003")
+	)
+
+	(segment
+		(start 88.6125 46.0625)
+		(end 88.675 46)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_PLLFILT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040004")
+	)
+
+	(via
+		(at 82.875 46.0625)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/HUB_PLLFILT")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040005")
+	)
+
+	(segment
+		(start 99.325 34)
+		(end 98.5 33.175)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040006")
+	)
+
+	(segment
+		(start 98.5 33.175)
+		(end 98.5 32.375)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040007")
+	)
+
+	(segment
+		(start 98.5 32.375)
+		(end 97 30.875)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040008")
+	)
+
+	(segment
+		(start 97 30.875)
+		(end 97 30.125)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040009")
+	)
+
+	(segment
+		(start 97 30.125)
+		(end 97.5 29.625)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040010")
+	)
+
+	(segment
+		(start 97.5 29.625)
+		(end 99.95 29.625)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040011")
+	)
+
+	(via
+		(at 98.5 32.375)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4040012")
+	)
+
 	(embedded_fonts no)
 )
