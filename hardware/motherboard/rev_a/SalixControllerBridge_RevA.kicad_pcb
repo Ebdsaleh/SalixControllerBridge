@@ -57980,5 +57980,59 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3940006")
 	)
 
+	(segment
+		(start 132.3 52)
+		(end 130.95 50.65)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950001")
+	)
+
+	(segment
+		(start 130.95 50.65)
+		(end 130.95 47)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950002")
+	)
+
+	(segment
+		(start 22.875 63.5)
+		(end 22.875 64.5)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950003")
+	)
+
+	(segment
+		(start 22.875 64.5)
+		(end 29.075 70.7)
+		(width 0.4)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950004")
+	)
+
+	(segment
+		(start 29.075 70.7)
+		(end 30.5 70.7)
+		(width 0.4)
+		(layer "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950005")
+	)
+
+	(via
+		(at 22.875 64.5)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3950006")
+	)
+
 	(embedded_fonts no)
 )
