@@ -58439,5 +58439,149 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3980016")
 	)
 
+	(segment
+		(start 121.1625 68.65)
+		(end 120.7625 69.05)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990001")
+	)
+
+	(segment
+		(start 120.7625 69.05)
+		(end 120.2125 69.05)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990002")
+	)
+
+	(segment
+		(start 116.175 64.5)
+		(end 116.875 65.2)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990003")
+	)
+
+	(segment
+		(start 116.875 65.2)
+		(end 116.875 65.35)
+		(width 0.4)
+		(layer "F.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990004")
+	)
+
+	(segment
+		(start 120.2125 69.05)
+		(end 116.875 65.7125)
+		(width 0.5)
+		(layer "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990005")
+	)
+
+	(segment
+		(start 116.875 65.7125)
+		(end 116.875 65.35)
+		(width 0.5)
+		(layer "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990006")
+	)
+
+	(via
+		(at 120.2125 69.05)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990007")
+	)
+
+	(via
+		(at 116.875 65.35)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "3V3_AUX")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990008")
+	)
+
+	(segment
+		(start 153.175 25)
+		(end 153.075 25.1)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990009")
+	)
+
+	(segment
+		(start 153.075 25.1)
+		(end 152.225 25.1)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990010")
+	)
+
+	(segment
+		(start 146.35 25.12)
+		(end 146.4 25.07)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990011")
+	)
+
+	(segment
+		(start 146.4 25.07)
+		(end 147.35 25.07)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990012")
+	)
+
+	(segment
+		(start 152.225 25.1)
+		(end 152.195 25.07)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990013")
+	)
+
+	(segment
+		(start 152.195 25.07)
+		(end 147.35 25.07)
+		(width 0.35)
+		(layer "B.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990014")
+	)
+
+	(via
+		(at 152.225 25.1)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990015")
+	)
+
+	(via
+		(at 147.35 25.07)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "/USB-C PD POWER INPUT/PD_SHIELD")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb3990016")
+	)
+
 	(embedded_fonts no)
 )
