@@ -59996,5 +59996,122 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4130008")
 	)
 
+	(segment
+		(start 48 92.22)
+		(end 64.5 75.72)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140001")
+	)
+
+	(segment
+		(start 64.5 75.72)
+		(end 64.5 63)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140002")
+	)
+
+	(segment
+		(start 64.5 63)
+		(end 77.5 63)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140003")
+	)
+
+	(segment
+		(start 77.5 63)
+		(end 78 62.5)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140004")
+	)
+
+	(segment
+		(start 78 62.5)
+		(end 92.74 62.5)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140005")
+	)
+
+	(segment
+		(start 92.74 62.5)
+		(end 96.78 66.54)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_A2B")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140006")
+	)
+
+	(segment
+		(start 48 94.76)
+		(end 46.5 93.26)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140007")
+	)
+
+	(segment
+		(start 46.5 93.26)
+		(end 46.5 63.5)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140008")
+	)
+
+	(segment
+		(start 46.5 63.5)
+		(end 47 63)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140009")
+	)
+
+	(segment
+		(start 47 63)
+		(end 62 63)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140010")
+	)
+
+	(segment
+		(start 62 63)
+		(end 64.5 60.5)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140011")
+	)
+
+	(segment
+		(start 64.5 60.5)
+		(end 93.28 60.5)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140012")
+	)
+
+	(segment
+		(start 93.28 60.5)
+		(end 96.78 64)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "IRQ_B2A")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140013")
+	)
+
 	(embedded_fonts no)
 )
