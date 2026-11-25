@@ -60113,5 +60113,86 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4140013")
 	)
 
+	(segment
+		(start 65.78 69.36)
+		(end 66.92 70.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150001")
+	)
+
+	(segment
+		(start 66.92 70.5)
+		(end 71.5 70.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150002")
+	)
+
+	(segment
+		(start 71.5 70.5)
+		(end 77.5 76.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150003")
+	)
+
+	(segment
+		(start 77.5 76.5)
+		(end 77.5 77.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150004")
+	)
+
+	(segment
+		(start 77.5 77.5)
+		(end 78 78)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150005")
+	)
+
+	(segment
+		(start 78 78)
+		(end 80 78)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150006")
+	)
+
+	(segment
+		(start 80 78)
+		(end 95.5 93.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150007")
+	)
+
+	(segment
+		(start 95.5 93.5)
+		(end 95.5 95.74)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150008")
+	)
+
+	(segment
+		(start 95.5 95.74)
+		(end 96.78 97.02)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "PICO_A_RUN")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4150009")
+	)
+
 	(embedded_fonts no)
 )
