@@ -60230,5 +60230,104 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4160004")
 	)
 
+	(segment
+		(start 154.025 100.2)
+		(end 154.025 100.775)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170001")
+	)
+
+	(segment
+		(start 154.025 100.775)
+		(end 159.25 106)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170002")
+	)
+
+	(segment
+		(start 159.25 106)
+		(end 164 106)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170003")
+	)
+
+	(segment
+		(start 164 106)
+		(end 164.5 105.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170004")
+	)
+
+	(segment
+		(start 164.5 105.5)
+		(end 164.5 102.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170005")
+	)
+
+	(segment
+		(start 164.5 102.5)
+		(end 163 101)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170006")
+	)
+
+	(segment
+		(start 163 101)
+		(end 162.15 101)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "TFT_TOUCH_CS_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170007")
+	)
+
+	(segment
+		(start 60 115.75)
+		(end 61.25 117)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "MGMT_I2C_SDA")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170008")
+	)
+
+	(segment
+		(start 61.25 117)
+		(end 117.5 117)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "MGMT_I2C_SDA")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170009")
+	)
+
+	(segment
+		(start 117.5 117)
+		(end 118.75 115.75)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "MGMT_I2C_SDA")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170010")
+	)
+
+	(segment
+		(start 118.75 115.75)
+		(end 120 115.75)
+		(width 0.25)
+		(layer "B.Cu")
+		(net "MGMT_I2C_SDA")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170011")
+	)
+
 	(embedded_fonts no)
 )
