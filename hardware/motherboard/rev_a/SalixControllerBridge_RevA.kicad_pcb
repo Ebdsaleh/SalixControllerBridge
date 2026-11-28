@@ -60329,5 +60329,23 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4170011")
 	)
 
+	(segment
+		(start 113.275 68)
+		(end 114.9 68)
+		(width 0.3)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4180001")
+	)
+
+	(via
+		(at 114.9 68)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4180002")
+	)
+
 	(embedded_fonts no)
 )
