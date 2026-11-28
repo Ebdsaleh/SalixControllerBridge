@@ -60491,5 +60491,122 @@
 		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4190016")
 	)
 
+	(segment
+		(start 102.3 72.975)
+		(end 101.825 72.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200001")
+	)
+
+	(segment
+		(start 101.825 72.5)
+		(end 100.75 72.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200002")
+	)
+
+	(segment
+		(start 100.75 72.5)
+		(end 100.5 72.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200003")
+	)
+
+	(segment
+		(start 100.5 72.75)
+		(end 100.5 87.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200004")
+	)
+
+	(segment
+		(start 100.5 87.75)
+		(end 101.5 88.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200005")
+	)
+
+	(segment
+		(start 101.5 88.75)
+		(end 101.5 94.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200006")
+	)
+
+	(segment
+		(start 101.5 94.25)
+		(end 97.5 98.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200007")
+	)
+
+	(segment
+		(start 97.5 98.25)
+		(end 92.25 98.25)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200008")
+	)
+
+	(segment
+		(start 92.25 98.25)
+		(end 79.5 111)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200009")
+	)
+
+	(segment
+		(start 79.5 111)
+		(end 73 111)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200010")
+	)
+
+	(segment
+		(start 73 111)
+		(end 70 114)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200011")
+	)
+
+	(segment
+		(start 70 114)
+		(end 67.75 114)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200012")
+	)
+
+	(segment
+		(start 67.75 114)
+		(end 66 115.75)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "/USB HUB {slash} INPUT INTERFACE/PRIMARY_INT_N")
+		(uuid "b71e8f23-62fc-4365-a5b2-e74bb4200013")
+	)
+
 	(embedded_fonts no)
 )
